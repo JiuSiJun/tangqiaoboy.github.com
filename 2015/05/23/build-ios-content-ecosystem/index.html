@@ -1,0 +1,432 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>打造 iOS 原创内容的生态圈 | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="故事在说想法之前，我想先讲几个故事。
+故事一：新杂志与《Tiny4Cocoa》我敬重的 tinyfool 刚创业的时候，做了一个 App 叫 「新杂志」，这是一个杂志聚合平台。与新杂志平台同期发布的还包括他的《Tiny4Cocoa》杂志，在《Tiny4Cocoa》杂志中，tinyfool 提出了每篇文章稿费 1000 元的价格，我当时还帮助他编辑过两期杂志。但是最终杂志没有继续下去，我觉得主要是以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="打造 iOS 原创内容的生态圈">
+<meta property="og:url" content="http://blog.devtang.com/2015/05/23/build-ios-content-ecosystem/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="故事在说想法之前，我想先讲几个故事。
+故事一：新杂志与《Tiny4Cocoa》我敬重的 tinyfool 刚创业的时候，做了一个 App 叫 「新杂志」，这是一个杂志聚合平台。与新杂志平台同期发布的还包括他的《Tiny4Cocoa》杂志，在《Tiny4Cocoa》杂志中，tinyfool 提出了每篇文章稿费 1000 元的价格，我当时还帮助他编辑过两期杂志。但是最终杂志没有继续下去，我觉得主要是以">
+<meta property="og:updated_time" content="2016-02-16T10:26:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="打造 iOS 原创内容的生态圈">
+<meta name="twitter:description" content="故事在说想法之前，我想先讲几个故事。
+故事一：新杂志与《Tiny4Cocoa》我敬重的 tinyfool 刚创业的时候，做了一个 App 叫 「新杂志」，这是一个杂志聚合平台。与新杂志平台同期发布的还包括他的《Tiny4Cocoa》杂志，在《Tiny4Cocoa》杂志中，tinyfool 提出了每篇文章稿费 1000 元的价格，我当时还帮助他编辑过两期杂志。但是最终杂志没有继续下去，我觉得主要是以">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/05/23/build-ios-content-ecosystem/" title="打造 iOS 原创内容的生态圈" itemprop="url">打造 iOS 原创内容的生态圈</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2015-05-23T13:35:37.000Z" itemprop="datePublished"> 发表于 2015-05-23 21:35</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u6545_u4E8B"><span class="toc-number">1.</span> <span class="toc-text">故事</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u6545_u4E8B_u4E00_uFF1A_u65B0_u6742_u5FD7_u4E0E_u300ATiny4Cocoa_u300B"><span class="toc-number">1.1.</span> <span class="toc-text">故事一：新杂志与《Tiny4Cocoa》</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6545_u4E8B_u4E8C_uFF1A_u5199_u4E66_u548C_u7A3F_u8D39"><span class="toc-number">1.2.</span> <span class="toc-text">故事二：写书和稿费</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6545_u4E8B_u4E09_uFF1A_u8F6C_u8F7D_u5BF9_u539F_u521B_u7684_u4E0D_u5C0A_u91CD"><span class="toc-number">1.3.</span> <span class="toc-text">故事三：转载对原创的不尊重</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u7ECF_u6D4E_u5B66_u4E0E_u751F_u6001_u5708"><span class="toc-number">2.</span> <span class="toc-text">经济学与生态圈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6211_u7684_u60F3_u6CD5"><span class="toc-number">3.</span> <span class="toc-text">我的想法</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="u6545_u4E8B"><a href="#u6545_u4E8B" class="headerlink" title="故事"></a>故事</h2><p>在说想法之前，我想先讲几个故事。</p>
+<h3 id="u6545_u4E8B_u4E00_uFF1A_u65B0_u6742_u5FD7_u4E0E_u300ATiny4Cocoa_u300B"><a href="#u6545_u4E8B_u4E00_uFF1A_u65B0_u6742_u5FD7_u4E0E_u300ATiny4Cocoa_u300B" class="headerlink" title="故事一：新杂志与《Tiny4Cocoa》"></a>故事一：新杂志与《Tiny4Cocoa》</h3><p>我敬重的 <a href="http://weibo.com/u/1400229064?topnav=1&amp;wvr=6&amp;topsug=1" target="_blank" rel="external">tinyfool</a> 刚创业的时候，做了一个 App 叫 「新杂志」，这是一个杂志聚合平台。与新杂志平台同期发布的还包括他的《Tiny4Cocoa》杂志，在《Tiny4Cocoa》杂志中，tinyfool 提出了每篇文章稿费 1000 元的价格，我当时还帮助他编辑过两期杂志。但是最终杂志没有继续下去，我觉得主要是以下几个原因：</p>
+<ol>
+<li>每一期约稿比较花精力。为了保证质量和篇幅，每一期我需要提前找一些作者要稿子，但是发现不一定能够约到。</li>
+<li>稿费都是 tinyfool 自掏腰包，虽然有广告收入，但是 1000 元一篇的成本还是很高。后来我们降到了 500 元，但是即使这样，长期自掏腰包这种状态也是难以维持的。</li>
+</ol>
+<p>虽然最终我们没有把《Tiny4Cocoa》做成，但是让优质内容的作者得到回报一直是我心中的理想。</p>
+<h3 id="u6545_u4E8B_u4E8C_uFF1A_u5199_u4E66_u548C_u7A3F_u8D39"><a href="#u6545_u4E8B_u4E8C_uFF1A_u5199_u4E66_u548C_u7A3F_u8D39" class="headerlink" title="故事二：写书和稿费"></a>故事二：写书和稿费</h3><p>我身边有一些朋友写书或者是做翻译，比如 onevcat、吴航、破船等，我自己也写了一本《iOS 开发进阶》。我们通过交流发现，当前的现实是，通过写作或翻译并不能给大家带来合理的回报。这里「合理」是说：大家如果选择不写书，而是接个项目或者做别的事情，带来的直接金钱回报是更多的。</p>
+<p>于是这种不合理导致了中国国内优质技术图书的缺少，虽然大家觉得一本书卖个将近 100 块钱很贵，但是大多数作者辛苦写一年，出版一本书的版税收入也就 15000 元左右，再扣完 20% 的税就更少了。</p>
+<p>虽然大家都是凭着理想写作，但是我还是想让大家获得更加「合理」的收入上的回报。</p>
+<h3 id="u6545_u4E8B_u4E09_uFF1A_u8F6C_u8F7D_u5BF9_u539F_u521B_u7684_u4E0D_u5C0A_u91CD"><a href="#u6545_u4E8B_u4E09_uFF1A_u8F6C_u8F7D_u5BF9_u539F_u521B_u7684_u4E0D_u5C0A_u91CD" class="headerlink" title="故事三：转载对原创的不尊重"></a>故事三：转载对原创的不尊重</h3><p>现在很多技术媒体，在转载文章的时候，都没有在醒目的位置注明原始作者和原文链接。因为他们还是想强调自己平台的重要性。另外一方面，有哪家媒体为转载付费吗？我知道的只有 InfoQ 会。而其它媒体，大多数都是悄无声息地将你的文章转载了。</p>
+<h2 id="u7ECF_u6D4E_u5B66_u4E0E_u751F_u6001_u5708"><a href="#u7ECF_u6D4E_u5B66_u4E0E_u751F_u6001_u5708" class="headerlink" title="经济学与生态圈"></a>经济学与生态圈</h2><p>为什么我强调要让优质内容作者获得足够的回报呢？这其实是一个简单的经济学道理。经济学的规则如果能够制定得合理，就可以产生的良性的发展，最终构建出生态圈。如果每一个技术作者都能获得体面的收入，那么就会吸引更多的技术人加入到写作和分享的队伍中来。</p>
+<h2 id="u6211_u7684_u60F3_u6CD5"><a href="#u6211_u7684_u60F3_u6CD5" class="headerlink" title="我的想法"></a>我的想法</h2><p>那我能做些什么事情呢？2013 年 2 月，我自己建立了一个名为 「iOS 开发」(iOSDevTips) 的微信公众号，在上面分享原始的 iOS 开发文章。坚持了两年多后，我发现由于微信公众号平台对原创作者非常尊重，这可能能够成为一个让原创作者获得不错收入的平台。</p>
+<p>所以我在想，我能不能让写 iOS 原创文章的其他作者，也借助我的公众号获得收入呢？于是，现在有一个初级的想法如下：</p>
+<p>我的微信公众号 「iOS 开发」已经有 15000 人的订阅量，图文打开率非常高，时不时也会有一些广告收入，我想提供付费的方式来获得授权将大家的原创文章转载到我的公众帐号上，转载会注明作者和大家博客文章的原始链接。这样，大家的每篇原创博客都会有第一笔收入。<br>另外，我还想通过微信的「打赏」来收大家凭借优质内容，获得第二笔的收入。我会把这笔收入也全部转给作者。</p>
+<p>这个想法有几个地方还是需要讨论的：</p>
+<ol>
+<li><p>我当前微信公众号的广告收入并不多，一年估计 1 万多的样子。所以我当前并不能拿出丰厚的转载稿费。我构想的是每篇文章大概 50 - 100 元的转载稿费。不过如果大家共同把这个微信公众号的影响力做起来，那么凭借广告收入，我就可以提供更高的转载稿费。</p>
+</li>
+<li><p>微信的「打赏」功能只支持原创的文章。按照 <a href="https://mp.weixin.qq.com/cgi-bin/announce?action=getannouncement&amp;key=1430137668&amp;version=11&amp;lang=zh_CN" target="_blank" rel="external">微信的规定</a>，我只能将获得「独家代理的文章」标识成原创，从而开启「打赏」功能，所以我需要得到作者的授权，获得在微信公众平台上的「独家代理」。</p>
+</li>
+</ol>
+<p>腾讯公司的微信公众号平台对原创作者非常尊重，而且这是当前中国最大的社交平台，我希望借助她的力量，让所有优质的原创 iOS 内容作者，都得到应得的收入作为回报，同时也使得那些优质的内容，得到快速地传播。</p>
+<p>对于我个人来说，如果能构建出一个由全中国优秀 iOS 开发者贡献的内容帐号，那将是一个非常有意义的事情。</p>
+<p>对于各位「iOS 开发」公众帐号的读者来说，大家以后将不止看到我个人的 iOS 技术文章，还包括我精心挑选的，愿意花钱支付转载费用的文章。大家不必为这些文章支付任何费用，但是偶尔可能会收到一个与 iOS 行业相关的广告。如果你愿意，转发你觉得优秀的文章，或者给优秀的文章适当「打赏」也会让这个生态圈发展得更好。</p>
+<p>对于各位 iOS 原创博客作者来说，欢迎大家将自己觉得优秀的博客文章授权给我，我愿意支付相应转载费用，以及提供所有的相关打赏收益。王晓磊的<a href="http://quotation.github.io/objc/2015/05/21/objc-runtime-ivar-access.html#rd?sukey=cbbc36a2500a2e6c799f926ca7d129c8729220e1f095d33857a222812b71c5071f20f3b0b4b0b06524263c8f38743b18" target="_blank" rel="external">这篇文章</a> 是第一个尝试用这种方式授权给我的作者。</p>
+<p>愿我们的行动能够让世界改变一点点。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2015/05/23/build-ios-content-ecosystem/" data-title="打造 iOS 原创内容的生态圈 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/05/25/can-we-buy-time/" title="Reveal 中国特惠活动">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Reveal 中国特惠活动</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/05/06/ios-weekly-44/"  title="iOS移动开发周报-第44期">
+ <strong>下一篇：</strong><br/> 
+ <span>iOS移动开发周报-第44期
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

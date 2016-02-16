@@ -1,0 +1,434 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>自己动手给iMac换SSD | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="公司的 iMac 是 2011 年款的，经过 2 年的使用，现在已经变得比较慢了，用htop看了一下，其实 cpu 占用率一直不高，主要是磁盘 IO 比较慢，所以考虑自己动手给 iMac 换一个 SSD。在此将整个过程分享给大家。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自己动手给iMac换SSD">
+<meta property="og:url" content="http://blog.devtang.com/2014/01/26/add-ssd-to-old-imac/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="公司的 iMac 是 2011 年款的，经过 2 年的使用，现在已经变得比较慢了，用htop看了一下，其实 cpu 占用率一直不高，主要是磁盘 IO 比较慢，所以考虑自己动手给 iMac 换一个 SSD。在此将整个过程分享给大家。">
+<meta property="og:image" content="http://blog.devtang.com/images/imac-broken-cable.jpg">
+<meta property="og:updated_time" content="2016-02-16T10:26:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自己动手给iMac换SSD">
+<meta name="twitter:description" content="公司的 iMac 是 2011 年款的，经过 2 年的使用，现在已经变得比较慢了，用htop看了一下，其实 cpu 占用率一直不高，主要是磁盘 IO 比较慢，所以考虑自己动手给 iMac 换一个 SSD。在此将整个过程分享给大家。">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/01/26/add-ssd-to-old-imac/" title="自己动手给iMac换SSD" itemprop="url">自己动手给iMac换SSD</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2014-01-26T14:06:00.000Z" itemprop="datePublished"> 发表于 2014-01-26 22:06</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u786C_u4EF6_u66F4_u6362_u6B65_u9AA4"><span class="toc-number">1.</span> <span class="toc-text">硬件更换步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5B89_u88C5_u64CD_u4F5C_u7CFB_u7EDF"><span class="toc-number">2.</span> <span class="toc-text">安装操作系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8FC1_u79FB_u6570_u636E"><span class="toc-number">3.</span> <span class="toc-text">迁移数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5176_u5B83"><span class="toc-number">4.</span> <span class="toc-text">其它</span></a></li></ol>
+		
+		</div>
+		
+		<p>公司的 iMac 是 2011 年款的，经过 2 年的使用，现在已经变得比较慢了，用<code>htop</code>看了一下，其实 cpu 占用率一直不高，主要是磁盘 IO 比较慢，所以考虑自己动手给 iMac 换一个 SSD。在此将整个过程分享给大家。</p>
+<a id="more"></a>
+<p>如果你需要备份系统，可以拿一个移动硬盘，使用<code>Time Machine</code>功能将需要的内容备份到移动硬盘上。</p>
+<p>另外你还需要准备一些工具，我是借同事的 <a href="http://www.amazon.cn/%E5%8F%B0%E6%B9%BE%E8%80%81A-38%E5%90%881%E6%89%8B%E6%9C%BA%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%BB%B4%E4%BF%AE%E7%B2%BE%E5%AF%86%E8%9E%BA%E4%B8%9D%E5%88%80%E5%A5%97%E8%A3%85-%E8%8B%B9%E6%9E%9C%E6%8B%86%E6%9C%BA%E5%B7%A5%E5%85%B7%E7%BB%84%E5%90%88-LA613138/dp/B00E7ICEXM/ref=sr_1_2?ie=UTF8&amp;qid=1390717853&amp;sr=8-2&amp;keywords=%E8%80%81A" target="_blank" rel="external">老 A 苹果拆机工具组合</a>，这个工具箱可以拆苹果的各种设备，上次还用它拆了一次 iPhone4s。</p>
+<h2 id="u786C_u4EF6_u66F4_u6362_u6B65_u9AA4"><a href="#u786C_u4EF6_u66F4_u6362_u6B65_u9AA4" class="headerlink" title="硬件更换步骤"></a>硬件更换步骤</h2><p>换 SSD 的步骤主要参考自：<a href="http://www.ifixit.com/Guide/iMac+Intel+21.5-Inch+EMC+2428+Hard+Drive+Replacement/5954" target="_blank" rel="external">ifixit 上的教程</a>。感兴趣的朋友可以一试。其实步骤相当简单，简单说一下：</p>
+<ol>
+<li>把 iMac 平放，用吸盘吸开屏幕盖。</li>
+<li>取下屏幕左右各 4 个螺丝，然后轻轻抬起屏幕（注意不要抬太高，因为后面连着线）。</li>
+<li>把屏幕与主版连接的 4 根线拆下来，之后将屏幕移除。</li>
+<li>取下硬盘上的 2 个螺丝，然后将硬盘的数据线和电源线拔掉，将硬盘轻轻取出来。</li>
+<li>将 SSD 接上数据线和电源线。</li>
+<li>做步骤 3 的逆向过程，把屏幕接上 4 根线，然后将屏幕左右各 4 个螺丝拧上。</li>
+<li>盖上屏幕盖，这个磁力很强，要小心手不要被夹住。</li>
+</ol>
+<p>换好之后，接通电源听到正常的启动声音的话，就表示硬件自检没问题了。 </p>
+<h2 id="u5B89_u88C5_u64CD_u4F5C_u7CFB_u7EDF"><a href="#u5B89_u88C5_u64CD_u4F5C_u7CFB_u7EDF" class="headerlink" title="安装操作系统"></a>安装操作系统</h2><p>SSD 上没有带 Mac 系统，所以要先把系统装上去。将苹果最新的系统刻录在 U 盘或 SD 卡上，然后接到 iMac 上。启动时按住<code>Option</code>键，等一段时间，就可以选择启动磁盘，我们选择从 U 盘启动。</p>
+<p>U 盘启动之后，先进入<code>Disk Utility</code>，将刚刚装上的 SSD 分区格式化成<code>Mac OS 扩展（日志式）</code>。然后返回，选择安装 Mac 操作系统。</p>
+<p>这个比较坑的一点是系统显示的<code>估计安装时间</code>只有大约 15 分钟，但是进行到最后 1 分钟时，却大概要再等 15 分钟才能结束，这个时候不要太心急。安装完成之后会进入第一次重启，然后再次显示正在安装，这个时候大概又需要等 20 分钟，不过不用任何操作，只用看着就行了。20 分钟后会第二次重启，重启之后就进入到欢迎界面了。</p>
+<p>进入欢迎界面后，先简单设置一下进入系统，安装 2 个小软件：</p>
+<ol>
+<li><a href="http://exirion.net/ssdfanctrl/" target="_blank" rel="external">SSD fan control</a></li>
+<li><a href="http://www.groths.org/software/trimenabler/" target="_blank" rel="external">Trim Enabler</a></li>
+</ol>
+<p>这主要是因为 iMac 的温度感应模块在原有的硬盘上，换下来之后，风扇就会狂转，只能用第三方软件来控制其转速。另一个工具是朋友推荐我安装的，没有仔细研究用处。</p>
+<h2 id="u8FC1_u79FB_u6570_u636E"><a href="#u8FC1_u79FB_u6570_u636E" class="headerlink" title="迁移数据"></a>迁移数据</h2><p>之后，你可以用<code>Time machine</code>或<code>迁移助理</code>，将这台电脑的数据从备份中恢复。我是使用的<code>迁移助理</code>，将我另一台 Macbook Air 的系统恢复过去的。</p>
+<h2 id="u5176_u5B83"><a href="#u5176_u5B83" class="headerlink" title="其它"></a>其它</h2><ol>
+<li>我换的是 21.5 寸的 iMac，如果是 27 寸的 iMac，因为内部空间足够，所以可以尝试将 SSD 和原有的硬盘都保留，这样就可以自己组<code>fusion drive</code>。不过更换方式就要相对麻烦一些，感觉兴趣的可以自己在 ifixit 上找相关的教程。</li>
+<li>显示屏上的连接线都很脆弱，更换的时候要小心，我在尝试能否象 27 寸 iMac 一样同时将原有硬盘和 SSD 保留的时候，就不小心压坏了显示屏上的连接线的一根针角。于是花了 80 块钱在 <a href="http://item.taobao.com/item.htm?id=20038464332" target="_blank" rel="external">淘宝</a> 上重新买了一根线才安好。所以大家一定别着急，换的时候小心一些。附一张损坏的连接线照片。</li>
+</ol>
+<img src="/images/imac-broken-cable.jpg">
+<p>总之，自动动手换 SSD 不是那么复杂，胆大心细一些就可以轻松搞定。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/mac/">mac</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2014/01/26/add-ssd-to-old-imac/" data-title="自己动手给iMac换SSD | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/02/11/reactivecocoa-introduction/" title="ReactiveCocoa - iOS开发的新框架">
+  <strong>上一篇：</strong><br/>
+  <span>
+  ReactiveCocoa - iOS开发的新框架</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/01/23/the-issue-of-non-breaking-space-in-coretext/"  title="非换行空格在CoreText排版上的问题">
+ <strong>下一篇：</strong><br/> 
+ <span>非换行空格在CoreText排版上的问题
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

@@ -1,0 +1,458 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>NSNumber对象缓存以及Tagged Pointer | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="这是一次和 @onevcat 的技术讨论总结。技术点比较散，但是还都比较有意思。涉及的技术细节包括：
+
+系统对象的缓存
+Tagged Pointer对象
+
+讨论一：autorelase对象按照苹果的编程约定，由非alloc,copy返回的对象都是autorelease的，所以对于以下代码，虽然变量number是__weak的，但是由于[NSNumber numberWithInt:100]返回的对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NSNumber对象缓存以及Tagged Pointer">
+<meta property="og:url" content="http://blog.devtang.com/2014/03/21/weak_object_lifecycle_and_tagged_pointer/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="这是一次和 @onevcat 的技术讨论总结。技术点比较散，但是还都比较有意思。涉及的技术细节包括：
+
+系统对象的缓存
+Tagged Pointer对象
+
+讨论一：autorelase对象按照苹果的编程约定，由非alloc,copy返回的对象都是autorelease的，所以对于以下代码，虽然变量number是__weak的，但是由于[NSNumber numberWithInt:100]返回的对">
+<meta property="og:image" content="http://blog.devtang.com/images/tagged_pointer_1.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/tagged_pointer_2.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/tagged_pointer_3.jpg">
+<meta property="og:updated_time" content="2016-02-16T10:28:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NSNumber对象缓存以及Tagged Pointer">
+<meta name="twitter:description" content="这是一次和 @onevcat 的技术讨论总结。技术点比较散，但是还都比较有意思。涉及的技术细节包括：
+
+系统对象的缓存
+Tagged Pointer对象
+
+讨论一：autorelase对象按照苹果的编程约定，由非alloc,copy返回的对象都是autorelease的，所以对于以下代码，虽然变量number是__weak的，但是由于[NSNumber numberWithInt:100]返回的对">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/03/21/weak_object_lifecycle_and_tagged_pointer/" title="NSNumber对象缓存以及Tagged Pointer" itemprop="url">NSNumber对象缓存以及Tagged Pointer</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2014-03-21T13:09:00.000Z" itemprop="datePublished"> 发表于 2014-03-21 21:09</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u8BA8_u8BBA_u4E00_uFF1Aautorelase_u5BF9_u8C61"><span class="toc-number">1.</span> <span class="toc-text">讨论一：autorelase对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8BA8_u8BBA_u4E8C_uFF1A_u5173_u4E8ENSNumber_u5BF9_u8C61_u7684_u7F13_u5B58"><span class="toc-number">2.</span> <span class="toc-text">讨论二：关于NSNumber对象的缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8BA8_u8BBA_u4E09_uFF1A64_u4F4D_u7CFB_u7EDF_u4E0ETagged_Pointer_u5BF9_u8C61"><span class="toc-number">3.</span> <span class="toc-text">讨论三：64位系统与Tagged Pointer对象</span></a></li></ol>
+		
+		</div>
+		
+		<p>这是一次和 <a href="http://onevcat.com/" target="_blank" rel="external">@onevcat</a> 的技术讨论总结。技术点比较散，但是还都比较有意思。涉及的技术细节包括：</p>
+<ol>
+<li>系统对象的缓存</li>
+<li><code>Tagged Pointer</code>对象</li>
+</ol>
+<h2 id="u8BA8_u8BBA_u4E00_uFF1Aautorelase_u5BF9_u8C61"><a href="#u8BA8_u8BBA_u4E00_uFF1Aautorelase_u5BF9_u8C61" class="headerlink" title="讨论一：autorelase对象"></a>讨论一：autorelase对象</h2><p>按照苹果的编程约定，由非<code>alloc</code>,<code>copy</code>返回的对象都是<code>autorelease</code>的，所以对于以下代码，虽然变量<code>number</code>是<code>__weak</code>的，但是由于<code>[NSNumber numberWithInt:100]</code>返回的对象是<code>autorelase</code>的，所以仍然能通过NSLog打印出来。</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">__<span class="keyword">weak</span> <span class="built_in">NSNumber</span> *number = [<span class="built_in">NSNumber</span> numberWithInt:<span class="number">100</span>];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"number = %@"</span>, number);</span><br></pre></td></tr></table></figure>
+<p>从汇编代码中看，以上代码在创建<code>number</code>变量时，是通过<code>objc_loadWeak</code>方法进行的。而根据 <a href="http://clang.llvm.org/docs/AutomaticReferenceCounting.html#arc-runtime-objc-loadweak" target="_blank" rel="external">Clang的官方文档</a>，<code>objc_loadWeak</code>方法会<code>retain</code>并<code>autorelease</code>这个对象。所以给一个weak对象赋值，它并不会马上释放，而是会放到<code>autorelease pool</code>中，与<code>autorelease pool</code>一起释放。</p>
+<p>如下是<code>objc_loadWeak</code>的代码示例：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">id</span> objc_loadWeak(<span class="keyword">id</span> *object) &#123;</span><br><span class="line">  <span class="keyword">return</span> objc_autorelease(objc_loadWeakRetained(object));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为了验证这个回答，我们又做了一个有趣的例子来验证，如下所示：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">__<span class="keyword">weak</span> <span class="built_in">NSNumber</span> *number;</span><br><span class="line"><span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">	number = [<span class="built_in">NSNumber</span> numberWithInt:<span class="number">100</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"number = %@"</span>, number);</span><br></pre></td></tr></table></figure>
+<p>在上面这个例子中，果然如我们所料，<code>number</code>在通过NSLog查看值时，变成了nil。</p>
+<h2 id="u8BA8_u8BBA_u4E8C_uFF1A_u5173_u4E8ENSNumber_u5BF9_u8C61_u7684_u7F13_u5B58"><a href="#u8BA8_u8BBA_u4E8C_uFF1A_u5173_u4E8ENSNumber_u5BF9_u8C61_u7684_u7F13_u5B58" class="headerlink" title="讨论二：关于NSNumber对象的缓存"></a>讨论二：关于NSNumber对象的缓存</h2><p>我们在做以上实验时，发现一个有趣的现象，如果你把100变成了10，则<code>number</code>变成在NSLog时，就能够输出值来，不再是nil了。如下是测试代码：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">__<span class="keyword">weak</span> <span class="built_in">NSNumber</span> *number;</span><br><span class="line"><span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">	number = [<span class="built_in">NSNumber</span> numberWithInt:<span class="number">10</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"number = %@"</span>, number);</span><br></pre></td></tr></table></figure>
+<p>经过 onevcat 的实验，从-1 ～ 12都是可以输出的，而其它值却会变成nil。于是我们猜测是系统对这些常见值的对象做了缓存，于是我们写了如下代码来验证。</p>
+<p>结果果然是这样，多次创建值为10的<code>NSNumber</code>对象，其地址都是<font color="red">一样的</font>。而多次创建值为100的<code>NSNumber</code>对象，每次创建获得的对象地址都是<font color="red">不一样的</font>。</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSNumber</span> *number = [<span class="built_in">NSNumber</span> numberWithInt:<span class="number">10</span>];</span><br><span class="line"><span class="built_in">NSNumber</span> *another = [<span class="built_in">NSNumber</span> numberWithInt:<span class="number">10</span>];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%p %p"</span>, number, another);</span><br><span class="line"></span><br><span class="line">number = [<span class="built_in">NSNumber</span> numberWithInt:<span class="number">100</span>];</span><br><span class="line">another = [<span class="built_in">NSNumber</span> numberWithInt:<span class="number">100</span>];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%p %p"</span>, number, another);</span><br></pre></td></tr></table></figure>
+<h2 id="u8BA8_u8BBA_u4E09_uFF1A64_u4F4D_u7CFB_u7EDF_u4E0ETagged_Pointer_u5BF9_u8C61"><a href="#u8BA8_u8BBA_u4E09_uFF1A64_u4F4D_u7CFB_u7EDF_u4E0ETagged_Pointer_u5BF9_u8C61" class="headerlink" title="讨论三：64位系统与Tagged Pointer对象"></a>讨论三：64位系统与Tagged Pointer对象</h2><p>讨论本来已经结束了，结果我在写这篇博客的时候，手贱又测试了一下，发现在64位的模拟器下，无论创建多少次，也无论int的值是多少，所有相同int值的<code>NSNumber</code>对象地址都是一样的！</p>
+<p>疑惑了几分钟，我突然想起WWDC中介绍的64位系统引放的<code>Tagged Pointer</code>，恍然大悟。</p>
+<p>在WWDC2013的《Session 404 Advanced in Objective-C》视频中，苹果介绍了<code>Tagged Pointer</code>。<code>Tagged Pointer</code>的存在主要是为了节省内存。我们知道，对象的指针大小一般是与机器字长有关，在32位系统中，一个指针的大小是32位（4字节），而在64位系统中，一个指针的大小将是64位（8字节）。</p>
+<p>在64位系统中，如果我们真正使用一个指针来存储<code>NSNumber</code>实例，那么我们首先需要一个8字节的指针，另外需要一块内存存储<code>NSNumber</code>实例，这通常又是8字节。这样的内存开销是比较大的。苹果对于<code>NSNumber</code>和<code>NSDate</code>对象，改成了用<code>Tagged Pointer</code>来存储，简单来说，<code>Tagged Pointer</code>是一个假的指针，它的值不再是另一个地址，而就是对应变量的值。</p>
+<p><code>Tagged Pointer</code>主要有以下3个特点：</p>
+<ol>
+<li><code>Tagged Pointer</code>专门用来存储小的对象，例如<code>NSNumber</code>和<code>NSDate</code></li>
+<li><code>Tagged Pointer</code>指针的值不再是地址了，而是真正的值。所以，实际上它不再是一个对象了，它只是一个披着对象皮的普通变量而已！所以，它的内存并不存储在堆中，也不需要malloc和free。</li>
+<li><p>在内存读取上有着3倍的效率（以前是寻址-&gt;发消息-&gt;获取值，现在直接获取值），创建时比以前快106倍。</p>
+<p>相关英文文档截图如下：</p>
+<img src="/images/tagged_pointer_1.jpg">
+</li>
+</ol>
+<p>但<code>Tagged Pointer</code>的引入也带来了问题，即<code>Tagged Pointer</code>因为并不是真正的对象，而是一个伪对象，所以你如果完全把它当成对象来使，可能会让它露马脚。比如我在<a href="/2013/10/15/objective-c-object-model/">《Objective-C对象模型及应用》</a>一文中就写道，所有对象都有 <code>isa</code> 指针，而<code>Tagged Pointer</code>其实是没有的，因为它不是真正的对象。</p>
+<p>因为不是真正的对象，所以如果你直接访问<code>Tagged Pointer</code>的<code>isa</code>成员的话，在编译时将会有如下警告：</p>
+ <img src="/images/tagged_pointer_2.jpg">
+<p>对于上面的写法，应该换成相应的方法调用，如 <code>isKindOfClass</code> 和 <code>object_getClass</code>，如下图所示：</p>
+ <img src="/images/tagged_pointer_3.jpg">
+<p>至此，所有疑问都已经解决，开心～</p>
+<p>另外这儿有一篇介绍<code>Tagged Pointer</code>的文章：<a href="http://blog.xcodev.com/archives/tagged-pointer-and-64-bit/" target="_blank" rel="external">《64位与Tagged Pointer》</a>，一并推荐给大家。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2014/03/21/weak_object_lifecycle_and_tagged_pointer/" data-title="NSNumber对象缓存以及Tagged Pointer | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/03/28/ios-weekly-5/" title="iOS移动开发周报-第5期">
+  <strong>上一篇：</strong><br/>
+  <span>
+  iOS移动开发周报-第5期</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/03/21/ios-weekly-4/"  title="iOS移动开发周报-第4期">
+ <strong>下一篇：</strong><br/> 
+ <span>iOS移动开发周报-第4期
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

@@ -1,0 +1,455 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>iOS应用内付费(IAP)开发步骤列表 | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="前两天和服务端同事一起，完成了应用内付费（以下简称IAP, In app purchase）的开发工作。步骤繁多，在此把开发步骤列表整理如下。因为只是步骤列表，所以并不含详细的说明教程，需要看教程的新手，可以看我附在最后的一些参考链接。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS应用内付费(IAP)开发步骤列表">
+<meta property="og:url" content="http://blog.devtang.com/2012/12/09/in-app-purchase-check-list/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="前两天和服务端同事一起，完成了应用内付费（以下简称IAP, In app purchase）的开发工作。步骤繁多，在此把开发步骤列表整理如下。因为只是步骤列表，所以并不含详细的说明教程，需要看教程的新手，可以看我附在最后的一些参考链接。">
+<meta property="og:image" content="http://blog.devtang.com/images/iap-add-product-id.png">
+<meta property="og:image" content="http://blog.devtang.com/images/iap-adduser-1.png">
+<meta property="og:image" content="http://blog.devtang.com/images/iap-adduser-2.png">
+<meta property="og:image" content="http://blog.devtang.com/images/iap-tax-info.png">
+<meta property="og:updated_time" content="2016-02-16T10:26:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS应用内付费(IAP)开发步骤列表">
+<meta name="twitter:description" content="前两天和服务端同事一起，完成了应用内付费（以下简称IAP, In app purchase）的开发工作。步骤繁多，在此把开发步骤列表整理如下。因为只是步骤列表，所以并不含详细的说明教程，需要看教程的新手，可以看我附在最后的一些参考链接。">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2012/12/09/in-app-purchase-check-list/" title="iOS应用内付费(IAP)开发步骤列表" itemprop="url">iOS应用内付费(IAP)开发步骤列表</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2012-12-09T04:55:00.000Z" itemprop="datePublished"> 发表于 2012-12-09 12:55</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#u914D_u7F6EDeveloper-apple-com"><span class="toc-number">1.</span> <span class="toc-text">配置Developer.apple.com</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u914D_u7F6EiTunes_Connect"><span class="toc-number">2.</span> <span class="toc-text">配置iTunes Connect</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u53C2_u8003_u94FE_u63A5"><span class="toc-number"></span> <span class="toc-text">参考链接</span></a>
+		
+		</div>
+		
+		<p>前两天和服务端同事一起，完成了应用内付费（以下简称IAP, In app purchase）的开发工作。步骤繁多，在此把开发步骤列表整理如下。因为只是步骤列表，所以并不含详细的说明教程，需要看教程的新手，可以看我附在最后的一些参考链接。</p>
+<a id="more"></a>
+<h3 id="u914D_u7F6EDeveloper-apple-com"><a href="#u914D_u7F6EDeveloper-apple-com" class="headerlink" title="配置Developer.apple.com"></a>配置Developer.apple.com</h3><p>登录到<a href="https://developer.apple.com/" target="_blank" rel="external">Developer.apple.com</a>，然后进行以下步骤：</p>
+<ol>
+<li>为应用建立建立一个不带通配符的App ID</li>
+<li>用该App ID生成和安装相应的Provisioning Profile文件。</li>
+</ol>
+<h3 id="u914D_u7F6EiTunes_Connect"><a href="#u914D_u7F6EiTunes_Connect" class="headerlink" title="配置iTunes Connect"></a>配置iTunes Connect</h3><p>登录到<a href="https://itunesconnect.apple.com/" target="_blank" rel="external">iTunes Connet</a>，然后进行以下步骤：</p>
+<ol>
+<li>用该App ID创建一个新的应用。</li>
+<li>在该应用中，创建应用内付费项目，选择付费类型，通常可选的是可重复消费(Consumable)的或是永久有效(Non-Consumable)的2种，然后设置好价格和Product ID以及购买介绍和截图即可，这里的Product ID是需要记住的，后面开发的时候需要。如下图所示：<img src="/images/iap-add-product-id.png">
+</li>
+</ol>
+<ol>
+<li><p>添加一个用于在sandbox付费的测试用户，如下图所示。注意苹果对该测试用户的密码要求<br>和正式账号一样，必须是至少8位，并且同时包含数字和大小写字母：</p>
+<img src="/images/iap-adduser-1.png">
+<img src="/images/iap-adduser-2.png">
+</li>
+<li><p>填写相关的税务，银行，联系人信息。如下图所示：</p>
+<img src="/images/iap-tax-info.png">
+</li>
+</ol>
+<p>###开发工作(ios端)</p>
+<p>1、 在工程中引入 storekit.framework 和 #import <storekit storekit.h=""></storekit></p>
+<p>2、 获得所有的付费Product ID列表。这个可以用常量存储在本地，也可以由自己的服务器返回。</p>
+<p>3、 制作一个界面，展示所有的应用内付费项目。这些应用内付费项目的价格和介绍信息可以是自己的服务器返回。但如果是不带服务器的单机游戏应用或工具类应用，则可以通过向App Store查询获得。我在测试时发现，向App Store查询速度非常慢，通常需要2-3秒钟，所以不建议这么做，最好还是搞个自己的服务器吧。</p>
+<p>4、当用户点击了一个IAP项目，我们先查询用户是否允许应用内付费，如果不允许则不用进行以下步骤了。代码如下：<br><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> ([SKPaymentQueue canMakePayments]) &#123;</span><br><span class="line">    <span class="comment">// 执行下面提到的第5步：</span></span><br><span class="line">    [<span class="keyword">self</span> getProductInfo];</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"失败，用户禁止应用内付费购买."</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>5、 我们先通过该IAP的ProductID向AppStore查询，获得SKPayment实例，然后通过SKPaymentQueue的 addPayment方法发起一个购买的操作。<br><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 下面的ProductId应该是事先在itunesConnect中添加好的，已存在的付费项目。否则查询会失败。</span></span><br><span class="line">- (<span class="keyword">void</span>)getProductInfo &#123;</span><br><span class="line">	<span class="built_in">NSSet</span> * set = [<span class="built_in">NSSet</span> setWithArray:@[<span class="string">@"ProductId"</span>]];</span><br><span class="line">	SKProductsRequest * request = [[SKProductsRequest alloc] initWithProductIdentifiers:set];</span><br><span class="line">	request<span class="variable">.delegate</span> = <span class="keyword">self</span>;</span><br><span class="line">	[request start];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 以上查询的回调函数</span></span><br><span class="line">- (<span class="keyword">void</span>)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response &#123;</span><br><span class="line">    <span class="built_in">NSArray</span> *myProduct = response<span class="variable">.products</span>;</span><br><span class="line">    <span class="keyword">if</span> (myProduct<span class="variable">.count</span> == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"无法获取产品信息，购买失败。"</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    SKPayment * payment = [SKPayment paymentWithProduct:myProduct[<span class="number">0</span>]];</span><br><span class="line">    [[SKPaymentQueue defaultQueue] addPayment:payment];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>6、 在viewDidLoad方法中，将购买页面设置成购买的Observer。<br><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    <span class="comment">// 监听购买结果</span></span><br><span class="line">    [[SKPaymentQueue defaultQueue] addTransactionObserver:<span class="keyword">self</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidUnload &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidUnload];</span><br><span class="line">    [[SKPaymentQueue defaultQueue] removeTransactionObserver:<span class="keyword">self</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>7、 当用户购买的操作有结果时，就会触发下面的回调函数，相应进行处理即可。<br><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(<span class="built_in">NSArray</span> *)transactions &#123;</span><br><span class="line">    <span class="keyword">for</span> (SKPaymentTransaction *transaction <span class="keyword">in</span> transactions)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">switch</span> (transaction<span class="variable">.transactionState</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">case</span> SKPaymentTransactionStatePurchased:<span class="comment">//交易完成</span></span><br><span class="line">                <span class="built_in">NSLog</span>(<span class="string">@"transactionIdentifier = %@"</span>, transaction<span class="variable">.transactionIdentifier</span>);</span><br><span class="line">                [<span class="keyword">self</span> completeTransaction:transaction];</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> SKPaymentTransactionStateFailed:<span class="comment">//交易失败</span></span><br><span class="line">                [<span class="keyword">self</span> failedTransaction:transaction];</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> SKPaymentTransactionStateRestored:<span class="comment">//已经购买过该商品</span></span><br><span class="line">                [<span class="keyword">self</span> restoreTransaction:transaction];</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> SKPaymentTransactionStatePurchasing:      <span class="comment">//商品添加进列表</span></span><br><span class="line">                <span class="built_in">NSLog</span>(<span class="string">@"商品添加进列表"</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)completeTransaction:(SKPaymentTransaction *)transaction &#123;</span><br><span class="line">    <span class="comment">// Your application should implement these two methods.</span></span><br><span class="line">    <span class="built_in">NSString</span> * productIdentifier = transaction<span class="variable">.payment</span><span class="variable">.productIdentifier</span>;</span><br><span class="line">    <span class="built_in">NSString</span> * receipt = [transaction<span class="variable">.transactionReceipt</span> base64EncodedString];</span><br><span class="line">    <span class="keyword">if</span> ([productIdentifier length] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 向自己的服务器验证购买凭证</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Remove the transaction from the payment queue.</span></span><br><span class="line">    [[SKPaymentQueue defaultQueue] finishTransaction: transaction];</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)failedTransaction:(SKPaymentTransaction *)transaction &#123;</span><br><span class="line">    <span class="keyword">if</span>(transaction<span class="variable">.error</span><span class="variable">.code</span> != SKErrorPaymentCancelled) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"购买失败"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"用户取消交易"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    [[SKPaymentQueue defaultQueue] finishTransaction: transaction];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)restoreTransaction:(SKPaymentTransaction *)transaction &#123;</span><br><span class="line">	<span class="comment">// 对于已购商品，处理恢复购买的逻辑</span></span><br><span class="line">    [[SKPaymentQueue defaultQueue] finishTransaction: transaction];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>8、服务器验证凭证(Optional)。如果购买成功，我们需要将凭证发送到服务器上进行验证。考虑到网络异常情况，iOS端的发送凭证操作应该进行持久化，如果程序退出，崩溃或网络异常，可以恢复重试。</p>
+<p>###开发工作(服务端)</p>
+<p>服务端的工作比较简单，分4步：</p>
+<ol>
+<li>接收ios端发过来的购买凭证。</li>
+<li>判断凭证是否已经存在或验证过，然后存储该凭证。</li>
+<li>将该凭证发送到苹果的服务器验证，并将验证结果返回给客户端。</li>
+<li>如果需要，修改用户相应的会员权限。</li>
+</ol>
+<p>考虑到网络异常情况，服务器的验证应该是一个可恢复的队列，如果网络失败了，应该进行重试。</p>
+<p>与苹果的验证接口文档在<a href="https://developer.apple.com/library/ios/#documentation/NetworkingInternet/Conceptual/StoreKitGuide/VerifyingStoreReceipts/VerifyingStoreReceipts.html#//apple_ref/doc/uid/TP40008267-CH104-SW3" target="_blank" rel="external">这里</a>。简单来说就是将该购买凭证用Base64编码，然后POST给苹果的验证服务器，苹果将验证结果以JSON形式返回。</p>
+<p>苹果AppStore线上的购买凭证验证地址是<a href="https://buy.itunes.apple.com/verifyReceipt" target="_blank" rel="external">https://buy.itunes.apple.com/verifyReceipt</a> ，测试的验证地址是：<a href="https://sandbox.itunes.apple.com/verifyReceipt" target="_blank" rel="external">https://sandbox.itunes.apple.com/verifyReceipt</a></p>
+<h2 id="u53C2_u8003_u94FE_u63A5"><a href="#u53C2_u8003_u94FE_u63A5" class="headerlink" title="参考链接"></a>参考链接</h2><p>以下参考链接详细说明了完成应用内付费开发的步骤：</p>
+<ol>
+<li><a href="https://developer.apple.com/appstore/in-app-purchase/index.html" target="_blank" rel="external">https://developer.apple.com/appstore/in-app-purchase/index.html</a></li>
+<li><a href="http://www.himigame.com/iphone-cocos2d/550.html" target="_blank" rel="external">http://www.himigame.com/iphone-cocos2d/550.html</a></li>
+<li><a href="http://www.cocoachina.com/iphonedev/sdk/2011/1028/3435.html" target="_blank" rel="external">http://www.cocoachina.com/iphonedev/sdk/2011/1028/3435.html</a></li>
+<li><a href="http://www.cocoachina.com/newbie/basic/2012/0214/3976.html" target="_blank" rel="external">http://www.cocoachina.com/newbie/basic/2012/0214/3976.html</a></li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2012/12/09/in-app-purchase-check-list/" data-title="iOS应用内付费(IAP)开发步骤列表 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2012/12/09/iap-crack-issue/" title="关于IAP的破解">
+  <strong>上一篇：</strong><br/>
+  <span>
+  关于IAP的破解</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2012/12/08/use-privoxy/"  title="使用Privoxy做智能代理切换">
+ <strong>下一篇：</strong><br/> 
+ <span>使用Privoxy做智能代理切换
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

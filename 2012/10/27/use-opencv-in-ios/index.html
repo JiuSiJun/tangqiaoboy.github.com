@@ -1,0 +1,464 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>在MacOS和iOS系统中使用OpenCV | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="前言
+OpenCV 是一个开源的跨平台计算机视觉库，实现了图像处理和计算机视觉方面的很多通用算法。
+最近试着在MacOS和iOS上使用OpenCV，发现网上关于在MacOS和iOS上搭建OpenCV的资料很少。好不容易搜到些资料，却发现由于OpenCV和XCode的版本更新，变得不再有用了。有些问题费了我很多时间，在此总结分享给大家，希望后来人少走些弯路。
+可以预见到，随着XCode和OpenCV">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在MacOS和iOS系统中使用OpenCV">
+<meta property="og:url" content="http://blog.devtang.com/2012/10/27/use-opencv-in-ios/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="前言
+OpenCV 是一个开源的跨平台计算机视觉库，实现了图像处理和计算机视觉方面的很多通用算法。
+最近试着在MacOS和iOS上使用OpenCV，发现网上关于在MacOS和iOS上搭建OpenCV的资料很少。好不容易搜到些资料，却发现由于OpenCV和XCode的版本更新，变得不再有用了。有些问题费了我很多时间，在此总结分享给大家，希望后来人少走些弯路。
+可以预见到，随着XCode和OpenCV">
+<meta property="og:image" content="http://blog.devtang.com/images/opencv.png">
+<meta property="og:image" content="http://blog.devtang.com/images/use-opencv-in-mac-1.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/use-opencv-in-mac-2.png">
+<meta property="og:image" content="http://blog.devtang.com/images/use-opencv-in-mac-3.png">
+<meta property="og:image" content="http://blog.devtang.com/images/use-opencv-in-mac-4.png">
+<meta property="og:updated_time" content="2016-02-16T10:26:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在MacOS和iOS系统中使用OpenCV">
+<meta name="twitter:description" content="前言
+OpenCV 是一个开源的跨平台计算机视觉库，实现了图像处理和计算机视觉方面的很多通用算法。
+最近试着在MacOS和iOS上使用OpenCV，发现网上关于在MacOS和iOS上搭建OpenCV的资料很少。好不容易搜到些资料，却发现由于OpenCV和XCode的版本更新，变得不再有用了。有些问题费了我很多时间，在此总结分享给大家，希望后来人少走些弯路。
+可以预见到，随着XCode和OpenCV">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2012/10/27/use-opencv-in-ios/" title="在MacOS和iOS系统中使用OpenCV" itemprop="url">在MacOS和iOS系统中使用OpenCV</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2012-10-27T12:43:00.000Z" itemprop="datePublished"> 发表于 2012-10-27 20:43</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MacOS_u7CFB_u7EDF_u4E2D_u4F7F_u7528OpenCV"><span class="toc-number">2.</span> <span class="toc-text">MacOS系统中使用OpenCV</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5728Mac_OS_Lion_u4E2D_u5B89_u88C5OpenCV"><span class="toc-number">2.1.</span> <span class="toc-text">在Mac OS Lion中安装OpenCV</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5728Mac_OS_Mountain_Lion_u4E2D_u5B89_u88C5OpenCV"><span class="toc-number">2.2.</span> <span class="toc-text">在Mac OS Mountain Lion中安装OpenCV</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5728MacOS_u7CFB_u7EDF_u4E2D_u4F7F_u7528OpenCV"><span class="toc-number">2.3.</span> <span class="toc-text">在MacOS系统中使用OpenCV</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5728iOS_u7CFB_u7EDF_u4E2D_u4F7F_u7528OpenCV"><span class="toc-number">3.</span> <span class="toc-text">在iOS系统中使用OpenCV</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E0B_u8F7D_u6216_u7F16_u8BD1opencv2-framework"><span class="toc-number">3.1.</span> <span class="toc-text">下载或编译opencv2.framework</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5728iOS_u7A0B_u5E8F_u4E2D_u4F7F_u7528OpenCV"><span class="toc-number">3.2.</span> <span class="toc-text">在iOS程序中使用OpenCV</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><img src="/images/opencv.png">
+<p><a href="http://opencv.org/about.html" target="_blank" rel="external">OpenCV</a> 是一个开源的跨平台计算机视觉库，实现了图像处理和计算机视觉方面的很多通用算法。</p>
+<p>最近试着在MacOS和iOS上使用OpenCV，发现网上关于在MacOS和iOS上搭建OpenCV的资料很少。好不容易搜到些资料，却发现由于OpenCV和XCode的版本更新，变得不再有用了。有些问题费了我很多时间，在此总结分享给大家，希望后来人少走些弯路。</p>
+<p>可以预见到，随着XCode和OpenCV的版本更新，本文可能不再有效了。</p>
+<p>所以特此注明，文本介绍的搭建方法仅针对于 XCode4.5.1 和 OpenCV 2.4.2版本。</p>
+<p>（2013-6-22）更新: 我在XCode4.6.2 和 OpenCV 2.4.5版本的时候重新进行了一次环境搭建，以下内容做了相应调整，应该也是有效的。</p>
+<a id="more"></a>
+<h2 id="MacOS_u7CFB_u7EDF_u4E2D_u4F7F_u7528OpenCV"><a href="#MacOS_u7CFB_u7EDF_u4E2D_u4F7F_u7528OpenCV" class="headerlink" title="MacOS系统中使用OpenCV"></a>MacOS系统中使用OpenCV</h2><h3 id="u5728Mac_OS_Lion_u4E2D_u5B89_u88C5OpenCV"><a href="#u5728Mac_OS_Lion_u4E2D_u5B89_u88C5OpenCV" class="headerlink" title="在Mac OS Lion中安装OpenCV"></a>在Mac OS Lion中安装OpenCV</h3><p>相信大部分Mac用户都安装了brew或port，如果你没有装，那么首先安装一下brew吧。使用如下命令安装brew:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ruby <span class="operator">-e</span> <span class="string">"<span class="variable">$(curl -fsSkL raw.github.com/mxcl/homebrew/go)</span>"</span></span><br></pre></td></tr></table></figure>
+<p>在安装好brew后，只需要一条命令就可以安装OpenCV了：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brew install opencv</span><br></pre></td></tr></table></figure></p>
+<p>通常情况下这样做就应该会安装成功，但我在公司和家里面的电脑尝试的时候，brew都会报一些错误，我遇到的都是一些小问题，按照brew的提示信息，解决掉相应的问题即可。</p>
+<p>安装成功后，你应该可以在“/usr/local/include”目录下找到名为opencv和opencv2的目录，这里面是OpenCV相关的头文件。你也可以在“/usr/local/lib”目录下找到许多以libopencv_开头的.dylib文件，这些是OpenCV的链接库文件。</p>
+<h3 id="u5728Mac_OS_Mountain_Lion_u4E2D_u5B89_u88C5OpenCV"><a href="#u5728Mac_OS_Mountain_Lion_u4E2D_u5B89_u88C5OpenCV" class="headerlink" title="在Mac OS Mountain Lion中安装OpenCV"></a>在Mac OS Mountain Lion中安装OpenCV</h3><p>按照<a href="http://tilomitra.com/opencv-on-mac-osx/" target="_blank" rel="external">该教程</a>，先用brew安装cmake.</p>
+<p>去<a href="http://opencv.org/" target="_blank" rel="external">OpenCV官网</a>下载Linux/Mac版的源码，将源码解压后，在控制台中切换到源码目录，执行如下操作：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># make a separate directory for building</span></span><br><span class="line">mkdir build</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line">cmake -G <span class="string">"Unix Makefiles"</span> ..</span><br><span class="line"></span><br><span class="line"><span class="comment"># Now, we can make OpenCV. Type the following in:</span></span><br><span class="line">make -j8</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<p>上面的命令在执行时要注意，整个源码目录的路径不能带空格。否则编译会报错找不到一些文件。</p>
+<p>安装成功后，你应该可以在“/usr/local/include”目录下找到名为opencv和opencv2的目录，这里面是OpenCV相关的头文件。你也可以在“/usr/local/lib”目录下找到许多以libopencv_开头的.dylib文件，这些是OpenCV的链接库文件。</p>
+<h3 id="u5728MacOS_u7CFB_u7EDF_u4E2D_u4F7F_u7528OpenCV"><a href="#u5728MacOS_u7CFB_u7EDF_u4E2D_u4F7F_u7528OpenCV" class="headerlink" title="在MacOS系统中使用OpenCV"></a>在MacOS系统中使用OpenCV</h3><p>接着我们可以试着在Xcode工程中使用OpenCV。</p>
+<p>新建一个Cocoa Application的工程。工程建好后，选中工程的Target，在Build Settings一样，找到“Header Search Paths”这一个选项，将它的值改为“/usr/local/include”。</p>
+<p>同样还需要设置的还有”Lib Search Paths”这一项，将它的值改为”/usr/local/lib/**”, 如下所示：</p>
+<img src="/images/use-opencv-in-mac-1.jpg">
+<p>接着切换到Build Phases这个tab，在“Link Binary With Libraries”中，选项+号，然后将弹出的文件选择对话框目录切换到“/usr/local/lib”目录下，选择你需要使用的OpenCV链接库（通常情况下，你至少会需要core、highgui和imgproc库)，如下图所示（截图中的OpenCV版本号可能和你的有差别，但应该不影响）：</p>
+<img src="/images/use-opencv-in-mac-2.png">
+<p>这里有一个技巧，因为 /usr 目录在对话框中默认不是可见的，可以按快捷键 command + shift + G，在弹出的“前往文件夹”对话框中输入 /usr/local/lib ，即可跳转到目标文件夹。如下图所示：</p>
+<img src="/images/use-opencv-in-mac-3.png">
+<p>下一步是我自己试出来的，对于Lion操作系统，你需要在Build Settings中，将“C++ Language Dialect”设置成C++11，将“C++ Standard Library”设置成libstdc++ ，如下图所示。个人感觉是由于XCode默认设置的GNU++11、libc++与OpenCV库有一些兼容性问题，我在更改该设置前老是出现编译错误。后续版本在Montain Lion系统中解决了这个问题，不用进行这一步了。</p>
+<img src="/images/use-opencv-in-mac-4.png">
+<p>把上面的设置都做好后，就可以在需要的使用OpenCV库的地方，加上opencv的头文件引用即可：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"opencv2/opencv.hpp"</span></span></span><br></pre></td></tr></table></figure>
+<p>注意，如果你的源文件扩展名是.m的，你还需要改成.mm，这样编译器才知道你将会在该文件混合使用C++语言和Objective-C语言。</p>
+<p>OpenCV处理图象需要的格式是cv::Mat类，而MacOS的图象格式默认是NSImage，所以你需要知道如何在cv::Mat与NSImage之前相互转换。如下是一个NSImage的Addition，你肯定会需要它的。该代码来自stackoverflow上的<a href="http://stackoverflow.com/questions/8563356/nsimage-to-cvmat-and-vice-versa" target="_blank" rel="external">这个贴子</a>。</p>
+<p>NSImage+OpenCV.h 文件：<br><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  NSImage+OpenCV.h</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Created by TangQiao on 12-10-26.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#import <span class="title">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#import <span class="title">"opencv2/opencv.hpp"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSImage</span> (<span class="title">OpenCV</span>)</span></span><br><span class="line"></span><br><span class="line">+(<span class="built_in">NSImage</span>*)imageWithCVMat:(<span class="keyword">const</span> cv::Mat&amp;)cvMat;</span><br><span class="line">-(<span class="keyword">id</span>)initWithCVMat:(<span class="keyword">const</span> cv::Mat&amp;)cvMat;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">readonly</span>) cv::Mat CVMat;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">readonly</span>) cv::Mat CVGrayscaleMat;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></p>
+<p>NSImage+OpenCV.mm文件：<br><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  NSImage+OpenCV.mm</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Created by TangQiao on 12-10-26.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#import <span class="title">"NSImage+OpenCV.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> ProviderReleaseDataNOP(<span class="keyword">void</span> *info, <span class="keyword">const</span> <span class="keyword">void</span> *data, size_t size)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSImage</span> (<span class="title">OpenCV</span>)</span></span><br><span class="line"></span><br><span class="line">-(<span class="built_in">CGImageRef</span>)<span class="built_in">CGImage</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGContextRef</span> bitmapCtx = <span class="built_in">CGBitmapContextCreate</span>(<span class="literal">NULL</span><span class="comment">/*data - pass NULL to let CG allocate the memory*/</span>,</span><br><span class="line">                                                   [<span class="keyword">self</span> size]<span class="variable">.width</span>,</span><br><span class="line">                                                   [<span class="keyword">self</span> size]<span class="variable">.height</span>,</span><br><span class="line">                                                   <span class="number">8</span> <span class="comment">/*bitsPerComponent*/</span>,</span><br><span class="line">                                                   <span class="number">0</span> <span class="comment">/*bytesPerRow - CG will calculate it for you if it's allocating the data.  This might get padded out a bit for better alignment*/</span>,</span><br><span class="line">                                                   [[<span class="built_in">NSColorSpace</span> genericRGBColorSpace] <span class="built_in">CGColorSpace</span>],</span><br><span class="line">                                                   k<span class="built_in">CGBitmapByteOrder32Host</span>|k<span class="built_in">CGImageAlphaPremultipliedFirst</span>);</span><br><span class="line">    </span><br><span class="line">    [<span class="built_in">NSGraphicsContext</span> saveGraphicsState];</span><br><span class="line">    [<span class="built_in">NSGraphicsContext</span> setCurrentContext:[<span class="built_in">NSGraphicsContext</span> graphicsContextWithGraphicsPort:bitmapCtx flipped:<span class="literal">NO</span>]];</span><br><span class="line">    [<span class="keyword">self</span> drawInRect:<span class="built_in">NSMakeRect</span>(<span class="number">0</span>,<span class="number">0</span>, [<span class="keyword">self</span> size]<span class="variable">.width</span>, [<span class="keyword">self</span> size]<span class="variable">.height</span>) fromRect:<span class="built_in">NSZeroRect</span> operation:<span class="built_in">NSCompositeCopy</span> fraction:<span class="number">1.0</span>];</span><br><span class="line">    [<span class="built_in">NSGraphicsContext</span> restoreGraphicsState];</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">CGImageRef</span> cgImage = <span class="built_in">CGBitmapContextCreateImage</span>(bitmapCtx);</span><br><span class="line">    <span class="built_in">CGContextRelease</span>(bitmapCtx);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> cgImage;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-(cv::Mat)CVMat</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGImageRef</span> imageRef = [<span class="keyword">self</span> <span class="built_in">CGImage</span>];</span><br><span class="line">    <span class="built_in">CGColorSpaceRef</span> colorSpace = <span class="built_in">CGImageGetColorSpace</span>(imageRef);</span><br><span class="line">    <span class="built_in">CGFloat</span> cols = <span class="keyword">self</span><span class="variable">.size</span><span class="variable">.width</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> rows = <span class="keyword">self</span><span class="variable">.size</span><span class="variable">.height</span>;</span><br><span class="line">    cv::Mat cvMat(rows, cols, CV_8UC4); <span class="comment">// 8 bits per component, 4 channels</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">CGContextRef</span> contextRef = <span class="built_in">CGBitmapContextCreate</span>(cvMat<span class="variable">.data</span>,                 <span class="comment">// Pointer to backing data</span></span><br><span class="line">                                                    cols,                      <span class="comment">// Width of bitmap</span></span><br><span class="line">                                                    rows,                     <span class="comment">// Height of bitmap</span></span><br><span class="line">                                                    <span class="number">8</span>,                          <span class="comment">// Bits per component</span></span><br><span class="line">                                                    cvMat<span class="variable">.step</span>[<span class="number">0</span>],              <span class="comment">// Bytes per row</span></span><br><span class="line">                                                    colorSpace,                 <span class="comment">// Colorspace</span></span><br><span class="line">                                                    k<span class="built_in">CGImageAlphaNoneSkipLast</span> |</span><br><span class="line">                                                    k<span class="built_in">CGBitmapByteOrderDefault</span>); <span class="comment">// Bitmap info flags</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">CGContextDrawImage</span>(contextRef, <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, cols, rows), imageRef);</span><br><span class="line">    <span class="built_in">CGContextRelease</span>(contextRef);</span><br><span class="line">    <span class="built_in">CGImageRelease</span>(imageRef);</span><br><span class="line">    <span class="keyword">return</span> cvMat;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(cv::Mat)CVGrayscaleMat</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGImageRef</span> imageRef = [<span class="keyword">self</span> <span class="built_in">CGImage</span>];</span><br><span class="line">    <span class="built_in">CGColorSpaceRef</span> colorSpace = <span class="built_in">CGColorSpaceCreateDeviceGray</span>();</span><br><span class="line">    <span class="built_in">CGFloat</span> cols = <span class="keyword">self</span><span class="variable">.size</span><span class="variable">.width</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> rows = <span class="keyword">self</span><span class="variable">.size</span><span class="variable">.height</span>;</span><br><span class="line">    cv::Mat cvMat = cv::Mat(rows, cols, CV_8UC1); <span class="comment">// 8 bits per component, 1 channel</span></span><br><span class="line">    <span class="built_in">CGContextRef</span> contextRef = <span class="built_in">CGBitmapContextCreate</span>(cvMat<span class="variable">.data</span>,                 <span class="comment">// Pointer to backing data</span></span><br><span class="line">                                                    cols,                      <span class="comment">// Width of bitmap</span></span><br><span class="line">                                                    rows,                     <span class="comment">// Height of bitmap</span></span><br><span class="line">                                                    <span class="number">8</span>,                          <span class="comment">// Bits per component</span></span><br><span class="line">                                                    cvMat<span class="variable">.step</span>[<span class="number">0</span>],              <span class="comment">// Bytes per row</span></span><br><span class="line">                                                    colorSpace,                 <span class="comment">// Colorspace</span></span><br><span class="line">                                                    k<span class="built_in">CGImageAlphaNone</span> |</span><br><span class="line">                                                    k<span class="built_in">CGBitmapByteOrderDefault</span>); <span class="comment">// Bitmap info flags</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">CGContextDrawImage</span>(contextRef, <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, cols, rows), imageRef);</span><br><span class="line">    <span class="built_in">CGContextRelease</span>(contextRef);</span><br><span class="line">    <span class="built_in">CGColorSpaceRelease</span>(colorSpace);</span><br><span class="line">    <span class="built_in">CGImageRelease</span>(imageRef);</span><br><span class="line">    <span class="keyword">return</span> cvMat;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">+ (<span class="built_in">NSImage</span> *)imageWithCVMat:(<span class="keyword">const</span> cv::Mat&amp;)cvMat</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> [[[<span class="built_in">NSImage</span> alloc] initWithCVMat:cvMat] autorelease];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">id</span>)initWithCVMat:(<span class="keyword">const</span> cv::Mat&amp;)cvMat</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSData</span> *data = [<span class="built_in">NSData</span> dataWithBytes:cvMat<span class="variable">.data</span> length:cvMat<span class="variable">.elemSize</span>() * cvMat<span class="variable">.total</span>()];</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">CGColorSpaceRef</span> colorSpace;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (cvMat<span class="variable">.elemSize</span>() == <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        colorSpace = <span class="built_in">CGColorSpaceCreateDeviceGray</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        colorSpace = <span class="built_in">CGColorSpaceCreateDeviceRGB</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">CGDataProviderRef</span> provider = <span class="built_in">CGDataProviderCreateWithCFData</span>((<span class="built_in">CFDataRef</span>)data);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">CGImageRef</span> imageRef = <span class="built_in">CGImageCreate</span>(cvMat<span class="variable">.cols</span>,                                     <span class="comment">// Width</span></span><br><span class="line">                                        cvMat<span class="variable">.rows</span>,                                     <span class="comment">// Height</span></span><br><span class="line">                                        <span class="number">8</span>,                                              <span class="comment">// Bits per component</span></span><br><span class="line">                                        <span class="number">8</span> * cvMat<span class="variable">.elemSize</span>(),                           <span class="comment">// Bits per pixel</span></span><br><span class="line">                                        cvMat<span class="variable">.step</span>[<span class="number">0</span>],                                  <span class="comment">// Bytes per row</span></span><br><span class="line">                                        colorSpace,                                     <span class="comment">// Colorspace</span></span><br><span class="line">                                        k<span class="built_in">CGImageAlphaNone</span> | k<span class="built_in">CGBitmapByteOrderDefault</span>,  <span class="comment">// Bitmap info flags</span></span><br><span class="line">                                        provider,                                       <span class="comment">// CGDataProviderRef</span></span><br><span class="line">                                        <span class="literal">NULL</span>,                                           <span class="comment">// Decode</span></span><br><span class="line">                                        <span class="literal">false</span>,                                          <span class="comment">// Should interpolate</span></span><br><span class="line">                                        k<span class="built_in">CGRenderingIntentDefault</span>);                     <span class="comment">// Intent</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSBitmapImageRep</span> *bitmapRep = [[<span class="built_in">NSBitmapImageRep</span> alloc] initWith<span class="built_in">CGImage</span>:imageRef];</span><br><span class="line">    <span class="built_in">NSImage</span> *image = [[<span class="built_in">NSImage</span> alloc] init];</span><br><span class="line">    [image addRepresentation:bitmapRep];</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">CGImageRelease</span>(imageRef);</span><br><span class="line">    <span class="built_in">CGDataProviderRelease</span>(provider);</span><br><span class="line">    <span class="built_in">CGColorSpaceRelease</span>(colorSpace);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> image;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></p>
+<p>完成以上步骤后，恭喜你，你可以在源代码中自由地调用OpenCV的函数了。</p>
+<h2 id="u5728iOS_u7CFB_u7EDF_u4E2D_u4F7F_u7528OpenCV"><a href="#u5728iOS_u7CFB_u7EDF_u4E2D_u4F7F_u7528OpenCV" class="headerlink" title="在iOS系统中使用OpenCV"></a>在iOS系统中使用OpenCV</h2><h3 id="u4E0B_u8F7D_u6216_u7F16_u8BD1opencv2-framework"><a href="#u4E0B_u8F7D_u6216_u7F16_u8BD1opencv2-framework" class="headerlink" title="下载或编译opencv2.framework"></a>下载或编译opencv2.framework</h3><p>接下来介绍如何在iOS程序中使用OpenCV。在iOS上使用最新的OpenCV库比较简单，进入<a href="http://opencv.org/" target="_blank" rel="external">opencv的官网</a>，下载build好的名为opencv2.framework即可（<a href="http://sourceforge.net/projects/opencvlibrary/files/opencv-ios/2.4.3/opencv2.framework.zip/download?utm_expid=6384-3" target="_blank" rel="external">下载地址</a>）。</p>
+<p>如果你比较喜欢折腾，也可以自行下载opencv的源码，在本地编译opencv2.framework。<a href="http://docs.opencv.org/trunk/doc/tutorials/introduction/ios_install/ios_install.html#ios-installation" target="_blank" rel="external">这里</a>有官方网站的教程，步骤非常简单，不过我照着它的教程尝试了一下失败了。感觉还是XCode编译器与OpenCV代码的兼容性问题，所以就没有继续研究了。</p>
+<h3 id="u5728iOS_u7A0B_u5E8F_u4E2D_u4F7F_u7528OpenCV"><a href="#u5728iOS_u7A0B_u5E8F_u4E2D_u4F7F_u7528OpenCV" class="headerlink" title="在iOS程序中使用OpenCV"></a>在iOS程序中使用OpenCV</h3><p>新建一个iOS工程，将opencv2.framework直接拖动到工程中。然后，你需要在Build Settings中，将“C++ Standard Library”设置成libstdc++。</p>
+<p>因为opencv中的MIN宏和UIKit的MIN宏有冲突。所以需要在.pch文件中，先定义opencv的头文件，否则会有编译错误。将工程的.pch文件内容修改成如下所示：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">&lt;Availability.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#ifdef __cplusplus</span></span><br><span class="line">    <span class="preprocessor">#import <span class="title">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="preprocessor">#endif</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#ifdef __OBJC__</span></span><br><span class="line">    <span class="preprocessor">#import <span class="title">&lt;UIKit/UIKit.h&gt;</span></span></span><br><span class="line">    <span class="preprocessor">#import <span class="title">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#endif</span></span><br></pre></td></tr></table></figure>
+<p>把上面的设置都做好后，就可以在需要的使用OpenCV库的地方，加上opencv的头文件引用即可：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"opencv2/opencv.hpp"</span></span></span><br></pre></td></tr></table></figure>
+<p>还是那句话，如果你的源文件扩展名是.m的，你还需要改成.mm，这样编译器才知道你将会在该文件中混合使用C++语言和Objective-C语言。</p>
+<p>同样，iOS程序内部通常用UIImage表示图片，而OpenCV处理图象需要的格式是cv::Mat，你会需要下面这个Addition来在cv::Mat和UIImage格式之间相互转换。该代码来自<a href="https://github.com/aptogo/OpenCVForiPhone" target="_blank" rel="external">aptogo的开源代码</a>，他的版权信息在源码头文件中。</p>
+<p>UIImage+OpenCV.h 文件：<br><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  UIImage+OpenCV.h</span></span><br><span class="line"><span class="comment">//  OpenCVClient</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Created by Robin Summerhill on 02/09/2011.</span></span><br><span class="line"><span class="comment">//  Copyright 2011 Aptogo Limited. All rights reserved.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Permission is given to use this source code file without charge in any</span></span><br><span class="line"><span class="comment">//  project, commercial or otherwise, entirely at your risk, with the condition</span></span><br><span class="line"><span class="comment">//  that any redistribution (in part or whole) of source code must retain</span></span><br><span class="line"><span class="comment">//  this copyright and permission notice. Attribution in compiled projects is</span></span><br><span class="line"><span class="comment">//  appreciated but not required.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#import <span class="title">&lt;UIKit/UIKit.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">UIImage</span> (<span class="title">UIImage_OpenCV</span>)</span></span><br><span class="line"></span><br><span class="line">+(<span class="built_in">UIImage</span> *)imageWithCVMat:(<span class="keyword">const</span> cv::Mat&amp;)cvMat;</span><br><span class="line">-(<span class="keyword">id</span>)initWithCVMat:(<span class="keyword">const</span> cv::Mat&amp;)cvMat;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">readonly</span>) cv::Mat CVMat;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">readonly</span>) cv::Mat CVGrayscaleMat;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></p>
+<p>UIImage+OpenCV.mm 文件：<br><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  UIImage+OpenCV.mm</span></span><br><span class="line"><span class="comment">//  OpenCVClient</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Created by Robin Summerhill on 02/09/2011.</span></span><br><span class="line"><span class="comment">//  Copyright 2011 Aptogo Limited. All rights reserved.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Permission is given to use this source code file without charge in any</span></span><br><span class="line"><span class="comment">//  project, commercial or otherwise, entirely at your risk, with the condition</span></span><br><span class="line"><span class="comment">//  that any redistribution (in part or whole) of source code must retain</span></span><br><span class="line"><span class="comment">//  this copyright and permission notice. Attribution in compiled projects is</span></span><br><span class="line"><span class="comment">//  appreciated but not required.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#import <span class="title">"UIImage+OpenCV.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> ProviderReleaseDataNOP(<span class="keyword">void</span> *info, <span class="keyword">const</span> <span class="keyword">void</span> *data, size_t size)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Do not release memory</span></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">UIImage</span> (<span class="title">UIImage_OpenCV</span>)</span></span><br><span class="line"></span><br><span class="line">-(cv::Mat)CVMat</span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">CGColorSpaceRef</span> colorSpace = <span class="built_in">CGImageGetColorSpace</span>(<span class="keyword">self</span><span class="variable">.CGImage</span>);</span><br><span class="line">    <span class="built_in">CGFloat</span> cols = <span class="keyword">self</span><span class="variable">.size</span><span class="variable">.width</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> rows = <span class="keyword">self</span><span class="variable">.size</span><span class="variable">.height</span>;</span><br><span class="line">    </span><br><span class="line">    cv::Mat cvMat(rows, cols, CV_8UC4); <span class="comment">// 8 bits per component, 4 channels</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">CGContextRef</span> contextRef = <span class="built_in">CGBitmapContextCreate</span>(cvMat<span class="variable">.data</span>,                 <span class="comment">// Pointer to backing data</span></span><br><span class="line">                                                    cols,                      <span class="comment">// Width of bitmap</span></span><br><span class="line">                                                    rows,                     <span class="comment">// Height of bitmap</span></span><br><span class="line">                                                    <span class="number">8</span>,                          <span class="comment">// Bits per component</span></span><br><span class="line">                                                    cvMat<span class="variable">.step</span>[<span class="number">0</span>],              <span class="comment">// Bytes per row</span></span><br><span class="line">                                                    colorSpace,                 <span class="comment">// Colorspace</span></span><br><span class="line">                                                    k<span class="built_in">CGImageAlphaNoneSkipLast</span> |</span><br><span class="line">                                                    k<span class="built_in">CGBitmapByteOrderDefault</span>); <span class="comment">// Bitmap info flags</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">CGContextDrawImage</span>(contextRef, <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, cols, rows), <span class="keyword">self</span><span class="variable">.CGImage</span>);</span><br><span class="line">    <span class="built_in">CGContextRelease</span>(contextRef);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> cvMat;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(cv::Mat)CVGrayscaleMat</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGColorSpaceRef</span> colorSpace = <span class="built_in">CGColorSpaceCreateDeviceGray</span>();</span><br><span class="line">    <span class="built_in">CGFloat</span> cols = <span class="keyword">self</span><span class="variable">.size</span><span class="variable">.width</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> rows = <span class="keyword">self</span><span class="variable">.size</span><span class="variable">.height</span>;</span><br><span class="line">    </span><br><span class="line">    cv::Mat cvMat = cv::Mat(rows, cols, CV_8UC1); <span class="comment">// 8 bits per component, 1 channel</span></span><br><span class="line"> </span><br><span class="line">    <span class="built_in">CGContextRef</span> contextRef = <span class="built_in">CGBitmapContextCreate</span>(cvMat<span class="variable">.data</span>,                 <span class="comment">// Pointer to backing data</span></span><br><span class="line">                                                    cols,                      <span class="comment">// Width of bitmap</span></span><br><span class="line">                                                    rows,                     <span class="comment">// Height of bitmap</span></span><br><span class="line">                                                    <span class="number">8</span>,                          <span class="comment">// Bits per component</span></span><br><span class="line">                                                    cvMat<span class="variable">.step</span>[<span class="number">0</span>],              <span class="comment">// Bytes per row</span></span><br><span class="line">                                                    colorSpace,                 <span class="comment">// Colorspace</span></span><br><span class="line">                                                    k<span class="built_in">CGImageAlphaNone</span> |</span><br><span class="line">                                                    k<span class="built_in">CGBitmapByteOrderDefault</span>); <span class="comment">// Bitmap info flags</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">CGContextDrawImage</span>(contextRef, <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, cols, rows), <span class="keyword">self</span><span class="variable">.CGImage</span>);</span><br><span class="line">    <span class="built_in">CGContextRelease</span>(contextRef);</span><br><span class="line">    <span class="built_in">CGColorSpaceRelease</span>(colorSpace);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> cvMat;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">+ (<span class="built_in">UIImage</span> *)imageWithCVMat:(<span class="keyword">const</span> cv::Mat&amp;)cvMat</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> [[[<span class="built_in">UIImage</span> alloc] initWithCVMat:cvMat] autorelease];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">id</span>)initWithCVMat:(<span class="keyword">const</span> cv::Mat&amp;)cvMat</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSData</span> *data = [<span class="built_in">NSData</span> dataWithBytes:cvMat<span class="variable">.data</span> length:cvMat<span class="variable">.elemSize</span>() * cvMat<span class="variable">.total</span>()];</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">CGColorSpaceRef</span> colorSpace;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (cvMat<span class="variable">.elemSize</span>() == <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        colorSpace = <span class="built_in">CGColorSpaceCreateDeviceGray</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        colorSpace = <span class="built_in">CGColorSpaceCreateDeviceRGB</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">CGDataProviderRef</span> provider = <span class="built_in">CGDataProviderCreateWithCFData</span>((<span class="built_in">CFDataRef</span>)data);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">CGImageRef</span> imageRef = <span class="built_in">CGImageCreate</span>(cvMat<span class="variable">.cols</span>,                                     <span class="comment">// Width</span></span><br><span class="line">                                        cvMat<span class="variable">.rows</span>,                                     <span class="comment">// Height</span></span><br><span class="line">                                        <span class="number">8</span>,                                              <span class="comment">// Bits per component</span></span><br><span class="line">                                        <span class="number">8</span> * cvMat<span class="variable">.elemSize</span>(),                           <span class="comment">// Bits per pixel</span></span><br><span class="line">                                        cvMat<span class="variable">.step</span>[<span class="number">0</span>],                                  <span class="comment">// Bytes per row</span></span><br><span class="line">                                        colorSpace,                                     <span class="comment">// Colorspace</span></span><br><span class="line">                                        k<span class="built_in">CGImageAlphaNone</span> | k<span class="built_in">CGBitmapByteOrderDefault</span>,  <span class="comment">// Bitmap info flags</span></span><br><span class="line">                                        provider,                                       <span class="comment">// CGDataProviderRef</span></span><br><span class="line">                                        <span class="literal">NULL</span>,                                           <span class="comment">// Decode</span></span><br><span class="line">                                        <span class="literal">false</span>,                                          <span class="comment">// Should interpolate</span></span><br><span class="line">                                        k<span class="built_in">CGRenderingIntentDefault</span>);                     <span class="comment">// Intent   </span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">self</span> initWith<span class="built_in">CGImage</span>:imageRef];</span><br><span class="line">    <span class="built_in">CGImageRelease</span>(imageRef);</span><br><span class="line">    <span class="built_in">CGDataProviderRelease</span>(provider);</span><br><span class="line">    <span class="built_in">CGColorSpaceRelease</span>(colorSpace);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>上面2个环境搭建好后，你就可以在MacOS上试验各种图象处理算法，然后很方便地移值到iOS上。</p>
+<p>一直觉得，图象和声音是移动设备上的特点和优势。因为移动设备没有了可以快速输入的键盘，屏幕也不大，在移动设备上，声音，图象和视频应该是相比文字更方便让人输入的东西。移动端APP应该利用好这些特点，才能设计出更加体贴的功能。</p>
+<p>而且，通常情况下做图象处理都比较好玩，记得以前在学校做了一个在QQ游戏大厅自动下中国象棋的程序，其后台使用了网上下载的一个带命令行接口的象棋AI，然后我的代码主要做的事情就是识别象棋棋盘，然后将棋盘数据传给那个象棋AI，接着获得它返回的策略后，模拟鼠标点击来移动棋子。当时不懂什么图象算法，直接把棋子先截取下来保存，然后识别的时候做完全匹配，非常弱的办法，但是效果非常好，做出来也很好玩。嗯，所以文章最后，我想说的是：have fun!</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2012/10/27/use-opencv-in-ios/" data-title="在MacOS和iOS系统中使用OpenCV | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2012/11/10/how-to-design-upgrade-notice/" title="改进iOS客户端的升级提醒功能">
+  <strong>上一篇：</strong><br/>
+  <span>
+  改进iOS客户端的升级提醒功能</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2012/10/15/scrum-and-architecture-in-fenbi/"  title="粉笔网的架构和项目管理">
+ <strong>下一篇：</strong><br/> 
+ <span>粉笔网的架构和项目管理
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

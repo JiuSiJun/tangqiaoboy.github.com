@@ -1,0 +1,437 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>将博客从GitHub迁移到GitCafe | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="我之前一直使用 Github Pages 功能 以及 Octopress 来搭建个人博客，我也写了一篇文章 《象写程序一样写博客：搭建基于 github 的博客》 来分享博客搭建的技术细节。
+但是自从我的博客每天访问量超过 2000 次以后，我就发现博客的访问速度还是一个不可忽视的问题。通过 监控宝 和 Google Analytics，我发现有些博客文章的平均打开时间长达 4 秒钟。于是我开始考">
+<meta property="og:type" content="article">
+<meta property="og:title" content="将博客从GitHub迁移到GitCafe">
+<meta property="og:url" content="http://blog.devtang.com/2014/06/02/use-gitcafe-to-host-blog/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="我之前一直使用 Github Pages 功能 以及 Octopress 来搭建个人博客，我也写了一篇文章 《象写程序一样写博客：搭建基于 github 的博客》 来分享博客搭建的技术细节。
+但是自从我的博客每天访问量超过 2000 次以后，我就发现博客的访问速度还是一个不可忽视的问题。通过 监控宝 和 Google Analytics，我发现有些博客文章的平均打开时间长达 4 秒钟。于是我开始考">
+<meta property="og:image" content="http://blog.devtang.com/images/gitcafe-ping.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/gitcafe-jiankong.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/gitcafe-create-page.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/gitcafe-edit-rakefile.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/gitcafe-set-domain.jpg">
+<meta property="og:updated_time" content="2016-02-16T10:28:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="将博客从GitHub迁移到GitCafe">
+<meta name="twitter:description" content="我之前一直使用 Github Pages 功能 以及 Octopress 来搭建个人博客，我也写了一篇文章 《象写程序一样写博客：搭建基于 github 的博客》 来分享博客搭建的技术细节。
+但是自从我的博客每天访问量超过 2000 次以后，我就发现博客的访问速度还是一个不可忽视的问题。通过 监控宝 和 Google Analytics，我发现有些博客文章的平均打开时间长达 4 秒钟。于是我开始考">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/06/02/use-gitcafe-to-host-blog/" title="将博客从GitHub迁移到GitCafe" itemprop="url">将博客从GitHub迁移到GitCafe</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2014-06-02T09:22:02.000Z" itemprop="datePublished"> 发表于 2014-06-02 17:22</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u8FC1_u79FB_u6559_u7A0B"><span class="toc-number">1.</span> <span class="toc-text">迁移教程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u6CE8_u518C"><span class="toc-number">1.1.</span> <span class="toc-text">注册</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5728_GitCafe__u4E0A_u65B0_u5EFA_u4E00_u4E2A_u535A_u5BA2_u9879_u76EE"><span class="toc-number">1.2.</span> <span class="toc-text">在 GitCafe 上新建一个博客项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BBE_u7F6E_u591A_u4E2A_Git_Remote__u6E90"><span class="toc-number">1.3.</span> <span class="toc-text">设置多个 Git Remote 源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4FEE_u6539_Rakefile__28_u53EF_u9009_29"><span class="toc-number">1.4.</span> <span class="toc-text">修改 Rakefile (可选)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BBE_u7F6E_u57DF_u540D"><span class="toc-number">1.5.</span> <span class="toc-text">设置域名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6DFB_u52A0_u5BF9_GitCafe__u7684_u611F_u8C22__28_u53EF_u9009_29"><span class="toc-number">1.6.</span> <span class="toc-text">添加对 GitCafe 的感谢 (可选)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u611F_u8C22"><span class="toc-number">2.</span> <span class="toc-text">感谢</span></a></li></ol>
+		
+		</div>
+		
+		<p>我之前一直使用 <a href="https://pages.github.com/" target="_blank" rel="external">Github Pages 功能</a> 以及 <a href="http://octopress.org/" target="_blank" rel="external">Octopress</a> 来搭建个人博客，我也写了一篇文章 <a href="/2012/02/10/setup-blog-based-on-github/">《象写程序一样写博客：搭建基于 github 的博客》</a> 来分享博客搭建的技术细节。</p>
+<p>但是自从我的博客每天访问量超过 2000 次以后，我就发现博客的访问速度还是一个不可忽视的问题。通过 <a href="http://www.jiankongbao.com/" target="_blank" rel="external">监控宝</a> 和 <a href="http://www.google.com/analytics/" target="_blank" rel="external">Google Analytics</a>，我发现有些博客文章的平均打开时间长达 4 秒钟。于是我开始考虑将博客搭建在更快的服务器上面。</p>
+<p>我的首先考虑是购买独立的 VPS，我买的是 <a href="https://www.digitalocean.com/?refcode=f54eef197afd" target="_blank" rel="external">DigitalOcean</a>，<a href="https://www.digitalocean.com/?refcode=f54eef197afd" target="_blank" rel="external">DigitalOcean</a> 算下来每月只需要 5$。于是在一个周末，我花时间购买了 DigitalOcean 家的 VPS，安装了 Nginx，然后在上面运行了一个脚本，定时将我 github 博客的内容自动更新过来（其实就是定期<code>git pull</code>一下我博客的 repo）。</p>
+<p>就这样运行了一个月，我发现虽然 <a href="https://www.digitalocean.com/?refcode=f54eef197afd" target="_blank" rel="external">DigitalOcean</a> 服务器的 ping 值相比 github 要快一些。但是从监控数据上看，整体的网页访问速度并没有什么提高。就在我在微博上抱怨的时候，一个朋友推荐我试试 <a href="http://gitcafe.com/signup?invited_by=tangqiaoboy" target="_blank" rel="external">GitCafe</a>。于是我就尝试了一下，结果你猜怎么着？我被吓坏了。</p>
+<p>ping 值直接从 200ms 左右减少到 3ms 左右，如下图所示：</p>
+<img src="/images/gitcafe-ping.jpg">
+<p>监控宝的统计显示，首页平均打开时间从原来的 1800ms 减少到 350ms 左右，快了 5 倍，如下图所示：</p>
+<img src="/images/gitcafe-jiankong.jpg">
+<p>所以我强烈建议各位基于 Github Pages 功能来搭建个人博客的朋友，将博客内容镜像到 <a href="http://gitcafe.com/signup?invited_by=tangqiaoboy" target="_blank" rel="external">GitCafe</a> 上。如果你有个人的独立域名，那么镜像之后就可以随时将博客地址在 Github 和 Gitcafe 之间切换了。对于各位博主来说，这样做没有任何风险，因为你可以随时再切换回去。当然，免费用了人家的服务，如果你能像我这样，在网站的底部附上感谢内容，那是再好不过的了。</p>
+<p>以下为大家介绍详细的迁移过程。</p>
+<h2 id="u8FC1_u79FB_u6559_u7A0B"><a href="#u8FC1_u79FB_u6559_u7A0B" class="headerlink" title="迁移教程"></a>迁移教程</h2><h3 id="u6CE8_u518C"><a href="#u6CE8_u518C" class="headerlink" title="注册"></a>注册</h3><p>如果你还没有注册过 <a href="http://gitcafe.com/signup?invited_by=tangqiaoboy" target="_blank" rel="external">GitCafe</a>，首先需要 <a href="https://gitcafe.com/signup" target="_blank" rel="external">点这里</a> 注册一下。</p>
+<p>注册完成之后，去 <a href="https://gitcafe.com/account/public_keys" target="_blank" rel="external">公钥管理</a> 那儿添加一下你的 ssh 公钥，这样以后提交代码会方便很多。当然你也可以不设置这一步，每次提交通过密码来验证。</p>
+<h3 id="u5728_GitCafe__u4E0A_u65B0_u5EFA_u4E00_u4E2A_u535A_u5BA2_u9879_u76EE"><a href="#u5728_GitCafe__u4E0A_u65B0_u5EFA_u4E00_u4E2A_u535A_u5BA2_u9879_u76EE" class="headerlink" title="在 GitCafe 上新建一个博客项目"></a>在 GitCafe 上新建一个博客项目</h3><p>然后我们需要先在 GitCafe 上新建一个博客项目。GitCafe 的博客搭建官方教程藏得比较深，所以我第一次还没有找到，教程地址在 <a href="https://gitcafe.com/GitCafe/Help/wiki/Pages-%E7%9B%B8%E5%85%B3%E5%B8%AE%E5%8A%A9#wiki" target="_blank" rel="external">这里</a>。具体来说，就是创建一个与用户名 (如果是组织，就是组织名) 相同名称的项目。如果你创建的项目名与用户名相同，GitCafe 会自动识别成这是一个 Page 项目，如下所示：</p>
+<img src="/images/gitcafe-create-page.jpg">
+<h3 id="u8BBE_u7F6E_u591A_u4E2A_Git_Remote__u6E90"><a href="#u8BBE_u7F6E_u591A_u4E2A_Git_Remote__u6E90" class="headerlink" title="设置多个 Git Remote 源"></a>设置多个 Git Remote 源</h3><p>接下来我们需要将原本提交到 Github 上的博客内容同步提交到 GitCafe。因为我的博客是基于 <a href="http://octopress.org/" target="_blank" rel="external">Octopress</a> 的，我介绍一下 Octopress 的做法，其它博客引擎的做法类似。</p>
+<p>对于 Octopress，我们只需要每次提交网站内容时，执行完 <code>rake deploy</code>之后，再执行以下脚本即可（你可以将该脚本中的代码仓库地址换成你的，然后将其保存成一个脚 本文件，需要时执行一下即可）：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">cd</span> _deploy</span><br><span class="line"><span class="comment"># 添加 gitcafe 源</span></span><br><span class="line">git remote add gitcafe git@gitcafe.com:tangqiaoboy/tangqiaoboy.git &gt;&gt; /dev/null <span class="number">2</span>&gt;&amp;<span class="number">1</span></span><br><span class="line"><span class="comment"># 提交博客内容</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"### Pushing to GitCafe..."</span></span><br><span class="line">git push -u gitcafe master:gitcafe-pages</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"### Done"</span>%</span><br></pre></td></tr></table></figure>
+<p>大概解释一下以上内容，Octopress 在发布时会将自己的 <code>_delpoy</code>目录切换到 master 分支，然后将生成的博客内容放到<code>_delpoy</code>目录中，然后执行<code>git push</code>操作。正常情况下，默认内容是 push 到 github 上的。我们执行的以上脚本，就是为该项目增加了一个名为<code>gitcafe</code>的远程仓库，然后将 master 分支 push 到<code>gitcafe</code>的<code>gitcafe-pages</code>分支。</p>
+<h3 id="u4FEE_u6539_Rakefile__28_u53EF_u9009_29"><a href="#u4FEE_u6539_Rakefile__28_u53EF_u9009_29" class="headerlink" title="修改 Rakefile (可选)"></a>修改 Rakefile (可选)</h3><p>除了以上方法外，你也可以直接修改<code>Rakefile</code>。在其第 269 行后增加如下代码，也可以达到同样的目的，这样你每次就仍然只需要执行<code>rake deploy</code>即可同时将博客同步到 github 和 gitcafe：</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">system <span class="string">"git remote add gitcafe git@gitcafe.com:tangqiaoboy/tangqiaoboy.git &gt;&gt; /dev/null 2&gt;&amp;1"</span></span><br><span class="line">system <span class="string">"git push -u gitcafe master:gitcafe-pages"</span></span><br></pre></td></tr></table></figure>
+<p>插入代码的示例位置如下：</p>
+<img src="/images/gitcafe-edit-rakefile.jpg">
+<h3 id="u8BBE_u7F6E_u57DF_u540D"><a href="#u8BBE_u7F6E_u57DF_u540D" class="headerlink" title="设置域名"></a>设置域名</h3><p>GitCafe 的自定义域名设置比 github 要友好得多，它不但提供了图形界面设置，并且支持同时设置多个域名。在<code>项目管理</code>-&gt;<code>域名管理</code>中，我们可以找到相应的设置项，如下所示：</p>
+<img src="/images/gitcafe-set-domain.jpg">
+<p>在设置完之后，我们需要去域名解析的服务商那儿，将对应的域名用<code>A 记录</code>类型，解析到<code>117.79.146.98</code>即可。</p>
+<h3 id="u6DFB_u52A0_u5BF9_GitCafe__u7684_u611F_u8C22__28_u53EF_u9009_29"><a href="#u6DFB_u52A0_u5BF9_GitCafe__u7684_u611F_u8C22__28_u53EF_u9009_29" class="headerlink" title="添加对 GitCafe 的感谢 (可选)"></a>添加对 GitCafe 的感谢 (可选)</h3><p>如果你也想像我一样，想在博客底部添加对 GitCafe 的感谢，可以参考 <a href="https://github.com/tangqiaoboy/tangqiaoboy.github.com/commit/a8ff6914d6fca786baf5702de3da01d408bd7b43" target="_blank" rel="external">这个提交</a>。它通过修改 Octopress 的<code>source/_includes/custom/footer.html</code>模版文件完成。</p>
+<h2 id="u611F_u8C22"><a href="#u611F_u8C22" class="headerlink" title="感谢"></a>感谢</h2><p>最后再次感谢 GitCafe，上个月在 QCon 大会上了解到他们的发展思路和 Github 很不一样。虽然它还是一家创业公司，但是我期待看到它最终能够推动国内开源和技术社区的发展。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/summary/">summary</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2014/06/02/use-gitcafe-to-host-blog/" data-title="将博客从GitHub迁移到GitCafe | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/06/10/ios-weekly-14/" title="iOS移动开发周报-第14期">
+  <strong>上一篇：</strong><br/>
+  <span>
+  iOS移动开发周报-第14期</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/06/01/ios-weekly-13/"  title="iOS移动开发周报-第13期">
+ <strong>下一篇：</strong><br/> 
+ <span>iOS移动开发周报-第13期
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

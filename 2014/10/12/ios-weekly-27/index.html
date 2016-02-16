@@ -1,0 +1,452 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>iOS移动开发周报-第27期 | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="版权说明本文为InfoQ中文站特供稿件，首发地址为：文章链接。如需转载，请与InfoQ中文站联系。
+前言欢迎国内的iOS同行或技术作者向我提交周报线索，线索可以是新闻、教程、开发工具或开源项目，将相关文章的简介和链接在微博上发布并 @唐巧_boy 即可。
+【摘要】：本期iOS移动开发周报带来如下内容：国内iOS6比例已经低于5%，Apple 发布 Swift 语言和 Xcode 入门视频，Face">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS移动开发周报-第27期">
+<meta property="og:url" content="http://blog.devtang.com/2014/10/12/ios-weekly-27/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="版权说明本文为InfoQ中文站特供稿件，首发地址为：文章链接。如需转载，请与InfoQ中文站联系。
+前言欢迎国内的iOS同行或技术作者向我提交周报线索，线索可以是新闻、教程、开发工具或开源项目，将相关文章的简介和链接在微博上发布并 @唐巧_boy 即可。
+【摘要】：本期iOS移动开发周报带来如下内容：国内iOS6比例已经低于5%，Apple 发布 Swift 语言和 Xcode 入门视频，Face">
+<meta property="og:updated_time" content="2016-02-16T10:26:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS移动开发周报-第27期">
+<meta name="twitter:description" content="版权说明本文为InfoQ中文站特供稿件，首发地址为：文章链接。如需转载，请与InfoQ中文站联系。
+前言欢迎国内的iOS同行或技术作者向我提交周报线索，线索可以是新闻、教程、开发工具或开源项目，将相关文章的简介和链接在微博上发布并 @唐巧_boy 即可。
+【摘要】：本期iOS移动开发周报带来如下内容：国内iOS6比例已经低于5%，Apple 发布 Swift 语言和 Xcode 入门视频，Face">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/10/12/ios-weekly-27/" title="iOS移动开发周报-第27期" itemprop="url">iOS移动开发周报-第27期</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2014-10-12T08:33:21.000Z" itemprop="datePublished"> 发表于 2014-10-12 16:33</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7248_u6743_u8BF4_u660E"><span class="toc-number">1.</span> <span class="toc-text">版权说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u65B0_u95FB"><span class="toc-number">2.</span> <span class="toc-text">新闻</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6559_u7A0B"><span class="toc-number">3.</span> <span class="toc-text">教程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5F00_u6E90_u9879_u76EE"><span class="toc-number">4.</span> <span class="toc-text">开源项目</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="u7248_u6743_u8BF4_u660E"><a href="#u7248_u6743_u8BF4_u660E" class="headerlink" title="版权说明"></a>版权说明</h2><p>本文为InfoQ中文站特供稿件，首发地址为：<a href="http://www.infoq.com/cn/news/2014/10/ios6" target="_blank" rel="external">文章链接</a>。如需转载，请与InfoQ中文站联系。</p>
+<h3 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h3><p>欢迎国内的iOS同行或技术作者向我提交周报线索，线索可以是新闻、教程、开发工具或开源项目，将相关文章的简介和链接在微博上发布并 <a href="http://weibo.com/tangqiaoboy" target="_blank" rel="external">@唐巧_boy</a> 即可。</p>
+<p>【摘要】：本期iOS移动开发周报带来如下内容：国内iOS6比例已经低于5%，Apple 发布 Swift 语言和 Xcode 入门视频，Facebook’s iOS Infrastructure等。</p>
+<h2 id="u65B0_u95FB"><a href="#u65B0_u95FB" class="headerlink" title="新闻"></a>新闻</h2><ol>
+<li><p><a href="http://weibo.com/1708947107/BoBnZ1qy9?mod=weibotime#_rnd1412427404394" target="_blank" rel="external">《国内iOS6比例已经低于5%》</a>：来自国内友盟的统计以及笔者开发的应用（猿题库）统计结果都显示，国内的iOS6用户比例已经低于5%。</p>
+</li>
+<li><p><a href="http://tech.sina.com.cn/mobile/n/apple/2014-09-27/10059651916.shtml" target="_blank" rel="external">《苹果关闭iOS 7.1.2验证：iOS 8将无法降级》</a>：在发布iOS 8的两个更新之后，苹果停止了为iOS 7.1.2固件提供签名。这意味着，已经升级至新版iOS 8的用户将无法再降级回iOS 7.1.2。</p>
+</li>
+<li><p><a href="http://tech.sina.com.cn/mobile/n/apple/2014-10-04/08109666982.shtml" target="_blank" rel="external">《新恶意软件iWorm已感染全球1.7万台Mac电脑》</a>：信息安全研究人员近期发现，全球超过1.7万台Mac电脑已经感染了一种名为“iWorm”的新的OS X恶意软件。这种恶意软件曾使用Reddit网站作为传播媒介，能窃取用户数据，触发多种系统操作，并执行Lua脚本。用户可以通过测试路径<code>/Library/Application Support/JavaW</code>是否存在，在判断是否中病毒。如果OS X找不到这一文件夹，那么Mac电脑就是安全的。</p>
+</li>
+</ol>
+<h2 id="u6559_u7A0B"><a href="#u6559_u7A0B" class="headerlink" title="教程"></a>教程</h2><ol>
+<li><p><a href="http://swift-cheatsheet.co.uk/" target="_blank" rel="external">《iOS8 Swift Cheat Sheet and Quick Reference Guide》</a>：这份速查表列出了Swift的常见的基本用法。</p>
+</li>
+<li><p><a href="http://bbs.iosre.com/forum.php?mod=viewthread&amp;tid=422" target="_blank" rel="external">《 获取当前安装的所有App》</a>：作者介绍了利用私有API在非越狱的iOS 7和8机器上，获取iOS中安装的所有App的办法。</p>
+</li>
+<li><p><a href="http://weibo.com/p/23041889d963070102v39b" target="_blank" rel="external">《iOS8企业应用部署Bug》</a>：作者发现使用iOS企业部署（In-HouseDistribution）方式进行应用升级时，在iOS8下无法成功，删除应用再重新安装也不行。经过调研，作者发现这个是Apple的bug，并且提供了临时解决办法。</p>
+</li>
+<li><p><a href="https://designcode.io/learn" target="_blank" rel="external">《The best resources for learning iOS design and Xcode》</a>：作者整理了一系列关于iOS 设计和 Xcode 方面的学习资源，并提供邮件订阅。</p>
+</li>
+<li><p><a href="http://www.iwangke.me/2014/10/06/how-to-implement-a-core-animation-based-60-fps-ktv-lyrics-view/" target="_blank" rel="external">《基于Core Animation的KTV歌词视图的平滑实现》</a>：文章介绍了唱吧歌词视图的技术实现细节。</p>
+</li>
+<li><p><a href="https://medium.com/swift-programming/15-swift-ios-open-source-projects-you-cannot-ignore-6bd4ac37d7dd" target="_blank" rel="external">《10 Swift IOS open-source projects you cannot ignore》</a>：文章介绍了10大不能错过的 Swift 开源项目。</p>
+</li>
+<li><p><a href="http://www.appdesignvault.com/ios-8-custom-keyboard-extension/#a_aid=mdev" target="_blank" rel="external">《iOS 8 Custom Keyboard Tutorial: How to Create A Third-Party Keyboard Extension》</a>：文章介绍了如何在iOS8下自定义键盘。</p>
+</li>
+</ol>
+<p>##视频</p>
+<ol>
+<li><p><a href="http://www.guomii.com/posts/39029" target="_blank" rel="external">《Apple 发布 Swift 语言和 Xcode 入门视频》</a>：Apple 在 Swift 官方博客上发布了一段6分钟多的视频，介绍如何从零开始使用 Xcode 套件开发 iOS 应用，非常值得想现在开始学 iOS 开发的朋友一看。</p>
+</li>
+<li><p><a href="https://www.youtube.com/watch?v=XhXC4SKOGfQ" target="_blank" rel="external">《Facebook’s iOS Infrastructure》</a>：Facebook在视频中分享了他们的iOS端架构。</p>
+</li>
+</ol>
+<h2 id="u5F00_u6E90_u9879_u76EE"><a href="#u5F00_u6E90_u9879_u76EE" class="headerlink" title="开源项目"></a>开源项目</h2><ol>
+<li><p><a href="https://github.com/SwiftP2P/SwiftSSL" target="_blank" rel="external">SwiftSSL</a>：SwiftSSL 是一个基于CommonCrypto的Swift语言的加密库。</p>
+</li>
+<li><p><a href="https://github.com/daltoniam/SwiftHTTP" target="_blank" rel="external">SwiftHTTP</a>：用Swift语言实现的HTTP网络库。</p>
+</li>
+<li><p><a href="https://github.com/stephencelis/SQLite.swift" target="_blank" rel="external">SQLite.swift</a>：SQLite.swift是一个将SQLite3封装成Swift语言的包装库。</p>
+</li>
+<li><p><a href="https://github.com/Brimizer/Slidden" target="_blank" rel="external">Slidden</a>: Slidden是一个老外开源的开发自定义键盘的库，利用这个开源库，可以方便的配置键位、颜色以及键位对应的图片。</p>
+</li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS-weekly/">iOS weekly</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2014/10/12/ios-weekly-27/" data-title="iOS移动开发周报-第27期 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/10/22/ios-weekly-28/" title="iOS移动开发周报-第28期">
+  <strong>上一篇：</strong><br/>
+  <span>
+  iOS移动开发周报-第28期</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/10/03/opensouce-a-key-value-storage-tool/"  title="开源一个Key-Value存储工具类">
+ <strong>下一篇：</strong><br/> 
+ <span>开源一个Key-Value存储工具类
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

@@ -1,0 +1,458 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>使用蒲公英来做iOS测试应用的分发 | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="前言我在 《给 iOS 工程增加 Daily Build》 一文中介绍过如何用命令行生成 IPA 文件以及通过 itms-services 协议 来让用户可以直接在网页上安装测试应用。但是这种方法虽然有效，但是还是比较麻烦，因为：
+
+开发者需要自己写相关的 Build 脚本。
+开发者需要自己搭建好应用下载的服务器。
+如果要做得更友好，开发者还需要部署 CDN 服务、增加扫描二维码下载等功能。
+
+所">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用蒲公英来做iOS测试应用的分发">
+<meta property="og:url" content="http://blog.devtang.com/2015/01/22/pgy-usage-guide/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="前言我在 《给 iOS 工程增加 Daily Build》 一文中介绍过如何用命令行生成 IPA 文件以及通过 itms-services 协议 来让用户可以直接在网页上安装测试应用。但是这种方法虽然有效，但是还是比较麻烦，因为：
+
+开发者需要自己写相关的 Build 脚本。
+开发者需要自己搭建好应用下载的服务器。
+如果要做得更友好，开发者还需要部署 CDN 服务、增加扫描二维码下载等功能。
+
+所">
+<meta property="og:image" content="http://blog.devtang.com/images/pgy_0.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/export_ipa_1.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/export_ipa_2.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/pgy_1.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/pgy_2.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/pgy_3.jpg">
+<meta property="og:updated_time" content="2016-02-16T10:28:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用蒲公英来做iOS测试应用的分发">
+<meta name="twitter:description" content="前言我在 《给 iOS 工程增加 Daily Build》 一文中介绍过如何用命令行生成 IPA 文件以及通过 itms-services 协议 来让用户可以直接在网页上安装测试应用。但是这种方法虽然有效，但是还是比较麻烦，因为：
+
+开发者需要自己写相关的 Build 脚本。
+开发者需要自己搭建好应用下载的服务器。
+如果要做得更友好，开发者还需要部署 CDN 服务、增加扫描二维码下载等功能。
+
+所">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/01/22/pgy-usage-guide/" title="使用蒲公英来做iOS测试应用的分发" itemprop="url">使用蒲公英来做iOS测试应用的分发</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2015-01-22T11:16:06.000Z" itemprop="datePublished"> 发表于 2015-01-22 19:16</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u751F_u6210_IPA__u6587_u4EF6"><span class="toc-number">2.</span> <span class="toc-text">生成 IPA 文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4E0A_u4F20_u5230_u84B2_u516C_u82F1"><span class="toc-number">3.</span> <span class="toc-text">上传到蒲公英</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4E00_u4E9B_u5C0F_u6280_u5DE7"><span class="toc-number">4.</span> <span class="toc-text">一些小技巧</span></a></li></ol>
+		
+		</div>
+		
+		<img src="/images/pgy_0.jpg">
+<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>我在 <a href="/2012/02/16/apply-daily-build-in-ios-project/">《给 iOS 工程增加 Daily Build》</a> 一文中介绍过如何用命令行生成 IPA 文件以及通过 <code>itms-services</code> 协议 来让用户可以直接在网页上安装测试应用。但是这种方法虽然有效，但是还是比较麻烦，因为：</p>
+<ol>
+<li>开发者需要自己写相关的 Build 脚本。</li>
+<li>开发者需要自己搭建好应用下载的服务器。</li>
+<li>如果要做得更友好，开发者还需要部署 CDN 服务、增加扫描二维码下载等功能。</li>
+</ol>
+<p>所以本文给大家推荐一个叫 “<a href="http://www.pgyer.com/" target="_blank" rel="external">蒲公英</a>” 的免费服务，帮助开发者能够方便地来做 iOS 应用的测试分发工作。蒲公英于 2014 年 7 月正式上线，我自己使用过一段时间，还是挺满意的。</p>
+<p>下面我们就来看看，如何使用 “<a href="http://www.pgyer.com/" target="_blank" rel="external">蒲公英</a>” 来进行测试版本应用的分发工作。</p>
+<h2 id="u751F_u6210_IPA__u6587_u4EF6"><a href="#u751F_u6210_IPA__u6587_u4EF6" class="headerlink" title="生成 IPA 文件"></a>生成 IPA 文件</h2><p>生成应用的 IPA 文件可以使用命令行 <code>xcodebuild exportArchive -exportFormat ipa</code>来完成，也可以使用 Xcode 提供的相应功能。相信大部分同学应该都用过，我就简单介绍一下。</p>
+<p>首先将编译的目标机器设置成 “iOS Device”，然后点击”Product”-&gt;”Archive”，Archive 成功之后，就可以在 Xcode 的 Organizer 中看到相应的文件。</p>
+<p>接下来点击 Organizer 中的 “Export” 按钮，如下图所示：</p>
+<img src="/images/export_ipa_1.jpg">
+<p>在接下来的弹出界面中选择 “Save for Ad Hoc Deployment”。如下图所示：</p>
+<img src="/images/export_ipa_2.jpg">
+<p>选择完成后点 Next，Xcode 会自动将测试设备的签名信息附加上，并将相应的 IPA 文件导出。</p>
+<h2 id="u4E0A_u4F20_u5230_u84B2_u516C_u82F1"><a href="#u4E0A_u4F20_u5230_u84B2_u516C_u82F1" class="headerlink" title="上传到蒲公英"></a>上传到蒲公英</h2><p>如果是第一次使用蒲公英，我们需要访问 <a href="http://www.pgyer.com/user/register" target="_blank" rel="external">蒲公英的网址</a> 进行注册。注册主要是为了保护测试应用的安全和设置相应的权限（例如设置下载密码）。</p>
+<p>注册之后，点击<a href="http://www.pgyer.com/" target="_blank" rel="external">蒲公英网站首页</a>的 “发布应用”，然后选择之前生成的 IPA 文件即可完成上传 IPA 的过程。蒲公英对上传速度进行了很大程度的优化，上传应用速度非常快，下图是我测试上传猿题库的过程（上传 18M 的 IPA 文件大概花了半分钟时间，平均速度应该超过了 500K 每秒）：</p>
+<img src="/images/pgy_1.jpg">
+<p>上传成功后，蒲公英会自动分析应用的 Bundle ID 信息，将其在 App Store 上的应用介绍和截图获取下来。然后你可以选择设置一个 “安装密码”，以避免一些越狱用户非法安装你的应用。对于小范围试用的应用，建议也不要将其发布到 “应用广场”。如下所示：</p>
+<img src="/images/pgy_2.jpg">
+<p>设置好所有需要的信息后，点击发布应用，蒲公英会生成一个应用分发的网页。如下图所示：</p>
+<img src="/images/pgy_3.jpg">
+<p>你可以把这个网页发给你的测试用户:</p>
+<ul>
+<li>如果用户在手机上打开这个页面，则可以直接点击 “安装按钮” 来一键下载和安装测试应用。</li>
+<li>如果用户在电脑上打开这个应用，则可以用扫描二维码的方式来一键下载和安装测试应用。</li>
+</ul>
+<h2 id="u4E00_u4E9B_u5C0F_u6280_u5DE7"><a href="#u4E00_u4E9B_u5C0F_u6280_u5DE7" class="headerlink" title="一些小技巧"></a>一些小技巧</h2><ul>
+<li>有企业证书的同学，如果将 IPA 在本地用企业证书签名，则可以把蒲公英当作一个企业应用发布渠道，省去部署分发服务器的烦恼，但最好设置安装密码，以免被苹果认为滥用企业证书。</li>
+<li>嫌每次打开蒲公英的网页太麻烦？蒲公英提供了 <a href="http://www.pgyer.com/apps" target="_blank" rel="external">Mac 客户端</a>，所有上传和设置操作都可以在客户端上直接进行。</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2015/01/22/pgy-usage-guide/" data-title="使用蒲公英来做iOS测试应用的分发 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/01/31/ios-weekly-37/" title="iOS移动开发周报-第37期">
+  <strong>上一篇：</strong><br/>
+  <span>
+  iOS移动开发周报-第37期</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/01/18/ios-weekly-36/"  title="iOS移动开发周报-第36期">
+ <strong>下一篇：</strong><br/> 
+ <span>iOS移动开发周报-第36期
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

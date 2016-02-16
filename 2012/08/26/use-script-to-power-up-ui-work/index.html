@@ -1,0 +1,422 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>用脚本来简化iOS美术同学的工作 | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="问题我们知道，在 iOS 开发中，为了使我们的 app 能够同时支持 iPhone 的 Retina 屏幕和普通屏幕，美术同学需要对 UI 设计稿中的每个元素进行 2 次切图。苹果要求对图片元素的命名分别为 name.png 和 name@2x.png，带 @2x 的表示是 Retina 屏幕的贴图，不带 @2x 的同名文件为普通屏幕的贴图。
+我在开发的时候发现很难要求美术同学按照开发的要求来对图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用脚本来简化iOS美术同学的工作">
+<meta property="og:url" content="http://blog.devtang.com/2012/08/26/use-script-to-power-up-ui-work/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="问题我们知道，在 iOS 开发中，为了使我们的 app 能够同时支持 iPhone 的 Retina 屏幕和普通屏幕，美术同学需要对 UI 设计稿中的每个元素进行 2 次切图。苹果要求对图片元素的命名分别为 name.png 和 name@2x.png，带 @2x 的表示是 Retina 屏幕的贴图，不带 @2x 的同名文件为普通屏幕的贴图。
+我在开发的时候发现很难要求美术同学按照开发的要求来对图">
+<meta property="og:image" content="http://blog.devtang.com/images/ui-script-tips.png">
+<meta property="og:updated_time" content="2016-02-16T10:26:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用脚本来简化iOS美术同学的工作">
+<meta name="twitter:description" content="问题我们知道，在 iOS 开发中，为了使我们的 app 能够同时支持 iPhone 的 Retina 屏幕和普通屏幕，美术同学需要对 UI 设计稿中的每个元素进行 2 次切图。苹果要求对图片元素的命名分别为 name.png 和 name@2x.png，带 @2x 的表示是 Retina 屏幕的贴图，不带 @2x 的同名文件为普通屏幕的贴图。
+我在开发的时候发现很难要求美术同学按照开发的要求来对图">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2012/08/26/use-script-to-power-up-ui-work/" title="用脚本来简化iOS美术同学的工作" itemprop="url">用脚本来简化iOS美术同学的工作</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2012-08-26T12:34:00.000Z" itemprop="datePublished"> 发表于 2012-08-26 20:34</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u95EE_u9898"><span class="toc-number">1.</span> <span class="toc-text">问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u89E3_u51B3_u65B9_u6848"><span class="toc-number">2.</span> <span class="toc-text">解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u68C0_u67E5_u56FE_u7247"><span class="toc-number">2.1.</span> <span class="toc-text">检查图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u95EE_u9898-1"><span class="toc-number">2.2.</span> <span class="toc-text">问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u540E_u8BB0"><span class="toc-number">2.3.</span> <span class="toc-text">后记</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h2 id="u95EE_u9898"><a href="#u95EE_u9898" class="headerlink" title="问题"></a>问题</h2><p>我们知道，在 iOS 开发中，为了使我们的 app 能够同时支持 iPhone 的 Retina 屏幕和普通屏幕，美术同学需要对 UI 设计稿中的每个元素进行 2 次切图。苹果要求对图片元素的命名分别为 name.png 和 name@2x.png，带 @2x 的表示是 Retina 屏幕的贴图，不带 @2x 的同名文件为普通屏幕的贴图。</p>
+<p>我在开发的时候发现很难要求美术同学按照开发的要求来对图片命名。她们通常对于切图的命名是例如 <em> 登录按钮大 .png</em> ，<em> 登录按钮小 .png</em>, <em> 登录按钮按下大 .png</em> <em> 登录按钮按下小 .png</em> 这样的形式。于是，对这些文件按照苹果的要求进行重命名就成了我这个码农的一个体力活。</p>
+<a id="more"></a>
+<h2 id="u89E3_u51B3_u65B9_u6848"><a href="#u89E3_u51B3_u65B9_u6848" class="headerlink" title="解决方案"></a>解决方案</h2><p>有什么方法能减少开发和美术的体力活呢？想到因为 name@2x.png 的图片是 name.png 图片的 2 整倍，所以，我们完全可以让美术只切 @2x 的大图，而我们使用脚本来生成小图。于是我写了下面这样的一个脚本，我只需要将所有的大图按照类似 name-1@2x.png , name-2@2x.png 方式命名，然后脚本就会自动帮我生成对应的名为 name-1.png 和 name-2.png 的小图。</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#! /bin/bash</span></span><br><span class="line"><span class="preprocessor"># File name : convertImage.sh</span></span><br><span class="line"><span class="preprocessor"># Author: Tang Qiao</span></span><br><span class="line"><span class="preprocessor"># </span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor"># print usage</span></span><br><span class="line">usage() &#123;</span><br><span class="line">    cat &lt;&lt; EOF</span><br><span class="line">    Usage:</span><br><span class="line">        convertImage<span class="variable">.sh</span> &lt;src directory&gt; &lt;dest directory&gt;</span><br><span class="line">EOF</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ $<span class="preprocessor"># -ne 2 ]; then</span></span><br><span class="line">    usage</span><br><span class="line">    exit <span class="number">1</span></span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">SRC_DIR=$<span class="number">1</span></span><br><span class="line">DEST_DIR=$<span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor"># check src dir</span></span><br><span class="line"><span class="keyword">if</span> [ ! -d $SRC_DIR ]; then</span><br><span class="line">    echo <span class="string">"src directory not exist: $SRC_DIR"</span></span><br><span class="line">    exit <span class="number">1</span></span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="preprocessor"># check dest dir</span></span><br><span class="line"><span class="keyword">if</span> [ ! -d $DEST_DIR ]; then</span><br><span class="line">    mkdir -p $DEST_DIR</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> src_file <span class="keyword">in</span> $SRC_DIR<span class="comment">/*.* ; do</span><br><span class="line">    echo "process file name: $src_file"</span><br><span class="line">    # 获得去掉文件名的纯路径</span><br><span class="line">    src_path=`dirname $src_file`</span><br><span class="line">    # 获得去掉路径的纯文件名</span><br><span class="line">    filename=`basename $src_file`</span><br><span class="line">    # 获得文件名字 (不包括扩展名)</span><br><span class="line">    name=`echo "$filename" | cut -d'.' -f1`</span><br><span class="line">    # remove @2x in filename if there is</span><br><span class="line">    name=`echo "$name" | cut -d"@" -f1`</span><br><span class="line">    # 获得文件扩展名</span><br><span class="line">    extension=`echo "$filename" | cut -d'.' -f2`</span><br><span class="line">    dest_file="$DEST_DIR/$&#123;name&#125;.$&#123;extension&#125;"</span><br><span class="line"></span><br><span class="line">    convert $src_file -resize 50% $dest_file</span><br><span class="line">done</span></span><br></pre></td></tr></table></figure>
+<p>脚本使用方法：将以上代码另存为 convertImage.sh，然后用以下方式调用此脚本，即可将源文件夹中所有以 @2x 结尾的图片文件转成一半大小的、去掉 @2x 的小图片。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">convertImage.sh 源文件夹 目标文件夹 </span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">使用以上脚本后，美术只用切一半的图了。因为给我的切图少了，所以我可以更加方便地找到对应的切图了。另外，我也减少了一半对切图进行重命名的工作。</span><br><span class="line"></span><br><span class="line"><span class="comment">## Tips</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### imagemagick</span></span><br><span class="line">如果你运行以上脚本失败，请先用 brew 或 port 安装 imagemagick。imagemagick 是一个相当强大的图象处理库。</span><br><span class="line">``` bash</span><br><span class="line">brew install imagemagick</span><br></pre></td></tr></table></figure>
+<h3 id="u68C0_u67E5_u56FE_u7247"><a href="#u68C0_u67E5_u56FE_u7247" class="headerlink" title="检查图片"></a>检查图片</h3><p>在使用该脚本一段时间后，我发现美术同学给我的大图的长宽常常不是偶数，这样造成缩小的图就不是原图的整倍数了。为了方便我检查美术给我的图片是否宽高都是偶数，我写了如下检查的脚本，这样就可以检查图片的宽高是否符合要求了。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="shebang">#! /bin/bash</span></span><br><span class="line"><span class="comment"># File name : checkImageSize.sh</span></span><br><span class="line"><span class="comment"># Author: Tang Qiao</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">usage</span></span>() &#123;</span><br><span class="line">    cat &lt;&lt;EOF</span><br><span class="line">    Usage:</span><br><span class="line">        checkImageSize.sh &lt;directory&gt;</span><br><span class="line">EOF</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$#</span> <span class="operator">-ne</span> <span class="number">1</span> ]; <span class="keyword">then</span></span><br><span class="line">    usage</span><br><span class="line">    <span class="built_in">exit</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">SRC_DIR=<span class="variable">$1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># check src dir</span></span><br><span class="line"><span class="keyword">if</span> [ ! <span class="operator">-d</span> <span class="variable">$SRC_DIR</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"src directory not exist: <span class="variable">$SRC_DIR</span>"</span></span><br><span class="line">    <span class="built_in">exit</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> src_file <span class="keyword">in</span> <span class="variable">$SRC_DIR</span>/*.png ; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"process file name: <span class="variable">$src_file</span>"</span></span><br><span class="line">    width=`identify -format <span class="string">"%[fx:w]"</span> <span class="variable">$src_file</span>`</span><br><span class="line">    height=`identify -format <span class="string">"%[fx:h]"</span> <span class="variable">$src_file</span>`</span><br><span class="line">    <span class="comment"># check width</span></span><br><span class="line">    modValue=`awk -v a=<span class="variable">$width</span> <span class="string">'BEGIN&#123;printf "%d", a % 2&#125;'</span>`</span><br><span class="line">    <span class="keyword">if</span> [ <span class="string">"<span class="variable">$modValue</span>"</span> == <span class="string">"1"</span> ]; <span class="keyword">then</span></span><br><span class="line">       <span class="built_in">echo</span> <span class="string">"[Error], the file <span class="variable">$src_file</span> width is <span class="variable">$width</span>"</span> </span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    <span class="comment"># check height</span></span><br><span class="line">    modValue=`awk -v a=<span class="variable">$height</span> <span class="string">'BEGIN&#123;printf "%d", a % 2&#125;'</span>`</span><br><span class="line">    <span class="keyword">if</span> [ <span class="string">"<span class="variable">$modValue</span>"</span> == <span class="string">"1"</span> ]; <span class="keyword">then</span></span><br><span class="line">       <span class="built_in">echo</span> <span class="string">"[Error], the file <span class="variable">$src_file</span> height is <span class="variable">$height</span>"</span> </span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<h3 id="u95EE_u9898-1"><a href="#u95EE_u9898-1" class="headerlink" title="问题"></a>问题</h3><p>我在使用以上方法时，发现由于 imagemagick 压缩比太高，生成的图片如果象素太小，它就会生成索引图片，而不知道何故，少量索引图片在 iPhone 3GS 上会显示出一条黑线在图片底部。对于这些图片，用 photoshop 将其模式改成 RGB 颜色即可。如下所示：</p>
+<img src="/images/ui-script-tips.png">
+<p>用脚本代替体力活是一件很 happy 的事情，因为你可以用省下来的时间多做一些有意思的事情了。</p>
+<p>Have fun !</p>
+<h3 id="u540E_u8BB0"><a href="#u540E_u8BB0" class="headerlink" title="后记"></a>后记</h3><p>在发表完这篇文章后，得到了很多反馈。</p>
+<p>其中 <a href="http://weibo.com/wangyihan01" target="_blank" rel="external">李祎</a> 同学提到了一个 iOS 独立开发者的解决思路：<a href="http://kevincao.com/2011/08/prepare-png-for-iphone-app/" target="_blank" rel="external">http://kevincao.com/2011/08/prepare-png-for-iphone-app/</a> ，我感觉该博客中提到的方法，或许更加适合美术同学，因为整个操作都是图形化的。所以附在这里，希望对大家有用。</p>
+<p>另外，网易杭研院的 <a href="http://weibo.com/myerlang" target="_blank" rel="external">施强</a> 同学推荐了一个用于缩图的软件:<a href="http://www.xnconvert.com/" target="_blank" rel="external">http://www.xnconvert.com/</a> ，据说也能很好的解决以上问题。一并在此推荐给大家作为参考。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2012/08/26/use-script-to-power-up-ui-work/" data-title="用脚本来简化iOS美术同学的工作 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2012/09/15/talk-about-my-startup-exp/" title="谈谈我的创业感受">
+  <strong>上一篇：</strong><br/>
+  <span>
+  谈谈我的创业感受</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2012/08/05/use-modern-objective-c/"  title="Objective-C的新特性">
+ <strong>下一篇：</strong><br/> 
+ <span>Objective-C的新特性
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

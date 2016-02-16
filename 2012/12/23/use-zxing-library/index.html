@@ -1,0 +1,456 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>在iOS中使用ZXing库 | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="前言ZXing(Github镜像地址)是一个开源的条码生成和扫描库（开源协议为Apache2.0)。它不但支持众多的条码格式，而且有各种语言的实现版本，它支持的语言包括：Java, C++, C#, Objective-C, ActionScript和Ruby。
+我上周在iOS项目开发中使用了ZXing的扫描二维码功能。在此总结一下如何将ZXing集成到已有的iOS工程中，分享给大家。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在iOS中使用ZXing库">
+<meta property="og:url" content="http://blog.devtang.com/2012/12/23/use-zxing-library/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="前言ZXing(Github镜像地址)是一个开源的条码生成和扫描库（开源协议为Apache2.0)。它不但支持众多的条码格式，而且有各种语言的实现版本，它支持的语言包括：Java, C++, C#, Objective-C, ActionScript和Ruby。
+我上周在iOS项目开发中使用了ZXing的扫描二维码功能。在此总结一下如何将ZXing集成到已有的iOS工程中，分享给大家。">
+<meta property="og:image" content="http://blog.devtang.com/images/zxing-icon.png">
+<meta property="og:image" content="http://blog.devtang.com/images/zxing-step-1.png">
+<meta property="og:image" content="http://blog.devtang.com/images/zxing-step-2.png">
+<meta property="og:image" content="http://blog.devtang.com/images/zxing-step-3.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/zxing-step-4.png">
+<meta property="og:updated_time" content="2016-02-16T10:26:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在iOS中使用ZXing库">
+<meta name="twitter:description" content="前言ZXing(Github镜像地址)是一个开源的条码生成和扫描库（开源协议为Apache2.0)。它不但支持众多的条码格式，而且有各种语言的实现版本，它支持的语言包括：Java, C++, C#, Objective-C, ActionScript和Ruby。
+我上周在iOS项目开发中使用了ZXing的扫描二维码功能。在此总结一下如何将ZXing集成到已有的iOS工程中，分享给大家。">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2012/12/23/use-zxing-library/" title="在iOS中使用ZXing库" itemprop="url">在iOS中使用ZXing库</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2012-12-23T09:03:00.000Z" itemprop="datePublished"> 发表于 2012-12-23 17:03</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u96C6_u6210_u6B65_u9AA4"><span class="toc-number">2.</span> <span class="toc-text">集成步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4E8C_u7EF4_u7801_u8BC6_u522B"><span class="toc-number">3.</span> <span class="toc-text">二维码识别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u4F7F_u7528_u65B9_u6CD5_u4E00"><span class="toc-number">3.1.</span> <span class="toc-text">使用方法一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4F7F_u7528_u65B9_u6CD5_u4E8C"><span class="toc-number">3.2.</span> <span class="toc-text">使用方法二</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Trouble_Shoot__26amp_3B_Tips"><span class="toc-number">4.</span> <span class="toc-text">Trouble Shoot & Tips</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ZXing_u548COpenCV_u7684_u517C_u5BB9_u95EE_u9898"><span class="toc-number">5.</span> <span class="toc-text">ZXing和OpenCV的兼容问题</span></a></li></ol>
+		
+		</div>
+		
+		<img src="/images/zxing-icon.png">
+<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p><a href="https://code.google.com/p/zxing/" target="_blank" rel="external">ZXing</a>(<a href="https://github.com/zxing/zxing" target="_blank" rel="external">Github镜像地址</a>)是一个开源的条码生成和扫描库（开源协议为<a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="external">Apache2.0</a>)。它不但支持众多的条码格式，而且有各种语言的实现版本，它支持的语言包括：Java, C++, C#, Objective-C, ActionScript和Ruby。</p>
+<p>我上周在iOS项目开发中使用了ZXing的扫描二维码功能。在此总结一下如何将ZXing集成到已有的iOS工程中，分享给大家。</p>
+<a id="more"></a>
+<h2 id="u96C6_u6210_u6B65_u9AA4"><a href="#u96C6_u6210_u6B65_u9AA4" class="headerlink" title="集成步骤"></a>集成步骤</h2><p>首先去Google Code或Github将ZXing的代码下载下来，整个工程比较大，我们只需要其中涉及iOS的部分，所以最好做一些裁剪。简单来说，我们只需要保留cpp和iphone这2个文件夹，其余的全部删掉。如下图所示：</p>
+<img src="/images/zxing-step-1.png">
+<p>接着我们继续裁剪，对于cpp这个目录，只保留cpp/core/src/zxing下面的内容，其余内容也可以删掉了。但是整个目录结构必须保持原样。裁剪完后，整个目录结构如下所示：</p>
+<img src="/images/zxing-step-2.png">
+<p>接下来，我们把裁剪后的zxing目录整个移动到我们的iOS项目的目录下，并且把上图中可以看到的ZXingWidget.xcodeproj文件拖动到我们的iOS工程中。</p>
+<p>下一步，我们需要设置ZXing项目和我们原本的iOS项目之间的依赖关系。在我们的iOS项目的设置中，点击build phases tab，然后增加 Target Dependencies 和 Link binary，并且增加这些framework依赖：</p>
+<pre><code>a. AVFoundation
+b. AudioToolbox
+c. CoreVideo
+d. CoreMedia
+e. libiconv
+f. AddressBook
+g. AddressBookUI
+</code></pre><p>完成之后如下图所示：</p>
+<img src="/images/zxing-step-3.jpg">
+<p>最后一步，在设置中增加如下2个header search path:</p>
+<ul>
+<li>./zxing/iphone/ZXingWidget/Classes</li>
+<li>./zxing/cpp/core/src</li>
+</ul>
+<p>需要注意的是，第一个path要设置成循环查找子目录，而第二个不循环查找，如下图所示：</p>
+<img src="/images/zxing-step-4.png">
+<p>恭喜你，完成这步之后，你就已经完成ZXing库的集成了。下面谈谈如何使用ZXing库来做二维码识别。</p>
+<h2 id="u4E8C_u7EF4_u7801_u8BC6_u522B"><a href="#u4E8C_u7EF4_u7801_u8BC6_u522B" class="headerlink" title="二维码识别"></a>二维码识别</h2><p>ZXing的iOS版本提供2种方法来做二维码识别功能，第一种方法比较简单，第二种方法比较复杂。我在做Demo时使用了第一种方法，做真正项目开发的时候使用了第二种方法，所以都给大家介绍一下。</p>
+<h3 id="u4F7F_u7528_u65B9_u6CD5_u4E00"><a href="#u4F7F_u7528_u65B9_u6CD5_u4E00" class="headerlink" title="使用方法一"></a>使用方法一</h3><p>ZXing直接提供了一个扫描二维码的View Controller，即ZXingWidgetController。在需要使用的界面代码中，加入文件依赖：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">&lt;ZXingWidgetController.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#import <span class="title">&lt;QRCodeReader.h&gt;</span> </span></span><br><span class="line">``` </span><br><span class="line">然后在需要扫描的时候，调用如下代码即可：</span><br><span class="line">``` objc</span><br><span class="line">- (<span class="keyword">IBAction</span>)scanPressed:(<span class="keyword">id</span>)sender &#123;</span><br><span class="line">  ZXingWidgetController *widController = [[ZXingWidgetController alloc] initWithDelegate:<span class="keyword">self</span> showCancel:<span class="literal">YES</span> OneDMode:<span class="literal">NO</span>];</span><br><span class="line">  <span class="built_in">NSMutableSet</span> *readers = [[<span class="built_in">NSMutableSet</span> alloc ] init];</span><br><span class="line">  QRCodeReader* qrcodeReader = [[QRCodeReader alloc] init];</span><br><span class="line">  [readers addObject:qrcodeReader];</span><br><span class="line">  [qrcodeReader release];</span><br><span class="line">  widController<span class="variable">.readers</span> = readers;</span><br><span class="line">  [readers release];</span><br><span class="line">  [<span class="keyword">self</span> presentModalViewController:widController animated:<span class="literal">YES</span>];</span><br><span class="line">  [widController release];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在ZXing扫描有结果时，会调用如下回调函数：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@protocol</span> <span class="title">ZXingDelegate</span></span></span><br><span class="line">- (<span class="keyword">void</span>)zxingController:(ZXingWidgetController*)controller didScanResult:(<span class="built_in">NSString</span> *)result;</span><br><span class="line">- (<span class="keyword">void</span>)zxingControllerDidCancel:(ZXingWidgetController*)controller;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<h3 id="u4F7F_u7528_u65B9_u6CD5_u4E8C"><a href="#u4F7F_u7528_u65B9_u6CD5_u4E8C" class="headerlink" title="使用方法二"></a>使用方法二</h3><p>方法二与方法一的区别就相当于AVFoundation和UIImagePickerController的区别一样。简单来说，就是使用方法二比方法一更加麻烦，但是获得的可定制性更高。</p>
+<p>使用方法二时，你需要自己用AVFoundation获得Camera返回的实时图象，然后转成UIImage，最后传给ZXing的Decoder类完成二维码的识别。由于使用AVFoundation涉及的代码略多，我写的示意代码如下：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="preprocessor">#import <span class="title">"Decoder.h"</span></span></span><br><span class="line"><span class="preprocessor">#import <span class="title">"TwoDDecoderResult.h"</span></span></span><br><span class="line"><span class="preprocessor">#import <span class="title">"QRCodeReader.h"</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">	<span class="comment">// setup QR reader</span></span><br><span class="line">	<span class="keyword">self</span><span class="variable">.qrReader</span> = [[<span class="built_in">NSMutableSet</span> alloc ] init];</span><br><span class="line">	QRCodeReader* qrcodeReader = [[QRCodeReader alloc] init];</span><br><span class="line">	[<span class="keyword">self</span><span class="variable">.qrReader</span> addObject:qrcodeReader];</span><br><span class="line">	<span class="keyword">self</span><span class="variable">.scanningQR</span> = <span class="literal">NO</span>;</span><br><span class="line">	<span class="keyword">self</span><span class="variable">.step</span> = STEP_QR;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// AVFoundation的回调函数</span></span><br><span class="line">- (<span class="keyword">void</span>)captureOutput:(<span class="built_in">AVCaptureOutput</span> *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(<span class="built_in">AVCaptureConnection</span> *)connection &#123;</span><br><span class="line">	<span class="comment">// 第一步，将sampleBuffer转成UIImage</span></span><br><span class="line">	<span class="built_in">UIImage</span> *image= [<span class="keyword">self</span> getCaptureImage:sampleBuffer];</span><br><span class="line">	<span class="comment">// 第二步，用Decoder识别图象</span></span><br><span class="line">	Decoder *d = [[Decoder alloc] init];</span><br><span class="line">	d<span class="variable">.readers</span> = <span class="keyword">self</span><span class="variable">.qrReader</span>;</span><br><span class="line">	d<span class="variable">.delegate</span> = <span class="keyword">self</span>;</span><br><span class="line">	<span class="keyword">self</span><span class="variable">.scanningQR</span> = [d decodeImage:image] == <span class="literal">YES</span> ? <span class="literal">NO</span> : <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ZXing的Decoder类提供了以下回调函数获得识别结果：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@protocol</span> <span class="title">DecoderDelegate</span>&lt;<span class="title">NSObject</span>&gt;</span></span><br><span class="line"><span class="keyword">@optional</span></span><br><span class="line">- (<span class="keyword">void</span>)decoder:(Decoder *)decoder willDecodeImage:(<span class="built_in">UIImage</span> *)image usingSubset:(<span class="built_in">UIImage</span> *)subset;</span><br><span class="line">- (<span class="keyword">void</span>)decoder:(Decoder *)decoder didDecodeImage:(<span class="built_in">UIImage</span> *)image usingSubset:(<span class="built_in">UIImage</span> *)subset withResult:(TwoDDecoderResult *)result &#123;</span><br><span class="line">	<span class="built_in">NSLog</span>(<span class="string">@"result = %@"</span>, [result text]);</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">void</span>)decoder:(Decoder *)decoder failedToDecodeImage:(<span class="built_in">UIImage</span> *)image usingSubset:(<span class="built_in">UIImage</span> *)subset reason:(<span class="built_in">NSString</span> *)reason;</span><br><span class="line">- (<span class="keyword">void</span>)decoder:(Decoder *)decoder foundPossibleResultPoint:(<span class="built_in">CGPoint</span>)point;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<h2 id="Trouble_Shoot__26amp_3B_Tips"><a href="#Trouble_Shoot__26amp_3B_Tips" class="headerlink" title="Trouble Shoot &amp; Tips"></a>Trouble Shoot &amp; Tips</h2><p>我在使用中遇到了一些问题，主要是编译的问题。</p>
+<ol>
+<li>一个是找不到 <iostream> 头文件。解决方法：把用到ZXing的源文件扩展名由.m改成.mm。</iostream></li>
+<li>报错：Undefined symbols for architecture armv7s，<a href="http://stackoverflow.com/questions/12968369/undefined-symbols-for-architecture-armv7-when-using-zxing-library-in-xcode-4-5" target="_blank" rel="external">解决方法</a>：把ZXingWidget的一个build target参数：”Build Active Architecture Only” 修改成 “NO”.</li>
+<li>报错：No such file or directory，出现该错误可能是你的Header Search Path写错了，或者就是你的zxing库的目录结构不是我上面强调的，好好检查一下吧。</li>
+<li>如果你需要生成二维码做测试，推荐一个不错的在线生成二维码的网站：<a href="http://cli.im/" target="_blank" rel="external">http://cli.im/</a></li>
+</ol>
+<h2 id="ZXing_u548COpenCV_u7684_u517C_u5BB9_u95EE_u9898"><a href="#ZXing_u548COpenCV_u7684_u517C_u5BB9_u95EE_u9898" class="headerlink" title="ZXing和OpenCV的兼容问题"></a>ZXing和OpenCV的兼容问题</h2><p>ZXing 2.1 和OpenCV 2.4.3的iOS库有一些兼容问题，他们对C++标准库的版本和编译器版本都有一些需求，造成满足一方了，另一方就编译不通过了。Stackoverflow上有人终于找到了一个让它们和平共处的方法，但是只适用于iOS5.0以上版本。正好我们的App只支持iOS5.0+，所以就搞定了。所以如果你也正好遇到这个问题，可以参考<a href="http://stackoverflow.com/questions/13498581/opencv-zxing-incompatibility-on-ios" target="_blank" rel="external">这个贴子</a>。</p>
+<p>希望本文对大家有用，Have Fun~</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2012/12/23/use-zxing-library/" data-title="在iOS中使用ZXing库 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/01/01/2012-summary/" title="2012年个人总结">
+  <strong>上一篇：</strong><br/>
+  <span>
+  2012年个人总结</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2012/12/15/do-not-use-storyboard/"  title="StoryBoard--看上去很美">
+ <strong>下一篇：</strong><br/> 
+ <span>StoryBoard--看上去很美
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

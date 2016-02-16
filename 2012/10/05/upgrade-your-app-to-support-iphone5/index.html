@@ -1,0 +1,438 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>让你的APP支持iPhone5 | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="前言国庆节前，为了支持 iPhone5 的屏幕分辨率 (640 象素 x 1136 象素)，我尝试着升级粉笔网 iPhone 客户端。整个过程花了大概一天的时间，我把这个过程总结下来，希望对大家有帮助。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="让你的APP支持iPhone5">
+<meta property="og:url" content="http://blog.devtang.com/2012/10/05/upgrade-your-app-to-support-iphone5/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="前言国庆节前，为了支持 iPhone5 的屏幕分辨率 (640 象素 x 1136 象素)，我尝试着升级粉笔网 iPhone 客户端。整个过程花了大概一天的时间，我把这个过程总结下来，希望对大家有帮助。">
+<meta property="og:image" content="http://blog.devtang.com/images/iphone5support-1.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/autosizing-1.png">
+<meta property="og:image" content="http://blog.devtang.com/images/autosizing-2.png">
+<meta property="og:updated_time" content="2016-02-16T10:26:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="让你的APP支持iPhone5">
+<meta name="twitter:description" content="前言国庆节前，为了支持 iPhone5 的屏幕分辨率 (640 象素 x 1136 象素)，我尝试着升级粉笔网 iPhone 客户端。整个过程花了大概一天的时间，我把这个过程总结下来，希望对大家有帮助。">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2012/10/05/upgrade-your-app-to-support-iphone5/" title="让你的APP支持iPhone5" itemprop="url">让你的APP支持iPhone5</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2012-10-05T08:18:00.000Z" itemprop="datePublished"> 发表于 2012-10-05 16:18</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5347_u7EA7_u51C6_u5907"><span class="toc-number">2.</span> <span class="toc-text">升级准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5177_u4F53_u5347_u7EA7_u6B65_u9AA4_u5982_u4E0B"><span class="toc-number">3.</span> <span class="toc-text">具体升级步骤如下</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#u5347_u7EA7_u542F_u52A8_u753B_u9762_u548C_u7B2C_u4E09_u65B9_u94FE_u63A5_u5E93"><span class="toc-number">3.0.1.</span> <span class="toc-text">升级启动画面和第三方链接库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u8C03_u6574_xib__u6587_u4EF6"><span class="toc-number">3.0.2.</span> <span class="toc-text">调整 xib 文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u4EE3_u7801_u8C03_u6574"><span class="toc-number">3.0.3.</span> <span class="toc-text">代码调整</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u8C03_u6574_u5C4F_u5E55_Rotation__u7684_u56DE_u8C03_u51FD_u6570"><span class="toc-number">3.0.4.</span> <span class="toc-text">调整屏幕 Rotation 的回调函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u63D0_u4EA4_u5E94_u7528"><span class="toc-number">3.0.5.</span> <span class="toc-text">提交应用</span></a></li></ol></li></ol></li></ol>
+		
+		</div>
+		
+		<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>国庆节前，为了支持 iPhone5 的屏幕分辨率 (640 象素 x 1136 象素)，我尝试着升级粉笔网 <a href="http://itunes.apple.com/cn/app/fen-bi-wang/id551540593" target="_blank" rel="external">iPhone 客户端</a>。整个过程花了大概一天的时间，我把这个过程总结下来，希望对大家有帮助。</p>
+<a id="more"></a>
+<h2 id="u5347_u7EA7_u51C6_u5907"><a href="#u5347_u7EA7_u51C6_u5907" class="headerlink" title="升级准备"></a>升级准备</h2><p>为了支持 iPhone5，我们首先需要准备以下工具和资源：</p>
+<ol>
+<li>下载最新版的 XCode4.5</li>
+<li>让美术同学提供 640 x 1136 分辨率的启动画面，640 x 1136 分辨率的程序截图（用于在 app store 中显示）</li>
+<li>由于 iPhone5 使用的 A6 处理器采用了新的 armv7s 架构，所以如果你使用了第三方的静态链接库，需要下载对应支持 armv7s 的版本。我们由于使用了第三方的数据统计工具 Flurry，所以下载更新了 Flurry 的静态链接库。</li>
+<li>如果你的显示器分辨率太小，将无法显示完整的 iPhone5 模拟器，可选的解决办法是换个更大的显示器或者把显示器竖起来，象我这样:</li>
+</ol>
+<img src="/images/iphone5support-1.jpg">
+<p>另外还有一个简单的办法，可以在启动模拟器后，用快捷键 command+3(50%)，command+2(75%), command+1(100%)，来调整模拟器的显示比例，谢谢 <a href="http://weibo.com/arcsystemworks" target="_blank" rel="external">Superrr 一一</a> 提供的方法，比我的简单多了。</p>
+<h2 id="u5177_u4F53_u5347_u7EA7_u6B65_u9AA4_u5982_u4E0B"><a href="#u5177_u4F53_u5347_u7EA7_u6B65_u9AA4_u5982_u4E0B" class="headerlink" title="具体升级步骤如下"></a>具体升级步骤如下</h2><h4 id="u5347_u7EA7_u542F_u52A8_u753B_u9762_u548C_u7B2C_u4E09_u65B9_u94FE_u63A5_u5E93"><a href="#u5347_u7EA7_u542F_u52A8_u753B_u9762_u548C_u7B2C_u4E09_u65B9_u94FE_u63A5_u5E93" class="headerlink" title="升级启动画面和第三方链接库"></a>升级启动画面和第三方链接库</h4><p>升级启动画面，将美术同学提供的 640 x 1136 分辨率的启动画面图片，命名为 Default-568h@2x.png，添加到工程中即可。</p>
+<p>升级第三方链接库，这个只需要用新的第三方链接库替换掉以前的即可。如果你使用了例如 opencv 这种需要自己编译对应版本链接库的开源库，那么替换之前，需要自己先用 xcode4.5 编译其 armv7s 版本的静态链接库。</p>
+<h4 id="u8C03_u6574_xib__u6587_u4EF6"><a href="#u8C03_u6574_xib__u6587_u4EF6" class="headerlink" title="调整 xib 文件"></a>调整 xib 文件</h4><p>粉笔网客户端的界面基本上都是顶部是 UINavigationBar, 底部是 UITabBar 或 UIToolBar，中间是 UITableView。</p>
+<p>对于这一类界面，调整起来非常简单，只需要将 UITableView 设置成高度自动扩展的 Autosizing 方式，如下图所示：</p>
+<img src="/images/autosizing-1.png">
+<p>对于底部的 UIToolBar，Autosizing 设置成靠底部对齐的方式即可。如下图所示：</p>
+<img src="/images/autosizing-2.png">
+<h4 id="u4EE3_u7801_u8C03_u6574"><a href="#u4EE3_u7801_u8C03_u6574" class="headerlink" title="代码调整"></a>代码调整</h4><p>有一些界面元素的位置是用代码来设置的，例如 “发表笔记” 界面中浮动贴在输入法键盘上面的各种可选操作的 UIToolbar。因为键盘的高度在不同的输入法下是不一样的，所以需要用代码动态调整。</p>
+<p>我的调整代码如下：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 说明：keyboardWillShow 函数和 keyboardWillHide 函数分别监听了</span></span><br><span class="line"><span class="comment">// UIKeyboardWillShowNotification 和 UIKeyboardWillHideNotification</span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>) keyboardWillShow:(<span class="built_in">NSNotification</span> *)notification &#123;</span><br><span class="line">    <span class="built_in">NSDictionary</span> * info = [notification userInfo];</span><br><span class="line">    <span class="built_in">CGSize</span> kbSize = [[info objectForKey:<span class="built_in">UIKeyboardFrameEndUserInfoKey</span>] <span class="built_in">CGRectValue</span>]<span class="variable">.size</span>;</span><br><span class="line">    <span class="keyword">float</span> textViewHeight = <span class="built_in">UI_SCREEN_HEIGHT</span> - <span class="built_in">UI_STATUS_BAR_HEIGHT</span> - <span class="built_in">UI_NAVIGATION_BAR_HEIGHT</span> - <span class="built_in">UI_TOOL_BAR_HEIGHT</span> - kbSize<span class="variable">.height</span>;</span><br><span class="line">    [<span class="built_in">UIView</span> animateWithDuration:<span class="number">0.3</span> animations:^&#123;</span><br><span class="line">        _textView<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="built_in">UI_NAVIGATION_BAR_HEIGHT</span>, <span class="built_in">UI_SCREEN_WIDTH</span>, textViewHeight);</span><br><span class="line">        _toolbar<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="built_in">UI_NAVIGATION_BAR_HEIGHT</span> + textViewHeight, <span class="built_in">UI_SCREEN_WIDTH</span>, <span class="built_in">UI_TOOL_BAR_HEIGHT</span>);</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>) keyboardWillHide:(<span class="built_in">NSNotification</span> *)notification &#123;</span><br><span class="line">    <span class="built_in">CGSize</span> kbSize = <span class="built_in">CGSizeMake</span>(<span class="number">320</span>, <span class="number">216</span>);</span><br><span class="line">    <span class="keyword">float</span> textViewHeight = <span class="built_in">UI_SCREEN_HEIGHT</span> - <span class="built_in">UI_STATUS_BAR_HEIGHT</span> - <span class="built_in">UI_NAVIGATION_BAR_HEIGHT</span> - <span class="built_in">UI_TOOL_BAR_HEIGHT</span> - kbSize<span class="variable">.height</span>;</span><br><span class="line">    [<span class="built_in">UIView</span> animateWithDuration:<span class="number">0.3</span> animations:^&#123;</span><br><span class="line">        _textView<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="built_in">UI_NAVIGATION_BAR_HEIGHT</span>, <span class="built_in">UI_SCREEN_WIDTH</span>, textViewHeight);</span><br><span class="line">        _toolbar<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="built_in">UI_NAVIGATION_BAR_HEIGHT</span> + textViewHeight, <span class="built_in">UI_SCREEN_WIDTH</span>, <span class="built_in">UI_TOOL_BAR_HEIGHT</span>);</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到，我将设备的各种高度都定义成了宏，这里的宏 UI_SCREEN_HEIGHT 表示整个设备的高度，以前这个宏的值是固定的 480，现在因为 iPhone5 中高度值变了，所以我们将这个宏定义改成了如下的值，这样，所有相关的用代码实现的界面位置调整都搞定了。我的 UI 相关的宏定义如下：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#define UI_NAVIGATION_BAR_HEIGHT        44</span></span><br><span class="line"><span class="preprocessor">#define UI_TOOL_BAR_HEIGHT              44</span></span><br><span class="line"><span class="preprocessor">#define UI_TAB_BAR_HEIGHT               49</span></span><br><span class="line"><span class="preprocessor">#define UI_STATUS_BAR_HEIGHT            20</span></span><br><span class="line"><span class="preprocessor">#define UI_SCREEN_WIDTH                 320</span></span><br><span class="line"><span class="comment">// 将以下宏定义的值从 480 改成 [[UIScreen mainScreen] bounds].size.height</span></span><br><span class="line"><span class="preprocessor">#define UI_SCREEN_HEIGHT                ([[UIScreen mainScreen] bounds].size.height)</span></span><br></pre></td></tr></table></figure>
+<p>如果你以前没有将这些设备的高度值抽取成宏，我建议你通过查找替换，先将所有用到 480 的地方修改成宏，然后再增加上面的宏定义即可。</p>
+<p>当然，也有一些调整稍微复杂一些，例如粉笔网首页的上拉加载更多，需要判断上拉高度是否到达阈值，这些也是和设备高度相关的。这些阈值信息以前可能就直接写成和高度相关的值，例如 220 什么的，这些通过直接查找 480 还没法直接找到。</p>
+<p>对于这些问题，只能是通过在模拟器中测试，发现问题，然后再把这些 “Magic Number” 替换成用上面提到的宏计算的公式。例如我们的上拉加载更多的阈值宏定义如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> LOAD_MORE_TEXT_HEIGHT <span class="number">77</span></span></span><br><span class="line"><span class="comment">// 显示文字阈值</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> LOAD_MORE_THRESHOLD (UI_SCREEN_HEIGHT - UI_STATUS_BAR_HEIGHT - UI_NAVIGATION_BAR_HEIGHT - UI_TAB_BAR_HEIGHT - LOAD_MORE_TEXT_HEIGHT)</span></span><br><span class="line"><span class="comment">// 刷新阈值</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> LOAD_MORE_MAX       (LOAD_MORE_THRESHOLD + <span class="number">10.0</span>)</span></span><br></pre></td></tr></table></figure>
+<h4 id="u8C03_u6574_u5C4F_u5E55_Rotation__u7684_u56DE_u8C03_u51FD_u6570"><a href="#u8C03_u6574_u5C4F_u5E55_Rotation__u7684_u56DE_u8C03_u51FD_u6570" class="headerlink" title="调整屏幕 Rotation 的回调函数"></a>调整屏幕 Rotation 的回调函数</h4><p>从 iOS6 开始，苹果修改了屏幕旋转的回调函数。在 iOS6 以前，回调函数是</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)shouldAutorotateToInterfaceOrientation:(<span class="built_in">UIInterfaceOrientation</span>)interfaceOrientation</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> (interfaceOrientation == <span class="built_in">UIInterfaceOrientationPortrait</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在新的回调函数是：<br><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)shouldAutorotate &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="built_in">NSInteger</span>)supportedInterfaceOrientations &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">UIInterfaceOrientationMaskAllButUpsideDown</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="built_in">UIInterfaceOrientation</span>)preferredInterfaceOrientationForPresentation &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">UIInterfaceOrientationPortrait</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>并且，现在是否旋转屏幕是由最上层的 View Controller 决定。例如，如果你是由 UITabBarController 或 UINavigationController 包起来的界面的话，是否旋转屏幕就由 UITabBarController 或 UINavigationController 中的 shouldAutorotate 回调决定，而默认其返回的是 YES。修改方法是给这 2 个容器 Controller 增加 Addition, 将其 shouldAutorotate 修改成由当前显示的子 view controller 决定，或者直接默认返回 NO。</p>
+<h4 id="u63D0_u4EA4_u5E94_u7528"><a href="#u63D0_u4EA4_u5E94_u7528" class="headerlink" title="提交应用"></a>提交应用</h4><p>基本上就是以上这些调整工作了，完了之后用 Xcode4.5 编译后提交审核，并且在 itunes connect 中设置 iPhone5 屏幕尺寸的 app 介绍截图即可。业界传言说对于支持 iPhone5 的程序，苹果在应用审核的时候会优先进行，我不知道是否是真的，不过我们的应用确实只用了 5 天时间就通过了审核，这是我个人遇到过的最快的一次审核。</p>
+<p>祝大家国庆节玩得开心～</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2012/10/05/upgrade-your-app-to-support-iphone5/" data-title="让你的APP支持iPhone5 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2012/10/09/3rd-libs-used-in-fenbi-app/" title="粉笔网iPhone端使用的第三方开源库">
+  <strong>上一篇：</strong><br/>
+  <span>
+  粉笔网iPhone端使用的第三方开源库</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2012/09/15/talk-about-my-startup-exp/"  title="谈谈我的创业感受">
+ <strong>下一篇：</strong><br/> 
+ <span>谈谈我的创业感受
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

@@ -1,0 +1,447 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>iOS移动开发周报-第3期 | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="版权说明本文为InfoQ中文站特供稿件，首发地址为：文章链接。如需转载，请与InfoQ中文站联系。
+前言欢迎国内的iOS同行或技术作者向我提交周报线索，线索可以是新闻、教程、开发工具或开源项目，将相关文章的简介和链接在微博上发布并 @唐巧_boy 即可。
+【摘要】：本周移动开发周报带来如下内容：苹果发布iOS7.1相关内容，ReactiveCocoa和Origami相关的教程，一些来自于Faceb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS移动开发周报-第3期">
+<meta property="og:url" content="http://blog.devtang.com/2014/03/14/ios-weekly-3/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="版权说明本文为InfoQ中文站特供稿件，首发地址为：文章链接。如需转载，请与InfoQ中文站联系。
+前言欢迎国内的iOS同行或技术作者向我提交周报线索，线索可以是新闻、教程、开发工具或开源项目，将相关文章的简介和链接在微博上发布并 @唐巧_boy 即可。
+【摘要】：本周移动开发周报带来如下内容：苹果发布iOS7.1相关内容，ReactiveCocoa和Origami相关的教程，一些来自于Faceb">
+<meta property="og:updated_time" content="2016-02-16T10:26:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS移动开发周报-第3期">
+<meta name="twitter:description" content="版权说明本文为InfoQ中文站特供稿件，首发地址为：文章链接。如需转载，请与InfoQ中文站联系。
+前言欢迎国内的iOS同行或技术作者向我提交周报线索，线索可以是新闻、教程、开发工具或开源项目，将相关文章的简介和链接在微博上发布并 @唐巧_boy 即可。
+【摘要】：本周移动开发周报带来如下内容：苹果发布iOS7.1相关内容，ReactiveCocoa和Origami相关的教程，一些来自于Faceb">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/03/14/ios-weekly-3/" title="iOS移动开发周报-第3期" itemprop="url">iOS移动开发周报-第3期</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2014-03-14T07:10:00.000Z" itemprop="datePublished"> 发表于 2014-03-14 15:10</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7248_u6743_u8BF4_u660E"><span class="toc-number">1.</span> <span class="toc-text">版权说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u65B0_u95FB"><span class="toc-number">2.</span> <span class="toc-text">新闻</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6559_u7A0B"><span class="toc-number">3.</span> <span class="toc-text">教程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5DE5_u5177"><span class="toc-number">4.</span> <span class="toc-text">工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5F00_u6E90_u9879_u76EE"><span class="toc-number">5.</span> <span class="toc-text">开源项目</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="u7248_u6743_u8BF4_u660E"><a href="#u7248_u6743_u8BF4_u660E" class="headerlink" title="版权说明"></a>版权说明</h2><p>本文为InfoQ中文站特供稿件，首发地址为：<a href="http://www.infoq.com/cn/news/2014/03/apple-ios71-xcode51" target="_blank" rel="external">文章链接</a>。如需转载，请与InfoQ中文站联系。</p>
+<h3 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h3><p>欢迎国内的iOS同行或技术作者向我提交周报线索，线索可以是新闻、教程、开发工具或开源项目，将相关文章的简介和链接在微博上发布并 <a href="http://weibo.com/tangqiaoboy" target="_blank" rel="external">@唐巧_boy</a> 即可。</p>
+<p>【摘要】：本周移动开发周报带来如下内容：苹果发布iOS7.1相关内容，ReactiveCocoa和Origami相关的教程，一些来自于Facebook的开源项目。</p>
+<h2 id="u65B0_u95FB"><a href="#u65B0_u95FB" class="headerlink" title="新闻"></a>新闻</h2><ol>
+<li><p><a href="http://tech.sina.com.cn/it/apple/2014-03-11/01399228853.shtml" target="_blank" rel="external">《苹果发布iOS 7.1更新》</a>：苹果在3月11日正式发布了iOS 7.1更新，支持连接车载系统CarPlay。iOS 7.1 对用户界面进一步做了改进，同时改进了Touch ID指纹识别的能力，并针对iPhone 4做了优化。也此同时，苹果也同步放出了支持iOS 7.1的集成编译环境Xcode 5.1正式版，开发者可以从<a href="http://developer.apple.com/" target="_blank" rel="external">苹果开发者中心</a>下载新版本的Xcode。</p>
+</li>
+<li><p><a href="http://www.polarb.com/publishers/results/poll_sets/2042" target="_blank" rel="external">《iOS 7.1 vs iOS 7》</a>：文章对比了iOS 7.1相对于iOS 7所做的细节上的调整，这些调整结果也支持用户打分。从打分结果上看，大部分的调整得到了用户的肯定。</p>
+</li>
+<li><p><a href="http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html" target="_blank" rel="external">《3月的TIOBE编程语言排行榜》</a>：三月的TIOBE编程语言排行榜，Objective-C和C++继续拉开差距，稳坐第三的位置。而在半年前，二者还是几乎一样的Rating值，可见移动开发在继续升温。</p>
+</li>
+<li><p>升级到Xcode 5.1和iOS 7遇到的各种开发问题及解决办法汇总：</p>
+<ul>
+<li><a href="http://weibo.com/2157980617/AAwK4kpE8?mod=weibotime" target="_blank" rel="external">《iOS 企业证书部署无效的问题》</a></li>
+<li><a href="http://weibo.com/1658814735/AAvyB25js" target="_blank" rel="external">《clipsToBounds 属性默认值变了》</a></li>
+<li><a href="http://weibo.com/2157980617/AAv3IwVrH?mod=weibotime" target="_blank" rel="external">《第三方库不支持64位造成编译错误》</a></li>
+</ul>
+</li>
+</ol>
+<h2 id="u6559_u7A0B"><a href="#u6559_u7A0B" class="headerlink" title="教程"></a>教程</h2><ol>
+<li><p><a href="http://www.raywenderlich.com/62699/reactivecocoa-tutorial-pt1" target="_blank" rel="external">《ReactiveCocoa Tutorial – The Definitive Introduction》</a>: RayWenderlich网站放出了从零开始学ReactiveCocoa系列教程第一课。讲得很基本很实用，适合想学ReactiveCocoa的同学作为入门教材。</p>
+</li>
+<li><p><a href="http://imkevin.me/post/78301132929/nginx-spdy-ios" target="_blank" rel="external">《让 Nginx SPDY 和 iOS 交朋友》</a>：<a href="http://zh.wikipedia.org/wiki/SPDY" target="_blank" rel="external">SPDY</a>是Google开发的基于传输控制协议（TCP）的应用层协议，目前已经被用于Google Chrome浏览器中来访问Google的SSL加密服务。SPDY协议类似于HTTP，但旨在缩短网页的加载时间和提高安全性。SPDY协议通过压缩、多路复用和优先级来缩短加载时间。作者在文章中分享了如何在iOS应用中使用SPDY协议的经验。</p>
+</li>
+<li><p><a href="http://blog.xcodev.com/archives/access-iphone-simcard-contacts-via-baseband/" target="_blank" rel="external">《利用iPhone基带读写SIM卡联系人》</a> 和 <a href="http://blog.xcodev.com/archives/send-sms-via-iphone-baseband/" target="_blank" rel="external">《利用iPhone基带发送短信息》</a>：文章简要介绍了一下SIM卡的一些常识，AT指令中中文字符的相关处理，以及如何读写SIM卡中的联系人数据，最终实现了利用iPhone基带发送短信息的功能。不过由于苹果沙盒(sandbox)的限制，该相关知识只能在越狱手机上应用。</p>
+</li>
+<li><p><a href="http://vimeo.com/88468610" target="_blank" rel="external">《The 4 Minute Guide to Quartz Composer<br>》</a>和<a href="http://vimeo.com/85578380" target="_blank" rel="external">《Prototyping with Facebook Origami》</a>：两篇介绍Facebook免费提供的基于Quartz Composer的交互设计工具Origami的视频教程（需要翻墙）。</p>
+</li>
+</ol>
+<h2 id="u5DE5_u5177"><a href="#u5DE5_u5177" class="headerlink" title="工具"></a>工具</h2><ol>
+<li>手工写<code>.gitignore</code>文件常常费时费力还容易出错，<a href="http://www.gitignore.io/" target="_blank" rel="external">http://www.gitignore.io/</a> 是一个<code>.gitignore</code>的生成网站，iOS工程的<code>.gitignore</code>生成地址是这个： <a href="http://www.gitignore.io/api/xcode,objective-c" target="_blank" rel="external">http://www.gitignore.io/api/xcode,objective-c</a></li>
+</ol>
+<h2 id="u5F00_u6E90_u9879_u76EE"><a href="#u5F00_u6E90_u9879_u76EE" class="headerlink" title="开源项目"></a>开源项目</h2><ol>
+<li><p><a href="https://github.com/facebook/Shimmer" target="_blank" rel="external">Shimmer</a>: Facebook 开源了他旗下应用 Paper 的加载效果，它使用了WWDC 2009中介绍的<code>-[CALayer mask]</code>的技术方案。</p>
+</li>
+<li><p><a href="https://github.com/facebook/chisel" target="_blank" rel="external">chisel</a>：Facebook开源了LLDB的增强工具chisel，其中的许多命令对于调试界面非常有帮助。</p>
+</li>
+<li><p><a href="https://github.com/facebook/KVOController" target="_blank" rel="external">KVOController</a>: Facebook开源了Key-Value Observing工具KVOController。KVO是一个在iOS应用程序开发中，用于模块间通讯的技术技术，常常用于保证界面对于模型数据变化的实时响应。</p>
+</li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS-weekly/">iOS weekly</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2014/03/14/ios-weekly-3/" data-title="iOS移动开发周报-第3期 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/03/21/ios-weekly-4/" title="iOS移动开发周报-第4期">
+  <strong>上一篇：</strong><br/>
+  <span>
+  iOS移动开发周报-第4期</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/03/07/ios-weekly-2/"  title="iOS移动开发周报-第2期">
+ <strong>下一篇：</strong><br/> 
+ <span>iOS移动开发周报-第2期
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

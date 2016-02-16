@@ -1,0 +1,422 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>让XCode的 stack trace信息可读 | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="昨天在写iOS代码的时候，调试的时候模拟器崩溃了。异常停在了如下整个main函数的入口处：
+int main(int argc, char *argv[])&amp;#123;    @autoreleasepool &amp;#123;        // 异常停在了下面这行，毫无提示作用        return UIApplicationMain(argc, argv, nil, NSStringFrom">
+<meta property="og:type" content="article">
+<meta property="og:title" content="让XCode的 stack trace信息可读">
+<meta property="og:url" content="http://blog.devtang.com/2012/11/14/make-stack-trace-more-readable/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="昨天在写iOS代码的时候，调试的时候模拟器崩溃了。异常停在了如下整个main函数的入口处：
+int main(int argc, char *argv[])&amp;#123;    @autoreleasepool &amp;#123;        // 异常停在了下面这行，毫无提示作用        return UIApplicationMain(argc, argv, nil, NSStringFrom">
+<meta property="og:image" content="http://blog.devtang.com/images/stacktrace-1.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/stacktrace-2.png">
+<meta property="og:updated_time" content="2016-02-16T10:26:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="让XCode的 stack trace信息可读">
+<meta name="twitter:description" content="昨天在写iOS代码的时候，调试的时候模拟器崩溃了。异常停在了如下整个main函数的入口处：
+int main(int argc, char *argv[])&amp;#123;    @autoreleasepool &amp;#123;        // 异常停在了下面这行，毫无提示作用        return UIApplicationMain(argc, argv, nil, NSStringFrom">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2012/11/14/make-stack-trace-more-readable/" title="让XCode的 stack trace信息可读" itemprop="url">让XCode的 stack trace信息可读</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2012-11-14T12:19:00.000Z" itemprop="datePublished"> 发表于 2012-11-14 20:19</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u65B9_u6CD5_u4E00"><span class="toc-number">1.</span> <span class="toc-text">方法一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u65B9_u6CD5_u4E8C"><span class="toc-number">2.</span> <span class="toc-text">方法二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
+		
+		</div>
+		
+		<p>昨天在写iOS代码的时候，调试的时候模拟器崩溃了。异常停在了如下整个main函数的入口处：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">        <span class="comment">// 异常停在了下面这行，毫无提示作用</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">UIApplicationMain</span>(argc, argv, <span class="literal">nil</span>, <span class="built_in">NSStringFromClass</span>([MyClass class]));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>XCode的Console界面报出了一些出错信息, 如下图所示：</p>
+<img src="/images/stacktrace-1.jpg">
+<p>我根据Console里面的文字提示信息，猜出应该是出现了空指针nil的操作。但是具体出错在哪一行，却不知道。最终虽然找到了bug，但是debug的过程确实费了些时间。考虑到这个stace trace信息应该对我挺有帮助才对的，所以我就查了一下如何让这原本一堆16进制的调用栈信息更可读。于是在stackoverflow上找到了2个比较好的解决办法，在这里分享给大家。</p>
+<h2 id="u65B9_u6CD5_u4E00"><a href="#u65B9_u6CD5_u4E00" class="headerlink" title="方法一"></a>方法一</h2><p>该<a href="http://stackoverflow.com/questions/7841610/xcode-4-2-debug-doesnt-symbolicate-stack-call" target="_blank" rel="external">方法</a>的步骤是，首先在你的AppDelegate中定义一个方法, 用于处理异常：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> uncaughtExceptionHandler(<span class="built_in">NSException</span> *exception) &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"CRASH: %@"</span>, exception);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"Stack Trace: %@"</span>, [exception callStackSymbols]);</span><br><span class="line">    <span class="comment">// Internal error reporting</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后在应用启动时，设置这个方法作为自己的自定义异常回调：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions</span><br><span class="line">&#123;   </span><br><span class="line">    <span class="built_in">NSSetUncaughtExceptionHandler</span>(&amp;uncaughtExceptionHandler);</span><br><span class="line">    <span class="comment">// Normal launch stuff</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>完成之后，当对于上面的异常，在定义了这个回调之后，Log信息变成如下所示，出错行一目了然，根据下面的可读的stack trace，我一下就可以找到是QuestionParser这个类的第378行导致的异常，进而可以跳到出错行分析原因，很容易就把bug修复了。</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">Ape[<span class="number">2711</span>:<span class="number">11303</span>] CRASH: *** -[__<span class="built_in">NSPlaceholderDictionary</span> initWithObjects:forKeys:count:]: attempt to insert <span class="literal">nil</span> object from objects[<span class="number">2</span>]</span><br><span class="line">Ape[<span class="number">2711</span>:<span class="number">11303</span>] Stack Trace: (</span><br><span class="line">	<span class="number">0</span>   CoreFoundation                      <span class="number">0x0209402e</span> __exceptionPreprocess + <span class="number">206</span></span><br><span class="line">	<span class="number">1</span>   libobjc<span class="variable">.A</span><span class="variable">.dylib</span>                     <span class="number">0x01a71e7e</span> objc_exception_throw + <span class="number">44</span></span><br><span class="line">	<span class="number">2</span>   CoreFoundation                      <span class="number">0x0205aa95</span> -[__<span class="built_in">NSPlaceholderDictionary</span> initWithObjects:forKeys:count:] + <span class="number">165</span></span><br><span class="line">	<span class="number">3</span>   CoreFoundation                      <span class="number">0x020874e9</span> +[<span class="built_in">NSDictionary</span> dictionaryWithObjects:forKeys:count:] + <span class="number">73</span></span><br><span class="line">	<span class="number">4</span>   Ape                                 <span class="number">0x00096a0a</span> +[QuestionParser parseToDictionary:] + <span class="number">378</span></span><br><span class="line">	<span class="number">5</span>   Ape                                 <span class="number">0x00096434</span> -[QuestionStore putQuestion:] + <span class="number">308</span></span><br><span class="line">	<span class="number">6</span>   Ape                                 <span class="number">0x00089ddf</span> -[QuestionViewController requestFinished:] + <span class="number">303</span></span><br><span class="line">	<span class="number">7</span>   Ape                                 <span class="number">0x000869dd</span> -[NetworkAgent requestFinished:] + <span class="number">653</span></span><br><span class="line">	<span class="number">8</span>   Ape                                 <span class="number">0x00085d33</span> __27-[NetworkAgent addRequest:]_block_invoke_0 + <span class="number">131</span></span><br><span class="line">	<span class="number">9</span>   libdispatch<span class="variable">.dylib</span>                   <span class="number">0x01cf153f</span> _dispatch_call_block_and_release + <span class="number">15</span></span><br><span class="line">	<span class="number">10</span>  libdispatch<span class="variable">.dylib</span>                   <span class="number">0x01d03014</span> _dispatch_client_callout + <span class="number">14</span></span><br><span class="line">	<span class="number">11</span>  libdispatch<span class="variable">.dylib</span>                   <span class="number">0x01cf2fd6</span> _dispatch_after_timer_callback + <span class="number">28</span></span><br><span class="line">	<span class="number">12</span>  libdispatch<span class="variable">.dylib</span>                   <span class="number">0x01d03014</span> _dispatch_client_callout + <span class="number">14</span></span><br><span class="line">	<span class="number">13</span>  libdispatch<span class="variable">.dylib</span>                   <span class="number">0x01cfa8b7</span> _dispatch_source_latch_and_call + <span class="number">219</span></span><br><span class="line">	<span class="number">14</span>  libdispatch<span class="variable">.dylib</span>                   <span class="number">0x01cf6405</span> _dispatch_source_invoke + <span class="number">322</span></span><br><span class="line">	<span class="number">15</span>  libdispatch<span class="variable">.dylib</span>                   <span class="number">0x01cf3768</span> _dispatch_main_queue_callback_4CF + <span class="number">187</span></span><br><span class="line">	<span class="number">16</span>  CoreFoundation                      <span class="number">0x0203aaf5</span> __<span class="built_in">CFRunLoopRun</span> + <span class="number">1925</span></span><br><span class="line">	<span class="number">17</span>  CoreFoundation                      <span class="number">0x02039f44</span> <span class="built_in">CFRunLoopRunSpecific</span> + <span class="number">276</span></span><br><span class="line">	<span class="number">18</span>  CoreFoundation                      <span class="number">0x02039e1b</span> <span class="built_in">CFRunLoopRunInMode</span> + <span class="number">123</span></span><br><span class="line">	<span class="number">19</span>  GraphicsServices                    <span class="number">0x0282b7e3</span> GSEventRunModal + <span class="number">88</span></span><br><span class="line">	<span class="number">20</span>  GraphicsServices                    <span class="number">0x0282b668</span> GSEventRun + <span class="number">104</span></span><br><span class="line">	<span class="number">21</span>  <span class="built_in">UIKit</span>                               <span class="number">0x00be265c</span> <span class="built_in">UIApplicationMain</span> + <span class="number">1211</span></span><br><span class="line">	<span class="number">22</span>  Ape                                 <span class="number">0x00016c5d</span> main + <span class="number">141</span></span><br><span class="line">	<span class="number">23</span>  Ape                                 <span class="number">0x00002b05</span> start + <span class="number">53</span></span><br><span class="line">	<span class="number">24</span>  ???                                 <span class="number">0x00000001</span> <span class="number">0x0</span> + <span class="number">1</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h2 id="u65B9_u6CD5_u4E8C"><a href="#u65B9_u6CD5_u4E8C" class="headerlink" title="方法二"></a>方法二</h2><p>方法二相比方法一更加简单，具体做法是在XCode界面中按cmd + 6跳到Breakpoint的tab，然后点击左下角的+号，增加一个Exception的断点，如下图所示。这样，当异常出现时，会自动停在异常处，而不会抛出到UIApplicationMain。拿我的有bug的程序来说，代码会自动断在QuestionParser这个类的第378行。</p>
+<img src="/images/stacktrace-2.png">
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>其实以前XCode是能显示出可读的stack trace信息的，似乎到了XCode4.2以后就出问题了。所以上面提到的2个办法相当于walk around解决了XCode4.2以后出现的bug。如果该文章对你有用，希望你能帮我点击下面的分享按钮，分享给更多朋友，同时也帮我宣传一下博客，这将有助于我分享更多的心得给大家，Have fun!</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2012/11/14/make-stack-trace-more-readable/" data-title="让XCode的 stack trace信息可读 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2012/11/16/drop-ios4-enbrace-ios5/" title="放弃iOS4，拥抱iOS5">
+  <strong>上一篇：</strong><br/>
+  <span>
+  放弃iOS4，拥抱iOS5</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2012/11/10/how-to-design-upgrade-notice/"  title="改进iOS客户端的升级提醒功能">
+ <strong>下一篇：</strong><br/> 
+ <span>改进iOS客户端的升级提醒功能
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

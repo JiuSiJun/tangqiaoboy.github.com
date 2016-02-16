@@ -1,0 +1,437 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>在iOS开发中使用FMDB | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="前言SQLite (http://www.sqlite.org/docs.html) 是一个轻量级的关系数据库。iOS SDK 很早就支持了 SQLite，在使用时，只需要加入 libsqlite3.dylib 依赖以及引入 sqlite3.h 头文件即可。但是，原生的 SQLite API 在使用上相当不友好，在使用时，非常不便。于是，开源社区中就出现了一系列将 SQLite API 进行封装的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在iOS开发中使用FMDB">
+<meta property="og:url" content="http://blog.devtang.com/2012/04/22/use-fmdb/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="前言SQLite (http://www.sqlite.org/docs.html) 是一个轻量级的关系数据库。iOS SDK 很早就支持了 SQLite，在使用时，只需要加入 libsqlite3.dylib 依赖以及引入 sqlite3.h 头文件即可。但是，原生的 SQLite API 在使用上相当不友好，在使用时，非常不便。于是，开源社区中就出现了一系列将 SQLite API 进行封装的">
+<meta property="og:image" content="http://blog.devtang.com/images/sqlite_manager.jpg">
+<meta property="og:updated_time" content="2016-02-16T10:26:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在iOS开发中使用FMDB">
+<meta name="twitter:description" content="前言SQLite (http://www.sqlite.org/docs.html) 是一个轻量级的关系数据库。iOS SDK 很早就支持了 SQLite，在使用时，只需要加入 libsqlite3.dylib 依赖以及引入 sqlite3.h 头文件即可。但是，原生的 SQLite API 在使用上相当不友好，在使用时，非常不便。于是，开源社区中就出现了一系列将 SQLite API 进行封装的">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2012/04/22/use-fmdb/" title="在iOS开发中使用FMDB" itemprop="url">在iOS开发中使用FMDB</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2012-04-22T06:11:00.000Z" itemprop="datePublished"> 发表于 2012-04-22 14:11</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4F7F_u7528_u8BF4_u660E"><span class="toc-number">2.</span> <span class="toc-text">使用说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5F15_u5165_u76F8_u5173_u6587_u4EF6"><span class="toc-number">2.1.</span> <span class="toc-text">引入相关文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5EFA_u7ACB_u6570_u636E_u5E93"><span class="toc-number">2.2.</span> <span class="toc-text">建立数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6253_u5F00_u6570_u636E_u5E93"><span class="toc-number">2.3.</span> <span class="toc-text">打开数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6267_u884C_u66F4_u65B0_u64CD_u4F5C"><span class="toc-number">2.4.</span> <span class="toc-text">执行更新操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6267_u884C_u67E5_u8BE2_u64CD_u4F5C"><span class="toc-number">2.5.</span> <span class="toc-text">执行查询操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6570_u636E_u53C2_u6570"><span class="toc-number">2.6.</span> <span class="toc-text">数据参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7EBF_u7A0B_u5B89_u5168"><span class="toc-number">2.7.</span> <span class="toc-text">线程安全</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5DE5_u5177"><span class="toc-number">3.</span> <span class="toc-text">工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>SQLite (<a href="http://www.sqlite.org/docs.html" target="_blank" rel="external">http://www.sqlite.org/docs.html</a>) 是一个轻量级的关系数据库。iOS SDK 很早就支持了 SQLite，在使用时，只需要加入 libsqlite3.dylib 依赖以及引入 sqlite3.h 头文件即可。但是，原生的 SQLite API 在使用上相当不友好，在使用时，非常不便。于是，开源社区中就出现了一系列将 SQLite API 进行封装的库，而 FMDB (<a href="https://github.com/ccgus/fmdb" target="_blank" rel="external">https://github.com/ccgus/fmdb</a>) 则是开源社区中的优秀者。</p>
+<a id="more"></a>
+<p>FMDB 在使用上相当方便。以下是一个简单的例子：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSString</span>* docsdir = [<span class="built_in">NSSearchPathForDirectoriesInDomains</span>( <span class="built_in">NSDocumentDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>) lastObject];</span><br><span class="line"><span class="built_in">NSString</span>* dbpath = [docsdir stringByAppendingPathComponent:<span class="string">@"user.sqlite"</span>]; </span><br><span class="line">FMDatabase* db = [FMDatabase databaseWithPath:dbpath];</span><br><span class="line">[db open];</span><br><span class="line">FMResultSet *rs = [db executeQuery:<span class="string">@"select * from people"</span>];</span><br><span class="line"><span class="keyword">while</span> ([rs next]) &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@ %@"</span>,</span><br><span class="line">        [rs stringForColumn:<span class="string">@"firstname"</span>], </span><br><span class="line">        [rs stringForColumn:<span class="string">@"lastname"</span>]);</span><br><span class="line">&#125;</span><br><span class="line">[db close];</span><br></pre></td></tr></table></figure>
+<p>可以看到，使用 FMDB 后的数据库代码清晰明了，比原生的 API 优雅多了。另外，FMDB 同时兼容 ARC 和非 ARC 工程，会自动根据工程配置来调整相关的内存管理代码。</p>
+<h2 id="u4F7F_u7528_u8BF4_u660E"><a href="#u4F7F_u7528_u8BF4_u660E" class="headerlink" title="使用说明"></a>使用说明</h2><p>该使用说明主要翻译自 fmdb 的 github 项目说明文档: <a href="https://github.com/ccgus/fmdb" target="_blank" rel="external">https://github.com/ccgus/fmdb</a></p>
+<h3 id="u5F15_u5165_u76F8_u5173_u6587_u4EF6"><a href="#u5F15_u5165_u76F8_u5173_u6587_u4EF6" class="headerlink" title="引入相关文件"></a>引入相关文件</h3><p>首先将 FMDB 从 github 上 clone 下来，然后将以下文件 copy 到你的工程中：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">FMDatabase.h&#10;FMDatabase.m&#10;FMDatabaseAdditions.h&#10;FMDatabaseAdditions.m&#10;FMDatabasePool.h&#10;FMDatabasePool.m&#10;FMDatabaseQueue.h&#10;FMDatabaseQueue.m&#10;FMResultSet.h&#10;FMResultSet.m</span><br></pre></td></tr></table></figure>
+<h3 id="u5EFA_u7ACB_u6570_u636E_u5E93"><a href="#u5EFA_u7ACB_u6570_u636E_u5E93" class="headerlink" title="建立数据库"></a>建立数据库</h3><p>建立数据库只需要如下一行即可 , 当该文件不存在时，fmdb 会自己创建一个。如果你传入的参数是空串：@”” ，则 fmdb 会在临时文件目录下创建这个数据库，如果你传入的参数是 NULL，则它会建立一个在内存中的数据库。</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">FMDatabase *db = [FMDatabase databaseWithPath:<span class="string">@"/tmp/tmp.db"</span>];</span><br></pre></td></tr></table></figure>
+<h3 id="u6253_u5F00_u6570_u636E_u5E93"><a href="#u6253_u5F00_u6570_u636E_u5E93" class="headerlink" title="打开数据库"></a>打开数据库</h3><p>使用如下语句，如果打开失败，可能是权限不足或者资源不足。通常打开完操作操作后，需要调用 close 方法来关闭数据库。</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (![db open]) &#123;</span><br><span class="line">    <span class="comment">// error </span></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// some operation</span></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">[db close];</span><br></pre></td></tr></table></figure>
+<h3 id="u6267_u884C_u66F4_u65B0_u64CD_u4F5C"><a href="#u6267_u884C_u66F4_u65B0_u64CD_u4F5C" class="headerlink" title="执行更新操作"></a>执行更新操作</h3><p>除了 Select 操作之外，其它的都是更新操作。更新操作使用如下方法，如果有错误，可以用 error 参数中获得。</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">-[FMDatabase executeUpdate:error:withArgumentsInArray:orVAList:]</span><br></pre></td></tr></table></figure>
+<h3 id="u6267_u884C_u67E5_u8BE2_u64CD_u4F5C"><a href="#u6267_u884C_u67E5_u8BE2_u64CD_u4F5C" class="headerlink" title="执行查询操作"></a>执行查询操作</h3><p>查询操作示例如下。注意：即使操作结果只有一行，也需要先调用 FMResultSet 的 next 方法。</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">FMResultSet *s = [db executeQuery:<span class="string">@"SELECT * FROM myTable"</span>];</span><br><span class="line"><span class="keyword">while</span> ([s next]) &#123;</span><br><span class="line">    <span class="comment">//retrieve values for each record</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">FMResultSet *s = [db executeQuery:<span class="string">@"SELECT COUNT(*) FROM myTable"</span>];</span><br><span class="line"><span class="keyword">if</span> ([s next]) &#123;</span><br><span class="line">    <span class="keyword">int</span> totalCount = [s intForColumnIndex:<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>FMDB 提供如下多个方法来获取不同类型的数据：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">intForColumn:</span><br><span class="line">longForColumn:</span><br><span class="line">longLongIntForColumn:</span><br><span class="line">boolForColumn:</span><br><span class="line">doubleForColumn:</span><br><span class="line">stringForColumn:</span><br><span class="line">dateForColumn:</span><br><span class="line">dataForColumn:</span><br><span class="line">dataNoCopyForColumn:</span><br><span class="line">UTF8StringForColumnIndex:</span><br><span class="line">objectForColumn:</span><br></pre></td></tr></table></figure>
+<p>通常情况下，你并不需要关闭 FMResultSet，因为相关的数据库关闭时，FMResultSet 也会被自动关闭。</p>
+<h3 id="u6570_u636E_u53C2_u6570"><a href="#u6570_u636E_u53C2_u6570" class="headerlink" title="数据参数"></a>数据参数</h3><p>通常情况下，你可以按照标准的 SQL 语句，用 ? 表示执行语句的参数，如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">INSERT INTO myTable VALUES (?, ?, ?)</span><br></pre></td></tr></table></figure>
+<p>然后，可以我们可以调用 executeUpdate 方法来将 ? 所指代的具体参数传入，通常是用变长参数来传递进去的，如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">NSString *sql = @&#34;insert into User (name, password) values (?, ?)&#34;;&#10;[db executeUpdate:sql, user.name, user.password];</span><br></pre></td></tr></table></figure>
+<p>这里需要注意的是，参数必须是 NSObject 的子类，所以象 int,double,bool 这种基本类型，需要封装成对应的包装类才行，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// &#38169;&#35823;&#65292;42 &#19981;&#33021;&#20316;&#20026;&#21442;&#25968;&#10;[db executeUpdate:@&#34;INSERT INTO myTable VALUES (?)&#34;, 42];&#10;// &#27491;&#30830;&#65292;&#23558; 42 &#23553;&#35013;&#25104; NSNumber &#31867;&#10;[db executeUpdate:@&#34;INSERT INTO myTable VALUES (?)&#34;, [NSNumber numberWithInt:42]];</span><br></pre></td></tr></table></figure>
+<h3 id="u7EBF_u7A0B_u5B89_u5168"><a href="#u7EBF_u7A0B_u5B89_u5168" class="headerlink" title="线程安全"></a>线程安全</h3><p>如果我们的 app 需要多线程操作数据库，那么就需要使用 FMDatabaseQueue 来保证线程安全了。<br>切记不能在多个线程中共同一个 FMDatabase 对象并且在多个线程中同时使用，这个类本身不是线程安全的，这样使用会造成数据混乱等问题。</p>
+<p>使用 FMDatabaseQueue 很简单，首先用一个数据库文件地址来初使化 FMDatabaseQueue，然后就可以将一个闭包 (block) 传入 inDatabase 方法中。<br>在闭包中操作数据库，而不直接参与 FMDatabase 的管理。</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建，最好放在一个单例的类中</span></span><br><span class="line">FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:aPath];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line">[queue inDatabase:^(FMDatabase *db) &#123;</span><br><span class="line">    [db executeUpdate:<span class="string">@"INSERT INTO myTable VALUES (?)"</span>, [<span class="built_in">NSNumber</span> numberWithInt:<span class="number">1</span>]];</span><br><span class="line">    [db executeUpdate:<span class="string">@"INSERT INTO myTable VALUES (?)"</span>, [<span class="built_in">NSNumber</span> numberWithInt:<span class="number">2</span>]];</span><br><span class="line">    [db executeUpdate:<span class="string">@"INSERT INTO myTable VALUES (?)"</span>, [<span class="built_in">NSNumber</span> numberWithInt:<span class="number">3</span>]];</span><br><span class="line"></span><br><span class="line">    FMResultSet *rs = [db executeQuery:<span class="string">@"select * from foo"</span>];</span><br><span class="line">    <span class="keyword">while</span> ([rs next]) &#123;</span><br><span class="line">        <span class="comment">// …</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果要支持事务</span></span><br><span class="line">[queue inTransaction:^(FMDatabase *db, <span class="built_in">BOOL</span> *rollback) &#123;</span><br><span class="line">    [db executeUpdate:<span class="string">@"INSERT INTO myTable VALUES (?)"</span>, [<span class="built_in">NSNumber</span> numberWithInt:<span class="number">1</span>]];</span><br><span class="line">    [db executeUpdate:<span class="string">@"INSERT INTO myTable VALUES (?)"</span>, [<span class="built_in">NSNumber</span> numberWithInt:<span class="number">2</span>]];</span><br><span class="line">    [db executeUpdate:<span class="string">@"INSERT INTO myTable VALUES (?)"</span>, [<span class="built_in">NSNumber</span> numberWithInt:<span class="number">3</span>]];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (whoopsSomethingWrongHappened) &#123;</span><br><span class="line">        *rollback = <span class="literal">YES</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// etc…</span></span><br><span class="line">    [db executeUpdate:<span class="string">@"INSERT INTO myTable VALUES (?)"</span>, [<span class="built_in">NSNumber</span> numberWithInt:<span class="number">4</span>]];</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+<h2 id="u5DE5_u5177"><a href="#u5DE5_u5177" class="headerlink" title="工具"></a>工具</h2><p>为了查看 Sqlite 中的数据，一个好的图形化界面的数据库管理程序是必不可少的。mysql 有 phpMyAdmin，那么 sqlite 呢？</p>
+<p>我主要使用的是 Firefox 的一个名为 SQLite Manager 的插件，安装此插件后，可以直接打开后缀名为 sqlite 的数据库文件。SQLite Manager 提供一个图形化的界面来执行数据查询或更改操作。如下图所示：</p>
+<img src="/images/sqlite_manager.jpg">
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>FMDB 将 SQLite API 进行了很友好的封装，使用上非常方便，对于那些使用纯 Sqlite API 来进行数据库操作的 app，可以考虑将其迁移到基于 FMDB 上，这对于以后数据库相关功能的开发维护，可以提高不少效率。</p>
+<p>我在学习 fmdb 的时候做了一个小工程用于练习，我把它放到 github 上了。感兴趣的可以自行下载：<a href="https://github.com/tangqiaoboy/FmdbSample" target="_blank" rel="external">https://github.com/tangqiaoboy/FmdbSample</a> </p>
+<p>祝大家玩得开心。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2012/04/22/use-fmdb/" data-title="在iOS开发中使用FMDB | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2012/05/05/do-not-use-sbjson/" title="不要使用SBJSON(json-framework)">
+  <strong>上一篇：</strong><br/>
+  <span>
+  不要使用SBJSON(json-framework)</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2012/04/06/about-100-devices-limit/"  title="关于iOS测试机个数上限的详细规则">
+ <strong>下一篇：</strong><br/> 
+ <span>关于iOS测试机个数上限的详细规则
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

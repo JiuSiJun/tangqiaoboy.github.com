@@ -1,0 +1,441 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>猿题库iOS客户端的技术细节（二）：答题卡扫描算法 | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="前言本人今年主要在负责猿题库 iOS 客户端的开发，本文旨在通过分享猿题库 iOS 客户端开发过程中的技术细节，达到总结和交流的目的。
+这是本技术分享系列文章的第二篇。本文涉及的技术细节是：答题卡扫描算法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="猿题库iOS客户端的技术细节（二）：答题卡扫描算法">
+<meta property="og:url" content="http://blog.devtang.com/2013/10/19/the-tech-detail-of-ape-client-2/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="前言本人今年主要在负责猿题库 iOS 客户端的开发，本文旨在通过分享猿题库 iOS 客户端开发过程中的技术细节，达到总结和交流的目的。
+这是本技术分享系列文章的第二篇。本文涉及的技术细节是：答题卡扫描算法。">
+<meta property="og:image" content="http://blog.devtang.com/images/ape-card-1.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/ape-card-1.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/ape-card-2.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/ape-card-3.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/ape-card-4.jpg">
+<meta property="og:updated_time" content="2016-02-16T10:28:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="猿题库iOS客户端的技术细节（二）：答题卡扫描算法">
+<meta name="twitter:description" content="前言本人今年主要在负责猿题库 iOS 客户端的开发，本文旨在通过分享猿题库 iOS 客户端开发过程中的技术细节，达到总结和交流的目的。
+这是本技术分享系列文章的第二篇。本文涉及的技术细节是：答题卡扫描算法。">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/10/19/the-tech-detail-of-ape-client-2/" title="猿题库iOS客户端的技术细节（二）：答题卡扫描算法" itemprop="url">猿题库iOS客户端的技术细节（二）：答题卡扫描算法</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2013-10-19T03:10:00.000Z" itemprop="datePublished"> 发表于 2013-10-19 11:10</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u95EE_u9898_u63CF_u8FF0"><span class="toc-number">2.</span> <span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6280_u672F_u89E3_u51B3_u65B9_u6848"><span class="toc-number">3.</span> <span class="toc-text">技术解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#u539F_u59CB_u56FE"><span class="toc-number">3.0.1.</span> <span class="toc-text">原始图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u8BC6_u522B_u7B54_u9898_u5361_u533A_u57DF"><span class="toc-number">3.0.2.</span> <span class="toc-text">识别答题卡区域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u56FE_u8C61_u7EA0_u504F"><span class="toc-number">3.0.3.</span> <span class="toc-text">图象纠偏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u7B54_u6848_u533A_u57DF_u8BC6_u522B"><span class="toc-number">3.0.4.</span> <span class="toc-text">答案区域识别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u7B97_u6CD5_u8D28_u91CF"><span class="toc-number">4.</span> <span class="toc-text">算法质量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7B97_u6CD5_u6B63_u786E_u7387_u548C_u53EC_u56DE_u7387"><span class="toc-number">4.1.</span> <span class="toc-text">算法正确率和召回率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7B97_u6CD5_u6267_u884C_u65F6_u95F4"><span class="toc-number">4.2.</span> <span class="toc-text">算法执行时间</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u7B97_u6CD5_u7684_u8C03_u8BD5_u548C_u79FB_u690D"><span class="toc-number">5.</span> <span class="toc-text">算法的调试和移植</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>本人今年主要在负责猿题库 iOS 客户端的开发，本文旨在通过分享猿题库 iOS 客户端开发过程中的技术细节，达到总结和交流的目的。</p>
+<p>这是本技术分享系列文章的第二篇。本文涉及的技术细节是：答题卡扫描算法。</p>
+<a id="more"></a>
+<h2 id="u95EE_u9898_u63CF_u8FF0"><a href="#u95EE_u9898_u63CF_u8FF0" class="headerlink" title="问题描述"></a>问题描述</h2><p>我们在调研用户需求的时候，发现有些用户很喜欢我们的猿题库产品，因为我们会根据用户对当前课程的知识点掌握情况，智能地给他出题。但是部分用户还是习惯在纸上做题，所以我们提供了试卷打印功能。</p>
+<p>但是，用户如果在纸上答题，无法方便地将答案上传到我们的服务器上。如果我们没有了用户做题数据，就无法根据他的成绩，做针对性的推荐和分析。所以，我们想到一种办法：<strong> 用户像传统考试那样，将答题结果填涂在答题卡上，然后我们提供一种用手机摄像头采集填涂结果的答题卡扫描算法，方便用户上传答题数据。</strong></p>
+<img src="/images/ape-card-1.jpg">
+<p>上图是一个我们试验用的答题卡，通过手机摄像头获取，从中可以看到，该答题卡有以下问题：</p>
+<ol>
+<li>由于手机摄像头无法完全正对答题卡，拍照角度有偏曲，答题卡在拍照后并不是完全的矩形。</li>
+<li>用户填涂区域可能并不饱满和完整。</li>
+<li>答题纸边缘可能有用户的草稿或其它干扰识别的信息。</li>
+</ol>
+<h2 id="u6280_u672F_u89E3_u51B3_u65B9_u6848"><a href="#u6280_u672F_u89E3_u51B3_u65B9_u6848" class="headerlink" title="技术解决方案"></a>技术解决方案</h2><p>我们尝试了多种识别方案，最终采用的方案如下：</p>
+<ol>
+<li>图象预处理，压缩图像大小，转彩色图像为灰度图像</li>
+<li>识别答题卡区域</li>
+<li>图象纠偏</li>
+<li>答案区域识别</li>
+</ol>
+<p>该方案及相关算法细节我们还在申请专利，由于专利还在申请过程中，所以我们这次仅展示上述主要步骤的示例图片。等专利完全申请结束后，我会在此将算法细节公开。</p>
+<p>上述主要步骤的示例图如下：</p>
+<h4 id="u539F_u59CB_u56FE"><a href="#u539F_u59CB_u56FE" class="headerlink" title="原始图"></a>原始图</h4><img src="/images/ape-card-1.jpg">
+<h4 id="u8BC6_u522B_u7B54_u9898_u5361_u533A_u57DF"><a href="#u8BC6_u522B_u7B54_u9898_u5361_u533A_u57DF" class="headerlink" title="识别答题卡区域"></a>识别答题卡区域</h4><img src="/images/ape-card-2.jpg">
+<h4 id="u56FE_u8C61_u7EA0_u504F"><a href="#u56FE_u8C61_u7EA0_u504F" class="headerlink" title="图象纠偏"></a>图象纠偏</h4><img src="/images/ape-card-3.jpg">
+<h4 id="u7B54_u6848_u533A_u57DF_u8BC6_u522B"><a href="#u7B54_u6848_u533A_u57DF_u8BC6_u522B" class="headerlink" title="答案区域识别"></a>答案区域识别</h4><p>答案已标注在图片每个题号的右边位置：</p>
+<img src="/images/ape-card-4.jpg">
+<h2 id="u7B97_u6CD5_u8D28_u91CF"><a href="#u7B97_u6CD5_u8D28_u91CF" class="headerlink" title="算法质量"></a>算法质量</h2><h3 id="u7B97_u6CD5_u6B63_u786E_u7387_u548C_u53EC_u56DE_u7387"><a href="#u7B97_u6CD5_u6B63_u786E_u7387_u548C_u53EC_u56DE_u7387" class="headerlink" title="算法正确率和召回率"></a>算法正确率和召回率</h3><p>我们用收集来的 1000 套样本数据对算法进行评测，最终结果是：扫描题目准确率达到 99.67%，召回率达到 99.14%。主要识别失败的样本是：页面严重扭曲弯折的答题卡。我们也在一直改进算法，希望能够给用户提供更加精准的扫描结果。</p>
+<h3 id="u7B97_u6CD5_u6267_u884C_u65F6_u95F4"><a href="#u7B97_u6CD5_u6267_u884C_u65F6_u95F4" class="headerlink" title="算法执行时间"></a>算法执行时间</h3><p>我们觉得让用户直接对着答题卡用拍摄的方式动态识别，比先拍一张照片再识别的方式更加方便。所以我们对答题卡识别算法的执行时间进行了一系列优化，最终保证每次识别时间小于 0.1 秒，这样的识别时间非常快，基本上用户把手机摄像头对准答题卡，扫描结果就出来了。</p>
+<h2 id="u7B97_u6CD5_u7684_u8C03_u8BD5_u548C_u79FB_u690D"><a href="#u7B97_u6CD5_u7684_u8C03_u8BD5_u548C_u79FB_u690D" class="headerlink" title="算法的调试和移植"></a>算法的调试和移植</h2><p>由于我们整个技术团队都使用 Mac 电脑进行开发，所以我们对于算法的调试都是在 Mac 平台上完成的，我使用了开源的图象处理库 OpenCV，在搭建 OpenCV 环境时遇到一些问题，最终完成环境搭建后，我将相关的经验总结在博文 <a href="/2012/10/27/use-opencv-in-ios/">《在 MacOS 和 iOS 系统中使用 OpenCV》</a> 中。</p>
+<p>由于算法需要同时应用在 iOS 和 Android 平台，所以我主要用 C++ 语言实现算法。Xcode 可以很好地支持 Objective-C 语言和 C++ 语言混编，只需要将相关的源文件扩展名从 .m 改为 .mm 即可。而 Android 平台所采用的 Java 语言，也支持通过 <a href="http://en.wikipedia.org/wiki/Java_Native_Interface" target="_blank" rel="external">JNI</a> 的方式来调用 C++ 的代码。这样就可以方便地将识别算法移植到手机中了。</p>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>本文介绍了猿题库 iOS 客户端采用的答题卡扫描算法的大致步骤，以及算法的质量和移植方案。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2013/10/19/the-tech-detail-of-ape-client-2/" data-title="猿题库iOS客户端的技术细节（二）：答题卡扫描算法 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/10/21/the-tech-detail-of-ape-client-3/" title="猿题库iOS客户端的技术细节（三）：基于CoreText的排版引擎">
+  <strong>上一篇：</strong><br/>
+  <span>
+  猿题库iOS客户端的技术细节（三）：基于CoreText的排版引擎</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/10/17/the-tech-detail-of-ape-client-1/"  title="猿题库iOS客户端的技术细节（一）：使用多target来构建大量相似App">
+ <strong>下一篇：</strong><br/> 
+ <span>猿题库iOS客户端的技术细节（一）：使用多target来构建大量相似App
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

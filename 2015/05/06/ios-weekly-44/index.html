@@ -1,0 +1,453 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>iOS移动开发周报-第44期 | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="版权说明本文为 InfoQ 中文站特供稿件，首发地址为：文章链接。如需转载，请与 InfoQ 中文站联系。
+前言欢迎国内的iOS同行或技术作者向我提交周报线索，线索可以是新闻、教程、开发工具或开源项目，将相关文章的简介和链接在微博上发布并 @唐巧_boy 即可。
+【摘要】：本期 iOS 移动开发周报带来如下内容：Apple Watch 产品体验报告、苹果推出了官方的分析工具、iOS 图形性能进阶与">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS移动开发周报-第44期">
+<meta property="og:url" content="http://blog.devtang.com/2015/05/06/ios-weekly-44/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="版权说明本文为 InfoQ 中文站特供稿件，首发地址为：文章链接。如需转载，请与 InfoQ 中文站联系。
+前言欢迎国内的iOS同行或技术作者向我提交周报线索，线索可以是新闻、教程、开发工具或开源项目，将相关文章的简介和链接在微博上发布并 @唐巧_boy 即可。
+【摘要】：本期 iOS 移动开发周报带来如下内容：Apple Watch 产品体验报告、苹果推出了官方的分析工具、iOS 图形性能进阶与">
+<meta property="og:updated_time" content="2016-02-16T10:28:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS移动开发周报-第44期">
+<meta name="twitter:description" content="版权说明本文为 InfoQ 中文站特供稿件，首发地址为：文章链接。如需转载，请与 InfoQ 中文站联系。
+前言欢迎国内的iOS同行或技术作者向我提交周报线索，线索可以是新闻、教程、开发工具或开源项目，将相关文章的简介和链接在微博上发布并 @唐巧_boy 即可。
+【摘要】：本期 iOS 移动开发周报带来如下内容：Apple Watch 产品体验报告、苹果推出了官方的分析工具、iOS 图形性能进阶与">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/05/06/ios-weekly-44/" title="iOS移动开发周报-第44期" itemprop="url">iOS移动开发周报-第44期</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2015-05-06T11:59:09.000Z" itemprop="datePublished"> 发表于 2015-05-06 19:59</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7248_u6743_u8BF4_u660E"><span class="toc-number">1.</span> <span class="toc-text">版权说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u65B0_u95FB"><span class="toc-number">2.</span> <span class="toc-text">新闻</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6559_u7A0B"><span class="toc-number">3.</span> <span class="toc-text">教程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5DE5_u5177"><span class="toc-number">4.</span> <span class="toc-text">工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5F00_u6E90_u9879_u76EE"><span class="toc-number">5.</span> <span class="toc-text">开源项目</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="u7248_u6743_u8BF4_u660E"><a href="#u7248_u6743_u8BF4_u660E" class="headerlink" title="版权说明"></a>版权说明</h2><p>本文为 InfoQ 中文站特供稿件，首发地址为：<a href="http://www.infoq.com/cn/news/2015/05/ios-weekly-apple-watch" target="_blank" rel="external">文章链接</a>。如需转载，请与 InfoQ 中文站联系。</p>
+<h3 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h3><p>欢迎国内的iOS同行或技术作者向我提交周报线索，线索可以是新闻、教程、开发工具或开源项目，将相关文章的简介和链接在微博上发布并 <a href="http://weibo.com/tangqiaoboy" target="_blank" rel="external">@唐巧_boy</a> 即可。</p>
+<p>【摘要】：本期 iOS 移动开发周报带来如下内容：Apple Watch 产品体验报告、苹果推出了官方的分析工具、iOS 图形性能进阶与测试、iOS 应用架构谈等。</p>
+<h2 id="u65B0_u95FB"><a href="#u65B0_u95FB" class="headerlink" title="新闻"></a>新闻</h2><ol>
+<li><p><a href="http://www.jianshu.com/p/b4e8f2cbcd6d" target="_blank" rel="external">《Apple Watch 产品体验报告》</a>：文章从各个维度对 Apple Watch 进行了体验总结，包括外观感受、交互设计、功能场景分析、差异化分析等。</p>
+</li>
+<li><p><a href="/2015/05/01/apple-release-analytics-beta/">《苹果推出了官方的分析工具》</a>：苹果在五月一号这天，向开发者发送邮件，邀请参与他自家的分析工具的试用。从苹果的介绍中看出这个工具的特点是：无需额外操作，相关功能是直接集成进 iOS 系统中的，对应用来说没有任何其它的代价。另外由于苹果的限制，一些功能是第三方工具是无法提供的（例如统计运营活动效果、统计查看 AppStore 页面效果等）。苹果提供这样的工具，有助于开发者更加有效地开展市场推广和运营相关的工作。</p>
+</li>
+</ol>
+<h2 id="u6559_u7A0B"><a href="#u6559_u7A0B" class="headerlink" title="教程"></a>教程</h2><ol>
+<li><p><a href="https://developer.apple.com/swift/blog/?id=27" target="_blank" rel="external">《Increasing Performance by Reducing Dynamic Dispatch》</a>：来自苹果官方博客的文章，介绍了通过减少动态分发，来提高 Swift 程序的执行效率的办法。具体做法上，文章分享了使用 <code>final</code> 关键字，使用 <code>private</code> 关键字，以及使用 <code>Whole Module Optimization</code> 编译参数来进行深度优化。</p>
+</li>
+<li><p><a href="http://iosre.com/t/mac-os-x-dash-v2-2-0/1132" target="_blank" rel="external">《Mac OS X 上逆向 Dash v2.2.0 过程分析》</a>：不知不觉，<a href="http://iosre.com/" target="_blank" rel="external">http://iosre.com/</a> 已经成为国内著名的 iOS 安全方面的网站了。本文在逆向 Dash 的同时，也揭露了 Dash 使用的防逆向手段，学习本文可以了解到常见的逆向攻击手段和防范方法（例如：二进制的校验），提高大家的安全意识。</p>
+</li>
+<li><p><a href="http://www.jianshu.com/p/1f24a39f3c4f" target="_blank" rel="external">《Scrapy+Flask+Mongodb+Swift 开发全攻略（1）》</a>：本文试图实现一个人完成获得资源、编写服务端、iOS 客户端、服务端部署上线、客户端上 AppStore 的完整过程。其中，Flask 是 python 写的一个非常有名的 web 开发框架，Mongodb 是一个非关系型数据库。</p>
+</li>
+<li><p><a href="https://github.com/100mango/zen/blob/master/WWDC%E5%BF%83%E5%BE%97%EF%BC%9AAdvanced%20Graphics%20and%20Animations%20for%20iOS%20Apps/Advanced%20Graphics%20and%20Animations%20for%20iOS%20Apps.md" target="_blank" rel="external">《iOS 图形性能进阶与测试》</a>：这篇文章主要是学习完 Advanced Graphics and Animations for iOS Apps 这个 session 后的总结和相应细节的延伸和细化。主要内容为图形性能与测试工具这两个章节。</p>
+</li>
+<li><p><a href="http://lvwenhan.com/ios/450.html" target="_blank" rel="external">《Auto Layout 使用心得（六）—— 制造炫酷的下拉刷新动画》</a>：本文中，我们将一起使用 Auto Layout 技术制造一个炫酷的下拉刷新动画。Auto Layout 除了在布局的时候比较繁琐以外，还有一个经常被人吐槽的点：让许多 UIView.animateWithDuration 失效，甚至在界面上出现 “反方向动画” 的视觉效果。本文中我们将主要讲述制造下拉刷新动画的过程，关于 Auto Layout 与动画的详细配合我们以后再一起仔细探究。</p>
+</li>
+<li><p><a href="http://nilsun.github.io/iPhone-watch-communication/" target="_blank" rel="external">《Apple Watch 和 iPhone 通信实践》</a>：本文主要从实践的角度分析 iPhone 和 Watch 的通信框架。</p>
+</li>
+<li><p><a href="http://casatwy.com/iosying-yong-jia-gou-tan-viewceng-de-zu-zhi-he-diao-yong-fang-an.html" target="_blank" rel="external">《iOS 应用架构谈 - view 层的组织和调用方案》</a>：文章比较长，介绍了涉及 view 的各方面的经验。分享作者最后的总结：要做一个 View 层架构，主要就是从以下三方面入手：制定良好的规范、选择好合适的模式（MVC、MVCS、MVVM、VIPER）、根据业务情况针对 <code>ViewController</code> 做好拆分，提供一些小工具方便开发。</p>
+</li>
+<li><p><a href="http://blog.csdn.net/agdsdl/article/details/45218987#0-tsina-1-51027-397232819ff9a47a7b7e80a40613cfe1" target="_blank" rel="external">《CocoaPods 建立私有仓库》</a>：个人或公司在开发过程中，会积累很多可以复用的代码包，有些我们不想开源，又想像开源库一样在 CocoaPods 中管理它们，那么通过私有仓库来管理就很必要。文章介绍了建立私有仓库的具体操作方法。</p>
+</li>
+<li><p><a href="http://www.jianshu.com/p/2ed5f7444900" target="_blank" rel="external">《实时显示 iOS 的编写 UI 代码效果》</a>：编写 iOS 应用 UI 的方式大概有两种，一种是 Storyboard/Xib，另一种是手写代码。采用 Storyboard/Xib 方式组织 UI，由于提供可视化的特性，只要从 UI 库中拖动 UI 控件，便可以显示结果，极大地提高开发速度。但面临一个问题就是多人协作开发，由于所有的 UI 都放在同一个 Storyboard 文件中，使用 Git/SVN 合并代码就会出现冲突。多人协作开发还不是主要问题，有人提出可以创建多个 Storyboard 来分开 UI 编写，而 Storyboard/Xib 最主要问题是代码复用性比较差。所以有些人就选择手写 UI 代码，这样不仅可以解决多人协作开发问题，而且通过自定义控件在多个 View 使用。但每次手写 UI 代码后都要编译、构建和运行，最后在模拟器显示，这样会拖慢开发速度。如果每次修改 UI 控件后，保存修改便实时在模拟器显示修改后结果，就可以极大的提高编写 UI 的速度。本文介绍了一种办法可以实时显示 iOS 编写的 UI 代码效果。</p>
+</li>
+</ol>
+<h2 id="u5DE5_u5177"><a href="#u5DE5_u5177" class="headerlink" title="工具"></a>工具</h2><ol>
+<li><p><a href="http://fuckingclangwarnings.com/" target="_blank" rel="external">《Which Clang Warning Is Generating This Message》</a>：Clang 的警告与语义对照表。通过它可以更加方便地知道 Clang 的警告所表达的意思。</p>
+</li>
+<li><p><a href="https://github.com/PonyCui/PPEtcHosts" target="_blank" rel="external">PPEtcHosts</a>：PPEtcHosts 是一个小工具，可以在应用内实现域名 Host 绑定，可以解决真机无法修改 <code>/etc/hosts</code> 的问题。</p>
+</li>
+</ol>
+<h2 id="u5F00_u6E90_u9879_u76EE"><a href="#u5F00_u6E90_u9879_u76EE" class="headerlink" title="开源项目"></a>开源项目</h2><ol>
+<li><p><a href="https://github.com/KittenYang/KYGooeyMenu" target="_blank" rel="external">KYGooeyMenu</a>：KYGooeyMenu 是一个具有 Gooey Effects 带粘性的扇形菜单控件。</p>
+</li>
+<li><p><a href="https://github.com/Draveness/DKNightVersion" target="_blank" rel="external">DKNightVersion</a>：DKNightVersion 是一个支持夜间模式切换的框架。</p>
+</li>
+<li><p><a href="https://github.com/forkingdog/UITableView-FDTemplateLayoutCell" target="_blank" rel="external">UITableView-FDTemplateLayoutCell</a>：UITableView-FDTemplateLayoutCell 是一个方便缓存 UITableViewCell 的高度的框架。</p>
+</li>
+<li><p><a href="https://github.com/shaojiankui/IOS-Categories" target="_blank" rel="external">IOS-Categories</a>：IOS-Categories 是一个收集各种有用的 Objective-C 语言的 Category 的项目。</p>
+</li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS-weekly/">iOS weekly</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2015/05/06/ios-weekly-44/" data-title="iOS移动开发周报-第44期 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/05/23/build-ios-content-ecosystem/" title="打造 iOS 原创内容的生态圈">
+  <strong>上一篇：</strong><br/>
+  <span>
+  打造 iOS 原创内容的生态圈</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/05/01/apple-release-analytics-beta/"  title="苹果推出了官方的分析工具">
+ <strong>下一篇：</strong><br/> 
+ <span>苹果推出了官方的分析工具
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

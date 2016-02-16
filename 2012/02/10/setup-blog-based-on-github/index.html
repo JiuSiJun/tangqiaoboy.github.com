@@ -1,0 +1,464 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>象写程序一样写博客：搭建基于github的博客 | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="2016.02.16 更新说明本博客已经由 octopress 迁移到了 hexo，本文章的内容稍显陈旧。
+前言github 真是无所不能。其 Pages 功能 支持上传 html，并且在页面中显示。于是有好事者做了一个基于 github 的博客管理工具：octopress，基本原理是用 git 来管理你的文章，然后最终发布到 github 上成为一个独立博客站点。由于 github 支持 CNA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="象写程序一样写博客：搭建基于github的博客">
+<meta property="og:url" content="http://blog.devtang.com/2012/02/10/setup-blog-based-on-github/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="2016.02.16 更新说明本博客已经由 octopress 迁移到了 hexo，本文章的内容稍显陈旧。
+前言github 真是无所不能。其 Pages 功能 支持上传 html，并且在页面中显示。于是有好事者做了一个基于 github 的博客管理工具：octopress，基本原理是用 git 来管理你的文章，然后最终发布到 github 上成为一个独立博客站点。由于 github 支持 CNA">
+<meta property="og:updated_time" content="2016-02-16T10:28:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="象写程序一样写博客：搭建基于github的博客">
+<meta name="twitter:description" content="2016.02.16 更新说明本博客已经由 octopress 迁移到了 hexo，本文章的内容稍显陈旧。
+前言github 真是无所不能。其 Pages 功能 支持上传 html，并且在页面中显示。于是有好事者做了一个基于 github 的博客管理工具：octopress，基本原理是用 git 来管理你的文章，然后最终发布到 github 上成为一个独立博客站点。由于 github 支持 CNA">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2012/02/10/setup-blog-based-on-github/" title="象写程序一样写博客：搭建基于github的博客" itemprop="url">象写程序一样写博客：搭建基于github的博客</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2012-02-10T11:55:00.000Z" itemprop="datePublished"> 发表于 2012-02-10 19:55</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2016-02-16__u66F4_u65B0_u8BF4_u660E"><span class="toc-number">1.</span> <span class="toc-text">2016.02.16 更新说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">2.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5B89_u88C5"><span class="toc-number">3.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5B89_u88C5_rbenv"><span class="toc-number">3.1.</span> <span class="toc-text">安装 rbenv</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5B89_u88C5_Octopress"><span class="toc-number">3.2.</span> <span class="toc-text">安装 Octopress</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u914D_u7F6E"><span class="toc-number">3.3.</span> <span class="toc-text">配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8BBE_u7F6E_github__u8D26_u53F7"><span class="toc-number">4.</span> <span class="toc-text">设置 github 账号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5199_u535A_u5BA2_u65B9_u6CD5"><span class="toc-number">5.</span> <span class="toc-text">写博客方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u9AD8_u7EA7_u914D_u7F6E"><span class="toc-number">6.</span> <span class="toc-text">高级配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5176_u5B83"><span class="toc-number">7.</span> <span class="toc-text">其它</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tips"><span class="toc-number">8.</span> <span class="toc-text">Tips</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#u56FE_u7247"><span class="toc-number">8.0.1.</span> <span class="toc-text">图片</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u57DF_u540D"><span class="toc-number">8.0.2.</span> <span class="toc-text">域名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u539F_u7406"><span class="toc-number">8.0.3.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u53C2_u8003"><span class="toc-number">8.0.4.</span> <span class="toc-text">参考</span></a></li></ol></li></ol></li></ol>
+		
+		</div>
+		
+		<h2 id="2016-02-16__u66F4_u65B0_u8BF4_u660E"><a href="#2016-02-16__u66F4_u65B0_u8BF4_u660E" class="headerlink" title="2016.02.16 更新说明"></a>2016.02.16 更新说明</h2><p>本博客已经由 octopress 迁移到了 hexo，本文章的内容稍显陈旧。</p>
+<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>github 真是无所不能。其 <a href="http://pages.github.com/" target="_blank" rel="external">Pages 功能</a> 支持上传 html，并且在页面中显示。于是有好事者做了一个基于 github 的博客管理工具：<a href="http://octopress.org/" target="_blank" rel="external">octopress</a>，基本原理是用 git 来管理你的文章，然后最终发布到 github 上成为一个独立博客站点。由于 github 支持 CNAME 域名指向，所以如果有独立域名的话，可以基于这些做出一个专业的博客站点出来。</p>
+<p>本博客就是完全基于此搭建起来的，在使用了 2 个月之后，我将原系统根据中国人的需求做了一些配置，去掉了 GFW 会挡住的 google font api，以及替换掉了速度超慢的国外的评论系统，也加上了分享到国内的微博的功能。现在把这些都总结出来，希望大家都可以方便地搭建基于 github 的博客来。</p>
+<a id="more"></a>
+<h2 id="u5B89_u88C5"><a href="#u5B89_u88C5" class="headerlink" title="安装"></a>安装</h2><p>首先说说怎么安装相应的工具。其实这些内容在 <a href="http://octopress.org/docs/setup/" target="_blank" rel="external">http://octopress.org/docs/setup/</a> 上都有，我只是把它大概翻译了一下。</p>
+<h3 id="u5B89_u88C5_rbenv"><a href="#u5B89_u88C5_rbenv" class="headerlink" title="安装 rbenv"></a>安装 rbenv</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">brew update&#10;brew install rbenv&#10;brew install ruby-build&#10;&#10;rbenv install 1.9.3-p0&#10;rbenv local 1.9.3-p0&#10;rbenv rehash</span><br></pre></td></tr></table></figure>
+<p>你有可能需要安装老版本的 GCC 编译器才能顺利安装 Ruby 1.9.3:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">brew tap homebrew/dupes </span><br><span class="line">brew install apple-gcc42</span><br></pre></td></tr></table></figure>
+<h3 id="u5B89_u88C5_Octopress"><a href="#u5B89_u88C5_Octopress" class="headerlink" title="安装 Octopress"></a>安装 Octopress</h3><p>首先从 github 上将源码 clone 下来：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone git://github.com/imathis/octopress.git octopress&#10;cd octopress    # If you use RVM, You&#39;ll be asked if you trust the .rvmrc file (say yes).&#10;ruby --version  # Should report Ruby 1.9.2</span><br></pre></td></tr></table></figure></p>
+<p>然后，ruby 的软件源 <a href="https://rubygems.org" target="_blank" rel="external">https://rubygems.org</a> 因为使用的是亚马逊的云服务，所以被墙了，需要更新一下 ruby 的源，使用如下代码将官方的 ruby 源替换成国内淘宝的源：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gem sources --remove https://rubygems.org/&#10;gem sources -a https://ruby.taobao.org/&#10;gem sources -l</span><br></pre></td></tr></table></figure>
+<p>然后安装依赖:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gem install bundler&#10;rbenv rehash    # If you use rbenv, rehash to be able to run the bundle command&#10;bundle install</span><br></pre></td></tr></table></figure></p>
+<p>最后安装 Octopress<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rake install</span><br></pre></td></tr></table></figure></p>
+<h3 id="u914D_u7F6E"><a href="#u914D_u7F6E" class="headerlink" title="配置"></a>配置</h3><p>安装好之后可以简单配置一下：</p>
+<ul>
+<li>主要是修改文件：_config.yml ，这个配置文件都有相应的注释。主要就是改一些博客头，作者名之类的东西。<br>注意最好把里面的 twitter 相关的信息全部删掉，否则由于 GFW 的原因，将会造成页面 load 很慢。</li>
+<li>修改定制文件 /source/_includes/custom/head.html 把 google 的自定义字体去掉，原因同上。</li>
+</ul>
+<h2 id="u8BBE_u7F6E_github__u8D26_u53F7"><a href="#u8BBE_u7F6E_github__u8D26_u53F7" class="headerlink" title="设置 github 账号"></a>设置 github 账号</h2><p>基于 github 的博客当然需要先注册 github 账号，Github 的账号注册地址是：<a href="https://github.com/signup/free" target="_blank" rel="external">https://github.com/signup/free</a> 。申请好 github 账号后，建一个名为 username.github.io 的代码仓库。这里注意 username 必须是和你的账号名一致。</p>
+<h2 id="u5199_u535A_u5BA2_u65B9_u6CD5"><a href="#u5199_u535A_u5BA2_u65B9_u6CD5" class="headerlink" title="写博客方法"></a>写博客方法</h2><p>然后就可以写博客啦～ 写博客主要是用以下几个命令，<a href="http://octopress.org/docs/blogging/" target="_blank" rel="external">这里</a> 有详细介绍：</p>
+<ul>
+<li>rake new_post[‘article name’] 生成博文框架，然后修改生成的文件即可</li>
+<li>rake generate 生成静态文件 </li>
+<li>rake watch 检测文件变化，实时生成新内容</li>
+<li>rake preview 在本机 4000 端口生成访问内容</li>
+<li>rake deploy 发布文件</li>
+</ul>
+<p>博文是采用 markdown 语法，另外增加了一些扩充的插件，markdown 的介绍文章网上可以搜到很多，比如 <a href="http://daringfireball.net/projects/markdown/" target="_blank" rel="external">这个</a>。</p>
+<h2 id="u9AD8_u7EA7_u914D_u7F6E"><a href="#u9AD8_u7EA7_u914D_u7F6E" class="headerlink" title="高级配置"></a>高级配置</h2><p>我主要介绍一下如何配置评论和分享到微博功能。步骤如下：</p>
+<ul>
+<li>在 _config.yml 中增加一项： weibo_share: true</li>
+<li><p>修改 source/_includes/post/sharing.html ，增加：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> // &#19979;&#38754;&#30340;&#22823;&#25324;&#21495;&#26159;&#20840;&#35282;&#30340;&#65292;&#22914;&#26524;&#22797;&#21046;&#65292;&#35831;&#33258;&#34892;&#25913;&#25104;&#21322;&#35282;&#10;&#65371;% if site.weibo_share %&#65373;&#10;    &#65371;% include post/weibo.html %&#65373;&#10;&#65371;% endif %&#65373;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>增加文件：source/_includes/post/weibo.html</p>
+</li>
+<li>访问 <a href="http://www.jiathis.com/" target="_blank" rel="external">http://www.jiathis.com/</a> ，获取分享的代码</li>
+<li>访问 <a href="http://uyan.cc/" target="_blank" rel="external">http://uyan.cc/</a> ，获得评论的代码</li>
+<li>将上面 2 步的代码都加入到 weibo.html 中即可</li>
+<li>修改<code>sass/base/_typography.scss</code>，将其中的<code>article blockquote</code>的<code>font-style</code>由<code>italic</code>改为<code>normal</code>, 因为中文的引用文字用斜体显示其实并不好看。再将其中的<code>ul, ol</code><br>的<code>margin-left: 1.3em;</code>修改为<code>margin-bottom: 0em;</code>。</li>
+</ul>
+<h2 id="u5176_u5B83"><a href="#u5176_u5B83" class="headerlink" title="其它"></a>其它</h2><p>对于国内的用户来说，Github 因为服务器在国外，访问速度上不可避免有些慢。我在 2014 年 5 月尝试将博客同时放到 Github 和 GitCafe 上（GitCafe 提供博客服务，而 Github 作为备份服务器），使得国内访问速度非常理想，感兴趣的朋友可以参考这篇文章：<a href="/2014/06/02/use-gitcafe-to-host-blog/">《将博客从 GitHub 迁移到 GitCafe》</a></p>
+<h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><p>####从 wordpress 迁移到 github<br>这儿有一篇文章介绍了如何做迁移：<br><a href="http://blog.xupeng.me/2011/12/14/migrate-to-octopress/" target="_blank" rel="external">http://blog.xupeng.me/2011/12/14/migrate-to-octopress/</a></p>
+<h4 id="u56FE_u7247"><a href="#u56FE_u7247" class="headerlink" title="图片"></a>图片</h4><p>如果要在文章中上传图片，直接 copy 到 /source/images 目录下即可。在文章中可以直接引用。也可以选一些大的图床站点，例如 flickr 之类的放在那边。</p>
+<h4 id="u57DF_u540D"><a href="#u57DF_u540D" class="headerlink" title="域名"></a>域名</h4><p>如果你象我一样有自己的域名，可以将域名指向这个博客，具体步骤是：</p>
+<ul>
+<li>在域名管理中，建立一个 CNAME 指向，将你的域名指向 yourname.github.io</li>
+<li>建一个名为 CNAME 的文件在 source 目录下，然后将自己的域名输入进去。</li>
+<li>将内容 push 到 github 后，第一次生效大概等 1 小时，之后你就可以用自己的域名访问了。</li>
+</ul>
+<h4 id="u539F_u7406"><a href="#u539F_u7406" class="headerlink" title="原理"></a>原理</h4><ul>
+<li>Octopress 其实为你建立了 2 个分支，一个是 master 分支，用于存放生成的最终网页。另一个是 source 分支，用于存放最初的原始 markdown 文件。</li>
+<li>平时写作和提交都在 source 分支下，当需要发布时，rake deploy 命令会将内容生成到 public 这个目录，然后将这个目录的内容当作 master 分支的内容同步到 github 上面。</li>
+</ul>
+<h4 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h4><p>这儿还有一些参考的文章：</p>
+<ul>
+<li><a href="http://www.yangzhiping.com/tech/octopress.html" target="_blank" rel="external">http://www.yangzhiping.com/tech/octopress.html</a></li>
+<li><a href="http://blog.xupeng.me/2011/12/14/migrate-to-octopress/" target="_blank" rel="external">http://blog.xupeng.me/2011/12/14/migrate-to-octopress/</a></li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/shell/">shell</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2012/02/10/setup-blog-based-on-github/" data-title="象写程序一样写博客：搭建基于github的博客 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2012/02/14/nsstring-java-like-wrapper/" title="给NSString增加Java风格的方法">
+  <strong>上一篇：</strong><br/>
+  <span>
+  给NSString增加Java风格的方法</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2012/02/06/new-methods-in-uiviewcontroller-of-ios5/"  title="iOS5中UIViewController的新方法">
+ <strong>下一篇：</strong><br/> 
+ <span>iOS5中UIViewController的新方法
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

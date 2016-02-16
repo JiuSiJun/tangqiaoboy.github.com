@@ -1,0 +1,439 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>再见，viewDidUnload方法 | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="前言我在去年的一篇文章 《iOS5 中 UIViewController 的新方法》 中介绍了 iOS5 引入的关于 ViewController 的新方法。但是现在如果运行该文章中的 Sample 代码的话，你会发现 Log 中不会再出现 viewDidUnload 方法被调用的记录。这是因为在 iOS6 中，viewDidUnload 回调方法被 Deprecated 掉了。查看苹果的文档，可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="再见，viewDidUnload方法">
+<meta property="og:url" content="http://blog.devtang.com/2013/05/18/goodbye-viewdidunload/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="前言我在去年的一篇文章 《iOS5 中 UIViewController 的新方法》 中介绍了 iOS5 引入的关于 ViewController 的新方法。但是现在如果运行该文章中的 Sample 代码的话，你会发现 Log 中不会再出现 viewDidUnload 方法被调用的记录。这是因为在 iOS6 中，viewDidUnload 回调方法被 Deprecated 掉了。查看苹果的文档，可">
+<meta property="og:image" content="http://blog.devtang.com/images/viewdidunload-1.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/viewdidunload-2.jpg">
+<meta property="og:updated_time" content="2016-02-16T10:28:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="再见，viewDidUnload方法">
+<meta name="twitter:description" content="前言我在去年的一篇文章 《iOS5 中 UIViewController 的新方法》 中介绍了 iOS5 引入的关于 ViewController 的新方法。但是现在如果运行该文章中的 Sample 代码的话，你会发现 Log 中不会再出现 viewDidUnload 方法被调用的记录。这是因为在 iOS6 中，viewDidUnload 回调方法被 Deprecated 掉了。查看苹果的文档，可">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/05/18/goodbye-viewdidunload/" title="再见，viewDidUnload方法" itemprop="url">再见，viewDidUnload方法</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2013-05-18T09:37:00.000Z" itemprop="datePublished"> 发表于 2013-05-18 17:37</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5206_u6790"><span class="toc-number">2.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5185_u5B58_u4F18_u5316"><span class="toc-number">3.</span> <span class="toc-text">内存优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u53C2_u8003_u94FE_u63A5"><span class="toc-number">5.</span> <span class="toc-text">参考链接</span></a></li></ol>
+		
+		</div>
+		
+		<h3 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h3><p>我在去年的一篇文章 <a href="/2012/02/06/new-methods-in-uiviewcontroller-of-ios5/">《iOS5 中 UIViewController 的新方法》</a> 中介绍了 iOS5 引入的关于 ViewController 的新方法。但是现在如果运行该文章中的 Sample 代码的话，你会发现 Log 中不会再出现 viewDidUnload 方法被调用的记录。这是因为在 iOS6 中，viewDidUnload 回调方法被 Deprecated 掉了。查看苹果的文档，可以看到如下的说明。</p>
+<img src="/images/viewdidunload-1.jpg">
+<p>那么，原本在 viewDidUnload 中的代码应该怎么处理？在 iOS6 中，又应该怎么处理内存警告？带着这些问题，我查找了一些资料，在此分享给大家。</p>
+<a id="more"></a>
+<h3 id="u5206_u6790"><a href="#u5206_u6790" class="headerlink" title="分析"></a>分析</h3><p>在 iOS4 和 iOS5 系统中，当内存不足，应用收到 Memory warning 时，系统会自动调用当前没在界面上的 ViewController 的 viewDidUnload 方法。<br>通常情况下，这些未显示在界面上的 ViewController 是 UINavigationController Push 栈中未在栈顶的 ViewController，以及 UITabBarViewController 中未显示的子 ViewController。这些 View Controller 都会在 Memory Warning 事件发生时，被系统自动调用 viewDidUnload 方法。</p>
+<p>在 iOS6 中，由于 viewDidUnload 事件在 iOS6 下任何情况都不会被触发，所以苹果在文档中建议，应该将回收内存的相关操作移到另一个回调函数：didReceiveMemoryWarning 中。但是如果你仅仅是把以前写到 viewDidUnload 函数中的代码移动到 didReceiveMemoryWarning 函数中，那么你就错了。以下是一个 <font color="red"> 错误的示例代码 </font> ：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)didReceiveMemoryWarning &#123;</span><br><span class="line">    [<span class="keyword">super</span> didReceiveMemoryWarning];</span><br><span class="line">    <span class="keyword">if</span>([<span class="keyword">self</span> isViewLoaded] &amp;&amp; ![[<span class="keyword">self</span> view] window]) &#123;</span><br><span class="line">        [<span class="keyword">self</span> setView:<span class="literal">nil</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="http://thejoeconwayblog.wordpress.com/2012/10/04/view-controller-lifecycle-in-ios-6/" target="_blank" rel="external">这篇文章</a> 解释了 iOS6 不推荐你将 view 置为 nil 的原因（链接打开需要翻墙）, 翻译过来如下：</p>
+<ol>
+<li><p>UIView 有一个 CALayer 的成员变量，CALayer 是具体用于将自己画到屏幕上的。如下图所示：</p>
+<img src="/images/viewdidunload-2.jpg">
+</li>
+<li><p>CALayer 是一个 bitmap 图象的容器类，当 UIView 调用自身的 drawRect 时，CALayer 才会创建这个 bitmap 图象类。</p>
+</li>
+<li><p>具体占内存的其实是一个 bitmap 图象类，CALayer 只占 48bytes, UIView 只占 96bytes。而一个 iPad 的全屏 UIView 的 bitmap 类会占到 12M 的大小！</p>
+</li>
+<li><p>在 iOS6 时，当系统发出 MemoryWarning 时，系统会自动回收 bitmap 类。但是不回收 UIView 和 CALayer 类。这样即回收了大部分内存，又能在需要 bitmap 类时，通过调用 UIView 的 drawRect: 方法重建。</p>
+</li>
+</ol>
+<h3 id="u5185_u5B58_u4F18_u5316"><a href="#u5185_u5B58_u4F18_u5316" class="headerlink" title="内存优化"></a>内存优化</h3><p>另外文章中还提到苹果的操作系统对此做的一个内存优化技巧，解释如下：</p>
+<ol>
+<li><p>当一段内存被分配时，它会被标记成 “In use“, 以防止被重复使用。当内存被释放时，这段内存会被标记成 “Not in use”，这样，在有新的内存申请时，这块内存就可能被分配给其它变量。</p>
+</li>
+<li><p>CALayer 包括的具体的 bitmap 内容的私有成员变量类型为 <a href="http://blog.spacemanlabs.com/2011/08/calayer-internals-contents/" target="_blank" rel="external">CABackingStore</a>， 当收到 MemroyWarning 时，<br>CABackingStore 类型的内存区会被标记成 volatile 类型（这里的 volatile 和 C 以及 Java 语言的 volatile 不是一个意思），volatile 表示，这块内存可能被再次被原变量重用。</p>
+</li>
+</ol>
+<p>这样，有了上面的优化后，当收到 Memoy Warning 时，虽然所有的 CALayer 所包含的 bitmap 内存都被标记成 volatile 了，但是只要这块内存没有再次被复用，那么当需要重建 bitmap 内存时，<br>它就可以直接被复用，而避免了再次调用 UIView 的 drawRect: 方法。</p>
+<h3 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h3><p>所以，简单来说，对于 iOS6，你不需要做任何以前 viewDidUnload 的事情，更不需要把以前 viewDidUnload 的代码移动到 didReceiveMemoryWarning 方法中。</p>
+<p>引用 WWDC 2012 中的一段话来给 viewDidUnload 说再见：</p>
+<blockquote><p>The method viewWillUnload and viewDidUnload. We’re not going to call them anymore. I mean, there’s kind of a cost-benifit equation and analysis that we went through. In the early days, there was a real performance need for us to ensure that on memory warnings we unloaded views. There was all kinds of graphics and backing stores and so forth that would also get unloaded. We now unload those independently of the view, so it isn’t that big of a deal for us for those to be unloaded, and there were so many bugs where there would be pointers into。</p>
+</blockquote>
+<h3 id="u53C2_u8003_u94FE_u63A5"><a href="#u53C2_u8003_u94FE_u63A5" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li><a href="http://thejoeconwayblog.wordpress.com/2012/10/04/view-controller-lifecycle-in-ios-6/" target="_blank" rel="external">View Controller Lifecycle in iOS 6</a></li>
+<li><a href="http://blog.spacemanlabs.com/2011/08/calayer-internals-contents/" target="_blank" rel="external">CALayer Internals: Contents</a></li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2013/05/18/goodbye-viewdidunload/" data-title="再见，viewDidUnload方法 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/06/16/ios-dev-tool-app-store-tool/" title="iOS开发工具篇-AppStore统计工具">
+  <strong>上一篇：</strong><br/>
+  <span>
+  iOS开发工具篇-AppStore统计工具</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/05/08/git-submodule-issues/"  title="Git submodule的坑">
+ <strong>下一篇：</strong><br/> 
+ <span>Git submodule的坑
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

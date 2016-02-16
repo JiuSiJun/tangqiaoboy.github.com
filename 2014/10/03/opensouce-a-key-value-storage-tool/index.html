@@ -1,0 +1,442 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>开源一个Key-Value存储工具类 | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="前言还记得大学刚学数据库那会儿，天真地以为世界上所有的存储都需要用数据库来做。后来毕业后，正值NOSQL流行，那时我在网易参与了网易微博的开发，我们当时使用了有道自己做的“BigTable”— OMAP来存储微博数据，那个时候才发现，其实Key-Value这种简单的存储也能搞定微博这类不太简单的存储逻辑。
+相比MYSQL，当数据量上千万后，NOSQL的优势体现出来了：对于海量数据，NOSQL在存取">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开源一个Key-Value存储工具类">
+<meta property="og:url" content="http://blog.devtang.com/2014/10/03/opensouce-a-key-value-storage-tool/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="前言还记得大学刚学数据库那会儿，天真地以为世界上所有的存储都需要用数据库来做。后来毕业后，正值NOSQL流行，那时我在网易参与了网易微博的开发，我们当时使用了有道自己做的“BigTable”— OMAP来存储微博数据，那个时候才发现，其实Key-Value这种简单的存储也能搞定微博这类不太简单的存储逻辑。
+相比MYSQL，当数据量上千万后，NOSQL的优势体现出来了：对于海量数据，NOSQL在存取">
+<meta property="og:image" content="http://blog.devtang.com/images/key-value-store-setup.jpg">
+<meta property="og:updated_time" content="2016-02-16T10:26:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="开源一个Key-Value存储工具类">
+<meta name="twitter:description" content="前言还记得大学刚学数据库那会儿，天真地以为世界上所有的存储都需要用数据库来做。后来毕业后，正值NOSQL流行，那时我在网易参与了网易微博的开发，我们当时使用了有道自己做的“BigTable”— OMAP来存储微博数据，那个时候才发现，其实Key-Value这种简单的存储也能搞定微博这类不太简单的存储逻辑。
+相比MYSQL，当数据量上千万后，NOSQL的优势体现出来了：对于海量数据，NOSQL在存取">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/10/03/opensouce-a-key-value-storage-tool/" title="开源一个Key-Value存储工具类" itemprop="url">开源一个Key-Value存储工具类</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2014-10-03T14:06:18.000Z" itemprop="datePublished"> 发表于 2014-10-03 22:06</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#iOS_u7AEF_u7684_u5C1D_u8BD5"><span class="toc-number">2.</span> <span class="toc-text">iOS端的尝试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5B9E_u73B0_u65B9_u6848"><span class="toc-number">3.</span> <span class="toc-text">实现方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5F00_u6E90"><span class="toc-number">4.</span> <span class="toc-text">开源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u96C6_u6210_u8BF4_u660E"><span class="toc-number">5.</span> <span class="toc-text">集成说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4F7F_u7528_u8BF4_u660E"><span class="toc-number">6.</span> <span class="toc-text">使用说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u6253_u5F00_uFF08_u6216_u521B_u5EFA_uFF09_u6570_u636E_u5E93"><span class="toc-number">6.1.</span> <span class="toc-text">打开（或创建）数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u521B_u5EFA_u6570_u636E_u5E93_u8868"><span class="toc-number">6.2.</span> <span class="toc-text">创建数据库表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BFB_u5199_u6570_u636E"><span class="toc-number">6.3.</span> <span class="toc-text">读写数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5220_u9664_u6570_u636E_u63A5_u53E3"><span class="toc-number">6.4.</span> <span class="toc-text">删除数据接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u66F4_u591A_u63A5_u53E3"><span class="toc-number">6.5.</span> <span class="toc-text">更多接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5176_u5B83"><span class="toc-number">7.</span> <span class="toc-text">其它</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>还记得大学刚学数据库那会儿，天真地以为世界上所有的存储都需要用数据库来做。后来毕业后，正值NOSQL流行，那时我在网易参与了网易微博的开发，我们当时使用了有道自己做的“BigTable”— OMAP来存储微博数据，那个时候才发现，其实Key-Value这种简单的存储也能搞定微博这类不太简单的存储逻辑。</p>
+<p>相比MYSQL，当数据量上千万后，NOSQL的优势体现出来了：对于海量数据，NOSQL在存取速度上没有任何影响，另外，天生的多备份和分布式，也说数据安全和扩容变得异常容易。</p>
+<h2 id="iOS_u7AEF_u7684_u5C1D_u8BD5"><a href="#iOS_u7AEF_u7684_u5C1D_u8BD5" class="headerlink" title="iOS端的尝试"></a>iOS端的尝试</h2><p>后来我从后台转做iOS端的开发，我就尝试了在iOS端直接使用Key-Value式的存储。经过在粉笔网、猿题库、小猿搜题三个客户端中的尝试后，我发现Key-Value式的存储不但完全能够满足大多数移动端开发的需求，而且非常适合移动端采用。主要原因是：移动端存储的数据量不会很大：</p>
+<ul>
+<li>如果是单机的应用（例如效率工具Clear），用户自己一个人创建的数据最多也就上万条。</li>
+<li>如果是有服务端的应用（例如网易新闻，微博），那移动端通常不会保存全量的数据，每次会从服务器上获取数据，本地只是做一些内容的缓存而已，所以也不会有很大的数据量。</li>
+</ul>
+<p>如果数据量不大的话，那么在iOS端使用最简单直接的Key-Value存储就能带来开发上的效率优势。它能保证：</p>
+<ol>
+<li>Model层的代码编写简单，易于测试。</li>
+<li>由于Value是JSON格式，所以在做Model字段更改时，易于扩展和兼容。</li>
+</ol>
+<h2 id="u5B9E_u73B0_u65B9_u6848"><a href="#u5B9E_u73B0_u65B9_u6848" class="headerlink" title="实现方案"></a>实现方案</h2><p>在存储引擎上，2年前我直接选择了Sqlite当做存储引擎，相当于每个数据库表只有Key，Value两个字段。后来，随着LevelDB的流行，业界也有一些应用采用了LevelDB来做iOS端的Key-Value存储引擎，例如开源的<a href="https://github.com/viewfinderco/viewfinder" target="_blank" rel="external">ViewFinder</a>。</p>
+<p>因为LevelDB本身并不是为移动端设计的，我担心它过于占用内存，我自己也没有看到业界有在移动端针对LevelDB做很详细的测试，连LevelDB的iOS端移植都不是官方做的。加上我自己写的基于Sqlite的Key-Value存储用着也没有什么问题，所以我也就一直没有更换成LevelDB。</p>
+<h2 id="u5F00_u6E90"><a href="#u5F00_u6E90" class="headerlink" title="开源"></a>开源</h2><p>经过两年的使用和测试，我认为它非常好用，而且代码也非常简单，只有不到400行。所以现在开源分享给大家，这个项目叫<a href="https://github.com/yuantiku/YTKKeyValueStore" target="_blank" rel="external">YTKKeyValueStore</a>，项目代码在<a href="https://github.com/yuantiku/YTKKeyValueStore" target="_blank" rel="external">这里</a>。</p>
+<p>以下是一个简单的使用示例：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">YTKKeyValueStore *store = [[YTKKeyValueStore alloc] initDBWithName:@&#34;test.db&#34;];&#10;NSString *tableName = @&#34;user_table&#34;;&#10;[store createTableWithName:tableName];&#10;// &#20445;&#23384;&#10;NSString *key = @&#34;1&#34;;&#10;NSDictionary *user = @&#123;@&#34;id&#34;: @1, @&#34;name&#34;: @&#34;tangqiao&#34;, @&#34;age&#34;: @30&#125;;&#10;[store putObject:user withId:key intoTable:tableName];&#10;// &#26597;&#35810;&#10;NSDictionary *queryUser = [store getObjectById:key fromTable:tableName];&#10;NSLog(@&#34;query data result: %@&#34;, queryUser);</span><br></pre></td></tr></table></figure>
+<h2 id="u96C6_u6210_u8BF4_u660E"><a href="#u96C6_u6210_u8BF4_u660E" class="headerlink" title="集成说明"></a>集成说明</h2><p>使用本项目，你需要将开源代码中的<code>YTKKeyValueStore.h</code>和<code>YTKKeyValueStore.m</code>添加到你的工程中，并且在工程设置的<code>Link Binary With Libraries</code>中，增加<code>libsqlite3.dylib</code>，如下图所示：</p>
+<img src="/images/key-value-store-setup.jpg">
+<p>由于时间关系，当前还未提供Cocoapods方式集成。</p>
+<h2 id="u4F7F_u7528_u8BF4_u660E"><a href="#u4F7F_u7528_u8BF4_u660E" class="headerlink" title="使用说明"></a>使用说明</h2><p>所有的接口都封装在<code>YTKKeyValueStore</code>类中。以下是一些常用方法说明。</p>
+<h3 id="u6253_u5F00_uFF08_u6216_u521B_u5EFA_uFF09_u6570_u636E_u5E93"><a href="#u6253_u5F00_uFF08_u6216_u521B_u5EFA_uFF09_u6570_u636E_u5E93" class="headerlink" title="打开（或创建）数据库"></a>打开（或创建）数据库</h3><p>通过<code>initDBWithName</code>方法，即可在程序的<code>Document</code>目录打开指定的数据库文件。如果该文件不存在，则会创建一个新的数据库。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// &#25171;&#24320;&#21517;&#20026;test.db&#30340;&#25968;&#25454;&#24211;&#65292;&#22914;&#26524;&#35813;&#25991;&#20214;&#19981;&#23384;&#22312;&#65292;&#21017;&#21019;&#26032;&#19968;&#20010;&#26032;&#30340;&#12290;&#10;YTKKeyValueStore *store = [[YTKKeyValueStore alloc] initDBWithName:@&#34;test.db&#34;];</span><br></pre></td></tr></table></figure>
+<h3 id="u521B_u5EFA_u6570_u636E_u5E93_u8868"><a href="#u521B_u5EFA_u6570_u636E_u5E93_u8868" class="headerlink" title="创建数据库表"></a>创建数据库表</h3><p>通过<code>createTableWithName</code>方法，我们可以在打开的数据库中创建表，如果表名已经存在，则会忽略该操作。如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">YTKKeyValueStore *store = [[YTKKeyValueStore alloc] initDBWithName:@&#34;test.db&#34;];&#10;NSString *tableName = @&#34;user_table&#34;;&#10;// &#21019;&#24314;&#21517;&#20026;user_table&#30340;&#34920;&#65292;&#22914;&#26524;&#24050;&#23384;&#22312;&#65292;&#21017;&#24573;&#30053;&#35813;&#25805;&#20316;&#10;[store createTableWithName:tableName];</span><br></pre></td></tr></table></figure>
+<h3 id="u8BFB_u5199_u6570_u636E"><a href="#u8BFB_u5199_u6570_u636E" class="headerlink" title="读写数据"></a>读写数据</h3><p><code>YTKKeyValueStore</code>类提供key-value的存储接口，存入的所有数据需要提供key以及其对应的value，读取的时候需要提供key来获得相应的value。</p>
+<p><code>YTKKeyValueStore</code>类支持的value类型包括：NSString, NSNumber, NSDictionary和NSArray，为此提供了以下接口：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- (void)putString:(NSString *)string withId:(NSString *)stringId intoTable:(NSString *)tableName;&#10;- (void)putNumber:(NSNumber *)number withId:(NSString *)numberId intoTable:(NSString *)tableName;&#10;- (void)putObject:(id)object withId:(NSString *)objectId intoTable:(NSString *)tableName;</span><br></pre></td></tr></table></figure>
+<p>与此对应，有以下value为NSString, NSNumber, NSDictionary和NSArray的读取接口：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- (NSString *)getStringById:(NSString *)stringId fromTable:(NSString *)tableName;&#10;- (NSNumber *)getNumberById:(NSString *)numberId fromTable:(NSString *)tableName;&#10;- (id)getObjectById:(NSString *)objectId fromTable:(NSString *)tableName;</span><br></pre></td></tr></table></figure>
+<h3 id="u5220_u9664_u6570_u636E_u63A5_u53E3"><a href="#u5220_u9664_u6570_u636E_u63A5_u53E3" class="headerlink" title="删除数据接口"></a>删除数据接口</h3><p><code>YTKKeyValueStore</code>提供了以下接口用于删除数据。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// &#28165;&#38500;&#25968;&#25454;&#34920;&#20013;&#25152;&#26377;&#25968;&#25454;&#10;- (void)clearTable:(NSString *)tableName;&#10;&#10;// &#21024;&#38500;&#25351;&#23450;key&#30340;&#25968;&#25454;&#10;- (void)deleteObjectById:(NSString *)objectId fromTable:(NSString *)tableName;&#10;&#10;// &#25209;&#37327;&#21024;&#38500;&#19968;&#32452;key&#25968;&#32452;&#30340;&#25968;&#25454;&#10;- (void)deleteObjectsByIdArray:(NSArray *)objectIdArray fromTable:(NSString *)tableName;&#10;&#10;// &#25209;&#37327;&#21024;&#38500;&#25152;&#26377;&#24102;&#25351;&#23450;&#21069;&#32512;&#30340;&#25968;&#25454;&#10;- (void)deleteObjectsByIdPrefix:(NSString *)objectIdPrefix fromTable:(NSString *)tableName;</span><br></pre></td></tr></table></figure>
+<h3 id="u66F4_u591A_u63A5_u53E3"><a href="#u66F4_u591A_u63A5_u53E3" class="headerlink" title="更多接口"></a>更多接口</h3><p><code>YTKKeyValueStore</code>还提供了以下接口来获取表示内部存储的key-value对象。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// &#33719;&#24471;&#25351;&#23450;key&#30340;&#25968;&#25454;&#10;- (YTKKeyValueItem *)getYTKKeyValueItemById:(NSString *)objectId fromTable:(NSString *)tableName;&#10;// &#33719;&#24471;&#25152;&#26377;&#25968;&#25454;&#10;- (NSArray *)getAllItemsFromTable:(NSString *)tableName;</span><br></pre></td></tr></table></figure>
+<p>由于<code>YTKKeyValueItem</code>类带有<code>createdTime</code>字段，可以获得该条数据的插入（或更新）时间，以便上层做复杂的处理（例如用来做缓存过期逻辑）。</p>
+<h2 id="u5176_u5B83"><a href="#u5176_u5B83" class="headerlink" title="其它"></a>其它</h2><p>两年前写过不少测试用例，后来给弄丢了，所以现在开项项目中还没有测试用例。由于时间关系，更详细的使用说明稍后会更新到项目中。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2014/10/03/opensouce-a-key-value-storage-tool/" data-title="开源一个Key-Value存储工具类 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/10/12/ios-weekly-27/" title="iOS移动开发周报-第27期">
+  <strong>上一篇：</strong><br/>
+  <span>
+  iOS移动开发周报-第27期</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/10/01/startup-2nd-year-summary/"  title="写在创业两周年">
+ <strong>下一篇：</strong><br/> 
+ <span>写在创业两周年
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

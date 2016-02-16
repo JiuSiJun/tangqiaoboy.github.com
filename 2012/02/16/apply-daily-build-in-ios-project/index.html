@@ -1,0 +1,451 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>给iOS工程增加Daily Build | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="前言Daily Build 是一件非常有意义的事情，也是敏捷开发中关于 “持续集成” 的一个实践。Daily Build 对于开发来说有如下好处：
+
+保证了每次 check in 的代码可用，不会造成整个工程编译失败。
+进度跟进。产品经理可以每天看到最新的开发进度，并且试用产品，调整一些细节。很多时候，一个新功能，你真正用了一下才能有体会好或不好，所以 daily build 也给产品经理更多时间">
+<meta property="og:type" content="article">
+<meta property="og:title" content="给iOS工程增加Daily Build">
+<meta property="og:url" content="http://blog.devtang.com/2012/02/16/apply-daily-build-in-ios-project/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="前言Daily Build 是一件非常有意义的事情，也是敏捷开发中关于 “持续集成” 的一个实践。Daily Build 对于开发来说有如下好处：
+
+保证了每次 check in 的代码可用，不会造成整个工程编译失败。
+进度跟进。产品经理可以每天看到最新的开发进度，并且试用产品，调整一些细节。很多时候，一个新功能，你真正用了一下才能有体会好或不好，所以 daily build 也给产品经理更多时间">
+<meta property="og:image" content="http://blog.devtang.com/images/daily_build_1.png">
+<meta property="og:image" content="http://blog.devtang.com/images/dailybuild_issue.jpg">
+<meta property="og:updated_time" content="2016-02-16T10:26:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="给iOS工程增加Daily Build">
+<meta name="twitter:description" content="前言Daily Build 是一件非常有意义的事情，也是敏捷开发中关于 “持续集成” 的一个实践。Daily Build 对于开发来说有如下好处：
+
+保证了每次 check in 的代码可用，不会造成整个工程编译失败。
+进度跟进。产品经理可以每天看到最新的开发进度，并且试用产品，调整一些细节。很多时候，一个新功能，你真正用了一下才能有体会好或不好，所以 daily build 也给产品经理更多时间">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2012/02/16/apply-daily-build-in-ios-project/" title="给iOS工程增加Daily Build" itemprop="url">给iOS工程增加Daily Build</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2012-02-16T11:27:00.000Z" itemprop="datePublished"> 发表于 2012-02-16 19:27</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6B65_u9AA4"><span class="toc-number">2.</span> <span class="toc-text">步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#xcodebuild__u547D_u4EE4"><span class="toc-number">2.1.</span> <span class="toc-text">xcodebuild 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u751F_u6210_ipa__u6587_u4EF6"><span class="toc-number">2.2.</span> <span class="toc-text">生成 ipa 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u751F_u6210_u5B89_u88C5_u6587_u4EF6"><span class="toc-number">2.3.</span> <span class="toc-text">生成安装文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5B9A_u65F6_u8FD0_u884C"><span class="toc-number">2.4.</span> <span class="toc-text">定时运行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5931_u8D25_u62A5_u8B66"><span class="toc-number">2.5.</span> <span class="toc-text">失败报警</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E0A_u4F20"><span class="toc-number">2.6.</span> <span class="toc-text">上传</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u9047_u5230_u7684_u95EE_u9898"><span class="toc-number">3.</span> <span class="toc-text">遇到的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>Daily Build 是一件非常有意义的事情，也是敏捷开发中关于 “持续集成” 的一个实践。Daily Build 对于开发来说有如下好处：</p>
+<ul>
+<li>保证了每次 check in 的代码可用，不会造成整个工程编译失败。</li>
+<li>进度跟进。产品经理可以每天看到最新的开发进度，并且试用产品，调整一些细节。很多时候，一个新功能，你真正用了一下才能有体会好或不好，所以 daily build 也给产品经理更多时间来调理他的设计。</li>
+<li>需求确认。产品经理可以确认开发的功能细节是他的预期。因为我们的开发比较紧凑，所以都没有传统的需求说明文档，所以 daily build 也给产品经理用于尽早确认开发的功能细节是他的预期，我就遇到一次产品经理发现开发出的一个功能细节和他的预期不一致，但是因为有 daily build，使得我可以尽早做修改，把修改的代价减小了。</li>
+<li>测试跟进。如果功能点是独立的话，测试同事完全可以根据 daily build 来进行一些早期的测试。越早的 Bug 反馈可以使得修改 bug 所需的时间越短。</li>
+</ul>
+<a id="more"></a>
+<h2 id="u6B65_u9AA4"><a href="#u6B65_u9AA4" class="headerlink" title="步骤"></a>步骤</h2><h3 id="xcodebuild__u547D_u4EE4"><a href="#xcodebuild__u547D_u4EE4" class="headerlink" title="xcodebuild 命令"></a>xcodebuild 命令</h3><p>如何做 daily build 呢？其实 Xcode 就提供了命令行 build 的命令，这个命令是 xcodebuild，用 xcodebuild -usage<br>可以查看到所有的可用参数，如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[tangqiao ~]<span class="variable">$xcodebuild</span> -usage</span><br><span class="line">Usage: xcodebuild [-project &lt;projectname&gt;] [[-target &lt;targetname&gt;]...|-alltargets] [-configuration &lt;configurationname&gt;] [-arch &lt;architecture&gt;]... [-sdk [&lt;sdkname&gt;|&lt;sdkpath&gt;]] [&lt;buildsetting&gt;=&lt;value&gt;]... [&lt;buildaction&gt;]...</span><br><span class="line">       xcodebuild [-project &lt;projectname&gt;] -scheme &lt;schemeName&gt; [-configuration &lt;configurationname&gt;] [-arch &lt;architecture&gt;]... [-sdk [&lt;sdkname&gt;|&lt;sdkpath&gt;]] [&lt;buildsetting&gt;=&lt;value&gt;]... [&lt;buildaction&gt;]...</span><br><span class="line">       xcodebuild -workspace &lt;workspacename&gt; -scheme &lt;schemeName&gt; [-configuration &lt;configurationname&gt;] [-arch &lt;architecture&gt;]... [-sdk [&lt;sdkname&gt;|&lt;sdkpath&gt;]] [&lt;buildsetting&gt;=&lt;value&gt;]... [&lt;buildaction&gt;]...</span><br><span class="line">       xcodebuild -version [-sdk [&lt;sdkfullpath&gt;|&lt;sdkname&gt;] [&lt;infoitem&gt;] ]</span><br><span class="line">       xcodebuild -list [[-project &lt;projectname&gt;]|[-workspace &lt;workspacename&gt;]]</span><br><span class="line">       xcodebuild -showsdks</span><br></pre></td></tr></table></figure>
+<p>一般情况下的命令使用如下:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">xcodebuild -configuration Release -target <span class="string">"YourProduct"</span></span><br></pre></td></tr></table></figure>
+<p>但在 daily build 中，用 Release 用为 configuration 其实不是特别好。因为 Release 的证书可能会被经常修改。我们可以基于 Release 的 Configuation，建一个专门用于 daily build 的 configuration。方法是：在工程详细页面中，选择 Info 一栏，在 Configurations 一栏的下方点击 “+” 号，然后选择 “Duplicate Release Configuration”, 新建名为 “DailyBuild” 的 Configuration, 如下图所示：</p>
+<img src="/images/daily_build_1.png">
+<p>之后就可以用如下命令来做 daily build 了</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">xcodebuild -configuration DailyBuild -target <span class="string">"YourProduct"</span></span><br></pre></td></tr></table></figure>
+<p>执行完命令后，会在当前工程下的 build/DailyBuild-iphoneos/ 目录下生成一个名为： YourProduct.app 的文件。这个就是我们 Build 成功之后的程序文件。</p>
+<h3 id="u751F_u6210_ipa__u6587_u4EF6"><a href="#u751F_u6210_ipa__u6587_u4EF6" class="headerlink" title="生成 ipa 文件"></a>生成 ipa 文件</h3><p>接下来我们需要生成 ipa 文件，在生成 ipa 文件这件事情上，xcode 似乎没有提供什么工具，不过这个没什么影响，因为 ipa 文件实际上就是一个 zip 文件，我们使用系统的 zip 命令来生成 ipa 文件即可。需要注意的是，ipa 文件并不是简单地将编辑好的 app 文件打成 zip 文件，它需要将 app 文件放在一个名为 Payload 的文件夹下，然后将整个 Payload 目录打包成为 .ipa 文件，命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$BUILD_PATH</span></span><br><span class="line">mkdir -p ipa/Payload</span><br><span class="line">cp -r ./DailyBuild-iphoneos/<span class="variable">$PRODUCT_NAME</span> ./ipa/Payload/</span><br><span class="line"><span class="built_in">cd</span> ipa</span><br><span class="line">zip -r <span class="variable">$FILE_NAME</span> *</span><br></pre></td></tr></table></figure>
+<h3 id="u751F_u6210_u5B89_u88C5_u6587_u4EF6"><a href="#u751F_u6210_u5B89_u88C5_u6587_u4EF6" class="headerlink" title="生成安装文件"></a>生成安装文件</h3><p>苹果允许用 itms-services 协议来直接在 iphone/ipad 上安装应用程序，我们可以直接生成该协议需要的相关文件，这样产品经理和测试同学都可以直接在设备上安装新版的应用了。相关的参考资料可以见：<a href="http://blog.encomiabile.it/2010/12/21/ios4-and-wireless-application-deploy/" target="_blank" rel="external">这里</a> 和 <a href="http://blog.s135.com/itms-services/" target="_blank" rel="external">这里</a></p>
+<p>具体来说，就是需要生成一个带 itms-services 协议的链接的 html 文件，以及一个 plist 文件。</p>
+<p>生成 html 的示例代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat &lt;&lt; EOF &gt; install.html</span><br><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;meta http-equiv=<span class="string">"Content-Type"</span> content=<span class="string">"text/html; charset=UTF-8"</span> /&gt;</span><br><span class="line">    &lt;title&gt; 安装此软件 &lt;/title&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">      &lt;li&gt; 安装此软件:&lt;a href=<span class="string">"itms-services://?action=download-manifest&amp;url=http%3A%2F%2Fwww.yourdomain.com%2Fynote.plist"</span>&gt;<span class="variable">$FILE_NAME</span>&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<p>生成 plist 文件的代码如下，注意，需要将下面的涉及 www.yourdomain.com 的地方换成你线上服务器的地址，将 ProductName 换成你的 app 安装后的名字。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat &lt;&lt; EOF &gt; ynote.plist</span><br><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span>?&gt;</span><br><span class="line">&lt;!DOCTYPE plist PUBLIC <span class="string">"-//Apple//DTD PLIST 1.0//EN"</span> <span class="string">"http://www.apple.com/DTDs/PropertyList-1.0.dtd"</span>&gt;</span><br><span class="line">&lt;plist version=<span class="string">"1.0"</span>&gt;</span><br><span class="line">&lt;dict&gt;</span><br><span class="line">   &lt;key&gt;items&lt;/key&gt;</span><br><span class="line">   &lt;array&gt;</span><br><span class="line">       &lt;dict&gt;</span><br><span class="line">           &lt;key&gt;assets&lt;/key&gt;</span><br><span class="line">           &lt;array&gt;</span><br><span class="line">               &lt;dict&gt;</span><br><span class="line">                   &lt;key&gt;kind&lt;/key&gt;</span><br><span class="line">                   &lt;string&gt;software-package&lt;/string&gt;</span><br><span class="line">                   &lt;key&gt;url&lt;/key&gt;</span><br><span class="line">                   &lt;string&gt;http://www.yourdomain.com/<span class="variable">$FILE_NAME</span>&lt;/string&gt;</span><br><span class="line">               &lt;/dict&gt;</span><br><span class="line">               &lt;dict&gt;</span><br><span class="line">                   &lt;key&gt;kind&lt;/key&gt;</span><br><span class="line">                   &lt;string&gt;display-image&lt;/string&gt;</span><br><span class="line">                   &lt;key&gt;needs-shine&lt;/key&gt;</span><br><span class="line">                   &lt;<span class="literal">true</span>/&gt;</span><br><span class="line">                   &lt;key&gt;url&lt;/key&gt;</span><br><span class="line">                   &lt;string&gt;http://www.yourdomain.com/icon.png&lt;/string&gt;</span><br><span class="line">               &lt;/dict&gt;</span><br><span class="line">           &lt;dict&gt;</span><br><span class="line">                   &lt;key&gt;kind&lt;/key&gt;</span><br><span class="line">                   &lt;string&gt;full-size-image&lt;/string&gt;</span><br><span class="line">                   &lt;key&gt;needs-shine&lt;/key&gt;</span><br><span class="line">                   &lt;<span class="literal">true</span>/&gt;</span><br><span class="line">                   &lt;key&gt;url&lt;/key&gt;</span><br><span class="line">                   &lt;string&gt;http://www.yourdomain.com/icon.png&lt;/string&gt;</span><br><span class="line">               &lt;/dict&gt;</span><br><span class="line">           &lt;/array&gt;&lt;key&gt;metadata&lt;/key&gt;</span><br><span class="line">           &lt;dict&gt;</span><br><span class="line">               &lt;key&gt;bundle-identifier&lt;/key&gt;</span><br><span class="line">               &lt;string&gt;com.yourdomain.productname&lt;/string&gt;</span><br><span class="line">               &lt;key&gt;bundle-version&lt;/key&gt;</span><br><span class="line">               &lt;string&gt;<span class="number">1.0</span>.<span class="number">0</span>&lt;/string&gt;</span><br><span class="line">               &lt;key&gt;kind&lt;/key&gt;</span><br><span class="line">               &lt;string&gt;software&lt;/string&gt;</span><br><span class="line">               &lt;key&gt;subtitle&lt;/key&gt;</span><br><span class="line">               &lt;string&gt;ProductName&lt;/string&gt;</span><br><span class="line">               &lt;key&gt;title&lt;/key&gt;</span><br><span class="line">               &lt;string&gt;ProductName&lt;/string&gt;</span><br><span class="line">           &lt;/dict&gt;</span><br><span class="line">       &lt;/dict&gt;</span><br><span class="line">   &lt;/array&gt;</span><br><span class="line">&lt;/dict&gt;</span><br><span class="line">&lt;/plist&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<h3 id="u5B9A_u65F6_u8FD0_u884C"><a href="#u5B9A_u65F6_u8FD0_u884C" class="headerlink" title="定时运行"></a>定时运行</h3><p>这一点非常简单，使用 crontab -e 命令即可。大家可以随意 google 一下 crontab 命令，可以找到很多相关文档。假如我们要每周 1-5 的早上 9 点钟执行 daily build，则 crontab 的配置如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0 9 * * * 1-5 /Users/tangqiao/dailybuild.sh &#62;&#62; /Users/tangqiao/dailybuild.log 2&#62;&#38;1</span><br></pre></td></tr></table></figure>
+<h3 id="u5931_u8D25_u62A5_u8B66"><a href="#u5931_u8D25_u62A5_u8B66" class="headerlink" title="失败报警"></a>失败报警</h3><p>在 daily build 脚本运行失败时，最好能发报警邮件或者短信，以便能够尽早发现。发邮件可以用 python 的 smtplib 来写，示例如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> smtplib</span><br><span class="line"></span><br><span class="line">sender = <span class="string">'sender@devtang.com'</span></span><br><span class="line">receivers = [<span class="string">'receiver@devtang.com'</span>]</span><br><span class="line"></span><br><span class="line">message = <span class="string">"""From: Alert &lt;sender@devtang.com&gt;</span><br><span class="line">To: Some one &lt;receiver@devtang.com&gt;</span><br><span class="line">Subject: SMTP email sample</span><br><span class="line"></span><br><span class="line">Hope you can get it.</span><br><span class="line">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    obj = smtplib.SMTP(<span class="string">'server.mail.devtang.com'</span>)</span><br><span class="line">    obj.sendmail(sender, receivers, message)</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'OK: send mail succeed'</span></span><br><span class="line"><span class="keyword">except</span> Exception:</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'Error: unable to send mail'</span></span><br></pre></td></tr></table></figure>
+<h3 id="u4E0A_u4F20"><a href="#u4E0A_u4F20" class="headerlink" title="上传"></a>上传</h3><p>daily build 编译出来如果需要单独上传到另外一台 web 机器上，可以用 ftp 或者 scp 协议。如果 web 机器悲剧的是 windows 机器的话，可以在 windows 机器上开一个共享，然后用 mount -t smbfs 来将这个共享 mount 到本地，相关的示例代码如下：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir upload</span><br><span class="line">mount -t smbfs //<span class="variable">$SMB_USERNAME</span>:<span class="variable">$SMB_PASSWORD</span>@<span class="variable">$SMB_TARGET</span> ./upload</span><br><span class="line"><span class="keyword">if</span> [ <span class="string">"$?"</span> <span class="operator">-ne</span> <span class="number">0</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"Failed to mount smb directory"</span></span><br><span class="line">    <span class="built_in">exit</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line">mkdir ./upload/<span class="variable">$FOLDER</span></span><br><span class="line">cp <span class="variable">$FILE_NAME</span> ./upload/<span class="variable">$FOLDER</span>/</span><br><span class="line"><span class="keyword">if</span> [ <span class="string">"$?"</span> <span class="operator">-eq</span> <span class="number">0</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"[OK] <span class="variable">$FILE_NAME</span> is uploaded to <span class="variable">$SMB_TARGET</span>"</span> </span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"[ERROR] <span class="variable">$FILE_NAME</span> is FAILED to  uploaded to <span class="variable">$SMB_TARGET</span>"</span> </span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line">umount ./upload</span><br></pre></td></tr></table></figure></p>
+<h2 id="u9047_u5230_u7684_u95EE_u9898"><a href="#u9047_u5230_u7684_u95EE_u9898" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>本来我写的自动化脚本在 Mac OS X 10.6 下运行得很好。但是升级到 lion 后，脚本在手动执行时很正常，但是在用 crontab 启动时就会出现找不到开发者证书的错误。在网上搜了很久也没有找到解决办法。最后我试了一下在 “钥匙串访问” 中把开发者证书从 “登录” 那栏拖动到 “系统” 那栏，居然就解决了，如下图所示：</p>
+<img src="/images/dailybuild_issue.jpg">
+<p>另外我搜到 2 个类似的问题的解决方案，虽然对我这个没起作用，也一并放在这儿，或许对遇到类似问题的人有帮助：</p>
+<ul>
+<li><a href="http://stackoverflow.com/questions/7635143/cannot-build-xcode-project-from-command-line-but-can-from-xcode" target="_blank" rel="external">http://stackoverflow.com/questions/7635143/cannot-build-xcode-project-from-command-line-but-can-from-xcode</a></li>
+<li><a href="http://shappy1978.iteye.com/blog/765842" target="_blank" rel="external">http://shappy1978.iteye.com/blog/765842</a></li>
+</ul>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>将以上各点结合起来，就可以用 bash 写出一个 daily build 脚本了。每天这一切都会自动完成，心情相当好。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2012/02/16/apply-daily-build-in-ios-project/" data-title="给iOS工程增加Daily Build | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2012/02/22/use-gcd/" title="使用GCD">
+  <strong>上一篇：</strong><br/>
+  <span>
+  使用GCD</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2012/02/14/nsstring-java-like-wrapper/"  title="给NSString增加Java风格的方法">
+ <strong>下一篇：</strong><br/> 
+ <span>给NSString增加Java风格的方法
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

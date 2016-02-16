@@ -1,0 +1,500 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>使用Flurry来统计和分析用户行为 | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="2015年11月更新由于 Flurry 的后台在中国访问实在太慢，另外 Flurry 对中国区的 IP 类型判断不太准确（3G和Wifi无法准确区分），所以我现在不再推荐大家使用 Flurry 了。
+不用 Flurry 之后，我们现在使用的是腾讯的 MTA 来做统计。
+简介
+本文为InfoQ中文站特供稿件，首发地址为：文章链接。如需转载，请与InfoQ中文站联系。
+Flurry是一家专门为移动应用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Flurry来统计和分析用户行为">
+<meta property="og:url" content="http://blog.devtang.com/2013/11/14/use-flurry-to-analyse-data/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="2015年11月更新由于 Flurry 的后台在中国访问实在太慢，另外 Flurry 对中国区的 IP 类型判断不太准确（3G和Wifi无法准确区分），所以我现在不再推荐大家使用 Flurry 了。
+不用 Flurry 之后，我们现在使用的是腾讯的 MTA 来做统计。
+简介
+本文为InfoQ中文站特供稿件，首发地址为：文章链接。如需转载，请与InfoQ中文站联系。
+Flurry是一家专门为移动应用">
+<meta property="og:image" content="http://blog.devtang.com/images/flurry-logo.png">
+<meta property="og:image" content="http://blog.devtang.com/images/flurry-create-app-1.png">
+<meta property="og:image" content="http://blog.devtang.com/images/flurry-create-app-2.png">
+<meta property="og:image" content="http://blog.devtang.com/images/flurry-create-app-3.png">
+<meta property="og:image" content="http://blog.devtang.com/images/flurry-create-app-4.png">
+<meta property="og:image" content="http://blog.devtang.com/images/flurry-sdk-files.png">
+<meta property="og:image" content="http://blog.devtang.com/images/flurry-setup-in-xcode.png">
+<meta property="og:image" content="http://blog.devtang.com/images/flurry-link-library.png">
+<meta property="og:image" content="http://blog.devtang.com/images/flurry-set-api-key.png">
+<meta property="og:image" content="http://blog.devtang.com/images/flurry-view-events.png">
+<meta property="og:updated_time" content="2016-02-16T10:26:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Flurry来统计和分析用户行为">
+<meta name="twitter:description" content="2015年11月更新由于 Flurry 的后台在中国访问实在太慢，另外 Flurry 对中国区的 IP 类型判断不太准确（3G和Wifi无法准确区分），所以我现在不再推荐大家使用 Flurry 了。
+不用 Flurry 之后，我们现在使用的是腾讯的 MTA 来做统计。
+简介
+本文为InfoQ中文站特供稿件，首发地址为：文章链接。如需转载，请与InfoQ中文站联系。
+Flurry是一家专门为移动应用">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/11/14/use-flurry-to-analyse-data/" title="使用Flurry来统计和分析用户行为" itemprop="url">使用Flurry来统计和分析用户行为</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2013-11-14T05:51:00.000Z" itemprop="datePublished"> 发表于 2013-11-14 13:51</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2015_u5E7411_u6708_u66F4_u65B0"><span class="toc-number">1.</span> <span class="toc-text">2015年11月更新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u7B80_u4ECB"><span class="toc-number">2.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flurry_u7684_u57FA_u672C_u4F7F_u7528"><span class="toc-number">3.</span> <span class="toc-text">Flurry的基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u6CE8_u518C_u548C_u4E0B_u8F7D_u5BF9_u5E94SDK"><span class="toc-number">3.1.</span> <span class="toc-text">注册和下载对应SDK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u96C6_u6210SDK"><span class="toc-number">3.2.</span> <span class="toc-text">集成SDK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u81EA_u5B9A_u4E49_u7EDF_u8BA1_u9879"><span class="toc-number">3.3.</span> <span class="toc-text">自定义统计项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u67E5_u770B_u7EDF_u8BA1_u7ED3_u679C"><span class="toc-number">3.4.</span> <span class="toc-text">查看统计结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7EDF_u8BA1Crashlog"><span class="toc-number">3.5.</span> <span class="toc-text">统计Crashlog</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u548C_u5176_u5B83_u7EDF_u8BA1_u5206_u6790_u5E73_u53F0_u7684_u5BF9_u6BD4"><span class="toc-number">4.</span> <span class="toc-text">和其它统计分析平台的对比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="2015_u5E7411_u6708_u66F4_u65B0"><a href="#2015_u5E7411_u6708_u66F4_u65B0" class="headerlink" title="2015年11月更新"></a>2015年11月更新</h2><p>由于 Flurry 的后台在中国访问实在太慢，另外 Flurry 对中国区的 IP 类型判断不太准确（3G和Wifi无法准确区分），所以我现在不再推荐大家使用 Flurry 了。</p>
+<p>不用 Flurry 之后，我们现在使用的是腾讯的 MTA 来做统计。</p>
+<h2 id="u7B80_u4ECB"><a href="#u7B80_u4ECB" class="headerlink" title="简介"></a>简介</h2><img src="/images/flurry-logo.png">
+<p>本文为InfoQ中文站特供稿件，首发地址为：<a href="http://www.infoq.com/cn/articles/use-flurry-to-statistics-and-analysis-user-behavior" target="_blank" rel="external">文章链接</a>。如需转载，请与InfoQ中文站联系。</p>
+<p><a href="http://www.flurry.com/" target="_blank" rel="external">Flurry</a>是一家专门为移动应用提供数据统计和分析的公司。他们的数据统计分析SDK支持的平台包括iPhone, iPad, Android, Windows Phone, Java ME和BlackBerry。使用Flurry服务的公司包括eBay、Yahoo、Hulu和Skype等超过11万家公司，涉及的应用超过36万个。</p>
+<p>利用Flurry提供的分析平台，我们可以很容易地自动统计出应用的使用情况，例如：</p>
+<ol>
+<li>每天（每周或每月）登录用户数，应用使用次数</li>
+<li>每天（每周或每月）新用户数，活跃用户数</li>
+<li>用户的所在地、年龄、性别的分布情况</li>
+</ol>
+<p>Flurry也可以自动统计出移动设备的分类情况，例如：</p>
+<ol>
+<li>使用3G，Wifi的会话比例</li>
+<li>使用iOS系统各版本(例如iOS6.0, iOS7.0等)的比例</li>
+<li>使用iOS各种设备（例如iPhone4, iPhone5等)的比例</li>
+</ol>
+<p>除了上面介绍的自动统计项目，Flurry SDK也提供了统计用的相关API，便于我们针对自己产品的特点，做针对性的统计。例如统计应用中某个按钮的按下次数，或者网络请求的平均响应时间等。</p>
+<a id="more"></a>
+<h2 id="Flurry_u7684_u57FA_u672C_u4F7F_u7528"><a href="#Flurry_u7684_u57FA_u672C_u4F7F_u7528" class="headerlink" title="Flurry的基本使用"></a>Flurry的基本使用</h2><h3 id="u6CE8_u518C_u548C_u4E0B_u8F7D_u5BF9_u5E94SDK"><a href="#u6CE8_u518C_u548C_u4E0B_u8F7D_u5BF9_u5E94SDK" class="headerlink" title="注册和下载对应SDK"></a>注册和下载对应SDK</h3><p>使用Flurry前，需要先到官方网站<a href="http://www.flurry.com/" target="_blank" rel="external">http://www.flurry.com/</a>注册账号。然后登录到Flurry后台，依次选择 <code>&quot;Applications&quot; -&gt; “Add a New Application&quot;</code> ，增加一个需要统计分析的应用。如下图所示：</p>
+<img src="/images/flurry-create-app-1.png">
+<p>然后，在接下来的界面之后根据你的应用类型，选择iPhone或iPad应用。如下图所示：</p>
+<img src="/images/flurry-create-app-2.png">
+<p>接着，填入应用的名字和分类（名字仅用作在Flurry后台和自己的其它应用区分，不需要和应用的真实名字相同），之后点击”Create App”，如下所示：</p>
+<img src="/images/flurry-create-app-3.png">
+<p>到此，我们就成功在后台创建了一个新的应用统计和分析项目。点击下图中的”Download”，可以下载需要集成在应用中的SDK。而下图中的提示2中的Key：<code>X28BBKTNZ9H3VYTBDBG3</code>则是我们在集成时用于标识自己应用的ID。</p>
+<img src="/images/flurry-create-app-4.png">
+<h3 id="u96C6_u6210SDK"><a href="#u96C6_u6210SDK" class="headerlink" title="集成SDK"></a>集成SDK</h3><p>我们将下载后的SDK解压，可以看到文件列表如下。列表中对我们最重要的文件是Flurry目录下的<code>flurry.h</code>文件和<code>libFlurry_4.3.0.a</code>文件。这2个文件需要复制到Xcode的工程中去。</p>
+<p>而<code>ProjectApiKey.txt</code>文件中记录了我们之前创建的应用ID，在在代码中调用SDK初使化时需要使用。</p>
+<img src="/images/flurry-sdk-files.png">
+<p>接着我们打开Xcode工程，将之前下载解压的Flurry目录拖动添加到工程中，同时在工程的.pch文件中加上 <code>#import &quot;Flurry.h&quot;</code>，如下图所示：</p>
+<img src="/images/flurry-setup-in-xcode.png">
+<p>接着我们在<code>Link Binary With Libraries</code>中加入如下2个依赖的framework: </p>
+<ul>
+<li>Security.framework</li>
+<li>SystemConfiguration.framework。</li>
+</ul>
+<img src="/images/flurry-link-library.png">
+<p>接着我们打开 <code>AppDelegate.m</code>，在<code>- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions</code>方法中，加入代码<code>[Flurry startSession:@&quot;X28BBKTNZ9H3VYTBDBG3&quot;];</code>，如下图所示：</p>
+<img src="/images/flurry-set-api-key.png">
+<p>这样，就完成了Flurry最简单的集成。通过以上短短几步，Flurry就可以帮我们完成应用的基本使用数据的统计和分析。</p>
+<h3 id="u81EA_u5B9A_u4E49_u7EDF_u8BA1_u9879"><a href="#u81EA_u5B9A_u4E49_u7EDF_u8BA1_u9879" class="headerlink" title="自定义统计项"></a>自定义统计项</h3><p>Flurry提供了<code>logEvent</code>函数，用于实现自定义的统计项。默认情况下，该函数接受一个参数，用于表示当前统计项的名字。</p>
+<p>例如我们的界面中有2个按钮，我们想统计它们各自被用户的点击次数，则可以如下代码实现。在该代码中，我们定义了2个自定义的统计项，名字分别为<code>First Button Pressed</code>和<code>Second Button Pressed</code>。</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">IBAction</span>)firstButtonPressed:(<span class="keyword">id</span>)sender &#123;</span><br><span class="line">    [Flurry logEvent:<span class="string">@"First Button Pressed"</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">IBAction</span>)secondButtonPressed:(<span class="keyword">id</span>)sender &#123;</span><br><span class="line">    [Flurry logEvent:<span class="string">@"Second Button Pressed"</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>logEvent</code>函数也支持添加各种参数，用于做更加精细的统计，例如，我们想在统计用户在同一个页面，点击时不同按钮的次数分布，看哪些按钮更加常用，则统计代码可以如下实现：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">IBAction</span>)firstButtonPressed:(<span class="keyword">id</span>)sender &#123;</span><br><span class="line">    [Flurry logEvent:<span class="string">@"Button Pressed"</span></span><br><span class="line">      withParameters:@&#123;<span class="string">@"target"</span>: <span class="string">@"first"</span>&#125;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">IBAction</span>)secondButtonPressed:(<span class="keyword">id</span>)sender &#123;</span><br><span class="line">    [Flurry logEvent:<span class="string">@"Button Pressed"</span></span><br><span class="line">      withParameters:@&#123;<span class="string">@"target"</span>: <span class="string">@"second"</span>&#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>logEvent</code>函数也支持统计时间，常常用来统计某个复杂的网络操作的耗时或者用户对于某些界面的响应时间。例如，我们想统计用户停留在某个提示界面的时间，则可以用如下代码完成：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  FirstViewController.m</span></span><br><span class="line"><span class="comment">//  FlurryUsageSample</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Created by TangQiao on 13-10-25.</span></span><br><span class="line"><span class="comment">//  Copyright (c) 2013年 TangQiao. All rights reserved.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#import <span class="title">"FirstViewController.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#define FLURRY_EVENT_KEY @<span class="title">"First View Controller"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">FirstViewController</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewWillAppear:(<span class="built_in">BOOL</span>)animated &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewWillAppear:animated];</span><br><span class="line">    <span class="comment">// 开始统计时间</span></span><br><span class="line">    [Flurry logEvent:FLURRY_EVENT_KEY timed:<span class="literal">YES</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewWillDisappear:(<span class="built_in">BOOL</span>)animated &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewWillDisappear:animated];</span><br><span class="line">    <span class="comment">// 结束统计时间</span></span><br><span class="line">    [Flurry endTimedEvent:FLURRY_EVENT_KEY withParameters:<span class="literal">nil</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<h3 id="u67E5_u770B_u7EDF_u8BA1_u7ED3_u679C"><a href="#u67E5_u770B_u7EDF_u8BA1_u7ED3_u679C" class="headerlink" title="查看统计结果"></a>查看统计结果</h3><p>完成上面的自定义统计的代码后，待应用发布后，我们就可以从后台的<code>Events</code>栏中看到相应的统计结果了。如下图所示：</p>
+<img src="/images/flurry-view-events.png">
+<h3 id="u7EDF_u8BA1Crashlog"><a href="#u7EDF_u8BA1Crashlog" class="headerlink" title="统计Crashlog"></a>统计Crashlog</h3><p>Flurry从4.2.3开始，支持应用的Crashlog统计。只需要在<code>AppDelegate.m</code>文件中，在调用<code>startSession</code>方法之前，调用<code>setCrashReportingEnabled:YES</code>即可：</p>
+<pre><code>[Flurry setCrashReportingEnabled:YES];
+[Flurry startSession:@&quot;YOUR_API_KEY&quot;];
+</code></pre><p>这里注意，<font color="red">一定要在startSession之前调用setCrashReportingEnabled，否则将无法记录Crashlog信息！切记！！</font></p>
+<p>之后你就可以从后台管理界面的<code>Errors</code>项中，获得应用的Crashlog信息。</p>
+<h2 id="u548C_u5176_u5B83_u7EDF_u8BA1_u5206_u6790_u5E73_u53F0_u7684_u5BF9_u6BD4"><a href="#u548C_u5176_u5B83_u7EDF_u8BA1_u5206_u6790_u5E73_u53F0_u7684_u5BF9_u6BD4" class="headerlink" title="和其它统计分析平台的对比"></a>和其它统计分析平台的对比</h2><p>和著名的统计工具<a href="http://www.google.com/analytics/" target="_blank" rel="external">Google Analytics</a>相比，Flurry的优点是：</p>
+<ol>
+<li>Flurry专门针对移动端做了许多优化，例如统计流量就小很多。</li>
+<li>Flurry没有被墙的问题。</li>
+</ol>
+<p>Flurry缺点是:</p>
+<ol>
+<li>Google Analytics的统计功能相对更强大一些。</li>
+<li>Google Analytics可以和网页版的统计数据做整合。</li>
+</ol>
+<p>和国内的分析平台<a href="http://www.umeng.com/" target="_blank" rel="external">友盟</a>相比，Flurry的优点是：</p>
+<ol>
+<li>使用Flurry的应用相对更多。根据Flurry和友盟的官方数据，有超过36万应用使用Flurry<sup><a href="http://www.flurry.com/big-data.html" target="_blank" rel="external">1</a> </sup>，有超过18万应用使用友盟<sup><a href="http://www.umeng.com/analytics" target="_blank" rel="external">2</a></sup>。</li>
+<li>Flurry是国外的公司，保持独立和专注，数据安全性更高；友盟现在已经<a href="http://tech.163.com/13/0426/16/8TDB6H1N00094MOK.html" target="_blank" rel="external">被阿里收购</a>，当用户的应用涉及领域和阿里有类似或重合的时候，那么该统计数据有潜在的安全性问题。</li>
+</ol>
+<p>Flurry的缺点是：</p>
+<ol>
+<li>友盟因为是中国公司，所以对国内开发者非常友善，相关的文档或界面都是中文的。而Flurry并不提供中文的后台管理界面或相关文档。</li>
+<li>Flurry的服务器在国外，在响应速度上应该相对比友盟慢一些。但在测试中，Flurry服务器都保证了500ms左右的响应时间，还是比较好的。</li>
+</ol>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>本文介绍了Flurry的基本功能以及如何做自定义的统计，最后与业界其它同类工具做了对比。我也将相关示例代码整理到github上，地址是：<a href="https://github.com/tangqiaoboy/FlurryUsageSample" target="_blank" rel="external">https://github.com/tangqiaoboy/FlurryUsageSample</a>，愿本文能帮助你更加方便地做应用的统计和分析工作。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2013/11/14/use-flurry-to-analyse-data/" data-title="使用Flurry来统计和分析用户行为 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/12/11/network-tool-charles-intr/" title="iOS开发工具-网络封包分析工具Charles">
+  <strong>上一篇：</strong><br/>
+  <span>
+  iOS开发工具-网络封包分析工具Charles</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/10/21/the-tech-detail-of-ape-client-3/"  title="猿题库iOS客户端的技术细节（三）：基于CoreText的排版引擎">
+ <strong>下一篇：</strong><br/> 
+ <span>猿题库iOS客户端的技术细节（三）：基于CoreText的排版引擎
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

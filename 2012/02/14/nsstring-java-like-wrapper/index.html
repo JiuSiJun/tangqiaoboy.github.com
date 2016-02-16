@@ -1,0 +1,416 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>给NSString增加Java风格的方法 | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="我实在受不了 NSString 冗长的方法调用了，每次写之前都要查文档。特别是那个去掉前后多余的空格的方法，长得离谱。与之对应的别的语言，拿 java 来说，对应的方法名叫 trim。拿 python 来说，对应的方法名叫 strip。但是 Objective-C 呢？是下面这段：
+[self stringByTrimmingCharactersInSet:[NSCharacterSet whit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="给NSString增加Java风格的方法">
+<meta property="og:url" content="http://blog.devtang.com/2012/02/14/nsstring-java-like-wrapper/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="我实在受不了 NSString 冗长的方法调用了，每次写之前都要查文档。特别是那个去掉前后多余的空格的方法，长得离谱。与之对应的别的语言，拿 java 来说，对应的方法名叫 trim。拿 python 来说，对应的方法名叫 strip。但是 Objective-C 呢？是下面这段：
+[self stringByTrimmingCharactersInSet:[NSCharacterSet whit">
+<meta property="og:updated_time" content="2016-02-16T10:26:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="给NSString增加Java风格的方法">
+<meta name="twitter:description" content="我实在受不了 NSString 冗长的方法调用了，每次写之前都要查文档。特别是那个去掉前后多余的空格的方法，长得离谱。与之对应的别的语言，拿 java 来说，对应的方法名叫 trim。拿 python 来说，对应的方法名叫 strip。但是 Objective-C 呢？是下面这段：
+[self stringByTrimmingCharactersInSet:[NSCharacterSet whit">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2012/02/14/nsstring-java-like-wrapper/" title="给NSString增加Java风格的方法" itemprop="url">给NSString增加Java风格的方法</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2012-02-14T09:17:00.000Z" itemprop="datePublished"> 发表于 2012-02-14 17:17</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			
+		
+		</div>
+		
+		<p>我实在受不了 NSString 冗长的方法调用了，每次写之前都要查文档。特别是那个去掉前后多余的空格的方法，长得离谱。与之对应的别的语言，拿 java 来说，对应的方法名叫 trim。拿 python 来说，对应的方法名叫 strip。但是 Objective-C 呢？是下面这段：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[<span class="keyword">self</span> stringByTrimmingCharactersInSet:[<span class="built_in">NSCharacterSet</span> whitespaceAndNewlineCharacterSet]];</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>其实我也明白 Objective-C 这种长函数名的好处，就是能很清楚地了解当前的方法是干什么的。但是一些常用的方法，简单的方法名同样能表达清楚意思，并且更容易记住。长方法名的最大的问题是，代码写到一半得查文档，直接把思路打断了，所以我上周末花了一天时间把 Objective-C 的 NSString 类给封装了一下，把相应的方法调用都换成与 Java 类似的了。这样我每次用的时候就不用写那么长又记不住的方法名了。</p>
+<p>主要封装后的方法定义如下：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSString</span>(<span class="title">Wrapper</span>)</span></span><br><span class="line">- (<span class="keyword">unichar</span>) charAt:(<span class="keyword">int</span>)index;</span><br><span class="line">- (<span class="keyword">int</span>) compareTo:(<span class="built_in">NSString</span>*) anotherString;</span><br><span class="line">- (<span class="keyword">int</span>) compareToIgnoreCase:(<span class="built_in">NSString</span>*) str;</span><br><span class="line">- (<span class="built_in">BOOL</span>) contains:(<span class="built_in">NSString</span>*) str;</span><br><span class="line">- (<span class="built_in">BOOL</span>) startsWith:(<span class="built_in">NSString</span>*)prefix;</span><br><span class="line">- (<span class="built_in">BOOL</span>) endsWith:(<span class="built_in">NSString</span>*)suffix;</span><br><span class="line">- (<span class="built_in">BOOL</span>) equals:(<span class="built_in">NSString</span>*) anotherString;</span><br><span class="line">- (<span class="built_in">BOOL</span>) equalsIgnoreCase:(<span class="built_in">NSString</span>*) anotherString;</span><br><span class="line">- (<span class="keyword">int</span>) indexOfChar:(<span class="keyword">unichar</span>)ch;</span><br><span class="line">- (<span class="keyword">int</span>) indexOfChar:(<span class="keyword">unichar</span>)ch fromIndex:(<span class="keyword">int</span>)index;</span><br><span class="line">- (<span class="keyword">int</span>) indexOfString:(<span class="built_in">NSString</span>*)str;</span><br><span class="line">- (<span class="keyword">int</span>) indexOfString:(<span class="built_in">NSString</span>*)str fromIndex:(<span class="keyword">int</span>)index;</span><br><span class="line">- (<span class="keyword">int</span>) lastIndexOfChar:(<span class="keyword">unichar</span>)ch;</span><br><span class="line">- (<span class="keyword">int</span>) lastIndexOfChar:(<span class="keyword">unichar</span>)ch fromIndex:(<span class="keyword">int</span>)index;</span><br><span class="line">- (<span class="keyword">int</span>) lastIndexOfString:(<span class="built_in">NSString</span>*)str;</span><br><span class="line">- (<span class="keyword">int</span>) lastIndexOfString:(<span class="built_in">NSString</span>*)str fromIndex:(<span class="keyword">int</span>)index;</span><br><span class="line">- (<span class="built_in">NSString</span> *) substringFromIndex:(<span class="keyword">int</span>)beginIndex toIndex:(<span class="keyword">int</span>)endIndex;</span><br><span class="line">- (<span class="built_in">NSString</span> *) toLowerCase;</span><br><span class="line">- (<span class="built_in">NSString</span> *) toUpperCase;</span><br><span class="line">- (<span class="built_in">NSString</span> *) trim;</span><br><span class="line">- (<span class="built_in">NSString</span> *) replaceAll:(<span class="built_in">NSString</span>*)origin with:(<span class="built_in">NSString</span>*)replacement;</span><br><span class="line">- (<span class="built_in">NSArray</span> *) split:(<span class="built_in">NSString</span>*) separator;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>看着方法体，一下子感觉轻松了好多，以后再也不必每次写的时候查文档了。代码放到 github 上了，你可以用如下命令获得代码或者直接访问网址 <a href="https://github.com/tangqiaoboy/xcode_tool" target="_blank" rel="external">https://github.com/tangqiaoboy/xcode_tool</a> ：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@github.com:tangqiaoboy/xcode_tool.git</span><br><span class="line"><span class="built_in">cd</span> xcode_tool/NSStringWrappeer</span><br></pre></td></tr></table></figure>
+<p>如果要把这个 Wrapper 加到现有工程中，只需要拷贝我的文件：NSStringWrapper.h 和 NSStringWrapper.m 到你自己的工程中即可。在使用的时候注意我修改了一点，我将查找不存在的返回值设置成了-1，这样和 java 语言保持一致，如果你想用 NSNotFound 作为查找不存在时的结果，请修改文件 NSStringWrapper.m 顶部的宏定义:JavaNotFound 即可，如下所示：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 如果不喜欢，可以将-1 改成 NSNotFound 即可</span></span><br><span class="line"><span class="preprocessor">#define JavaNotFound -1</span></span><br></pre></td></tr></table></figure>
+<p>Have fun!</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2012/02/14/nsstring-java-like-wrapper/" data-title="给NSString增加Java风格的方法 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2012/02/16/apply-daily-build-in-ios-project/" title="给iOS工程增加Daily Build">
+  <strong>上一篇：</strong><br/>
+  <span>
+  给iOS工程增加Daily Build</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2012/02/10/setup-blog-based-on-github/"  title="象写程序一样写博客：搭建基于github的博客">
+ <strong>下一篇：</strong><br/> 
+ <span>象写程序一样写博客：搭建基于github的博客
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

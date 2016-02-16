@@ -1,0 +1,474 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>数据的秘密（上）- 为什么要关注数据 | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="前言由于科技的进步，以及数据「数字化」地存储，使得现代人类可以获得海量的数据。而有了这些海量的数据之后，借助于一些数据分析工具和方法，我们就可以从数据中找到社会运行的「秘密」。
+在工作中，借助这些「秘密」，我们有可能发现商业中的新机会，也可能验证或推翻自己的一些猜想。数据分析，使得我们对「秘密」的探索有了一个可靠的方法。
+在本文中，我想分享一下工作中学到的发现数据中秘密的心得。
+稻盛和夫的故事我们">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据的秘密（上）- 为什么要关注数据">
+<meta property="og:url" content="http://blog.devtang.com/2015/09/02/why-we-need-monitor-data/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="前言由于科技的进步，以及数据「数字化」地存储，使得现代人类可以获得海量的数据。而有了这些海量的数据之后，借助于一些数据分析工具和方法，我们就可以从数据中找到社会运行的「秘密」。
+在工作中，借助这些「秘密」，我们有可能发现商业中的新机会，也可能验证或推翻自己的一些猜想。数据分析，使得我们对「秘密」的探索有了一个可靠的方法。
+在本文中，我想分享一下工作中学到的发现数据中秘密的心得。
+稻盛和夫的故事我们">
+<meta property="og:image" content="http://blog.devtang.com/images/data_picture_from_matrix.jpg">
+<meta property="og:updated_time" content="2016-02-16T10:26:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据的秘密（上）- 为什么要关注数据">
+<meta name="twitter:description" content="前言由于科技的进步，以及数据「数字化」地存储，使得现代人类可以获得海量的数据。而有了这些海量的数据之后，借助于一些数据分析工具和方法，我们就可以从数据中找到社会运行的「秘密」。
+在工作中，借助这些「秘密」，我们有可能发现商业中的新机会，也可能验证或推翻自己的一些猜想。数据分析，使得我们对「秘密」的探索有了一个可靠的方法。
+在本文中，我想分享一下工作中学到的发现数据中秘密的心得。
+稻盛和夫的故事我们">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/09/02/why-we-need-monitor-data/" title="数据的秘密（上）- 为什么要关注数据" itemprop="url">数据的秘密（上）- 为什么要关注数据</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2015-09-02T12:39:18.000Z" itemprop="datePublished"> 发表于 2015-09-02 20:39</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7A3B_u76DB_u548C_u592B_u7684_u6545_u4E8B"><span class="toc-number">1.1.</span> <span class="toc-text">稻盛和夫的故事</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Monitor_your_data_uFF08_u76D1_u63A7_u4F60_u7684_u6570_u636E_uFF09"><span class="toc-number">2.</span> <span class="toc-text">Monitor your data（监控你的数据）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4EA7_u54C1_u4E0A_u7684_u300Cmonitor_your_data_u300D"><span class="toc-number">3.</span> <span class="toc-text">产品上的「monitor your data」</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u9A8C_u8BC1_u60F3_u6CD5"><span class="toc-number">3.1.</span> <span class="toc-text">验证想法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u53D1_u73B0_u65B0_u7684_u79D8_u5BC6"><span class="toc-number">3.2.</span> <span class="toc-text">发现新的秘密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u53D1_u73B0_u6570_u636E_u89C4_u5F8B"><span class="toc-number">3.3.</span> <span class="toc-text">发现数据规律</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u57F9_u517B_u4EA7_u54C1_u76F4_u89C9"><span class="toc-number">3.4.</span> <span class="toc-text">培养产品直觉</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
+		
+		</div>
+		
+		<img src="/images/data_picture_from_matrix.jpg">
+<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>由于科技的进步，以及数据「数字化」地存储，使得现代人类可以获得海量的数据。而有了这些海量的数据之后，借助于一些数据分析工具和方法，我们就可以从数据中找到社会运行的「秘密」。</p>
+<p>在工作中，借助这些「秘密」，我们有可能发现商业中的新机会，也可能验证或推翻自己的一些猜想。数据分析，使得我们对「秘密」的探索有了一个可靠的方法。</p>
+<p>在本文中，我想分享一下工作中学到的发现数据中秘密的心得。</p>
+<h3 id="u7A3B_u76DB_u548C_u592B_u7684_u6545_u4E8B"><a href="#u7A3B_u76DB_u548C_u592B_u7684_u6545_u4E8B" class="headerlink" title="稻盛和夫的故事"></a>稻盛和夫的故事</h3><p>我们先看看 <a href="http://baike.baidu.com/subview/974414/5032771.htm" target="_blank" rel="external">稻盛和夫</a> 挽救日航的故事吧。他的这段传奇经历曾经被很多媒体报道，我将故事摘要如下：</p>
+<blockquote>
+<p>2010 年 1 月 19 日，日本航空公司申请破产保护。日航有 58 年历史，一度被视作日本战后经济繁荣的骄傲象征。</p>
+<p>2010 年 2 月 1 日，受日本首相邀请，稻盛和夫答应出日航董事长，一年之后，日航扭亏为盈，利润是对手全日空的三倍。<br>仅仅用了一年时间，日航做到了三个第一，一个是利润世界第一，一个是准点率世界第一，一个是服务水平世界第一。</p>
+</blockquote>
+<p>在日航重新上市之后，稻盛和夫分享了他 <a href="http://money.163.com/12/1026/01/8EN3V9EN00253B0H.html" target="_blank" rel="external">挽救日航的秘密</a>。这里面涉及的内容很多，其中有很重要的一条，就是稻盛和夫非常重视日航具体的运营数据，他花了很大的力气来优化数据的获取，从而能够对日航的现状进行判断。</p>
+<p>稻盛和夫是这样说的：</p>
+<blockquote>
+<p>我担任董事长后，最为吃惊的是，公司的各项统计数据不仅不全，而且统计时间很长很慢，往往需要 3 个月之后才能搞全数据，以至于经营者无法迅速掌握公司的运营情况。<br>所以，在对企业内部进行改革时，我特别关注统计工作。经过改革，现在各个部门的数据做到即有即报，公司详尽的经营报告，做到了一个月内完成。</p>
+</blockquote>
+<p>如果把日航看过一个生病了的病人，稻盛和夫的做法其实和现代医学的做法类似，就是首先进行各项检查，获得病人的身体指标信息，有了这些检查数据，我们就可以利用各种基于数据的经验，来进行病情诊断和治疗。所有的治疗手段又可以通过再次的检查来验证，从而进一步改进治疗方法。</p>
+<p>人做为一个生命体，全身密布的神经负责着各种信息的传递，所以我们的大脑能够接受到各种信息，从而做出决策，饿了吃饭，冷了加衣服，保证着我们身体的健康。</p>
+<p>而企业没有天生的神经系统，所以数据收集和分析就显得异常重要了。日航作为一家运营了 50 多年的公司，居然在这方面做得非常差，难怪会进入破产的边缘。而稻盛和夫用的办法也很简单，先让数据能够收集起来，那么后续依据数据做决策就不再那么困难了。</p>
+<h2 id="Monitor_your_data_uFF08_u76D1_u63A7_u4F60_u7684_u6570_u636E_uFF09"><a href="#Monitor_your_data_uFF08_u76D1_u63A7_u4F60_u7684_u6570_u636E_uFF09" class="headerlink" title="Monitor your data（监控你的数据）"></a>Monitor your data（监控你的数据）</h2><p>我刚毕业的时候加入的是网易公司，当时负责做网易邮箱的底层 Restful Api。当时我们部门的老大郭常圳常常讲要「monitor your data」，我当时作为一个应届生，刚开始对这个口号不太理解。我当时想：数据当然是重要的，但是也不值得老挂在嘴边讲吧？但是后来我才慢慢发现，这其实确实非常重要。</p>
+<p>作为程序员，我们开发一个后台服务，大家有没有测试过以下数据：</p>
+<ul>
+<li>这个服务能够承受多少的 QPS（每秒访问量）？</li>
+<li>平均响应时间和 99% 的响应时间是多少？</li>
+<li>如果服务器压力增加，我们能不能通过简单的加机器来解决，需要加多少台机器？</li>
+<li>当前线上服务瓶颈在哪里？</li>
+<li>按当前的增长速度，多久我们得需要加机器？</li>
+</ul>
+<p>当时郭常圳带领我们，将我们做的每一个服务都进行了详细的压力测试，我们对于我们的服务承受力有着非常详细的数据测试结果。</p>
+<p>这一点每个公司都做到了吗？其实不是。我还记得我们后来和网易的网站部共同开发网易微博后台，当时我们因为要将邮箱微博和网易微博数据合并，需要进行在线的数据迁移。我当时负责数据迁移工作，在我向网站部询问我应该用多大的请求压力来迁移数据时，对方只是回答：“尽量慢点”。</p>
+<p>我当时就傻掉了，谁能告诉我什么叫 “尽量慢点”？于是我只能小心翼翼，一点一点地增加压力，最后我发现，他们的数据库其实一点压力都没有，我根本就不用控制压力都不会影响线上服务。但是，由于他们「monitor your data」做得不好，所以他们对任何可能的压力都心怀恐惧，不敢乱动。</p>
+<p>后来我也私下和他们求证了一下，他们果然完全不知道他们的服务器能够承受多少 QPS。大家也可以问问自己公司的服务器同事，自己的服务器能够承受的 QPS 是多少，就知道自己的公司在这一点上做得好不好了。</p>
+<p>而现在，数据驱动的思维更加深入到互联网开发中了。因此，国外的 New Relic 这类公司，才可以获得上亿美金的估值。 New Relic 的工作原理是放很多小的探针到你的程序代码中，这些探针收集到非常详细的程序运行数据，就可以为你优化服务器提供有效的建议。</p>
+<h2 id="u4EA7_u54C1_u4E0A_u7684_u300Cmonitor_your_data_u300D"><a href="#u4EA7_u54C1_u4E0A_u7684_u300Cmonitor_your_data_u300D" class="headerlink" title="产品上的「monitor your data」"></a>产品上的「monitor your data」</h2><p>如果说技术上的「monitor your data」只是影响服务稳定性的话，那么产品上的「monitor your data」就会决定产品的成败了。</p>
+<p>我认为产品上的数据分析有以下作用。</p>
+<h3 id="u9A8C_u8BC1_u60F3_u6CD5"><a href="#u9A8C_u8BC1_u60F3_u6CD5" class="headerlink" title="验证想法"></a>验证想法</h3><p>在互联网行业工作这么多年，我发现了一个秘密，就是任何新的互联网产品，都不是靠用户调研或数据分析来的。</p>
+<p>因为用户调研非常难做，稍不注意就会被别的因素影响，所以乔布斯曾经说他从来不做用户调研。而数据分析对于一个新产品来说，会陷入无米之炊的尴尬境地。</p>
+<p>所以很多新产品的第一版都是创始人或产品经理「拍脑袋」的产物。这一点其实是非常现实的做法。「拍脑袋」依赖于创始人的经验，如果创始人经验丰富，那么很可能产品对了 7 分，错了 3 分。另外那 3 分的错误假设，可以在产品上线后迅速通过数据来验证，从而迭代修正这些假设。</p>
+<p>所以数据分析对于产品来说，第一大作用就是验证（或推翻）产品经理的假设，从而使产品能够得到快速迭代改进。</p>
+<h3 id="u53D1_u73B0_u65B0_u7684_u79D8_u5BC6"><a href="#u53D1_u73B0_u65B0_u7684_u79D8_u5BC6" class="headerlink" title="发现新的秘密"></a>发现新的秘密</h3><p>很多时候，数据分析不光会得到你的产品本身的状态，还会发现一些新的机会。借助这些新发现，我们对产品产生新的认识。</p>
+<p>拿我们的创业产品「小猿搜题」来说，我们一直在监控它的 <a href="http://baike.baidu.com/item/%E5%87%80%E6%8E%A8%E8%8D%90%E5%80%BC/3783368" target="_blank" rel="external"> NPS（净推荐值）</a> 数据。为了把数据分析得更加细致，我们把打 NPS 0 分的用户行为进行了抽样分析，最终我们发现，虽然我们的 slogon 叫「初高中拍照搜题利器」，但是却有大量的小学生用户在使用我们的产品。</p>
+<p>我们并没有为小学生做任何的产品上的优化，所以造成了这部分用户没有被很好的满足。所以，我们最近在内容和搜索算法上针对小学生做了特别优化，同时将产品的 slogon 修改成了「中小学拍照搜题利器」。</p>
+<p>如果没有细致的数据分析，我们可能就错过了几千万的潜在用户。</p>
+<h3 id="u53D1_u73B0_u6570_u636E_u89C4_u5F8B"><a href="#u53D1_u73B0_u6570_u636E_u89C4_u5F8B" class="headerlink" title="发现数据规律"></a>发现数据规律</h3><p>一个产品会有非常多的指标，日活，月活，留存率，年龄分布，用户使用习惯等，产品经理应该对这些指标了如指掌，在对这些数据熟悉之后，产品经理就可以发现数据中的变化规律或异常点，从而对产品带来一些改进。</p>
+<p>在这一点上，我喜欢讲林彪的一个故事。</p>
+<blockquote>
+<p>1948 年辽沈战役开始之后，在东北野战军前线指挥所里面，每天深夜都要进行例常的 “每日军情汇报”：由值班参谋读出下属各个纵队、师、团用电台报告的当日战况和缴获情况。</p>
+<p>那几乎是重复着千篇一律的枯燥无味的数据：每支部队歼敌多少、俘虏多少；缴获的火炮、车辆多少、枪支、物资多少。</p>
+<p>司令员林彪的要求很细，俘虏要分清军官和士兵，缴获的枪支，要统计出机枪、长枪、短枪；击毁和缴获尚能使用的汽车，也要分出大小和类别。</p>
+<p>经过一天紧张的战斗指挥工作，人们都非常疲劳。整个作战室里面估计只有定下这个规矩的司令员林彪本人、还有那个读电报的倒霉参谋在用心留意。</p>
+<p>1948 年 10 月 14 日，东北野战军以迅雷不及掩耳之势，仅用了 30 小时就攻克了对手原以为可以长期坚守的锦州之后，不顾疲劳，挥师北上与从沈阳出援的敌精锐廖耀湘基团二十余万在辽西相遇，一时间形成了混战。战局瞬息万变，谁胜谁负实难预料。</p>
+<p>在大战紧急中，林彪无论有多忙，仍然坚持每晚必作的 “功课”。一天深夜，值班参谋正在读着下面某师上报的其下属部队的战报。说他们下面的部队碰到了一个不大的遭遇战，歼敌部分、其余逃走。与其它之前所读的战报看上去并无明显异样，值班参谋就这样读着读着，林彪突然叫了一声 “停！” 他的眼里闪出了光芒，问：“刚才念的在胡家窝棚那个战斗的缴获，你们听到了吗？”</p>
+<p>大家带着睡意的脸上出现了茫然，因为如此战斗每天都有几十起，不都是差不多一模一样的枯燥数字吗？林彪扫视一周，见无人回答，便接连问了三句：</p>
+<p> “为什么那里缴获的短枪与长枪的比例比其它战斗略高”？<br> “为什么那里缴获和击毁的小车与大车的比例比其它战斗略高”？<br> “为什么在那里俘虏和击毙的军官与士兵的比例比其它战斗略高”？</p>
+<p>人们还没有来得及思索，等不及的林彪司令员大步走向挂满军用地图的墙壁，指着地图上的那个点说：“我猜想，不，我断定！敌人的指挥所就在这里！”</p>
+<p>随后林彪口授命令，追击从胡家窝棚逃走的那部分敌人，并坚决把他们打掉。各部队要采取分割包围的办法，把失去指挥中枢后会变得混乱的几十万敌军切成小块，逐一歼灭。</p>
+<p>廖耀湘对自己静心隐蔽的精悍野战司令部那么快就被发现、打掉，觉得实在不可思议，认为那是一个偶然事件，输得不甘心。当他得知林彪是如何得出判断之后说，“我服了，败在他手下，不丢人。”</p>
+</blockquote>
+<p>有些时候，一个数据中的异常点，就是一次决定性的机会。而产品经理只有做好「monitor your data」，才能抓住这样的机会。</p>
+<h3 id="u57F9_u517B_u4EA7_u54C1_u76F4_u89C9"><a href="#u57F9_u517B_u4EA7_u54C1_u76F4_u89C9" class="headerlink" title="培养产品直觉"></a>培养产品直觉</h3><p>有一些产品，产品经理自己就是目标用户，所以可以比较容易用同理心来分析出用户的需求。但是像我们猿题库这次创业，目标用户都是初高中生，我怎么知道这些 00 后的需求、想法和兴趣爱好？</p>
+<p>除了多和他们聊天，多用他们喜欢的产品外，分析他们的行为数据也至关重要。郭常圳常常说：“我们做产品要有场景化思维，要还原用户当时真实的使用场景”。而通过分析一些用户使用数据，就有助于我们还原用户使用场景。</p>
+<p>这种事情做得多了，我们就会更加了解用户了，慢慢就形成了产品的直觉。</p>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>关注数据和数据分析能力，是互联网时代生存的基本技能。不管是做产品还是做技术，养成「monitor your data」的习惯，都可以让你将工作做得更加出色。</p>
+<p>本文讲完了为什么要关注数据，在下一篇里，我将分享具体如何做。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/summary/">summary</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2015/09/02/why-we-need-monitor-data/" data-title="数据的秘密（上）- 为什么要关注数据 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/09/03/how-to-monitor-data/" title="数据的秘密（下）- 如何分析数据">
+  <strong>上一篇：</strong><br/>
+  <span>
+  数据的秘密（下）- 如何分析数据</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/08/22/reverse-book-summary/"  title="《逆转》读书心得">
+ <strong>下一篇：</strong><br/> 
+ <span>《逆转》读书心得
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

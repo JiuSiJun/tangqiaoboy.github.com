@@ -1,0 +1,472 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>分析支付宝客户端的插件机制 | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="前言因为开了 iOSDevTips 的微信公共账号，老收到各种 iOS 开发的问题，前两天收到一个问题的内容是：
+
+请问像支付宝钱包那样可以在应用里安装自己的应用，是已经在应用里写了逻辑，还是可以向应用里发送代码 ?
+
+我觉得这个问题挺有意思的，估计大家都感兴趣，所以今天就抽空研究了一下，将支付宝客户端的插件机制具体实现方式介绍给大家。
+先介绍一下该插件机制，如上图所示，支付宝客户端在安装后，对于">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分析支付宝客户端的插件机制">
+<meta property="og:url" content="http://blog.devtang.com/2013/06/23/alipay-plugin-mechanism/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="前言因为开了 iOSDevTips 的微信公共账号，老收到各种 iOS 开发的问题，前两天收到一个问题的内容是：
+
+请问像支付宝钱包那样可以在应用里安装自己的应用，是已经在应用里写了逻辑，还是可以向应用里发送代码 ?
+
+我觉得这个问题挺有意思的，估计大家都感兴趣，所以今天就抽空研究了一下，将支付宝客户端的插件机制具体实现方式介绍给大家。
+先介绍一下该插件机制，如上图所示，支付宝客户端在安装后，对于">
+<meta property="og:image" content="http://blog.devtang.com/images/alipay-plugin-1.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/alipay-plugin-2.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/alipay-plugin-3.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/alipay-plugin-4.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/alipay-plugin-5.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/alipay-plugin-6.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/ios-menu-2.jpg">
+<meta property="og:updated_time" content="2016-02-16T10:28:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="分析支付宝客户端的插件机制">
+<meta name="twitter:description" content="前言因为开了 iOSDevTips 的微信公共账号，老收到各种 iOS 开发的问题，前两天收到一个问题的内容是：
+
+请问像支付宝钱包那样可以在应用里安装自己的应用，是已经在应用里写了逻辑，还是可以向应用里发送代码 ?
+
+我觉得这个问题挺有意思的，估计大家都感兴趣，所以今天就抽空研究了一下，将支付宝客户端的插件机制具体实现方式介绍给大家。
+先介绍一下该插件机制，如上图所示，支付宝客户端在安装后，对于">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/06/23/alipay-plugin-mechanism/" title="分析支付宝客户端的插件机制" itemprop="url">分析支付宝客户端的插件机制</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2013-06-23T04:39:00.000Z" itemprop="datePublished"> 发表于 2013-06-23 12:39</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5206_u6790_u8FC7_u7A0B"><span class="toc-number">2.</span> <span class="toc-text">分析过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u622A_u53D6_u7F51_u7EDC_u8BF7_u6C42"><span class="toc-number">2.1.</span> <span class="toc-text">截取网络请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E0B_u8F7D_u63D2_u4EF6_u6587_u4EF6"><span class="toc-number">2.2.</span> <span class="toc-text">下载插件文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5206_u6790_u6587_u4EF6_u5185_u5BB9"><span class="toc-number">2.3.</span> <span class="toc-text">分析文件内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u63D2_u4EF6_u7684_u7F51_u7EDC_u901A_u8BAF"><span class="toc-number">2.4.</span> <span class="toc-text">插件的网络通讯</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4EA4_u6613_u7684_u5B89_u5168"><span class="toc-number">2.5.</span> <span class="toc-text">交易的安全</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u76F8_u5173_u5DE5_u5177"><span class="toc-number">4.</span> <span class="toc-text">相关工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u540E_u8BB0_uFF082013-7-7_uFF09"><span class="toc-number">5.</span> <span class="toc-text">后记（2013-7-7）</span></a></li></ol>
+		
+		</div>
+		
+		<img src="/images/alipay-plugin-1.jpg">
+<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>因为开了 iOSDevTips 的微信公共账号，老收到各种 iOS 开发的问题，前两天收到一个问题的内容是：</p>
+<blockquote>
+<p>请问像支付宝钱包那样可以在应用里安装自己的应用，是已经在应用里写了逻辑，还是可以向应用里发送代码 ?</p>
+</blockquote>
+<p>我觉得这个问题挺有意思的，估计大家都感兴趣，所以今天就抽空研究了一下，将支付宝客户端的插件机制具体实现方式介绍给大家。</p>
+<p>先介绍一下该插件机制，如上图所示，支付宝客户端在安装后，对于像 “彩票”、“爱心捐赠” 这类功能，需要再点击安装一次，然后才可以使用。有些时候该插件功能进行了升级，需要点击升级才可以继续使用。插件的方式有利于软件动态增加新的功能或升级功能，而不用再一次向 AppStore 提交审核。另外，由于用户不需要的插件可以不用安装，也缩小了应用本身的体积大小，节省了下载流量。</p>
+<a id="more"></a>
+<h2 id="u5206_u6790_u8FC7_u7A0B"><a href="#u5206_u6790_u8FC7_u7A0B" class="headerlink" title="分析过程"></a>分析过程</h2><h3 id="u622A_u53D6_u7F51_u7EDC_u8BF7_u6C42"><a href="#u622A_u53D6_u7F51_u7EDC_u8BF7_u6C42" class="headerlink" title="截取网络请求"></a>截取网络请求</h3><p>分析第一步，截取网络请求。截取网络请求可以查看当用户点击 “彩票” 进行安装的时候，客户端到底做了什么事情。使用 Charles 的代理设置功能，启动一个 http 代理，然后在 iPhone 上设置连接此代理，则可以看到，当点击 “彩票” 插件时，客户端下载了一个名为 10000011.amr 的文件。如下图所示：</p>
+<img src="/images/alipay-plugin-2.jpg">
+<h3 id="u4E0B_u8F7D_u63D2_u4EF6_u6587_u4EF6"><a href="#u4E0B_u8F7D_u63D2_u4EF6_u6587_u4EF6" class="headerlink" title="下载插件文件"></a>下载插件文件</h3><p>尝试用 wget 将文件下载下来，发现其没有验证 cookie，下载成功，命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget http://download.alipay.com/mobilecsprod/alipay.mobile/<span class="number">20130601021432806</span>/xlarge/<span class="number">10000011</span>.amr</span><br></pre></td></tr></table></figure>
+<p>amr 本意表示是一个音频文件，明显不对，尝试将其后缀名改成 zip，成功将其解压。用 itools 连接上支付宝的客户端，同样能看到客户端将其下载后，也是解压到 document 目录下的。解压后的内容与应用内新增加的内容一致，如图所示：</p>
+<img src="/images/alipay-plugin-3.jpg">
+<h3 id="u5206_u6790_u6587_u4EF6_u5185_u5BB9"><a href="#u5206_u6790_u6587_u4EF6_u5185_u5BB9" class="headerlink" title="分析文件内容"></a>分析文件内容</h3><p>大概浏览了一下解压后的文件，主要包括 html、css 和 js 文件。可见支付宝的插件机器是通过 UIWebView 来展示内容的方式来实现的，那为什么要先下载安装这些内容而不通过 UIWebView 实时下载 html 呢？这主要应该是为了节省相应的流量。我看了一下，10000011.amr 文件整个有将近 1M 大小，如果不通过插件机制预先下载，则只能依赖系统对于 UIWebView 的缓存来节省流量，这相对来说没有前者靠谱。</p>
+<p>另外，使用基于 UIWebView 的方式来展示插件，也有利于代码的复用。因为这些逻辑都是用 js 来写的，可以同样应用于 Android 平台，在 Config.js 文件中，明显可以看到对于各类平台的判断逻辑。如下图所示：</p>
+<img src="/images/alipay-plugin-4.jpg">
+<p>另外，/www/demo/index-alipay-native.html 文件即该插件的首页，用浏览器打开就可以看到和手机端一样的内容。如下载图所示（左半边是手机上的应用截图，右半边是浏览器打开该 html 文件的截图）：</p>
+<img src="/images/alipay-plugin-5.jpg">
+<h3 id="u63D2_u4EF6_u7684_u7F51_u7EDC_u901A_u8BAF"><a href="#u63D2_u4EF6_u7684_u7F51_u7EDC_u901A_u8BAF" class="headerlink" title="插件的网络通讯"></a>插件的网络通讯</h3><p>接下来感兴趣的是该插件是如何完成和支付宝后台的网络通讯的。可以想到有两种可能的方式：</p>
+<ol>
+<li>直接和支付宝后台通讯</li>
+<li>和 Native 端通讯，然后 Native 端和服务器通讯。</li>
+</ol>
+<p>要验证这个需要读该插件的 js 源代码，整个 js 源码逻辑还是比较干净的，主要用了玉伯写的 <a href="http://seajs.org/docs/" target="_blank" rel="external">seajs</a> 做模块化加载，<a href="http://backbonejs.org/" target="_blank" rel="external">backbone.js</a> 是一个前端的 MVC 框架，<a href="http://zeptojs.com/" target="_blank" rel="external">zepto.js</a> 是一个更适合于移动端使用的 “JQuery”。</p>
+<p>大概扫了一下，感觉更可能是用的方法一：直接和支付宝后台通讯 , 因为 Config.js 中都明确将网络通讯的地址写下来了。另一个证据是，利用下面的脚本扫描整个 js 源码，只能在 backbone 中搜到对于 iframe 的使用。而在 iOS 开发中，如果 js 端和 native 端要通讯，是需要用到 iframe 的，详细原理可以参见我的另一篇文章 <a href="/2012/03/24/talk-about-uiwebview-and-phonegap/">《关于 UIWebView 和 PhoneGap 的总结》</a>。不过我不能完全确认，因为我还没有找到相应控制页面切换和跳转的 js 代码，如果你找到了，麻烦告诉我。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find . -type f -name <span class="string">"*.js"</span> | xargs grep <span class="string">"iframe"</span></span><br></pre></td></tr></table></figure>
+<h3 id="u4EA4_u6613_u7684_u5B89_u5168"><a href="#u4EA4_u6613_u7684_u5B89_u5168" class="headerlink" title="交易的安全"></a>交易的安全</h3><p>用 Charles 可以截取到，当有网络交易时，应用会另外启动一个 https 的安全链接，完成整个交易过程的加密。如下图所示：</p>
+<img src="/images/alipay-plugin-6.jpg">
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>支付宝的插件机制整体上就是通过 html 和 javascript 方式实现的，主要的好处是：</p>
+<ol>
+<li>跨平台 (可以同时用在 iOS 和 Android 客户端）</li>
+<li>省流量（不需要的插件不用下载，插件本地缓存长期存在不会过期，自己管理插件更新逻辑）</li>
+<li>更新方便（不用每次提交 AppStore 审核）</li>
+</ol>
+<p>坏处如果非要说有的话，就是用 javascript 写 iOS 界面，无法提供非常炫的 UI 交互以及利用到 iOS 的所有平台特性。不过象支付宝这种工具类应用，也不需要很复杂的 UI 交互效果。</p>
+<p>另外教大家一个小技巧，如果你不确定某个页面是不是 UIWebView 做的，直接在那个页面长按，如果弹出 “ 拷贝，定义，学习 “ 这种菜单，那就是确定无疑是 UIWebView 的界面了。如下图所示：</p>
+<img src="/images/ios-menu-2.jpg">
+<h2 id="u76F8_u5173_u5DE5_u5177"><a href="#u76F8_u5173_u5DE5_u5177" class="headerlink" title="相关工具"></a>相关工具</h2><p>欢迎关注我的技术微博 <a href="http://weibo.com/tangqiaoboy" target="_blank" rel="external">@ 唐巧 _boy</a> 和微信公共账号 <a href="http://chuansong.me/account/iosDevTips" target="_blank" rel="external">iOSDevTips</a> ，每天收获一些关于 iOS 开发的学习资料和技巧心得。</p>
+<p>我在研究时使用了 <a href="http://www.charlesproxy.com/" target="_blank" rel="external">Charles</a> 来截获支付宝客户端的网络请求，用 <a href="http://itools.hk/" target="_blank" rel="external">iTools</a> 来查看支付宝客户端的本地内容。如果你想自行验证本文内容，请先下载上述工具。在此就不额外介绍它们的使用了。</p>
+<h2 id="u540E_u8BB0_uFF082013-7-7_uFF09"><a href="#u540E_u8BB0_uFF082013-7-7_uFF09" class="headerlink" title="后记（2013-7-7）"></a>后记（2013-7-7）</h2><ol>
+<li><p>在完成上文后，Allen 在他的博客上先后分享了两篇更深入分析的文章 <a href="http://imallen.com/blog/2013/06/26/inside-alipay-plugin.html" target="_blank" rel="external">《浅析支付宝钱包插件》</a> 和 <a href="http://imallen.com/blog/2013/07/06/about-alipay-plugin-and-phonegap.html" target="_blank" rel="external">《再谈支付宝钱包插件和说好的 Demo》</a>。 这两篇文章都比本文深入得多，值得大家阅读。</p>
+</li>
+<li><p>写完上文，居然收到了来自支付宝卫朴（花名）的工作邀请。不过我现在创业正在努力当中，所以我拒绝了邀请。看来这也是一种找工作的办法啊，比投简历管用，呵呵。</p>
+</li>
+<li><p>从一些朋友那儿了解到，支付宝因为本文而会在以后的版本中加强安全性，至少不会像现在这样，所有逻辑都在写在 javascript 中，并且还带有注释，这也是我希望看到的结果。愿支付宝越做越好。</p>
+</li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2013/06/23/alipay-plugin-mechanism/" data-title="分析支付宝客户端的插件机制 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/07/24/use-crashlytics/" title="使用Crashlytics来保存应用崩溃信息">
+  <strong>上一篇：</strong><br/>
+  <span>
+  使用Crashlytics来保存应用崩溃信息</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/06/17/startup-anniversary-note/"  title="写在创业一周年">
+ <strong>下一篇：</strong><br/> 
+ <span>写在创业一周年
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

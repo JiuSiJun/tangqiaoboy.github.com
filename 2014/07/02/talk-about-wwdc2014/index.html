@@ -1,0 +1,423 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>WWDC2014，苹果的“软件”发布会 | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="在今年的 6 月 2 日到 6 日，苹果照例举行了一年一次的全球开发者大会（World Wide Developer Conference，简称 WWDC）。由于去年大会门票在不到 2 分钟之内被抢购一空，今年苹果改成了用抽签的方式来决定 WWDC 现场门票的购买权。在发布会前，大家对今年的发布会充满了各种期待，希望在发布会上见到 iPhone6、iWatch、新一代的耳机（因为苹果收购了耳机厂商">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WWDC2014，苹果的“软件”发布会">
+<meta property="og:url" content="http://blog.devtang.com/2014/07/02/talk-about-wwdc2014/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="在今年的 6 月 2 日到 6 日，苹果照例举行了一年一次的全球开发者大会（World Wide Developer Conference，简称 WWDC）。由于去年大会门票在不到 2 分钟之内被抢购一空，今年苹果改成了用抽签的方式来决定 WWDC 现场门票的购买权。在发布会前，大家对今年的发布会充满了各种期待，希望在发布会上见到 iPhone6、iWatch、新一代的耳机（因为苹果收购了耳机厂商">
+<meta property="og:image" content="http://blog.devtang.com/images/wwdc2014.jpg">
+<meta property="og:updated_time" content="2016-02-16T10:26:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WWDC2014，苹果的“软件”发布会">
+<meta name="twitter:description" content="在今年的 6 月 2 日到 6 日，苹果照例举行了一年一次的全球开发者大会（World Wide Developer Conference，简称 WWDC）。由于去年大会门票在不到 2 分钟之内被抢购一空，今年苹果改成了用抽签的方式来决定 WWDC 现场门票的购买权。在发布会前，大家对今年的发布会充满了各种期待，希望在发布会上见到 iPhone6、iWatch、新一代的耳机（因为苹果收购了耳机厂商">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/07/02/talk-about-wwdc2014/" title="WWDC2014，苹果的“软件”发布会" itemprop="url">WWDC2014，苹果的“软件”发布会</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2014-07-02T14:04:10.000Z" itemprop="datePublished"> 发表于 2014-07-02 22:04</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#OS_X"><span class="toc-number">1.</span> <span class="toc-text">OS X</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#iOS"><span class="toc-number">2.</span> <span class="toc-text">iOS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Swift"><span class="toc-number">3.</span> <span class="toc-text">Swift</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
+		
+		</div>
+		
+		<img src="/images/wwdc2014.jpg">
+<p>在今年的 6 月 2 日到 6 日，苹果照例举行了一年一次的全球开发者大会（World Wide Developer Conference，简称 WWDC）。由于去年大会门票在不到 2 分钟之内被抢购一空，今年苹果改成了用抽签的方式来决定 WWDC 现场门票的购买权。在发布会前，大家对今年的发布会充满了各种期待，希望在发布会上见到 iPhone6、iWatch、新一代的耳机（因为苹果收购了耳机厂商 beats）以及新版的 Macbook。但是让人惊讶的是，苹果这次在大会上并没有发布任何新的硬件产品，但展示出其在软件上的各种功能改进和整合上的巨大努力，让我们一起来看看今年苹果的 WWDC 到底带来了哪些改变。</p>
+<h2 id="OS_X"><a href="#OS_X" class="headerlink" title="OS X"></a>OS X</h2><p>苹果沿用了从去年开始的，以地名来命名操作系统的习惯，新的 OS X 10.10 操作系统的名字为 Yosemite（约塞米蒂国家公园）。Yosemite 吸收了 iOS7 开始的扁平化的设计风格，整个 Finder、Dock 栏及相关应用都重新绘制了新的图标和界面，并且支持偏平化和毛玻璃的半透明效果。另外 Yosemite 还有一些细节改进，例如重新设计的通知中心、更快的 Safari、更好用的邮件客户端等。与去年一样，新版的 Yosemite 操作系统仍然完全免费。</p>
+<p>另外我们可以看到，今年苹果在软件上的许多改进都 “借鉴” 了不少其它应用。例如新版的 Spotlight 就和 Mac 下优秀的应用 Alfred 非常相似。而全新的 iCloud Drive 客户端，不但支持所有 Mac 和 iOS 设备，还支持 Windows 平台，这无疑是和 Dropbox 开始了正面的竞争（Dropbox 在两年前拒绝了来自乔布斯 8 亿美元左右的收购请求，现在估值达到了 100 亿美元）。</p>
+<p>不过在我看来，以上这些改进比起 handoff 功能来说，都不算什么。handoff 功能显示出苹果对于功能整合的深度思考。苹果提了几个问题：</p>
+<ul>
+<li>当我在电脑上工作时，这个时候来了一个电话或短信，为什么我不能直接在电脑上接电话或回复短信呢？</li>
+<li>当我在电脑的浏览器上看到一个电话号码时，我为什么不能直接点击这个电话号码拨打电话呢？</li>
+<li>当我在手机上回复邮件写了一半，这个时候走到电脑前面了，为什么不能方便地在电脑上继续写邮件呢？</li>
+<li>当我在电脑上看到一个小说正入迷，这个时候要出门，为什么不能直接拿起手机继续看呢？</li>
+</ul>
+<p>于是这次，苹果将 Mac 电脑和 iPhone、iPad 的功能进行了深度整合，当你拥有这三个设备时，它们每一个都可以接打电话和收发短信，你在它们任何一个设备上编辑的文档，也可以实时同步到另一个设备上。handoff 并不是苹果的应用独有的功能，苹果将其相关的 API 都开放给了开发者，所以开发者也可以完全开发出支持 handoff 功能的应用。</p>
+<p>handoff 功能对于苹果而言意义重大，因为它再次重新定义了硬件生态圈，通过软件的深度整合，拥有多个苹果设备的用户会享受到极大的便利性。每一个设备的功能和信息都和其它苹果设备完美配合，使得单个硬件本身的功能被放大。这将催进拥有一个苹果设备的用户购买更多苹果的其它设备。随着苹果以后推出更多的智能硬件，其构造的硬件生态圈将像 App Store 软件生态圈一样，增加其产品的竞争力。</p>
+<h2 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h2><p>苹果在这次大会上推出了新的 iOS8 操作系统。在 iOS8 中，iMessage 功能更一步增强，增加了发送语音的功能以及支持多人群聊，很多人都调侃说：“如果加上朋友圈，iMessage 就和微信功能一样了”。但 iMessage 并不支持 Android 平台，所以对微信一类的应用来说完全没有任何威胁。iOS8 中的图片编辑功能也得到了增强，通知中心允许用户进行更多地定制。另外苹果提供了 HealthKit，用于集成用户健康相关的信息。新的 Extension 功能类似于 Android 的 Intent，能够方便应用间相互调用。</p>
+<p>相对于 Yosemite 带来的整合方面的改进，新版 iOS8 的改进的重点则是开放。苹果开放了输入法接口，允许第三方提供输入法。苹果也开放了 Touch ID，允许第三方应用获得指纹信息。HomeKit 则为智能硬件开放了不少可以互操作的接口。另外，iOS8 还新增了 4000 个新的 API，开放了大量底层 API 接口供应用调用。所以对于普通用户而言，iOS8 新增的可见功能可能是有限的，但是其开放的大量 API 和新 SDK 释放出了巨大的想象空间，相信会产生更多有趣的应用。</p>
+<h2 id="Swift"><a href="#Swift" class="headerlink" title="Swift"></a>Swift</h2><p>这次的 WWDC 的口号是：“Write the code. Change the world”，Swift 的推出算是很好地诠释了本口号。苹果的 Objective-C 语言发明于与 C++ 同时期的上世纪 80 年代初，虽然苹果对其进行了很多次改进，但这终究像给应用打补丁一样，不是特别舒服。</p>
+<p>这次 Swift 的推出，算是苹果大胆的一次尝试，试图用全新的编程语言来提高 OS X 和 iOS 程序员的开发效率，单从语言特性上来看，Swift 吸收了众多现代编程语言的优秀特性，例如类型推断（Type inference）、范型（Generic）、闭包（Closure）、命名空间（namespace），元组（tuple）等，整体语法上也更加简洁。我们也了解到 Swift 是苹果从 4 年前就开始筹划中的事情，可见苹果在长远规划上对于 Swift 语言的重视，相信未来 Swift 会接替更多 Objective-C 原本的地位，所有 iOS 开发者都应该花时间学习这门全新的语言。</p>
+<p>苹果这次推出 Swift 也吸引了大量的讨论，其中比较不正确的观点是认为 iOS 开发的门槛因此而降低了。从我和身边的同行对 Swift 的学习和讨论来看，Swift 并不是一门可以简单上手的语言。并且在未来一到两年内，iOS 开发必然会经历同时使用 Objective-C 和 Swift 的过渡阶段。对于 iOS 开发者，除了必须掌握以前的 Objective-C 语言的知识，还需要学习并不简单的 Swift，可见 iOS 开发的门槛不但没有降低，反而提高了不少。</p>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>总体来说，苹果今年的 WWDC 大会虽然没有推出硬件上的新品，但是其在软件功能整合、开放系统 API 以及改进开发工具上做出了巨大努力，这些都会给苹果产品带来更大的竞争优势。</p>
+<p>注：本文已投稿发表到 <a href="http://www.csdn.net/article/2014-07-01/2820470%E3%80%82" target="_blank" rel="external">CSDN</a>，未经允许不得转载。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2014/07/02/talk-about-wwdc2014/" data-title="WWDC2014，苹果的“软件”发布会 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/07/03/ios-weekly-16/" title="iOS移动开发周报-第16期">
+  <strong>上一篇：</strong><br/>
+  <span>
+  iOS移动开发周报-第16期</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/06/29/ios-dev-tools/"  title="那些好用的iOS开发工具">
+ <strong>下一篇：</strong><br/> 
+ <span>那些好用的iOS开发工具
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

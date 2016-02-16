@@ -1,0 +1,426 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>iPhone开发常问的十个问题(2012年3月版) | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="前言今天去stackoverflow.com上看了一下iPhone标签下排名最高的10个问题，将它们整理出来，希望这些常见问题能帮到一些iPhone开发的初学者。本来想把答案也翻译过来的，后来发现答案资料通常都比较复杂，翻译起来太麻烦。所以大家还是看英文的答案吧，我只顺带用中文总结一下答案。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iPhone开发常问的十个问题(2012年3月版)">
+<meta property="og:url" content="http://blog.devtang.com/2012/03/15/10-most-common-questions-on-stackoverflow-201203/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="前言今天去stackoverflow.com上看了一下iPhone标签下排名最高的10个问题，将它们整理出来，希望这些常见问题能帮到一些iPhone开发的初学者。本来想把答案也翻译过来的，后来发现答案资料通常都比较复杂，翻译起来太麻烦。所以大家还是看英文的答案吧，我只顺带用中文总结一下答案。">
+<meta property="og:updated_time" content="2016-02-16T10:26:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iPhone开发常问的十个问题(2012年3月版)">
+<meta name="twitter:description" content="前言今天去stackoverflow.com上看了一下iPhone标签下排名最高的10个问题，将它们整理出来，希望这些常见问题能帮到一些iPhone开发的初学者。本来想把答案也翻译过来的，后来发现答案资料通常都比较复杂，翻译起来太麻烦。所以大家还是看英文的答案吧，我只顺带用中文总结一下答案。">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2012/03/15/10-most-common-questions-on-stackoverflow-201203/" title="iPhone开发常问的十个问题(2012年3月版)" itemprop="url">iPhone开发常问的十个问题(2012年3月版)</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2012-03-15T14:04:00.000Z" itemprop="datePublished"> 发表于 2012-03-15 22:04</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u95EE_u9898_u4E00_3A__u6709_u54EA_u4E9BiPhone_u5F00_u53D1_u548CObjective-C_u7684_u5165_u95E8_u8D44_u6599"><span class="toc-number">1.1.</span> <span class="toc-text">问题一: 有哪些iPhone开发和Objective-C的入门资料</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u95EE_u9898_u4E8C_3A__u5982_u4F55_u5728Windows_u4E2D_u8FDB_u884CiPhone_u5F00_u53D1"><span class="toc-number">1.2.</span> <span class="toc-text">问题二: 如何在Windows中进行iPhone开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u95EE_u9898_u4E09_3A__u6709_u54EA_u4E9B_u57FA_u4E8EiPhone_u7684base64_u7F16_u7801_u7684_u5E93"><span class="toc-number">1.3.</span> <span class="toc-text">问题三: 有哪些基于iPhone的base64编码的库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u95EE_u9898_u56DB_3A__u5982_u4F55_u5224_u65AD_u5F53_u524DiPhone_u662F_u5426_u8054_u7F51"><span class="toc-number">1.4.</span> <span class="toc-text">问题四: 如何判断当前iPhone是否联网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u95EE_u9898_u4E94_3A__u5982_u4F55_u505A_u4E00_u4E2A_u5FEB_u901F_u5E76_u4E14_u8F7B_u91CF_u7EA7_u7684PDF_u9605_u8BFB_u5668"><span class="toc-number">1.5.</span> <span class="toc-text">问题五: 如何做一个快速并且轻量级的PDF阅读器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u95EE_u9898_u516D_3A__u5982_u4F55_u8BA9_u6211_u7684app_u652F_u6301_u6253_u5F00_u4E00_u79CD_u683C_u5F0F_u7684_u6587_u4EF6"><span class="toc-number">1.6.</span> <span class="toc-text">问题六: 如何让我的app支持打开一种格式的文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u95EE_u9898_u4E03_3A__u5F53_u952E_u76D8_u51FA_u73B0_u7684_u65F6_u5019_uFF0C_u5982_u4F55_u8BA9UITextField_u81EA_u52A8_u4E0A_u79FB"><span class="toc-number">1.7.</span> <span class="toc-text">问题七: 当键盘出现的时候，如何让UITextField自动上移</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u95EE_u9898_u516B_3A__u6709_u5173UIImagePickerController_2C_Image_2C_Memory_u7684_u95EE_u9898_u548C_u7B54_u6848_u6574_u7406"><span class="toc-number">1.8.</span> <span class="toc-text">问题八: 有关UIImagePickerController, Image, Memory的问题和答案整理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u95EE_u9898_u4E5D_3A__u5982_u4F55_u5BF9_u5305_u542B_u81EA_u5B9A_u4E49_u5143_u7D20_u7C7B_u578B_u7684NSMutableArray_u6392_u5E8F"><span class="toc-number">1.9.</span> <span class="toc-text">问题九: 如何对包含自定义元素类型的NSMutableArray排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u95EE_u9898_u5341_3A__u5982_u4F55_u5728iPhone_u4E2D_u4F7F_u7528_u81EA_u5B9A_u4E49_u5B57_u4F53"><span class="toc-number">1.10.</span> <span class="toc-text">问题十: 如何在iPhone中使用自定义字体</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>今天去stackoverflow.com上看了一下iPhone标签下排名最高的10个问题，将它们整理出来，希望这些常见问题能帮到一些iPhone开发的初学者。本来想把答案也翻译过来的，后来发现答案资料通常都比较复杂，翻译起来太麻烦。所以大家还是看英文的答案吧，我只顺带用中文总结一下答案。</p>
+<a id="more"></a>
+<h3 id="u95EE_u9898_u4E00_3A__u6709_u54EA_u4E9BiPhone_u5F00_u53D1_u548CObjective-C_u7684_u5165_u95E8_u8D44_u6599"><a href="#u95EE_u9898_u4E00_3A__u6709_u54EA_u4E9BiPhone_u5F00_u53D1_u548CObjective-C_u7684_u5165_u95E8_u8D44_u6599" class="headerlink" title="问题一: 有哪些iPhone开发和Objective-C的入门资料"></a>问题一: <a href="http://stackoverflow.com/questions/1939/how-to-articles-for-iphone-development-and-objective-c" target="_blank" rel="external">有哪些iPhone开发和Objective-C的入门资料</a></h3><p>这个确实是最常问的问题了。对于我个人来说，入门时所看的资料主要是《From C++ to Objective-c》和《iPhone开发基础教程》，另外，我也把stanford的iphone视频课程看完了，链接是：<a href="http://www.stanford.edu/class/cs193p/cgi-bin/index.php" target="_blank" rel="external">http://www.stanford.edu/class/cs193p/cgi-bin/index.php</a></p>
+<p>个人体会是边学边做，上手会比较快。编程这东西，不自己上手做做，没感觉。另外，如果入门之后想提高的话，我觉得还是需要把苹果每年的WWDC视频都下载下来看看，里面讲的东西还是非常有用的, 链接是: <a href="http://developer.apple.com/WWDC/" target="_blank" rel="external">http://developer.apple.com/WWDC/</a></p>
+<h3 id="u95EE_u9898_u4E8C_3A__u5982_u4F55_u5728Windows_u4E2D_u8FDB_u884CiPhone_u5F00_u53D1"><a href="#u95EE_u9898_u4E8C_3A__u5982_u4F55_u5728Windows_u4E2D_u8FDB_u884CiPhone_u5F00_u53D1" class="headerlink" title="问题二: 如何在Windows中进行iPhone开发"></a>问题二: <a href="http://stackoverflow.com/questions/113547/iphone-development-on-windows" target="_blank" rel="external">如何在Windows中进行iPhone开发</a></h3><p>大家还是把Windows想太全能了。至少在开发这一块上，Windows对于程序员来说，还是相当不友好的。这一点在使用Mac系统后，差别一下子就体会到了。就比如说git，在Windows下使用就有很多问题。另外话说回来，Mac机也不是什么都好，在中国，Mac系统相关的国内软件相当少，Mac下的游戏也相对Windows少很多，如果你想用Mac机来娱乐的话，会比较受限制。</p>
+<h3 id="u95EE_u9898_u4E09_3A__u6709_u54EA_u4E9B_u57FA_u4E8EiPhone_u7684base64_u7F16_u7801_u7684_u5E93"><a href="#u95EE_u9898_u4E09_3A__u6709_u54EA_u4E9B_u57FA_u4E8EiPhone_u7684base64_u7F16_u7801_u7684_u5E93" class="headerlink" title="问题三: 有哪些基于iPhone的base64编码的库"></a>问题三: <a href="http://stackoverflow.com/questions/392464/any-base64-library-on-iphone-sdk" target="_blank" rel="external">有哪些基于iPhone的base64编码的库</a></h3><p>从这个问题的答案中，我选了一个我个人觉得比较好用的Base64编码库，放到我的Xcode Tool中了。地址是：<a href="https://github.com/tangqiaoboy/xcode_tool/tree/master/Encoding" target="_blank" rel="external">https://github.com/tangqiaoboy/xcode_tool/tree/master/Encoding</a>。</p>
+<h3 id="u95EE_u9898_u56DB_3A__u5982_u4F55_u5224_u65AD_u5F53_u524DiPhone_u662F_u5426_u8054_u7F51"><a href="#u95EE_u9898_u56DB_3A__u5982_u4F55_u5224_u65AD_u5F53_u524DiPhone_u662F_u5426_u8054_u7F51" class="headerlink" title="问题四: 如何判断当前iPhone是否联网"></a>问题四: <a href="http://stackoverflow.com/questions/1083701/how-to-check-for-an-active-internet-connection-on-iphone-sdk" target="_blank" rel="external">如何判断当前iPhone是否联网</a></h3><p>最佳的答案是用苹果提供的Reachability类。详细的使用方式大家自己看答案吧，写得很清楚。</p>
+<h3 id="u95EE_u9898_u4E94_3A__u5982_u4F55_u505A_u4E00_u4E2A_u5FEB_u901F_u5E76_u4E14_u8F7B_u91CF_u7EA7_u7684PDF_u9605_u8BFB_u5668"><a href="#u95EE_u9898_u4E94_3A__u5982_u4F55_u505A_u4E00_u4E2A_u5FEB_u901F_u5E76_u4E14_u8F7B_u91CF_u7EA7_u7684PDF_u9605_u8BFB_u5668" class="headerlink" title="问题五: 如何做一个快速并且轻量级的PDF阅读器"></a>问题五: <a href="http://stackoverflow.com/questions/3889634/fast-and-lean-pdf-viewer-for-iphone-ipad-ios-tips-and-hints" target="_blank" rel="external">如何做一个快速并且轻量级的PDF阅读器</a></h3><p>我暂时没这个需求，就没有详细看答案。</p>
+<h3 id="u95EE_u9898_u516D_3A__u5982_u4F55_u8BA9_u6211_u7684app_u652F_u6301_u6253_u5F00_u4E00_u79CD_u683C_u5F0F_u7684_u6587_u4EF6"><a href="#u95EE_u9898_u516D_3A__u5982_u4F55_u8BA9_u6211_u7684app_u652F_u6301_u6253_u5F00_u4E00_u79CD_u683C_u5F0F_u7684_u6587_u4EF6" class="headerlink" title="问题六: 如何让我的app支持打开一种格式的文件"></a>问题六: <a href="http://stackoverflow.com/questions/2774343/how-do-i-associate-file-types-with-an-iphone-application" target="_blank" rel="external">如何让我的app支持打开一种格式的文件</a></h3><p>在iPhone 3.2以上系统中，使用URL schemes即可完成这个需求。详细见答案。</p>
+<h3 id="u95EE_u9898_u4E03_3A__u5F53_u952E_u76D8_u51FA_u73B0_u7684_u65F6_u5019_uFF0C_u5982_u4F55_u8BA9UITextField_u81EA_u52A8_u4E0A_u79FB"><a href="#u95EE_u9898_u4E03_3A__u5F53_u952E_u76D8_u51FA_u73B0_u7684_u65F6_u5019_uFF0C_u5982_u4F55_u8BA9UITextField_u81EA_u52A8_u4E0A_u79FB" class="headerlink" title="问题七: 当键盘出现的时候，如何让UITextField自动上移"></a>问题七: <a href="http://stackoverflow.com/questions/1126726/how-to-make-a-uitextfield-move-up-when-keyboard-is-present" target="_blank" rel="external">当键盘出现的时候，如何让UITextField自动上移</a></h3><p>对于iPhone界面控件的操作应该算是开发中必备的能力。键盘出现的时候上移相关的控件算是常见的需求，但是从这么多人问这个问题就可以看出，还是有很多人对这些需求的实现方式有疑问。</p>
+<p>对于这个问题，主要是通过增加对键盘出现和消失的相应的Notification，然后在键盘出现和消息的时候，通过设置相关控件的frame来实现。相关代码如下，来源自stackoverflow。</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">-(<span class="keyword">void</span>)textFieldDidBeginEditing:(<span class="built_in">UITextField</span> *)sender</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> ([sender isEqual:_textField])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//move the main view, so that the keyboard does not hide it.</span></span><br><span class="line">        <span class="keyword">if</span>  (<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span><span class="variable">.origin</span><span class="variable">.y</span> &gt;= <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            [<span class="keyword">self</span> setViewMovedUp:<span class="literal">YES</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//method to move the view up/down whenever the keyboard is shown/dismissed</span></span><br><span class="line">-(<span class="keyword">void</span>)setViewMovedUp:(<span class="built_in">BOOL</span>)movedUp</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="built_in">UIView</span> beginAnimations:<span class="literal">nil</span> context:<span class="literal">NULL</span>];</span><br><span class="line">    [<span class="built_in">UIView</span> setAnimationDuration:<span class="number">0.5</span>]; <span class="comment">// if you want to slide up the view</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">CGRect</span> rect = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span>;</span><br><span class="line">    <span class="keyword">if</span> (movedUp)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 1. move the view's origin up so that the text field that will be hidden come above the keyboard </span></span><br><span class="line">        <span class="comment">// 2. increase the size of the view so that the area behind the keyboard is covered up.</span></span><br><span class="line">        rect<span class="variable">.origin</span><span class="variable">.y</span> -= kOFFSET_FOR_KEYBOARD;</span><br><span class="line">        rect<span class="variable">.size</span><span class="variable">.height</span> += kOFFSET_FOR_KEYBOARD;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// revert back to the normal state.</span></span><br><span class="line">        rect<span class="variable">.origin</span><span class="variable">.y</span> += kOFFSET_FOR_KEYBOARD;</span><br><span class="line">        rect<span class="variable">.size</span><span class="variable">.height</span> -= kOFFSET_FOR_KEYBOARD;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span> = rect;</span><br><span class="line"></span><br><span class="line">    [<span class="built_in">UIView</span> commitAnimations];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)keyboardWillShow:(<span class="built_in">NSNotification</span> *)notif</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//keyboard will be shown now. depending for which textfield is active, move up or move down the view appropriately</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ([_textField isFirstResponder] &amp;&amp; <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span><span class="variable">.origin</span><span class="variable">.y</span> &gt;= <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        [<span class="keyword">self</span> setViewMovedUp:<span class="literal">YES</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (![_textField isFirstResponder] &amp;&amp; <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span><span class="variable">.origin</span><span class="variable">.y</span> &lt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        [<span class="keyword">self</span> setViewMovedUp:<span class="literal">NO</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewWillAppear:(<span class="built_in">BOOL</span>)animated</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// register for keyboard notifications</span></span><br><span class="line">    [[<span class="built_in">NSNotificationCenter</span> defaultCenter] addObserver:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(keyboardWillShow:) </span><br><span class="line">                                                 name:<span class="built_in">UIKeyboardWillShowNotification</span> object:<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.window</span>]; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewWillDisappear:(<span class="built_in">BOOL</span>)animated</span><br><span class="line">&#123;</span><br><span class="line">     <span class="comment">// unregister for keyboard notifications while not visible.</span></span><br><span class="line">    [[<span class="built_in">NSNotificationCenter</span> defaultCenter] removeObserver:<span class="keyword">self</span> name:<span class="built_in">UIKeyboardWillShowNotification</span> object:<span class="literal">nil</span>]; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="u95EE_u9898_u516B_3A__u6709_u5173UIImagePickerController_2C_Image_2C_Memory_u7684_u95EE_u9898_u548C_u7B54_u6848_u6574_u7406"><a href="#u95EE_u9898_u516B_3A__u6709_u5173UIImagePickerController_2C_Image_2C_Memory_u7684_u95EE_u9898_u548C_u7B54_u6848_u6574_u7406" class="headerlink" title="问题八: 有关UIImagePickerController, Image, Memory的问题和答案整理"></a>问题八: <a href="http://stackoverflow.com/questions/1282830/uiimagepickercontroller-uiimage-memory-and-more" target="_blank" rel="external">有关UIImagePickerController, Image, Memory的问题和答案整理</a></h3><p>这个其实是一个相关问题的汇总贴。其中对于UIImage的操作示例挺有用处。做iPhone开发，总是会遇到一些图象处理相关的东西，能够从这儿积累一些相应的知识，到真正自己需要的时候帮助就大了。</p>
+<h3 id="u95EE_u9898_u4E5D_3A__u5982_u4F55_u5BF9_u5305_u542B_u81EA_u5B9A_u4E49_u5143_u7D20_u7C7B_u578B_u7684NSMutableArray_u6392_u5E8F"><a href="#u95EE_u9898_u4E5D_3A__u5982_u4F55_u5BF9_u5305_u542B_u81EA_u5B9A_u4E49_u5143_u7D20_u7C7B_u578B_u7684NSMutableArray_u6392_u5E8F" class="headerlink" title="问题九: 如何对包含自定义元素类型的NSMutableArray排序"></a>问题九: <a href="http://stackoverflow.com/questions/805547/how-to-sort-an-nsmutablearray-with-custom-objects-in-it" target="_blank" rel="external">如何对包含自定义元素类型的NSMutableArray排序</a></h3><p>答案讨论了各种方法，下面是其中提到的最简单的方法：定义一个比较用的selector</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="built_in">NSComparisonResult</span>)compare:(Person *)otherObject &#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="keyword">self</span><span class="variable">.birthDate</span> compare:otherObject<span class="variable">.birthDate</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSArray</span> *sortedArray;</span><br><span class="line">sortedArray = [drinkDetails sortedArrayUsingSelector:<span class="keyword">@selector</span>(compare:)];</span><br></pre></td></tr></table></figure>
+<h3 id="u95EE_u9898_u5341_3A__u5982_u4F55_u5728iPhone_u4E2D_u4F7F_u7528_u81EA_u5B9A_u4E49_u5B57_u4F53"><a href="#u95EE_u9898_u5341_3A__u5982_u4F55_u5728iPhone_u4E2D_u4F7F_u7528_u81EA_u5B9A_u4E49_u5B57_u4F53" class="headerlink" title="问题十: 如何在iPhone中使用自定义字体"></a>问题十: <a href="http://stackoverflow.com/questions/360751/can-i-embed-a-custom-font-in-an-iphone-application" target="_blank" rel="external">如何在iPhone中使用自定义字体</a></h3><p>答案讨论了在iOS3.2以前及以后的做法，现在都5.1了，估计支持3.2以前的app很少了吧。所以我把iOS3.2以后的办法附在下面。简单来说，就是iOS3.2苹果支持自定义字体，只需要在Info.plist文件中设置UIAppFonts相关的信息即可。步骤如下：</p>
+<ol>
+<li>将自定义字体加到你的工程资源文件中</li>
+<li>在 info.plist 文件中增加一名为 UIAppFonts 的key</li>
+<li>将这个key修改成array</li>
+<li>将你用到的所有字体的名字，作为这个array的值，一项一项填进去（包括扩展名）</li>
+<li>保存 info.plist</li>
+<li>现在就可以在代码中直接用[UIFont fontWithName:@”CustomFontName” size:12]来取得你自定义的字体了。 </li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2012/03/15/10-most-common-questions-on-stackoverflow-201203/" data-title="iPhone开发常问的十个问题(2012年3月版) | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2012/03/24/talk-about-uiwebview-and-phonegap/" title="关于UIWebView的总结">
+  <strong>上一篇：</strong><br/>
+  <span>
+  关于UIWebView的总结</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2012/03/10/xcode4-tips/"  title="Xcode4 使用技巧">
+ <strong>下一篇：</strong><br/> 
+ <span>Xcode4 使用技巧
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

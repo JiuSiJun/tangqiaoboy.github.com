@@ -1,0 +1,481 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>专访 YYKit 作者 ibireme: 开源大牛是怎样炼成的 | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="版权说明本文为InfoQ中文站特供稿件，首发地址为：文章链接。如需转载，请与InfoQ中文站联系。
+前言第一次听到 ibireme 这个名字，是看到他在 微博上分享 了 YYText 开源库。当时我第一眼见到 YYText 的功能示意 GIF 图时（下图所示），就被它丰富的功能吸引了。YYText 应该是我见到过的功能最强大的基于 CoreText 的排版框架了。
+
+令人惊讶的是，YYText 虽">
+<meta property="og:type" content="article">
+<meta property="og:title" content="专访 YYKit 作者 ibireme: 开源大牛是怎样炼成的">
+<meta property="og:url" content="http://blog.devtang.com/2015/11/26/yykit-auther-interview/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="版权说明本文为InfoQ中文站特供稿件，首发地址为：文章链接。如需转载，请与InfoQ中文站联系。
+前言第一次听到 ibireme 这个名字，是看到他在 微博上分享 了 YYText 开源库。当时我第一眼见到 YYText 的功能示意 GIF 图时（下图所示），就被它丰富的功能吸引了。YYText 应该是我见到过的功能最强大的基于 CoreText 的排版框架了。
+
+令人惊讶的是，YYText 虽">
+<meta property="og:image" content="https://camo.githubusercontent.com/fb454f77c109e6ac671e8fdb3220ade92238715b/68747470733a2f2f7261772e6769746875622e636f6d2f69626972656d652f5959546578742f6d61737465722f417474726962757465732f59595465787420457874656e6465642f5959546578744174746163686d656e742e676966">
+<meta property="og:updated_time" content="2016-02-16T10:28:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="专访 YYKit 作者 ibireme: 开源大牛是怎样炼成的">
+<meta name="twitter:description" content="版权说明本文为InfoQ中文站特供稿件，首发地址为：文章链接。如需转载，请与InfoQ中文站联系。
+前言第一次听到 ibireme 这个名字，是看到他在 微博上分享 了 YYText 开源库。当时我第一眼见到 YYText 的功能示意 GIF 图时（下图所示），就被它丰富的功能吸引了。YYText 应该是我见到过的功能最强大的基于 CoreText 的排版框架了。
+
+令人惊讶的是，YYText 虽">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/26/yykit-auther-interview/" title="专访 YYKit 作者 ibireme: 开源大牛是怎样炼成的" itemprop="url">专访 YYKit 作者 ibireme: 开源大牛是怎样炼成的</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2015-11-26T12:47:13.000Z" itemprop="datePublished"> 发表于 2015-11-26 20:47</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7248_u6743_u8BF4_u660E"><span class="toc-number">1.</span> <span class="toc-text">版权说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">2.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u91C7_u8BBF"><span class="toc-number">3.</span> <span class="toc-text">采访</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7ED3_u675F_u8BED"><span class="toc-number">4.</span> <span class="toc-text">结束语</span></a></li></ol>
+		
+		</div>
+		
+		<h3 id="u7248_u6743_u8BF4_u660E"><a href="#u7248_u6743_u8BF4_u660E" class="headerlink" title="版权说明"></a>版权说明</h3><p>本文为InfoQ中文站特供稿件，首发地址为：<a href="http://www.infoq.com/cn/news/2015/11/ibireme-interview" target="_blank" rel="external">文章链接</a>。如需转载，请与InfoQ中文站联系。</p>
+<h3 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h3><p>第一次听到 <a href="http://weibo.com/239801242" target="_blank" rel="external">ibireme</a> 这个名字，是看到他在 <a href="http://weibo.com/2477831984/D2ujxj5Vx?type=comment#_rnd1448528368875" target="_blank" rel="external">微博上分享</a> 了 <a href="https://github.com/ibireme/YYText" target="_blank" rel="external">YYText</a> 开源库。当时我第一眼见到 YYText 的功能示意 GIF 图时（下图所示），就被它丰富的功能吸引了。YYText 应该是我见到过的功能最强大的基于 CoreText 的排版框架了。</p>
+<p><img src="https://camo.githubusercontent.com/fb454f77c109e6ac671e8fdb3220ade92238715b/68747470733a2f2f7261772e6769746875622e636f6d2f69626972656d652f5959546578742f6d61737465722f417474726962757465732f59595465787420457874656e6465642f5959546578744174746163686d656e742e676966" alt="YYText示意图"></p>
+<p>令人惊讶的是，YYText 虽然代码量很大（超过一万行），但它只是 ibireme 的作品之一。ibireme 利用业余时间完成了 <a href="https://github.com/ibireme/YYKit" target="_blank" rel="external">YYKit</a> 工具库，包括：</p>
+<ul>
+<li><a href="https://github.com/ibireme/YYModel" target="_blank" rel="external">YYModel</a> — 高性能的 iOS JSON 模型框架。</li>
+<li><a href="https://github.com/ibireme/YYCache" target="_blank" rel="external">YYCache</a> — 高性能的 iOS 缓存框架。</li>
+<li><a href="https://github.com/ibireme/YYImage" target="_blank" rel="external">YYImage</a> — 功能强大的 iOS 图像框架。</li>
+<li><a href="https://github.com/ibireme/YYWebImage" target="_blank" rel="external">YYWebImage</a> — 高性能的 iOS 异步图像加载框架。</li>
+<li><a href="https://github.com/ibireme/YYText" target="_blank" rel="external">YYText</a> — 功能强大的 iOS 富文本框架。</li>
+<li><a href="https://github.com/ibireme/YYKeyboardManager" target="_blank" rel="external">YYKeyboardManager</a> — iOS 键盘监听管理工具。</li>
+<li><a href="https://github.com/ibireme/YYDispatchQueuePool" target="_blank" rel="external">YYDispatchQueuePool</a> — iOS 全局并发队列管理工具。</li>
+<li><a href="https://github.com/ibireme/YYAsyncLayer" target="_blank" rel="external">YYAsyncLayer</a> — iOS 异步绘制与显示的工具。</li>
+<li><a href="https://github.com/ibireme/YYCategories" target="_blank" rel="external">YYCategories</a> — 功能丰富的 Category 类型工具库。</li>
+</ul>
+<p>我和一些朋友挑选了一些其中的组件代码阅读，大家都认为质量非常高，大家对它的评语是这样的：</p>
+<blockquote>
+<p>打算自己撸一个 JSON 转 model 的，专门看了 YYModel 的代码，果然屌。</p>
+<p>YYKit 超级好用。 </p>
+<p>对比一下，感觉自己一年都没写代码。</p>
+<p>怎么会有如此完美的工程师？真想抽一周时间宅在家里把 YYKit 的源码重敲一遍。</p>
+</blockquote>
+<p>之后我抽空学习了一下 ibireme 的博客（<a href="http://blog.ibireme.com/" target="_blank" rel="external">http://blog.ibireme.com/</a>），上面有多篇介绍他对于 iOS 开发中各种问题的研究，例如他在开发 YYModel 时，<a href="http://blog.ibireme.com/2015/10/23/ios_model_framework_benchmark/" target="_blank" rel="external">调研和评测</a> 了包括 Mantle 和 MJExtension 在内的多款开源库。这种专业认真的做事态度让我非常佩服，也让我对 YYModel 的质量充满信心。</p>
+<p>然后，我有幸得到了 ibireme 的 QQ 和微信号，所以和他交流了多次。这时我才知道 ibireme 是一个 90 后，在优酷从事 iOS 开发工作。而这些所有的开源库，都是他在业余时间完成的。</p>
+<p>我想大家很可能对 ibireme 的学习和成长的经历感兴趣，而且 ibireme 的故事很可能会激励更多有激情的 iOS 开发新人，利用业余时间学习、Coding 和分享，最终让国内的 iOS 开发技术氛围更好。所以，我向 ibireme 发出了采访邀请，ibireme 欣然接受了。于是，让我们来一起揭开这位神秘人物的面纱吧。</p>
+<h3 id="u91C7_u8BBF"><a href="#u91C7_u8BBF" class="headerlink" title="采访"></a>采访</h3><blockquote>
+<p>唐巧：你好 ibireme，能否先向读者简单介绍一下自己？</p>
+</blockquote>
+<p>ibireme：大家好，我叫郭曜源，是一个 iOS 开发者，现居北京，就职于优酷土豆。喜欢代码，爱好设计与音乐。</p>
+<blockquote>
+<p>唐巧：我发现 YYKit 是在这个月初上传到 github 上的，但是它的代码量非常大，能否介绍一下每个部分大概花了你多长时间？</p>
+</blockquote>
+<p>ibireme：Category 等工具类大部分都是这一两年工作和业余时间攒下来的。文本和图片相关的那几个项目是今年年初开始写起的，陆陆续续写了半年多。YYModel 花的时间最少，只有大概两个周末。</p>
+<blockquote>
+<p>唐巧：为什么选择一次性开源这么多代码，而不是一个一个开源呢？</p>
+</blockquote>
+<p>ibireme：最初这些代码我都是写在一个工程里，代码量比较多，相互之间也有很多依赖。准备发布时，我觉得这样很不方便别人使用，这才按功能拆开成一个个小的组件，然后一起发布的。</p>
+<blockquote>
+<p>唐巧：这些开源库在国内外都收到了大量的好评，这个有没有超出你的预期？</p>
+</blockquote>
+<p>ibireme：发布前我有预期会收到不少关注，但是发布后收到的好评还是大大超出我的预料。最令我惊讶的是 Facebook 和 Uber 等国外的工程师也关注到这个项目，并且还以此向我发出了工作邀请，这让我非常激动。</p>
+<blockquote>
+<p>唐巧：你对 YYKit 后续的发展上有什么计划吗？</p>
+</blockquote>
+<p>ibireme：现在只是计划进行一些正常的维护工作，保证稳定性。未来如果有合适的东西，我也会尝试加到里面的，但应该不会有太大改变了。</p>
+<blockquote>
+<p>唐巧：YYKit 是你的业余作品，我很好奇你是如何保证工作之余还有这么高产的？</p>
+</blockquote>
+<p>ibireme：最近一年我工作不太忙，很少加班，空闲时间比较多。另外我比较宅，平时喜欢待在家里做一些喜欢的事情。说起来，应该是充足的时间加上个人兴趣让我完成了这些项目吧。</p>
+<blockquote>
+<p>唐巧：你如何看待 Swift 语言，有没有计划过用 Swift 重写你的 YYKit？</p>
+</blockquote>
+<p>ibireme：相对于 Objective-C 来说，我觉得 Swift 无疑是更优秀、更现代的语言。目前我对 Swift 研究并不多，工作中也没有用到，但未来我会把时间更多投入到 Swift 中去。YYKit 中不少东西更适合于 C/Objective-C，所以我没有计划用 Swift 重写整个项目。我可能会用 Swift 写一些新的东西，以充分发挥 Swift 的特性。</p>
+<blockquote>
+<p>唐巧：你在 iOS 开发上是如何快速成长起来的？有没有什么心得可以分享给 iOS 开发新手？</p>
+</blockquote>
+<p>ibireme：我接触 iOS 开发的时间很早，但是一直都是在工作之余靠着兴趣自学的。14 年我还在人人网时，部门内部有个新项目需要 iOS 开发，我才得以有机会在工作中使用 iOS 相关的技术。全职转为 iOS 开发后，我花费了大量的时间阅读和学习各种开源的代码、研究其中的实现原理、尝试自己实现相关技术、尝试在工作中使用，这使得我在 iOS 开发技术上进步很快。对于 iOS 开发来说，我觉得自学能力是很重要的。主动去研究一些优秀的开源项目、多在工作中实践和学习，这样就能逐步提升个人技术水平了。</p>
+<blockquote>
+<p>唐巧：你觉得哪些开发者对你影响最大？</p>
+</blockquote>
+<p>ibireme：可能平时我更喜欢看代码，对于开发者我倒是了解的不多吧。如果要选一位的话，我会选 Linus Torvalds。他的一句话我很喜欢：”Talk is cheap, show me the code”。</p>
+<blockquote>
+<p>唐巧：在技术领域，你对未来有什么学习规划吗？</p>
+</blockquote>
+<p>ibireme：在 iOS 方面，我可能会针对 Swift、音频处理和合成等方面投入更多精力。另外我第一份工作是 Java 后台开发，工作时前后端、数据库相关的东西也都接触过，所以如果有时间的话我也会继续学习这些技术，即使不用在工作上，也能开拓眼界吧。</p>
+<h3 id="u7ED3_u675F_u8BED"><a href="#u7ED3_u675F_u8BED" class="headerlink" title="结束语"></a>结束语</h3><p>刚刚 ibireme 在介绍自己学习方法的时候，提到了两点我认为非常关键，一个就是大量地阅读优秀项目的源代码，另一个就是自己动手实践来尝试。</p>
+<p>我在很久以前，分享过我认为 iOS 开发者可以提高自己能力的各种方法，见 <a href="/2014/07/27/ios-levelup-tips/">《iOS 开发如何提高》</a>，里面也提到阅读开源代码和多写代码。我感觉 ibireme 将这一点做到了极致，因此他在短短一年多的时间，就能够成长成为在业界有影响力的开源项目作者。</p>
+<p>我们处在一个信息爆炸的时代，每一天都有大量的 iOS 开发文章出现，我们对这些文章如饥似渴，但是很多时候又浅尝辄止。像 ibireme 这样，专心阅读几个开源项目，然后自己动手真正实践，或许才是正确的学习方式。</p>
+<p>希望 ibireme 的故事能够激励那些渴望成长成为牛人的 iOS 开发新人，也希望在中国能够出现更多像 YYKit 这样的优秀的开源项目，与大家共勉。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2015/11/26/yykit-auther-interview/" data-title="专访 YYKit 作者 ibireme: 开源大牛是怎样炼成的 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/12/18/from-dev-to-manager/" title=" 涅槃重生:我的技术转管理之路 ">
+  <strong>上一篇：</strong><br/>
+  <span>
+   涅槃重生:我的技术转管理之路 </span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/11/21/apps-damaged-bug/"  title="Mac 应用出现「已损坏」问题，苹果到底犯了什么傻逼错误？">
+ <strong>下一篇：</strong><br/> 
+ <span>Mac 应用出现「已损坏」问题，苹果到底犯了什么傻逼错误？
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

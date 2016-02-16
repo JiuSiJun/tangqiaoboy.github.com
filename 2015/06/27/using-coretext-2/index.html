@@ -1,0 +1,505 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>基于 CoreText 的排版引擎：进阶 | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="版权说明原创文章，转载请保留以下信息：
+
+本文节选自我的图书：《iOS 开发进阶 》。
+本文涉及的 Demo 工程在这里：https://github.com/tangqiaoboy/iOS-Pro。
+扫码关注我的「iOS 开发」微信公众帐号：
+
+
+
+本章前言在上一篇《基于 CoreText 的排版引擎：基础》中，我们学会了排版的基础知识，现在我们来增加复杂性，让我们的排版引擎支持图片和链接的点击">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于 CoreText 的排版引擎：进阶">
+<meta property="og:url" content="http://blog.devtang.com/2015/06/27/using-coretext-2/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="版权说明原创文章，转载请保留以下信息：
+
+本文节选自我的图书：《iOS 开发进阶 》。
+本文涉及的 Demo 工程在这里：https://github.com/tangqiaoboy/iOS-Pro。
+扫码关注我的「iOS 开发」微信公众帐号：
+
+
+
+本章前言在上一篇《基于 CoreText 的排版引擎：基础》中，我们学会了排版的基础知识，现在我们来增加复杂性，让我们的排版引擎支持图片和链接的点击">
+<meta property="og:image" content="http://blog.devtang.com/images/weixin-qr.jpg">
+<meta property="og:image" content="http://tangqiao.b0.upaiyun.com/coretext/coretext-ctline.jpg">
+<meta property="og:image" content="http://tangqiao.b0.upaiyun.com/coretext/coretext-uiview-tree.png">
+<meta property="og:image" content="http://tangqiao.b0.upaiyun.com/coretext/coretext-demo.gif">
+<meta property="og:updated_time" content="2016-02-16T10:26:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于 CoreText 的排版引擎：进阶">
+<meta name="twitter:description" content="版权说明原创文章，转载请保留以下信息：
+
+本文节选自我的图书：《iOS 开发进阶 》。
+本文涉及的 Demo 工程在这里：https://github.com/tangqiaoboy/iOS-Pro。
+扫码关注我的「iOS 开发」微信公众帐号：
+
+
+
+本章前言在上一篇《基于 CoreText 的排版引擎：基础》中，我们学会了排版的基础知识，现在我们来增加复杂性，让我们的排版引擎支持图片和链接的点击">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/06/27/using-coretext-2/" title="基于 CoreText 的排版引擎：进阶" itemprop="url">基于 CoreText 的排版引擎：进阶</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2015-06-27T00:59:55.000Z" itemprop="datePublished"> 发表于 2015-06-27 08:59</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7248_u6743_u8BF4_u660E"><span class="toc-number">1.</span> <span class="toc-text">版权说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u672C_u7AE0_u524D_u8A00"><span class="toc-number">2.</span> <span class="toc-text">本章前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u652F_u6301_u56FE_u6587_u6DF7_u6392_u7684_u6392_u7248_u5F15_u64CE"><span class="toc-number">3.</span> <span class="toc-text">支持图文混排的排版引擎</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u6539_u9020_u6A21_u7248_u6587_u4EF6"><span class="toc-number">3.1.</span> <span class="toc-text">改造模版文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CTLine__u4E0E_CTRun"><span class="toc-number">3.2.</span> <span class="toc-text">CTLine 与 CTRun</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6539_u9020_u6A21_u7248_u89E3_u6790_u7C7B"><span class="toc-number">3.3.</span> <span class="toc-text">改造模版解析类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6DFB_u52A0_u5BF9_u56FE_u7247_u7684_u70B9_u51FB_u652F_u6301"><span class="toc-number">4.</span> <span class="toc-text">添加对图片的点击支持</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5B9E_u73B0_u65B9_u5F0F"><span class="toc-number">4.1.</span> <span class="toc-text">实现方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E8B_u4EF6_u5904_u7406"><span class="toc-number">4.2.</span> <span class="toc-text">事件处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6DFB_u52A0_u5BF9_u94FE_u63A5_u7684_u70B9_u51FB_u652F_u6301"><span class="toc-number">4.3.</span> <span class="toc-text">添加对链接的点击支持</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h2 id="u7248_u6743_u8BF4_u660E"><a href="#u7248_u6743_u8BF4_u660E" class="headerlink" title="版权说明"></a>版权说明</h2><p>原创文章，转载请保留以下信息：</p>
+<ul>
+<li>本文节选自我的图书：《<a href="http://item.jd.com/11598468.html" target="_blank">iOS 开发进阶 </a>》。</li>
+<li>本文涉及的 Demo 工程在这里：<a href="https://github.com/tangqiaoboy/iOS-Pro" target="_blank" rel="external">https://github.com/tangqiaoboy/iOS-Pro</a>。</li>
+<li><p>扫码关注我的「iOS 开发」微信公众帐号：</p>
+<p><img src="http://blog.devtang.com/images/weixin-qr.jpg" alt="二维码"></p>
+</li>
+</ul>
+<h2 id="u672C_u7AE0_u524D_u8A00"><a href="#u672C_u7AE0_u524D_u8A00" class="headerlink" title="本章前言"></a>本章前言</h2><p>在上一篇《基于 CoreText 的排版引擎：基础》中，我们学会了排版的基础知识，现在我们来增加复杂性，让我们的排版引擎支持图片和链接的点击。</p>
+<h2 id="u652F_u6301_u56FE_u6587_u6DF7_u6392_u7684_u6392_u7248_u5F15_u64CE"><a href="#u652F_u6301_u56FE_u6587_u6DF7_u6392_u7684_u6392_u7248_u5F15_u64CE" class="headerlink" title="支持图文混排的排版引擎"></a>支持图文混排的排版引擎</h2><h3 id="u6539_u9020_u6A21_u7248_u6587_u4EF6"><a href="#u6539_u9020_u6A21_u7248_u6587_u4EF6" class="headerlink" title="改造模版文件"></a>改造模版文件</h3><p>下面我们来进一步改造，让排版引擎支持对于图片的排版。在上一小节中，我们在设置模版文件的时候，就专门在模板文件里面留了一个名为<code>type</code>的字段，用于表示内容的类型。之前的<code>type</code>的值都是<code>txt</code>，这次，我们增加一个值为<code>img</code>的值，用于表示图片。</p>
+<p>我们将上一节的<code>content.json</code>文件修改为如下内容，增加了 2 个<code>type</code>值为<code>img</code>的配置项。由于是图片的配置项，所以我们不需要设置颜色，字号这些图片不具有的属性，但是，我们另外增加了 3 个图片的配置属性：</p>
+<ol>
+<li>一个名为<code>width</code>的属性，用于设置图片显示的宽度。</li>
+<li>一个名为<code>height</code>的属性，用于设置图片显示的高度。</li>
+<li>一个名为<code>name</code>的属性，用于设置图片的资源名。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[ &#123;&#10;    &#34;type&#34; : &#34;img&#34;,&#10;    &#34;width&#34; : 200,&#10;    &#34;height&#34; : 108,&#10;    &#34;name&#34; : &#34;coretext-image-1.jpg&#34;&#10;  &#125;,&#10;  &#123; &#34;color&#34; : &#34;blue&#34;,&#10;    &#34;content&#34; : &#34; &#26356;&#36827;&#19968;&#27493;&#22320;&#65292;&#23454;&#38469;&#24037;&#20316;&#20013;&#65292;&#25105;&#20204;&#26356;&#24076;&#26395;&#36890;&#36807;&#19968;&#20010;&#25490;&#29256;&#25991;&#20214;&#65292;&#26469;&#35774;&#32622;&#38656;&#35201;&#25490;&#29256;&#30340;&#25991;&#23383;&#30340; &#34;,&#10;    &#34;size&#34; : 16,&#10;    &#34;type&#34; : &#34;txt&#34;&#10;  &#125;,&#10;  &#123; &#34;color&#34; : &#34;red&#34;,&#10;    &#34;content&#34; : &#34; &#20869;&#23481;&#12289;&#39068;&#33394;&#12289;&#23383;&#20307; &#34;,&#10;    &#34;size&#34; : 22,&#10;    &#34;type&#34; : &#34;txt&#34;&#10;  &#125;,&#10;  &#123; &#34;color&#34; : &#34;black&#34;,&#10;    &#34;content&#34; : &#34; &#22823;&#23567;&#31561;&#20449;&#24687;&#12290;\n&#34;,&#10;    &#34;size&#34; : 16,&#10;    &#34;type&#34; : &#34;txt&#34;&#10;  &#125;,&#10;  &#123;&#10;    &#34;type&#34; : &#34;img&#34;,&#10;    &#34;width&#34; : 200,&#10;    &#34;height&#34; : 130,&#10;    &#34;name&#34; : &#34;coretext-image-2.jpg&#34;&#10;  &#125;,&#10;  &#123; &#34;color&#34; : &#34;default&#34;,&#10;    &#34;content&#34; : &#34; &#25105;&#22312;&#24320;&#21457;&#29503;&#39064;&#24211;&#24212;&#29992;&#26102;&#65292;&#33258;&#24049;&#23450;&#20041;&#20102;&#19968;&#20010;&#22522;&#20110; UBB &#30340;&#25490;&#29256;&#27169;&#29256;&#65292;&#20294;&#26159;&#23454;&#29616;&#35813;&#25490;&#29256;&#25991;&#20214;&#30340;&#35299;&#26512;&#22120;&#35201;&#33457;&#36153;&#22823;&#37327;&#30340;&#31687;&#24133;&#65292;&#32771;&#34385;&#21040;&#36825;&#24182;&#19981;&#26159;&#26412;&#31456;&#30340;&#37325;&#28857;&#65292;&#25152;&#20197;&#25105;&#20204;&#20197;&#19968;&#20010;&#36739;&#31616;&#21333;&#30340;&#25490;&#29256;&#25991;&#20214;&#26469;&#35762;&#35299;&#20854;&#24605;&#24819;&#12290;&#34;,&#10;    &#34;type&#34; : &#34;txt&#34;&#10;  &#125;&#10;]</span><br></pre></td></tr></table></figure>
+<p>按理说，图片本身的内容信息中，是包含宽度和高度信息的，为什么我们要在这里指定图片的宽高呢？这主要是因为，在真实的开发中，应用的模版和图片通常是通过服务器获取的，模版是纯文本的内容，获取速度比图片快很多，而图片不但获取速度慢，而且为了省流量，通常的做法是直到需要显示图片的时候，再加载图片内容。</p>
+<p>如果我们不将图片的宽度和高度信息设置在模板里面，那么 CoreText 在排版的时候就无法知道绘制所需要的高度，我们就无法设置<code>CoreTextData</code>类中的<code>height</code>信息，没有高度信息，就会对 UITableView 一类的控件排版造成影响。所以，除非你的应用图片能够保证在绘制前都能全部在本地，否则就应该另外提前提供图片宽度和高度信息。</p>
+<p>在完成模板文件修改后，我们选取两张测试用的图片，分别将其命名为<code>coretext-image-1.jpg</code>和<code>coretext-image-2.jpg</code>（和模板中的值一致），将其拖动增加到工程中。向 Xcode 工程增加图片资源是基础知识，在此就不详细介绍过程了。</p>
+<h3 id="CTLine__u4E0E_CTRun"><a href="#CTLine__u4E0E_CTRun" class="headerlink" title="CTLine 与 CTRun"></a>CTLine 与 CTRun</h3><p>接下来我们需要改造的是<code>CTFrameParser</code>类，让解析模板文件的方法支持<code>type</code>为<code>img</code>的配置。</p>
+<p>在改造前，我们先来了解一下<code>CTFrame</code>内部的组成。通过之前的例子，我们可以看到，我们首先通过<code>NSAttributeString</code>和配置信息创建 <code>CTFrameSetter</code>，<br>然后，再通过<code>CTFrameSetter</code>来创建<code>CTFrame</code>。</p>
+<p>在<code>CTFrame</code>内部，是由多个<code>CTLine</code>来组成的，每个<code>CTLine</code>代表一行，每个<code>CTLine</code>又是由多个<code>CTRun</code>来组成，每个<code>CTRun</code>代表一组显示风格一致的文本。我们不用手工管理<code>CTLine</code>和<code>CTRun</code>的创建过程。</p>
+<p>下图是一个<code>CTLine</code>和<code>CTRun</code>的示意图，可以看到，第三行的<code>CTLine</code>是由 2 个<code>CTRun</code>构成的，第一个<code>CTRun</code>为红色大字号的左边部分，第二个<code>CTRun</code>为右边字体较小的部分。</p>
+<p><img src="http://tangqiao.b0.upaiyun.com/coretext/coretext-ctline.jpg" alt=""></p>
+<p>虽然我们不用管理<code>CTRun</code>的创建过程，但是我们可以设置某一个具体的<code>CTRun</code>的<code>CTRunDelegate</code>来指定该文本在绘制时的高度、宽度、排列对齐方式等信息。</p>
+<p>对于图片的排版，其实 CoreText 本质上不是直接支持的，但是，我们可以在要显示文本的地方，用一个特殊的空白字符代替，同时设置该字体的<code>CTRunDelegate</code>信息为要显示的图片的宽度和高度信息，这样最后生成的<code>CTFrame</code>实例，就会在绘制时将图片的位置预留出来。</p>
+<p>因为我们的<code>CTDisplayView</code>的绘制代码是在<code>drawRect</code>里面的，所以我们可以方便地把需要绘制的图片，用<code>CGContextDrawImage</code>方法直接绘制出来就可以了。</p>
+<h3 id="u6539_u9020_u6A21_u7248_u89E3_u6790_u7C7B"><a href="#u6539_u9020_u6A21_u7248_u89E3_u6790_u7C7B" class="headerlink" title="改造模版解析类"></a>改造模版解析类</h3><p>在了解了以上原理后，我们就可以开始进行改造了。</p>
+<p>我们需要做的工作包括：</p>
+<ol>
+<li>改造<code>CTFrameParser</code>的<code>parseTemplateFile:(NSString *)path config:(CTFrameParserConfig*)config;</code>方法，使其支持对<code>type</code>为<code>img</code>的节点解析。并且对<code>type</code>为<code>img</code>的节点，设置其<code>CTRunDelegate</code>信息，使其在绘制时，为图片预留相应的空白位置。</li>
+<li>改造<code>CoreTextData</code>类，增加图片相关的信息，并且增加计算图片绘制区域的逻辑。</li>
+<li>改造<code>CTDisplayView</code>类，增加绘制图片相关的逻辑。</li>
+</ol>
+<p>首先介绍对于<code>CTFrameParser</code>的改造：</p>
+<p>我们修改了<code>parseTemplateFile</code>方法，增加了一个名为<code>imageArray</code>的参数来保存解析时的图片信息。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+ (CoreTextData *)parseTemplateFile:(NSString *)path config:(CTFrameParserConfig*)config &#123;&#10;    NSMutableArray *imageArray = [NSMutableArray array];&#10;    NSAttributedString *content = [self loadTemplateFile:path config:config imageArray:imageArray];&#10;    CoreTextData *data = [self parseAttributedContent:content config:config];&#10;    data.imageArray = imageArray;&#10;    return data;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>接着我们修改<code>loadTemplateFile</code>方法，增加了对于<code>type</code>是<code>img</code>的节点处理逻辑，该逻辑主要做 2 件事情：</p>
+<ol>
+<li>保存当前图片节点信息到<code>imageArray</code>变量中</li>
+<li>新建一个空白的占位符。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+ (NSAttributedString *)loadTemplateFile:(NSString *)path&#10;                                  config:(CTFrameParserConfig*)config&#10;                              imageArray:(NSMutableArray *)imageArray &#123;&#10;    NSData *data = [NSData dataWithContentsOfFile:path];&#10;    NSMutableAttributedString *result = [[NSMutableAttributedString alloc] init];&#10;    if (data) &#123;&#10;        NSArray *array = [NSJSONSerialization JSONObjectWithData:data&#10;                             options:NSJSONReadingAllowFragments&#10;                               error:nil];&#10;        if ([array isKindOfClass:[NSArray class]]) &#123;&#10;            for (NSDictionary *dict in array) &#123;&#10;                NSString *type = dict[@&#34;type&#34;];&#10;                if ([type isEqualToString:@&#34;txt&#34;]) &#123;&#10;                    NSAttributedString *as =&#10;                        [self parseAttributedContentFromNSDictionary:dict&#10;                                                              config:config];&#10;                    [result appendAttributedString:as];&#10;                &#125; else if ([type isEqualToString:@&#34;img&#34;]) &#123;&#10;                    // &#21019;&#24314; CoreTextImageData&#10;                    CoreTextImageData *imageData = [[CoreTextImageData alloc] init];&#10;                    imageData.name = dict[@&#34;name&#34;];&#10;                    imageData.position = [result length];&#10;                    [imageArray addObject:imageData];&#10;                    // &#21019;&#24314;&#31354;&#30333;&#21344;&#20301;&#31526;&#65292;&#24182;&#19988;&#35774;&#32622;&#23427;&#30340; CTRunDelegate &#20449;&#24687;&#10;                    NSAttributedString *as = [self parseImageDataFromNSDictionary:dict config:config];&#10;                    [result appendAttributedString:as];&#10;                &#125;&#10;            &#125;&#10;        &#125;&#10;    &#125;&#10;    return result;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>最后我们新建一个最关键的方法：<code>parseImageDataFromNSDictionary</code>，生成图片空白的占位符，并且设置其<code>CTRunDelegate</code>信息。其代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;static CGFloat ascentCallback(void *ref)&#123;&#10;    return [(NSNumber*)[(__bridge NSDictionary*)ref objectForKey:@&#34;height&#34;] floatValue];&#10;&#125;&#10;&#10;static CGFloat descentCallback(void *ref)&#123;&#10;    return 0;&#10;&#125;&#10;&#10;static CGFloat widthCallback(void* ref)&#123;&#10;    return [(NSNumber*)[(__bridge NSDictionary*)ref objectForKey:@&#34;width&#34;] floatValue];&#10;&#125;&#10;&#10;+ (NSAttributedString *)parseImageDataFromNSDictionary:(NSDictionary *)dict&#10;                                                config:(CTFrameParserConfig*)config &#123;&#10;    CTRunDelegateCallbacks callbacks;&#10;    memset(&#38;callbacks, 0, sizeof(CTRunDelegateCallbacks));&#10;    callbacks.version = kCTRunDelegateVersion1;&#10;    callbacks.getAscent = ascentCallback;&#10;    callbacks.getDescent = descentCallback;&#10;    callbacks.getWidth = widthCallback;&#10;    CTRunDelegateRef delegate = CTRunDelegateCreate(&#38;callbacks, (__bridge void *)(dict));&#10;&#10;    // &#20351;&#29992; 0xFFFC &#20316;&#20026;&#31354;&#30333;&#30340;&#21344;&#20301;&#31526;&#10;    unichar objectReplacementChar = 0xFFFC;&#10;    NSString * content = [NSString stringWithCharacters:&#38;objectReplacementChar length:1];&#10;    NSDictionary * attributes = [self attributesWithConfig:config];&#10;    NSMutableAttributedString * space =&#10;       [[NSMutableAttributedString alloc] initWithString:content&#10;                                              attributes:attributes];&#10;    CFAttributedStringSetAttribute((CFMutableAttributedStringRef)space,&#10;              CFRangeMake(0, 1), kCTRunDelegateAttributeName, delegate);&#10;    CFRelease(delegate);&#10;    return space;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>接着我们对<code>CoreTextData</code>进行改造，增加了<code>imageArray</code>成员变量，用于保存图片绘制时所需的信息。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#import &#60;Foundation/Foundation.h&#62;&#10;#import &#34;CoreTextImageData.h&#34;&#10;&#10;@interface CoreTextData : NSObject&#10;&#10;@property (assign, nonatomic) CTFrameRef ctFrame;&#10;@property (assign, nonatomic) CGFloat height;&#10;// &#26032;&#22686;&#21152;&#30340;&#25104;&#21592;&#10;@property (strong, nonatomic) NSArray * imageArray;&#10;&#10;@end</span><br></pre></td></tr></table></figure>
+<p>在设置<code>imageArray</code>成员时，我们还会调一个新创建的<code>fillImagePosition</code>方法，用于找到每张图片在绘制时的位置。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;- (void)setImageArray:(NSArray *)imageArray &#123;&#10;    _imageArray = imageArray;&#10;    [self fillImagePosition];&#10;&#125;&#10;&#10;- (void)fillImagePosition &#123;&#10;    if (self.imageArray.count == 0) &#123;&#10;        return;&#10;    &#125;&#10;    NSArray *lines = (NSArray *)CTFrameGetLines(self.ctFrame);&#10;    int lineCount = [lines count];&#10;    CGPoint lineOrigins[lineCount];&#10;    CTFrameGetLineOrigins(self.ctFrame, CFRangeMake(0, 0), lineOrigins);&#10;&#10;    int imgIndex = 0;&#10;    CoreTextImageData * imageData = self.imageArray[0];&#10;&#10;    for (int i = 0; i &#60; lineCount; ++i) &#123;&#10;        if (imageData == nil) &#123;&#10;            break;&#10;        &#125;&#10;        CTLineRef line = (__bridge CTLineRef)lines[i];&#10;        NSArray * runObjArray = (NSArray *)CTLineGetGlyphRuns(line);&#10;        for (id runObj in runObjArray) &#123;&#10;            CTRunRef run = (__bridge CTRunRef)runObj;&#10;            NSDictionary *runAttributes = (NSDictionary *)CTRunGetAttributes(run);&#10;            CTRunDelegateRef delegate = (__bridge CTRunDelegateRef)[runAttributes valueForKey:(id)kCTRunDelegateAttributeName];&#10;            if (delegate == nil) &#123;&#10;                continue;&#10;            &#125;&#10;&#10;            NSDictionary * metaDic = CTRunDelegateGetRefCon(delegate);&#10;            if (![metaDic isKindOfClass:[NSDictionary class]]) &#123;&#10;                continue;&#10;            &#125;&#10;&#10;            CGRect runBounds;&#10;            CGFloat ascent;&#10;            CGFloat descent;&#10;            runBounds.size.width = CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &#38;ascent, &#38;descent, NULL);&#10;            runBounds.size.height = ascent + descent;&#10;&#10;            CGFloat xOffset = CTLineGetOffsetForStringIndex(line, CTRunGetStringRange(run).location, NULL);&#10;            runBounds.origin.x = lineOrigins[i].x + xOffset;&#10;            runBounds.origin.y = lineOrigins[i].y;&#10;            runBounds.origin.y -= descent;&#10;&#10;            CGPathRef pathRef = CTFrameGetPath(self.ctFrame);&#10;            CGRect colRect = CGPathGetBoundingBox(pathRef);&#10;&#10;            CGRect delegateBounds = CGRectOffset(runBounds, colRect.origin.x, colRect.origin.y);&#10;&#10;            imageData.imagePosition = delegateBounds;&#10;            imgIndex++;&#10;            if (imgIndex == self.imageArray.count) &#123;&#10;                imageData = nil;&#10;                break;&#10;            &#125; else &#123;&#10;                imageData = self.imageArray[imgIndex];&#10;            &#125;&#10;        &#125;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="u6DFB_u52A0_u5BF9_u56FE_u7247_u7684_u70B9_u51FB_u652F_u6301"><a href="#u6DFB_u52A0_u5BF9_u56FE_u7247_u7684_u70B9_u51FB_u652F_u6301" class="headerlink" title="添加对图片的点击支持"></a>添加对图片的点击支持</h2><h3 id="u5B9E_u73B0_u65B9_u5F0F"><a href="#u5B9E_u73B0_u65B9_u5F0F" class="headerlink" title="实现方式"></a>实现方式</h3><p>为了实现对图片的点击支持，我们需要给<code>CTDisplayView</code>类增加用户点击操作的检测函数，在检测函数中，判断当前用户点击的区域是否在图片上，如果在图片上，则触发点击图片的逻辑。苹果提供的<code>UITapGestureRecognizer</code>可以很好的满足我们的要求，所以我们这里用它来检测用户的点击操作。</p>
+<p>我们这里实现的是点击图片后，先用<code>NSLog</code>打印出一行日志。实际应用中，读者可以根据业务需求自行调整点击后的效果。</p>
+<p>我们先为<code>CTDisplayView</code>类增加<code>UITapGestureRecognizer</code>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- (id)initWithCoder:(NSCoder *)aDecoder &#123;&#10;    self = [super initWithCoder:aDecoder];&#10;    if (self) &#123;&#10;        [self setupEvents];&#10;    &#125;&#10;    return self;&#10;&#125;&#10;&#10;- (void)setupEvents &#123;&#10;    UIGestureRecognizer * tapRecognizer =&#10;          [[UITapGestureRecognizer alloc] initWithTarget:self&#10;                    action:@selector(userTapGestureDetected:)];&#10;    tapRecognizer.delegate = self;&#10;    [self addGestureRecognizer:tapRecognizer];&#10;    self.userInteractionEnabled = YES;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>然后增加<code>UITapGestureRecognizer</code>的回调函数：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- (void)userTapGestureDetected:(UIGestureRecognizer *)recognizer &#123;&#10;    CGPoint point = [recognizer locationInView:self];&#10;    for (CoreTextImageData * imageData in self.data.imageArray) &#123;&#10;        // &#32763;&#36716;&#22352;&#26631;&#31995;&#65292;&#22240;&#20026; imageData &#20013;&#30340;&#22352;&#26631;&#26159; CoreText &#30340;&#22352;&#26631;&#31995;&#10;        CGRect imageRect = imageData.imagePosition;&#10;        CGPoint imagePosition = imageRect.origin;&#10;        imagePosition.y = self.bounds.size.height - imageRect.origin.y&#10;                          - imageRect.size.height;&#10;        CGRect rect = CGRectMake(imagePosition.x, imagePosition.y, imageRect.size.width, imageRect.size.height);&#10;        // &#26816;&#27979;&#28857;&#20987;&#20301;&#32622; Point &#26159;&#21542;&#22312; rect &#20043;&#20869;&#10;        if (CGRectContainsPoint(rect, point)) &#123;&#10;            // &#22312;&#36825;&#37324;&#22788;&#29702;&#28857;&#20987;&#21518;&#30340;&#36923;&#36753;&#10;            NSLog(@&#34;bingo&#34;);&#10;            break;&#10;        &#125;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="u4E8B_u4EF6_u5904_u7406"><a href="#u4E8B_u4EF6_u5904_u7406" class="headerlink" title="事件处理"></a>事件处理</h3><p>在界面上，<code>CTDisplayView</code>通常在<code>UIView</code>的树形层级结构中，一个 UIView 可能是最外层 View Controller 的 View 的孩子的孩子的孩子（如下图所示）。在这种多级层次结构中，很难通过<code>delegate</code>模式将图片点击的事件一层一层往外层传递，所以最好使用<code>NSNotification</code>，来处理图片点击事件。</p>
+<p><img src="http://tangqiao.b0.upaiyun.com/coretext/coretext-uiview-tree.png" alt=""></p>
+<p>在 Demo 中，我们在最外层的 View Controller 中监听图片点击的通知，当收到通知后，进入到一个新的界面来显示图片点击内容。</p>
+<p>注：读者可以将 demo 工程切换到<code>image_click</code>分支，查看示例代码。</p>
+<h3 id="u6DFB_u52A0_u5BF9_u94FE_u63A5_u7684_u70B9_u51FB_u652F_u6301"><a href="#u6DFB_u52A0_u5BF9_u94FE_u63A5_u7684_u70B9_u51FB_u652F_u6301" class="headerlink" title="添加对链接的点击支持"></a>添加对链接的点击支持</h3><p>####修改模板文件</p>
+<p>我们修改模版文件，增加一个名为 link 的类型，用于表示链接内容。如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[&#10;  &#123; &#34;color&#34; : &#34;default&#34;,&#10;    &#34;content&#34; : &#34; &#36825;&#22312;&#36825;&#37324;&#23581;&#35797;&#25918;&#19968;&#20010;&#21442;&#32771;&#38142;&#25509;&#65306;&#34;,&#10;    &#34;type&#34; : &#34;txt&#34;&#10;  &#125;,&#10;  &#123; &#34;color&#34; : &#34;blue&#34;,&#10;    &#34;content&#34; : &#34; &#38142;&#25509;&#25991;&#23383; &#34;,&#10;    &#34;url&#34; : &#34;http://blog.devtang.com&#34;,&#10;    &#34;type&#34; : &#34;link&#34;&#10;  &#125;,&#10;  &#123; &#34;color&#34; : &#34;default&#34;,&#10;    &#34;content&#34; : &#34; &#22823;&#23478;&#21487;&#20197;&#23581;&#35797;&#28857;&#20987;&#19968;&#19979; &#34;,&#10;    &#34;type&#34; : &#34;txt&#34;&#10;  &#125;&#10;]</span><br></pre></td></tr></table></figure>
+<p>####解析模版中的链接信息</p>
+<p>我们首先增加一个<code>CoreTextLinkData</code>类，用于记录解析 JSON 文件时的链接信息：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@interface CoreTextLinkData : NSObject&#10;&#10;@property (strong, nonatomic) NSString * title;&#10;@property (strong, nonatomic) NSString * url;&#10;@property (assign, nonatomic) NSRange range;&#10;&#10;@end</span><br></pre></td></tr></table></figure>
+<p>然后我们修改 CTFrameParser 类，增加解析链接的逻辑：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+ (NSAttributedString *)loadTemplateFile:(NSString *)path&#10;                                  config:(CTFrameParserConfig*)config&#10;                              imageArray:(NSMutableArray *)imageArray&#10;                               linkArray:(NSMutableArray *)linkArray &#123;&#10;    NSData *data = [NSData dataWithContentsOfFile:path];&#10;    NSMutableAttributedString *result = [[NSMutableAttributedString alloc] init];&#10;    if (data) &#123;&#10;        NSArray *array = [NSJSONSerialization JSONObjectWithData:data&#10;                                        options:NSJSONReadingAllowFragments&#10;                                          error:nil];&#10;        if ([array isKindOfClass:[NSArray class]]) &#123;&#10;            for (NSDictionary *dict in array) &#123;&#10;                NSString *type = dict[@&#34;type&#34;];&#10;                if ([type isEqualToString:@&#34;txt&#34;]) &#123;&#10;                    // &#30465;&#30053;&#10;                &#125; else if ([type isEqualToString:@&#34;img&#34;]) &#123;&#10;                    // &#30465;&#30053;&#10;                &#125; else if ([type isEqualToString:@&#34;link&#34;]) &#123;&#10;                    NSUInteger startPos = result.length;&#10;                    NSAttributedString *as =&#10;                       [self parseAttributedContentFromNSDictionary:dict&#10;                                                             config:config];&#10;                    [result appendAttributedString:as];&#10;                    // &#21019;&#24314; CoreTextLinkData&#10;                    NSUInteger length = result.length - startPos;&#10;                    NSRange linkRange = NSMakeRange(startPos, length);&#10;                    CoreTextLinkData *linkData = [[CoreTextLinkData alloc] init];&#10;                    linkData.title = dict[@&#34;content&#34;];&#10;                    linkData.url = dict[@&#34;url&#34;];&#10;                    linkData.range = linkRange;&#10;                    [linkArray addObject:linkData];&#10;                &#125;&#10;            &#125;&#10;        &#125;&#10;    &#125;&#10;    return result;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>然后，我们增加一个 Utils 类来专门处理检测用户点击是否在链接上。主要的方法是使用 CTLineGetStringIndexForPosition 函数来获得用户点击的位置与 NSAttributedString 字符串上的位置的对应关系。这样就知道是点击的哪个字符了。然后判断该字符串是否在链接上即可。该 Util 在实现逻辑如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// &#26816;&#27979;&#28857;&#20987;&#20301;&#32622;&#26159;&#21542;&#22312;&#38142;&#25509;&#19978;&#10;+ (CoreTextLinkData *)touchLinkInView:(UIView *)view atPoint:(CGPoint)point data:(CoreTextData *)data &#123;&#10;    CTFrameRef textFrame = data.ctFrame;&#10;    CFArrayRef lines = CTFrameGetLines(textFrame);&#10;    if (!lines) return nil;&#10;    CFIndex count = CFArrayGetCount(lines);&#10;    CoreTextLinkData *foundLink = nil;&#10;&#10;    // &#33719;&#24471;&#27599;&#19968;&#34892;&#30340; origin &#22352;&#26631;&#10;    CGPoint origins[count];&#10;    CTFrameGetLineOrigins(textFrame, CFRangeMake(0,0), origins);&#10;&#10;    // &#32763;&#36716;&#22352;&#26631;&#31995;&#10;    CGAffineTransform transform =  CGAffineTransformMakeTranslation(0, view.bounds.size.height);&#10;    transform = CGAffineTransformScale(transform, 1.f, -1.f);&#10;&#10;    for (int i = 0; i &#60; count; i++) &#123;&#10;        CGPoint linePoint = origins[i];&#10;        CTLineRef line = CFArrayGetValueAtIndex(lines, i);&#10;        // &#33719;&#24471;&#27599;&#19968;&#34892;&#30340; CGRect &#20449;&#24687;&#10;        CGRect flippedRect = [self getLineBounds:line point:linePoint];&#10;        CGRect rect = CGRectApplyAffineTransform(flippedRect, transform);&#10;&#10;        if (CGRectContainsPoint(rect, point)) &#123;&#10;            // &#23558;&#28857;&#20987;&#30340;&#22352;&#26631;&#36716;&#25442;&#25104;&#30456;&#23545;&#20110;&#24403;&#21069;&#34892;&#30340;&#22352;&#26631;&#10;            CGPoint relativePoint = CGPointMake(point.x-CGRectGetMinX(rect),&#10;                                                point.y-CGRectGetMinY(rect));&#10;            // &#33719;&#24471;&#24403;&#21069;&#28857;&#20987;&#22352;&#26631;&#23545;&#24212;&#30340;&#23383;&#31526;&#20018;&#20559;&#31227;&#10;            CFIndex idx = CTLineGetStringIndexForPosition(line, relativePoint);&#10;            // &#21028;&#26029;&#36825;&#20010;&#20559;&#31227;&#26159;&#21542;&#22312;&#25105;&#20204;&#30340;&#38142;&#25509;&#21015;&#34920;&#20013;&#10;            foundLink = [self linkAtIndex:idx linkArray:data.linkArray];&#10;            return foundLink;&#10;        &#125;&#10;    &#125;&#10;    return nil;&#10;&#125;&#10;&#10;+ (CGRect)getLineBounds:(CTLineRef)line point:(CGPoint)point &#123;&#10;    CGFloat ascent = 0.0f;&#10;    CGFloat descent = 0.0f;&#10;    CGFloat leading = 0.0f;&#10;    CGFloat width = (CGFloat)CTLineGetTypographicBounds(line, &#38;ascent, &#38;descent, &#38;leading);&#10;    CGFloat height = ascent + descent;&#10;    return CGRectMake(point.x, point.y - descent, width, height);&#10;&#125;&#10;&#10;+ (CoreTextLinkData *)linkAtIndex:(CFIndex)i linkArray:(NSArray *)linkArray &#123;&#10;    CoreTextLinkData *link = nil;&#10;    for (CoreTextLinkData *data in linkArray) &#123;&#10;        if (NSLocationInRange(i, data.range)) &#123;&#10;            link = data;&#10;            break;&#10;        &#125;&#10;    &#125;&#10;    return link;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>最后改造一下<code>CTDisplayView</code>，使其在检测到用户点击后，调用上面的 Util 方法即可。我们这里实现的是点击链接后，先用<code>NSLog</code>打印出一行日志。实际应用中，读者可以根据业务需求自行调整点击后的效果。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- (void)userTapGestureDetected:(UIGestureRecognizer *)recognizer &#123;&#10;    CGPoint point = [recognizer locationInView:self];&#10;    // &#27492;&#22788;&#30465;&#30053;&#19978;&#19968;&#33410;&#20013;&#20171;&#32461;&#30340;&#65292;&#23545;&#22270;&#29255;&#28857;&#20987;&#26816;&#27979;&#30340;&#36923;&#36753;&#10;&#10;    CoreTextLinkData *linkData = [CoreTextUtils touchLinkInView:self atPoint:point data:self.data];&#10;    if (linkData) &#123;&#10;        NSLog(@&#34;hint link!&#34;);&#10;        return;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>注：在 Demo 中工程中，我们实现了点击链接跳转到一个新的界面，然后用 UIWebView 来显示链接内容的逻辑。读者可以将 demo 工程切换到<code>link_click</code>分支，查看示例代码。</p>
+<p>Demo 工程的 Gif 效果图如下，读者可以将示例工程用<code>git checkout image_support</code>切换到当前章节状态，查看相关代码逻辑。</p>
+<p><img src="http://tangqiao.b0.upaiyun.com/coretext/coretext-demo.gif" alt=""></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2015/06/27/using-coretext-2/" data-title="基于 CoreText 的排版引擎：进阶 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/06/28/apple-watch-usage-exp/" title="Apple Watch 使用体验">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Apple Watch 使用体验</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/06/27/using-coretext-1/"  title="基于 CoreText 的排版引擎：基础">
+ <strong>下一篇：</strong><br/> 
+ <span>基于 CoreText 的排版引擎：基础
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
