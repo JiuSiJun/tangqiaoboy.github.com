@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="唐巧的技术博客">
 <meta property="og:description" content="2016.02.16 更新说明本博客已经由 octopress 迁移到了 hexo，本文章的内容稍显陈旧。
 前言github 真是无所不能。其 Pages 功能 支持上传 html，并且在页面中显示。于是有好事者做了一个基于 github 的博客管理工具：octopress，基本原理是用 git 来管理你的文章，然后最终发布到 github 上成为一个独立博客站点。由于 github 支持 CNA">
-<meta property="og:updated_time" content="2016-02-16T10:28:02.000Z">
+<meta property="og:updated_time" content="2016-02-16T12:43:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="象写程序一样写博客：搭建基于github的博客">
 <meta name="twitter:description" content="2016.02.16 更新说明本博客已经由 octopress 迁移到了 hexo，本文章的内容稍显陈旧。
@@ -60,8 +60,10 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
+						<fieldset role="search">
 						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
 						<input type="hidden" name="q" value="site:blog.devtang.com">
+						</fieldset>
 					</form>
 					
 					</li>
@@ -163,6 +165,11 @@
 </div>
 
 
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Git/">Git</a><a href="/tags/blog/">blog</a>
+  </div>
+
 </div>
 
 
@@ -202,6 +209,10 @@
 </nav>
 
 	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2012/02/10/setup-blog-based-on-github/" data-title="象写程序一样写博客：搭建基于github的博客" data-url="http://blog.devtang.com/2012/02/10/setup-blog-based-on-github/"></div>
+</section>
+
 
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
@@ -232,15 +243,13 @@
 		  
 		
 		  
-			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
-		  
 		
 		  
 			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+			<li><a href="/categories/shell/" title="shell">shell<sup>6</sup></a></li>
 		  
 		
 		  
@@ -425,6 +434,18 @@ $(document).ready(function(){
 
 
 
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"tangqiaoboy"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
 
 
 
@@ -434,6 +455,15 @@ $(document).ready(function(){
 
 
 <!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-28029597-1', 'null');  
+ga('send', 'pageview');
+</script>
 
 
 

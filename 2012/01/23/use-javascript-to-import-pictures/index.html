@@ -17,7 +17,7 @@
 <meta property="og:url" content="http://blog.devtang.com/2012/01/23/use-javascript-to-import-pictures/index.html">
 <meta property="og:site_name" content="唐巧的技术博客">
 <meta property="og:description" content="需求先说说需求。春节回家见爸妈，老爸迷上了摄影。他把平时的照片都上传到了 成都图片网, 这个成都图片网专门有一个 “快拍成都” 的版块，用于大家将随手拍的生活中的图片分享上去。每天编辑还会选出一张最有特色的图片，刊登到《成都商报》上。">
-<meta property="og:updated_time" content="2016-02-16T10:26:44.000Z">
+<meta property="og:updated_time" content="2016-02-16T12:39:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用javascript协助导入图片">
 <meta name="twitter:description" content="需求先说说需求。春节回家见爸妈，老爸迷上了摄影。他把平时的照片都上传到了 成都图片网, 这个成都图片网专门有一个 “快拍成都” 的版块，用于大家将随手拍的生活中的图片分享上去。每天编辑还会选出一张最有特色的图片，刊登到《成都商报》上。">
@@ -57,8 +57,10 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
+						<fieldset role="search">
 						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
 						<input type="hidden" name="q" value="site:blog.devtang.com">
+						</fieldset>
 					</form>
 					
 					</li>
@@ -130,11 +132,6 @@
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/javascript/">javascript</a>
-</div>
-
 
 </div>
 
@@ -175,6 +172,10 @@
 </nav>
 
 	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2012/01/23/use-javascript-to-import-pictures/" data-title="用javascript协助导入图片" data-url="http://blog.devtang.com/2012/01/23/use-javascript-to-import-pictures/"></div>
+</section>
+
 
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
@@ -205,15 +206,13 @@
 		  
 		
 		  
-			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
-		  
 		
 		  
 			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+			<li><a href="/categories/shell/" title="shell">shell<sup>6</sup></a></li>
 		  
 		
 		  
@@ -398,6 +397,18 @@ $(document).ready(function(){
 
 
 
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"tangqiaoboy"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
 
 
 
@@ -407,6 +418,15 @@ $(document).ready(function(){
 
 
 <!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-28029597-1', 'null');  
+ga('send', 'pageview');
+</script>
 
 
 

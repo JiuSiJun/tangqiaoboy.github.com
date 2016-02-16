@@ -2,6 +2,36 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.devtang.com/2016/02/16/from-octopress-to-hexo/</loc>
+    <lastmod>2016-02-16T12:47:52.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2012/02/10/setup-blog-based-on-github/</loc>
+    <lastmod>2016-02-16T12:43:57.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2012/02/04/use-git-to-manage-code-snippets/</loc>
+    <lastmod>2016-02-16T12:39:51.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2012/02/03/talk-about-svn-and-git/</loc>
+    <lastmod>2016-02-16T12:39:35.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2012/01/23/use-javascript-to-import-pictures/</loc>
+    <lastmod>2016-02-16T12:39:19.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2012/02/16/apply-daily-build-in-ios-project/</loc>
+    <lastmod>2016-02-16T12:37:00.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.devtang.com/about/index.html</loc>
     <lastmod>2016-02-16T10:36:26.000Z</lastmod>
   </url>
@@ -17,38 +47,13 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/01/02/2015-summary/</loc>
-    <lastmod>2016-02-16T10:28:20.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.devtang.com/2015/11/14/charles-introduction/</loc>
     <lastmod>2016-02-16T10:28:20.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2015/11/26/yykit-auther-interview/</loc>
-    <lastmod>2016-02-16T10:28:02.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2012/02/05/mvc-in-ios-develop/</loc>
-    <lastmod>2016-02-16T10:28:02.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2015/05/06/ios-weekly-44/</loc>
-    <lastmod>2016-02-16T10:28:02.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2015/04/09/ios-weekly-42/</loc>
-    <lastmod>2016-02-16T10:28:02.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2015/03/24/ios-weekly-41/</loc>
-    <lastmod>2016-02-16T10:28:02.000Z</lastmod>
+    <loc>http://blog.devtang.com/2016/01/02/2015-summary/</loc>
+    <lastmod>2016-02-16T10:28:20.000Z</lastmod>
   </url>
   
   <url>
@@ -112,7 +117,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2015/12/24/resume-cheat-story/</loc>
+    <loc>http://blog.devtang.com/2014/04/18/ios-weekly-8/</loc>
     <lastmod>2016-02-16T10:28:02.000Z</lastmod>
   </url>
   
@@ -137,7 +142,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2013/12/22/how-to-write-resume-for-it-company/</loc>
+    <loc>http://blog.devtang.com/2015/05/06/ios-weekly-44/</loc>
     <lastmod>2016-02-16T10:28:02.000Z</lastmod>
   </url>
   
@@ -162,7 +167,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2015/12/18/from-dev-to-manager/</loc>
+    <loc>http://blog.devtang.com/2015/04/09/ios-weekly-42/</loc>
     <lastmod>2016-02-16T10:28:02.000Z</lastmod>
   </url>
   
@@ -212,33 +217,33 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2012/02/10/setup-blog-based-on-github/</loc>
+    <loc>http://blog.devtang.com/2015/11/26/yykit-auther-interview/</loc>
     <lastmod>2016-02-16T10:28:02.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/04/18/ios-weekly-8/</loc>
+    <loc>http://blog.devtang.com/2015/12/18/from-dev-to-manager/</loc>
     <lastmod>2016-02-16T10:28:02.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/01/03/reactive-cocoa-discussion/</loc>
-    <lastmod>2016-02-16T10:26:44.000Z</lastmod>
+    <loc>http://blog.devtang.com/2012/02/05/mvc-in-ios-develop/</loc>
+    <lastmod>2016-02-16T10:28:02.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2015/02/01/talk-about-react-native/</loc>
-    <lastmod>2016-02-16T10:26:44.000Z</lastmod>
+    <loc>http://blog.devtang.com/2015/12/24/resume-cheat-story/</loc>
+    <lastmod>2016-02-16T10:28:02.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2015/01/31/write-sdk-tips/</loc>
-    <lastmod>2016-02-16T10:26:44.000Z</lastmod>
+    <loc>http://blog.devtang.com/2015/03/24/ios-weekly-41/</loc>
+    <lastmod>2016-02-16T10:28:02.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2015/01/31/ios-weekly-37/</loc>
-    <lastmod>2016-02-16T10:26:44.000Z</lastmod>
+    <loc>http://blog.devtang.com/2013/12/22/how-to-write-resume-for-it-company/</loc>
+    <lastmod>2016-02-16T10:28:02.000Z</lastmod>
   </url>
   
   <url>
@@ -447,12 +452,12 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/05/16/ios-weekly-11/</loc>
+    <loc>http://blog.devtang.com/2016/02/16/make-friend-with-time/</loc>
     <lastmod>2016-02-16T10:26:44.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/02/16/make-friend-with-time/</loc>
+    <loc>http://blog.devtang.com/2014/05/08/ios-security-dev-overview/</loc>
     <lastmod>2016-02-16T10:26:44.000Z</lastmod>
   </url>
   
@@ -807,7 +812,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2012/02/16/apply-daily-build-in-ios-project/</loc>
+    <loc>http://blog.devtang.com/2015/03/01/tipping-point/</loc>
     <lastmod>2016-02-16T10:26:44.000Z</lastmod>
   </url>
   
@@ -817,7 +822,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2015/03/01/tipping-point/</loc>
+    <loc>http://blog.devtang.com/2015/11/21/apps-damaged-bug/</loc>
     <lastmod>2016-02-16T10:26:44.000Z</lastmod>
   </url>
   
@@ -827,17 +832,17 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2015/11/21/apps-damaged-bug/</loc>
+    <loc>http://blog.devtang.com/2016/01/03/reactive-cocoa-discussion/</loc>
     <lastmod>2016-02-16T10:26:44.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2012/02/04/use-git-to-manage-code-snippets/</loc>
+    <loc>http://blog.devtang.com/2015/02/01/talk-about-react-native/</loc>
     <lastmod>2016-02-16T10:26:44.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2012/02/03/talk-about-svn-and-git/</loc>
+    <loc>http://blog.devtang.com/2015/01/31/write-sdk-tips/</loc>
     <lastmod>2016-02-16T10:26:44.000Z</lastmod>
   </url>
   
@@ -847,7 +852,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2012/01/23/use-javascript-to-import-pictures/</loc>
+    <loc>http://blog.devtang.com/2015/01/31/ios-weekly-37/</loc>
     <lastmod>2016-02-16T10:26:44.000Z</lastmod>
   </url>
   
@@ -897,7 +902,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/05/08/ios-security-dev-overview/</loc>
+    <loc>http://blog.devtang.com/2014/05/16/ios-weekly-11/</loc>
     <lastmod>2016-02-16T10:26:44.000Z</lastmod>
   </url>
   

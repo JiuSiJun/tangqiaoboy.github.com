@@ -63,8 +63,10 @@ MVC 的概念最早出现在二十世纪八十年代的 施乐帕克 实验室�
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
+						<fieldset role="search">
 						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
 						<input type="hidden" name="q" value="site:blog.devtang.com">
+						</fieldset>
 					</form>
 					
 					</li>
@@ -224,6 +226,10 @@ MVC 的概念最早出现在二十世纪八十年代的 施乐帕克 实验室�
 </nav>
 
 	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/11/02/mvc-and-mvvm/" data-title="被误解的 MVC 和被神化的 MVVM" data-url="http://blog.devtang.com/2015/11/02/mvc-and-mvvm/"></div>
+</section>
+
 
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
@@ -254,15 +260,13 @@ MVC 的概念最早出现在二十世纪八十年代的 施乐帕克 实验室�
 		  
 		
 		  
-			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
-		  
 		
 		  
 			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+			<li><a href="/categories/shell/" title="shell">shell<sup>6</sup></a></li>
 		  
 		
 		  
@@ -447,6 +451,18 @@ $(document).ready(function(){
 
 
 
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"tangqiaoboy"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
 
 
 
@@ -456,6 +472,15 @@ $(document).ready(function(){
 
 
 <!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-28029597-1', 'null');  
+ga('send', 'pageview');
+</script>
 
 
 

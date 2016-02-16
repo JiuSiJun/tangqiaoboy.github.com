@@ -56,8 +56,10 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
+						<fieldset role="search">
 						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
 						<input type="hidden" name="q" value="site:blog.devtang.com">
+						</fieldset>
 					</form>
 					
 					</li>
@@ -67,6 +69,26 @@
     </header>
     <div id="container">
       <div id="main">
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2016/02/16/from-octopress-to-hexo/" title="从 Octopress 迁移到 Hexo" itemprop="url">
+  
+    <h1 itemprop="name">从 Octopress 迁移到 Hexo</h1>
+    
+     
+           <p itemprop="description" >序言我的博客之前一直使用的是 Octopress，不过 Octopress 已经很久没有更新了。而且 Octopress 是基于 Ruby 的，生成博客文章的速度真的是非常非常慢，每次我使用 rake preview 命令时，我的 MacBook 的 CPU 就会狂转。最新的一次</p>
+        
+    
+    <time datetime="2016-02-16T11:05:46.000Z" itemprop="datePublished">2016-02-16 19:05</time>
+  </a>
+</section>
+
+
+
+
+
 
   
 <section class="post" itemscope itemprop="blogitem">
@@ -380,27 +402,6 @@ MVC 的概念最早出现在二十世纪八十年代的 施乐帕克 实验室�
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/10/25/one-on-one-summary/" title="浅析一对一沟通" itemprop="url">
-  
-    <h1 itemprop="name">浅析一对一沟通</h1>
-    
-     
-           <p itemprop="description" >引言一对一沟通，又被称作一对一会议、One-on-one 等，是互联网公司常用的沟通方式。一对一沟通虽然被广泛使用，但是涉及的文章却很少，我主要通过两本书来获得它的一些知识，这两本书是《格鲁夫给经理人的第一课》和《创业维艰》。
-这两本书的作者都非常有名，格鲁夫是 Intel 公司</p>
-        
-    
-    <time datetime="2015-10-25T10:06:42.000Z" itemprop="datePublished">2015-10-25 18:06</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -435,15 +436,13 @@ MVC 的概念最早出现在二十世纪八十年代的 施乐帕克 实验室�
 		  
 		
 		  
-			<li><a href="/categories/javascript/" title="javascript">javascript<sup>1</sup></a></li>
-		  
 		
 		  
 			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/shell/" title="shell">shell<sup>5</sup></a></li>
+			<li><a href="/categories/shell/" title="shell">shell<sup>6</sup></a></li>
 		  
 		
 		  
@@ -562,6 +561,15 @@ $(document).ready(function(){
 
 
 <!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-28029597-1', 'null');  
+ga('send', 'pageview');
+</script>
 
 
 
