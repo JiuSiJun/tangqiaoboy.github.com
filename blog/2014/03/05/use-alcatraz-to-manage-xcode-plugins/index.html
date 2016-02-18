@@ -1,0 +1,383 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>使用Alcatraz来管理Xcode插件 - 唐巧的技术博客</title>
+  <meta name="author" content="唐巧">
+
+  
+  <meta name="description" content="简介 Alcatraz 是一个帮你管理 Xcode 插件、模版以及颜色配置的工具。它可以直接集成到 Xcode 的图形界面中，让你感觉就像在使用 Xcode 自带的功能一样。 安装和删除 使用如下的命令行来安装 Alcatraz： 1
+2
+mkdir -p ~/Library/ &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.devtang.com/blog/2014/03/05/use-alcatraz-to-manage-xcode-plugins">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="唐巧的技术博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <!-- googleapis is fucked by gfw -->
+  <script src="http://cdn.staticfile.org/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-28029597-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">唐巧的技术博客</a></h1>
+  
+    <h2>记录下自己学习的点滴</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.devtang.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">所有文章</a></li>
+  <li><a href="/blog/categories/ios/">iOS开发专题</a></li>
+  <li><a href="http://weibo.com/tangqiaoboy" target="_blank">我的微博</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">使用Alcatraz来管理Xcode插件</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-05T22:36:00+08:00" pubdate data-updated="true">Mar 5<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><img src="/images/Alcatraz-logo.jpg"></p>
+
+<h2>简介</h2>
+
+<p>Alcatraz 是一个帮你管理 Xcode 插件、模版以及颜色配置的工具。它可以直接集成到 Xcode 的图形界面中，让你感觉就像在使用 Xcode 自带的功能一样。</p>
+
+<h2>安装和删除</h2>
+
+<p>使用如下的命令行来安装 Alcatraz：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>mkdir -p ~/Library/Application<span class="se">\ </span>Support/Developer/Shared/Xcode/Plug-ins;
+</span><span class='line'>curl -L http://git.io/lOQWeA | tar xvz -C ~/Library/Application<span class="se">\ </span>Support/Developer/Shared/Xcode/Plug-ins
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果你不想使用 Alcatraz 了，可以使用如下命令来删除：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rm -rf ~/Library/Application<span class="se">\ </span>Support/Developer/Shared/Xcode/Plug-ins/Alcatraz.xcplugin
+</span><span class='line'>rm -rf ~/Library/Application<span class="se">\ </span>Support/Alcatraz
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
+
+
+<h2>使用</h2>
+
+<p>安装成功后重启 Xcode，就可以在 Xcode 的顶部菜单中找到 Alcatraz，如下所示：</p>
+
+<p><img src="/images/alcatraz-menu.jpg"></p>
+
+<p>点击 “Package Manager”，即可启动插件列表页面，如下所示：</p>
+
+<p><img src="/images/alcatraz-home.jpg"></p>
+
+<p>之后你可以在右上角搜索插件，对于想安装的插件，点击其左边的图标，即可下载安装，如下所示，我正在安装<code>KImageNamed</code>插件：</p>
+
+<p><img src="/images/alcatraz-install.jpg"></p>
+
+<p>安装完成后，再次点击插件左边的图标，可以将该插件删除。</p>
+
+<h2>插件路径</h2>
+
+<p>Xcode 所有的插件都安装在目录<code>~/Library/Application Support/Developer/Shared/Xcode/Plug-ins/</code>下，你也可以手工切换到这个目录来删除插件。</p>
+
+<h2>关于 Xcode 的插件机制</h2>
+
+<p>Alcatraz 当前只支持 OSX 10.9 and Xcode 5。不要抱怨了，这其实主要是因为苹果并没有开放插件机制，每次升级 Alcatraz 都都要重新适配。如果你看 Alcatraz 的 Commit Log，你就会发现，Alcatraz 花了几个月时间，才适配到 Xcode 5，这对于插件开发者来说，是比较难受的。</p>
+
+<p>所以作为一款开源并且免费的插件，只支持最新版的 Xcode 可以让开源作者节省大量精力。我也希望苹果能早日开放 Xcode 的插件机制标准，方便广大的插件开发者构建强大的第三方增强工具。</p>
+
+<h2>推荐的插件</h2>
+
+<p>我个人比较喜欢 XCode 的 vim 插件 XVim，微博里大家推荐过的还有 KImageNamed 插件，Alcatraz 里面应该好用的插件很多，我还没有时间试用。</p>
+
+<p>这儿有一些朋友整理的插件列表：<a href="http://www.cocoachina.com/applenews/devnews/2013/0918/7022.html">《那些不能错过的 Xcode 插件》</a></p>
+
+<p>如要你发现好用的插件，欢迎在留言处回复告诉我，我可以推荐给大家。谢谢～</p>
+
+<h2>插件开发</h2>
+
+<p>如果你觉得自己很牛逼，想尝试开发插件，这儿有一些教程：</p>
+
+<ul>
+<li><a href="http://studentdeng.github.io/blog/2014/02/21/xcode-plugin-fun/">《Xcode5 Plugins 开发简介》</a></li>
+<li><a href="http://onevcat.com/2013/02/xcode-plugin/">《Xcode 4 插件制作入门》</a></li>
+<li><a href="http://joeyio.com/ios/2013/07/25/write_xcode4_plugin_of_your_own/">《写个自己的 Xcode4 插件》</a></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">唐巧</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-05T22:36:00+08:00" pubdate data-updated="true">Mar 5<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ios/'>iOS</a>
+  
+</span>
+
+
+    </p>
+    <p class="meta">
+      关注我的「iOS开发」微信公众号，每天获得精选的 iOS 开发文章和创业心得：<br>
+<img src="/images/weixin-qr.jpg" />
+
+<br>原创文章，版权声明：自由转载-非商用-非衍生-保持署名 | <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" id="">Creative Commons BY-NC-ND 3.0</a>
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <style>
+    .flash-video{display:none;}
+</style>
+<!-- JiaThis Button BEGIN -->
+<div id="ckepop">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_tsina">新浪微博</a>
+<a class="jiathis_button_t163">网易微博</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_renren">人人网</a>
+<a class="jiathis_button_douban">豆瓣</a>
+
+<a href="http://www.jiathis.com/share?uid=1574434" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+    data_track_clickback:true,
+    sm:"t163,tsina,tqq,renren,douban",
+    summary:"",
+    hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v2.jiathis.com/code_mini/jia.js?uid=1574434" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+<br />
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=89581" async=""></script>
+<!-- UY END -->
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/02/27/ios-weekly-1/" title="Previous Post: iOS移动开发周报-第1期">&laquo; iOS移动开发周报-第1期</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/03/07/ios-weekly-2/" title="Next Post: iOS移动开发周报-第2期">iOS移动开发周报-第2期 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>赞助商</h1>
+  <p>
+     <a href="http://zc.pgyer.com" target="_blank"><img width="260px" src="/images/ad_pgyer.png" /></a>
+  </p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/17/how-to-read-a-book-summary/">教你阅读图书的「方法论」- 评《如何阅读一本书》</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/12/saul-introdution/">MagicalRecord 作者 Saul Mora 的故事</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/10/atswift-conference-summary/">首届Swift开发者大会见闻</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/03/reactive-cocoa-discussion/">ReactiveCocoa 讨论会</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/02/2015-summary/">2015 年个人总结</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/24/resume-cheat-story/">培训机构出来的 iOS 学员怎么了？</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/18/from-dev-to-manager/">涅槃重生:我的技术转管理之路</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/26/yykit-auther-interview/">专访 YYKit 作者 Ibireme: 开源大牛是怎样炼成的</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/21/apps-damaged-bug/">Mac 应用出现「已损坏」问题，苹果到底犯了什么傻逼错误？</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/14/charles-introduction/">Charles 从入门到精通(中国5折特惠)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/02/mvc-and-mvvm/">被误解的 MVC 和被神化的 MVVM</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/10/25/one-on-one-summary/">浅析一对一沟通</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>About Me</h1>
+  <p>InfoQ编辑, 《<a href="http://item.jd.com/11598468.html" target="_blank">iOS开发进阶</a>》作者, 在猿题库创业。<br/>
+      <br/>Java开发工程师，曾开发网易邮箱、微博。
+      <br/>iOS开发工程师，曾开发有道云笔记、猿题库、小猿搜题。
+  </p>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  &copy; 2016 - 唐巧 -
+  <span class="credit">基于 <a href="http://octopress.org" target="_blank">Octopress</a></span>
+  <span class="credit">, 感谢 <a href="http://gitcafe.com/signup?invited_by=tangqiaoboy" target="_blank">GitCafe</a> 为本站提供存储空间</span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+<script src=" http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=2351546126" type="text/javascript" charset="utf-8"></script>
+<script>
+WB2.anyWhere(function(W){
+W.widget.followButton({
+    uid: 1708947107,
+    id: "wb_follow_btn"
+    });
+});
+</script>
+
+
+</body>
+</html>

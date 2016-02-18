@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: shell | 唐巧的技术博客]]></title>
+  <link href="http://blog.devtang.com/blog/categories/shell/atom.xml" rel="self"/>
+  <link href="http://blog.devtang.com/"/>
+  <updated>2016-01-19T21:29:28+08:00</updated>
+  <id>http://blog.devtang.com/</id>
+  <author>
+    <name><![CDATA[唐巧]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Git submodule的坑]]></title>
+    <link href="http://blog.devtang.com/blog/2013/05/08/git-submodule-issues/"/>
+    <updated>2013-05-08T21:44:00+08:00</updated>
+    <id>http://blog.devtang.com/blog/2013/05/08/git-submodule-issues</id>
+    <content type="html"><![CDATA[<h2>前言</h2>
+
+<p>随着近几年的发展，Git 已经成为开源界的标准的版本控制工具。开源界的重量级项目，如 Linux, Android, Eclipse, Gnome, KDE, Qt, ROR, Debian，无一例外的都是使用 git 来进行版本控制。如果你还不会 Git，那么恕我直言，你已经 out 了，赶紧抽空充充电吧。本文并不打算做 Git 入门级介绍，想学习 git 的同学，推荐国内作者蒋鑫写的 <a href="http://book.douban.com/subject/6526452/">《Git 权威指南》</a>。</p>
+
+<p>对于一些比较大的工程，为了便于复用，常常需要抽取子项目。例如我开发的猿题库客户端现在包括 3 门考试，客户端涉及的公共 UI、公共底层逻辑、公共的第三方库、以及公共的答题卡扫描算法就被我分别抽取成了子项目。这些子项目都以 git submodule 的形式，增加到工程中。</p>
+
+<p>在使用了 git submodule 一段时间后，我发现了一些 submodule 的问题，在此分享给大家。</p>
+
+<!-- more -->
+
+
+<h2>更新 submodule 的坑</h2>
+
+<p>submodule 项目和它的父项目本质上是 2 个独立的 git 仓库。只是父项目存储了它依赖的 submodule 项目的版本号信息而已。如果你的同事更新了 submodule，然后更新了父项目中依赖的版本号。你需要在 git pull 之后，调用 git submodule update 来更新 submodule 信息。</p>
+
+<p>这儿的坑在于，如果你 git pull 之后，忘记了调用 git submodule update，那么你极有可能再次把旧的 submodule 依赖信息提交上去。对于那些习惯使用 git commit -a 的人来说，这种危险会更大一些。所以建议大家:</p>
+
+<ol>
+<li>git pull 之后，立即执行 git status, 如果发现 submodule 有修改，立即执行 git submodule update</li>
+<li>尽量不要使用 git commit -a， git add 命令存在的意义就是让你对加入暂存区的文件做二次确认，而 git commit -a 相当于跳过了这个确认过程。</li>
+</ol>
+
+
+<p>更复杂一些，如果你的 submodule 又依赖了 submodule，那么很可能你需要在 git pull 和 git submodule update 之后，再分别到每个 submodule 中再执行一次 git submodule update，这里可以使用 git submodule foreach 命令来实现： <code>git submodule foreach git submodule update</code></p>
+
+<h2>修改 submodule 的坑</h2>
+
+<p>有些时候你需要对 submodule 做一些修改，很常见的做法就是切到 submodule 的目录，然后做修改，然后 commit 和 push。</p>
+
+<p>这里的坑在于，默认 git submodule update 并不会将 submodule 切到任何 branch，所以，默认下 submodule 的 HEAD 是处于游离状态的 (&lsquo;detached HEAD&rsquo; state)。所以在修改前，记得一定要用 git checkout master 将当前的 submodule 分支切换到 master，然后才能做修改和提交。</p>
+
+<p>如果你不慎忘记切换到 master 分支，又做了提交，可以用 cherry-pick 命令挽救。具体做法如下：</p>
+
+<ol>
+<li>用 <code>git checkout master</code> 将 HEAD 从游离状态切换到 master 分支 , 这时候，git 会报 Warning 说有一个提交没有在 branch 上，记住这个提交的 change-id（假如 change-id 为 aaaa)</li>
+<li>用 <code>git cherry-pick aaaa</code> 来将刚刚的提交作用在 master 分支上</li>
+<li>用 <code>git push</code> 将更新提交到远程版本库中</li>
+</ol>
+
+
+<p>以下是相关命令的操作示范和命令行输出结果：</p>
+
+<p>``` bash
+➜ ui_common git:(df697f9) git checkout master
+Warning: you are leaving 1 commit behind, not connected to
+any of your branches:</p>
+
+<p>  df697f9 forget to check out master</p>
+
+<p>If you want to keep them by creating a new branch, this may be a good time
+to do so with:</p>
+
+<p> git branch new_branch_name df697f911e5a0f09d883f8f360977e470c53d81e</p>
+
+<p>Switched to branch &lsquo;master&rsquo;
+➜ ui_common git:(master) git cherry-pick df697f9</p>
+
+<p>```</p>
+
+<h2>使用第三方工具</h2>
+
+<p>对于 submodule 的重度使用者，有几个工具可作推荐：</p>
+
+<ol>
+<li><a href="http://source.android.com/source/version-control.html">Repo</a>  Google 用于管理 Android 项目的工具。</li>
+<li><a href="http://gitslave.sourceforge.net/">Gitslave</a></li>
+<li><a href="https://github.com/apenwarr/git-subtree/">Git Subtree</a></li>
+</ol>
+
+
+<p>以上工具，我都没有实际用过，所以无法提供更多信息。</p>
+
+<h2>Tips</h2>
+
+<p>由于常常使用 submodule 的相关命令，可以在 ~/.gitconfig 文件中将其设置别名，方便操作，我设置的所有相关别名如下：</p>
+
+<p>``` bash
+[alias]</p>
+
+<pre><code>st = status -s
+ci = commit
+l = log --oneline --decorate -12 --color
+ll = log --oneline --decorate --color
+lc = log --graph --color
+co = checkout
+br = branch
+rb = rebase
+dci = dcommit
+sbi = submodule init
+sbu = submodule update
+sbp = submodule foreach git pull
+sbc = submodule foreach git co master
+</code></pre>
+
+<p>```</p>
+
+<h2>参考链接</h2>
+
+<ol>
+<li><p><a href="http://codingkilledthecat.wordpress.com/2012/04/28/why-your-company-shouldnt-use-git-submodules/">《why-your-company-shouldnt-use-git-submodules》</a> (需翻墙)</p></li>
+<li><p><a href="http://fiji.sc/Git_submodule_tutorial">《Git_submodule_tutorial》</a></p></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[用Git进行协同开发]]></title>
+    <link href="http://blog.devtang.com/blog/2012/02/29/collaboration-with-git/"/>
+    <updated>2012-02-29T19:08:00+08:00</updated>
+    <id>http://blog.devtang.com/blog/2012/02/29/collaboration-with-git</id>
+    <content type="html"><![CDATA[<h2>问题场景描述</h2>
+
+<p>常常会遇到这样的协同场景：后台的同事和前端的同事需要共同开发一个新功能，而他们的代码相互依赖，所以需要不停地更新各自的代码进行联调。</p>
+
+<p>对于这种场景，最简单的方式就是，这 2 个同事坐到一起，然后把 svn 当作一个共享代码的中转站来共享开发中的代码。</p>
+
+<p>在这种方式下，大家各自写自己的代码，提交到 svn 上，然后用 svn up 获得对方的代码。在调试问题的时候，大家可能不停地更新代码，然后让对方用 svn up 来更新。最终，虽然开发能够顺利进行，但是 svn 上会积累大量调试中的代码历史。所以，这样把 svn 当作代码中转站是一个很山寨的行为。</p>
+
+<p>在开发 <a href="http://note.youdao.com">有道云笔记</a> 新的 <a href="http://itunes.apple.com/cn/app/id483995181">iPad 版</a> 时，我和前端同事 zyc 尝试用 git 进行了协同开发。在这里把具体方案分享给大家，欢迎大家讨论。</p>
+
+<!--More-->
+
+
+<h2>Git 相关协议介绍</h2>
+
+<p>Git 对于你本机的代码项目，允许用很方便的方式进行非授权的只读访问 ,<a href="http://progit.org/book/zh/ch4-9.html">相关介绍链接</a>。简单来说，就是可以用 Git 自带的 Git daemon 命令在本机的 9418 端口启动一个守护进程，然后其它机器就可以以只读方式访问你开放出来的项目代码。</p>
+
+<p>具体步骤如下：</p>
+
+<ul>
+<li>在你的 Git 工程下新建一个名为 git-daemon-export-ok 的文件放到 .git 目录下，表明该工程允许非授权访问。示例代码如下：</li>
+</ul>
+
+
+<p><code>bash
+cd /path/to/project.git
+touch git-daemon-export-ok
+</code></p>
+
+<ul>
+<li>执行 git daemon 命令，设置你要 Export 出的项目目录的父目录，例如工程的代码地址是：/opt/git/project 的话，则示例代码如下：</li>
+</ul>
+
+
+<p><code>bash
+git daemon --reuseaddr --base-path=/opt/git/ /opt/git/
+</code></p>
+
+<ul>
+<li>告知对方你的机器的 IP，然后在对方的机器，用下列命令即可检出你的代码：</li>
+</ul>
+
+
+<p><code>bash
+git checkout git://your_ip_address/project
+</code></p>
+
+<ul>
+<li>如果对方有更新，只需要 git pull 一下。</li>
+</ul>
+
+
+<h2>协作</h2>
+
+<p>对于这种基于 Git 的协作，我们可以在本地随意的提交代码，让对方用 git pull 更新。当开发完成，需要 push 到公共仓库的时候，再用 git rebase -i 将本地的提交进行清理即可。并且由于大家都是在机器间互拷，不依赖 svn 公共服务器，更新代码的速度也要快得多。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Git的使用感受]]></title>
+    <link href="http://blog.devtang.com/blog/2012/02/03/talk-about-svn-and-git/"/>
+    <updated>2012-02-03T21:08:00+08:00</updated>
+    <id>http://blog.devtang.com/blog/2012/02/03/talk-about-svn-and-git</id>
+    <content type="html"><![CDATA[<p>从开始工作到现在，在公司里面一直用 svn 来做版本管理。大约半年前听说了 Git，因为 Git 的光辉相当耀眼，作者是 Linus Torvalds，被大量的开源软件采用，如 jQuery, Perl, Qt, ROR, YUI, GNOME 等，所以决定学一学。
+比较庆幸的是，国内有一本较好的介绍 Git 的书：<a href="http://www.amazon.cn/Git%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97-%E8%92%8B%E9%91%AB/dp/B0058FLC40/ref=sr_1_1?ie=UTF8&amp;qid=1328277616&amp;sr=8-1">《Git 权威指南》</a>。
+我大概花了一个月的周末时间来学习它。在这里总结一下使用 Git 的感受，主要是和 SVN 来做一些比较，以便突出 Git 的特点。</p>
+
+<!--more-->
+
+
+<h2>学习成本</h2>
+
+<p>首先我感觉 Git 的学习成本还是比较高的。svn 基本上不到 20 个命令就可以应付日常的工作了，而 Git 有上百个命令。我在学习 SVN 的时候，基本上没有看什么书，最多就是在网上随便看了一些贴子，就基本会使用 SVN 了。而我花在 Git 的学习时间算下来，至少有 1 周。</p>
+
+<p>因为 Git 的学习成本较高，所以当一个会 svn 的同学刚刚接触 Git 的时候，如果简单地把 Git 当 SVN 用，就会感觉 Git 相当难用。我在公司就时常听到同事抱怨它。所以我认为，要想真正用好 Git，还是需要投入时间来学习它，否则是很难使用的。</p>
+
+<h2>Git 的内部结构</h2>
+
+<p>Git 真正是一个面向程序员的工具，它的内部数据结构是一个有向无环图，并且，你必须理解它的内部数据结构后，才能掌握它。因为你的很多操作，都其实对应的是这个有向无环图的操作。比如:</p>
+
+<ul>
+<li>git commit 就是增加一个结点。</li>
+<li>git commit &mdash;amend 就是改发一个结点。</li>
+<li>git reset 就是修改 HEAD 指向的结点。</li>
+</ul>
+
+
+<p>另外，Git 内部包括三个区域：工作区，暂存区和版本库。</p>
+
+<ul>
+<li>git add 是将工作区的内容保存到暂存区</li>
+<li>git checkout 是将暂存区的内容覆盖工作区</li>
+<li>git commit 是将暂存区的内容保存到版本库</li>
+<li>git reset 默认情况下是将版本库的内容覆盖工作区</li>
+<li>git diff 也有三种情况，分别是比较工作区与暂存区，工作区与版本库，暂存区与版本库之间的差别</li>
+</ul>
+
+
+<p>了解了 Git 的内部结构，对于这些 Git 的命令就更加理解了。</p>
+
+<h2>svn 的坑</h2>
+
+<p>svn 在平常使用上基本没什么坑，平时通过</p>
+
+<pre>svn pe svn:ignore . </pre>
+
+
+<p> 设置好忽略的文件，以免误把不应该加入版本管理的文件加进来。</p>
+
+<p>我唯一遇到的一次问题是这样的：我有一个目录要加入 svn 的版本库，但是目录里面的一些文件不想加入。如果直接输入 svn add 目录名，就会把目录下所有文件都加入到版本管理中。如果 cd 到那个目录里面配置 svn:ignore，又会因为当前目录还不在版本管理中，设置不了。最后找到的解决办法是在 svn add 的时候增加 &mdash;non-recursive 参数：
+<code>
+svn add dirname --non-recursive
+或者是：
+$ svn add dirname --depth empty
+</code></p>
+
+<p>还有就是对于一些不小心用 svn add 加入了版本管理，但实际上不应该加的目录。可以这么做：
+<code>
+svn export spool spool-tmp    (这里 export 可以将原目录中的 .svn 目录给清除掉)
+svn rm spool
+svn ci -m 'Removing inadvertently added directory "spool".'
+mv spool-tmp spool
+svn propset svn:ignore 'spool' .
+svn ci -m 'Ignoring a directory called "spool".'
+</code></p>
+
+<h2>Git 的坑</h2>
+
+<ul>
+<li>在 windows 下的文件的权限因为无法和 linux 上完全一致，所以用 Git 检出的文件权限可能显示为被更改。
+另外因为 windows 下的换行和 linux 上也不一样，协作开发时也容易出问题。所以在 windows 上使用 Git 的同学需要加上以下 2 行配置参数：</li>
+</ul>
+
+
+<p><code>
+git config --global core.filemode false
+git config --global core.autocrlf true
+第一句是忽略文件权限的改动。
+第二句是将文件 checkout 时自动把 LF 转成 CRLF，check in 时自动把 CRLF 转成 LF
+</code></p>
+
+<ul>
+<li>svn 的 svn revert filename 对应的其实是 git checkout &mdash; filename, 而 git revert xxx 是基于 xxx 提交所做的改动，做一次反向提交，和 svn revert 完全不一样。</li>
+</ul>
+
+
+<h2>Git 的一些小技巧</h2>
+
+<h3>强制推送</h3>
+
+<p> 一旦推送到远程仓库后，就不要用类似 git reset, git ci &mdash;amend, git rebase 等破坏性提交了，否则远程仓库会因为你的新推送不是 Fast Forward 而拒绝提交 (关于什么是 Fast Forward 要讲的太多了，自已看书吧)。如果实在不小心做了。在确定别人没有检出前，用 git push -f 可以强制推送到远程仓库中。如下图:</p>
+
+<p><img src="/images/git_push_f.jpg"></p>
+
+<h3>使用 git svn</h3>
+
+<p> 在公司没有应用 git 前，你可以用 git svn 来做管理。 git svn 相关命令：</p>
+
+<p>```</p>
+
+<pre><code> git svn clone -r REV1:HEAD svn_addr local_addr
+ git svn dcommit  提交到 SVN
+ git svn fetch    从 svn up 信息
+ git svn rebase   将从 svn up 过来的信息，rebase 成 git 提交
+ git svn rebase --continue  冲突后继续 rebase 信息
+</code></pre>
+
+<p>```</p>
+
+<p>用 git svn clone 的时候，带上 -r rev1:HEAD 参数，可以省去将 SVN 整个提交历史抓取下来的时间。</p>
+
+<h3>设置常用命令的别名</h3>
+
+<p> 在用户的 home 目录下，有一个 .gitconfig 文件，里面可以配置一些别名，方便平时的 git 操作。
+特别是那些平日使用 SVN 的短命令习惯了的同学，配置一下别名后，使用 git 就会相当顺手了。我配置的别名如下。这里特别多说一句，有些人喜欢将 ci 设置成 commit -a，这样就不用 git add 来把需要提交的文件加入到暂存区了。在《Git 权威指南》中，作者极力反对这样做。因为 Git 本身在提交前有 add 这步，就是为了让提交者能够审视自己的提交文件，以防止错误的提交发生。</p>
+
+<pre>
+[alias]
+    st = status -s
+    ci = commit
+    l = log --oneline --decorate -13
+    ll = log --oneline --decorate
+    co = checkout
+    br = branch
+    rb = rebase
+    dci = dcommit
+</pre>
+
+
+<h3>删除不在 git 管理下的文件</h3>
+
+<p> 如果你需要删除 Git 下没有加入到版本库中的文件，可以使用：
+<code>
+git clean -nd 测试删除
+git clean -fd 真实删除
+</code></p>
+
+<h3>搭建自己的远程仓库</h3>
+
+<p>搭建一个 Git 远程仓库相当简单，直接在一台带 SSH 的服务器上用 git init &mdash;bare dirname 即可。本地可以用 git remote 命令来设置多个远程分支。另外，第一次提交的时候，因为远程仓库中没有任何分支，需要用如下指令建立 master 分支：
+<code>
+git remote add origin yourname@yourhost.com:~/path/repository_name
+git remote add add2 yourname@yourhost.com:~/path/repository_name
+git push origin master
+git push add2 master
+// 如果 git remote add 设置地址写错了，可以用 git remote set-url 更改：
+git remote set-url origin yourname@yourhost.com:~/path/repository_name
+</code></p>
+
+<h3>如何用 Git 将一个文件的历史提交恢复？</h3>
+
+<p>上次遇到一个问题，我某次提交改动了很多文件，但是其中有一个是不应该改的。所以我需要把这次提交中关于那个文件的改动撤销。直接用 git checkout 命令可以检出某一个文件的历史版本，然后就可以将对这个文件的改动取消了。如下：</p>
+
+<p><code>
+git checkout CommitId fileName
+git ci -m "revert a file modification"
+</code></p>
+
+<h3>本地工作区还有未提交的内容时，不能 pull?</h3>
+
+<p>可以先用 git stash 将内容暂存，然后再 pull，成功后再 git stash pop 将修改恢复。</p>
+
+<h3>提交的邮箱错了？</h3>
+
+<p>有些时候，因为同时在 github 和公司内部做提交，所以用 2 个不同的邮箱。如果一个新工程 clone 下来，忘了用 git config 来设置提交用户名和邮箱，就有可能用错误的邮箱作为账号名提交。这个时候，如果你只是错了最近的一次提交而已，可以用如下命令来将最近的一次提交作者名和邮箱修改：</p>
+
+<p><code>bash
+git config user.email your-email@163.com
+git config user.name your-name
+git commit --amend --reset-author
+</code>
+如果等你发现的时候，已经错了很多提交了。可以用如下命令来一次性修改多个提交的用户名和邮箱：</p>
+
+<p>``` bash
+git filter-branch -f &mdash;env-filter "</p>
+
+<pre><code>GIT_AUTHOR_NAME='Tang Qiao'
+GIT_AUTHOR_EMAIL='tangqiao@fenbi.com'
+GIT_COMMITTER_NAME='Tang Qiao'
+GIT_COMMITTER_EMAIL='tangqiao@fenbi.com'
+</code></pre>
+
+<p>&ldquo; HEAD</p>
+
+<p>```</p>
+
+<h3>提交的时候自动去掉源码末尾的空格</h3>
+
+<p>源码末尾的空格几乎都是无意义的，应该去掉的。大多数 review 系统，都会将源码末尾的空格标红。所以，我们何不在提交时让 git 自动帮我们去掉这些空格呢？这个可以通过设置 git 的 hook 来实现，具体方法如下：</p>
+
+<ol>
+<li><p>用 vim 编辑一个名为 pre-commit 的文件：
+<code>
+vim .git/hooks/pre-commit
+</code></p></li>
+<li><p>输入如下代码，保存退出 vim</p></li>
+</ol>
+
+
+<p>```</p>
+
+<h1>!/bin/sh</h1>
+
+<p>if git-rev-parse &mdash;verify HEAD >/dev/null 2>&amp;1 ; then
+   against=HEAD
+else
+   # Initial commit: diff against an empty tree object
+   against=4b825dc642cb6eb9a060e54bf8d69288fbee4904
+fi</p>
+
+<h1>Find files with trailing whitespace</h1>
+
+<p>for FILE in <code>exec git diff-index --check --cached $against -- | sed '/^[+-]/d' | sed -E 's/:[0-9]+:.*//' | uniq</code> ; do</p>
+
+<pre><code># Fix them!
+sed -i '' -E 's/[[:space:]]*$//' "$FILE"
+git add "$FILE"
+</code></pre>
+
+<p>done
+```</p>
+
+<ol>
+<li>增加 pre-commit 的运行权根：
+<code>
+chmod +x .git/hooks/pre-commit
+</code></li>
+</ol>
+
+
+<h3>让常用操作自动带颜色</h3>
+
+<p>默认的 git diff, status, log 什么的都是不带颜色的，可以用如下命令让它们都带上颜色。另外还有一些有趣的命令，一并列在下面。</p>
+
+<p>```
+git config &mdash;global &mdash;add user.email &ldquo;<a href="&#109;&#97;&#105;&#x6c;&#x74;&#111;&#58;&#101;&#x6d;&#x61;&#x69;&#x6c;&#64;&#49;&#x36;&#51;&#46;&#99;&#111;&#109;">&#x65;&#x6d;&#97;&#x69;&#108;&#x40;&#x31;&#x36;&#51;&#46;&#99;&#x6f;&#109;</a>&rdquo;
+git config &mdash;global &mdash;add user.name &ldquo;your name&rdquo;</p>
+
+<p>git config &mdash;global alias.co checkout
+git config &mdash;global alias.br branch
+git config &mdash;global alias.ci commit
+git config &mdash;global alias.st status -s
+git config &mdash;global alias.l log &mdash;oneline &mdash;decorate -12</p>
+
+<p>git config &mdash;global color.diff auto
+git config &mdash;global color.status auto
+git config &mdash;global color.branch auto
+git config &mdash;global merge.tool kdiff3
+git config &mdash;global meregtool.kdiff3.path &ldquo;/usr/bin/kdiff3"<br/>
+git config &mdash;global alias.visual &rdquo;!gitk"
+```</p>
+
+<h3>自动补全 git 命令</h3>
+
+<ol>
+<li><p>安装 bash-completion: brew install bash-completion</p></li>
+<li><p>按要求把以下代码增加到 .bash_profile 文件中：</p></li>
+</ol>
+
+
+<p><code>``
+  if [ -f</code>brew &mdash;prefix`/etc/bash_completion ]; then</p>
+
+<pre><code>. `brew --prefix`/etc/bash_completion
+</code></pre>
+
+<p>  fi
+```</p>
+
+<ol>
+<li>下载 bash-completion 对于 Git 的支持</li>
+</ol>
+
+
+<p><code>bash
+cd /usr/local/etc/bash_completion.d/
+sudo curl -O https://raw.github.com/git/git/master/contrib/completion/git-completion.bash
+</code></p>
+
+<h2>一些 Git 的资料</h2>
+
+<ul>
+<li><a href="http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/zh_cn/">Git Magic</a> 很通俗的一本介绍 Git 的书，比较短小精炼。</li>
+<li><a href="http://progit.org/book/zh/">Pro Git</a> 全面介绍 Git 的书，非常详细。</li>
+<li><a href="http://www.amazon.cn/Git%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97-%E8%92%8B%E9%91%AB/dp/B0058FLC40/ref=sr_1_1?ie=UTF8&amp;qid=1328277616&amp;sr=8-1">《Git 权威指南》</a> 中国人写的一本介绍 Git 的书，也非常通俗。我个人主要就是通过这本书来学习 Git 的。</li>
+<li><a href="http://www.github.com">Github</a> 基于 Git 的开源网站。在 Github 的托管的项目相当多，著名的有：rails, jquery, node, homebrew, three20, jekyll, jquery-ui, backbone, coffee-script, tornado, redis, underscore, asi-http-request, django。</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[去掉Xcode源码末尾的空格]]></title>
+    <link href="http://blog.devtang.com/blog/2011/12/10/remove-tail-blankspace-in-xcode/"/>
+    <updated>2011-12-10T17:08:00+08:00</updated>
+    <id>http://blog.devtang.com/blog/2011/12/10/remove-tail-blankspace-in-xcode</id>
+    <content type="html"><![CDATA[<p>在用 Xcode 开发的时候，很容易就在行末增加一些空格了。这些空格在上传到 review board 上后 , 就会被特别的颜色显示出来。因为一种好的编程风格是说 , 不应该在行末增加不必要的空格。如果是用 eclipse 写 java, 那么这种时候选中写好的代码，按 <code>ctrl+shift+F</code> 即可调整源码的风格 , 将尾部的空格去掉。可惜在 Xcode 中并没有提供相应的功能。</p>
+
+<!--more-->
+
+
+<p>不过我们可以用命令行来达到这一效果 , 在工程目录下输入:</p>
+
+<p><code>bash
+find . -name "*.[hm]" | xargs sed -Ee 's/ +$//g' -i ""
+</code></p>
+
+<p>这样 , 就可以把源码中行末多出来的空格去掉了 , 是不是很爽 ? 可以把这句加到执行 post-review 的脚本上，这样就可以做到自动去空格了。</p>
+
+<p>顺便说一下，我打算把这些小脚本工具总结出来，放到 github 上，地址是 <a href="https://github.com/tangqiaoboy/xcode_tool">https://github.com/tangqiaoboy/xcode_tool</a>，感兴趣的同学可以把它 clone 下来。</p>
+
+<p>祝玩得开心～</p>
+
+<h2>2013 年 6 月 22 日更新</h2>
+
+<p>上文写于 2011 年末，在 2012 年在 WWDC 大会上，苹果推出了 Xcode4。从 Xcode4 开始，Xcode 会自动去掉源码末尾的空格。所以上面提到的脚本基本没用了。不过对于工程中的 html 或 js 文件，Xcode 的去末尾空格功能并没有打开，所以在某些时候才能有一些小用处。</p>
+
+<p>另外，每次记得敲命令来去掉空格是一件很恶心的事情，最好是由程序自动完成。考虑到现在 git 已经很普及了，在这里介绍另一种在 git 仓库中创建钩子 (hook) 的方法来去掉所有提交文件的末尾空格，具体做法如下：</p>
+
+<p>在工程目录的 <code>.git/hooks/</code> 目录下，创建一个名为 <code>pre-commit</code> 的文件，输入如下内容</p>
+
+<p>``` bash</p>
+
+<h1>!/bin/sh</h1>
+
+<p>if git-rev-parse &mdash;verify HEAD >/dev/null 2>&amp;1 ; then
+   against=HEAD
+else
+   # Initial commit: diff against an empty tree object
+   against=4b825dc642cb6eb9a060e54bf8d69288fbee4904
+fi</p>
+
+<h1>Find files with trailing whitespace</h1>
+
+<p>for FILE in <code>exec git diff-index --check --cached $against -- | sed '/^[+-]/d' | sed -E 's/:[0-9]+:.*//' | uniq</code> ; do</p>
+
+<pre><code># Fix them!
+sed -i '' -E 's/[[:space:]]*$//' "$FILE"
+git add "$FILE"
+</code></pre>
+
+<p>done</p>
+
+<p>```</p>
+
+<p>然后用 <code>chmod +x pre-commit</code> 给该文件加上执行权限。这样，每次在 git 提交文件的时候，该脚本就会被自动执行并且将提交文件末尾的空格去掉。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[使用RBTool自动提交code review请求]]></title>
+    <link href="http://blog.devtang.com/blog/2011/08/25/use-rbtool-to-post-review-request/"/>
+    <updated>2011-08-25T18:13:00+08:00</updated>
+    <id>http://blog.devtang.com/blog/2011/08/25/use-rbtool-to-post-review-request</id>
+    <content type="html"><![CDATA[<h3>前言</h3>
+
+<p>让我们回想一下手工提交review请求的过程:</p>
+
+<ol>
+<li>首先得用 svn diff > filename.diff 生成diff文件。</li>
+<li>然后输入review board的网址，可能是 rb.companyname.com</li>
+<li>然后需要输入你的账号密码进行登录验证。</li>
+<li>然后你需要填写你的svn repository 地址，然后上传diff文件。</li>
+<li>然后你进到review请求的详细页面，填写summary, description, test-done, group和people项，而通常情况下，你的group是固定的，review你的people也就是那么几个人来回变。</li>
+<li>最后你填完这些内容，点击 publish 来发布你的review请求。</li>
+</ol>
+
+
+<!--more-->
+
+
+<h3>RBTool安装和配置</h3>
+
+<p>是不是觉得很烦索？其实review board官网提供了一个RBTool，
+可以帮你把这些步骤全部省掉，一切只需要在命令行敲一条 post-review指令即可。
+很心动吧？让我们来看看如何安装RBTool。</p>
+
+<p>首先需要你的电脑里安装了git, python, Mac同学表示这些东西都安全装预好了，如果是老版本的mac，也可以自行下载安装。Git的windows/mac/linux版本下载地址是：<a href="http://git-scm.com/">http://git-scm.com/</a> 。</p>
+
+<p>下载安装完git后，输入</p>
+
+<pre>
+git clone git://github.com/reviewboard/rbtools.git 
+cd rbtools
+sudo python setup.py install 
+</pre>
+
+
+<p>OK，post-review已经安装好了。</p>
+
+<p>然后你需要小小配置一下，在自己svn项目的根目录下，建立：.reviewboardrc 文件。在文件中输入：</p>
+
+<p><code>
+REVIEWBOARD_URL = "http://rb.yourcompany.com"
+REPOSITORY = "https://dev.yourcompany.com/svn/xxxx"
+</code></p>
+
+<p>这2行分别代表你们公司的review board网址和svn根目录地址。</p>
+
+<h3>RBTool的使用</h3>
+
+<p>OK，以后你要提交review请求，只需要在项目根目录下输入 post-review 即可。第一次需要输入登陆review board的用户名密码，post-review工具会记住密码，以后就不用输入了。post-review默认会将你当前svn目录下的diff修改提交到review board上。你也可以加上一些指定的参数来指定group, people, description等等。比如我就写了一个小脚本，将post-review改成：</p>
+
+<pre>
+post-review --target-groups=mygroup --target-people=friendname1,friendname2
+</pre>
+
+
+<p>post-review还可以更新以前提交的diff,方法是用 -r 指定review number即可。具体的可以用post-review &mdash;help来查看详细信息。也可以去review board官网查看详细的说明：<a href="http://www.reviewboard.org/docs/codebase/dev/getting-started/#rbtools">http://www.reviewboard.org/docs/codebase/dev/getting-started/#rbtools</a></p>
+
+<p>如果是用git svn管理的项目，另外加上参数：&mdash;parent git-svn 即可。</p>
+
+<p>赶快用RBTool工具提高你的工作效率吧～</p>
+]]></content>
+  </entry>
+  
+</feed>

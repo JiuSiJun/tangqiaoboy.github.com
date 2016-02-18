@@ -1,0 +1,490 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>象写程序一样写博客：搭建基于github的博客 - 唐巧的技术博客</title>
+  <meta name="author" content="唐巧">
+
+  
+  <meta name="description" content="github 真是无所不能。其 Pages 功能 支持上传 html，并且在页面中显示。于是有好事者做了一个基于 github 的博客管理工具：octopress，基本原理是用 git 来管理你的文章，然后最终发布到 github 上成为一个独立博客站点。由于 github 支持 CNAME &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="唐巧的技术博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <!-- googleapis is fucked by gfw -->
+  <script src="http://cdn.staticfile.org/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-28029597-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">唐巧的技术博客</a></h1>
+  
+    <h2>记录下自己学习的点滴</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.devtang.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">所有文章</a></li>
+  <li><a href="/blog/categories/ios/">iOS开发专题</a></li>
+  <li><a href="http://weibo.com/tangqiaoboy" target="_blank">我的微博</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">象写程序一样写博客：搭建基于github的博客</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-10T19:55:00+08:00" pubdate data-updated="true">Feb 10<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>github 真是无所不能。其 <a href="http://pages.github.com/">Pages 功能</a> 支持上传 html，并且在页面中显示。于是有好事者做了一个基于 github 的博客管理工具：<a href="http://octopress.org/">octopress</a>，基本原理是用 git 来管理你的文章，然后最终发布到 github 上成为一个独立博客站点。由于 github 支持 CNAME 域名指向，所以如果有独立域名的话，可以基于这些做出一个专业的博客站点出来。</p>
+
+<p>本博客就是完全基于此搭建起来的，在使用了 2 个月之后，我将原系统根据中国人的需求做了一些配置，去掉了 GFW 会挡住的 google font api，以及替换掉了速度超慢的国外的评论系统，也加上了分享到国内的微博的功能。现在把这些都总结出来，希望大家都可以方便地搭建基于 github 的博客来。</p>
+
+<!--more-->
+
+
+<h2>安装</h2>
+
+<p>首先说说怎么安装相应的工具。其实这些内容在 <a href="http://octopress.org/docs/setup/">http://octopress.org/docs/setup/</a> 上都有，我只是把它大概翻译了一下。</p>
+
+<h3>安装 rbenv</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>brew update
+</span><span class='line'>brew install rbenv
+</span><span class='line'>brew install ruby-build
+</span><span class='line'>
+</span><span class='line'>rbenv install 1.9.3-p0
+</span><span class='line'>rbenv local 1.9.3-p0
+</span><span class='line'>rbenv rehash</span></code></pre></td></tr></table></div></figure>
+
+
+<p>你有可能需要安装老版本的 GCC 编译器才能顺利安装 Ruby 1.9.3:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew tap homebrew/dupes
+</span><span class='line'>brew install apple-gcc42
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>安装 Octopress</h3>
+
+<p>首先从 github 上将源码 clone 下来：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone git://github.com/imathis/octopress.git octopress
+</span><span class='line'><span class="nb">cd </span>octopress    <span class="c"># If you use RVM, You&#39;ll be asked if you trust the .rvmrc file (say yes).</span>
+</span><span class='line'>ruby --version  <span class="c"># Should report Ruby 1.9.2</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后，ruby 的软件源 <a href="https://rubygems.org">https://rubygems.org</a> 因为使用的是亚马逊的云服务，所以被墙了，需要更新一下 ruby 的源，使用如下代码将官方的 ruby 源替换成国内淘宝的源：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gem sources --remove https://rubygems.org/
+</span><span class='line'>gem sources -a https://ruby.taobao.org/
+</span><span class='line'>gem sources -l
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后安装依赖:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gem install bundler
+</span><span class='line'>rbenv rehash    <span class="c"># If you use rbenv, rehash to be able to run the bundle command</span>
+</span><span class='line'>bundle install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最后安装 Octopress</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>配置</h3>
+
+<p>安装好之后可以简单配置一下：</p>
+
+<ul>
+<li>主要是修改文件：_config.yml ，这个配置文件都有相应的注释。主要就是改一些博客头，作者名之类的东西。
+注意最好把里面的 twitter 相关的信息全部删掉，否则由于 GFW 的原因，将会造成页面 load 很慢。</li>
+<li>修改定制文件 /source/_includes/custom/head.html 把 google 的自定义字体去掉，原因同上。</li>
+</ul>
+
+
+<h2>设置 github 账号</h2>
+
+<p>基于 github 的博客当然需要先注册 github 账号，Github 的账号注册地址是：<a href="https://github.com/signup/free">https://github.com/signup/free</a> 。申请好 github 账号后，建一个名为 username.github.io 的代码仓库。这里注意 username 必须是和你的账号名一致。</p>
+
+<h2>写博客方法</h2>
+
+<p>然后就可以写博客啦～ 写博客主要是用以下几个命令，<a href="http://octopress.org/docs/blogging/">这里</a> 有详细介绍：</p>
+
+<ul>
+<li>rake new_post[&lsquo;article name&rsquo;] 生成博文框架，然后修改生成的文件即可</li>
+<li>rake generate 生成静态文件</li>
+<li>rake watch 检测文件变化，实时生成新内容</li>
+<li>rake preview 在本机 4000 端口生成访问内容</li>
+<li>rake deploy 发布文件</li>
+</ul>
+
+
+<p>博文是采用 markdown 语法，另外增加了一些扩充的插件，markdown 的介绍文章网上可以搜到很多，比如 <a href="http://daringfireball.net/projects/markdown/">这个</a>。</p>
+
+<h2>高级配置</h2>
+
+<p>我主要介绍一下如何配置评论和分享到微博功能。步骤如下：</p>
+
+<ul>
+<li>在 _config.yml 中增加一项： weibo_share: true</li>
+<li>修改 source/_includes/post/sharing.html ，增加：</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>  // 下面的大括号是全角的，如果复制，请自行改成半角
+</span><span class='line'> ｛% <span class="k">if </span>site.weibo_share %｝
+</span><span class='line'>     ｛% include post/weibo.html %｝
+</span><span class='line'> ｛% endif %｝
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>增加文件：source/_includes/post/weibo.html</li>
+<li>访问 <a href="http://www.jiathis.com/">http://www.jiathis.com/</a> ，获取分享的代码</li>
+<li>访问 <a href="http://uyan.cc/">http://uyan.cc/</a> ，获得评论的代码</li>
+<li>将上面 2 步的代码都加入到 weibo.html 中即可</li>
+<li>修改<code>sass/base/_typography.scss</code>，将其中的<code>article blockquote</code>的<code>font-style</code>由<code>italic</code>改为<code>normal</code>, 因为中文的引用文字用斜体显示其实并不好看。再将其中的<code>ul, ol</code>
+的<code>margin-left: 1.3em;</code>修改为<code>margin-bottom: 0em;</code>。</li>
+</ul>
+
+
+<h2>其它</h2>
+
+<p>对于国内的用户来说，Github 因为服务器在国外，访问速度上不可避免有些慢。我在 2014 年 5 月尝试将博客同时放到 Github 和 GitCafe 上（GitCafe 提供博客服务，而 Github 作为备份服务器），使得国内访问速度非常理想，感兴趣的朋友可以参考这篇文章：<a href="http://blog.devtang.com/blog/2014/06/02/use-gitcafe-to-host-blog/">《将博客从 GitHub 迁移到 GitCafe》</a></p>
+
+<h2>Tips</h2>
+
+<h4>从 wordpress 迁移到 github</h4>
+
+<p>这儿有一篇文章介绍了如何做迁移：
+<a href="http://blog.xupeng.me/2011/12/14/migrate-to-octopress/">http://blog.xupeng.me/2011/12/14/migrate-to-octopress/</a></p>
+
+<h4>图片</h4>
+
+<p>如果要在文章中上传图片，直接 copy 到 /source/images 目录下即可。在文章中可以直接引用。也可以选一些大的图床站点，例如 flickr 之类的放在那边。</p>
+
+<h4>域名</h4>
+
+<p>如果你象我一样有自己的域名，可以将域名指向这个博客，具体步骤是：</p>
+
+<ul>
+<li>在域名管理中，建立一个 CNAME 指向，将你的域名指向 yourname.github.io</li>
+<li>建一个名为 CNAME 的文件在 source 目录下，然后将自己的域名输入进去。</li>
+<li>将内容 push 到 github 后，第一次生效大概等 1 小时，之后你就可以用自己的域名访问了。</li>
+</ul>
+
+
+<h4>原理</h4>
+
+<ul>
+<li>Octopress 其实为你建立了 2 个分支，一个是 master 分支，用于存放生成的最终网页。另一个是 source 分支，用于存放最初的原始 markdown 文件。</li>
+<li>平时写作和提交都在 source 分支下，当需要发布时，rake deploy 命令会将内容生成到 public 这个目录，然后将这个目录的内容当作 master 分支的内容同步到 github 上面。</li>
+</ul>
+
+
+<h4>参考</h4>
+
+<p>这儿还有一些参考的文章：</p>
+
+<ul>
+<li><a href="http://www.yangzhiping.com/tech/octopress.html">http://www.yangzhiping.com/tech/octopress.html</a></li>
+<li><a href="http://blog.xupeng.me/2011/12/14/migrate-to-octopress/">http://blog.xupeng.me/2011/12/14/migrate-to-octopress/</a></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">唐巧</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-10T19:55:00+08:00" pubdate data-updated="true">Feb 10<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/summary/'>summary</a>
+  
+</span>
+
+
+    </p>
+    <p class="meta">
+      关注我的「iOS开发」微信公众号，每天获得精选的 iOS 开发文章和创业心得：<br>
+<img src="/images/weixin-qr.jpg" />
+
+<br>原创文章，版权声明：自由转载-非商用-非衍生-保持署名 | <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" id="">Creative Commons BY-NC-ND 3.0</a>
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <style>
+    .flash-video{display:none;}
+</style>
+<!-- JiaThis Button BEGIN -->
+<div id="ckepop">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_tsina">新浪微博</a>
+<a class="jiathis_button_t163">网易微博</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_renren">人人网</a>
+<a class="jiathis_button_douban">豆瓣</a>
+
+<a href="http://www.jiathis.com/share?uid=1574434" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+    data_track_clickback:true,
+    sm:"t163,tsina,tqq,renren,douban",
+    summary:"",
+    hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v2.jiathis.com/code_mini/jia.js?uid=1574434" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+<br />
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=89581" async=""></script>
+<!-- UY END -->
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/02/06/new-methods-in-uiviewcontroller-of-ios5/" title="Previous Post: iOS5中UIViewController的新方法">&laquo; iOS5中UIViewController的新方法</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/02/14/nsstring-java-like-wrapper/" title="Next Post: 给NSString增加Java风格的方法">给NSString增加Java风格的方法 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>赞助商</h1>
+  <p>
+     <a href="http://zc.pgyer.com" target="_blank"><img width="260px" src="/images/ad_pgyer.png" /></a>
+  </p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/17/how-to-read-a-book-summary/">教你阅读图书的「方法论」- 评《如何阅读一本书》</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/12/saul-introdution/">MagicalRecord 作者 Saul Mora 的故事</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/10/atswift-conference-summary/">首届Swift开发者大会见闻</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/03/reactive-cocoa-discussion/">ReactiveCocoa 讨论会</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/02/2015-summary/">2015 年个人总结</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/24/resume-cheat-story/">培训机构出来的 iOS 学员怎么了？</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/18/from-dev-to-manager/">涅槃重生:我的技术转管理之路</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/26/yykit-auther-interview/">专访 YYKit 作者 Ibireme: 开源大牛是怎样炼成的</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/21/apps-damaged-bug/">Mac 应用出现「已损坏」问题，苹果到底犯了什么傻逼错误？</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/14/charles-introduction/">Charles 从入门到精通(中国5折特惠)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/02/mvc-and-mvvm/">被误解的 MVC 和被神化的 MVVM</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/10/25/one-on-one-summary/">浅析一对一沟通</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>About Me</h1>
+  <p>InfoQ编辑, 《<a href="http://item.jd.com/11598468.html" target="_blank">iOS开发进阶</a>》作者, 在猿题库创业。<br/>
+      <br/>Java开发工程师，曾开发网易邮箱、微博。
+      <br/>iOS开发工程师，曾开发有道云笔记、猿题库、小猿搜题。
+  </p>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  &copy; 2016 - 唐巧 -
+  <span class="credit">基于 <a href="http://octopress.org" target="_blank">Octopress</a></span>
+  <span class="credit">, 感谢 <a href="http://gitcafe.com/signup?invited_by=tangqiaoboy" target="_blank">GitCafe</a> 为本站提供存储空间</span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+<script src=" http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=2351546126" type="text/javascript" charset="utf-8"></script>
+<script>
+WB2.anyWhere(function(W){
+W.widget.followButton({
+    uid: 1708947107,
+    id: "wb_follow_btn"
+    });
+});
+</script>
+
+
+</body>
+</html>

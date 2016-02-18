@@ -1,0 +1,343 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Mac 应用出现「已损坏」问题，苹果到底犯了什么傻逼错误？ - 唐巧的技术博客</title>
+  <meta name="author" content="唐巧">
+
+  
+  <meta name="description" content="事件回顾 据国外多名网友反映，从 11 月 13 号开始，打开一些 Mac App Store 中下载的软件时，会出现 “已损坏”（Damaged）的提示。受此问题影响的软件较多，包括广为人知的 1Password、Dash、Byword 和 Tweetbot 等。Tweetbot 开发者 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.devtang.com/blog/2015/11/21/apps-damaged-bug">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="唐巧的技术博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <!-- googleapis is fucked by gfw -->
+  <script src="http://cdn.staticfile.org/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-28029597-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">唐巧的技术博客</a></h1>
+  
+    <h2>记录下自己学习的点滴</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.devtang.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">所有文章</a></li>
+  <li><a href="/blog/categories/ios/">iOS开发专题</a></li>
+  <li><a href="http://weibo.com/tangqiaoboy" target="_blank">我的微博</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Mac 应用出现「已损坏」问题，苹果到底犯了什么傻逼错误？</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-11-21T22:22:42+08:00" pubdate data-updated="true">Nov 21<span>st</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><img src="/images/apps-damaged-issue.jpg"></p>
+
+<h2>事件回顾</h2>
+
+<p>据国外多名网友反映，从 11 月 13 号开始，打开一些 Mac App Store 中下载的软件时，会出现 “已损坏”（Damaged）的提示。受此问题影响的软件较多，包括广为人知的 1Password、Dash、Byword 和 Tweetbot 等。Tweetbot 开发者 Paul Haddad 在 Twitter 上表示这个问题看起来与认证证书到期有关，并猜想目前证书使用 SHA256 加密，或许会和 OS X 老版本不兼容。</p>
+
+<h2>问题原因</h2>
+
+<p>微博上的 <a href="http://weibo.com/u/1713195262">@webfrogs</a> 分享的<a href="http://m.imore.com/heres-whats-happening-mac-app-store-and-damaged-apps">这篇文章</a>中详细解答了这个问题产生的原因。我仔细读了一下，给大家分享一下。</p>
+
+<p>每一个 Mac AppStore 下载的软件都有一个证书，证明该软件是合法购买并且没有被篡改的。在以前，该证书是通过 SHA-1 来进行散列验证的，<a href="https://zh.wikipedia.org/wiki/SHA%E5%AE%B6%E6%97%8F">SHA-1</a> 是一种类似 MD5 的散列算法，比 MD5 更安全，但是计算起来更耗费 CPU 。</p>
+
+<p>最近，苹果更改了证书的算法，使用 SHA-2 来进行散列验证的。这本来应该是对用户透明的，但是，苹果的质量部门却没有发现这个大 Bug。于是影响了大范围的用户。</p>
+
+<p>具体影响的过程是：</p>
+
+<ol>
+<li>首先，过期的证书在缓存中没有被清除，系统会要求用户重启来清除证书或重新获得新证书。</li>
+<li>然后，一些应用明显地使用的是旧版的 OpenSSL 来验证购买凭证，然后你猜怎么着？旧版的 OpenSSL 不！支！持！SHA-2 算法！</li>
+</ol>
+
+
+<p>由此我们就可以知道应该如何解决该问题了：</p>
+
+<p>方案一：类似 XcodeGhost 事件那样，可以将那些使用旧版 OpenSSL 应用被苹果下架，要求它们升级到最新版的 OpenSSL，但是这个至少需要几天时间。</p>
+
+<p>方案二：苹果将算法退回到 SHA-1。</p>
+
+<p>于是，在愤怒的用户面前，苹果想了想，还是怂了，将算法退回（Roll back）到了 SHA-1。当然，想必他也会要求以后的应用必须使用新的 OpenSSL 库，然后确保没问题后再升级加密算法。</p>
+
+<h2>总结</h2>
+
+<p>总结起来就是：苹果傻逼了，搞了一个大 bug，然后自己回退代码了。这次事故苹果的质量保证部门应该犯有不可推卸的责任。</p>
+
+<p>另外，我居然没受影响，原因是我没有升级 OS X 到最新版，所以逃过了一劫。不过我的一些搞 iOS 开发的小伙们可惨了，好多人挨个把软件重新下载了一遍。</p>
+
+<p>乔布斯离世之后，苹果的软件质量变得越来越不稳定，加上创业太累，这让我这个不喜欢折腾的人越发喜欢等大家测试稳定之后再升级，希望这是我的错觉吧。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">唐巧</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-11-21T22:22:42+08:00" pubdate data-updated="true">Nov 21<span>st</span>, 2015</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ios/'>iOS</a>
+  
+</span>
+
+
+    </p>
+    <p class="meta">
+      关注我的「iOS开发」微信公众号，每天获得精选的 iOS 开发文章和创业心得：<br>
+<img src="/images/weixin-qr.jpg" />
+
+<br>原创文章，版权声明：自由转载-非商用-非衍生-保持署名 | <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" id="">Creative Commons BY-NC-ND 3.0</a>
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <style>
+    .flash-video{display:none;}
+</style>
+<!-- JiaThis Button BEGIN -->
+<div id="ckepop">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_tsina">新浪微博</a>
+<a class="jiathis_button_t163">网易微博</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_renren">人人网</a>
+<a class="jiathis_button_douban">豆瓣</a>
+
+<a href="http://www.jiathis.com/share?uid=1574434" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+    data_track_clickback:true,
+    sm:"t163,tsina,tqq,renren,douban",
+    summary:"",
+    hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v2.jiathis.com/code_mini/jia.js?uid=1574434" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+<br />
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=89581" async=""></script>
+<!-- UY END -->
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/11/14/charles-introduction/" title="Previous Post: Charles 从入门到精通(中国5折特惠)">&laquo; Charles 从入门到精通(中国5折特惠)</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/11/26/yykit-auther-interview/" title="Next Post: 专访 YYKit 作者 ibireme: 开源大牛是怎样炼成的">专访 YYKit 作者 ibireme: 开源大牛是怎样炼成的 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>赞助商</h1>
+  <p>
+     <a href="http://zc.pgyer.com" target="_blank"><img width="260px" src="/images/ad_pgyer.png" /></a>
+  </p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/17/how-to-read-a-book-summary/">教你阅读图书的「方法论」- 评《如何阅读一本书》</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/12/saul-introdution/">MagicalRecord 作者 Saul Mora 的故事</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/10/atswift-conference-summary/">首届Swift开发者大会见闻</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/03/reactive-cocoa-discussion/">ReactiveCocoa 讨论会</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/02/2015-summary/">2015 年个人总结</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/24/resume-cheat-story/">培训机构出来的 iOS 学员怎么了？</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/18/from-dev-to-manager/">涅槃重生:我的技术转管理之路</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/26/yykit-auther-interview/">专访 YYKit 作者 Ibireme: 开源大牛是怎样炼成的</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/21/apps-damaged-bug/">Mac 应用出现「已损坏」问题，苹果到底犯了什么傻逼错误？</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/14/charles-introduction/">Charles 从入门到精通(中国5折特惠)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/02/mvc-and-mvvm/">被误解的 MVC 和被神化的 MVVM</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/10/25/one-on-one-summary/">浅析一对一沟通</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>About Me</h1>
+  <p>InfoQ编辑, 《<a href="http://item.jd.com/11598468.html" target="_blank">iOS开发进阶</a>》作者, 在猿题库创业。<br/>
+      <br/>Java开发工程师，曾开发网易邮箱、微博。
+      <br/>iOS开发工程师，曾开发有道云笔记、猿题库、小猿搜题。
+  </p>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  &copy; 2016 - 唐巧 -
+  <span class="credit">基于 <a href="http://octopress.org" target="_blank">Octopress</a></span>
+  <span class="credit">, 感谢 <a href="http://gitcafe.com/signup?invited_by=tangqiaoboy" target="_blank">GitCafe</a> 为本站提供存储空间</span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+<script src=" http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=2351546126" type="text/javascript" charset="utf-8"></script>
+<script>
+WB2.anyWhere(function(W){
+W.widget.followButton({
+    uid: 1708947107,
+    id: "wb_follow_btn"
+    });
+});
+</script>
+
+
+</body>
+</html>

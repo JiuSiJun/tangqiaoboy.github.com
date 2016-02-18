@@ -1,0 +1,365 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>自己动手给iMac换SSD - 唐巧的技术博客</title>
+  <meta name="author" content="唐巧">
+
+  
+  <meta name="description" content="公司的 iMac 是 2011 年款的，经过 2 年的使用，现在已经变得比较慢了，用htop看了一下，其实 cpu 占用率一直不高，主要是磁盘 IO 比较慢，所以考虑自己动手给 iMac 换一个 SSD。在此将整个过程分享给大家。 如果你需要备份系统，可以拿一个移动硬盘，使用Time &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.devtang.com/blog/2014/01/26/add-ssd-to-old-imac">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="唐巧的技术博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <!-- googleapis is fucked by gfw -->
+  <script src="http://cdn.staticfile.org/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-28029597-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">唐巧的技术博客</a></h1>
+  
+    <h2>记录下自己学习的点滴</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.devtang.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">所有文章</a></li>
+  <li><a href="/blog/categories/ios/">iOS开发专题</a></li>
+  <li><a href="http://weibo.com/tangqiaoboy" target="_blank">我的微博</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">自己动手给iMac换SSD</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-26T22:06:00+08:00" pubdate data-updated="true">Jan 26<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>公司的 iMac 是 2011 年款的，经过 2 年的使用，现在已经变得比较慢了，用<code>htop</code>看了一下，其实 cpu 占用率一直不高，主要是磁盘 IO 比较慢，所以考虑自己动手给 iMac 换一个 SSD。在此将整个过程分享给大家。</p>
+
+<!-- more -->
+
+
+<p>如果你需要备份系统，可以拿一个移动硬盘，使用<code>Time Machine</code>功能将需要的内容备份到移动硬盘上。</p>
+
+<p>另外你还需要准备一些工具，我是借同事的 <a href="http://www.amazon.cn/%E5%8F%B0%E6%B9%BE%E8%80%81A-38%E5%90%881%E6%89%8B%E6%9C%BA%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%BB%B4%E4%BF%AE%E7%B2%BE%E5%AF%86%E8%9E%BA%E4%B8%9D%E5%88%80%E5%A5%97%E8%A3%85-%E8%8B%B9%E6%9E%9C%E6%8B%86%E6%9C%BA%E5%B7%A5%E5%85%B7%E7%BB%84%E5%90%88-LA613138/dp/B00E7ICEXM/ref=sr_1_2?ie=UTF8&amp;qid=1390717853&amp;sr=8-2&amp;keywords=%E8%80%81A">老 A 苹果拆机工具组合</a>，这个工具箱可以拆苹果的各种设备，上次还用它拆了一次 iPhone4s。</p>
+
+<h2>硬件更换步骤</h2>
+
+<p>换 SSD 的步骤主要参考自：<a href="http://www.ifixit.com/Guide/iMac+Intel+21.5-Inch+EMC+2428+Hard+Drive+Replacement/5954">ifixit 上的教程</a>。感兴趣的朋友可以一试。其实步骤相当简单，简单说一下：</p>
+
+<ol>
+<li>把 iMac 平放，用吸盘吸开屏幕盖。</li>
+<li>取下屏幕左右各 4 个螺丝，然后轻轻抬起屏幕（注意不要抬太高，因为后面连着线）。</li>
+<li>把屏幕与主版连接的 4 根线拆下来，之后将屏幕移除。</li>
+<li>取下硬盘上的 2 个螺丝，然后将硬盘的数据线和电源线拔掉，将硬盘轻轻取出来。</li>
+<li>将 SSD 接上数据线和电源线。</li>
+<li>做步骤 3 的逆向过程，把屏幕接上 4 根线，然后将屏幕左右各 4 个螺丝拧上。</li>
+<li>盖上屏幕盖，这个磁力很强，要小心手不要被夹住。</li>
+</ol>
+
+
+<p>换好之后，接通电源听到正常的启动声音的话，就表示硬件自检没问题了。</p>
+
+<h2>安装操作系统</h2>
+
+<p>SSD 上没有带 Mac 系统，所以要先把系统装上去。将苹果最新的系统刻录在 U 盘或 SD 卡上，然后接到 iMac 上。启动时按住<code>Option</code>键，等一段时间，就可以选择启动磁盘，我们选择从 U 盘启动。</p>
+
+<p>U 盘启动之后，先进入<code>Disk Utility</code>，将刚刚装上的 SSD 分区格式化成<code>Mac OS 扩展（日志式）</code>。然后返回，选择安装 Mac 操作系统。</p>
+
+<p>这个比较坑的一点是系统显示的<code>估计安装时间</code>只有大约 15 分钟，但是进行到最后 1 分钟时，却大概要再等 15 分钟才能结束，这个时候不要太心急。安装完成之后会进入第一次重启，然后再次显示正在安装，这个时候大概又需要等 20 分钟，不过不用任何操作，只用看着就行了。20 分钟后会第二次重启，重启之后就进入到欢迎界面了。</p>
+
+<p>进入欢迎界面后，先简单设置一下进入系统，安装 2 个小软件：</p>
+
+<ol>
+<li><a href="http://exirion.net/ssdfanctrl/">SSD fan control</a></li>
+<li><a href="http://www.groths.org/software/trimenabler/">Trim Enabler</a></li>
+</ol>
+
+
+<p>这主要是因为 iMac 的温度感应模块在原有的硬盘上，换下来之后，风扇就会狂转，只能用第三方软件来控制其转速。另一个工具是朋友推荐我安装的，没有仔细研究用处。</p>
+
+<h2>迁移数据</h2>
+
+<p>之后，你可以用<code>Time machine</code>或<code>迁移助理</code>，将这台电脑的数据从备份中恢复。我是使用的<code>迁移助理</code>，将我另一台 Macbook Air 的系统恢复过去的。</p>
+
+<h2>其它</h2>
+
+<ol>
+<li>我换的是 21.5 寸的 iMac，如果是 27 寸的 iMac，因为内部空间足够，所以可以尝试将 SSD 和原有的硬盘都保留，这样就可以自己组<code>fusion drive</code>。不过更换方式就要相对麻烦一些，感觉兴趣的可以自己在 ifixit 上找相关的教程。</li>
+<li>显示屏上的连接线都很脆弱，更换的时候要小心，我在尝试能否象 27 寸 iMac 一样同时将原有硬盘和 SSD 保留的时候，就不小心压坏了显示屏上的连接线的一根针角。于是花了 80 块钱在 <a href="http://item.taobao.com/item.htm?id=20038464332">淘宝</a> 上重新买了一根线才安好。所以大家一定别着急，换的时候小心一些。附一张损坏的连接线照片。</li>
+</ol>
+
+
+<p><img src="/images/imac-broken-cable.jpg"></p>
+
+<p>总之，自动动手换 SSD 不是那么复杂，胆大心细一些就可以轻松搞定。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">唐巧</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-26T22:06:00+08:00" pubdate data-updated="true">Jan 26<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/fun/'>fun</a>
+  
+</span>
+
+
+    </p>
+    <p class="meta">
+      关注我的「iOS开发」微信公众号，每天获得精选的 iOS 开发文章和创业心得：<br>
+<img src="/images/weixin-qr.jpg" />
+
+<br>原创文章，版权声明：自由转载-非商用-非衍生-保持署名 | <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" id="">Creative Commons BY-NC-ND 3.0</a>
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <style>
+    .flash-video{display:none;}
+</style>
+<!-- JiaThis Button BEGIN -->
+<div id="ckepop">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_tsina">新浪微博</a>
+<a class="jiathis_button_t163">网易微博</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_renren">人人网</a>
+<a class="jiathis_button_douban">豆瓣</a>
+
+<a href="http://www.jiathis.com/share?uid=1574434" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+    data_track_clickback:true,
+    sm:"t163,tsina,tqq,renren,douban",
+    summary:"",
+    hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v2.jiathis.com/code_mini/jia.js?uid=1574434" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+<br />
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=89581" async=""></script>
+<!-- UY END -->
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/01/23/the-issue-of-non-breaking-space-in-coretext/" title="Previous Post: 非换行空格在CoreText排版上的问题">&laquo; 非换行空格在CoreText排版上的问题</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/02/11/reactivecocoa-introduction/" title="Next Post: ReactiveCocoa - iOS开发的新框架">ReactiveCocoa - iOS开发的新框架 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>赞助商</h1>
+  <p>
+     <a href="http://zc.pgyer.com" target="_blank"><img width="260px" src="/images/ad_pgyer.png" /></a>
+  </p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/17/how-to-read-a-book-summary/">教你阅读图书的「方法论」- 评《如何阅读一本书》</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/12/saul-introdution/">MagicalRecord 作者 Saul Mora 的故事</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/10/atswift-conference-summary/">首届Swift开发者大会见闻</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/03/reactive-cocoa-discussion/">ReactiveCocoa 讨论会</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/02/2015-summary/">2015 年个人总结</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/24/resume-cheat-story/">培训机构出来的 iOS 学员怎么了？</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/18/from-dev-to-manager/">涅槃重生:我的技术转管理之路</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/26/yykit-auther-interview/">专访 YYKit 作者 Ibireme: 开源大牛是怎样炼成的</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/21/apps-damaged-bug/">Mac 应用出现「已损坏」问题，苹果到底犯了什么傻逼错误？</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/14/charles-introduction/">Charles 从入门到精通(中国5折特惠)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/02/mvc-and-mvvm/">被误解的 MVC 和被神化的 MVVM</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/10/25/one-on-one-summary/">浅析一对一沟通</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>About Me</h1>
+  <p>InfoQ编辑, 《<a href="http://item.jd.com/11598468.html" target="_blank">iOS开发进阶</a>》作者, 在猿题库创业。<br/>
+      <br/>Java开发工程师，曾开发网易邮箱、微博。
+      <br/>iOS开发工程师，曾开发有道云笔记、猿题库、小猿搜题。
+  </p>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  &copy; 2016 - 唐巧 -
+  <span class="credit">基于 <a href="http://octopress.org" target="_blank">Octopress</a></span>
+  <span class="credit">, 感谢 <a href="http://gitcafe.com/signup?invited_by=tangqiaoboy" target="_blank">GitCafe</a> 为本站提供存储空间</span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+<script src=" http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=2351546126" type="text/javascript" charset="utf-8"></script>
+<script>
+WB2.anyWhere(function(W){
+W.widget.followButton({
+    uid: 1708947107,
+    id: "wb_follow_btn"
+    });
+});
+</script>
+
+
+</body>
+</html>

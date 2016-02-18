@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>让我们再谈谈 iOS 安全 - 唐巧的技术博客</title>
+  <meta name="author" content="唐巧">
+
+  
+  <meta name="description" content="前言 安全方面的话题总是聊不完的。这不，国外一家有名的专门攻击别人的安全公司 Hacking Team 自己被 Hack 了，结果有 400 多 G 的攻击资料泄漏出来，包括一些 0-day 的漏洞。这里 有别人写的这次攻击的分析。 我大概看了一下这次的泄漏出来的 资料分析，发现里面还有一些涉及 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.devtang.com/blog/2015/07/11/ios-security-book-recommendation">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="唐巧的技术博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <!-- googleapis is fucked by gfw -->
+  <script src="http://cdn.staticfile.org/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-28029597-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">唐巧的技术博客</a></h1>
+  
+    <h2>记录下自己学习的点滴</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.devtang.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">所有文章</a></li>
+  <li><a href="/blog/categories/ios/">iOS开发专题</a></li>
+  <li><a href="http://weibo.com/tangqiaoboy" target="_blank">我的微博</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">让我们再谈谈 iOS 安全</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-11T20:27:25+08:00" pubdate data-updated="true">Jul 11<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>前言</h2>
+
+<p>安全方面的话题总是聊不完的。这不，国外一家有名的专门攻击别人的安全公司 Hacking Team 自己被 Hack 了，结果有 400 多 G 的攻击资料泄漏出来，包括一些 0-day 的漏洞。<a href="http://zhuanlan.zhihu.com/drops/20102713">这里</a> 有别人写的这次攻击的分析。</p>
+
+<p>我大概看了一下这次的泄漏出来的 <a href="http://zhuanlan.zhihu.com/drops/20102713">资料分析</a>，发现里面还有一些涉及 iOS 的安全。比如：</p>
+
+<ol>
+<li>一个用于记录密码的 iOS 键盘。</li>
+<li>一个 iOS 网络底层的代理。</li>
+<li>一个 MAC OS 木马。</li>
+</ol>
+
+
+<p>这些攻击都挺难防的，拿 MAC OS 的木马来说，基本上 Mac 用户都是不装杀毒软件的。虽然大部分应用都是从 Mac App Store 上下载，但是也有不少应用是用自己的渠道来发布的，所以用户稍不注意可能就会中招。</p>
+
+<h2>《iOS 应用安全攻防实战》</h2>
+
+<p><img src="/images/ios-security-book.jpg"></p>
+
+<p>在几个月前，电子工业出版社的老师找到我说，<a href="http://item.jd.com/11712317.html">《iOS 应用安全攻防实战》</a> 这本书的中文版将要出版了，邀请我写一篇推荐序。我正好以前看过它的英文版，是一本相当不错的 iOS 安全方面的著作，所以在此推荐给大家。</p>
+
+<p>《iOS 应用安全攻防实战》的两位译者实力也很强，都是安全方面的专家。其中：</p>
+
+<ul>
+<li>译者肖梓航是 Palo Alto Networks 高级研究员，主要方向是移动平台反病毒和软件安全，也是著名的安全社区「看雪论坛」的版主。</li>
+<li>译者李俱顺 <a href="http://weibo.com/s1mbily?from=feed&amp;loc=at&amp;nick=s1mbily">@s1mbily</a> 曾就职于支付宝大安全，现在是杭州云柚科技联合创始人。</li>
+</ul>
+
+
+<p>在写本文的时候，我还顺便检索到了译者李俱顺一次分享：<a href="http://vdisk.weibo.com/s/984d5N01JUg">iOS8 应用安全新挑战</a>，也非常适合广大 iOS 开发者用来普及安全知识。</p>
+
+<h2>《iOS应用逆向工程》</h2>
+
+<p><img src="/images/ios-reverse-engine-book.jpg"></p>
+
+<p>即然都提到安全了，也顺便再给大家宣传一下，我的朋友吴航写的<a href="http://item.jd.com/11670145.html">《iOS应用逆向工程 第2版》</a>也在2个月前顺利出版了。本书第一版卖得很好，不过安全方面的内容业界更新得很快，所以他们将第1版中过时的内容进行了更新，同时增加了更多篇幅。</p>
+
+<p>《iOS应用逆向工程 第2版》偏重攻击方面多一些，不过知道攻击方法后，防范方法也就相对容易想到了，所以同样推荐给大家。</p>
+
+<h2>送书</h2>
+
+<p>我从出版社要了 10 本 <a href="http://item.jd.com/11712317.html">《iOS 应用安全攻防实战》</a>，打算送给我的「iOS 开发」微信公众号的读者。具体的送书方式是：我会请一些 iOS 安全方面的朋友来分享一些内容，同时提一些问题，回答得好的朋友，即可获得赠书。</p>
+
+<p>扫描以下图片即可关注该公众帐号。</p>
+
+<p><img src="http://blog.devtang.com/images/weixin-qr.jpg" alt="二维码" /></p>
+
+<h2>推荐序</h2>
+
+<p>以下为 <a href="http://item.jd.com/11712317.html">《iOS 应用安全攻防实战》</a> 推荐序《为你的iOS程序穿上安全的外衣》正文：</p>
+
+<p>从有计算机程序开始，安全问题就一直存在，而互联网的流行使得安全问题被进一步放大，所以现在各大互联网公司对于安全都非常重视。我曾经所在的网易公司就有专门的安全部门。安全部门的同事会扮演黑客的角色，对网易旗下的产品进行各种试探性的攻击，从而发现公司产品在安全方面的问题。</p>
+
+<p>在移动互联网快速发展的今天，iOS 应用由于直接运行在用户的手机上，相比运行在服务器的后台服务，更有可能被黑客攻击。恶意的一些攻击手段包括劫持网络通讯、窃取本地数据以及篡改程序行为。很多人把安全问题完全交给 iOS 系统自带的沙盒（Sandbox），但是仅仅靠沙盒也是不够的。因为如果不做其它的防护，一旦沙盒被攻破，那么程序的安全性就完全无法保障了。</p>
+
+<p>而在中国，这样的问题尤为突出，因为中国对软件的版权保护不力，使得盗版软件流行。而 iOS 应用如果需要安装盗版软件，越狱系统是最为方便的方式（另一种方式是用企业签名）。越狱催生出一些 iOS 盗版应用市场，从而出现一些盗版的游戏、软件以及木马病毒的传播。</p>
+
+<p>做为 iOS 应用的开发者，我们当然不希望自己的游戏被修改成无限道具和金币，自己的应用被修改成无需付费就使用应用内付费功能，更不希望黑客在自己的应用中植入木马，窃取受害用户的帐号密码等敏感信息。而这一切，都是沙盒无法保护的。我们需要做更多的安全方面的工作，才能抬高应用被破解和修改的成本，使得自己的应用更加安全。</p>
+
+<p>但是，「猫和老鼠」的游戏每天都在上演，在我们不断增加防御手段的同时，黑客的攻击手段也在不断升级。所以，安全问题会是一个永不过时的话题，没有绝对意义上的安全。我们能做的，就是不断学习和研究，使得当前自己应用的安全水平已经能够防止大多数别有用心的黑客攻击。</p>
+
+<p>那国内 iOS 安全的现状是什么样呢？就我所知，几乎 99% 的 iOS 应用都没有做破解方面的防护。但是，如果你简单做一些代码混淆、反动态库注入、反调试方面的工作，就可以将应用被破解的难度大大提高。另外，如果你使用 IDA 进行 iOS 代码反汇编的话，你几乎可以看到你想看的所有应用的源码。</p>
+
+<p>我还记得 2015 年的春节前夕，微信在其应用中做了一个抢红包的功能，但是这个功能还在测试中，所以被设置成永不开启。但是，我认识的一个做安全的朋友却用本书中介绍的 Cycript 工具，将这个功能打开了，结果造成了相关功能被提前泄漏到了网上。而一些破坏性更强的逆向攻击行为我都不敢将其公开，因为几乎所有应用都在这些攻击方式下不能幸免。</p>
+
+<p>那我个人为什么对安全这么感兴趣呢？其实说来话长，我高中时就开始学习编程，当时的梦想是当一名黑客。于是安全方面的学习就一直伴随着我的职业生涯。而我在学习 iOS 移动开发的时候，带着习惯，我也就开始学习 iOS 开发安全方面的知识。</p>
+
+<p>还记得我学习 iOS 开发安全的时候，曾经看过本书的英文版。本书的内容同时包括了攻击和防御相关的内容，非常适合 iOS 开发工程师学习，并且将其中的实践带到自己的应用中，以保护自己的应用不被攻击。我并不期望本书能够解决所有的安全问题，但是我相信，看过本书的朋友，能够将自己的 iOS 应用在安全方面的得分，从不及格提升到 80 分。</p>
+
+<p>最后，感谢本书的作者、译者，以及电子工业出版社在 iOS 安全方面所做的贡献。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">唐巧</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-11T20:27:25+08:00" pubdate data-updated="true">Jul 11<span>th</span>, 2015</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ios/'>iOS</a>
+  
+</span>
+
+
+    </p>
+    <p class="meta">
+      关注我的「iOS开发」微信公众号，每天获得精选的 iOS 开发文章和创业心得：<br>
+<img src="/images/weixin-qr.jpg" />
+
+<br>原创文章，版权声明：自由转载-非商用-非衍生-保持署名 | <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" id="">Creative Commons BY-NC-ND 3.0</a>
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <style>
+    .flash-video{display:none;}
+</style>
+<!-- JiaThis Button BEGIN -->
+<div id="ckepop">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_tsina">新浪微博</a>
+<a class="jiathis_button_t163">网易微博</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_renren">人人网</a>
+<a class="jiathis_button_douban">豆瓣</a>
+
+<a href="http://www.jiathis.com/share?uid=1574434" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+    data_track_clickback:true,
+    sm:"t163,tsina,tqq,renren,douban",
+    summary:"",
+    hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v2.jiathis.com/code_mini/jia.js?uid=1574434" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+<br />
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=89581" async=""></script>
+<!-- UY END -->
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/06/28/apple-watch-usage-exp/" title="Previous Post: Apple Watch 使用体验">&laquo; Apple Watch 使用体验</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/08/01/become-a-tech-leader-summary/" title="Next Post: 《成为技术领导者》读书心得">《成为技术领导者》读书心得 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>赞助商</h1>
+  <p>
+     <a href="http://zc.pgyer.com" target="_blank"><img width="260px" src="/images/ad_pgyer.png" /></a>
+  </p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/17/how-to-read-a-book-summary/">教你阅读图书的「方法论」- 评《如何阅读一本书》</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/12/saul-introdution/">MagicalRecord 作者 Saul Mora 的故事</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/10/atswift-conference-summary/">首届Swift开发者大会见闻</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/03/reactive-cocoa-discussion/">ReactiveCocoa 讨论会</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/02/2015-summary/">2015 年个人总结</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/24/resume-cheat-story/">培训机构出来的 iOS 学员怎么了？</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/18/from-dev-to-manager/">涅槃重生:我的技术转管理之路</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/26/yykit-auther-interview/">专访 YYKit 作者 Ibireme: 开源大牛是怎样炼成的</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/21/apps-damaged-bug/">Mac 应用出现「已损坏」问题，苹果到底犯了什么傻逼错误？</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/14/charles-introduction/">Charles 从入门到精通(中国5折特惠)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/02/mvc-and-mvvm/">被误解的 MVC 和被神化的 MVVM</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/10/25/one-on-one-summary/">浅析一对一沟通</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>About Me</h1>
+  <p>InfoQ编辑, 《<a href="http://item.jd.com/11598468.html" target="_blank">iOS开发进阶</a>》作者, 在猿题库创业。<br/>
+      <br/>Java开发工程师，曾开发网易邮箱、微博。
+      <br/>iOS开发工程师，曾开发有道云笔记、猿题库、小猿搜题。
+  </p>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  &copy; 2016 - 唐巧 -
+  <span class="credit">基于 <a href="http://octopress.org" target="_blank">Octopress</a></span>
+  <span class="credit">, 感谢 <a href="http://gitcafe.com/signup?invited_by=tangqiaoboy" target="_blank">GitCafe</a> 为本站提供存储空间</span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+<script src=" http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=2351546126" type="text/javascript" charset="utf-8"></script>
+<script>
+WB2.anyWhere(function(W){
+W.widget.followButton({
+    uid: 1708947107,
+    id: "wb_follow_btn"
+    });
+});
+</script>
+
+
+</body>
+</html>

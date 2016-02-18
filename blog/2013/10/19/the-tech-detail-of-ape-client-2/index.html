@@ -1,0 +1,385 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>猿题库iOS客户端的技术细节（二）：答题卡扫描算法 - 唐巧的技术博客</title>
+  <meta name="author" content="唐巧">
+
+  
+  <meta name="description" content="前言 本人今年主要在负责猿题库 iOS 客户端的开发，本文旨在通过分享猿题库 iOS 客户端开发过程中的技术细节，达到总结和交流的目的。 这是本技术分享系列文章的第二篇。本文涉及的技术细节是：答题卡扫描算法。 问题描述 我们在调研用户需求的时候，发现有些用户很喜欢我们的猿题库产品， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.devtang.com/blog/2013/10/19/the-tech-detail-of-ape-client-2">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="唐巧的技术博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <!-- googleapis is fucked by gfw -->
+  <script src="http://cdn.staticfile.org/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-28029597-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">唐巧的技术博客</a></h1>
+  
+    <h2>记录下自己学习的点滴</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.devtang.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">所有文章</a></li>
+  <li><a href="/blog/categories/ios/">iOS开发专题</a></li>
+  <li><a href="http://weibo.com/tangqiaoboy" target="_blank">我的微博</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">猿题库iOS客户端的技术细节（二）：答题卡扫描算法</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-19T11:10:00+08:00" pubdate data-updated="true">Oct 19<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>前言</h2>
+
+<p>本人今年主要在负责猿题库 iOS 客户端的开发，本文旨在通过分享猿题库 iOS 客户端开发过程中的技术细节，达到总结和交流的目的。</p>
+
+<p>这是本技术分享系列文章的第二篇。本文涉及的技术细节是：答题卡扫描算法。</p>
+
+<!-- more -->
+
+
+<h3>问题描述</h3>
+
+<p>我们在调研用户需求的时候，发现有些用户很喜欢我们的猿题库产品，因为我们会根据用户对当前课程的知识点掌握情况，智能地给他出题。但是部分用户还是习惯在纸上做题，所以我们提供了试卷打印功能。</p>
+
+<p>但是，用户如果在纸上答题，无法方便地将答案上传到我们的服务器上。如果我们没有了用户做题数据，就无法根据他的成绩，做针对性的推荐和分析。所以，我们想到一种办法：<strong> 用户像传统考试那样，将答题结果填涂在答题卡上，然后我们提供一种用手机摄像头采集填涂结果的答题卡扫描算法，方便用户上传答题数据。</strong></p>
+
+<p><img src="/images/ape-card-1.jpg"></p>
+
+<p>上图是一个我们试验用的答题卡，通过手机摄像头获取，从中可以看到，该答题卡有以下问题：</p>
+
+<ol>
+<li>由于手机摄像头无法完全正对答题卡，拍照角度有偏曲，答题卡在拍照后并不是完全的矩形。</li>
+<li>用户填涂区域可能并不饱满和完整。</li>
+<li>答题纸边缘可能有用户的草稿或其它干扰识别的信息。</li>
+</ol>
+
+
+<h3>技术解决方案</h3>
+
+<p>我们尝试了多种识别方案，最终采用的方案如下：</p>
+
+<ol>
+<li>图象预处理，压缩图像大小，转彩色图像为灰度图像</li>
+<li>识别答题卡区域</li>
+<li>图象纠偏</li>
+<li>答案区域识别</li>
+</ol>
+
+
+<p>该方案及相关算法细节我们还在申请专利，由于专利还在申请过程中，所以我们这次仅展示上述主要步骤的示例图片。等专利完全申请结束后，我会在此将算法细节公开。</p>
+
+<p>上述主要步骤的示例图如下：</p>
+
+<h4>原始图</h4>
+
+<p><img src="/images/ape-card-1.jpg"></p>
+
+<h4>识别答题卡区域</h4>
+
+<p><img src="/images/ape-card-2.jpg"></p>
+
+<h4>图象纠偏</h4>
+
+<p><img src="/images/ape-card-3.jpg"></p>
+
+<h4>答案区域识别</h4>
+
+<p>答案已标注在图片每个题号的右边位置：</p>
+
+<p><img src="/images/ape-card-4.jpg"></p>
+
+<h3>算法质量</h3>
+
+<h4>算法正确率和召回率</h4>
+
+<p>我们用收集来的 1000 套样本数据对算法进行评测，最终结果是：扫描题目准确率达到 99.67%，召回率达到 99.14%。主要识别失败的样本是：页面严重扭曲弯折的答题卡。我们也在一直改进算法，希望能够给用户提供更加精准的扫描结果。</p>
+
+<h4>算法执行时间</h4>
+
+<p>我们觉得让用户直接对着答题卡用拍摄的方式动态识别，比先拍一张照片再识别的方式更加方便。所以我们对答题卡识别算法的执行时间进行了一系列优化，最终保证每次识别时间小于 0.1 秒，这样的识别时间非常快，基本上用户把手机摄像头对准答题卡，扫描结果就出来了。</p>
+
+<h2>算法的调试和移植</h2>
+
+<p>由于我们整个技术团队都使用 Mac 电脑进行开发，所以我们对于算法的调试都是在 Mac 平台上完成的，我使用了开源的图象处理库 OpenCV，在搭建 OpenCV 环境时遇到一些问题，最终完成环境搭建后，我将相关的经验总结在博文 <a href="http://blog.devtang.com/blog/2012/10/27/use-opencv-in-ios/">《在 MacOS 和 iOS 系统中使用 OpenCV》</a> 中。</p>
+
+<p>由于算法需要同时应用在 iOS 和 Android 平台，所以我主要用 C++ 语言实现算法。Xcode 可以很好地支持 Objective-C 语言和 C++ 语言混编，只需要将相关的源文件扩展名从 .m 改为 .mm 即可。而 Android 平台所采用的 Java 语言，也支持通过 <a href="http://en.wikipedia.org/wiki/Java_Native_Interface">JNI</a> 的方式来调用 C++ 的代码。这样就可以方便地将识别算法移植到手机中了。</p>
+
+<h2>总结</h2>
+
+<p>本文介绍了猿题库 iOS 客户端采用的答题卡扫描算法的大致步骤，以及算法的质量和移植方案。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">唐巧</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-19T11:10:00+08:00" pubdate data-updated="true">Oct 19<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ios/'>iOS</a>
+  
+</span>
+
+
+    </p>
+    <p class="meta">
+      关注我的「iOS开发」微信公众号，每天获得精选的 iOS 开发文章和创业心得：<br>
+<img src="/images/weixin-qr.jpg" />
+
+<br>原创文章，版权声明：自由转载-非商用-非衍生-保持署名 | <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" id="">Creative Commons BY-NC-ND 3.0</a>
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <style>
+    .flash-video{display:none;}
+</style>
+<!-- JiaThis Button BEGIN -->
+<div id="ckepop">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_tsina">新浪微博</a>
+<a class="jiathis_button_t163">网易微博</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_renren">人人网</a>
+<a class="jiathis_button_douban">豆瓣</a>
+
+<a href="http://www.jiathis.com/share?uid=1574434" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+    data_track_clickback:true,
+    sm:"t163,tsina,tqq,renren,douban",
+    summary:"",
+    hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v2.jiathis.com/code_mini/jia.js?uid=1574434" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+<br />
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=89581" async=""></script>
+<!-- UY END -->
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/10/17/the-tech-detail-of-ape-client-1/" title="Previous Post: 猿题库iOS客户端的技术细节（一）：使用多target来构建大量相似App">&laquo; 猿题库iOS客户端的技术细节（一）：使用多target来构建大量相似App</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/10/21/the-tech-detail-of-ape-client-3/" title="Next Post: 猿题库iOS客户端的技术细节（三）：基于CoreText的排版引擎">猿题库iOS客户端的技术细节（三）：基于CoreText的排版引擎 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>赞助商</h1>
+  <p>
+     <a href="http://zc.pgyer.com" target="_blank"><img width="260px" src="/images/ad_pgyer.png" /></a>
+  </p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/17/how-to-read-a-book-summary/">教你阅读图书的「方法论」- 评《如何阅读一本书》</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/12/saul-introdution/">MagicalRecord 作者 Saul Mora 的故事</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/10/atswift-conference-summary/">首届Swift开发者大会见闻</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/03/reactive-cocoa-discussion/">ReactiveCocoa 讨论会</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/02/2015-summary/">2015 年个人总结</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/24/resume-cheat-story/">培训机构出来的 iOS 学员怎么了？</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/18/from-dev-to-manager/">涅槃重生:我的技术转管理之路</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/26/yykit-auther-interview/">专访 YYKit 作者 Ibireme: 开源大牛是怎样炼成的</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/21/apps-damaged-bug/">Mac 应用出现「已损坏」问题，苹果到底犯了什么傻逼错误？</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/14/charles-introduction/">Charles 从入门到精通(中国5折特惠)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/02/mvc-and-mvvm/">被误解的 MVC 和被神化的 MVVM</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/10/25/one-on-one-summary/">浅析一对一沟通</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>About Me</h1>
+  <p>InfoQ编辑, 《<a href="http://item.jd.com/11598468.html" target="_blank">iOS开发进阶</a>》作者, 在猿题库创业。<br/>
+      <br/>Java开发工程师，曾开发网易邮箱、微博。
+      <br/>iOS开发工程师，曾开发有道云笔记、猿题库、小猿搜题。
+  </p>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  &copy; 2016 - 唐巧 -
+  <span class="credit">基于 <a href="http://octopress.org" target="_blank">Octopress</a></span>
+  <span class="credit">, 感谢 <a href="http://gitcafe.com/signup?invited_by=tangqiaoboy" target="_blank">GitCafe</a> 为本站提供存储空间</span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+<script src=" http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=2351546126" type="text/javascript" charset="utf-8"></script>
+<script>
+WB2.anyWhere(function(W){
+W.widget.followButton({
+    uid: 1708947107,
+    id: "wb_follow_btn"
+    });
+});
+</script>
+
+
+</body>
+</html>

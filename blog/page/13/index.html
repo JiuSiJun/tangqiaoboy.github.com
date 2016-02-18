@@ -1,0 +1,444 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>唐巧的技术博客</title>
+  <meta name="author" content="唐巧">
+
+  
+  <meta name="description" content="事件回放 2015 年 6 月 10 日，Homebrew 的作者 @Max Howell 在 twitter 上发表了如下一内容： Google: 90% of our engineers use the software you wrote (Homebrew), but you can’t &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.devtang.com/blog/page/13">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="唐巧的技术博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <!-- googleapis is fucked by gfw -->
+  <script src="http://cdn.staticfile.org/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-28029597-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">唐巧的技术博客</a></h1>
+  
+    <h2>记录下自己学习的点滴</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.devtang.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">所有文章</a></li>
+  <li><a href="/blog/categories/ios/">iOS开发专题</a></li>
+  <li><a href="http://weibo.com/tangqiaoboy" target="_blank">我的微博</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/16/talk-about-tech-interview/">你会翻转二叉树吗？&#8211;谈程序员的招聘</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-16T21:55:41+08:00" pubdate data-updated="true">Jun 16<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="/images/invert-a-binary-tree.jpg"></p>
+
+<h2>事件回放</h2>
+
+<p>2015 年 6 月 10 日，Homebrew 的作者 <a href="https://twitter.com/mxcl/status/608682016205344768">@Max Howell</a> 在 twitter 上发表了如下一内容：</p>
+
+<blockquote><p>Google: 90% of our engineers use the software you wrote (Homebrew), but you can’t invert a binary tree on a whiteboard so fuck off.</p></blockquote>
+
+<p>事情大概是说，Max Howell 去 Google 面试，面试官说：虽然在 Google 有 90% 的工程师用你写的 Homebrew，但是你居然不能在白板上写出翻转二叉树的代码，所以滚蛋吧。</p>
+
+<p>这件事情如果发生在任何一个应届生身上，那是再正常不过的了，但是偏偏面试者是有名的 Max Howell。于是乎，关于应该如何面试程序员，再一次被大家热烈的讨论。</p>
+
+<p>我看了一下 <a href="http://www.quora.com/Is-invert-a-binary-tree-a-good-question-for-Google-to-ask-in-a-technical-interview">Quora</a> 和 <a href="https://news.ycombinator.com/item?id=9695102">Hacker News</a> 上的讨论，就此话题说说我的看法。</p>
+
+<h2>如何做这道题</h2>
+
+<p>在说招聘之前，我们先谈谈这道题应该怎么做吧。LeetCode 非常与时俱进地收录了 <a href="https://leetcode.com/problems/invert-binary-tree/">这道题</a>，我尝试做了一下。由于 LeetCode 不支持用 Objective-C 或 Swift 写，我只好用 Java 来写，但是电脑里面没有装 Eclipse，所以我直接就在 LeetCode 编辑框里面提交了。</p>
+
+<p>编译错了两次，之后运行错了一次，出现了 NullPointerException，于是想到没有检查指针为空，加上检查之后，就通过了。下图是提交记录。</p>
+
+<p><img src="/images/invert-result.jpg"></p>
+
+<p>除去 LeetCode 自动生成的注释和方法定义，我所写的整个代码行数为 9 行，大概花了 5 分钟时间。代码如下所示：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/**
+</span><span class='line'> * Definition for a binary tree node.
+</span><span class='line'> * public class TreeNode {
+</span><span class='line'> *     int val;
+</span><span class='line'> *     TreeNode left;
+</span><span class='line'> *     TreeNode right;
+</span><span class='line'> *     TreeNode(int x) { val = x; }
+</span><span class='line'> * }
+</span><span class='line'> */
+</span><span class='line'>public class Solution {
+</span><span class='line'>    public TreeNode invertTree(TreeNode root) {
+</span><span class='line'>        if (root == null) {
+</span><span class='line'>            return null;
+</span><span class='line'>        }
+</span><span class='line'>        root.left = invertTree(root.left);
+</span><span class='line'>        root.right = invertTree(root.right);
+</span><span class='line'>
+</span><span class='line'>        TreeNode tmp = root.left;
+</span><span class='line'>        root.left = root.right;
+</span><span class='line'>        root.right = tmp;
+</span><span class='line'>        return root;
+</span><span class='line'>    }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>那么这道题考查了什么呢？我觉得主要是考查了递归的思想。递归是程序设计的精髓，掌握了他可以将一个大问题分解成小问题，继而求解。比如对于此题来说，反转一个二叉树其实就是：</p>
+
+<ol>
+<li>反转二叉树的左右子树</li>
+<li>将左右子树交换</li>
+</ol>
+
+
+<p>而第 1 步又是一个反转二叉树的问题，所以就可以用递归来处理了。然后再考虑好递归的结束条件，这道题就可以解决了。</p>
+
+<h2>这是一道好的面试题吗？</h2>
+
+<p>如果面试者是一个应届生，我认为这是一道非常好的题目。因为应届生刚刚学完学校的数据结构和算法知识，二叉树和递归都是基本的知识，应该被掌握的。</p>
+
+<p>如果面试者是一个有多年工作经验的人，我认为这道题的难度其实不大，一个人即使多年不使用二叉树，多年不使用递归，但是这种思考还是很容易想到的。当然，所花的时间可能会大一些。所以我并不认为这是一道难题。</p>
+
+<p>但是，对于一个有工作经验的人，考查他的工作内容，或许更有价值。因为相比代码的逻辑思维能力来说，工作方式和解决问题态度，架构设计，设计模式都是更重要的考查点。</p>
+
+<h2>当我们面算法题的时候，我们在考查什么？</h2>
+
+<p>就像 <a href="http://www.quora.com/Is-invert-a-binary-tree-a-good-question-for-Google-to-ask-in-a-technical-interview">Quora</a> 上提到的那样，算法题面试被广泛应用在各大顶级互联网公司，包括 Google, Facebook, Microsoft, Amazon, Airbnb, Dropbox。在中国，这样的情况同样存在，BAT 的面试也充斥着算法题目。我当年在网易有道面试的时候，每一轮也都问了很多道算法题目。</p>
+
+<p>但是，很多求职者都会问：“工作中用得到这些吗？”，说实话，用得非常少。那么当我们面算法题的时候，我们到底在考查什么？就我的经验来看，我们会从算法面试中考查到以下三点：</p>
+
+<ol>
+<li>计算机的基础知识。一个人基础知识扎实，说明他在学校就很用功。</li>
+<li>聪明程度。编程还是一个重智力的工作，智商高的人会在不停地知识更新中快速跟进学习。算法题其实就是计算机专业的智力测试题。这里面，动态规划的算法题目由于变化多，体现得就特别明显，考动态规划其实就是测智力。</li>
+<li>沟通能力和思维。面试算法题的时候，一般不会直接让候选人写代码，而是会先一起讨论。通过讨论的过程，了解面试者沟通的能力和考虑问题的方式，也是考查的重点。</li>
+</ol>
+
+
+<h2>考查算法题会不会太片面？</h2>
+
+<p>是的，算法在工作中运用得比较少，一般人也不会在工作中专门积累解算法题的能力。所以通常做算法题最强的是应届生，因为他们有时间去刷题。而在实际工作中，很多能力，都比算法能力重要。比如对代码的洁癖，对设计模式的理解，对计算机底层（操作系统、网络）的理解，对待工作的态度等。</p>
+
+<p>那么，为什么那么多公司不考查，或者不重点考查这些，而只是问算法题呢？</p>
+
+<p>答案很简单，因为要在几个小时内了解一个人太难了。通常一场面试只有一个小时，如果要在一个小时内把上面说到的知识点都面面俱到的考查，是做不到的。但是如果花几天来考查，对于公司和求职者都是不可接受的。所以，很多大公司就用面算法题的方式来偷懒，因为这种方式虽然可能会误伤很多优秀的人才，但是不合格的人，要混进去还是相当困难的。</p>
+
+<p>讲一句不好听的，很多公司在招聘的时候，首先根据学校，把非 985 的学校简历都过滤掉，也是一种不太合理，但是有效的方法。清华北大的人一定就牛逼吗？不一定，但是从概率上讲，比南翔技校的人通过面试的机会要高一些。所以，为了提高面试效率和成本，就直接把一般学校的简历过滤掉，这是一个不人道，但是从经济上合理的行为。</p>
+
+<p>我自己也因为这个选拔方式深受打击，我自认为还是非常优秀的，在学校时拿到过 ACM 国际大学生程序设计竞赛的区域赛金牌，也在 IBM 实习过，学校专业课成绩也很好，但是毕业那年我连 Google 的笔试资格都没拿到。因为我不是清华北大的，Google 就在清华北大选人才，就足够了。</p>
+
+<h2>我们应该怎么办？</h2>
+
+<p>现有的面试方式，其实让公司和候选者都不是太爽，主要的原因就是考查的时间太短，能够参考的信息量太小。但是，随着互联网的发展，作为程序员，我们慢慢有了更多的方式来让公司在面试前就了解自己。</p>
+
+<p>我们可以搭建自己的博客，将自己的学习心得总结下来。我们可以将自己写得好的代码开源在 Github 上。我们可以在 stackoverflow 上回答问题，用 reputation 来证明自己的能力。我们还可以给著名的开源项目提 PR，成为重要的 Contributor。我们可以给 InfoQ 网站投稿。我们可以去 QCon 上分享技术。</p>
+
+<p>如果你能在网络上构建起自己的技术能力图，那么对于很多公司来说，或许面试中偏技术性的考查就不那么重要了，面试的过程就可以更轻松愉快了。</p>
+
+<p>但是，不要高兴得太早，要做到上面提到的这些只会比做算法题更难。但是，至少我们可以让自己的实习得到充分展示，能够让面试不那么片面，能够让公司更加全面的了解自己。</p>
+
+<p>所以说最后，机会还是给那些努力的人。如果一个人学校不好，没有做过什么大项目，在网上没有任何可以考查的信息，那么面试的时候，估计等待他的还是各种算法题。</p>
+
+<h2>猿题库是如何招聘的？</h2>
+
+<p>或许你会失望，我们其实就是和 Google 一样，会问大量的算法题。即使你来自名校名企，但是不会翻转二叉树，我们肯定会把你拒掉。</p>
+
+<p>对于有经验的开发者，我们会适当降低算法题的难度，同时考查一些工作经历，但是翻转二叉树这种难度的题目，是必须做出来的。</p>
+
+<p>所以，如果你没有各种社交网络的资料证明自己的实力，那还是老老实实把基础知识准备扎实吧。算法知识虽然用得少，但是在关键时候还是有用的，以后我会另外撰文举例。</p>
+
+<p>愿大家都能找到自己的伯乐～</p>
+
+<hr />
+
+<p>PS: 我所负责的小猿搜题项目，在半年时间内做到了市场第一的位置，现在想招更多 Java 服务器端和 Android 端开发，待遇和期权高于 BAT，面试要求也会高于 BAT。欢迎大家将简历发到 tangqiao(AT)fenbi.com 。这里有<a href="http://www.lagou.com/jobs/781132.html">职位说明</a>。</p>
+
+<hr />
+
+<p>扫码关注我的「iOS 开发」微信公共帐号，及时获得我精选的各种 iOS 文章：</p>
+
+<p><img src="http://blog.devtang.com/images/weixin-qr.jpg" alt="" /></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/16/talk-about-swift-open-source/">谈谈苹果开源 Swift</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-16T21:02:55+08:00" pubdate data-updated="true">Jun 16<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>在今年的 WWDC 大会上，苹果推出了 Swift 2，给 Swift 语言增加了许多新的特性，同时苹果宣布将开源 Swift 的编译器和标准库。虽然源码还需要等到年底才能放出，但不妨我们来聊聊开源这件事。</p>
+
+<h2>开源的互联网环境</h2>
+
+<p>从整个业界环境来看，开源似乎是现在互联网的标配。其中 Google 是开源的先锋，现在智能手机操作系统基本被 iOS 和 Android 垄断，而 Android 的成功，很大程度上是因为 Google 对 Android 系统的开源，并且对基于 Android 的定制修改采取鼓励的态度。</p>
+
+<p>Android 开源让苹果很受伤，因为这表明 Google 不指望依靠操作系统来建立竞争壁垒了，但是苹果不一样，苹果的大部分利润来自于硬件的销售，而硬件销售的高毛利是依赖软硬件一体带来的生态系统壁垒。如果开源 iOS，那么 AppStore 上海量的软件很可能贡献给其他基于 iOS 系统的兼容设备，从而对苹果的利润产生极大的冲击。</p>
+
+<p>相对于开源操作系统，开源编程语言的编译器和标准库对商业的影响要小得多。所以 Sun 开源了 Java，微软开源了 .net，而苹果开源了 Swift。</p>
+
+<p>那开源 Swift 对苹果有什么影响吗？首先现在 Swift 其实 bug 还比较多，开源 Swift 有助于大家更加积极的为 Swift 报 bug，甚至提 Pull Request。这更加有助于 Swift 的普及。</p>
+
+<p>然后，各种语言都在尝试着不用 Swift 和 Objective-C 来写 iOS 程序。基于 Ruby，Java，JavaScript，C#的各种跨平台的解决方案都有。开源 Swift，也有助于 Swift 语言在其他平台上发展，比如用 Swift 来写 Android 或者后台的 Server，这都是可以想象的，比如最近 Github 上就出现了一个基于 Swift 的 Rails 框架（<a href="https://github.com/anynines/Swift-rails-example">https://github.com/anynines/Swift-rails-example</a>）。</p>
+
+<h2>什么是好的开源项目</h2>
+
+<p>如果我们观察现在发展得比较好的开源项目，你就会发现开源项目要发展，其实开源仅仅是第一步。为了维护良好的开源社区，开源相关的工作还有很多。例如完善的文档，及时响应社区提的 Issue 和 Pull Request，对各种设计细节进行解释，这些都是需要大量人力的。如果没有搭配以上提到的这些工作，那么开源本身产生的效果将非常有限。</p>
+
+<p>但是如果我们观察苹果以前的开源行为，就会发现其实文档都是非常简陋的。在苹果的开源网站（<a href="http://www.opensource.apple.com/">http://www.opensource.apple.com/</a>）上，很多开源代码都是以非常“裸”的方式公开的，相关的代码架构文档非常少，社区的力量也很少参与贡献代码。</p>
+
+<p>不过 Swift 的编译器和标准库宣布在年底开源，让我对苹果的此次开源抱有了一点希望。很可能苹果这次想做得更好一些，所以想将相关的文档和社区搭建完善之后，再将源码开放。</p>
+
+<p>如果我们观察当前市场上成功的开源项目，就会发现成功的开源项目大多还是由商业公司在主导贡献代码。比如 Hadoop 80% 的代码都是由 Hortonworks 和雅虎贡献的。所以虽然 Swift 开源，但是苹果对于 Swift 的主导地位应该不会有任何变化，社区的力量可能更多的会贡献在 Bug 修复上。</p>
+
+<h2>跨平台复用代码</h2>
+
+<p>今年跨平台复用代码是一个火热的话题，基于 Html5 的 PhoneGap 没有被大多数人接受，所以今年更多的方案是用各种办法产生原生的 UI 界面。我认识的一个前新浪微博的朋友就离职做这方面的创业了。</p>
+
+<p>Swift 的开源让我们对在 iOS 和 Android 上复用一套代码又多了一个选择。不过这个就得完全依靠社区的力量了，我们已经看到有不少这方面的创业公司出现，基于 Swift 的跨平台开发方案能否出现，让我们拭目以待。</p>
+
+<p>PS：扫码关注我的「iOS 开发」微信公共帐号，及时获得我精选的各种 iOS 文章：</p>
+
+<p><img src="http://blog.devtang.com/images/weixin-qr.jpg" alt="" /></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/14/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/12/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>赞助商</h1>
+  <p>
+     <a href="http://zc.pgyer.com" target="_blank"><img width="260px" src="/images/ad_pgyer.png" /></a>
+  </p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/17/how-to-read-a-book-summary/">教你阅读图书的「方法论」- 评《如何阅读一本书》</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/12/saul-introdution/">MagicalRecord 作者 Saul Mora 的故事</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/10/atswift-conference-summary/">首届Swift开发者大会见闻</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/03/reactive-cocoa-discussion/">ReactiveCocoa 讨论会</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/02/2015-summary/">2015 年个人总结</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/24/resume-cheat-story/">培训机构出来的 iOS 学员怎么了？</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/18/from-dev-to-manager/">涅槃重生:我的技术转管理之路</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/26/yykit-auther-interview/">专访 YYKit 作者 Ibireme: 开源大牛是怎样炼成的</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/21/apps-damaged-bug/">Mac 应用出现「已损坏」问题，苹果到底犯了什么傻逼错误？</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/14/charles-introduction/">Charles 从入门到精通(中国5折特惠)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/02/mvc-and-mvvm/">被误解的 MVC 和被神化的 MVVM</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/10/25/one-on-one-summary/">浅析一对一沟通</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>About Me</h1>
+  <p>InfoQ编辑, 《<a href="http://item.jd.com/11598468.html" target="_blank">iOS开发进阶</a>》作者, 在猿题库创业。<br/>
+      <br/>Java开发工程师，曾开发网易邮箱、微博。
+      <br/>iOS开发工程师，曾开发有道云笔记、猿题库、小猿搜题。
+  </p>
+</section>
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  &copy; 2016 - 唐巧 -
+  <span class="credit">基于 <a href="http://octopress.org" target="_blank">Octopress</a></span>
+  <span class="credit">, 感谢 <a href="http://gitcafe.com/signup?invited_by=tangqiaoboy" target="_blank">GitCafe</a> 为本站提供存储空间</span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+<script src=" http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=2351546126" type="text/javascript" charset="utf-8"></script>
+<script>
+WB2.anyWhere(function(W){
+W.widget.followButton({
+    uid: 1708947107,
+    id: "wb_follow_btn"
+    });
+});
+</script>
+
+
+</body>
+</html>

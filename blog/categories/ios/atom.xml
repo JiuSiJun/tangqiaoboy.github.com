@@ -1,0 +1,710 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: iOS | 唐巧的技术博客]]></title>
+  <link href="http://blog.devtang.com/blog/categories/ios/atom.xml" rel="self"/>
+  <link href="http://blog.devtang.com/"/>
+  <updated>2016-01-19T21:29:28+08:00</updated>
+  <id>http://blog.devtang.com/</id>
+  <author>
+    <name><![CDATA[唐巧]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[MagicalRecord 作者 Saul Mora 的故事]]></title>
+    <link href="http://blog.devtang.com/blog/2016/01/12/saul-introdution/"/>
+    <updated>2016-01-12T22:20:45+08:00</updated>
+    <id>http://blog.devtang.com/blog/2016/01/12/saul-introdution</id>
+    <content type="html"><![CDATA[<p><img src="/images/saul-mora.jpg"></p>
+
+<p>这次 Swift 开发者大会上，我认识到了一位新朋友，他叫 Saul Mora（如上图），听到这个名字时我没有什么感觉，但是随后旁边的一个朋友介绍道：「他是 MagicRecord」的作者之一，我突然眼睛亮了。</p>
+
+<p>不知道有多少人听过 MagicRecord，MagicRecord 是一个基于 Core Data 的库，可以让你更加方便地使用 Core Data。在我学习 Core Data 时，曾经抱怨过 Core Data 一些设计过于繁琐，使用不方便，那时就常常会听到人们说：「你应该使用 MagicRecord」。而 MagicalRecord 的 Github 首页上 <a href="https://github.com/magicalpanda/MagicalRecord">https://github.com/magicalpanda/MagicalRecord</a> ，已经有了 8000 多的 Star 数。</p>
+
+<p>在我进一步和 Saul Mora 聊天时，我才发现，他的作品远远不只是 MagicRecord。他还是著名的 iOS 网站 Ray Wenderlich 的图书《Core Data by Tutorials》作者，并且发表了很多文章在 Ray Wenderlich 上。另外，他也是一个有趣的人，他维护着他的名为 NSBrief 的 podcast：<a href="http://nsbrief.com">http://nsbrief.com</a>，采访了很多 iOS 和 Mac 的开发者。</p>
+
+<p>好了，现在关键来了，Saul Mora 在硅谷工作得有些腻了，而且他想学习中文，于是他现在来到了中国，打算在北京、上海或成都找一份 iOS 开发的工作。</p>
+
+<p>我想，这对于很多公司来说，都是一个千载难逢的机会，来招募到一位全球顶尖的 iOS 开发者。所以，如果你对 Saul 感兴趣，可以将你的公司介绍、希望他过去做的事情、大概的待遇，以及任何你觉得可以吸引他的信息，发到他的邮箱：</p>
+
+<p><a href="&#x6d;&#97;&#x69;&#108;&#116;&#x6f;&#x3a;&#83;&#97;&#x75;&#x6c;&#x40;&#99;&#x61;&#x73;&#x61;&#x64;&#x65;&#x6d;&#x6f;&#x72;&#x61;&#x2e;&#x63;&#x6f;&#109;">&#83;&#x61;&#x75;&#108;&#x40;&#x63;&#97;&#115;&#x61;&#x64;&#x65;&#109;&#x6f;&#x72;&#97;&#46;&#x63;&#111;&#x6d;</a></p>
+
+<p>对了，Saul 现在还在学习中文，所以他还不能很流利地用中文交流。所以如果邮件用英文写的话，会更有利于他考虑工作机会哟。</p>
+
+<p>感谢 Saul 给开源社区的贡献，也祝福他在中国能够开始一段愉快的经历！</p>
+
+<hr>
+
+
+<p>以下是 Saul 写的自我介绍：</p>
+
+<p>About Saul</p>
+
+<p>Saul Mora is an American iOS developer. He has been involved with the iOS community for several years. He has helped start Cocoaheads and NSCoderNight meetups in Phoenix, Arizona and Denver, Colorado.</p>
+
+<p>He is the author of MagicalRecord (<a href="http://magicalrecord.com">http://magicalrecord.com</a>), the iOS framework for use with Core Data. Saul is a co-author of Core Data by Tutorials (<a href="http://www.raywenderlich.com/store/core-data-by-tutorials">http://www.raywenderlich.com/store/core-data-by-tutorials</a>) published with Ray Wenderlich (<a href="http://raywenderlich.com">http://raywenderlich.com</a>)</p>
+
+<p>Over the past few years, Saul has produced the NSBrief podcast (<a href="http://nsbrief.com">http://nsbrief.com</a>) to talk to many developers in the iOS and Mac development community. Saul has also shared his knowledge in person all over the world giving talks at many developer conferences in the USA and Europe.</p>
+
+<p>Saul has spent the last year in Silicon Valley and has recently decided to move to China to pursue his goal to become fluent in the Chinese language. He is eager to meet iOS developers everywhere and share his knowledge and experience with all the developers in China.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[首届Swift开发者大会见闻]]></title>
+    <link href="http://blog.devtang.com/blog/2016/01/10/atswift-conference-summary/"/>
+    <updated>2016-01-10T22:31:55+08:00</updated>
+    <id>http://blog.devtang.com/blog/2016/01/10/atswift-conference-summary</id>
+    <content type="html"><![CDATA[<p>今天是中国 iOS 开发者的一次聚会，因为首届 Swift 开发者大会在北京成功举办了。这次会议的质量很高，大会的相关 keynote 和 视频，稍后都会在官网上公开，所以没能参会的同学可以关注官网（ <a href="http://atswift.io/">http://atswift.io/</a> ）的内容更新。我作为大会的主席（其实基本没出什么力）全程参与了全天的大会，在此记录下一些参会的见闻。</p>
+
+<p>先说说本次的大会的演讲内容吧。这次大会的 Keynote 可<a href="https://github.com/atConf/atswift-2016-resources">在此下载</a>。</p>
+
+<h3>Chris</h3>
+
+<p>开场的是 objc.io 的创始人 Chris Eidhof。Chris 是大会演讲者中唯一没有准备 keynote 的人，但是演讲相当精彩。Chris 虽然没有 keynote，但是内容是精心准备过的，他先用 playground 简单介绍了一些 Swift 的内容后，就转到一个游戏 Demo 的重构工作中，整个重构工作包括几点：</p>
+
+<ol>
+<li>用 typealias 去掉 NSUserDefaults 的依赖。</li>
+<li>用 protocol 来代替继承。</li>
+<li>用 extension 来实现 protocol。</li>
+<li>尽量用 struct。</li>
+<li>全程用 testcase 来验证重构过程。</li>
+</ol>
+
+
+<p>最终，我们看到了一个重构之后的游戏 Demo，相比以前的工程，重构后的项目代码更短，逻辑更清晰。</p>
+
+<p>人们常说，Talk is cheap, show me the code。 Chris 用行动让我们看到如何写出更好的 Swift 代码。</p>
+
+<h3>傅若愚</h3>
+
+<p>傅若愚来自 thoughtworks，和我一样是成都人。他这次的演讲主题是《越过 OC 与 Swift 间的鸿沟》，对于正在经历从 OC 到 Swift 转型的各位来说，非常实际。</p>
+
+<p>他从一段代码来引出了大家的好奇，下面这段代码，居然会有两种输出结果，你猜出来是什么原因了吗？</p>
+
+<p><code>
+someArray = [1, 2, 3]
+var result = someArray.map({"No. \($0)"})
+</code></p>
+
+<p>接着傅若愚介绍了从 OC 转到 Swift 需要注意的地方：</p>
+
+<ol>
+<li>优先用 protocol 而不是继承</li>
+<li>更多通过 annum, struct, extension 来达成目的。</li>
+</ol>
+
+
+<p>最后，他展示了一个利用函数式编程来重构代码的例子。</p>
+
+<h3>Greg</h3>
+
+<p>Greg 是加拿大多伦多的一位 iOS 自由职业者，亚裔，看起来非常像中国人，但是其实他不会说中文。他在为著名 的 raywenderlich.com 撰写博客。本次他分享的是《Swift Style》。</p>
+
+<p>在介绍了编写易读的代码的重要性之后，他从以下 3 方面介绍了他的 Swift 经验：</p>
+
+<ol>
+<li>Value types</li>
+<li>Protocol</li>
+<li>Safety</li>
+</ol>
+
+
+<p>提问环节的时候，Chris 当托似地问了一个非常有趣的问题：「你最近 1 年在写 Swift 代码上有何转变？」。</p>
+
+<p>这个问题非常有意思，Greg 说他现在用了更多的 guard 关键词，然后 Greg 也说到，他写习惯 Swift 之后，因为养成了强类型检查的习惯，他偶尔回去写 oc 的时候会不停地 check 各种 nil。</p>
+
+<h3>李洁信</h3>
+
+<p>李洁信是下午第一场，非常犯困的时间。洁信稍微有一些紧张，内容是关于《Swift 中的协议编程》，他把这些内容都梳理得挺好的，讲得挺清楚。</p>
+
+<h3>王巍</h3>
+
+<p>喵神王巍是下午第二场，王巍的主题是《如何打造一个让人愉快的框架》，喵神的准备非常充分，演讲过程中还各种卖萌，实在是非常可爱。喵神主要从以下几个方面介绍了框架的开发：</p>
+
+<ol>
+<li>静态库和框架的对比</li>
+<li>包和依赖管理</li>
+<li>创建框架</li>
+<li>一些 Tips</li>
+<li>发布框架</li>
+<li>持续集成</li>
+</ol>
+
+
+<p>如果你希望基于 Swift 来开发一个 framework，非常值得看看喵神的分享。</p>
+
+<h3>包涵卿</h3>
+
+<p>包涵卿讲的是《Swift 函数式编程实践》，这块其实是挺难讲的，前面的一些函数式编程的基础还好，比如柯里化之类，但是后面估计比较难理解，我不知道现场有多少人听懂了 Monad 的概念，不过这个确实是比较挑战的话题。</p>
+
+<h3>翁阳</h3>
+
+<p>这场话题茶歇回去之后听了一半，所以没怎么整理出来笔记。有些遗憾。</p>
+
+<h3>周楷雯</h3>
+
+<p>周楷雯的分享里介绍了各种性能优化的技巧。可惜他当时手机变砖，有一些着急，讲得比较快，很多点感觉展开讲会更好一些。</p>
+
+<h3>后记</h3>
+
+<p>这次 Swift 大会中还做了一些有趣的调查，在此将数据分享给大家：</p>
+
+<ol>
+<li>这次有 &frac34; 的听众来自外地！</li>
+<li>现场有 1/3 的听众已经开始将 Swift 应用于公司项目开发中。</li>
+</ol>
+
+
+<p>这次大会的组委会都很棒，包括梁杰、裕波、王臣汉、陈雨恒、李涛（还有一些我没能记住名字的同学）都对这次大会付出了大量心血。作为一个非赢利性的 Swift 大会，我觉得他们做到了内容的高质量，期待明年的第二届大会如期进行！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ReactiveCocoa 讨论会]]></title>
+    <link href="http://blog.devtang.com/blog/2016/01/03/reactive-cocoa-discussion/"/>
+    <updated>2016-01-03T15:22:13+08:00</updated>
+    <id>http://blog.devtang.com/blog/2016/01/03/reactive-cocoa-discussion</id>
+    <content type="html"><![CDATA[<h2>前言</h2>
+
+<p><a href="https://github.com/ReactiveCocoa/ReactiveCocoa">ReactiveCocoa</a>（其简称为 RAC）是由 <a href="https://github.com/blog/1107-reactivecocoa-for-a-better-world">Github</a> 开源的一个应用于 iOS 和 OS X 开发的新框架。RAC 具有函数式编程和响应式编程的特性。它主要吸取了 .Net 的 <a href="http://msdn.microsoft.com/en-us/data/gg577609">Reactive Extensions</a> 的设计和实现。</p>
+
+<p>但是，相对于传统的 MVC 架构，ReactiveCocoa 的函数式编程方式的学习曲线陡峭，业界也没有丰富的图书资料，这使得大家对这种技术望而却步。这次，我邀请了一些行业内关注和使用 ReactiveCocoa 的内行，进行了一次关于 RAC 的讨论会，会上大家主要聊了 RAC 在使用中的各种问题，我们希望这次讨论会能够让重新全面审视这个开发框架。</p>
+
+<h2>讨论成员</h2>
+
+<p>本次讨论会邀请到的讨论者来自美团，百度，蘑菇街等公司。讨论前为了先相互认识，我让大家自我介绍了一下，并且顺便简单介绍各自所在的团队人数以及使用 RAC 的时长，以下是大家的自我介绍：</p>
+
+<ul>
+<li><p>臧成威，来自美团，团队基本都在使用 RAC，从 14 年初开始使用 RAC。在美团搞过 RAC 的几期培训，有丰富的经验。</p></li>
+<li><p>李忠 (limboy)，来自蘑菇街。李忠的博客（<a href="http://limboy.me/">http://limboy.me/</a>）上有很多介绍 RAC 的高质量文章。（这次讨论会李忠当时有事没有参加，事后对相关问题留言表达了自己的看法）</p></li>
+<li><p>唐晓轩 (txx)，来自礼物说，团队四个人，目前 “只有” 礼物说这一款产品。从年初开始使用 RAC，到现在正在安利 Android  团队使用 RXJava。</p></li>
+<li><p>孙源 (sunnyxx)，来自百度，从 13 年年底开始接触 RAC，当时边学边用 RAC 写了一个完整的项目，那时候还没现在这么火（当时 Limboy 的文章看了好几遍），后来在项目中在一个完整模块中尝试使用过，因为大家对函数响应式编程了解程度差别很大，导致代码几乎无法维护，随后重构。现在也有时用到，但都用于某个特定的功能的便捷实现上，无 MVVM，基本不会跨类使用。</p></li>
+<li><p>雷纯锋，来自广州支点网络科技股份有限公司，团队三个人使用 RAC ，从 12 年 6 月份开始使用 RAC ，公司项目一直使用的是 RAC。项目中一直也是用的 MVVM + RAC 的结构，另外我也有在维护一个 MVVM + RAC 的开源项目，叫 MVVMReactiveCocoa。</p></li>
+<li><p>汤圣罡 (lexurs)，来自新味，2 个 iOS。RAC 经验两年。目前在用 Overcoat+Mantle+ReactiveCocoa 实现的网络层，某些逻辑多的页面也喜欢用 RAC 实现。因为想全部改成 Swift，正在投靠 RxSwift 和 PromiseKit 的过程中。</p></li>
+<li><p>李雄略 (听榆大叔)，来自网家缘科技，分 2 个产品，每个产品 2 个 iOS 开发，从 14 年 3 月份开始使用 RAC，已在 3 个项目中使用 RAC。</p></li>
+<li><p>蓝晨钰 (lancy)，来自猿题库，没有在公司项目使用过 RAC。个人喜欢 RAC，私底下写过 RAC 的小项目，读过 RAC 源码，但对 RAC 在大型项目中和团队合作中持谨慎态度，猿题库的架构是类 MVVM 架构，但没有引入 RAC。</p></li>
+<li><p>唐巧（就是本文作者），来自猿题库，团队分 3 个产品，每个产品约 4 个 iOS 开发，没有在公司正式使用过 RAC，自己私下写过几百行 RAC 的代码，对于 RAC 是比较保守的一个人。</p></li>
+</ul>
+
+
+<p>好了，以下就是我们具体讨论的一些问题。</p>
+
+<h3>讨论：如何在团队内推广并用「正确的姿势」使用 RAC？</h3>
+
+<p>大家提到在使用 RAC 的时候，出现的一些问题，例如：</p>
+
+<ul>
+<li>不是太精通 RAC 的同学往往写出来的非常难以维护</li>
+<li>不知道新队友的 RAC 培养路径，Functional Programming &ndash;> MVVM &ndash;> &hellip;.</li>
+</ul>
+
+
+<p>对于难以维护的问题，臧成威的意见是：</p>
+
+<blockquote><p>这个美团这边的解决方案主要是 review，review 可以保证项目中所有人的范式是相同的，大家对于不同的写法都会有充分的讨论，而我们的新手主要是参考旧代码的风格写出新代码，所以并没有发生难以维护这一现象。</p>
+
+<p>但是前提是需要有很熟悉的人来带领，团队中熟悉 RAC 的人员基数得以保证。而且美团的 RAC 使用还是逐步放量的，从一开始的 UI 层使用，到底层逻辑层的使用，最后才到了 MVVM 的粘合层使用，这样避免了泛滥。</p>
+
+<p>总结来说，对于 RAC 这样厚重的库，引入的时候的 review 是必要的，否则可控性太差，最后就难以收场了。</p></blockquote>
+
+<p>总结起来就是：1、review + 有熟练的人带；2、逐步放开使用。</p>
+
+<p>对于人才的培养，臧成威的意见是：</p>
+
+<blockquote><p>RAC 的培养，从我这边三期的培训来看，课程的安排是这样的六节： 1. FRP 的思想概要 2. RAC 的 operations 介绍 3. 冷信号与热信号解惑 4. 生命周期指南 5. disposable 和多线程 6. 实战分享</p>
+
+<p>其中先建立 FRP 的思想，虽然看起来是最远的，但是确实是后续使用和教学的基础。</p>
+
+<p>一起培训大概有 30-50 人来听，课程一种持续三周，每周 2 节课、课程过后的 2 周，就可以发现代码中的 rac 使用明显提升</p>
+
+<p>另外补充一点，关于新手学习，最不建议的就是在不了解 FRP 原理和一些基础概念的情况下，盲目的看源代码。我见过太多的同学，花费了很多的时间通览源码，但是根本没有用途。因为从思想到源代码是经历了很多雕琢的。里面有太多的 bugfix，太多的折中。</p>
+
+<p>所以你看的时候，抛开了本质，一味的查看边界的处理，最后大都觉得痛苦，难用，难以掌握收场。</p>
+
+<p>唐巧：RAC 确实和其它的开源库性质上差别比较大，思想方面需要学习的比较多。</p>
+
+<p>是的，关键是思想。所以，一定要先从 “道” 上建立思想，然后从 “术” 上掌握使用，最后才是通览源码，掌握其原理。</p>
+
+<p>第一节是道的课程，第二节是术的课程。这两节下来就知道能干什么了。</p></blockquote>
+
+<p>雷纯锋意见也与臧成威一致。</p>
+
+<p>唐晓轩介绍了一下他自己的学习过程：</p>
+
+<blockquote><p>我是反着做的，先把 rac 当作 blocks kit 用 之后 看 racstream 的各种 operations，知道 rac 有哪些运算 其次 看 rac 的 uikit 扩展都是怎么实现的 最后才是函数式思维。</p></blockquote>
+
+<p>我顺着臧成威的回答，问了一下通常使用 RAC 的规范是什么，臧成威回答道：</p>
+
+<blockquote><p>大家可以参考这样的一条规范来做，首先通过 RACSignal#return RACSignal#createSignal 这类的创建一个 OOP 世界到 FRP 世界的一个转换，从而得到一个 Signal。</p>
+
+<p>之后 signal 在不接触 OOP 的情况下进行数据的各类变换，注意 FP 的引用透明和变量不可变特性。</p>
+
+<p>最后用 RAC 宏、RACSignal#subscribe、NSObject+liftSelect 这些操作把 FRP 的世界带回到 OOP 的世界里。</p></blockquote>
+
+<p>臧成威还很体贴地画了一个示意图，非常给力：</p>
+
+<p><img src="/images/fpr_oop_pattern.jpg"></p>
+
+<h3>讨论：大公司的大型 (臃肿) App 是否适合使用 RAC？</h3>
+
+<p>由于第一个话题臧成威贡献最多内容，加上美团是大家所知道的使用 RAC 最多的大型 App，所以这个话题还是由臧成威首先回答，以下是他的发言。</p>
+
+<blockquote><p>越大型的 app，说明内部的逻辑越复杂。而 RAC 从某几方面可以简化逻辑，使得代码从书写到执行都可以较为简化的完成功能</p>
+
+<p>我大概总结了几个适用的场景。RAC 总结来说就是：数据随着时间而产生，所以能想到的三点比较适合用 RAC：</p>
+
+<p>一、UI 操作，连续的动作与动画部分，例如某些控件跟随滚动。</p>
+
+<p>二、网络库，因为数据是在一定时间后才返回回来，不是立刻就返回的。</p>
+
+<p>三、刷新的业务逻辑，当触发点是多种的时候，业务往往会变得很复杂，用 delegate、notification、observe 混用，难以统一。这时用 RAC 可以保证上层的高度一致性，从而简化逻辑上分层。</p>
+
+<p>只要有通知的业务逻辑，RAC 都方便有效化解。</p>
+
+<p>雷纯锋：概括的说，应该就是统一所有异步事件吧。</p>
+
+<p>不适用的场景，与时间无关的，需要积极求解的计算，例如视图的单次渲染。</p></blockquote>
+
+<p>接着发言的是百度的孙源：</p>
+
+<blockquote><p>我这是百度知道，体量比较小，可以随便玩。</p>
+
+<p>我们现在就用它做点小功能，举个例子吧，聊天页面那个键盘弹出时 input bar 跟随滚动的功能，原来写需要接通知、写回调，现在在一个函数里面用 RAC 就比较方便。</p>
+
+<p>像这种小功能，主要是方便开发，让 “干一个事儿的代码写在一个地方”。</p></blockquote>
+
+<p>雷纯锋说他们的使用还是比较多：</p>
+
+<blockquote><p>基本上异步的事件能用 RAC 的都用的 RAC。</p>
+
+<p>不过代理方法用 RAC 的比较少，比如 UITableView 的代理方法一般都是直接写了。</p>
+
+<p>用 RACSubject + RACComand 来简化和统一应用的错误处理逻辑，这个算比较经典的吧。</p>
+
+<p>臧成威说：UI 交互上的点确实好多，比如下拉刷新、上拉导航条变透明。</p>
+
+<p>实时响应用户的输入，控制按钮的可用性，这点用 RAC 来实现非常简单。</p></blockquote>
+
+<p>李雄略说：</p>
+
+<blockquote><p>我们主要用来处理界面上的数据显示，以及 UI 的交互操作上，不会用来写代理。</p></blockquote>
+
+<p>对于这个话题，似乎大家的答案还是比较一致，即：大型 App 是适合使用 RAC 的。</p>
+
+<h3>讨论：都说调试 RAC 很痛苦，是否有一些调试技巧和经验分享？</h3>
+
+<p>臧成威说：</p>
+
+<blockquote><p>的确很痛苦，跟断点有的时候计算堆栈都要等几分钟。</p>
+
+<p>关于调试，RAC 源码下有 instruments 的两个插件，方便大家使用。</p>
+
+<p>signalEvents 这个可以看到流动的信号的发出情况，对于时序的问题可以比较好的解决。</p>
+
+<p>diposable 可以检查信号的 disposable 是否正常</p></blockquote>
+
+<p><img src="/images/rac-instrument.jpg"></p>
+
+<p>小伙伴们看了纷纷惊叹，表示以前没有用过这个神器。</p>
+
+<p>雷纯锋接着分享：</p>
+
+<blockquote><p>我的理解是一般给信号一个名字，然后通过下面的打印方法来进行调试。</p></blockquote>
+
+<p>```
+/// Logs all events that the receiver sends.
+&ndash; (RACSignal *)logAll;</p>
+
+<p>/// Logs each <code>next</code> that the receiver sends.
+&ndash; (RACSignal *)logNext;</p>
+
+<p>/// Logs any error that the receiver sends.
+&ndash; (RACSignal *)logError;</p>
+
+<p>/// Logs any <code>completed</code> event that the receiver sends.
+&ndash; (RACSignal *)logCompleted;
+```</p>
+
+<p>李雄略说：</p>
+
+<blockquote><p>我是用 log 方法来做的：</p></blockquote>
+
+<p>```
+DExecute(({</p>
+
+<pre><code>setenv("RAC_DEBUG_SIGNAL_NAMES", "RAC_DEBUG_SIGNAL_NAMES", 0);
+[signalUserGeo setNameWithFormat:@"signalUserGeo"];
+signalUserGeo = [signalUserGeo logAll];
+</code></pre>
+
+<p>}));
+```</p>
+
+<p>李忠的补充：</p>
+
+<blockquote><p>调试的话，如果是性能调试，主要是经验 +Instruments，经验类似于：少用 RACCommand、RACSequence 这样的，Instruments 可以用它的 Time Profile 来看。</p>
+
+<p>如果是 Bug 调试，主要还是靠 Log，配合一些 Xcode 插件，比如 MCLog(可以很方便地过滤日志)，如果要还原堆栈的话，就加一个断点。</p></blockquote>
+
+<p>接下来大家讨论起来：</p>
+
+<blockquote><p>臧成威：其实 instruments 也差不多，只是第一，不需要提前调用 logAll 这些；第二，可以利用 instruments 的筛选功能，不会看 log 看到眼花。</p>
+
+<p>雷纯锋：实际调试起来好用吗？</p>
+
+<p>臧成威：好用的，还可以看到发出 value 的堆栈。</p>
+
+<p>雷纯锋：使用 instruments 来调试的频率大吗？或者说在什么情况下会去用 instruments 调试呢？</p>
+
+<p>臧成威：一般调查问题的时候就它来查。比如某个信号接不到输出。</p>
+
+<p>臧成威：或者输出的值里面有错误的，但是是经过 merge、zip 等好多操作混合出来的，不知道源头是神马。</p>
+
+<p>雷纯锋：也就是说一般是在有问题，然后分析不出来的时候，才使用吗？</p>
+
+<p>臧成威：是的，一般是调查问题的时候用的，不是开发的时候用的，因为打开是比较慢的。</p>
+
+<p>李雄略：为了方便，我们保证一个 RACSignal 只会给订阅者 send 一种类型的 value，所以就手动给 signal 加了部分泛型支持：</p>
+
+<p>@interface RACSignal&lt;__covariant ObjectType> : RACStream</p>
+
+<p>RACSignal<NSString *> *signal = &hellip;</p>
+
+<p>孙源：用泛型，然后 map 之后呢</p>
+
+<p>李雄略：map 无法支持</p>
+
+<p>臧成威：RAC3 里面就有不错的泛型推导，但是是基于 swift 的。</p>
+
+<p>臧成威：这个我也想过，但是语言不支持，基本上是搞不定的</p>
+
+<p>孙源：调试这块也就是 log name 了。作者 guide 里面也是这么弄，用 Instrument 已经是高级技巧。</p>
+
+<p>臧成威：加 log 比较不好的就是容易眼花，还有不好还原当时的堆栈。</p>
+
+<p>孙源：我一般遇到问题，都是看代码脑补一遍过程，函数式就好在这里，基本上看着对了结果就没错。脑回路逻辑推导。</p>
+
+<p>臧成威：是的，推导很有道理。我觉得 sunnyxx 说的是王道，所以培训，给大家建立思维很重要。</p>
+
+<p>雷纯锋：恩，分析清楚整个运算过程是很重要的</p></blockquote>
+
+<h3>讨论：RAC 相比 RxSwift 和 PromiseKit 有哪些优缺点 ?</h3>
+
+<p>臧成威继续分享：</p>
+
+<blockquote><p>RAC vs RxSwift 的情况是这样：</p>
+
+<p>从支持度来说，RAC 对 Cocoa 的支持更好。但是从标准性、性能来讲 RxSwift 更胜一筹。</p>
+
+<p>因为毕竟是 Rx 团队的亲生项目。还有，OC 只有 RAC 支持，RxSwift 搞不定。</p>
+
+<p>雷纯锋：需要在 Obj-C 下和 Swift 下，分别来比较吧？那 Obj-C 下，用 RAC 应该是没有疑问的了吧，那在 Swift 下呢？</p>
+
+<p>Swift 场景下，由于 OC 做好的 bridge，所以 RAC3swift，仍然有不错的整合性。例如 notification、observer 这些。但是 RxSwift 与框架无关，所以这些功能需要自己补了。</p>
+
+<p>但是 RxSwift 比较标准，和 RxJS、RxJava 所有定义统一，所以迁移过来很容易。但 RxJS 和 RxJava 的原始用户比较少，这点不大明显。</p>
+
+<p>这是 Rx 和 RAC 的对比。</p>
+
+<p>RAC3 swift 版有个特性，就是热信号传导，这点 RxSwift 没有。对于特定的场景来说，热信号传导更好。</p>
+
+<p>PromiseKit 是一种异步库，思想和 FRP 不一样。</p>
+
+<p>PromiseKit 应该和 js 的 promise 库差不多的意思吧，这个我是靠猜的。</p></blockquote>
+
+<h3>讨论：RAC 在工程中使用范围的界限，往往一处 RAC 就会引起和他相关模块的 RAC 化，如何确定界限呢？</h3>
+
+<p>臧成威：这个我觉得有点危言耸听了吧，对上对下是可以有效包装，逐步放量的。</p>
+
+<p>臧成威：默认作为一种上下模块的通信协议，也不是很危险的事，所以我觉得没有太大的风险。上层拿到一个 RACSignal 就当做一个 BlockKit 的回调方式就可以。这样可以有效控制代码。</p>
+
+<p>雷纯锋：这个我觉得要看模块之间用什么来通信吧。</p>
+
+<p>李忠：这个我觉得还是跟使用场景有关。如果只是简单的对外暴露一个 property，外部直接 KVO 即可，甚至不用关心 RAC。但如果在一些比较复杂的场景使用 RAC 的话，很难做到对上层透明，除非内部的封装做得足够彻底。</p>
+
+<p>李忠：比如网络请求，返回一个 <code>RACSignal</code>，然后外部 <code>subscribeNext</code> 之后，想要取消怎么办？这时只能保存一个 <code>RACDisposable</code> 变量，然后在适当的时机调用 <code>dispose</code> 方法；或者要等待 2 个请求一起完成，再做一些事情（当然可以通过 semaphore / dispatch_group 来做，但这样就丢了 RAC 的特性）等等。</p>
+
+<p>李忠：所以还是要在项目初期就想清楚，如果团队成员对 RAC 都比较熟悉，那自然最好。如果其他人不太了解，甚至抵触，这时就要避免在复杂的场景下使用。</p>
+
+<h3>讨论：有什么学习 RAC 好的资料吗？</h3>
+
+<p>臧成威：李忠的博客不错：<a href="http://limboy.me/">http://limboy.me/</a></p>
+
+<p>唐巧：之前雷纯峰特别推荐美团的几篇博客：<a href="http://tech.meituan.com/tag/ReactiveCocoa">http://tech.meituan.com/tag/ReactiveCocoa</a></p>
+
+<p>李忠：coursera 上有一门课是讲 Reactive Programming 的 ( <a href="https://www.coursera.org/course/reactive">https://www.coursera.org/course/reactive</a> ) ，也会讲到 Functional Programming。</p>
+
+<p>雷纯锋：我写的这篇是范围比较广一点。<a href="http://blog.leichunfeng.com/blog/2015/12/25/reactivecocoa-v2-dot-5-yuan-ma-jie-xi-zhi-jia-gou-zong-lan/">http://blog.leichunfeng.com/blog/2015/12/25/reactivecocoa-v2-dot-5-yuan-ma-jie-xi-zhi-jia-gou-zong-lan/</a> 《ReactiveCocoa v2.5 源码解析之架构总览》</p>
+
+<p>另外要关于 Monad 的也有一篇，<a href="http://blog.leichunfeng.com/blog/2015/11/08/functor-applicative-and-monad/">http://blog.leichunfeng.com/blog/2015/11/08/functor-applicative-and-monad/</a> 《Functor、Applicative 和 Monad》</p>
+
+<p>雷纯锋：raywenderlich 上的文章：
+<a href="http://www.raywenderlich.com/62699/reactivecocoa-tutorial-pt1">http://www.raywenderlich.com/62699/reactivecocoa-tutorial-pt1</a>、
+<a href="http://www.raywenderlich.com/62796/reactivecocoa-tutorial-pt2">http://www.raywenderlich.com/62796/reactivecocoa-tutorial-pt2</a>、
+<a href="http://www.raywenderlich.com/74106/mvvm-tutorial-with-reactivecocoa-part-1">http://www.raywenderlich.com/74106/mvvm-tutorial-with-reactivecocoa-part-1</a>、
+<a href="http://www.raywenderlich.com/74131/mvvm-tutorial-with-reactivecocoa-part-2">http://www.raywenderlich.com/74131/mvvm-tutorial-with-reactivecocoa-part-2</a>。</p>
+
+<p>唐巧：我之前看过一本 《Functional Reactive Programming on iOS》，不过还是不够深入。</p>
+
+<p>臧成威：话说，看懂 Haskell，理解 RAC 就不是难事了。</p>
+
+<p>雷纯锋：是的，所以如果要理解 RAC 的思想的话，Haskell 可以学一下。<a href="http://learnyouahaskell.com/">http://learnyouahaskell.com/</a></p>
+
+<h3>RACSequence 的性能问题</h3>
+
+<p>讨论到最后大家还涉及到了 RACSequence 的性能问题。记录如下：</p>
+
+<blockquote><p>臧成威：了解了概念后，看源码就很爽了，是 OC 语言的典范。</p>
+
+<p>臧成威：不过看了 RACSequence 的实现，性能是无法使用的。</p>
+
+<p>雷纯锋：无法使用？你们不用 RACSequence 吗？</p>
+
+<p>臧成威：是的，Sequence 的性能很差。</p>
+
+<p>臧成威：由于 OC 没有引用透明和尾递归优化。</p>
+
+<p>雷纯锋：你们没有过吗？</p>
+
+<p>臧成威：你试试 100 个长度的数组进行遍历排序，然后再变回来就明白了。</p>
+
+<p>臧成威：现在都去掉了。</p>
+
+<p>雷纯锋：它主要是用来实现懒计算吧。</p>
+
+<p>雷纯锋：方便集合的转换吧，常规的遍历也不会使用它吧？</p>
+
+<p>臧成威：就是说集合转换的性能太差了。</p>
+
+<p>雷纯锋：恩，以后留意一下</p></blockquote>
+
+<h2>总结</h2>
+
+<p>本次分享内容的主要贡献来自美团的臧成威同学，从美团的实践中我们也能看到，在有充足经验的人指导下，RAC 不但可以应用于大型项目，也可以工作得很舒服。</p>
+
+<p>最后感谢参加这次讨论会的臧成威、李忠、唐晓轩、孙源、雷纯锋、汤圣罡、李雄略、蓝晨钰，希望他们的分享对大家有所帮助。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[培训机构出来的 iOS 学员怎么了？]]></title>
+    <link href="http://blog.devtang.com/blog/2015/12/24/resume-cheat-story/"/>
+    <updated>2015-12-24T22:23:45+08:00</updated>
+    <id>http://blog.devtang.com/blog/2015/12/24/resume-cheat-story</id>
+    <content type="html"><![CDATA[<h2>事件回放</h2>
+
+<p>前几天在 iOS 开发群里看到有人贴了一个 v2ex 上的帖子（地址： <a href="https://www.v2ex.com/t/244437">https://www.v2ex.com/t/244437</a> ） ，大概说收到了 1000 多份某培训机构出来的学员简历。这些简历让他发现了一些问题：</p>
+
+<ul>
+<li>面试表现比较差</li>
+<li>大多有伪造工作经历的行为</li>
+</ul>
+
+
+<p>以下是他的文章原文：</p>
+
+<blockquote><p>公司坐标：杭州。</p>
+
+<p>由于公司业务发展，需要新招一位 iOS 开发工程师，这周 HR 平均每天给我安排了三场面试。</p>
+
+<p>一周过去了，这些面试者给我的印象都很糟糕，并且……很蹊跷，今天找 HR 了解了一下。</p>
+
+<p>结果出现了令我震惊的事情， HR 在「智联」「 51job 」「拉勾」三个渠道发布了招聘，半个月收到了超过一千份 iOS > 简历，而同时招聘的其他技术岗位却很少有人投递简历。</p>
+
+<p>分析了一下这些简历的特征：</p>
+
+<p>1.户籍绝大多数是某地（非地图炮，仅是数据统计）</p>
+
+<p>2.几乎全部刚从外地来杭州</p>
+
+<p>3.几乎全部上家公司是外包公司</p>
+
+<p>4.很多人上家公司不一样，但简历中写的项目却是一样的</p>
+
+<p>5.简历上宣称的工作年限都是 1 年左右</p>
+
+<p>其实上面这几条，我都可以「理解」</p>
+
+<p>但是，这个数量着实让人震惊。</p>
+
+<p>我有一些推测，怕被喷，先不说了。</p>
+
+<p>你们怎么看?</p></blockquote>
+
+<p>有人把这个问题贴到知乎上，引来了一些知情者的回复，见 <a href="https://www.zhihu.com/question/38703692">https://www.zhihu.com/question/38703692</a> 。</p>
+
+<p>原来这些都是培训机构出来的学员，然后为了获得一次面试，就编造了工作公司和经历，并且隐藏了自己的培训经历。</p>
+
+<p>今天就想和大家聊聊这个沉重的话题。</p>
+
+<h2>诚信的恶性循环</h2>
+
+<p>首先我们说说简历造假吧。在我看来，简历造假还是时常遇到的。我认识礼物说的 CTO，我们 iOS 群里常常有朋友面试时遇到说自己在礼物说工作过的候选人，为什么呢？还不是网上有一堆高仿礼物说的 APP，自己下载下来看看，然后就可以假装是自己做的了。</p>
+
+<p>为什么很多候选人选择造假呢？除了简历不够好之外，造假很多时候确实有用。对于很多小公司来说，面试官自己也不懂如何面试 iOS 开发，那么就特别容易被忽悠。</p>
+
+<p>但是，一个公司里面有 iOS 开发者，然后再稍微懂一些面试技巧的话，简历造假是很容易发现的。关于怎么在面试中鉴别造假，我们在下一节聊。</p>
+
+<p>我们先聊聊看造假会造成什么危机呢？对于面试公司来说，如果他发现面试的效率特别低，或者招进来的人干活不行时，他会怎么办呢？</p>
+
+<p>我觉得他会很直接地开地图炮，把一类人直接刷掉，不再给面试机会。这类人是哪些人？简历雷同的、培训机构培训出来的人。</p>
+
+<p>这样公平吗？对候选人肯定不公平，但是公司招人也需要讲效率的，面试候选人其实成本特别高。</p>
+
+<p>所以造假这个行为，最终伤害的是候选人本人，以及培训机构的信誉。</p>
+
+<h2>如何在面试中鉴别造假</h2>
+
+<p>其实挺简单的，首先面试的时候不要设置固定问题，然后根据候选人的回答情况来深入问细节。</p>
+
+<p>就比如说一个候选人说他做过礼物说，那就有很多可以深入问的，比如问他：</p>
+
+<ul>
+<li>礼物说有几个 iOS 开发</li>
+<li>大家是如何分工的</li>
+<li>你负责的那块最主要的难点在哪里</li>
+<li>团队整个协作的过程</li>
+<li>在开发的时候有没有遇到需求变更</li>
+<li>功能上线后大概的数据是什么样的</li>
+<li>你觉得哪些地方还需要改进</li>
+<li>你们主要的竞争对手是谁，他们在哪些技术方面比你们做得好</li>
+</ul>
+
+
+<p>一个谎话要编容易，难的是每一个细节都编得面面俱到，所以深入细节问，很容易就会露馅。</p>
+
+<h2>我是培训机构学员怎么办</h2>
+
+<p>简单地说，公司招一个人最终级的目的还是把活干好。如果一个培训机构的学员，没有实际的工作能力，单凭几个月的培训就想一劳永逸地找一份好工作，这是不现实的。</p>
+
+<p>互联网技术日新月异，iOS 开发每年技术都在更新，如果指望所有知识都是从培训机构那儿获得，那么早晚都会被淘汰。</p>
+
+<p>所以，即使你当前是培训机构出来的学员，也必须培养自己实际解决问题的能力和自学能力。这样才能一点点地增强自己的实力。</p>
+
+<p>另外说一个残酷的现实，公司一般不会给你大块的上班时间用来学习新知识的。所以大多数学习充电过程只能是在下班后或周末。</p>
+
+<h2>我们应该怎么看待培训机构学员</h2>
+
+<p>我自己就招过一个培训机构出来的学员，她还是一个女生，现在工作得挺棒的。她是非计算机专业毕业的，参加培训机构学了 3 个月就来我们公司面试。她能通过面试，很大程度上是因为她不止参加了培训班的课，而且自己在网上学习了计算机数据结构和算法的基础知识，而且是看的国外的课程。</p>
+
+<p>当时面试时我完全没有考查她 iOS 知识，因为她承认只参加了 3 个月的培训。所以我考查了一下她自学数据结构和算法的情况。结果让我觉得她是一个自学能力还不错的女生，所以我就把她招了进来。</p>
+
+<p>刚进来带她做 iOS 费了一些精力，但是很快她就可以上手自己做事情了。现在，我已经完全把小猿搜题的 iOS 端交给她来负责。我想她就是一个培训机构出来学员的成功案例。</p>
+
+<p>我们并不鄙视培训机构的学生，但是我们不认同那些没有自学能力，认为参加 3 个月培训就可以拿高薪的「投机者」。这个行业虽然高薪，但是也很辛苦，如果没有兴趣和毅力，是没办法做好的。</p>
+
+<h2>搞 iOS 开发到底需要什么核心能力</h2>
+
+<p>大家看了我上次<a href="http://blog.devtang.com/blog/2015/11/26/yykit-auther-interview/">采访的 YYKit 作者的文章</a> 后，或许就能明白，其实一个人核心的能力就是学习能力。有强大的学习能力，那么就可以像 YYKit 作者那样，才接触 iOS 开发一年多就可以开源出大量优秀的作品。</p>
+
+<p>基本上，一个人在一个领域坚持投入大量的时间，很难做得不好。所以你是一个培训机构的学员，苦于找不到工作。与其简历造假拿到面试机会，倒不如再多花花精力，自己多专研一些代码，写一些 App，不要那么急功近利，我想结果都会好很多。</p>
+
+<p>愿培训机构出来的 iOS 学员都能找一份好工作。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[专访 YYKit 作者 ibireme: 开源大牛是怎样炼成的]]></title>
+    <link href="http://blog.devtang.com/blog/2015/11/26/yykit-auther-interview/"/>
+    <updated>2015-11-26T20:47:13+08:00</updated>
+    <id>http://blog.devtang.com/blog/2015/11/26/yykit-auther-interview</id>
+    <content type="html"><![CDATA[<h3>版权说明</h3>
+
+<p>本文为InfoQ中文站特供稿件，首发地址为：<a href="http://www.infoq.com/cn/news/2015/11/ibireme-interview">文章链接</a>。如需转载，请与InfoQ中文站联系。</p>
+
+<h3>前言</h3>
+
+<p>第一次听到 <a href="http://weibo.com/239801242">ibireme</a> 这个名字，是看到他在 <a href="http://weibo.com/2477831984/D2ujxj5Vx?type=comment#_rnd1448528368875">微博上分享</a> 了 <a href="https://github.com/ibireme/YYText">YYText</a> 开源库。当时我第一眼见到 YYText 的功能示意 GIF 图时（下图所示），就被它丰富的功能吸引了。YYText 应该是我见到过的功能最强大的基于 CoreText 的排版框架了。</p>
+
+<p><img src="https://camo.githubusercontent.com/fb454f77c109e6ac671e8fdb3220ade92238715b/68747470733a2f2f7261772e6769746875622e636f6d2f69626972656d652f5959546578742f6d61737465722f417474726962757465732f59595465787420457874656e6465642f5959546578744174746163686d656e742e676966" alt="YYText示意图" /></p>
+
+<p>令人惊讶的是，YYText 虽然代码量很大（超过一万行），但它只是 ibireme 的作品之一。ibireme 利用业余时间完成了 <a href="https://github.com/ibireme/YYKit">YYKit</a> 工具库，包括：</p>
+
+<ul>
+<li><a href="https://github.com/ibireme/YYModel">YYModel</a> — 高性能的 iOS JSON 模型框架。</li>
+<li><a href="https://github.com/ibireme/YYCache">YYCache</a> — 高性能的 iOS 缓存框架。</li>
+<li><a href="https://github.com/ibireme/YYImage">YYImage</a> — 功能强大的 iOS 图像框架。</li>
+<li><a href="https://github.com/ibireme/YYWebImage">YYWebImage</a> — 高性能的 iOS 异步图像加载框架。</li>
+<li><a href="https://github.com/ibireme/YYText">YYText</a> — 功能强大的 iOS 富文本框架。</li>
+<li><a href="https://github.com/ibireme/YYKeyboardManager">YYKeyboardManager</a> — iOS 键盘监听管理工具。</li>
+<li><a href="https://github.com/ibireme/YYDispatchQueuePool">YYDispatchQueuePool</a> — iOS 全局并发队列管理工具。</li>
+<li><a href="https://github.com/ibireme/YYAsyncLayer">YYAsyncLayer</a> — iOS 异步绘制与显示的工具。</li>
+<li><a href="https://github.com/ibireme/YYCategories">YYCategories</a> — 功能丰富的 Category 类型工具库。</li>
+</ul>
+
+
+<p>我和一些朋友挑选了一些其中的组件代码阅读，大家都认为质量非常高，大家对它的评语是这样的：</p>
+
+<blockquote><p>打算自己撸一个 JSON 转 model 的，专门看了 YYModel 的代码，果然屌。</p>
+
+<p>YYKit 超级好用。</p>
+
+<p>对比一下，感觉自己一年都没写代码。</p>
+
+<p>怎么会有如此完美的工程师？真想抽一周时间宅在家里把 YYKit 的源码重敲一遍。</p></blockquote>
+
+<p>之后我抽空学习了一下 ibireme 的博客（<a href="http://blog.ibireme.com/">http://blog.ibireme.com/</a>），上面有多篇介绍他对于 iOS 开发中各种问题的研究，例如他在开发 YYModel 时，<a href="http://blog.ibireme.com/2015/10/23/ios_model_framework_benchmark/">调研和评测</a> 了包括 Mantle 和 MJExtension 在内的多款开源库。这种专业认真的做事态度让我非常佩服，也让我对 YYModel 的质量充满信心。</p>
+
+<p>然后，我有幸得到了 ibireme 的 QQ 和微信号，所以和他交流了多次。这时我才知道 ibireme 是一个 90 后，在优酷从事 iOS 开发工作。而这些所有的开源库，都是他在业余时间完成的。</p>
+
+<p>我想大家很可能对 ibireme 的学习和成长的经历感兴趣，而且 ibireme 的故事很可能会激励更多有激情的 iOS 开发新人，利用业余时间学习、Coding 和分享，最终让国内的 iOS 开发技术氛围更好。所以，我向 ibireme 发出了采访邀请，ibireme 欣然接受了。于是，让我们来一起揭开这位神秘人物的面纱吧。</p>
+
+<h3>采访</h3>
+
+<blockquote><p>唐巧：你好 ibireme，能否先向读者简单介绍一下自己？</p></blockquote>
+
+<p>ibireme：大家好，我叫郭曜源，是一个 iOS 开发者，现居北京，就职于优酷土豆。喜欢代码，爱好设计与音乐。</p>
+
+<blockquote><p>唐巧：我发现 YYKit 是在这个月初上传到 github 上的，但是它的代码量非常大，能否介绍一下每个部分大概花了你多长时间？</p></blockquote>
+
+<p>ibireme：Category 等工具类大部分都是这一两年工作和业余时间攒下来的。文本和图片相关的那几个项目是今年年初开始写起的，陆陆续续写了半年多。YYModel 花的时间最少，只有大概两个周末。</p>
+
+<blockquote><p>唐巧：为什么选择一次性开源这么多代码，而不是一个一个开源呢？</p></blockquote>
+
+<p>ibireme：最初这些代码我都是写在一个工程里，代码量比较多，相互之间也有很多依赖。准备发布时，我觉得这样很不方便别人使用，这才按功能拆开成一个个小的组件，然后一起发布的。</p>
+
+<blockquote><p>唐巧：这些开源库在国内外都收到了大量的好评，这个有没有超出你的预期？</p></blockquote>
+
+<p>ibireme：发布前我有预期会收到不少关注，但是发布后收到的好评还是大大超出我的预料。最令我惊讶的是 Facebook 和 Uber 等国外的工程师也关注到这个项目，并且还以此向我发出了工作邀请，这让我非常激动。</p>
+
+<blockquote><p>唐巧：你对 YYKit 后续的发展上有什么计划吗？</p></blockquote>
+
+<p>ibireme：现在只是计划进行一些正常的维护工作，保证稳定性。未来如果有合适的东西，我也会尝试加到里面的，但应该不会有太大改变了。</p>
+
+<blockquote><p>唐巧：YYKit 是你的业余作品，我很好奇你是如何保证工作之余还有这么高产的？</p></blockquote>
+
+<p>ibireme：最近一年我工作不太忙，很少加班，空闲时间比较多。另外我比较宅，平时喜欢待在家里做一些喜欢的事情。说起来，应该是充足的时间加上个人兴趣让我完成了这些项目吧。</p>
+
+<blockquote><p>唐巧：你如何看待 Swift 语言，有没有计划过用 Swift 重写你的 YYKit？</p></blockquote>
+
+<p>ibireme：相对于 Objective-C 来说，我觉得 Swift 无疑是更优秀、更现代的语言。目前我对 Swift 研究并不多，工作中也没有用到，但未来我会把时间更多投入到 Swift 中去。YYKit 中不少东西更适合于 C/Objective-C，所以我没有计划用 Swift 重写整个项目。我可能会用 Swift 写一些新的东西，以充分发挥 Swift 的特性。</p>
+
+<blockquote><p>唐巧：你在 iOS 开发上是如何快速成长起来的？有没有什么心得可以分享给 iOS 开发新手？</p></blockquote>
+
+<p>ibireme：我接触 iOS 开发的时间很早，但是一直都是在工作之余靠着兴趣自学的。14 年我还在人人网时，部门内部有个新项目需要 iOS 开发，我才得以有机会在工作中使用 iOS 相关的技术。全职转为 iOS 开发后，我花费了大量的时间阅读和学习各种开源的代码、研究其中的实现原理、尝试自己实现相关技术、尝试在工作中使用，这使得我在 iOS 开发技术上进步很快。对于 iOS 开发来说，我觉得自学能力是很重要的。主动去研究一些优秀的开源项目、多在工作中实践和学习，这样就能逐步提升个人技术水平了。</p>
+
+<blockquote><p>唐巧：你觉得哪些开发者对你影响最大？</p></blockquote>
+
+<p>ibireme：可能平时我更喜欢看代码，对于开发者我倒是了解的不多吧。如果要选一位的话，我会选 Linus Torvalds。他的一句话我很喜欢："Talk is cheap, show me the code"。</p>
+
+<blockquote><p>唐巧：在技术领域，你对未来有什么学习规划吗？</p></blockquote>
+
+<p>ibireme：在 iOS 方面，我可能会针对 Swift、音频处理和合成等方面投入更多精力。另外我第一份工作是 Java 后台开发，工作时前后端、数据库相关的东西也都接触过，所以如果有时间的话我也会继续学习这些技术，即使不用在工作上，也能开拓眼界吧。</p>
+
+<h3>结束语</h3>
+
+<p>刚刚 ibireme 在介绍自己学习方法的时候，提到了两点我认为非常关键，一个就是大量地阅读优秀项目的源代码，另一个就是自己动手实践来尝试。</p>
+
+<p>我在很久以前，分享过我认为 iOS 开发者可以提高自己能力的各种方法，见 <a href="http://blog.devtang.com/blog/2014/07/27/ios-levelup-tips/">《iOS 开发如何提高》</a>，里面也提到阅读开源代码和多写代码。我感觉 ibireme 将这一点做到了极致，因此他在短短一年多的时间，就能够成长成为在业界有影响力的开源项目作者。</p>
+
+<p>我们处在一个信息爆炸的时代，每一天都有大量的 iOS 开发文章出现，我们对这些文章如饥似渴，但是很多时候又浅尝辄止。像 ibireme 这样，专心阅读几个开源项目，然后自己动手真正实践，或许才是正确的学习方式。</p>
+
+<p>希望 ibireme 的故事能够激励那些渴望成长成为牛人的 iOS 开发新人，也希望在中国能够出现更多像 YYKit 这样的优秀的开源项目，与大家共勉。</p>
+]]></content>
+  </entry>
+  
+</feed>

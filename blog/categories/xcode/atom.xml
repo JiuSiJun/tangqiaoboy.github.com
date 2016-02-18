@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: xcode | 唐巧的技术博客]]></title>
+  <link href="http://blog.devtang.com/blog/categories/xcode/atom.xml" rel="self"/>
+  <link href="http://blog.devtang.com/"/>
+  <updated>2016-01-19T21:29:28+08:00</updated>
+  <id>http://blog.devtang.com/</id>
+  <author>
+    <name><![CDATA[唐巧]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[xcode4使用技巧]]></title>
+    <link href="http://blog.devtang.com/blog/2012/03/10/xcode4-tips/"/>
+    <updated>2012-03-10T20:42:00+08:00</updated>
+    <id>http://blog.devtang.com/blog/2012/03/10/xcode4-tips</id>
+    <content type="html"><![CDATA[<p>使用 xcode4 也有一段时间了，今天整理了一下 xcode4 的一些使用技巧，在这里分享给大家。</p>
+
+<!-- more -->
+
+
+<h3>设置作者</h3>
+
+<p>这里所指的作者就是每个源文件头部注释中的 “Created by xxx" 中的作者名。
+我很长一段时间不知道应该在哪里设置它。后来终于找到了。</p>
+
+<p>原来这个作者名是来自” 地址薄 “这个程序中” 我 “的姓名。在 sportlight 中输入” 地 “即可找到这个程序。如下图所示：</p>
+
+<p><img src="/images/xcode-set-author-name.jpg"></p>
+
+<h3>设置公司（组织）</h3>
+
+<p>这里所指的公司也是指源文件头部注释中的”Copyright &copy; xxx" 中的公司名字。这个相对好找一些。
+点击工程，在右边的工具栏中就可以找到 &ldquo;Organization&rdquo; 这一项。</p>
+
+<h3>模拟器</h3>
+
+<p>iOS 模拟器也算是 xcode 的一部分。在刚开始使用时，不知道如何把照片导入到模拟器中。后来在网上搜到了方法：
+将照片拖到 iOS 模拟器中，iOS 模拟器会用 safari 打开该图片，然后在 safari 中长按该图，就会弹出菜单，选择 “保存到相册” 即可。</p>
+
+<p>另外，模拟器也有一些快捷键，我常用的是 cmd + 左 / 右 来调整 Orientation。另外，如果是 iPad 模拟器，可以按 cmd + 1 使其变成 100% 的大小。还有 cmd + s 可以将模拟器截图。</p>
+
+<h3>获得模拟器中的程序数据</h3>
+
+<p>其实模拟器中的程序存储在：/yourHome/Library/Application Support/iPhone Simulator/5.0/Applications 目录下，你可以直接进去找。</p>
+
+<p>另外，如果要删除所安装的程序，也可以直接将 Applications 目录下的文件夹删掉，这比在模拟器中删更方便。</p>
+
+<h3>安装旧版本的模拟器</h3>
+
+<p>在 xcode 中，只会带最新版的模拟器，虽然有些模拟器可以在设置里面下载，但是更老的版本就无法在 xcode 的设置页下载了。</p>
+
+<p>这个问题的解决办法是把以前的 xcode 和对应的模拟器装上，然后将模拟器复制或链接到最新的 xcode 目录下，代码如下：</p>
+
+<p><code>bash
+cd /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs
+sudo ln -s /Developer-3.2.5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk .
+sudo ln -s /Developer-3.2.5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk .
+</code></p>
+
+<p>以前的 xcode 可以从 <a href="http://tangqiaoboy.blog.163.com/blog/static/116114258201191323919494/">以下地址</a> 下载到 (需要开发者账号), 建议大家每次安装新 xcode 的时候，把模拟器都备份一下，安装完再恢复回来，这样就不用这么每次折腾了。</p>
+
+<h3>Behaviors</h3>
+
+<p>Behaviors 是设置页面里的一栏，通过 cmd + 逗号可以调出设置页面看到。
+在 Behaviors 里可以设置各种行为发生时，界面应该做何改变。</p>
+
+<p>例如，如果我们要每次运行结束后，就关闭 Console 界面，可以在 Behaviors 下面的 &ldquo;Run completes&rdquo; 一栏的右边，选中 &ldquo;Hide debugger&rdquo; 一项即可（如下图红色标识所示)。</p>
+
+<p>另外，我们也可以点击左下角的 “+” 来增加一些自定义的行为，例如我就增加了 2 个行为，分别用于把导航栏和工具栏同时隐藏和显示（如下图蓝色标识所示）。Behavior 的扩展性很强，你甚至可以定义执行一些脚本，所以可以做的事情很多。</p>
+
+<p><img src="/images/xcode-behaviors.jpg"></p>
+
+<h3>快捷键</h3>
+
+<p>如果能慢慢熟悉一些快捷键，对于提高工作效率是有很大帮助的。虽然设置页面有所有的快键键列表，但是估计没人能全部记住并且用上，我个人总结出来常用的快键键如下：</p>
+
+<p>```
+cmd + 1              切换成 Project Navigator (cmd + 2~7 也可以做相应切换，不过不常用）
+cmd + ctrl + 上     在 .h 和 .m 文件之间切换
+cmd + enter          切换成 standard editor
+cmd + opt + enter    切换成 assistant editor
+cmd + shift + y      切换 Console View 的显示或隐藏
+cmd + 0              隐藏左边的导航 (Navigator) 区
+cmd + opt + 0        隐藏右边的工具 (Utility) 区
+ctrl  + 6            列出当前文件中所有的方法，可以输入关键词来过滤。这个相当赞，可以快速定位到想编辑的方法。</p>
+
+<pre><code>                 我直接把这个快键盘改成了 ctrl+o，这样按起来更顺手。
+</code></pre>
+
+<p>cmd + ctrl + 左 / 右   到上 / 下一次编辑的位置，在 2 个编辑位置跳转的时候很方便。
+cmd + opt + j        跳转到文件过滤区
+cmd + shift + f      在工程中查找
+cmd + r              运行，如果选上直接 kill 掉上次进程的话，每次直接一按就可以重新运行了
+cmd + b              编译工程
+cmd + shift + k      清空编译好的文件
+cmd + .              结束本次调试
+ESC                  调出代码补全
+cmd + 单击           查看该方法的实现
+opt + 单击           查看该方法的文档
+cmd + t              新建一个 tab 栏
+cmd + shift + [      在 tab 栏之间切换
+```</p>
+
+<h3>Snippets</h3>
+
+<p>代码片段 (Snippets) 是 xcode4 新增的功能。用于管理一些常用的代码段，在需要时通过代码补全自动生成出来，可以提高工作效率。</p>
+
+<p>关于这个，可以参见我的另一篇文章：<a href="http://blog.devtang.com/blog/2012/02/04/use-git-to-manage-code-snippets/">http://blog.devtang.com/blog/2012/02/04/use-git-to-manage-code-snippets/</a></p>
+
+<h3>下载 xcode</h3>
+
+<p>从 Xcode4.3 开始，苹果将 Xcode 的下载放到了 Lion 的 mac app store 中。郁闷的是，中国区连接 app store 下载的速度相当慢，在试了一些方法（例如设置 hosts, 设置 dns）之后，我发现最好的办法如下：</p>
+
+<p>用开发者账号登陆：<a href="https://developer.apple.com/downloads/index.action">https://developer.apple.com/downloads/index.action</a>，然后点击下载获得下载地址，然后将地址复制到 mac 版迅雷中，用迅雷下载，速度可以达到 200K 左右。</p>
+
+<p>希望这些技巧能提高你的工作效率，祝玩得开心:)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[使用Github来管理xcode4中的代码片段]]></title>
+    <link href="http://blog.devtang.com/blog/2012/02/04/use-git-to-manage-code-snippets/"/>
+    <updated>2012-02-04T14:32:00+08:00</updated>
+    <id>http://blog.devtang.com/blog/2012/02/04/use-git-to-manage-code-snippets</id>
+    <content type="html"><![CDATA[<h3>代码片段介绍</h3>
+
+<p>xcode4 引入了一个新 feature: code snippets，在整个界面的右下角，可以通过快捷键：cmd + ctrl + opt + 2 调出来。code snippets 是一些代码的模版，对于一些常见的编程模式，xcode 都将这些代码抽象成模版放到 code snippet 中，使用的时候，只需要键入快捷键，就可以把模版的内容填到代码中。</p>
+
+<!--more-->
+
+
+<p>例如，在引入 GCD(Grand Central Dispatch) 后，当我们需要一个延时的操作时，只需要在 xcode 中键入：dispatch
+, 就可以看到 xcode 中弹出一个上下文菜单，第一项就是相应的代码片段。如下图所示：</p>
+
+<p><img src="/images/dispatch_after_snippet.jpg"></p>
+
+<h3>定义自己的代码片段</h3>
+
+<p>那么如何自定义 code snippet 呢，相当简单，当你觉得某段代码很有用，可以当作模版的时候，将其整块选中，
+拖动到 xcode 右下角的 code snippets 区域中即可。xcode 会自动帮你创建一个新的代码片段。
+之后你可以单击该代码片段，在弹出的界面中选择 edit，即可为此代码片段设置快捷键等信息。</p>
+
+<p>如果有些地方你想让用户替换掉，可以用 &lt;#被替换的内容#> 的格式。
+这样在代码片段被使用后，焦点会自动移到该处，你只需要连贯的键入替换后的内容即可。如下图所示：</p>
+
+<p><img src="/images/edit_code_snippet.jpg"></p>
+
+<p>关于 xcode 的一些代码片段，<a href="http://nearthespeedoflight.com/article/xcode_4_code_snippets">这里</a> 有一些用户的总结心得。</p>
+
+<h3>使用 Git 管理代码片段</h3>
+
+<p>在了解了 code snippet 之后，我在想能不能用 Git 来管理它，于是就研究了一下，发现它都存放于目录 ~/Library/Developer/Xcode/UserData/CodeSnippets 中。于是，我就将这个目录设置成一个 Git 的版本库，然后将自己整理
+的代码片段都放到 Github 上了。现在我有 2 台 mac 机器，一台笔记本，一台公司的 iMac，我常常在 2 台机器间切换着工作，由于将代码片段都放在 github 上，所以我在任何一端有更新，另一端都可以很方便的用 git pull 将更新拉到本地。前两天将公司机器升级到 lion，又重装了 lion 版的 xcode，简单设置一下，所有代码片段都回来了，非常方便。</p>
+
+<p>我的代码片段所在的 github 地址是 <a href="https://github.com/tangqiaoboy/xcode_tool">https://github.com/tangqiaoboy/xcode_tool</a>, 使用它非常方便，只需要如下 3 步即可：</p>
+
+<p><code>
+git clone https://github.com/tangqiaoboy/xcode_tool
+cd xcode_tool
+./setup_snippets.sh
+</code></p>
+
+<p>大家也可以将我的 github 项目 fork 一份，改成自己的。这样可以方便地增加和管理自己的代码片段。</p>
+
+<p>祝大家玩得开心。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[使用Objective-C的文档生成工具:appledoc]]></title>
+    <link href="http://blog.devtang.com/blog/2012/02/01/use-appledoc-to-generate-xcode-doc/"/>
+    <updated>2012-02-01T20:37:00+08:00</updated>
+    <id>http://blog.devtang.com/blog/2012/02/01/use-appledoc-to-generate-xcode-doc</id>
+    <content type="html"><![CDATA[<h2>前言</h2>
+
+<p>做项目的人多了，就需要文档了。今天开始尝试写一些项目文档。但是就源代码来说，文档最好和源码在一起，这样更新起来更加方便和顺手。象 Java 语言本身就自带 javadoc 命令，可以从源码中抽取文档。今天抽空调研了一下 objective-c 语言的类似工具。</p>
+
+<!-- more -->
+
+
+<p>从 <a href="http://stackoverflow.com/questions/813529/documentation-generator-for-objective-c">stackoverflow</a> 上找到三个比较 popular 的工具：doxygen, headdoc 和 appledoc 。它们分别的官方网址如下：</p>
+
+<ul>
+<li>docxygen <a href="http://www.stack.nl/~dimitri/doxygen/index.html">http://www.stack.nl/~dimitri/doxygen/index.html</a></li>
+<li>headdoc <a href="http://developer.apple.com/opensource/tools/headerdoc.html">http://developer.apple.com/opensource/tools/headerdoc.html</a></li>
+<li>appledoc <a href="http://gentlebytes.com/appledoc/">http://gentlebytes.com/appledoc/</a></li>
+</ul>
+
+
+<h2>介绍</h2>
+
+<p>我把这 3 个工具都大概调研了一下，说一下我的感受。</p>
+
+<h3>docxygen</h3>
+
+<p>docxygen 感觉是这 3 个工具中支持语言最多的，可以配置的地方也比较多。我大概看了一下文档，觉得还是比较复杂，而且默认生成的风格与苹果的风格不一致。就去看后面 2 个工具的介绍了。另外，它虽然是开源软件，但是没有将源码放到 github 上让我感觉这个工具的开发活跃度是不是不够。</p>
+
+<h3>headerdoc</h3>
+
+<p>headerdoc 是 xcode 自带的文档生成工具。在安装完 xcode 后，就可以用命令行：headdoc2html + 源文件名 来生成对应的文档。我个人试用了一下，还是比较方便的，不过 headerdoc 的注释生成规则比较特别，只生成以 /*! */ 的格式的注释。还有一个缺点是每个类文件对应一个注释文件，没有汇总的文件，这点感觉有点不爽。</p>
+
+<h3>appledoc</h3>
+
+<p>appledoc 是在 stackoverflow 上被大家推荐的一个注释工具。有几个原因造成我比较喜欢它：</p>
+
+<ol>
+<li>它默认生成的文档风格和苹果的官方文档是一致的，而 doxygen 需要另外配置。</li>
+<li>appledoc 就是用 objective-c 生成的，必要的时候调试和改动也比较方便。</li>
+<li>可以生成 docset，并且集成到 Xcode 中。这一点是很赞的，相当于在源码中按住 option 再单击就可以调出相应方法的帮助。</li>
+<li>appledoc 源码在 github 上，而 doxygen 在 svn 上。我个人比较偏激地认为比较活跃的开源项目都应该在 github 上。</li>
+<li>相对于 headerdoc，它没有特殊的注释要求，可以用 /** */ 的格式，也可以兼容 /*! */ 的格式的注释，并且生成的注释有汇总页面。</li>
+</ol>
+
+
+<h2>安装</h2>
+
+<p>那么简单介绍一下如何安装 appledoc，安装非常简单，只需要 2 步：
+<code>
+ git clone git://github.com/tomaz/appledoc.git
+ cd appledoc
+ sudo sh install-appledoc.sh
+</code></p>
+
+<h2>使用</h2>
+
+<p>使用 appledoc 时，只需要用如下命令即可：
+<code>
+appledoc -o ./doc --project-name ynote --project-company youdao .
+</code>
+appledoc 会扫描当前路径下的所有文件，然后生成好文档放到 doc 目录下。你也可以用 appledoc &mdash;help 查看所有可用的参数。</p>
+
+<p>基本上使用起来还是比较方便的，详细的信息可以查看官方的文档：<a href="http://gentlebytes.com/appledoc/">http://gentlebytes.com/appledoc/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[去掉Xcode源码末尾的空格]]></title>
+    <link href="http://blog.devtang.com/blog/2011/12/10/remove-tail-blankspace-in-xcode/"/>
+    <updated>2011-12-10T17:08:00+08:00</updated>
+    <id>http://blog.devtang.com/blog/2011/12/10/remove-tail-blankspace-in-xcode</id>
+    <content type="html"><![CDATA[<p>在用 Xcode 开发的时候，很容易就在行末增加一些空格了。这些空格在上传到 review board 上后 , 就会被特别的颜色显示出来。因为一种好的编程风格是说 , 不应该在行末增加不必要的空格。如果是用 eclipse 写 java, 那么这种时候选中写好的代码，按 <code>ctrl+shift+F</code> 即可调整源码的风格 , 将尾部的空格去掉。可惜在 Xcode 中并没有提供相应的功能。</p>
+
+<!--more-->
+
+
+<p>不过我们可以用命令行来达到这一效果 , 在工程目录下输入:</p>
+
+<p><code>bash
+find . -name "*.[hm]" | xargs sed -Ee 's/ +$//g' -i ""
+</code></p>
+
+<p>这样 , 就可以把源码中行末多出来的空格去掉了 , 是不是很爽 ? 可以把这句加到执行 post-review 的脚本上，这样就可以做到自动去空格了。</p>
+
+<p>顺便说一下，我打算把这些小脚本工具总结出来，放到 github 上，地址是 <a href="https://github.com/tangqiaoboy/xcode_tool">https://github.com/tangqiaoboy/xcode_tool</a>，感兴趣的同学可以把它 clone 下来。</p>
+
+<p>祝玩得开心～</p>
+
+<h2>2013 年 6 月 22 日更新</h2>
+
+<p>上文写于 2011 年末，在 2012 年在 WWDC 大会上，苹果推出了 Xcode4。从 Xcode4 开始，Xcode 会自动去掉源码末尾的空格。所以上面提到的脚本基本没用了。不过对于工程中的 html 或 js 文件，Xcode 的去末尾空格功能并没有打开，所以在某些时候才能有一些小用处。</p>
+
+<p>另外，每次记得敲命令来去掉空格是一件很恶心的事情，最好是由程序自动完成。考虑到现在 git 已经很普及了，在这里介绍另一种在 git 仓库中创建钩子 (hook) 的方法来去掉所有提交文件的末尾空格，具体做法如下：</p>
+
+<p>在工程目录的 <code>.git/hooks/</code> 目录下，创建一个名为 <code>pre-commit</code> 的文件，输入如下内容</p>
+
+<p>``` bash</p>
+
+<h1>!/bin/sh</h1>
+
+<p>if git-rev-parse &mdash;verify HEAD >/dev/null 2>&amp;1 ; then
+   against=HEAD
+else
+   # Initial commit: diff against an empty tree object
+   against=4b825dc642cb6eb9a060e54bf8d69288fbee4904
+fi</p>
+
+<h1>Find files with trailing whitespace</h1>
+
+<p>for FILE in <code>exec git diff-index --check --cached $against -- | sed '/^[+-]/d' | sed -E 's/:[0-9]+:.*//' | uniq</code> ; do</p>
+
+<pre><code># Fix them!
+sed -i '' -E 's/[[:space:]]*$//' "$FILE"
+git add "$FILE"
+</code></pre>
+
+<p>done</p>
+
+<p>```</p>
+
+<p>然后用 <code>chmod +x pre-commit</code> 给该文件加上执行权限。这样，每次在 git 提交文件的时候，该脚本就会被自动执行并且将提交文件末尾的空格去掉。</p>
+]]></content>
+  </entry>
+  
+</feed>
