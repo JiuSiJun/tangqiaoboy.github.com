@@ -1,0 +1,481 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Swift 烧脑体操（三） - 高阶函数 | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="版权说明本文为 InfoQ 中文站特供稿件，首发地址为：文章链接。如需转载，请与 InfoQ 中文站联系。
+前言Swift 其实比 Objective-C 复杂很多，相对于出生于上世纪 80 年代的 Objective-C 来说，Swift 融入了大量新特性。这也使得我们学习掌握这门语言变得相对来说更加困难。不过一切都是值得的，Swift 相比 Objective-C，写出来的程序更安全、更简洁，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift 烧脑体操（三） - 高阶函数">
+<meta property="og:url" content="http://blog.devtang.com/2016/02/27/swift-gym-3-higher-order-function/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="版权说明本文为 InfoQ 中文站特供稿件，首发地址为：文章链接。如需转载，请与 InfoQ 中文站联系。
+前言Swift 其实比 Objective-C 复杂很多，相对于出生于上世纪 80 年代的 Objective-C 来说，Swift 融入了大量新特性。这也使得我们学习掌握这门语言变得相对来说更加困难。不过一切都是值得的，Swift 相比 Objective-C，写出来的程序更安全、更简洁，">
+<meta property="og:image" content="http://ww2.sinaimg.cn/mw690/65dc76a3gw1f08hrkcyydj20i40cigv2.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/mw690/65dc76a3gw1f0sz14hv65j20er08t0tz.jpg">
+<meta property="og:updated_time" content="2016-02-27T01:33:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift 烧脑体操（三） - 高阶函数">
+<meta name="twitter:description" content="版权说明本文为 InfoQ 中文站特供稿件，首发地址为：文章链接。如需转载，请与 InfoQ 中文站联系。
+前言Swift 其实比 Objective-C 复杂很多，相对于出生于上世纪 80 年代的 Objective-C 来说，Swift 融入了大量新特性。这也使得我们学习掌握这门语言变得相对来说更加困难。不过一切都是值得的，Swift 相比 Objective-C，写出来的程序更安全、更简洁，">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/02/27/swift-gym-3-higher-order-function/" title="Swift 烧脑体操（三） - 高阶函数" itemprop="url">Swift 烧脑体操（三） - 高阶函数</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2016-02-27T01:25:51.000Z" itemprop="datePublished"> 发表于 2016-02-27 09:25</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7248_u6743_u8BF4_u660E"><span class="toc-number">1.</span> <span class="toc-text">版权说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">2.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u51C6_u5907_u8FD0_u52A8_uFF1A_u57FA_u7840_u77E5_u8BC6"><span class="toc-number">3.</span> <span class="toc-text">准备运动：基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Trailing_Closure_Syntax"><span class="toc-number">3.1.</span> <span class="toc-text">Trailing Closure Syntax</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5E38_u89C1_u7528_u6CD5_u793A_u4F8B"><span class="toc-number">4.</span> <span class="toc-text">常见用法示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u904D_u5386"><span class="toc-number">4.1.</span> <span class="toc-text">遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6C42_u548C"><span class="toc-number">4.2.</span> <span class="toc-text">求和</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7B5B_u9009"><span class="toc-number">4.3.</span> <span class="toc-text">筛选</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u904D_u5386-1"><span class="toc-number">4.4.</span> <span class="toc-text">遍历</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u70E7_u8111_u4F53_u64CD"><span class="toc-number">5.</span> <span class="toc-text">烧脑体操</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7528_u9AD8_u9636_u51FD_u6570_u6765_u9690_u85CF_u79C1_u6709_u53D8_u91CF"><span class="toc-number">5.1.</span> <span class="toc-text">用高阶函数来隐藏私有变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9762_u8BD5_u9898"><span class="toc-number">5.2.</span> <span class="toc-text">面试题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#u9898_u76EE_u4E00"><span class="toc-number">5.2.1.</span> <span class="toc-text">题目一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u9898_u76EE_u4E8C"><span class="toc-number">5.2.2.</span> <span class="toc-text">题目二</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u9898_u76EE_u4E09"><span class="toc-number">5.2.3.</span> <span class="toc-text">题目三</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u53C2_u8003_u7B54_u6848"><span class="toc-number">5.3.</span> <span class="toc-text">参考答案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#u9898_u76EE_u4E00-1"><span class="toc-number">5.3.1.</span> <span class="toc-text">题目一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u9898_u76EE_u4E8C-1"><span class="toc-number">5.3.2.</span> <span class="toc-text">题目二</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u9898_u76EE_u4E09-1"><span class="toc-number">5.3.3.</span> <span class="toc-text">题目三</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
+		
+		</div>
+		
+		<p><img src="http://ww2.sinaimg.cn/mw690/65dc76a3gw1f08hrkcyydj20i40cigv2.jpg" alt=""></p>
+<h2 id="u7248_u6743_u8BF4_u660E"><a href="#u7248_u6743_u8BF4_u660E" class="headerlink" title="版权说明"></a>版权说明</h2><p>本文为 InfoQ 中文站特供稿件，首发地址为：<a href="http://www.infoq.com/cn/articles/swift-brain-gym-high-order-function" target="_blank" rel="external">文章链接</a>。如需转载，请与 InfoQ 中文站联系。</p>
+<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>Swift 其实比 Objective-C 复杂很多，相对于出生于上世纪 80 年代的 Objective-C 来说，Swift 融入了大量新特性。这也使得我们学习掌握这门语言变得相对来说更加困难。不过一切都是值得的，Swift 相比 Objective-C，写出来的程序更安全、更简洁，最终能够提高我们的工作效率和质量。</p>
+<p>Swift 相关的学习资料已经很多，我想从另外一个角度来介绍它的一些特性，我把这个角度叫做「烧脑体操」。什么意思呢？就是我们专门挑一些比较费脑子的语言细节来学习。通过「烧脑」地思考，来达到对 Swift 语言的更加深入的理解。</p>
+<p>这是本体操的第三节，练习前请做好准备运动，保持头脑清醒。</p>
+<h2 id="u51C6_u5907_u8FD0_u52A8_uFF1A_u57FA_u7840_u77E5_u8BC6"><a href="#u51C6_u5907_u8FD0_u52A8_uFF1A_u57FA_u7840_u77E5_u8BC6" class="headerlink" title="准备运动：基础知识"></a>准备运动：基础知识</h2><p><img src="http://ww1.sinaimg.cn/mw690/65dc76a3gw1f0sz14hv65j20er08t0tz.jpg" alt=""></p>
+<p>在上一节里面，我们其实已经涉及到了高阶函数了。在 <a href="https://en.wikipedia.org/wiki/Higher-order_function" target="_blank" rel="external">Wikipedia</a> 中，是这么定义高阶函数（higher-order function）的，如果一个函数：</p>
+<ul>
+<li>接受一个或多个函数当作参数</li>
+<li>把一个函数当作返回值</li>
+</ul>
+<p>那么这个函数就被称作高阶函数。下面是一个简单的排序的例子，在这个例子中，传进去的参数就是一个函数：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let numbers = [1, 4, 2, 3]&#10;let res = numbers.sort &#123;&#10;    $0 &#60; $1&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Trailing_Closure_Syntax"><a href="#Trailing_Closure_Syntax" class="headerlink" title="Trailing Closure Syntax"></a>Trailing Closure Syntax</h3><p>上面的代码看着不像是函数作为参数存在，这是因为 Swift 的 Trailing Closure 特性。Swift 允许当函数的最后一个参数是闭包的时候，以紧跟 <code>{ }</code> 的形式，将最后一个闭包的内容附加在函数后面。</p>
+<p>所以，以下两行代码是等价的：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// &#27491;&#24120;&#20889;&#27861;&#65292;&#20989;&#25968;&#26159;&#20316;&#20026; sort &#30340;&#21442;&#25968;&#10;arr.sort(&#123; $0 &#60; $1 &#125;)&#10;&#10;// Trailing Closure &#20889;&#27861;&#65292;&#26356;&#31616;&#27905;&#26126;&#20102;&#10;arr.sort &#123; $0 &#60; $1 &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="u5E38_u89C1_u7528_u6CD5_u793A_u4F8B"><a href="#u5E38_u89C1_u7528_u6CD5_u793A_u4F8B" class="headerlink" title="常见用法示例"></a>常见用法示例</h2><p>高阶函数在 Swift 语言中有大量的使用场景，我们先来看一看常见的用法：</p>
+<h3 id="u904D_u5386"><a href="#u904D_u5386" class="headerlink" title="遍历"></a>遍历</h3><p>我们可以用 <code>map</code> 方法来对数组元素进行某种规则的转换，例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr = [1, 2, 4]&#10;// arr = [1, 2, 4]&#10;&#10;let brr = arr.map &#123;&#10;    &#34;No.&#34; + String($0)&#10;&#125;&#10;// brr = [&#34;No.1&#34;, &#34;No.2&#34;, &#34;No.4&#34;]</span><br></pre></td></tr></table></figure>
+<h3 id="u6C42_u548C"><a href="#u6C42_u548C" class="headerlink" title="求和"></a>求和</h3><p>我们可以用 <code>reduce</code> 方法，来对数组元素进行某种规则的求和（不一定是加和）。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr = [1, 2, 4]&#10;// arr = [1, 2, 4]&#10;&#10;let brr = arr.reduce(0) &#123;&#10;    (prevSum: Int, element: Int) in&#10;    return prevSum + element&#10;&#125;&#10;// brr = 7&#10;let crr = arr.reduce(&#34;&#34;) &#123;&#10;    if $0 == &#34;&#34; &#123;&#10;        return String($1)&#10;    &#125; else &#123;&#10;        return $0 + &#34; &#34; + String($1)&#10;    &#125;&#10;&#125;&#10;// crr = &#34;1 2 4&#34;</span><br></pre></td></tr></table></figure>
+<h3 id="u7B5B_u9009"><a href="#u7B5B_u9009" class="headerlink" title="筛选"></a>筛选</h3><p>我们可以利用 <code>filter</code> 方法，来对数组元素进行某种规则的过滤，例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr = [1, 2, 4]&#10;// arr = [1, 2, 4]&#10;&#10;let brr = arr.filter &#123;&#10;    $0 % 2 == 0&#10;&#125;&#10;// brr = [2, 4]</span><br></pre></td></tr></table></figure>
+<h3 id="u904D_u5386-1"><a href="#u904D_u5386-1" class="headerlink" title="遍历"></a>遍历</h3><p>即使是以前最简单的遍历，我们也可以用高阶函数的写法，将遍历需要的操作，以函数参数的形式传入 <code>forEach</code> 方法中，例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr = [1, 2, 4]&#10;arr.forEach &#123;&#10;    print($0)&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="u70E7_u8111_u4F53_u64CD"><a href="#u70E7_u8111_u4F53_u64CD" class="headerlink" title="烧脑体操"></a>烧脑体操</h2><p>下面我们来看看高阶函数一些比较烧脑的细节。</p>
+<h3 id="u7528_u9AD8_u9636_u51FD_u6570_u6765_u9690_u85CF_u79C1_u6709_u53D8_u91CF"><a href="#u7528_u9AD8_u9636_u51FD_u6570_u6765_u9690_u85CF_u79C1_u6709_u53D8_u91CF" class="headerlink" title="用高阶函数来隐藏私有变量"></a>用高阶函数来隐藏私有变量</h3><p>高阶函数使得代码逻辑可以用函数为主体来进行封装，下面我将详细解释一下这句话。</p>
+<p>在面向对象的世界里，逻辑存在的基本单元是对象，每个对象代表着一个最小可复用模块。在对象的内部，由高内聚的成员变量和成员函数构成。这些函数相互调用，并且操作对象的内部成员变量，最终对外产生可预期的行为。</p>
+<p>但是利用高阶函数，我们可以同样做到与对象类似的，高内聚的成员变量和成员函数，下面我就举一个具体的例子。</p>
+<p>下面的代码中，我们用类的方式，实现了一个 <code>Clock</code> 类， <code>Clock</code> 类实现了一个 <code>getCount</code> 方法，每次调用的时候返回的值 <code>+1</code>。为了测试代码，我们定义了两个实例 c1 和 c2，它们都可以正常输出预期的值。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Clock &#123;&#10;    var count: Int = 0&#10;    func getCount() -&#62; Int &#123;&#10;        return ++count;&#10;    &#125;&#10;&#125;&#10;&#10;let c1 = Clock()&#10;c1.getCount() // &#24471;&#21040; 1&#10;c1.getCount() // &#24471;&#21040; 2&#10;let c2 = Clock()&#10;c2.getCount() // &#24471;&#21040; 1</span><br></pre></td></tr></table></figure>
+<p>那么接下来，我们用高阶函数的方式，来做一下同样的事情。我们先看代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func getClock() -&#62; () -&#62; Int &#123;&#10;    var count: Int = 0&#10;    let getCount = &#123; () -&#62; Int in&#10;        ++count;&#10;    &#125;&#10;    return getCount&#10;&#125;&#10;&#10;let c1 = getClock()&#10;c1()  // &#24471;&#21040; 1&#10;c1()  // &#24471;&#21040; 2&#10;let c2 = getClock()&#10;c2()  // &#24471;&#21040; 1</span><br></pre></td></tr></table></figure>
+<p>在上面的代码中，我们这里定义了一个 <code>getClock</code> 函数，这个函数可以返回一个 <code>getCount</code> 函数。然后，不太一样的地方是，这个 <code>getCount</code> 函数持有了一个外部的变量 <code>count</code>。于是，这个函数也变得有了状态（或者你也可以说它有了 Side Effect）。每次调用这个函数的时候，返回的值都会变化。</p>
+<p>另一方面，因为<code>count</code>变量是 <code>getClock</code> 这个高阶函数的内部变量，所以它并没有像全局变量一样使得封装性被打破。<code>getClock</code>函数仍然可以看作一个高内部的可复用模块，并且对外隐藏了实现细节。</p>
+<p>所以，Swift 语言的高阶函数以及闭包可以 capture 外部变量的特性，使得代码逻辑可以以函数作为主体来进行封装，这将使得我们的代码组织更加灵活。</p>
+<p>当然，如果滥用，这也会造成代码组织变得更加混乱。</p>
+<h3 id="u9762_u8BD5_u9898"><a href="#u9762_u8BD5_u9898" class="headerlink" title="面试题"></a>面试题</h3><h4 id="u9898_u76EE_u4E00"><a href="#u9898_u76EE_u4E00" class="headerlink" title="题目一"></a>题目一</h4><p>另一个烧脑的故事是来自于一个朋友的面试题。在面试中，面试官要求他用数组的 <code>reduce</code> 方法实现 <code>map</code> 的功能。</p>
+<p>这个题目实在是非常蛋疼，不过用来烧脑倒是不错，大家感兴趣的话可以先想想，再翻下面的参考答案。</p>
+<h4 id="u9898_u76EE_u4E8C"><a href="#u9898_u76EE_u4E8C" class="headerlink" title="题目二"></a>题目二</h4><p>不过说回来，虽然题目一有些奇怪，但是它确实考查了对于高阶函数灵活使用以及对 <code>reduce</code> 方法的理解。大家还可以试试这些题目：</p>
+<ul>
+<li>问题一：用 <code>reduce</code> 方法找出数组中的最大值。</li>
+<li>问题二：用 <code>reduce</code> 方法一次求出数组中奇数的和、以及偶数乘积。</li>
+</ul>
+<h4 id="u9898_u76EE_u4E09"><a href="#u9898_u76EE_u4E09" class="headerlink" title="题目三"></a>题目三</h4><p>高阶函数另一个魔力就是可以链式调用，大家可以尝试这么一道题目：求一个数组中偶数的平方和。</p>
+<h3 id="u53C2_u8003_u7B54_u6848"><a href="#u53C2_u8003_u7B54_u6848" class="headerlink" title="参考答案"></a>参考答案</h3><h4 id="u9898_u76EE_u4E00-1"><a href="#u9898_u76EE_u4E00-1" class="headerlink" title="题目一"></a>题目一</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr = [1, 3, 2]&#10;let res = arr.reduce([]) &#123;&#10;    (a: [Int], element: Int) -&#62; [Int] in&#10;    var t = Array(a)&#10;    t.append(element * 2)&#10;    return t&#10;&#125;&#10;// res = [2, 6, 4]</span><br></pre></td></tr></table></figure>
+<h4 id="u9898_u76EE_u4E8C-1"><a href="#u9898_u76EE_u4E8C-1" class="headerlink" title="题目二"></a>题目二</h4><p>问题二的参考答案：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr = [1, 3, 2, 4]&#10;&#10;let res: (Int, Int) = arr.reduce((0, 1)) &#123;&#10;    (a :(Int, Int), element: Int) -&#62; (Int, Int) in&#10;    if element % 2 == 0 &#123;&#10;        return (a.0, a.1 * element)&#10;    &#125; else &#123;&#10;        return (a.0 + element, a.1)&#10;    &#125;&#10;&#125;&#10;// res = (4, 8)</span><br></pre></td></tr></table></figure>
+<h4 id="u9898_u76EE_u4E09-1"><a href="#u9898_u76EE_u4E09-1" class="headerlink" title="题目三"></a>题目三</h4><p>以下是参考答案：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr = [1, 3, 2, 4]&#10;let res = arr.filter &#123;&#10;        $0 % 2 == 0&#10;    &#125;.map &#123;&#10;        $0 * $0&#10;    &#125;.reduce(0) &#123;&#10;        $0 + $1&#10;    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>总结一下本次烧脑锻炼到的脑细胞：</p>
+<ul>
+<li>学习了 Swift 语言中的一些使用高阶函数的示例，包括 <code>map</code>, <code>reduce</code>, <code>filter</code> 等。</li>
+<li>学习了利用高阶函数来构造以函数为主体的功能模块。</li>
+<li>练习了一些奇怪的面试题。</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Swift/">Swift</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2016/02/27/swift-gym-3-higher-order-function/" data-title="Swift 烧脑体操（三） - 高阶函数 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/02/27/swift-gym-2-function-argument/"  title="Swift 烧脑体操（二） - 函数的参数">
+ <strong>下一篇：</strong><br/> 
+ <span>Swift 烧脑体操（二） - 函数的参数
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2016/02/27/swift-gym-3-higher-order-function/" data-title="Swift 烧脑体操（三） - 高阶函数" data-url="http://blog.devtang.com/2016/02/27/swift-gym-3-higher-order-function/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>89</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>6</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"tangqiaoboy"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-28029597-1', 'null');  
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="唐巧的技术博客">
 <meta property="og:description" content="引言10 月 15 日晚上，我参加了 MDCC（ http://mdcc.csdn.net/ ）大会晚上的英雄宴，宴会上见到了 XcodeGhost 的研究者，阿里巴巴资深安全工程师蒸米。
 蒸米是最早在乌云上公开 XcodeGhost 的工作原理的人。在后续 XcodeGhost 的服务器关闭后，蒸米也介绍了通过 DNS 污染来接管 XcodeGhost 木马的技术。让大家对于 iOS 平台的安全">
-<meta property="og:updated_time" content="2016-02-16T10:26:44.000Z">
+<meta property="og:updated_time" content="2016-02-18T13:15:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS 比 Android 还不安全? - 记一次和阿里资深安全工程师蒸米的交流">
 <meta name="twitter:description" content="引言10 月 15 日晚上，我参加了 MDCC（ http://mdcc.csdn.net/ ）大会晚上的英雄宴，宴会上见到了 XcodeGhost 的研究者，阿里巴巴资深安全工程师蒸米。
@@ -60,10 +60,8 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<fieldset role="search">
 						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
 						<input type="hidden" name="q" value="site:blog.devtang.com">
-						</fieldset>
 					</form>
 					
 					</li>
@@ -107,7 +105,7 @@
 <h2 id="u4E3A_u4EC0_u4E48_iOS__u7CFB_u7EDF_u6BD4_Android__u8FD8_u4E0D_u5B89_u5168__3F"><a href="#u4E3A_u4EC0_u4E48_iOS__u7CFB_u7EDF_u6BD4_Android__u8FD8_u4E0D_u5B89_u5168__3F" class="headerlink" title="为什么 iOS 系统比 Android 还不安全 ?"></a>为什么 iOS 系统比 Android 还不安全 ?</h2><p>蒸米在交流中一直强调他的观点，他认为 iOS 系统比 Android 还不安全。这一点让我非常不解，我当即指出：iOS 程序有 sandbox 限制，无法随意做高危险的事情，比如 Android 深受其害的扣费短信一条，iOS 程序很难做到自动发送。因为首先 iOS 程序很难在后台自动启动，另外，自动发送短信也是被系统禁止的。</p>
 <p>但是蒸米解释让我觉得也很有道理，他的理由主要有以下几点：</p>
 <h3 id="iOS__u7684_u7CFB_u7EDF_u6F0F_u6D1E_u66F4_u591A"><a href="#iOS__u7684_u7CFB_u7EDF_u6F0F_u6D1E_u66F4_u591A" class="headerlink" title="iOS 的系统漏洞更多"></a>iOS 的系统漏洞更多</h3><p>iOS 的系统漏洞其实比 Android 更多，Android 因为是开源的系统，所以相关的漏洞更容易被发现和修复，而 iOS 是封闭的系统，它的漏洞只能指望苹果自己的工程师来修复。</p>
-<p>就在我和蒸米交流的当天（10 月 15 日），国内的<a href="/www.pangu.io">盘古团队</a>宣布完成了 iOS 9 的越狱。而这距离 iOS 9 正式发布（9 月 17 日）才刚刚满一个月。蒸米说，其实越狱团队早就完成越狱的技术工作了，只不过需要完成越狱相关的产品以及等一个比较合适的时间点发布。所以，很有可能在 iOS 9 还在 Beta 版的时候，相关的漏洞就已经收集到了。</p>
+<p>就在我和蒸米交流的当天（10 月 15 日），国内的<a href="http://www.pangu.io" target="_blank" rel="external">盘古团队</a>宣布完成了 iOS 9 的越狱。而这距离 iOS 9 正式发布（9 月 17 日）才刚刚满一个月。蒸米说，其实越狱团队早就完成越狱的技术工作了，只不过需要完成越狱相关的产品以及等一个比较合适的时间点发布。所以，很有可能在 iOS 9 还在 Beta 版的时候，相关的漏洞就已经收集到了。</p>
 <p>相对来说，Android 的最新版其实相当安全。不过 Android 的问题是 ROM 更新太慢，由于大多数 ROM 都经过了厂商的定制，使得大多数人无法及时更新到最新的操作系统，这个问题极大地降低了 Android 的安全性。</p>
 <h3 id="iOS__u7684_u7CFB_u7EDF_u7248_u672C_u548C_u673A_u578B_u975E_u5E38_u96C6_u4E2D"><a href="#iOS__u7684_u7CFB_u7EDF_u7248_u672C_u548C_u673A_u578B_u975E_u5E38_u96C6_u4E2D" class="headerlink" title="iOS 的系统版本和机型非常集中"></a>iOS 的系统版本和机型非常集中</h3><p>iOS 的系统版本非常集中，一般都是最新发布的 2 个大版本。另外 iPhone 机型也非常少，每年固定出一款。这使得黑客可以针对单一系统或机型挖掘出来的漏洞，得到极其方便地扩散和影响。</p>
 <p>还记得早年 iOS 系统上面发面的 PDF 漏洞吗？用户只需要访问一个指定网址，就可以完成越狱过程。如果在未来有一个黑客找到一个类似这样的高级漏洞，那么受影响的很可能是所有的 iOS 用户。</p>
@@ -194,7 +192,7 @@
 		  
 		
 		  
-			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>89</sup></a></li>
 		  
 		
 		  
@@ -203,8 +201,6 @@
 		
 		  
 			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
-		  
-		
 		  
 		
 		  

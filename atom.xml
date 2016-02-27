@@ -4,7 +4,7 @@
   <subtitle><![CDATA[记录下自己学习的点滴]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.devtang.com/"/>
-  <updated>2016-02-16T12:47:52.000Z</updated>
+  <updated>2016-02-27T01:33:16.000Z</updated>
   <id>http://blog.devtang.com/</id>
   
   <author>
@@ -13,6 +13,311 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Swift 烧脑体操（三） - 高阶函数]]></title>
+    <link href="http://blog.devtang.com/2016/02/27/swift-gym-3-higher-order-function/"/>
+    <id>http://blog.devtang.com/2016/02/27/swift-gym-3-higher-order-function/</id>
+    <published>2016-02-27T01:25:51.000Z</published>
+    <updated>2016-02-27T01:33:16.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://ww2.sinaimg.cn/mw690/65dc76a3gw1f08hrkcyydj20i40cigv2.jpg" alt=""></p>
+<h2 id="u7248_u6743_u8BF4_u660E"><a href="#u7248_u6743_u8BF4_u660E" class="headerlink" title="版权说明"></a>版权说明</h2><p>本文为 InfoQ 中文站特供稿件，首发地址为：<a href="http://www.infoq.com/cn/articles/swift-brain-gym-high-order-function" target="_blank" rel="external">文章链接</a>。如需转载，请与 InfoQ 中文站联系。</p>
+<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>Swift 其实比 Objective-C 复杂很多，相对于出生于上世纪 80 年代的 Objective-C 来说，Swift 融入了大量新特性。这也使得我们学习掌握这门语言变得相对来说更加困难。不过一切都是值得的，Swift 相比 Objective-C，写出来的程序更安全、更简洁，最终能够提高我们的工作效率和质量。</p>
+<p>Swift 相关的学习资料已经很多，我想从另外一个角度来介绍它的一些特性，我把这个角度叫做「烧脑体操」。什么意思呢？就是我们专门挑一些比较费脑子的语言细节来学习。通过「烧脑」地思考，来达到对 Swift 语言的更加深入的理解。</p>
+<p>这是本体操的第三节，练习前请做好准备运动，保持头脑清醒。</p>
+<h2 id="u51C6_u5907_u8FD0_u52A8_uFF1A_u57FA_u7840_u77E5_u8BC6"><a href="#u51C6_u5907_u8FD0_u52A8_uFF1A_u57FA_u7840_u77E5_u8BC6" class="headerlink" title="准备运动：基础知识"></a>准备运动：基础知识</h2><p><img src="http://ww1.sinaimg.cn/mw690/65dc76a3gw1f0sz14hv65j20er08t0tz.jpg" alt=""></p>
+<p>在上一节里面，我们其实已经涉及到了高阶函数了。在 <a href="https://en.wikipedia.org/wiki/Higher-order_function" target="_blank" rel="external">Wikipedia</a> 中，是这么定义高阶函数（higher-order function）的，如果一个函数：</p>
+<ul>
+<li>接受一个或多个函数当作参数</li>
+<li>把一个函数当作返回值</li>
+</ul>
+<p>那么这个函数就被称作高阶函数。下面是一个简单的排序的例子，在这个例子中，传进去的参数就是一个函数：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let numbers = [1, 4, 2, 3]&#10;let res = numbers.sort &#123;&#10;    $0 &#60; $1&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Trailing_Closure_Syntax"><a href="#Trailing_Closure_Syntax" class="headerlink" title="Trailing Closure Syntax"></a>Trailing Closure Syntax</h3><p>上面的代码看着不像是函数作为参数存在，这是因为 Swift 的 Trailing Closure 特性。Swift 允许当函数的最后一个参数是闭包的时候，以紧跟 <code>{ }</code> 的形式，将最后一个闭包的内容附加在函数后面。</p>
+<p>所以，以下两行代码是等价的：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// &#27491;&#24120;&#20889;&#27861;&#65292;&#20989;&#25968;&#26159;&#20316;&#20026; sort &#30340;&#21442;&#25968;&#10;arr.sort(&#123; $0 &#60; $1 &#125;)&#10;&#10;// Trailing Closure &#20889;&#27861;&#65292;&#26356;&#31616;&#27905;&#26126;&#20102;&#10;arr.sort &#123; $0 &#60; $1 &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="u5E38_u89C1_u7528_u6CD5_u793A_u4F8B"><a href="#u5E38_u89C1_u7528_u6CD5_u793A_u4F8B" class="headerlink" title="常见用法示例"></a>常见用法示例</h2><p>高阶函数在 Swift 语言中有大量的使用场景，我们先来看一看常见的用法：</p>
+<h3 id="u904D_u5386"><a href="#u904D_u5386" class="headerlink" title="遍历"></a>遍历</h3><p>我们可以用 <code>map</code> 方法来对数组元素进行某种规则的转换，例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr = [1, 2, 4]&#10;// arr = [1, 2, 4]&#10;&#10;let brr = arr.map &#123;&#10;    &#34;No.&#34; + String($0)&#10;&#125;&#10;// brr = [&#34;No.1&#34;, &#34;No.2&#34;, &#34;No.4&#34;]</span><br></pre></td></tr></table></figure>
+<h3 id="u6C42_u548C"><a href="#u6C42_u548C" class="headerlink" title="求和"></a>求和</h3><p>我们可以用 <code>reduce</code> 方法，来对数组元素进行某种规则的求和（不一定是加和）。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr = [1, 2, 4]&#10;// arr = [1, 2, 4]&#10;&#10;let brr = arr.reduce(0) &#123;&#10;    (prevSum: Int, element: Int) in&#10;    return prevSum + element&#10;&#125;&#10;// brr = 7&#10;let crr = arr.reduce(&#34;&#34;) &#123;&#10;    if $0 == &#34;&#34; &#123;&#10;        return String($1)&#10;    &#125; else &#123;&#10;        return $0 + &#34; &#34; + String($1)&#10;    &#125;&#10;&#125;&#10;// crr = &#34;1 2 4&#34;</span><br></pre></td></tr></table></figure>
+<h3 id="u7B5B_u9009"><a href="#u7B5B_u9009" class="headerlink" title="筛选"></a>筛选</h3><p>我们可以利用 <code>filter</code> 方法，来对数组元素进行某种规则的过滤，例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr = [1, 2, 4]&#10;// arr = [1, 2, 4]&#10;&#10;let brr = arr.filter &#123;&#10;    $0 % 2 == 0&#10;&#125;&#10;// brr = [2, 4]</span><br></pre></td></tr></table></figure>
+<h3 id="u904D_u5386-1"><a href="#u904D_u5386-1" class="headerlink" title="遍历"></a>遍历</h3><p>即使是以前最简单的遍历，我们也可以用高阶函数的写法，将遍历需要的操作，以函数参数的形式传入 <code>forEach</code> 方法中，例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr = [1, 2, 4]&#10;arr.forEach &#123;&#10;    print($0)&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="u70E7_u8111_u4F53_u64CD"><a href="#u70E7_u8111_u4F53_u64CD" class="headerlink" title="烧脑体操"></a>烧脑体操</h2><p>下面我们来看看高阶函数一些比较烧脑的细节。</p>
+<h3 id="u7528_u9AD8_u9636_u51FD_u6570_u6765_u9690_u85CF_u79C1_u6709_u53D8_u91CF"><a href="#u7528_u9AD8_u9636_u51FD_u6570_u6765_u9690_u85CF_u79C1_u6709_u53D8_u91CF" class="headerlink" title="用高阶函数来隐藏私有变量"></a>用高阶函数来隐藏私有变量</h3><p>高阶函数使得代码逻辑可以用函数为主体来进行封装，下面我将详细解释一下这句话。</p>
+<p>在面向对象的世界里，逻辑存在的基本单元是对象，每个对象代表着一个最小可复用模块。在对象的内部，由高内聚的成员变量和成员函数构成。这些函数相互调用，并且操作对象的内部成员变量，最终对外产生可预期的行为。</p>
+<p>但是利用高阶函数，我们可以同样做到与对象类似的，高内聚的成员变量和成员函数，下面我就举一个具体的例子。</p>
+<p>下面的代码中，我们用类的方式，实现了一个 <code>Clock</code> 类， <code>Clock</code> 类实现了一个 <code>getCount</code> 方法，每次调用的时候返回的值 <code>+1</code>。为了测试代码，我们定义了两个实例 c1 和 c2，它们都可以正常输出预期的值。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Clock &#123;&#10;    var count: Int = 0&#10;    func getCount() -&#62; Int &#123;&#10;        return ++count;&#10;    &#125;&#10;&#125;&#10;&#10;let c1 = Clock()&#10;c1.getCount() // &#24471;&#21040; 1&#10;c1.getCount() // &#24471;&#21040; 2&#10;let c2 = Clock()&#10;c2.getCount() // &#24471;&#21040; 1</span><br></pre></td></tr></table></figure>
+<p>那么接下来，我们用高阶函数的方式，来做一下同样的事情。我们先看代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func getClock() -&#62; () -&#62; Int &#123;&#10;    var count: Int = 0&#10;    let getCount = &#123; () -&#62; Int in&#10;        ++count;&#10;    &#125;&#10;    return getCount&#10;&#125;&#10;&#10;let c1 = getClock()&#10;c1()  // &#24471;&#21040; 1&#10;c1()  // &#24471;&#21040; 2&#10;let c2 = getClock()&#10;c2()  // &#24471;&#21040; 1</span><br></pre></td></tr></table></figure>
+<p>在上面的代码中，我们这里定义了一个 <code>getClock</code> 函数，这个函数可以返回一个 <code>getCount</code> 函数。然后，不太一样的地方是，这个 <code>getCount</code> 函数持有了一个外部的变量 <code>count</code>。于是，这个函数也变得有了状态（或者你也可以说它有了 Side Effect）。每次调用这个函数的时候，返回的值都会变化。</p>
+<p>另一方面，因为<code>count</code>变量是 <code>getClock</code> 这个高阶函数的内部变量，所以它并没有像全局变量一样使得封装性被打破。<code>getClock</code>函数仍然可以看作一个高内部的可复用模块，并且对外隐藏了实现细节。</p>
+<p>所以，Swift 语言的高阶函数以及闭包可以 capture 外部变量的特性，使得代码逻辑可以以函数作为主体来进行封装，这将使得我们的代码组织更加灵活。</p>
+<p>当然，如果滥用，这也会造成代码组织变得更加混乱。</p>
+<h3 id="u9762_u8BD5_u9898"><a href="#u9762_u8BD5_u9898" class="headerlink" title="面试题"></a>面试题</h3><h4 id="u9898_u76EE_u4E00"><a href="#u9898_u76EE_u4E00" class="headerlink" title="题目一"></a>题目一</h4><p>另一个烧脑的故事是来自于一个朋友的面试题。在面试中，面试官要求他用数组的 <code>reduce</code> 方法实现 <code>map</code> 的功能。</p>
+<p>这个题目实在是非常蛋疼，不过用来烧脑倒是不错，大家感兴趣的话可以先想想，再翻下面的参考答案。</p>
+<h4 id="u9898_u76EE_u4E8C"><a href="#u9898_u76EE_u4E8C" class="headerlink" title="题目二"></a>题目二</h4><p>不过说回来，虽然题目一有些奇怪，但是它确实考查了对于高阶函数灵活使用以及对 <code>reduce</code> 方法的理解。大家还可以试试这些题目：</p>
+<ul>
+<li>问题一：用 <code>reduce</code> 方法找出数组中的最大值。</li>
+<li>问题二：用 <code>reduce</code> 方法一次求出数组中奇数的和、以及偶数乘积。</li>
+</ul>
+<h4 id="u9898_u76EE_u4E09"><a href="#u9898_u76EE_u4E09" class="headerlink" title="题目三"></a>题目三</h4><p>高阶函数另一个魔力就是可以链式调用，大家可以尝试这么一道题目：求一个数组中偶数的平方和。</p>
+<h3 id="u53C2_u8003_u7B54_u6848"><a href="#u53C2_u8003_u7B54_u6848" class="headerlink" title="参考答案"></a>参考答案</h3><h4 id="u9898_u76EE_u4E00-1"><a href="#u9898_u76EE_u4E00-1" class="headerlink" title="题目一"></a>题目一</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr = [1, 3, 2]&#10;let res = arr.reduce([]) &#123;&#10;    (a: [Int], element: Int) -&#62; [Int] in&#10;    var t = Array(a)&#10;    t.append(element * 2)&#10;    return t&#10;&#125;&#10;// res = [2, 6, 4]</span><br></pre></td></tr></table></figure>
+<h4 id="u9898_u76EE_u4E8C-1"><a href="#u9898_u76EE_u4E8C-1" class="headerlink" title="题目二"></a>题目二</h4><p>问题二的参考答案：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr = [1, 3, 2, 4]&#10;&#10;let res: (Int, Int) = arr.reduce((0, 1)) &#123;&#10;    (a :(Int, Int), element: Int) -&#62; (Int, Int) in&#10;    if element % 2 == 0 &#123;&#10;        return (a.0, a.1 * element)&#10;    &#125; else &#123;&#10;        return (a.0 + element, a.1)&#10;    &#125;&#10;&#125;&#10;// res = (4, 8)</span><br></pre></td></tr></table></figure>
+<h4 id="u9898_u76EE_u4E09-1"><a href="#u9898_u76EE_u4E09-1" class="headerlink" title="题目三"></a>题目三</h4><p>以下是参考答案：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr = [1, 3, 2, 4]&#10;let res = arr.filter &#123;&#10;        $0 % 2 == 0&#10;    &#125;.map &#123;&#10;        $0 * $0&#10;    &#125;.reduce(0) &#123;&#10;        $0 + $1&#10;    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>总结一下本次烧脑锻炼到的脑细胞：</p>
+<ul>
+<li>学习了 Swift 语言中的一些使用高阶函数的示例，包括 <code>map</code>, <code>reduce</code>, <code>filter</code> 等。</li>
+<li>学习了利用高阶函数来构造以函数为主体的功能模块。</li>
+<li>练习了一些奇怪的面试题。</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://ww2.sinaimg.cn/mw690/65dc76a3gw1f08hrkcyydj20i40cigv2.jpg" alt=""></p>
+<h2 id="u7248_u6743_u8BF4_u660E"><a href="#u7248_]]>
+    </summary>
+    
+      <category term="Swift" scheme="http://blog.devtang.com/tags/Swift/"/>
+    
+      <category term="iOS" scheme="http://blog.devtang.com/categories/iOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Swift 烧脑体操（二） - 函数的参数]]></title>
+    <link href="http://blog.devtang.com/2016/02/27/swift-gym-2-function-argument/"/>
+    <id>http://blog.devtang.com/2016/02/27/swift-gym-2-function-argument/</id>
+    <published>2016-02-27T01:23:29.000Z</published>
+    <updated>2016-02-27T01:33:21.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://ww2.sinaimg.cn/mw690/65dc76a3gw1f08hrkcyydj20i40cigv2.jpg" alt=""></p>
+<h2 id="u7248_u6743_u8BF4_u660E"><a href="#u7248_u6743_u8BF4_u660E" class="headerlink" title="版权说明"></a>版权说明</h2><p>本文为 InfoQ 中文站特供稿件，首发地址为：<a href="http://www.infoq.com/cn/articles/swift-brain-gym-arguments" target="_blank" rel="external">文章链接</a>。如需转载，请与 InfoQ 中文站联系。</p>
+<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>Swift 其实比 Objective-C 复杂很多，相对于出生于上世纪 80 年代的 Objective-C 来说，Swift 融入了大量新特性。这也使得我们学习掌握这门语言变得相对来说更加困难。不过一切都是值得的，Swift 相比 Objective-C，写出来的程序更安全、更简洁，最终能够提高我们的工作效率和质量。</p>
+<p>Swift 相关的学习资料已经很多，我想从另外一个角度来介绍它的一些特性，我把这个角度叫做「烧脑体操」。什么意思呢？就是我们专门挑一些比较费脑子的语言细节来学习。通过「烧脑」地思考，来达到对 Swift 语言的更加深入的理解。</p>
+<p>这是本体操的第二节，练习前请做好准备运动，保持头脑清醒。</p>
+<h2 id="u51C6_u5907_u8FD0_u52A8_uFF1A_u57FA_u7840_u77E5_u8BC6"><a href="#u51C6_u5907_u8FD0_u52A8_uFF1A_u57FA_u7840_u77E5_u8BC6" class="headerlink" title="准备运动：基础知识"></a>准备运动：基础知识</h2><p><img src="http://ww3.sinaimg.cn/mw690/65dc76a3gw1f0sz14p1u4j206w0a33zb.jpg" alt=""></p>
+<h3 id="u9762_u5411_u5BF9_u8C61_u8BED_u8A00_u7684_u4E16_u754C_u89C2"><a href="#u9762_u5411_u5BF9_u8C61_u8BED_u8A00_u7684_u4E16_u754C_u89C2" class="headerlink" title="面向对象语言的世界观"></a>面向对象语言的世界观</h3><p>对于很多面向对象的编程语言来说，在思考问题时，总是把「对象」作为考虑问题的基本出发点。</p>
+<p>面向对象的程序设计通过以下三大规则，构建出程序设计的基础，它们是：</p>
+<ol>
+<li>封装（Encapsulation），将一个相对独立的逻辑涉及的变量和函数放到一个类中，然后对外暴露少量接口，使其高内聚，低耦合。</li>
+<li>继承（Inheritance），子类可以继承父类的变量和函数，并且可以修改或扩展父类的行为。</li>
+<li>多态（Polymorphism），父类的指针可以指向子类的实例，在运行时程序语言支持找到子类对应的函数实现。</li>
+</ol>
+<p>在以上三大准则的基础上，再引入一些设计原则，比如：</p>
+<ol>
+<li>单一职责原则（Single Responsibility），每个类只应该做一件事情。</li>
+<li>不要重复原则（Don’t Repeat Yourself），相同（或相似）的代码不应该重复两次。</li>
+<li>好的组合优于继承（Better Composition over Inheritance），尽量使用组合而不是继承来设计。</li>
+</ol>
+<p>于是，程序世界就基于这些规则和原则，产生出了设计模式，进而能更加精准地指导我们的编程行为。这就像我们学习几何，先学习几条公理，然后以后的大量定理都通过公理证明而来。</p>
+<p>举个例子，单例模式（Singleton Pattern）其实就是封装和单一职责原则的产物。代理模式（Delegate Pattern) 也是单一职责和封装中的面向接口设计的思想的产物。</p>
+<p>但是，在面向对象语言的世界观里面，函数都是作为一个附属物存在的。函数通常附属于一个具体类的某个方法中。或许有一个函数它根本都不需要任何对象作为容器，为了这个世界的统一，我们还是会构造一个类，把这个函数放进去。比如，在小猿搜题中，我们就有一个叫 ImageUtils 的类，里面放了操作图像的各种各样的静态方法，有一些图象操作函数其实也不太通用，但是总得找一个类放不是。</p>
+<p>在一些面向对象语言的世界中，如果把对象称作 OOP 的一等公民的话，那么函数就是二等公民。</p>
+<h3 id="u51FD_u6570_u5F0F_u7F16_u7A0B"><a href="#u51FD_u6570_u5F0F_u7F16_u7A0B" class="headerlink" title="函数式编程"></a>函数式编程</h3><p>在 Swift 的世界中，函数并不是二等公民。是的，Swift 引入了大量函数式编程的特性，使得我们能够把函数当作一等公民来对待。</p>
+<p>一等公民有什么权利呢？那就是函数可以像对象一样，被赋值、被当作参数传递、参与计算或者当作结果被返回。</p>
+<p>我们先来看一段函数被赋值的例子，在下例中，我们将一个函数赋值给一个名为 <code>myFunc</code> 的变量，然后调用它。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let myFunc = &#123; &#10;    () -&#62; String in&#10;    return &#34;Tang Qiao&#34;&#10;&#125;&#10;&#10;let value = myFunc()&#10;// value &#30340;&#20540;&#20026; &#34;Tang Qiao&#34;</span><br></pre></td></tr></table></figure>
+<p>我们再来看一个函数被当作运算结果返回的例子。在这个例子中，我们希望构造一个「加法器」工厂，这个工厂能够接受一个参数 addValue，返回一个加法器函数，这个加法器函数能够将传递的参数加 addValue 之后返回。以下是实现的代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func addFactory(addValue: Int) -&#62; (Int -&#62; Int) &#123;&#10;    func adder(value: Int) -&#62; Int &#123;&#10;        return addValue + value&#10;    &#125;&#10;    return adder&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>有了上面这个函数，我们就可以构造一个 <code>+2</code> 的函数，然后使用它，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let add2 = addFactory(2) // &#26500;&#36896;&#19968;&#20010; +2 &#30340;&#20989;&#25968;&#10;let result = add2(3) // &#36816;&#31639;&#65292;&#20256;&#20837; 3&#65292;&#24471;&#21040; 5</span><br></pre></td></tr></table></figure>
+<h2 id="u51FD_u6570_u7684_u53C2_u6570"><a href="#u51FD_u6570_u7684_u53C2_u6570" class="headerlink" title="函数的参数"></a>函数的参数</h2><p>但是在本次「烧脑体操」中，全面介绍函数式编程明显不太现实，所以我们仅从函数的参数来深入学习一下，看看在 Swift 语言中，函数的参数能够有多复杂。</p>
+<!--
+这里多说一句题外话，有部分同学看了「烧脑体操」第一节后，留言说：本来简单的 Swift 语言，被你这么一说，弄得都不敢学了，你是不是在吓大家？还有一些人留言：你搞这么绕还不是为了装逼？
+
+对此，我想回答说：我研究这些仅仅是为了避免在语言细节的地方掉坑里，如果你对此不感兴趣，有一个动作叫做「取消关注」，我写文章并没有收费，如果你不喜欢，取关即可，犯不着在后台留言恶心我吧？
+-->
+<h3 id="u53C2_u6570_u7684_u7701_u7565"><a href="#u53C2_u6570_u7684_u7701_u7565" class="headerlink" title="参数的省略"></a>参数的省略</h3><p>我们先来简单看看函数参数的省略吧，因为有类型推导，函数的参数在 Swift 中常常可以被省略掉，特别以匿名函数（闭包）的形式存在的时候。</p>
+<p>我们来看一个数组排序的例子：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let array = [1, 3, 2, 4]&#10;let res = array.sort &#123;&#10;    (a: Int, b: Int) -&#62; Bool in&#10;    return a &#60; b&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>如果一个函数返回类型可以通过推导出来，则返回类型可以省略。所以以上代码中的 <code>-&gt; Bool</code> 可以删掉，变成：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let array = [1, 3, 2, 4]&#10;let res = array.sort &#123;&#10;    (a: Int, b: Int) in&#10;    return a &#60; b&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>如果一个函数的参数类型可以推导出来，则参数的类型可以省略。所以以上代码中的 <code>: Int</code> 可以删掉，变成：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let array = [1, 3, 2, 4]&#10;let res = array.sort &#123;&#10;    (a, b) in&#10;    return a &#60; b&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>如果函数参数的个数可以推导出来，也可以不写参数。那怎么使用这些参数呢？可以用 <code>$0</code>, <code>$1</code> 这样的方式来引用参数。所以以上代码中的 <code>(a, b)</code> 可以删掉，因为这样的话，参数和返回值都省略了，所以<code>in</code>也可以省略了，变成：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let array = [1, 3, 2, 4]&#10;let res = array.sort &#123;&#10;    return $0 &#60; $1&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>Swift 还有一个规则，如果函数的 body 只有一行，则可以把 <code>return</code> 关键字省略了，所以以上代码可以进一步简化成：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let array = [1, 3, 2, 4]&#10;let res = array.sort &#123;&#10;    $0 &#60; $1&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>最后一个简化规则更加暴力，因为 <code>&lt;</code> 符号也是一个函数，它接受的参数个数，类型和返回值与 sort 函数需要的一样，所以可以直接简化成：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let array = [1, 3, 2, 4]&#10;let res = array.sort( &#60; )</span><br></pre></td></tr></table></figure>
+<p>拿这个的方法，同样可以把我们刚刚写的 <code>addFactory</code> 做简化，最后简化成如下的形式：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// &#31616;&#21270;&#21069;&#10;func addFactory(addValue: Int) -&#62; (Int -&#62; Int) &#123;&#10;    func adder(value: Int) -&#62; Int &#123;&#10;        return addValue + value&#10;    &#125;&#10;    return adder&#10;&#125;&#10;// &#31616;&#21270;&#21518;&#10;func addFactory(addValue: Int) -&#62; (Int -&#62; Int) &#123;&#10;    return &#123; addValue + $0 &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="u51FD_u6570_u53C2_u6570_u4E2D_u7684_u5176_u5B83_u5173_u952E_u5B57"><a href="#u51FD_u6570_u53C2_u6570_u4E2D_u7684_u5176_u5B83_u5173_u952E_u5B57" class="headerlink" title="函数参数中的其它关键字"></a>函数参数中的其它关键字</h3><p>有些时候，我们的函数接受的参数就是另外一个函数，例如 sort，map，所以我们在看代码的时候，需要具备熟悉这种写法的能力。</p>
+<p>我们来看看数组的 map 函数的定义吧：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public func map&#60;T&#62;(@noescape transform: (Self.Generator.Element) throws -&#62; T) rethrows -&#62; [T]</span><br></pre></td></tr></table></figure>
+<p>这个函数定义中出现了几个我们刚刚没提到的关键词，我们先学习一下。</p>
+<h4 id="@noescape"><a href="#@noescape" class="headerlink" title="@noescape"></a><code>@noescape</code></h4><p><code>@noescape</code>，这是一个从 Swift 1.2 引入的关键字，它是专门用于修饰函数闭包这种参数类型的，当出现这个参数时，它表示该闭包不会跳出这个函数调用的生命期：即函数调用完之后，这个闭包的生命期也结束了。以下是苹果的文档原文：</p>
+<blockquote>
+<p>A new @noescape attribute may be used on closure parameters to functions. This indicates that the parameter is only ever called (or passed as an @noescape parameter in a call), which means that it cannot outlive the lifetime of the call. This enables some minor performance optimizations, but more importantly disables the self. requirement in closure arguments.</p>
+</blockquote>
+<p>什么情况下一个闭包参数会跳出函数的生命期呢？很简单，我们在函数实现内，将一个闭包用 <code>dispatch_async</code> 嵌套，这样这个闭包就会在另外一个线程中存在，从而跳出了当前函数的生命期。这样做主要是可以帮助编译器做性能的优化。</p>
+<p>如果你对此感兴趣，这里有一些更详细的介绍供你学习：</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/28427436/noescape-attribute-in-swift-1-2/28428521#28428521" target="_blank" rel="external">https://stackoverflow.com/questions/28427436/noescape-attribute-in-swift-1-2/28428521#28428521</a></li>
+<li><a href="http://nshint.io/blog/2015/10/23/noescape-attribute/" target="_blank" rel="external">http://nshint.io/blog/2015/10/23/noescape-attribute/</a></li>
+</ul>
+<h4 id="throws__u548C_rethrows"><a href="#throws__u548C_rethrows" class="headerlink" title="throws 和 rethrows"></a><code>throws</code> 和 <code>rethrows</code></h4><p><code>throws</code> 关键字表示：这个函数（闭包）可能抛出异常。而 <code>rethrows</code> 关键字表示：这个函数如果抛出异常，仅可能是因为传递给它的闭包的调用导致了异常。</p>
+<p><code>throws</code> 关键字的存在大家都应该能理解，因为总有一些异常可能在设计的时候希望暴露给上层，<code>throws</code> 关键字的存在使得这种设计成为可能。</p>
+<p>那么为什么会有 <code>rethrows</code> 关键字呢？在我看来，这是为了简化很多代码的书写。因为一旦一个函数会抛出异常，按 Swift 类型安全的写法，我们就需要使用 try 语法。但是如果很多地方都需要写 try 的话，会造成代码非常啰嗦。 <code>rethrows</code> 关键字使得一些情况下，如果你传进去的闭包不会抛出异常，那么你的调用代码就不需要写 try。</p>
+<p>如果你对此感兴趣，这里有一些更详细的介绍供你学习：</p>
+<ul>
+<li><a href="http://robnapier.net/re-throws" target="_blank" rel="external">http://robnapier.net/re-throws</a></li>
+</ul>
+<h3 id="u51FD_u6570_u4F5C_u4E3A_u51FD_u6570_u7684_u53C2_u6570"><a href="#u51FD_u6570_u4F5C_u4E3A_u51FD_u6570_u7684_u53C2_u6570" class="headerlink" title="函数作为函数的参数"></a>函数作为函数的参数</h3><p>刚刚说到，函数作为一等公民，意味着函数可以像对象一样，被当作参数传递或者被当作值返回。对此，我们专门有一个名称来称呼它，叫做<a href="https://en.wikipedia.org/wiki/Higher-order_function" target="_blank" rel="external">高阶函数（higher-order function）</a>。</p>
+<p>在刚刚那个数组的 map 函数中，我们就看到了它接着另外一个函数作为参数，这个函数接受数组元素类型作为参数，返回一个新类型。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public func map&#60;T&#62;(@noescape transform: (Self.Generator.Element) throws -&#62; T) rethrows -&#62; [T]</span><br></pre></td></tr></table></figure>
+<p>有了 map 函数，我们就可以轻松做数组元素的变换了。如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr = [1, 2, 4]&#10;// arr = [1, 2, 4]&#10;&#10;let brr = arr.map &#123;&#10;    &#34;No.&#34; + String($0)&#10;&#125;&#10;// brr = [&#34;No.1&#34;, &#34;No.2&#34;, &#34;No.4&#34;]</span><br></pre></td></tr></table></figure>
+<h2 id="u70E7_u8111_u7684_u53C2_u6570"><a href="#u70E7_u8111_u7684_u53C2_u6570" class="headerlink" title="烧脑的参数"></a>烧脑的参数</h2><p>好了，现在进入参数烧脑游戏的正式环节。</p>
+<p>我们需要构造一个工厂函数，这个函数接受两个函数作为参数，返回一个新的函数。新函数是两个函数参数的叠加作用效果。</p>
+<p>举一个具体的例子，假如我们有一个 <code>+2</code> 的函数，有一个 <code>+3</code> 的函数，那用这个工厂函数，我们可以得到一个 <code>+5</code> 的函数。</p>
+<p>又比如我们有一个 <code>*2</code> 的函数，有一个 <code>*5</code> 的函数，用这个工厂函数，我们就可以得到一个 <code>*10</code> 的函数。</p>
+<p>那这个函数如何写呢？我们先看答案吧：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func funcBuild(f: Int -&#62; Int, _ g: Int -&#62; Int) &#10;    -&#62; Int -&#62; Int &#123;&#10;    return &#123;&#10;        f(g($0))&#10;    &#125;&#10;&#125;&#10;&#10;let f1 = funcBuild(&#123;$0 + 2&#125;, &#123;$0 + 3&#125;)&#10;f1(0) // &#24471;&#21040; 5&#10;let f2 = funcBuild(&#123;$0 * 2&#125;, &#123;$0 * 5&#125;)&#10;f2(1) // &#24471;&#21040; 10</span><br></pre></td></tr></table></figure>
+<p>这个函数充分反映了函数作为一等公民的地位。但是，我们同时也看出来，函数作为参数存在时，对于程序的可读性带来了挑战。好在我们有 <code>typealias</code>，通过 <code>typealias</code>，我们可以将函数的类型写得更加易读，比如上面的代码，就可以修改成如下形式：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">typealias IntFunction = Int -&#62; Int&#10;&#10;func funcBuild(f: IntFunction, _ g: IntFunction)&#10;    -&#62; IntFunction &#123;&#10;    return &#123;&#10;        f(g($0))&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>现在看看代码，是不是清晰了很多？</p>
+<h2 id="u53C2_u6570_u4E2D_u7684_u8303_u578B"><a href="#u53C2_u6570_u4E2D_u7684_u8303_u578B" class="headerlink" title="参数中的范型"></a>参数中的范型</h2><p>当函数中的参数再引入范型之后，函数的功能更加强大，但是可读性进一步下降。比如刚刚的例子，限制函数只能是 <code>Int -&gt; Int</code> 其实是没有必要的，我们将两个函数拼成一个函数，只需要保证一个函数的输出类型，与另一个函数的输入类型匹配即可。所以，刚刚的例子，可以进一步用范型改造：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func funcBuild&#60;T, U, V&#62;(f: T -&#62; U, _ g: V -&#62; T)&#10;    -&#62; V -&#62; U &#123;&#10;        return &#123;&#10;            f(g($0))&#10;        &#125;&#10;&#125;&#10;let f3 = funcBuild(&#123; &#34;No.&#34; + String($0) &#125;, &#123;$0 * 2&#125;)&#10;f3(23) // &#32467;&#26524;&#26159; &#34;No.46&#34;</span><br></pre></td></tr></table></figure>
+<p>在上面这个例子中，我们保证函数 g 的输出类型是 T，函数 f 的输入类型是 T。这样，在例子中，我们将一个 <code>*2</code> 的函数与一个数字转字符串的函数拼接起来，构造出一个先乘 2，再转字符串的函数。</p>
+<p>相应的例子还有很多，比如 WWDC 中就介绍过一个给函数增加缓存机制的代码，在该代码中，任意一个不带缓存功能的函数，经过改造，都可以变成一个带缓存功能的函数。代码如下，大家可以自行学习一下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func memoize&#60;T: Hashable, U&#62;( body: (T)-&#62;U ) -&#62; (T-&#62;U) &#123;&#10;    var memo = Dictionary&#60;T, U&#62;()&#10;    return &#123; x in&#10;        if let q = memo[x] &#123; return q &#125;&#10;        let r = body(x)&#10;        memo[x] = r&#10;        return r&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>总结一下本次烧脑锻炼到的脑细胞：</p>
+<ul>
+<li>Swift 是一个结合面向对象编程和函数式编程特性的语言。</li>
+<li>函数在 Swift 中是一等公民，可以被赋值、被当作参数传递、参与计算、当作结果被返回或被动态创建。</li>
+<li>因为有类型推导，函数的参数有各种省略规则。</li>
+<li>函数作为参数时，有 @noescape，throw 和 rethrow 关键字需要了解。</li>
+<li>函数作为参数时，不易阅读。合理使用 typealias 可以使源码结构更清晰。</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://ww2.sinaimg.cn/mw690/65dc76a3gw1f08hrkcyydj20i40cigv2.jpg" alt=""></p>
+<h2 id="u7248_u6743_u8BF4_u660E"><a href="#u7248_]]>
+    </summary>
+    
+      <category term="Swift" scheme="http://blog.devtang.com/tags/Swift/"/>
+    
+      <category term="iOS" scheme="http://blog.devtang.com/categories/iOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Swift 烧脑体操（一） - Optional 的嵌套]]></title>
+    <link href="http://blog.devtang.com/2016/02/27/swift-gym-1-nested-optional/"/>
+    <id>http://blog.devtang.com/2016/02/27/swift-gym-1-nested-optional/</id>
+    <published>2016-02-27T01:21:32.000Z</published>
+    <updated>2016-02-27T01:33:21.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://ww2.sinaimg.cn/mw690/65dc76a3gw1f08hrkcyydj20i40cigv2.jpg" alt=""></p>
+<h2 id="u7248_u6743_u8BF4_u660E"><a href="#u7248_u6743_u8BF4_u660E" class="headerlink" title="版权说明"></a>版权说明</h2><p>本文为 InfoQ 中文站特供稿件，首发地址为：<a href="http://www.infoq.com/cn/articles/swift-brain-gym-optional" target="_blank" rel="external">文章链接</a>。如需转载，请与 InfoQ 中文站联系。</p>
+<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>Swift 其实比 Objective-C 复杂很多，相对于出生于上世纪 80 年代的 Objective-C 来说，Swift 融入了大量新特性。这也使得我们学习掌握这门语言变得相对来说更加困难。不过一切都是值得的，Swift 相比 Objective-C，写出来的程序更安全、更简洁，最终能够提高我们的工作效率和质量。</p>
+<p>Swift 相关的学习资料已经很多，我想从另外一个角度来介绍它的一些特性，我把这个角度叫做「烧脑体操」。什么意思呢？就是我们专门挑一些比较费脑子的语言细节来学习。通过「烧脑」地思考，来达到对 Swift 语言的更加深入的理解。</p>
+<p>这是本体操的第一节，练习前请做好准备运动，保持头脑清醒。</p>
+<h2 id="u51C6_u5907_u8FD0_u52A8_uFF1AOptional__u7684_u4ECB_u7ECD"><a href="#u51C6_u5907_u8FD0_u52A8_uFF1AOptional__u7684_u4ECB_u7ECD" class="headerlink" title="准备运动：Optional 的介绍"></a>准备运动：Optional 的介绍</h2><p><img src="http://ww3.sinaimg.cn/mw690/65dc76a3gw1f0sz13edhpj209s061mxt.jpg" alt=""></p>
+<p>王巍的《Swifter》(<a href="http://swifter.tips/buy" target="_blank" rel="external">http://swifter.tips/buy</a>)一书中，介绍了一个有用的命令：在 LLDB 中输入 <code>fr v -R foo</code>，可以查看 <code>foo</code> 这个变量的内存构成。我们稍后的分析将用到这个命令。</p>
+<p>在 Swift 的世界里，一切皆对象，包括 Int Float 这些基本数据类型，所以我们可以这么写：<code>print(1.description)</code>。</p>
+<p>而对象一般都是存储在指针中，Swift 也不例外，这就造成了一个问题，指针为空的情况需要处理。在 Objective-C 中，向一个 nil 的对象发消息是默认不产生任何效果的行为，但是在 Swift 中，这种行为被严格地禁止了。</p>
+<p>Swift 是一个强类型语言，它希望在编译期做更多的安全检查，所以引入了类型推断。而类型推断上如果要做到足够的安全，避免空指针调用是一个最基本的要求。于是，Optional 这种类型出现了。Optional 在 Swift 语言中其实是一个枚举类型：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public enum Optional&#60;Wrapped&#62; : _Reflectable, NilLiteralConvertible &#123;&#10;    case None&#10;    case Some(Wrapped)&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Optional__u7684_u5D4C_u5957"><a href="#Optional__u7684_u5D4C_u5957" class="headerlink" title="Optional 的嵌套"></a>Optional 的嵌套</h2><p>Optional 类型的变量，在使用时，大多需要用<code>if let</code>的方式来解包。如果你没有解包而直接使用，编辑器通过类型推断会提示你，所以看起来这套机制工作得很好。但是，如果 Optional 嵌套层次太多，就会造成一些麻烦，下面我们来看一个例子。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let a: Int? = 1&#10;let b: Int?? = a&#10;let c: Int??? = b</span><br></pre></td></tr></table></figure>
+<p>在这个机制中，1 这个 Int 值被层层 Optional 包裹，我们用刚刚提到的<code>fr v -R</code>，可以很好的看出来内部结构。如下图：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(lldb) fr v -R a&#10;(Swift.Optional&#60;Swift.Int&#62;) a = Some &#123;&#10;  Some = &#123;&#10;    value = 1&#10;  &#125;&#10;&#125;&#10;&#10;(lldb) fr v -R b&#10;(Swift.Optional&#60;Swift.Optional&#60;Swift.Int&#62;&#62;) b = Some &#123;&#10;  Some = Some &#123;&#10;    Some = &#123;&#10;      value = 1&#10;    &#125;&#10;  &#125;&#10;&#125;&#10;&#10;(lldb) fr v -R c&#10;(Swift.Optional&#60;Swift.Optional&#60;Swift.Optional&#60;Swift.Int&#62;&#62;&#62;) c = Some &#123;&#10;  Some = Some &#123;&#10;    Some = Some &#123;&#10;      Some = &#123;&#10;        value = 1&#10;      &#125;&#10;    &#125;&#10;  &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>从这个示例代码中，我们能看出来多层嵌套的 Optional 的具体内存结构。这个内存结构其实是一个类似二叉树一样的形状，如下图所示：</p>
+<p><img src="http://ww3.sinaimg.cn/mw690/65dc76a3gw1f08i00trqpj20ji0ch3ze.jpg" alt=""></p>
+<ul>
+<li>第一层二叉树有两个可选的值，一个值是 .None，另一个值类型是 <code>Optional&lt;Optional&lt;Int&gt;&gt;</code>。</li>
+<li>第二层二叉树有两个可选的值，一个值是 .None，另一个值类型是 <code>Optional&lt;Int&gt;</code>。</li>
+<li>第三层二叉树有两个可选的值，一个值是 .None，另一个值类型是 <code>Int</code>。</li>
+</ul>
+<p>那么问题来了，看起来这个 Optional.None 可以出现在每一层，那么在每一层的效果一样吗？我做了如下实验：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let a: Int? = nil&#10;let b: Int?? = a&#10;let c: Int??? = b&#10;let d: Int??? = nil</span><br></pre></td></tr></table></figure>
+<p>如果你在 playground 上看，它们的值都是 nil，但是它们的内存布局却不一样，特别是变量 c 和 变量 d：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(lldb) fr v -R a&#10;(Swift.Optional&#60;Swift.Int&#62;) a = None &#123;&#10;  Some = &#123;&#10;    value = 0&#10;  &#125;&#10;&#125;&#10;&#10;(lldb) fr v -R b&#10;(Swift.Optional&#60;Swift.Optional&#60;Swift.Int&#62;&#62;) b = Some &#123;&#10;  Some = None &#123;&#10;    Some = &#123;&#10;      value = 0&#10;    &#125;&#10;  &#125;&#10;&#125;&#10;&#10;(lldb) fr v -R c&#10;(Swift.Optional&#60;Swift.Optional&#60;Swift.Optional&#60;Swift.Int&#62;&#62;&#62;) c = Some &#123;&#10;  Some = Some &#123;&#10;    Some = None &#123;&#10;      Some = &#123;&#10;        value = 0&#10;      &#125;&#10;    &#125;&#10;  &#125;&#10;&#125;&#10;&#10;(lldb) fr v -R d&#10;(Swift.Optional&#60;Swift.Optional&#60;Swift.Optional&#60;Swift.Int&#62;&#62;&#62;) d = None &#123;&#10;  Some = Some &#123;&#10;    Some = Some &#123;&#10;      Some = &#123;&#10;        value = 0&#10;      &#125;&#10;    &#125;&#10;  &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>变量 c 因为是多层嵌套的 nil，所以它在最外层的二叉树上的值，是一个 <code>Optional&lt;Optional&lt;Int&gt;&gt;</code>。</li>
+<li>变量 d 因为是直接赋值成 nil，所以它在最外层的二叉树上的值，是一个 <code>Optional.None</code>。</li>
+</ul>
+<p>麻烦的事情来了，以上原因会造成用 if let 来判断变量 c 是否为 nil 失效了。如下代码最终会输出 <code>c is not none</code>。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let a: Int? = nil&#10;let b: Int?? = a&#10;let c: Int??? = b&#10;let d: Int??? = nil&#10;&#10;if let _ = c &#123;&#10;    print(&#34;c is not none&#34;)&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="u89E3_u91CA"><a href="#u89E3_u91CA" class="headerlink" title="解释"></a>解释</h2><p>在我看来，这个问题的根源是：一个 Optional 类型的变量可以接受一个非 Optional 的值。拿上面的代码举例，a 的类型是 Int?，b 的类型是 Int??，但是 a 的值却可以赋值给 b。所以，变量 b（类型为 Int??），它可以接受以下几种类型的赋值：</p>
+<ol>
+<li>nil 类型</li>
+<li>Int? 类型</li>
+<li>Int?? 类型</li>
+</ol>
+<p>按理说，Swift 是强类型，等号左右两边的类型不完全一样，为什么能够赋值成功呢？我查了一下 Optional 的源码，原来是对于上面第 1，2 种类型不一样的情况，Optional 定义了构造函数来构造出一个 Int?? 类型的值，这样构造之后，等号左右两边就一样了。源码来自 <a href="https://github.com/apple/swift/blob/master/stdlib/public/core/Optional.swift" target="_blank" rel="external">https://github.com/apple/swift/blob/master/stdlib/public/core/Optional.swift</a>，我摘录如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public enum Optional&#60;Wrapped&#62; : _Reflectable, NilLiteralConvertible &#123;&#10;  case None&#10;  case Some(Wrapped)&#10;&#10;  @available(*, unavailable, renamed=&#34;Wrapped&#34;)&#10;  public typealias T = Wrapped&#10;&#10;  /// Construct a `nil` instance.&#10;  @_transparent&#10;  public init() &#123; self = .None &#125;&#10;&#10;  /// Construct a non-`nil` instance that stores `some`.&#10;  @_transparent&#10;  public init(_ some: Wrapped) &#123; self = .Some(some) &#125;&#10;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>以上代码中，Optional 提供了两种构造函数，完成了刚刚提到的类型转换工作。</p>
+<h2 id="u70E7_u8111_u4F53_u64CD"><a href="#u70E7_u8111_u4F53_u64CD" class="headerlink" title="烧脑体操"></a>烧脑体操</h2><p>好了，说了这么多，我们下面开始烧脑了，以下代码来自傅若愚（<a href="https://github.com/lingoer" target="_blank" rel="external">https://github.com/lingoer</a>）在不久前 Swift 大会（<a href="http://atswift.io/#speaker" target="_blank" rel="external">http://atswift.io/#speaker</a>）上的一段分享：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var dict :[String:String?] = [:]&#10;dict = [&#34;key&#34;: &#34;value&#34;]&#10;func justReturnNil() -&#62; String? &#123;&#10;    return nil&#10;&#125;&#10;dict[&#34;key&#34;] = justReturnNil()&#10;dict</span><br></pre></td></tr></table></figure>
+<p>以下是代码执行结果：</p>
+<p><img src="http://ww2.sinaimg.cn/mw690/65dc76a3gw1f08hcnaidnj20vq06ugni.jpg" alt=""></p>
+<p>我们可以看到，我们想通过给这个 Dictionary 设置一个 nil，来删除掉这个 key-value 对。但是从 playground 的执行结果上看，key 并没有被删掉。</p>
+<p>为了测试到底设置什么样的值，才能正常地删掉这个 key-value 键值对，我做了如下实验：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var dict :[String:String?] = [:]&#10;// first try&#10;dict = [&#34;key&#34;: &#34;value&#34;]&#10;dict[&#34;key&#34;] = Optional&#60;Optional&#60;String&#62;&#62;.None&#10;dict&#10;&#10;// second try&#10;dict = [&#34;key&#34;: &#34;value&#34;]&#10;dict[&#34;key&#34;] = Optional&#60;String&#62;.None&#10;dict&#10;&#10;// third try&#10;dict = [&#34;key&#34;: &#34;value&#34;]&#10;dict[&#34;key&#34;] = nil&#10;dict&#10;&#10;// forth try&#10;dict = [&#34;key&#34;: &#34;value&#34;]&#10;let nilValue:String? = nil&#10;dict[&#34;key&#34;] = nilValue&#10;dict&#10;&#10;// fifth try&#10;dict = [&#34;key&#34;: &#34;value&#34;]&#10;let nilValue2:String?? = nil&#10;dict[&#34;key&#34;] = nilValue2&#10;dict</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<p><img src="http://ww2.sinaimg.cn/mw690/65dc76a3gw1f08hcj57k0j20vk0lqjxf.jpg" alt=""></p>
+<p>我们可以看到，以下三种方式可以成功删除 key-value 键值对：</p>
+<ul>
+<li><code>dict[&quot;key&quot;] = Optional&lt;Optional&lt;String&gt;&gt;.None</code></li>
+<li><code>dict[&quot;key&quot;] = nil</code></li>
+<li><code>let nilValue2:String?? = nil;  dict[&quot;key&quot;] = nilValue2</code></li>
+</ul>
+<p>所以，在这个烧脑之旅中，我们发现，一个 [String: String?] 的 Dictionary，可以接受以下类型的赋值：</p>
+<ul>
+<li>nil</li>
+<li>String</li>
+<li>String?</li>
+<li>String??</li>
+</ul>
+<p>如果要删除这个 Dictionary 中的元素，必须传入 nil 或 <code>Optional&lt;Optional&lt;String&gt;&gt;.None</code> ，而如果传入 <code>Optional&lt;String&gt;.None</code>，则不能正常删除元素。</p>
+<p>好吧，实验出现象了，那这种现象的原因是什么呢？</p>
+<p>还好苹果把它的实现开源了，那我们来一起看看吧，源文件来自：<a href="https://github.com/apple/swift/blob/master/stdlib/public/core/HashedCollections.swift.gyb" target="_blank" rel="external">https://github.com/apple/swift/blob/master/stdlib/public/core/HashedCollections.swift.gyb</a>，以下是关键代码。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public subscript(key: Key) -&#62; Value? &#123;&#10;  get &#123;&#10;    return _variantStorage.maybeGet(key)&#10;  &#125;&#10;  set(newValue) &#123;&#10;    if let x = newValue &#123;&#10;      // FIXME(performance): this loads and discards the old value.&#10;      _variantStorage.updateValue(x, forKey: key)&#10;    &#125;&#10;    else &#123;&#10;      // FIXME(performance): this loads and discards the old value.&#10;      removeValueForKey(key)&#10;    &#125;&#10;  &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>所以，当 Dictionary 的 value 类型为 String 时，如果你要设置它的值，它接受的是一个 String? 类型的参数。而因为我们刚刚例子中的 value 类型为 String?，所以正常情况下它需要的是一个 String?? 类型的参数。在上面的失败的例子中，我们传递的是一个 String? 类型的值，具体值为 <code>Optional&lt;String&gt;.None</code>，于是在执行时就会按以下的步骤来进行：</p>
+<ol>
+<li>我们传递一个值为 <code>Optional&lt;String&gt;.None</code>，类型为 String? 的参数。</li>
+<li>因为传的参数类型是 String?，而函数需要的是 String??，所以会执行 Optional 的构造函数，构造一个两层的 Optional。</li>
+<li>这个两层 Optional 的值为 <code>Optional.Some(&lt;Optional&lt;String&gt;.None&gt;)</code></li>
+<li>进入到 Dictionary 的实现时，会用 if let 进行是否为 nil 的判断，因为两层的 Optional，所以 if let 判断它不是 nil。</li>
+<li>所以代码执行到 <code>_variantStorage.updateValue(x, forKey: key)</code>，把 Optional<string>.None 当成值，设置给了相应的 key。</string></li>
+</ol>
+<p>如果你没理解，可以再翻翻最初我们对多层嵌套 nil 变量的实验和分析。</p>
+<p>我们再看看传递参数是 <code>Optional&lt;Optional&lt;String&gt;&gt;.None</code> 的情况，步骤如下：</p>
+<ol>
+<li>我们传递一个值为 <code>Optional&lt;Optional&lt;String&gt;&gt;.None</code>，类型为 String?? 的参数。</li>
+<li>因为参数类型是 String??，函数需要的类型也是 String??，所以参数不经变换，直接进入函数调用中。</li>
+<li>这个时候参数的值不变，还是 <code>Optional&lt;Optional&lt;String&gt;&gt;.None</code>。</li>
+<li>进入到 Dictionary 的实现时，会用 if let 进行是否为 nil 的判断，<code>Optional&lt;Optional&lt;String&gt;&gt;.None</code> 用 if let 判断，得到它是 nil。</li>
+<li>所以代码执行到 <code>removeValueForKey(key)</code>，Dictionary 删除了相应的 key-value 键值对。</li>
+</ol>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>好了，「烧脑体操」第一节就做完了，运动一下是不是感觉神清气爽？</p>
+<p>总结一下本次烧脑锻炼到的脑细胞：</p>
+<ul>
+<li>Optional 可以多层嵌套。</li>
+<li>因为 Optional 的构造函数支持，所以可以将一个类型为 T 的值，赋值给一个类型为 T? 的变量。</li>
+<li>因为 Optional 的构造函数支持，所以可以将 nil 赋值给一个任意嵌套层数的 Optional 变量。</li>
+<li>将 Optional 嵌套的内容是 nil 时，大家要小心 if let 操作失效问题。</li>
+<li>多层 Optional 嵌套容易烧脑细胞，尽量避免在工程中使用或触发。</li>
+<li>遇到问题可以翻翻苹果在 Github 开源的 <a href="https://github.com/apple/swift" target="_blank" rel="external">Swift 源码</a>。</li>
+</ul>
+<p>愿大家玩得开心！</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://ww2.sinaimg.cn/mw690/65dc76a3gw1f08hrkcyydj20i40cigv2.jpg" alt=""></p>
+<h2 id="u7248_u6743_u8BF4_u660E"><a href="#u7248_]]>
+    </summary>
+    
+      <category term="Swift" scheme="http://blog.devtang.com/tags/Swift/"/>
+    
+      <category term="iOS" scheme="http://blog.devtang.com/categories/iOS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[从 Octopress 迁移到 Hexo]]></title>
@@ -262,7 +567,7 @@
     <link href="http://blog.devtang.com/2016/02/16/make-friend-with-time/"/>
     <id>http://blog.devtang.com/2016/02/16/make-friend-with-time/</id>
     <published>2016-02-16T05:04:28.000Z</published>
-    <updated>2016-02-16T10:26:44.000Z</updated>
+    <updated>2016-02-18T13:14:02.000Z</updated>
     <content type="html"><![CDATA[<p><img src="https://camo.githubusercontent.com/9b0ba22b20c8464aefd022486269d4f3c8f3a5b8/687474703a2f2f696d6731302e333630627579696d672e636f6d2f6e312f6731352f4d30372f31312f30312f7242456857564a6e4a6167494141414141416e4f6362317365314141414564665141734b3934414363364a3231332e6a7067" alt=""></p>
 <h2 id="u5F15_u8A00"><a href="#u5F15_u8A00" class="headerlink" title="引言"></a>引言</h2><blockquote>
 <p>一切都不是我们的，而是别人的，只有时间是我们自己的财产。造物主交给我们，归我们所有的，只有这个不断流逝的、不稳定的东西。就连这个东西，谁只要愿意，都可以把它从我们手里剥夺走。</p>
@@ -271,7 +576,7 @@
 <p>今天要介绍的是 <a href="http://item.jd.com/11331635.html" target="_blank" rel="external">《奇特的一生》</a> 这是一本关于时间的书，春节期间看到池建强在微信读书中推荐，于是就一口气读完了。该书讲述苏联科学家柳比歇夫将自己的一生用时间来计划，通过分析柳比歇夫「时间统计法」，作者认为这是让他生活得更好的秘密。</p>
 <p>以下是我的读书感受。</p>
 <a id="more"></a>
-<h2 id="u548C_u65F6_u95F4_u505A_u670B_u53CB"><a href="#u548C_u65F6_u95F4_u505A_u670B_u53CB" class="headerlink" title="和时间做朋友"></a>和时间做朋友</h2><p>今年罗振宇的新年跨年演讲主题叫：「时间的朋友 2015」，听着名字就很酷，而李笑来老师的《和时间做朋友》也是我非常喜欢的一本书。看吧，大家都喜欢谈时间。时间，是这个世界上人人都有的东西，但却又是最昂贵的东西。</p>
+<h2 id="u548C_u65F6_u95F4_u505A_u670B_u53CB"><a href="#u548C_u65F6_u95F4_u505A_u670B_u53CB" class="headerlink" title="和时间做朋友"></a>和时间做朋友</h2><p>今年罗振宇的新年跨年演讲主题叫：「时间的朋友 2015」，听着名字就很酷，而李笑来老师的《把时间当做朋友》也是我非常喜欢的一本书。看吧，大家都喜欢谈时间。时间，是这个世界上人人都有的东西，但却又是最昂贵的东西。</p>
 <p>为了节约时间，我们发明了汽车、火车、飞机代替了马车。我们发明了电活代替了电信。我们发明了电梯代替了楼梯。我们每天使用的微信，也代替了以前的短信。一切的发明，都为我们省下了大量时间，但是奇怪的是，我们越来越感到时间不够用。</p>
 <p>你有这样的感受吗？晚上在电脑或手机面前看电影或者是刷微博，稍微不留神，就到了零晨 12 点了。但是我还记得小时候，家里偶尔会停电，那个时候点一盏蜡烛，大家围在蜡烛前面聊天，感觉聊了好久好久，来电后一看，才过了不到半个小时。</p>
 <p>时间就是这样一个顽皮的小孩，当你认真看他的时候，他会像蜗牛一样慢慢地一秒一秒往前爬；当你忘记他的时候，他就会飞奔起来，等你发现的时候，你才发现人生在世，几十个年头也就一眨眼的功夫。</p>
@@ -954,7 +1259,7 @@ UPYUN:
     <link href="http://blog.devtang.com/2015/12/24/resume-cheat-story/"/>
     <id>http://blog.devtang.com/2015/12/24/resume-cheat-story/</id>
     <published>2015-12-24T14:23:45.000Z</published>
-    <updated>2016-02-16T10:28:02.000Z</updated>
+    <updated>2016-02-18T13:13:34.000Z</updated>
     <content type="html"><![CDATA[<h2 id="u4E8B_u4EF6_u56DE_u653E"><a href="#u4E8B_u4EF6_u56DE_u653E" class="headerlink" title="事件回放"></a>事件回放</h2><p>前几天在 iOS 开发群里看到有人贴了一个 v2ex 上的帖子（地址： <a href="https://www.v2ex.com/t/244437" target="_blank" rel="external">https://www.v2ex.com/t/244437</a> ） ，大概说收到了 1000 多份某培训机构出来的学员简历。这些简历让他发现了一些问题：</p>
 <ul>
 <li>面试表现比较差</li>
@@ -987,8 +1292,7 @@ UPYUN:
 <p>我觉得他会很直接地开地图炮，把一类人直接刷掉，不再给面试机会。这类人是哪些人？简历雷同的、培训机构培训出来的人。</p>
 <p>这样公平吗？对候选人肯定不公平，但是公司招人也需要讲效率的，面试候选人其实成本特别高。</p>
 <p>所以造假这个行为，最终伤害的是候选人本人，以及培训机构的信誉。</p>
-<p>##如何在面试中鉴别造假</p>
-<p>其实挺简单的，首先面试的时候不要设置固定问题，然后根据候选人的回答情况来深入问细节。</p>
+<h2 id="u5982_u4F55_u5728_u9762_u8BD5_u4E2D_u9274_u522B_u9020_u5047"><a href="#u5982_u4F55_u5728_u9762_u8BD5_u4E2D_u9274_u522B_u9020_u5047" class="headerlink" title="如何在面试中鉴别造假"></a>如何在面试中鉴别造假</h2><p>其实挺简单的，首先面试的时候不要设置固定问题，然后根据候选人的回答情况来深入问细节。</p>
 <p>就比如说一个候选人说他做过礼物说，那就有很多可以深入问的，比如问他：</p>
 <ul>
 <li>礼物说有几个 iOS 开发</li>
@@ -1151,8 +1455,8 @@ UPYUN:
     <link href="http://blog.devtang.com/2015/11/26/yykit-auther-interview/"/>
     <id>http://blog.devtang.com/2015/11/26/yykit-auther-interview/</id>
     <published>2015-11-26T12:47:13.000Z</published>
-    <updated>2016-02-16T10:28:02.000Z</updated>
-    <content type="html"><![CDATA[<h3 id="u7248_u6743_u8BF4_u660E"><a href="#u7248_u6743_u8BF4_u660E" class="headerlink" title="版权说明"></a>版权说明</h3><p>本文为InfoQ中文站特供稿件，首发地址为：<a href="http://www.infoq.com/cn/news/2015/11/ibireme-interview" target="_blank" rel="external">文章链接</a>。如需转载，请与InfoQ中文站联系。</p>
+    <updated>2016-02-27T01:33:21.000Z</updated>
+    <content type="html"><![CDATA[<h3 id="u7248_u6743_u8BF4_u660E"><a href="#u7248_u6743_u8BF4_u660E" class="headerlink" title="版权说明"></a>版权说明</h3><p>本文为 InfoQ 中文站特供稿件，首发地址为：<a href="http://www.infoq.com/cn/news/2015/11/ibireme-interview" target="_blank" rel="external">文章链接</a>。如需转载，请与 InfoQ 中文站联系。</p>
 <h3 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h3><p>第一次听到 <a href="http://weibo.com/239801242" target="_blank" rel="external">ibireme</a> 这个名字，是看到他在 <a href="http://weibo.com/2477831984/D2ujxj5Vx?type=comment#_rnd1448528368875" target="_blank" rel="external">微博上分享</a> 了 <a href="https://github.com/ibireme/YYText" target="_blank" rel="external">YYText</a> 开源库。当时我第一眼见到 YYText 的功能示意 GIF 图时（下图所示），就被它丰富的功能吸引了。YYText 应该是我见到过的功能最强大的基于 CoreText 的排版框架了。</p>
 <p><img src="https://camo.githubusercontent.com/fb454f77c109e6ac671e8fdb3220ade92238715b/68747470733a2f2f7261772e6769746875622e636f6d2f69626972656d652f5959546578742f6d61737465722f417474726962757465732f59595465787420457874656e6465642f5959546578744174746163686d656e742e676966" alt="YYText示意图"></p>
 <p>令人惊讶的是，YYText 虽然代码量很大（超过一万行），但它只是 ibireme 的作品之一。ibireme 利用业余时间完成了 <a href="https://github.com/ibireme/YYKit" target="_blank" rel="external">YYKit</a> 工具库，包括：</p>
@@ -1223,7 +1527,7 @@ UPYUN:
 <p>希望 ibireme 的故事能够激励那些渴望成长成为牛人的 iOS 开发新人，也希望在中国能够出现更多像 YYKit 这样的优秀的开源项目，与大家共勉。</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<h3 id="u7248_u6743_u8BF4_u660E"><a href="#u7248_u6743_u8BF4_u660E" class="headerlink" title="版权说明"></a>版权说明</h3><p>本文为InfoQ中文站特供稿件，首发地址为：<a]]>
+    <![CDATA[<h3 id="u7248_u6743_u8BF4_u660E"><a href="#u7248_u6743_u8BF4_u660E" class="headerlink" title="版权说明"></a>版权说明</h3><p>本文为 InfoQ 中文站特供稿件，首发地址为：]]>
     </summary>
     
       <category term="iOS" scheme="http://blog.devtang.com/categories/iOS/"/>
@@ -1403,7 +1707,7 @@ Charles 正版[五折优惠活动](http://item.taobao.com/item.htm?&id=524230901
     <link href="http://blog.devtang.com/2015/11/02/mvc-and-mvvm/"/>
     <id>http://blog.devtang.com/2015/11/02/mvc-and-mvvm/</id>
     <published>2015-11-02T14:06:39.000Z</published>
-    <updated>2016-02-16T10:26:44.000Z</updated>
+    <updated>2016-02-27T01:33:21.000Z</updated>
     <content type="html"><![CDATA[<h1 id="u88AB_u8BEF_u89E3_u7684_MVC"><a href="#u88AB_u8BEF_u89E3_u7684_MVC" class="headerlink" title="被误解的 MVC"></a>被误解的 MVC</h1><h2 id="MVC__u7684_u5386_u53F2"><a href="#MVC__u7684_u5386_u53F2" class="headerlink" title="MVC 的历史"></a>MVC 的历史</h2><p><a href="http://baike.baidu.com/view/5432454.htm" target="_blank" rel="external">MVC</a>，全称是 Model View Controller，是模型 (model)－视图 (view)－控制器 (controller) 的缩写。它表示的是一种常见的客户端软件开发框架。</p>
 <p>MVC 的概念最早出现在二十世纪八十年代的 <a href="http://baike.baidu.com/view/616837.htm" target="_blank" rel="external">施乐帕克</a> 实验室中（对，就是那个发明图形用户界面和鼠标的实验室），当时施乐帕克为 Smalltalk 发明了这种软件设计模式。</p>
 <p>现在，MVC 已经成为主流的客户端编程框架，在 iOS 开发中，系统为我们实现好了公共的视图类：UIView，和控制器类：UIViewController。大多数时候，我们都需要继承这些类来实现我们的程序逻辑，因此，我们几乎逃避不开 MVC 这种设计模式。</p>
@@ -1481,7 +1785,7 @@ Charles 正版[五折优惠活动](http://item.taobao.com/item.htm?&id=524230901
 <h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>有一些人总是追赶着技术，有什么新技术不管三七二十一立马就用，结果被各种坑。</p>
 <p>又有一些人，总是担心新技术带来的技术风险，不愿意学习。结果现在还有人在用 MRC 手动管理引用计数。</p>
 <p>而我想说，我们需要保持的是一个拥抱变化的心，以及理性分析的态度。在新技术的面前，不盲从，也不守旧，一切的决策都应该建立在认真分析的基础上，这样才能应对技术的变化。</p>
-<h1 id="u7248_u6743_u8BF4_u660E"><a href="#u7248_u6743_u8BF4_u660E" class="headerlink" title="版权说明"></a>版权说明</h1><p>本文为InfoQ中文站特供稿件，首发地址为：<a href="http://www.infoq.com/cn/articles/rethinking-mvc-mvvm" target="_blank" rel="external">文章链接</a>。如需转载，请与InfoQ中文站联系。</p>
+<h1 id="u7248_u6743_u8BF4_u660E"><a href="#u7248_u6743_u8BF4_u660E" class="headerlink" title="版权说明"></a>版权说明</h1><p>本文为 InfoQ 中文站特供稿件，首发地址为：<a href="http://www.infoq.com/cn/articles/rethinking-mvc-mvvm" target="_blank" rel="external">文章链接</a>。如需转载，请与 InfoQ 中文站联系。</p>
 ]]></content>
     <summary type="html">
     <![CDATA[<h1 id="u88AB_u8BEF_u89E3_u7684_MVC"><a href="#u88AB_u8BEF_u89E3_u7684_MVC" class="headerlink" title="被误解的 MVC"></a>被误解的 MVC</h1><h2 id="MVC]]>
@@ -1570,7 +1874,7 @@ Charles 正版[五折优惠活动](http://item.taobao.com/item.htm?&id=524230901
     <link href="http://blog.devtang.com/2015/10/22/talk-with-zm-about-ios-security/"/>
     <id>http://blog.devtang.com/2015/10/22/talk-with-zm-about-ios-security/</id>
     <published>2015-10-22T14:12:16.000Z</published>
-    <updated>2016-02-16T10:26:44.000Z</updated>
+    <updated>2016-02-18T13:15:18.000Z</updated>
     <content type="html"><![CDATA[<h2 id="u5F15_u8A00"><a href="#u5F15_u8A00" class="headerlink" title="引言"></a>引言</h2><p>10 月 15 日晚上，我参加了 MDCC（ <a href="http://mdcc.csdn.net/" target="_blank" rel="external">http://mdcc.csdn.net/</a> ）大会晚上的英雄宴，宴会上见到了 XcodeGhost 的研究者，阿里巴巴资深安全工程师蒸米。</p>
 <p>蒸米是最早在乌云上公开 XcodeGhost 的工作原理的人。在后续 XcodeGhost 的服务器关闭后，蒸米也介绍了通过 DNS 污染来接管 XcodeGhost 木马的技术。让大家对于 iOS 平台的安全有了新的认识。</p>
 <p>之前我和蒸米在微博上多次私信交流，这次当面见到真人非常开心。蒸米是一个性格开朗阳光的人，看起来非常年轻，一问之下才知道他 26 岁就提前博士毕业了，毕业之后一直在阿里从事安全方面的工作。</p>
@@ -1583,7 +1887,7 @@ Charles 正版[五折优惠活动](http://item.taobao.com/item.htm?&id=524230901
 <h2 id="u4E3A_u4EC0_u4E48_iOS__u7CFB_u7EDF_u6BD4_Android__u8FD8_u4E0D_u5B89_u5168__3F"><a href="#u4E3A_u4EC0_u4E48_iOS__u7CFB_u7EDF_u6BD4_Android__u8FD8_u4E0D_u5B89_u5168__3F" class="headerlink" title="为什么 iOS 系统比 Android 还不安全 ?"></a>为什么 iOS 系统比 Android 还不安全 ?</h2><p>蒸米在交流中一直强调他的观点，他认为 iOS 系统比 Android 还不安全。这一点让我非常不解，我当即指出：iOS 程序有 sandbox 限制，无法随意做高危险的事情，比如 Android 深受其害的扣费短信一条，iOS 程序很难做到自动发送。因为首先 iOS 程序很难在后台自动启动，另外，自动发送短信也是被系统禁止的。</p>
 <p>但是蒸米解释让我觉得也很有道理，他的理由主要有以下几点：</p>
 <h3 id="iOS__u7684_u7CFB_u7EDF_u6F0F_u6D1E_u66F4_u591A"><a href="#iOS__u7684_u7CFB_u7EDF_u6F0F_u6D1E_u66F4_u591A" class="headerlink" title="iOS 的系统漏洞更多"></a>iOS 的系统漏洞更多</h3><p>iOS 的系统漏洞其实比 Android 更多，Android 因为是开源的系统，所以相关的漏洞更容易被发现和修复，而 iOS 是封闭的系统，它的漏洞只能指望苹果自己的工程师来修复。</p>
-<p>就在我和蒸米交流的当天（10 月 15 日），国内的<a href="/www.pangu.io">盘古团队</a>宣布完成了 iOS 9 的越狱。而这距离 iOS 9 正式发布（9 月 17 日）才刚刚满一个月。蒸米说，其实越狱团队早就完成越狱的技术工作了，只不过需要完成越狱相关的产品以及等一个比较合适的时间点发布。所以，很有可能在 iOS 9 还在 Beta 版的时候，相关的漏洞就已经收集到了。</p>
+<p>就在我和蒸米交流的当天（10 月 15 日），国内的<a href="http://www.pangu.io" target="_blank" rel="external">盘古团队</a>宣布完成了 iOS 9 的越狱。而这距离 iOS 9 正式发布（9 月 17 日）才刚刚满一个月。蒸米说，其实越狱团队早就完成越狱的技术工作了，只不过需要完成越狱相关的产品以及等一个比较合适的时间点发布。所以，很有可能在 iOS 9 还在 Beta 版的时候，相关的漏洞就已经收集到了。</p>
 <p>相对来说，Android 的最新版其实相当安全。不过 Android 的问题是 ROM 更新太慢，由于大多数 ROM 都经过了厂商的定制，使得大多数人无法及时更新到最新的操作系统，这个问题极大地降低了 Android 的安全性。</p>
 <h3 id="iOS__u7684_u7CFB_u7EDF_u7248_u672C_u548C_u673A_u578B_u975E_u5E38_u96C6_u4E2D"><a href="#iOS__u7684_u7CFB_u7EDF_u7248_u672C_u548C_u673A_u578B_u975E_u5E38_u96C6_u4E2D" class="headerlink" title="iOS 的系统版本和机型非常集中"></a>iOS 的系统版本和机型非常集中</h3><p>iOS 的系统版本非常集中，一般都是最新发布的 2 个大版本。另外 iPhone 机型也非常少，每年固定出一款。这使得黑客可以针对单一系统或机型挖掘出来的漏洞，得到极其方便地扩散和影响。</p>
 <p>还记得早年 iOS 系统上面发面的 PDF 漏洞吗？用户只需要访问一个指定网址，就可以完成越狱过程。如果在未来有一个黑客找到一个类似这样的高级漏洞，那么受影响的很可能是所有的 iOS 用户。</p>
@@ -1604,216 +1908,6 @@ Charles 正版[五折优惠活动](http://item.taobao.com/item.htm?&id=524230901
     </summary>
     
       <category term="iOS" scheme="http://blog.devtang.com/categories/iOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[写给那些傻傻的，想做服务器开发的应届生]]></title>
-    <link href="http://blog.devtang.com/2015/10/07/why-fresh-wants-to-do-server-dev/"/>
-    <id>http://blog.devtang.com/2015/10/07/why-fresh-wants-to-do-server-dev/</id>
-    <published>2015-10-07T04:05:50.000Z</published>
-    <updated>2016-02-16T10:26:44.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>猿题库刚刚结束了北京地区的大规模校园招聘，国庆之后打算转战外地进行校招。我本人深度参与了此次的校招工作，包括笔试题命题、面试题命题以及具体的面试工作。</p>
-<p>我在面试中发现了一个非常有意思的现象，就是大多数应届生都想做服务器端开发，但是他们却又不清楚服务器端开发具体要做些什么。</p>
-<p>我和同事聊天的时候说起此事，我们认为可能应届生觉得：做服务器端开发可以让自己写的程序运行在很多台机器上，并且处理海量的数据，这很「牛逼」。而做客户端或前端开发太简单，成长会比较小。</p>
-<p>于是我就写了本文，想给这些单纯的应届生泼泼冷水。先说说我的背景吧，我同时做过服务器端和客户端的开发。我在网易有道做过 1 年半的服务器端开发，产品涉及网易邮箱和微博产品，之后做了 3 年的 iOS 开发，产品涉及有道云笔记，猿题库和小猿搜题，所以我能够给大家分享服务器端和客户端开发的差别。</p>
-<h2 id="u5BF9_u670D_u52A1_u5668_u5F00_u53D1_u7684_u8BEF_u89E3"><a href="#u5BF9_u670D_u52A1_u5668_u5F00_u53D1_u7684_u8BEF_u89E3" class="headerlink" title="对服务器开发的误解"></a>对服务器开发的误解</h2><p>很多应届生认为做服务器端开发可以处理海量数据，管理上百台服务器。</p>
-<p>但是 —-</p>
-<p>处理海量数据就牛逼了？NO！</p>
-<p>服务器端开发经过多年的发展，对于海量数据的处理早有了很多固定的解决方案。不管是用云服务，还是用 Hbase ，你都可以很轻松地依赖开源库，解决海量数据的存储问题。</p>
-<p>还有一些同学想做大数据分析，如果你写过 MapReduce 程序就不会这么想了。现在的 MapReduce 程序写起来太 easy 了，很多时候简单到你就只需要写一条类似 SQL 的查询就行了。</p>
-<p>运行在上百台服务器上就牛逼了？NO！</p>
-<p>现在虚拟化技术发展迅猛，像小猿搜题所有服务都通过 Docker 来部署。很多时候，部署上线就是在 Web 管理界面上点击一个「Deploy」按钮即可。即使在过去，实际操作这些上百台服务器的也是运维同学，轮不到你来操作。</p>
-<p>所以，除了 YY 一下这些程序跑在多个机器上，这并没有什么可以带来成就感的地方。</p>
-<p>还有一些应届生觉得自己在学校做过网站，觉得在服务器开发方面有基础，做这方面更顺手。NO！企业里面的服务器开发完全不是你想的那样，基本上大家在学校做网站的经验等于零。</p>
-<h2 id="u670D_u52A1_u5668_u5F00_u53D1_u7684_u82E6"><a href="#u670D_u52A1_u5668_u5F00_u53D1_u7684_u82E6" class="headerlink" title="服务器开发的苦"></a>服务器开发的苦</h2><p>我给大家分享一下做服务器开发有什么苦的地方吧。</p>
-<h3 id="u6C38_u8FDC_u53EA_u80FD_u534A_u591C_u4E0A_u7EBF"><a href="#u6C38_u8FDC_u53EA_u80FD_u534A_u591C_u4E0A_u7EBF" class="headerlink" title="永远只能半夜上线"></a>永远只能半夜上线</h3><p>做为互联网公司，我们希望给用户提供 7 x 24 的不间断服务，那么服务万一需要中断怎么办？半夜上线呗。</p>
-<p>根据我多年的观察，晚上 12 点一般都是上网高峰，所以上线一般都是凌晨 3 点-4 点的时候进行。但是，你以为上线就是凌晨 3 点点一下「Deploy」按钮就完了吗？NO! 一般上线都会涉及功能升级，难免会有考虑不周到的情况，于是就会发生，上线出问题的情况。</p>
-<p>上线出问题怎么办？在网易，我们一般是两种做法：</p>
-<ol>
-<li>在线调试和修改 Bug，通常顺利的话，到早上 7，8 点的时候一般就能搞定了。</li>
-<li>在线调试和修改 Bug，如果不顺利的话，到早上 7，8 点的时候回滚数据。然后，我们需要回家休息半天之后，继续在下一个凌晨 3 点上线。</li>
-</ol>
-<p>当然，不会每次上线都是这种大升级，但是基本上，1、2 个月搞一次这种大上线还是挺常见的。</p>
-<p>相对来说，客户端同学在这方面要轻松得多。iOS 和 Android 都是提交应用市场审核，所以客户端的同学可以选一个白天上班的时候提交审核，而不用等到半夜。</p>
-<h3 id="u6C38_u8FDC_u9700_u8981_u7ACB_u5373_u54CD_u5E94"><a href="#u6C38_u8FDC_u9700_u8981_u7ACB_u5373_u54CD_u5E94" class="headerlink" title="永远需要立即响应"></a>永远需要立即响应</h3><p>服务器端的问题，只要出现，影响都是巨大的，所以服务器端的同学需要随时待命，一旦有服务器异常报警，就立即处理，以免影响到用户。所以做服务器开发的同学手机都是开着的，在服务不稳定时，一不小心，几十条报警短信就过来了。服务器开发出去旅游什么的，一般都带着笔记本，以便出问题时能够及时响应。</p>
-<p>相对来说，客户端同学在这方面要轻松得多，因为即使出现了 Bug，iOS 和 Android 客户端也是无法马上修复的，因为用户手机中的版本不会立即更新。所以客户端同学最多也是加班发布一个紧急版本提交审核，在时间上不会像服务器端那么着急。</p>
-<p>另一方面，很多客户端的 Bug，可以通过服务器端通过一些「兼容」来处理，这其实就是替客户端「擦屁股」。例如，假设某应用的 iOS 1.2.0 版本当获得服务器端返回的用户头象是 png 格式的时候会闪退，那么服务器端可以特殊处理，对于这个版本的应用把 png 图片转成 jpg 返回。你看，最终还是服务器端同事成了要立即响应的人。</p>
-<h3 id="u670D_u52A1_u5668_u7AEF_u8F6E_u5B50_u592A_u591A"><a href="#u670D_u52A1_u5668_u7AEF_u8F6E_u5B50_u592A_u591A" class="headerlink" title="服务器端轮子太多"></a>服务器端轮子太多</h3><p>服务器端的开发经过了 10 多年的发展，而客户端的开发才刚刚兴起。2009 年 <a href="https://en.wikipedia.org/wiki/IPhone" target="_blank" rel="external">iPhone 3GS</a> 推出之后，国内才有人做 iOS App 的开发，Android 开发的兴起也基本在<a href="https://en.wikipedia.org/wiki/Android_version_history" target="_blank" rel="external">同一时期</a>。算下来，客户端的开发才经历了 6 年而已。而服务器端的开发呢？光 <a href="https://en.wikipedia.org/wiki/Spring_Framework" target="_blank" rel="external">Spring</a> 就出现了 10 多年了。</p>
-<p>服务器端的技术长久发展的结果就是，基本上每个业务需求都已经有现成的轮子了。所以做服务器端开发很多时候就是学习各种开源组件的用法，并且熟悉这些组件的一些性能特点和坑。</p>
-<p>你以为这很容易吗？其实不是的！这些轮子发展那么多年，已经非常复杂了，光 Spring 就包括非常多的特性，写一本 1000 页的书来介绍它也不为过。如果不是多年的使用，你能搞明白它的各种功能的优缺点吗？如果你搞不明白，遇到问题的时候除了抓瞎还能干嘛？</p>
-<p>所以做服务器端的同学，要经过非常长时间学习（至少半年左右），才能上手进行实际的开发工作。上手之后，又需要经过非常长时间的学习，才能够熟悉自己使用的各种开源组件的特点和使用细节。</p>
-<p>相对来说，客户端同学在这方面要轻松得多，基本上不管是 iOS 还是 Android，新手只需要一个月左右就能入门，三个月左右就能够比较熟练了。</p>
-<h3 id="u5206_u5DE5_u4E0E_u7EC6_u5316"><a href="#u5206_u5DE5_u4E0E_u7EC6_u5316" class="headerlink" title="分工与细化"></a>分工与细化</h3><p>刚刚说到服务器端复杂，这带来的结果就是分工与细化。每个做服务器开发的同学，可能只会涉及服务器开发的某一部分的业务逻辑和功能，甚至是某一部分业务逻辑的某一层。比如我在网易邮箱做服务器端开发时，就只是负责 Restful Api 这一层的开发工作。</p>
-<p>从业务上来说，将复杂的系统拆分，然后每个人做独立的某一块当然是好的。但是对个人来说，服务器端开发却使终是一块迷雾环绕的大山，在这座大山上，你对你走过的路线很熟悉，而那些你没有接触过的服务器端技术，你使终是不清楚的。</p>
-<p>对于一个服务器端开发同学，特别是进入大公司的应届生来说，在他头几年的工作中，肯定只会围绕着非常小一块功能业务来学习，那么一两年之后，他顶多是熟悉了他工作涉及的那些东西，对于别的东西仍然是不清楚的。</p>
-<p>从这一点来说，去创业型的公司做服务器端开发又要比去大公司要好得多。</p>
-<p>相对来说，客户端同学在这方面要爽得多。因为移动开发技术刚刚兴起，很多技术方案和框架还没有复杂到无法全面掌握的程度。移动开发技术就像一棵快速成长的小树，客户端同学将有幸伴随着它一起成长，等 5 年之后，移动开发技术成变成一棵参天大树，这一代的程序员，将会是唯一亲身经历它演进的人，每一处演进带来的改变，都将使得我们更加深刻理解移动开发系统的设计原则。</p>
-<h3 id="u773C_u754C_u548C_u975E_u6280_u672F_u6210_u957F"><a href="#u773C_u754C_u548C_u975E_u6280_u672F_u6210_u957F" class="headerlink" title="眼界和非技术成长"></a>眼界和非技术成长</h3><p>某种程度上说，服务器端开发在业务方面是轻松的，因为他们只需要设计好 API 接口，返回 JSON 数据，不用考虑 UI 的设计，交互细节的处理。服务器端开发经过了多年的发展，单元测试和性能测试框架也非常成熟，所以开发起来非常有章法。</p>
-<p>所以服务器端的同学大多数时候只需要关注纯技术的知识，例如如何保证高可用，高扩展性，高并发，数据一致性，数据安全等。</p>
-<p>客户端就苦了，UI 需要和美术设计得完全一样，交互细节还需要做到流畅，很多时候产品用一用觉得一些 UI 和交互有问题，我们还需要被迫接受调整。另外在测试上，因为和界面耦合太紧，虽然业界有一些解决方案，但基本上不管是 iOS 和 Android 都还没有非常成熟好用的单元测试框架。大部分的测试工作都是由黑盒的手工测试完成的。</p>
-<p>但是，正因为客户端需要密切和产品经理，UI 设计师打交道，所以他们会频繁接触到产品设计思想和设计思想。这使得客户端的同学更加容易学习和积累编程之外的技能，包括产品和设计的思想以及沟通能力。另外，因为用户的 bug 都是通过客户端反馈，客户端同学还更容易接触到真实的用户。</p>
-<p>所以相对于服务器端同学来说，客户端的同学的眼界更宽，由于非技术方面的沟通更多，所以他们的非技术方案的成长也越多。</p>
-<h3 id="u6280_u672F_u6311_u6218_u548C_u5DE5_u8D44_u5F85_u9047"><a href="#u6280_u672F_u6311_u6218_u548C_u5DE5_u8D44_u5F85_u9047" class="headerlink" title="技术挑战和工资待遇"></a>技术挑战和工资待遇</h3><p>从纯技术上的挑战来说，服务器端明显更大。服务器端开发动辄超过 10 人的团队，代码量稍微复杂一些就是接近百万行。而客户端一个平台的研发大多数也就在 5 人左右，代码量多在 10 万行以内。</p>
-<p>但是，技术挑战大就表示工资待遇高吗？NO！市场价格是由供求关系来平衡的。虽然客户端的技术挑战小，但是基本上所有应届毕业生都想做服务器端开发，所以没有人做客户端开发呀！于是很多公司被迫从培训机构招人，很多人刚刚培训了 3 个月，就可以拿非常高的工资。这一点和 Web 前端类似，牛逼的 Web 前端人才非常少，但是不影响这个领域稍微牛逼一点的人拿非常高的薪水。</p>
-<p>另一方面，由于服务器端人才的饱和，也使得竞争变得非常激烈，除非你成为这个领域的顶级人才，否则从平均薪资来说，做客户端开发的同学应该和服务器端的同学类似。</p>
-<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>其实我这篇文章故意写得很片面，目的就是想让各位应届生同学们能够更加辩证地看待互联网行业中的工作。与其什么都不懂傻傻地选择服务器端开发，倒不如做客户端开发更有前途。</p>
-<p>我以上所说的，都是错的。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>猿题库刚刚结束了北京地区的大规模校园招聘，国庆之后打算转战外地进行校招。我本人深度参与了此次的校招工作，]]>
-    </summary>
-    
-      <category term="summary" scheme="http://blog.devtang.com/categories/summary/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[数据的秘密（下）- 如何分析数据]]></title>
-    <link href="http://blog.devtang.com/2015/09/03/how-to-monitor-data/"/>
-    <id>http://blog.devtang.com/2015/09/03/how-to-monitor-data/</id>
-    <published>2015-09-03T12:54:31.000Z</published>
-    <updated>2016-02-16T10:26:44.000Z</updated>
-    <content type="html"><![CDATA[<img src="/images/data_picture_from_matrix.jpg">
-<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>上一篇文章中，我们介绍了为什么要关注数据，在本文中我将分享具体如何做。</p>
-<h2 id="u5173_u6CE8_u5B8F_u89C2_u548C_u7EC6_u8282"><a href="#u5173_u6CE8_u5B8F_u89C2_u548C_u7EC6_u8282" class="headerlink" title="关注宏观和细节"></a>关注宏观和细节</h2><p>大多数人都能做到关注宏观的数据，拿互联网产品来说，日活，月活，流失率，NPS（净推荐值），这些都是宏观的数据。宏观数据能够反映出产品的整体状况，是值得长期关注的。</p>
-<p>但是在宏观之外，我们还应该关注一些细节的数据。拿日活来说，我们可以再进一步进行分析，比如：</p>
-<ul>
-<li>日活中新用户所占的比例</li>
-<li>日活中 iOS 和 Android 的各自占比</li>
-<li>日活中大家集中活跃的时间段</li>
-<li>日活中用户的会话（Session）次数分布，时长分布</li>
-<li>日活中用户平均使用你的产品核心功能的次数</li>
-</ul>
-<p>当你把数据拿放大镜看得更细的时候，你可能就会发现一些问题。带着这些问题，你进一步分析，就可以找到更多信息。</p>
-<p>举一个我们创业产品小猿搜题的例子，我们发现日活中的用户，有相当一部分用户只是注册了，但是并没有使用我们产品的核心功能，于是我们担心会不会有一些付费推广渠道「刷量」。</p>
-<p>所以，我们将新增用户中不活跃的比例按渠道来划分。通过这样的划分，我们很容易找到那些效果差的渠道，从而选择更有效的推广渠道。</p>
-<h2 id="u5173_u6CE8_u539F_u59CB_u6570_u636E"><a href="#u5173_u6CE8_u539F_u59CB_u6570_u636E" class="headerlink" title="关注原始数据"></a>关注原始数据</h2><p>原始数据是什么？就是那些不是通过别的数据计算出来的，不能被分割的数据。这些数据是最最真实的，而其它通过计算出来的数据，因为进行了二次加工，所以不一定能够完全反映出产品的问题。</p>
-<p>再举一个小猿搜题的例子，我们为了研究 NPS 给我们打零分的用户。把这些用户的搜索数据、操作记录都抽样出来，一个用户一个用户看，然后进行分类整理。最终我们发现这里面小学生用户占比很高，从而调整了产品的策略，在内容和算法上对小学生进行了兼顾。</p>
-<p>关注原始数据除了能改进产品外，还能在技术上提高代码的质量。我们曾经遇到过一个很难复杂的 Bug，在我们的测试机中都无法复现，但是我们通过分析相关用户的操作记录，找到了具体崩溃的操作方法。</p>
-<p>虽然该操作方法不能在我们自己的机器上复现 Bug，但是我们却能找到相关的关键代码。通过一些针对这些代码的讨论，我们就找到了 Bug 的原因。现在回想起来，如果没有这些原始数据，要修复这个 Bug 就要困难很多了。</p>
-<h2 id="u5173_u4E8E_u9762_u8BD5"><a href="#u5173_u4E8E_u9762_u8BD5" class="headerlink" title="关于面试"></a>关于面试</h2><p>其实不光做产品要看「原始数据」，面试一个人也是。我在面试的时候，会选一个候选人简历上的事情，进行深入了解。我会让他提供详细相关工作的数据和事例。通过这些「原始数据」，我能够更加方便地「还原他真实的工作场景」，从而对他的工作质量作出尽量客观的评价。</p>
-<p>举个例子，有一个产品实习生候选人在简历上写他运营了一个微信公众号，「粉丝逾千，单日粉丝增量 200 以上，数篇文章阅读量超过 3000」。但是在面试中，详细追问这些数字，我们才发现他说的「逾千」是指 1000，而「单日粉丝增量 200 以上」是指的最高的一天，其它信息也都是有夸大的成分。</p>
-<p>还有一次，我面试一个技术候选人，这个候选人说他有代码洁癖，觉得前公司的代码「很乱，受不了」。但是我让他具体举几个例子的时候，他却很难说出实际的例子。还有候选人说他喜欢看技术书，但是却无法说出他印象最深的一本技术书以及其中的部分观点。</p>
-<p>通过了解细节，我们就可以揭开简历中光鲜描述的外衣，了解到事情背后的细节，这对我们评价候选人至关重要。</p>
-<h2 id="u6570_u636E_u53EF_u89C6_u5316"><a href="#u6570_u636E_u53EF_u89C6_u5316" class="headerlink" title="数据可视化"></a>数据可视化</h2><p>数据可视化是指将原本枯燥的数据，用折线图、饼图、柱状图等方式呈现出来，它可以使我们更容易发现数据的规律，也更容易发现数据的异常。</p>
-<p>在小猿搜题项目中，数据可视化多次给我们带来巨大的帮助，包括：</p>
-<ul>
-<li>了解数据的特点：我们将小猿搜题的 QPS 按每小时为频率画出成一条折线图，所以我们很容易知道我们服务器高峰期的时间段以及访问量。</li>
-<li>发现服务异常：我们将服务器搜索的失败率占比画出成一个饼图，有一天，这个饼图中显示出失败率突然变高了。同时，每日的 NPS 分数突然也变低了很多。我们借此发现了新扩容的一台服务器故障。因为那台服务器是新加的，所以运维忘记了增加监控，如果没有数据可视化的帮助，这个故障可能会持续更长时间。</li>
-<li>监控核心质量：我们将小猿搜题的一些核心指标画成折线图，然后大家都努力让核心指标更优。</li>
-<li>发现恶意攻击：一些重要指标，我们都会可视化出来，这样当这些数据指标变化时，我们就会进一步分析原因，从中我们还发现了一些竞争对手恶意的攻击行为。</li>
-</ul>
-<h3 id="u6570_u636E_u53EF_u89C6_u5316_u5DE5_u5177"><a href="#u6570_u636E_u53EF_u89C6_u5316_u5DE5_u5177" class="headerlink" title="数据可视化工具"></a>数据可视化工具</h3><p>我们当然不可能所有的数据可视化都是自己手工用 Excel、Numbers 之类的工具来生成。所以，我们开发了一个数据可视化的平台，我们把它叫做 flyboard。</p>
-<p>flyboard 提供了各种数据可视化的方式，包括数字，折线图，饼图，环形图，柱状图等。如下图所示：</p>
-<img src="/images/flyboard-view.jpg">
-<p>我们将所有的原始数据都归集到分布式存储 <a href="http://baike.baidu.com/view/1993870.htm" target="_blank" rel="external">Hbase</a> 中，然后通过配置一些定时的计算任务，就可以以几乎实时地方式，看到产品的各项可视化指标。</p>
-<p>这些指标，有宏观的，也有一些比较细分的，如果我们对某项指标的数值有疑问，我们就会进一步写一些分析脚本，来从 Hbase 中计算一些数据进行检查。</p>
-<p>在猿题库公司，我们的三个产品（猿题库、小猿搜题、猿辅导）的办公区域，都挂着一个巨大的显示器，这个显示器除了用于 Scrum 的每日站会同步进度外，平时都用 flyboard 显示着产品的各项核心数据。</p>
-<p>悄悄告诉你一个秘密，我们的 flyboard 可视化平台是开源的，项目地址是：<a href="https://github.com/yuantiku/flyboard" target="_blank" rel="external">https://github.com/yuantiku/flyboard</a> ，在 Github 上你可以下载到完整的代码，我们也附有完整的安装使用说明文档。如果你还没有使用任何数据可视化工具，欢迎尝试一下 flyboard。</p>
-<h2 id="u5B66_u4E60_u5199_SQL"><a href="#u5B66_u4E60_u5199_SQL" class="headerlink" title="学习写 SQL"></a>学习写 SQL</h2><p>由于有 <a href="http://baike.baidu.com/view/908354.htm" target="_blank" rel="external">Hadoop</a>、<a href="http://baike.baidu.com/view/1993870.htm" target="_blank" rel="external">Hbase</a> 、 <a href="http://baike.baidu.com/subview/699292/10164173.htm" target="_blank" rel="external">Hive</a> 的存在，产品经理也可以通过一些简单的 SQL 语句，就可以生成 <a href="http://baike.baidu.com/view/2902.htm" target="_blank" rel="external">MapReduce</a> 任务，进行分布式的数据分析运算。</p>
-<p>所以数据分析最最常用的办法就是写 SQL。在很多公司，产品经理都在这方面能力比较欠缺，这使得产品经理在需要数据时，需要向技术提需求。技术会根据自己的工作排期。这样一来一回，一般一个简单的数据分析都需要一天时间。</p>
-<p>这样的低效率的方式，会扼杀产品经理的一些数据分析需求，特别是那种需要探索式发现的数据分析工作。因为这种工作需要不停地根据数据分析的结果，调整各种策略来写尝试的 SQL。</p>
-<p>所以在猿题库，我们希望产品经理都能有基本的数据分析能力，一些简单的 SQL 都是需要自己能够写的。当然，一些特别复杂的 SQL，产品经理可能还是需要向技术同事咨询。</p>
-<p>具体如何写 SQL，市面上已经有非常多的相关书籍了，我在这里就不再展开介绍了。</p>
-<h2 id="u6570_u636E_u67E5_u770B_u548C_u5206_u6790_u4E00_u5B9A_u8981_u65B9_u4FBF"><a href="#u6570_u636E_u67E5_u770B_u548C_u5206_u6790_u4E00_u5B9A_u8981_u65B9_u4FBF" class="headerlink" title="数据查看和分析一定要方便"></a>数据查看和分析一定要方便</h2><p>如果你仔细观察就会发现，很多革命性的产品就只是让某件事情更方便了一点点。智能手机其实只是让你上网更方便了一点，但是这种方便使得人们从以前有「离线和在线」的状态，变成了永久在线。于是，移动互联网诞生了，本质上来说，移动互联网就是一种人们永久在线的网络，但是就是这么一点点的方便，使得很多行业被完全颠覆。</p>
-<p>而数据分析也是一样，我们应该尽量让数据触手可得，这样我们才能将数据分析的效率最大化，一定程度上的效率提升就会产生质变，使得我们专注于数据做更多事情。</p>
-<p>我们之前移动端统计用 Flurry，但是 Flurry 在中国实在太慢了，即使挂上国外的 VPN 也很慢！如果产品经理每次登录 Flurry 要 10 秒钟的话，那么他就可能将注意力临时转移到别的事情上，然后就可能忘记本来要看的数据。</p>
-<p>为了让数据触手可得，我们放弃了对 Flurry 的使用，我们自己开发了日志收集平台，然后自己写日志计算程序，将一些核心指标全部自己计算在 flyboard 上，我们也另外开发了一套数据分析平台，实现 Flurry 中的类似功能。现在，我们已经能够非常舒服地分析数据了。</p>
-<p>所以，如果你的公司不能很方便的查看和分析数据，那么一定要想办法改进，这些数据就像人的神经系统一样，传递着产品的健康数据，重视这些数据，才能够做好产品。</p>
-<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>总结一下本文中的观点：</p>
-<ul>
-<li>重视宏观数据和细节</li>
-<li>关注原始数据</li>
-<li>数据可视化</li>
-<li>学会用 SQL</li>
-<li>数据查看和分析一定要方便</li>
-</ul>
-]]></content>
-    <summary type="html">
-    <![CDATA[<img src="/images/data_picture_from_matrix.jpg">
-<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>上一篇]]>
-    </summary>
-    
-      <category term="summary" scheme="http://blog.devtang.com/categories/summary/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[数据的秘密（上）- 为什么要关注数据]]></title>
-    <link href="http://blog.devtang.com/2015/09/02/why-we-need-monitor-data/"/>
-    <id>http://blog.devtang.com/2015/09/02/why-we-need-monitor-data/</id>
-    <published>2015-09-02T12:39:18.000Z</published>
-    <updated>2016-02-16T10:26:44.000Z</updated>
-    <content type="html"><![CDATA[<img src="/images/data_picture_from_matrix.jpg">
-<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>由于科技的进步，以及数据「数字化」地存储，使得现代人类可以获得海量的数据。而有了这些海量的数据之后，借助于一些数据分析工具和方法，我们就可以从数据中找到社会运行的「秘密」。</p>
-<p>在工作中，借助这些「秘密」，我们有可能发现商业中的新机会，也可能验证或推翻自己的一些猜想。数据分析，使得我们对「秘密」的探索有了一个可靠的方法。</p>
-<p>在本文中，我想分享一下工作中学到的发现数据中秘密的心得。</p>
-<h3 id="u7A3B_u76DB_u548C_u592B_u7684_u6545_u4E8B"><a href="#u7A3B_u76DB_u548C_u592B_u7684_u6545_u4E8B" class="headerlink" title="稻盛和夫的故事"></a>稻盛和夫的故事</h3><p>我们先看看 <a href="http://baike.baidu.com/subview/974414/5032771.htm" target="_blank" rel="external">稻盛和夫</a> 挽救日航的故事吧。他的这段传奇经历曾经被很多媒体报道，我将故事摘要如下：</p>
-<blockquote>
-<p>2010 年 1 月 19 日，日本航空公司申请破产保护。日航有 58 年历史，一度被视作日本战后经济繁荣的骄傲象征。</p>
-<p>2010 年 2 月 1 日，受日本首相邀请，稻盛和夫答应出日航董事长，一年之后，日航扭亏为盈，利润是对手全日空的三倍。<br>仅仅用了一年时间，日航做到了三个第一，一个是利润世界第一，一个是准点率世界第一，一个是服务水平世界第一。</p>
-</blockquote>
-<p>在日航重新上市之后，稻盛和夫分享了他 <a href="http://money.163.com/12/1026/01/8EN3V9EN00253B0H.html" target="_blank" rel="external">挽救日航的秘密</a>。这里面涉及的内容很多，其中有很重要的一条，就是稻盛和夫非常重视日航具体的运营数据，他花了很大的力气来优化数据的获取，从而能够对日航的现状进行判断。</p>
-<p>稻盛和夫是这样说的：</p>
-<blockquote>
-<p>我担任董事长后，最为吃惊的是，公司的各项统计数据不仅不全，而且统计时间很长很慢，往往需要 3 个月之后才能搞全数据，以至于经营者无法迅速掌握公司的运营情况。<br>所以，在对企业内部进行改革时，我特别关注统计工作。经过改革，现在各个部门的数据做到即有即报，公司详尽的经营报告，做到了一个月内完成。</p>
-</blockquote>
-<p>如果把日航看过一个生病了的病人，稻盛和夫的做法其实和现代医学的做法类似，就是首先进行各项检查，获得病人的身体指标信息，有了这些检查数据，我们就可以利用各种基于数据的经验，来进行病情诊断和治疗。所有的治疗手段又可以通过再次的检查来验证，从而进一步改进治疗方法。</p>
-<p>人做为一个生命体，全身密布的神经负责着各种信息的传递，所以我们的大脑能够接受到各种信息，从而做出决策，饿了吃饭，冷了加衣服，保证着我们身体的健康。</p>
-<p>而企业没有天生的神经系统，所以数据收集和分析就显得异常重要了。日航作为一家运营了 50 多年的公司，居然在这方面做得非常差，难怪会进入破产的边缘。而稻盛和夫用的办法也很简单，先让数据能够收集起来，那么后续依据数据做决策就不再那么困难了。</p>
-<h2 id="Monitor_your_data_uFF08_u76D1_u63A7_u4F60_u7684_u6570_u636E_uFF09"><a href="#Monitor_your_data_uFF08_u76D1_u63A7_u4F60_u7684_u6570_u636E_uFF09" class="headerlink" title="Monitor your data（监控你的数据）"></a>Monitor your data（监控你的数据）</h2><p>我刚毕业的时候加入的是网易公司，当时负责做网易邮箱的底层 Restful Api。当时我们部门的老大郭常圳常常讲要「monitor your data」，我当时作为一个应届生，刚开始对这个口号不太理解。我当时想：数据当然是重要的，但是也不值得老挂在嘴边讲吧？但是后来我才慢慢发现，这其实确实非常重要。</p>
-<p>作为程序员，我们开发一个后台服务，大家有没有测试过以下数据：</p>
-<ul>
-<li>这个服务能够承受多少的 QPS（每秒访问量）？</li>
-<li>平均响应时间和 99% 的响应时间是多少？</li>
-<li>如果服务器压力增加，我们能不能通过简单的加机器来解决，需要加多少台机器？</li>
-<li>当前线上服务瓶颈在哪里？</li>
-<li>按当前的增长速度，多久我们得需要加机器？</li>
-</ul>
-<p>当时郭常圳带领我们，将我们做的每一个服务都进行了详细的压力测试，我们对于我们的服务承受力有着非常详细的数据测试结果。</p>
-<p>这一点每个公司都做到了吗？其实不是。我还记得我们后来和网易的网站部共同开发网易微博后台，当时我们因为要将邮箱微博和网易微博数据合并，需要进行在线的数据迁移。我当时负责数据迁移工作，在我向网站部询问我应该用多大的请求压力来迁移数据时，对方只是回答：“尽量慢点”。</p>
-<p>我当时就傻掉了，谁能告诉我什么叫 “尽量慢点”？于是我只能小心翼翼，一点一点地增加压力，最后我发现，他们的数据库其实一点压力都没有，我根本就不用控制压力都不会影响线上服务。但是，由于他们「monitor your data」做得不好，所以他们对任何可能的压力都心怀恐惧，不敢乱动。</p>
-<p>后来我也私下和他们求证了一下，他们果然完全不知道他们的服务器能够承受多少 QPS。大家也可以问问自己公司的服务器同事，自己的服务器能够承受的 QPS 是多少，就知道自己的公司在这一点上做得好不好了。</p>
-<p>而现在，数据驱动的思维更加深入到互联网开发中了。因此，国外的 New Relic 这类公司，才可以获得上亿美金的估值。 New Relic 的工作原理是放很多小的探针到你的程序代码中，这些探针收集到非常详细的程序运行数据，就可以为你优化服务器提供有效的建议。</p>
-<h2 id="u4EA7_u54C1_u4E0A_u7684_u300Cmonitor_your_data_u300D"><a href="#u4EA7_u54C1_u4E0A_u7684_u300Cmonitor_your_data_u300D" class="headerlink" title="产品上的「monitor your data」"></a>产品上的「monitor your data」</h2><p>如果说技术上的「monitor your data」只是影响服务稳定性的话，那么产品上的「monitor your data」就会决定产品的成败了。</p>
-<p>我认为产品上的数据分析有以下作用。</p>
-<h3 id="u9A8C_u8BC1_u60F3_u6CD5"><a href="#u9A8C_u8BC1_u60F3_u6CD5" class="headerlink" title="验证想法"></a>验证想法</h3><p>在互联网行业工作这么多年，我发现了一个秘密，就是任何新的互联网产品，都不是靠用户调研或数据分析来的。</p>
-<p>因为用户调研非常难做，稍不注意就会被别的因素影响，所以乔布斯曾经说他从来不做用户调研。而数据分析对于一个新产品来说，会陷入无米之炊的尴尬境地。</p>
-<p>所以很多新产品的第一版都是创始人或产品经理「拍脑袋」的产物。这一点其实是非常现实的做法。「拍脑袋」依赖于创始人的经验，如果创始人经验丰富，那么很可能产品对了 7 分，错了 3 分。另外那 3 分的错误假设，可以在产品上线后迅速通过数据来验证，从而迭代修正这些假设。</p>
-<p>所以数据分析对于产品来说，第一大作用就是验证（或推翻）产品经理的假设，从而使产品能够得到快速迭代改进。</p>
-<h3 id="u53D1_u73B0_u65B0_u7684_u79D8_u5BC6"><a href="#u53D1_u73B0_u65B0_u7684_u79D8_u5BC6" class="headerlink" title="发现新的秘密"></a>发现新的秘密</h3><p>很多时候，数据分析不光会得到你的产品本身的状态，还会发现一些新的机会。借助这些新发现，我们对产品产生新的认识。</p>
-<p>拿我们的创业产品「小猿搜题」来说，我们一直在监控它的 <a href="http://baike.baidu.com/item/%E5%87%80%E6%8E%A8%E8%8D%90%E5%80%BC/3783368" target="_blank" rel="external"> NPS（净推荐值）</a> 数据。为了把数据分析得更加细致，我们把打 NPS 0 分的用户行为进行了抽样分析，最终我们发现，虽然我们的 slogon 叫「初高中拍照搜题利器」，但是却有大量的小学生用户在使用我们的产品。</p>
-<p>我们并没有为小学生做任何的产品上的优化，所以造成了这部分用户没有被很好的满足。所以，我们最近在内容和搜索算法上针对小学生做了特别优化，同时将产品的 slogon 修改成了「中小学拍照搜题利器」。</p>
-<p>如果没有细致的数据分析，我们可能就错过了几千万的潜在用户。</p>
-<h3 id="u53D1_u73B0_u6570_u636E_u89C4_u5F8B"><a href="#u53D1_u73B0_u6570_u636E_u89C4_u5F8B" class="headerlink" title="发现数据规律"></a>发现数据规律</h3><p>一个产品会有非常多的指标，日活，月活，留存率，年龄分布，用户使用习惯等，产品经理应该对这些指标了如指掌，在对这些数据熟悉之后，产品经理就可以发现数据中的变化规律或异常点，从而对产品带来一些改进。</p>
-<p>在这一点上，我喜欢讲林彪的一个故事。</p>
-<blockquote>
-<p>1948 年辽沈战役开始之后，在东北野战军前线指挥所里面，每天深夜都要进行例常的 “每日军情汇报”：由值班参谋读出下属各个纵队、师、团用电台报告的当日战况和缴获情况。</p>
-<p>那几乎是重复着千篇一律的枯燥无味的数据：每支部队歼敌多少、俘虏多少；缴获的火炮、车辆多少、枪支、物资多少。</p>
-<p>司令员林彪的要求很细，俘虏要分清军官和士兵，缴获的枪支，要统计出机枪、长枪、短枪；击毁和缴获尚能使用的汽车，也要分出大小和类别。</p>
-<p>经过一天紧张的战斗指挥工作，人们都非常疲劳。整个作战室里面估计只有定下这个规矩的司令员林彪本人、还有那个读电报的倒霉参谋在用心留意。</p>
-<p>1948 年 10 月 14 日，东北野战军以迅雷不及掩耳之势，仅用了 30 小时就攻克了对手原以为可以长期坚守的锦州之后，不顾疲劳，挥师北上与从沈阳出援的敌精锐廖耀湘基团二十余万在辽西相遇，一时间形成了混战。战局瞬息万变，谁胜谁负实难预料。</p>
-<p>在大战紧急中，林彪无论有多忙，仍然坚持每晚必作的 “功课”。一天深夜，值班参谋正在读着下面某师上报的其下属部队的战报。说他们下面的部队碰到了一个不大的遭遇战，歼敌部分、其余逃走。与其它之前所读的战报看上去并无明显异样，值班参谋就这样读着读着，林彪突然叫了一声 “停！” 他的眼里闪出了光芒，问：“刚才念的在胡家窝棚那个战斗的缴获，你们听到了吗？”</p>
-<p>大家带着睡意的脸上出现了茫然，因为如此战斗每天都有几十起，不都是差不多一模一样的枯燥数字吗？林彪扫视一周，见无人回答，便接连问了三句：</p>
-<p> “为什么那里缴获的短枪与长枪的比例比其它战斗略高”？<br> “为什么那里缴获和击毁的小车与大车的比例比其它战斗略高”？<br> “为什么在那里俘虏和击毙的军官与士兵的比例比其它战斗略高”？</p>
-<p>人们还没有来得及思索，等不及的林彪司令员大步走向挂满军用地图的墙壁，指着地图上的那个点说：“我猜想，不，我断定！敌人的指挥所就在这里！”</p>
-<p>随后林彪口授命令，追击从胡家窝棚逃走的那部分敌人，并坚决把他们打掉。各部队要采取分割包围的办法，把失去指挥中枢后会变得混乱的几十万敌军切成小块，逐一歼灭。</p>
-<p>廖耀湘对自己静心隐蔽的精悍野战司令部那么快就被发现、打掉，觉得实在不可思议，认为那是一个偶然事件，输得不甘心。当他得知林彪是如何得出判断之后说，“我服了，败在他手下，不丢人。”</p>
-</blockquote>
-<p>有些时候，一个数据中的异常点，就是一次决定性的机会。而产品经理只有做好「monitor your data」，才能抓住这样的机会。</p>
-<h3 id="u57F9_u517B_u4EA7_u54C1_u76F4_u89C9"><a href="#u57F9_u517B_u4EA7_u54C1_u76F4_u89C9" class="headerlink" title="培养产品直觉"></a>培养产品直觉</h3><p>有一些产品，产品经理自己就是目标用户，所以可以比较容易用同理心来分析出用户的需求。但是像我们猿题库这次创业，目标用户都是初高中生，我怎么知道这些 00 后的需求、想法和兴趣爱好？</p>
-<p>除了多和他们聊天，多用他们喜欢的产品外，分析他们的行为数据也至关重要。郭常圳常常说：“我们做产品要有场景化思维，要还原用户当时真实的使用场景”。而通过分析一些用户使用数据，就有助于我们还原用户使用场景。</p>
-<p>这种事情做得多了，我们就会更加了解用户了，慢慢就形成了产品的直觉。</p>
-<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>关注数据和数据分析能力，是互联网时代生存的基本技能。不管是做产品还是做技术，养成「monitor your data」的习惯，都可以让你将工作做得更加出色。</p>
-<p>本文讲完了为什么要关注数据，在下一篇里，我将分享具体如何做。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<img src="/images/data_picture_from_matrix.jpg">
-<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>由于科]]>
-    </summary>
-    
-      <category term="summary" scheme="http://blog.devtang.com/categories/summary/"/>
     
   </entry>
   

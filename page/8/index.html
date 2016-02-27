@@ -56,10 +56,8 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<fieldset role="search">
 						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
 						<input type="hidden" name="q" value="site:blog.devtang.com">
-						</fieldset>
 					</form>
 					
 					</li>
@@ -73,15 +71,84 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2014/03/21/weak_object_lifecycle_and_tagged_pointer/" title="NSNumber对象缓存以及Tagged Pointer" itemprop="url">
+  
+    <h1 itemprop="name">NSNumber对象缓存以及Tagged Pointer</h1>
+    
+     
+           <p itemprop="description" >这是一次和 @onevcat 的技术讨论总结。技术点比较散，但是还都比较有意思。涉及的技术细节包括：
+
+系统对象的缓存
+Tagged Pointer对象
+
+讨论一：autorelase对象按照苹果的编程约定，由非alloc,copy返回的对象都是autorelease的，所以对于</p>
+        
+    
+    <time datetime="2014-03-21T13:09:00.000Z" itemprop="datePublished">2014-03-21 21:09</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2014/03/21/ios-weekly-4/" title="iOS移动开发周报-第4期" itemprop="url">
+  
+    <h1 itemprop="name">iOS移动开发周报-第4期</h1>
+    
+     
+           <p itemprop="description" >版权说明本文为 InfoQ 中文站特供稿件，首发地址为：文章链接。如需转载，请与 InfoQ 中文站联系。
+前言欢迎国内的iOS同行或技术作者向我提交周报线索，线索可以是新闻、教程、开发工具或开源项目，将相关文章的简介和链接在微博上发布并 @唐巧_boy 即可。
+本周iOS移动开</p>
+        
+    
+    <time datetime="2014-03-21T12:23:00.000Z" itemprop="datePublished">2014-03-21 20:23</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2014/03/14/ios-weekly-3/" title="iOS移动开发周报-第3期" itemprop="url">
+  
+    <h1 itemprop="name">iOS移动开发周报-第3期</h1>
+    
+     
+           <p itemprop="description" >版权说明本文为 InfoQ 中文站特供稿件，首发地址为：文章链接。如需转载，请与 InfoQ 中文站联系。
+前言欢迎国内的iOS同行或技术作者向我提交周报线索，线索可以是新闻、教程、开发工具或开源项目，将相关文章的简介和链接在微博上发布并 @唐巧_boy 即可。
+【摘要】：本周移</p>
+        
+    
+    <time datetime="2014-03-14T07:10:00.000Z" itemprop="datePublished">2014-03-14 15:10</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2014/03/07/ios-weekly-2/" title="iOS移动开发周报-第2期" itemprop="url">
   
     <h1 itemprop="name">iOS移动开发周报-第2期</h1>
     
      
-           <p itemprop="description" >版权说明本文为InfoQ中文站特供稿件，首发地址为：文章链接。如需转载，请与InfoQ中文站联系。
+           <p itemprop="description" >版权说明本文为 InfoQ 中文站特供稿件，首发地址为：文章链接。如需转载，请与 InfoQ 中文站联系。
 前言欢迎国内的iOS同行或技术作者向我提交周报线索，线索可以是新闻、教程、开发工具或开源项目，将相关文章的简介和链接在微博上发布并 @唐巧_boy 即可。
 新闻
-《利用苹果商店规则</p>
+《利用苹果</p>
         
     
     <time datetime="2014-03-07T13:44:00.000Z" itemprop="datePublished">2014-03-07 21:44</time>
@@ -123,10 +190,10 @@ mkdir -p ~/Library/Applica</p>
     <h1 itemprop="name">iOS移动开发周报-第1期</h1>
     
      
-           <p itemprop="description" >版权说明本文为InfoQ中文站特供稿件，首发地址为：文章链接。如需转载，请与InfoQ中文站联系。
+           <p itemprop="description" >版权说明本文为 InfoQ 中文站特供稿件，首发地址为：文章链接。如需转载，请与 InfoQ 中文站联系。
 前言欢迎国内的iOS同行或技术作者向我提交周报线索，线索可以是新闻、教程、开发工具或开源项目，将相关文章的简介和链接在微博上发布并 @唐巧_boy 即可。
 新闻
-《苹果收购iOS测</p>
+《苹果收购</p>
         
     
     <time datetime="2014-02-27T09:23:00.000Z" itemprop="datePublished">2014-02-27 17:23</time>
@@ -336,74 +403,9 @@ Charles 是在 Mac 下常用的截取网络封包的工具，在做</p>
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2013/11/14/use-flurry-to-analyse-data/" title="使用Flurry来统计和分析用户行为" itemprop="url">
-  
-    <h1 itemprop="name">使用Flurry来统计和分析用户行为</h1>
-    
-     
-       <p itemprop="description" >2015年11月更新由于 Flurry 的后台在中国访问实在太慢，另外 Flurry 对中国区的 IP 类型判断不太准确（3G和Wifi无法准确区分），所以我现在不再推荐大家使用 Flurry 了。
-不用 Flurry 之后，我们现在使用的是腾讯的 MTA 来做统计。
-简介
-本文</p>
-      
-    
-    <time datetime="2013-11-14T05:51:00.000Z" itemprop="datePublished">2013-11-14 13:51</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2013/10/21/the-tech-detail-of-ape-client-3/" title="猿题库iOS客户端的技术细节（三）：基于CoreText的排版引擎" itemprop="url">
-  
-    <h1 itemprop="name">猿题库iOS客户端的技术细节（三）：基于CoreText的排版引擎</h1>
-    
-     
-       <p itemprop="description" >前言本人今年主要在负责猿题库 iOS 客户端的开发，本文旨在通过分享猿题库 iOS 客户端开发过程中的技术细节，达到总结和交流的目的。
-这是本技术分享系列文章的第三篇。本文涉及的技术细节是：基于 CoreText 的排版引擎。</p>
-      
-    
-    <time datetime="2013-10-21T08:15:00.000Z" itemprop="datePublished">2013-10-21 16:15</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2013/10/19/the-tech-detail-of-ape-client-2/" title="猿题库iOS客户端的技术细节（二）：答题卡扫描算法" itemprop="url">
-  
-    <h1 itemprop="name">猿题库iOS客户端的技术细节（二）：答题卡扫描算法</h1>
-    
-     
-       <p itemprop="description" >前言本人今年主要在负责猿题库 iOS 客户端的开发，本文旨在通过分享猿题库 iOS 客户端开发过程中的技术细节，达到总结和交流的目的。
-这是本技术分享系列文章的第二篇。本文涉及的技术细节是：答题卡扫描算法。</p>
-      
-    
-    <time datetime="2013-10-19T03:10:00.000Z" itemprop="datePublished">2013-10-19 11:10</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/7/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/9/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/9/">Next<span></span></a>
   </nav>
 
 </div>
@@ -423,7 +425,7 @@ Charles 是在 Mac 下常用的截取网络封包的工具，在做</p>
 		  
 		
 		  
-			<li><a href="/categories/iOS/" title="iOS">iOS<sup>86</sup></a></li>
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>89</sup></a></li>
 		  
 		
 		  
@@ -432,8 +434,6 @@ Charles 是在 Mac 下常用的截取网络封包的工具，在做</p>
 		
 		  
 			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
-		  
-		
 		  
 		
 		  
