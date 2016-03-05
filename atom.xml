@@ -4,7 +4,7 @@
   <subtitle><![CDATA[记录下自己学习的点滴]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.devtang.com/"/>
-  <updated>2016-02-27T01:33:16.000Z</updated>
+  <updated>2016-02-27T15:28:05.000Z</updated>
   <id>http://blog.devtang.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://blog.devtang.com/2016/02/27/swift-gym-3-higher-order-function/"/>
     <id>http://blog.devtang.com/2016/02/27/swift-gym-3-higher-order-function/</id>
     <published>2016-02-27T01:25:51.000Z</published>
-    <updated>2016-02-27T01:33:16.000Z</updated>
+    <updated>2016-02-27T15:28:05.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://ww2.sinaimg.cn/mw690/65dc76a3gw1f08hrkcyydj20i40cigv2.jpg" alt=""></p>
 <h2 id="u7248_u6743_u8BF4_u660E"><a href="#u7248_u6743_u8BF4_u660E" class="headerlink" title="版权说明"></a>版权说明</h2><p>本文为 InfoQ 中文站特供稿件，首发地址为：<a href="http://www.infoq.com/cn/articles/swift-brain-gym-high-order-function" target="_blank" rel="external">文章链接</a>。如需转载，请与 InfoQ 中文站联系。</p>
 <h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>Swift 其实比 Objective-C 复杂很多，相对于出生于上世纪 80 年代的 Objective-C 来说，Swift 融入了大量新特性。这也使得我们学习掌握这门语言变得相对来说更加困难。不过一切都是值得的，Swift 相比 Objective-C，写出来的程序更安全、更简洁，最终能够提高我们的工作效率和质量。</p>
@@ -831,13 +831,14 @@
   </entry>
   
   <entry>
-    <title><![CDATA[首届Swift开发者大会见闻]]></title>
+    <title><![CDATA[首届 Swift 开发者大会见闻]]></title>
     <link href="http://blog.devtang.com/2016/01/10/atswift-conference-summary/"/>
     <id>http://blog.devtang.com/2016/01/10/atswift-conference-summary/</id>
     <published>2016-01-10T14:31:55.000Z</published>
-    <updated>2016-02-16T10:26:44.000Z</updated>
+    <updated>2016-02-29T13:19:13.000Z</updated>
     <content type="html"><![CDATA[<p>今天是中国 iOS 开发者的一次聚会，因为首届 Swift 开发者大会在北京成功举办了。这次会议的质量很高，大会的相关 keynote 和 视频，稍后都会在官网上公开，所以没能参会的同学可以关注官网（ <a href="http://atswift.io/" target="_blank" rel="external">http://atswift.io/</a> ）的内容更新。我作为大会的主席（其实基本没出什么力）全程参与了全天的大会，在此记录下一些参会的见闻。</p>
 <p>先说说本次的大会的演讲内容吧。这次大会的 Keynote 可<a href="https://github.com/atConf/atswift-2016-resources" target="_blank" rel="external">在此下载</a>。</p>
+<p>2016.02.29更新：中国首届swift开发者大会的视频已经放出：<a href="http://www.imooc.com/learn/600" target="_blank" rel="external">http://www.imooc.com/learn/600</a></p>
 <h3 id="Chris"><a href="#Chris" class="headerlink" title="Chris"></a>Chris</h3><p>开场的是 objc.io 的创始人 Chris Eidhof。Chris 是大会演讲者中唯一没有准备 keynote 的人，但是演讲相当精彩。Chris 虽然没有 keynote，但是内容是精心准备过的，他先用 playground 简单介绍了一些 Swift 的内容后，就转到一个游戏 Demo 的重构工作中，整个重构工作包括几点：</p>
 <ol>
 <li>用 typealias 去掉 NSUserDefaults 的依赖。</li>
@@ -890,6 +891,8 @@
     <summary type="html">
     <![CDATA[<p>今天是中国 iOS 开发者的一次聚会，因为首届 Swift 开发者大会在北京成功举办了。这次会议的质量很高，大会的相关 keynote 和 视频，稍后都会在官网上公开，所以没能参会的同学可以关注官网（ <a href="http://atswift.io/" target=]]>
     </summary>
+    
+      <category term="Swift" scheme="http://blog.devtang.com/tags/Swift/"/>
     
       <category term="iOS" scheme="http://blog.devtang.com/categories/iOS/"/>
     
@@ -1326,11 +1329,11 @@ UPYUN:
   </entry>
   
   <entry>
-    <title><![CDATA[ 涅槃重生:我的技术转管理之路 ]]></title>
+    <title><![CDATA[涅槃重生:我的技术转管理之路]]></title>
     <link href="http://blog.devtang.com/2015/12/18/from-dev-to-manager/"/>
     <id>http://blog.devtang.com/2015/12/18/from-dev-to-manager/</id>
     <published>2015-12-18T13:32:00.000Z</published>
-    <updated>2016-02-16T10:28:02.000Z</updated>
+    <updated>2016-02-27T15:16:19.000Z</updated>
     <content type="html"><![CDATA[<img src="/images/from-dev-to-manager-1.jpg">
 <h2 id="u4E00_u4E2A_u7A0B_u5E8F_u5458_u7684_u7406_u60F3"><a href="#u4E00_u4E2A_u7A0B_u5E8F_u5458_u7684_u7406_u60F3" class="headerlink" title="一个程序员的理想"></a>一个程序员的理想</h2><p>我从高中就开始接触计算机并开始编程，我非常喜欢编程，我一直以为我会写一辈子代码。</p>
 <p>我从毕业就一直做技术，开始一年是做 Java 语言的服务器开发，开发过网易邮箱和微博的后台，后来转而做 iOS 开发。</p>
@@ -1455,7 +1458,7 @@ UPYUN:
     <link href="http://blog.devtang.com/2015/11/26/yykit-auther-interview/"/>
     <id>http://blog.devtang.com/2015/11/26/yykit-auther-interview/</id>
     <published>2015-11-26T12:47:13.000Z</published>
-    <updated>2016-02-27T01:33:21.000Z</updated>
+    <updated>2016-02-27T15:17:10.000Z</updated>
     <content type="html"><![CDATA[<h3 id="u7248_u6743_u8BF4_u660E"><a href="#u7248_u6743_u8BF4_u660E" class="headerlink" title="版权说明"></a>版权说明</h3><p>本文为 InfoQ 中文站特供稿件，首发地址为：<a href="http://www.infoq.com/cn/news/2015/11/ibireme-interview" target="_blank" rel="external">文章链接</a>。如需转载，请与 InfoQ 中文站联系。</p>
 <h3 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h3><p>第一次听到 <a href="http://weibo.com/239801242" target="_blank" rel="external">ibireme</a> 这个名字，是看到他在 <a href="http://weibo.com/2477831984/D2ujxj5Vx?type=comment#_rnd1448528368875" target="_blank" rel="external">微博上分享</a> 了 <a href="https://github.com/ibireme/YYText" target="_blank" rel="external">YYText</a> 开源库。当时我第一眼见到 YYText 的功能示意 GIF 图时（下图所示），就被它丰富的功能吸引了。YYText 应该是我见到过的功能最强大的基于 CoreText 的排版框架了。</p>
 <p><img src="https://camo.githubusercontent.com/fb454f77c109e6ac671e8fdb3220ade92238715b/68747470733a2f2f7261772e6769746875622e636f6d2f69626972656d652f5959546578742f6d61737465722f417474726962757465732f59595465787420457874656e6465642f5959546578744174746163686d656e742e676966" alt="YYText示意图"></p>
@@ -1529,6 +1532,8 @@ UPYUN:
     <summary type="html">
     <![CDATA[<h3 id="u7248_u6743_u8BF4_u660E"><a href="#u7248_u6743_u8BF4_u660E" class="headerlink" title="版权说明"></a>版权说明</h3><p>本文为 InfoQ 中文站特供稿件，首发地址为：]]>
     </summary>
+    
+      <category term="Interview" scheme="http://blog.devtang.com/tags/Interview/"/>
     
       <category term="iOS" scheme="http://blog.devtang.com/categories/iOS/"/>
     
