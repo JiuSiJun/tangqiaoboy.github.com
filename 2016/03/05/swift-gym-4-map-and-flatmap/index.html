@@ -1,0 +1,578 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Swift 烧脑体操（四） - map 和 flatMap | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="版权说明本文为 InfoQ 中文站特供稿件，首发地址为：文章链接。如需转载，请与 InfoQ 中文站联系。
+前言Swift 其实比 Objective-C 复杂很多，相对于出生于上世纪 80 年代的 Objective-C 来说，Swift 融入了大量新特性。这也使得我们学习掌握这门语言变得相对来说更加困难。不过一切都是值得的，Swift 相比 Objective-C，写出来的程序更安全、更简洁，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift 烧脑体操（四） - map 和 flatMap">
+<meta property="og:url" content="http://blog.devtang.com/2016/03/05/swift-gym-4-map-and-flatmap/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="版权说明本文为 InfoQ 中文站特供稿件，首发地址为：文章链接。如需转载，请与 InfoQ 中文站联系。
+前言Swift 其实比 Objective-C 复杂很多，相对于出生于上世纪 80 年代的 Objective-C 来说，Swift 融入了大量新特性。这也使得我们学习掌握这门语言变得相对来说更加困难。不过一切都是值得的，Swift 相比 Objective-C，写出来的程序更安全、更简洁，">
+<meta property="og:image" content="http://ww4.sinaimg.cn/mw690/65dc76a3gw1f0sz177142j20dk07bjsd.jpg">
+<meta property="og:image" content="https://quotesaga.s3.amazonaws.com/quote/QS_be152af2851e4e4e8d5049b0d5cbaed9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/65dc76a3gw1f0sygrb8chj20c606egmg.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/65dc76a3gw1f0scj26hf9j205805k3yk.jpg">
+<meta property="og:updated_time" content="2016-03-05T12:24:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift 烧脑体操（四） - map 和 flatMap">
+<meta name="twitter:description" content="版权说明本文为 InfoQ 中文站特供稿件，首发地址为：文章链接。如需转载，请与 InfoQ 中文站联系。
+前言Swift 其实比 Objective-C 复杂很多，相对于出生于上世纪 80 年代的 Objective-C 来说，Swift 融入了大量新特性。这也使得我们学习掌握这门语言变得相对来说更加困难。不过一切都是值得的，Swift 相比 Objective-C，写出来的程序更安全、更简洁，">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/03/05/swift-gym-4-map-and-flatmap/" title="Swift 烧脑体操（四） - map 和 flatMap" itemprop="url">Swift 烧脑体操（四） - map 和 flatMap</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2016-03-05T12:15:34.000Z" itemprop="datePublished"> 发表于 2016-03-05 20:15</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7248_u6743_u8BF4_u660E"><span class="toc-number">1.</span> <span class="toc-text">版权说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">2.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u51C6_u5907_u8FD0_u52A8_uFF1A_u57FA_u7840_u77E5_u8BC6"><span class="toc-number">3.</span> <span class="toc-text">准备运动：基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u6570_u7EC4_u4E2D_u7684_map__u548C_flatMap"><span class="toc-number">3.1.</span> <span class="toc-text">数组中的 map 和 flatMap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Optional__u4E2D_u7684_map__u548C_flatMap"><span class="toc-number">3.2.</span> <span class="toc-text">Optional 中的 map 和 flatMap</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#map__u548C_flatMap__u7684_u6E90_u7801"><span class="toc-number">4.</span> <span class="toc-text">map 和 flatMap 的源码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u6570_u7EC4_u7684_map__u7684_u6E90_u7801"><span class="toc-number">4.1.</span> <span class="toc-text">数组的 map 的源码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6570_u7EC4_u7684_flatMap__u7684_u6E90_u7801_uFF08_u91CD_u8F7D_u51FD_u6570_u4E00_uFF09"><span class="toc-number">4.2.</span> <span class="toc-text">数组的 flatMap 的源码（重载函数一）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6570_u7EC4_u7684_flatMap__u7684_u6E90_u7801_uFF08_u91CD_u8F7D_u51FD_u6570_u4E8C_uFF09"><span class="toc-number">4.3.</span> <span class="toc-text">数组的 flatMap 的源码（重载函数二）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Optional__u7684_map__u548C_flatMap__u6E90_u7801"><span class="toc-number">4.4.</span> <span class="toc-text">Optional 的 map 和 flatMap 源码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u70E7_u8111_u7684_map__u548C_flatMap"><span class="toc-number">5.</span> <span class="toc-text">烧脑的 map 和 flatMap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5173_u4E8E_u53D6_u540D"><span class="toc-number">5.1.</span> <span class="toc-text">关于取名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Functor"><span class="toc-number">5.2.</span> <span class="toc-text">Functor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Monad"><span class="toc-number">5.3.</span> <span class="toc-text">Monad</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u591A_u91CD_Optional"><span class="toc-number">5.4.</span> <span class="toc-text">多重 Optional</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="u7248_u6743_u8BF4_u660E"><a href="#u7248_u6743_u8BF4_u660E" class="headerlink" title="版权说明"></a>版权说明</h2><p>本文为 InfoQ 中文站特供稿件，首发地址为：<a href="http://www.infoq.com/cn/articles/swift-brain-gym-map-and-flatmap" target="_blank" rel="external">文章链接</a>。如需转载，请与 InfoQ 中文站联系。</p>
+<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>Swift 其实比 Objective-C 复杂很多，相对于出生于上世纪 80 年代的 Objective-C 来说，Swift 融入了大量新特性。这也使得我们学习掌握这门语言变得相对来说更加困难。不过一切都是值得的，Swift 相比 Objective-C，写出来的程序更安全、更简洁，最终能够提高我们的工作效率和质量。</p>
+<p>Swift 相关的学习资料已经很多，我想从另外一个角度来介绍它的一些特性，我把这个角度叫做「烧脑体操」。什么意思呢？就是我们专门挑一些比较费脑子的语言细节来学习。通过「烧脑」地思考，来达到对 Swift 语言的更加深入的理解。</p>
+<p>这是本体操的第四节，练习前请做好准备运动，保持头脑清醒。</p>
+<p>我之前一直以为我是懂 <code>map</code> 和 <code>flatMap</code> 的。但是直到我看到别人说：「一个实现了 <code>flatMap</code> 方法的类型其实就是 monad。」我又发现这个熟悉的东西变得陌生起来，本节烧脑体操打算更细致一些介绍 <code>map</code> 和 <code>flatMap</code>，为了下一节介绍 monad 做铺垫。</p>
+<h2 id="u51C6_u5907_u8FD0_u52A8_uFF1A_u57FA_u7840_u77E5_u8BC6"><a href="#u51C6_u5907_u8FD0_u52A8_uFF1A_u57FA_u7840_u77E5_u8BC6" class="headerlink" title="准备运动：基础知识"></a>准备运动：基础知识</h2><p><img src="http://ww4.sinaimg.cn/mw690/65dc76a3gw1f0sz177142j20dk07bjsd.jpg" alt=""></p>
+<h3 id="u6570_u7EC4_u4E2D_u7684_map__u548C_flatMap"><a href="#u6570_u7EC4_u4E2D_u7684_map__u548C_flatMap" class="headerlink" title="数组中的 map 和 flatMap"></a>数组中的 <code>map</code> 和 <code>flatMap</code></h3><p>数组中的 <code>map</code> 对数组元素进行某种规则的转换，例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr = [1, 2, 4]&#10;// arr = [1, 2, 4]&#10;&#10;let brr = arr.map &#123;&#10;    &#34;No.&#34; + String($0)&#10;&#125;&#10;// brr = [&#34;No.1&#34;, &#34;No.2&#34;, &#34;No.4&#34;]</span><br></pre></td></tr></table></figure>
+<p>而 <code>flatMap</code> 和 <code>map</code> 的差别在哪里呢？我们可以对比一下它们的定义。为了方便阅读，我在删掉了定义中的 <code>@noescape</code> 、<code>throws</code> 和 <code>rethrows</code> 关键字，如果你对这些关键字有疑问，可以查阅上一期的烧脑文章：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">extension SequenceType &#123;&#10;    public func map&#60;T&#62;(transform: (Self.Generator.Element) -&#62; T) &#10;         -&#62; [T]&#10;&#125;&#10;&#10;extension SequenceType &#123;&#10;    public func flatMap&#60;S : SequenceType&#62;(transform: (Self.Generator.Element) -&#62; S) &#10;         -&#62; [S.Generator.Element]&#10;&#125;&#10;&#10;extension SequenceType &#123;&#10;    public func flatMap&#60;T&#62;(transform: (Self.Generator.Element) -&#62; T?) &#10;         -&#62; [T]&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>我们从中可以发现，<code>map</code> 的定义只有一个，而 <code>flatMap</code> 的定义有两个重载的函数，这两个重载的函数都是接受一个闭包作为参数，返回一个数组。但是差别在于，闭包的定义不一样。</p>
+<p>第一个函数闭包的定义是：<code>(Self.Generator.Element) -&gt; S</code>，并且这里 S 被定义成：<code>S : SequenceType</code>。所以它是接受数组元素，然后输出一个 <code>SequenceType</code> 类型的元素的闭包。有趣的是， <code>flatMap</code> 最终执行的结果并不是 <code>SequenceType</code> 的数组，而是 <code>SequenceType</code> 内部元素另外组成的数组，即：<code>[S.Generator.Element]</code>。</p>
+<p>是不是有点晕？看看示例代码就比较清楚了：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr = [[1, 2, 3], [6, 5, 4]]&#10;let brr = arr.flatMap &#123;&#10;    $0&#10;&#125;&#10;// brr = [1, 2, 3, 6, 5, 4]</span><br></pre></td></tr></table></figure>
+<p>你看出来了吗？在这个例子中，数组 arr 调用 <code>flatMap</code> 时，元素<code>[1, 2, 3]</code> 和 <code>[6, 5, 4]</code> 分别被传入闭包中，又直接被作为结果返回。但是，最终的结果中，却是由这两个数组中的元素共同组成的新数组：<code>[1, 2, 3, 6, 5, 4]</code> 。</p>
+<p>需要注意的是，其实整个 <code>flatMap</code> 方法可以拆解成两步：</p>
+<ul>
+<li>第一步像 <code>map</code> 方法那样，对元素进行某种规则的转换。</li>
+<li>第二步，执行 <code>flatten</code> 方法，将数组中的元素一一取出来，组成一个新数组。</li>
+</ul>
+<p>所以，刚刚的代码其实等价于：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr = [[1, 2, 3], [6, 5, 4]]&#10;let crr = Array(arr.map&#123; $0 &#125;.flatten())&#10;// crr = [1, 2, 3, 6, 5, 4]</span><br></pre></td></tr></table></figure>
+<p>讲完了 <code>flatMap</code> 的第一种重载的函数，我们再来看第二种重载。</p>
+<p>在第二种重载中，闭包的定义变成了：<code>(Self.Generator.Element) -&gt; T?</code>，返回值 T 不再像第一种重载中那样要求是数组了，而变成了一个 Optional 的任意类型。而 <code>flatMap</code> 最终输出的数组结果，其实不是这个 <code>T?</code> 类型，而是这个 <code>T?</code> 类型解包之后，不为 <code>.None</code> 的元数数组：<code>[T]</code>。</p>
+<p>我们还是直接看代码吧。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr: [Int?] = [1, 2, nil, 4, nil, 5]&#10;let brr = arr.flatMap &#123; $0 &#125;&#10;// brr = [1, 2, 4, 5]</span><br></pre></td></tr></table></figure>
+<p>在这个例子中，<code>flatMap</code> 将数组中的 nil 都丢弃掉了，只保留了非空的值。</p>
+<p>在实际业务中，这样的例子还挺常见，比如你想构造一组图片，于是你使用 UIImage 的构造函数，但是这个函数可能会失败（比如图像的名字不存在时），所以返回的是一个 Optional 的 UIImage 对象。使用 <code>flatMap</code> 方法可以方便地将这些对象中为 .None 的都去除掉。如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let images = (1...6).flatMap &#123;&#10;    UIImage(named: &#34;imageName-\($0)&#34;) &#10;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Optional__u4E2D_u7684_map__u548C_flatMap"><a href="#Optional__u4E2D_u7684_map__u548C_flatMap" class="headerlink" title="Optional 中的 map 和 flatMap"></a>Optional 中的 <code>map</code> 和 <code>flatMap</code></h3><p>其实 <code>map</code> 和 <code>flatMap</code> 不止存在于数组中，在 Optional 中也存在。我们先看看定义吧：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public enum Optional&#60;Wrapped&#62; : _Reflectable, NilLiteralConvertible &#123;&#10;    case None&#10;    case Some(Wrapped)&#10;&#10;    public func map&#60;U&#62;( f: (Wrapped) throws -&#62; U) &#10;        rethrows -&#62; U?&#10;&#10;    public func flatMap&#60;U&#62;( f: (Wrapped) throws -&#62; U?) &#10;        rethrows -&#62; U?&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>所以，对于一个 Optional 的变量来说，<code>map</code> 方法允许它再次修改自己的值，并且不必关心自己是否为 <code>.None</code>。例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let a1: Int? = 3&#10;let b1 = a1.map&#123; $0 * 2 &#125;&#10;// b1 = 6&#10;&#10;let a2: Int? = nil&#10;let b2 = a2.map&#123; $0 * 2 &#125;&#10;// b2 = nil</span><br></pre></td></tr></table></figure>
+<p>再举一个例子，比如我们想把一个字符串转成 NSDate 实例，如果不用 <code>map</code> 方法，我们只能这么写：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var date: NSDate? = ...&#10;var formatted = date == nil ? nil : NSDateFormatter().stringFromDate(date!)</span><br></pre></td></tr></table></figure>
+<p>而使用 <code>map</code> 函数后，代码变得更短，更易读：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var date: NSDate? = ...&#10;var formatted = date.map(NSDateFormatter().stringFromDate)</span><br></pre></td></tr></table></figure>
+<p>看出来特点了吗？当我们的输入是一个 Optional，同时我们需要在逻辑中处理这个 Optional 是否为 nil，那么就适合用 <code>map</code> 来替代原来的写法，使得代码更加简短。</p>
+<p>那什么时候使用 Optional 的 <code>flatMap</code> 方法呢？答案是：当我们的闭包参数有可能返回 nil 的时候。</p>
+<p>比如，我们希望将一个字符串转换成 Int，但是转换可能失败，这个时候我们就可以用 <code>flatMap</code> 方法，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let s: String? = &#34;abc&#34;&#10;let v = s.flatMap &#123; (a: String) -&#62; Int? in&#10;    return Int(a)&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>我在这里还发现了更多的使用 <code>map</code> 和 <code>flatMap</code> 的例子，分享给大家：<a href="http://blog.xebia.com/the-power-of-map-and-flatmap-of-swift-optionals/" target="_blank" rel="external">http://blog.xebia.com/the-power-of-map-and-flatmap-of-swift-optionals/</a>。</p>
+<h2 id="map__u548C_flatMap__u7684_u6E90_u7801"><a href="#map__u548C_flatMap__u7684_u6E90_u7801" class="headerlink" title="map 和 flatMap 的源码"></a><code>map</code> 和 <code>flatMap</code> 的源码</h2><p><img src="https://quotesaga.s3.amazonaws.com/quote/QS_be152af2851e4e4e8d5049b0d5cbaed9.jpg" alt=""></p>
+<blockquote>
+<p>Talk is cheap. Show me the code.</p>
+<p>– Linus Torvalds</p>
+</blockquote>
+<p>为了更好地理解，我们去翻翻苹果开源的 Swift 代码，看看 <code>map</code> 和 <code>flatMap</code> 的实现吧。</p>
+<h3 id="u6570_u7EC4_u7684_map__u7684_u6E90_u7801"><a href="#u6570_u7EC4_u7684_map__u7684_u6E90_u7801" class="headerlink" title="数组的 map 的源码"></a>数组的 <code>map</code> 的源码</h3><p>源码地址是：<a href="https://github.com/apple/swift/blob/master/stdlib/public/core/Collection.swift" target="_blank" rel="external">https://github.com/apple/swift/blob/master/stdlib/public/core/Collection.swift</a>，摘录如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public func map&#60;T&#62;(@noescape transform: (Generator.Element) throws -&#62; T)&#10;        rethrows -&#62; [T] &#123;&#10;    let count: Int = numericCast(self.count)&#10;    if count == 0 &#123;&#10;        return []&#10;    &#125;&#10;    &#10;    var result = ContiguousArray&#60;T&#62;()&#10;    result.reserveCapacity(count)&#10;    &#10;    var i = self.startIndex&#10;    &#10;    for _ in 0..&#60;count &#123;&#10;        result.append(try transform(self[i]))&#10;        i = i.successor()&#10;    &#125;&#10;    &#10;    _expectEnd(i, self)&#10;    return Array(result)&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="u6570_u7EC4_u7684_flatMap__u7684_u6E90_u7801_uFF08_u91CD_u8F7D_u51FD_u6570_u4E00_uFF09"><a href="#u6570_u7EC4_u7684_flatMap__u7684_u6E90_u7801_uFF08_u91CD_u8F7D_u51FD_u6570_u4E00_uFF09" class="headerlink" title="数组的 flatMap 的源码（重载函数一）"></a>数组的 <code>flatMap</code> 的源码（重载函数一）</h3><p>刚刚也说到，数组的 <code>flatMap</code> 有两个重载的函数。我们先看第一个的函数实现。源码地址是：<a href="https://github.com/apple/swift/blob/master/stdlib/public/core/SequenceAlgorithms.swift.gyb" target="_blank" rel="external">https://github.com/apple/swift/blob/master/stdlib/public/core/SequenceAlgorithms.swift.gyb</a>。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;public func flatMap&#60;S : SequenceType&#62;(&#10;        transform: ($&#123;GElement&#125;) throws -&#62; S&#10;    ) rethrows -&#62; [S.$&#123;GElement&#125;] &#123;&#10;        var result: [S.$&#123;GElement&#125;] = []&#10;        for element in self &#123;&#10;            result.appendContentsOf(try transform(element))&#10;        &#125;&#10;        return result&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>对于这个代码，我们可以看出，它做了以下几件事情：</p>
+<ol>
+<li>构造一个名为 <code>result</code> 的新数组，用于存放结果。</li>
+<li>遍历自己的元素，对于每个元素，调用闭包的转换函数 <code>transform</code>，进行转换。</li>
+<li>将转换的结果，使用 <code>appendContentsOf</code> 方法，将结果放入 <code>result</code> 数组中。</li>
+</ol>
+<p>而这个 <code>appendContentsOf</code> 方法，即是把数组中的元素取出来，放入新数组。以下是一个简单示例：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var arr = [1, 3, 2]&#10;arr.appendContentsOf([4, 5])&#10;// arr = [1, 3, 2, 4, 5]</span><br></pre></td></tr></table></figure>
+<p>所以这种 <code>flatMap</code> 必须要求 <code>transform</code> 函数返回的是一个 <code>SequenceType</code> 类型，因为 <code>appendContentsOf</code> 方法需要的是一个 <code>SequenceType</code> 类型的参数。</p>
+<h3 id="u6570_u7EC4_u7684_flatMap__u7684_u6E90_u7801_uFF08_u91CD_u8F7D_u51FD_u6570_u4E8C_uFF09"><a href="#u6570_u7EC4_u7684_flatMap__u7684_u6E90_u7801_uFF08_u91CD_u8F7D_u51FD_u6570_u4E8C_uFF09" class="headerlink" title="数组的 flatMap 的源码（重载函数二）"></a>数组的 <code>flatMap</code> 的源码（重载函数二）</h3><p>当我们的闭包参数返回的类型不是 <code>SequenceType</code> 时，就会匹配上第二个重载的 <code>flatMap</code> 函数。以下是函数的源码。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public func flatMap&#60;T&#62;(&#10;    @noescape transform: ($&#123;GElement&#125;) throws -&#62; T?&#10;    ) rethrows -&#62; [T] &#123;&#10;        var result: [T] = []&#10;        for element in self &#123;&#10;            if let newElement = try transform(element) &#123;&#10;                result.append(newElement)&#10;            &#125;&#10;        &#125;&#10;        return result&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>我们也用同样的方式，把该函数的逻辑理一下：</p>
+<ol>
+<li>构造一个名为 <code>result</code> 的新数组，用于存放结果。(和另一个重载函数完全一样)</li>
+<li>遍历自己的元素，对于每个元素，调用闭包的转换函数 <code>transform</code>，进行转换。(和另一个重载函数完全一样)</li>
+<li>将转换的结果，判断结果是否是 nil，如果不是，使用使用 <code>append</code> 方法，将结果放入 <code>result</code> 数组中。（唯一差别的地方）</li>
+</ol>
+<p>所以，该 <code>flatMap</code> 函数可以过滤闭包执行结果为 nil 的情况，仅收集那些转换后非空的结果。</p>
+<p>对于这种重载的 <code>flatMap</code> 函数，它和 <code>map</code> 函数的逻辑非常相似，仅仅多做了一个判断是否为 nil 的逻辑。</p>
+<p>所以，面试题来了：「什么情况下数组的 <code>map</code> 可以和 <code>flatMap</code> 等价替换？」</p>
+<p>答案是：当 <code>map</code> 的闭包函数返回的结果不是 <code>SequenceType</code> 的时候。因为这样的话，<code>flatMap</code> 就会调到我们当前讨论的这种重载形式。而这种重载形式和 <code>map</code> 的差异就仅仅在于要不要判断结果为 nil。</p>
+<p>下面是一个示例代码，可以看出：<code>brr</code> 和 <code>crr</code> 虽然分别使用 <code>map</code> 和 <code>flatMap</code> 生成，但是结果完全一样：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr = [1, 2, 4]&#10;// arr = [1, 2, 4]&#10;&#10;let brr = arr.map &#123;&#10;    &#34;No.&#34; + String($0)&#10;&#125;&#10;// brr = [&#34;No.1&#34;, &#34;No.2&#34;, &#34;No.4&#34;]&#10;&#10;let crr = arr.flatMap &#123;&#10;    &#34;No.&#34; + String($0)&#10;&#125;&#10;// crr = [&#34;No.1&#34;, &#34;No.2&#34;, &#34;No.4&#34;]</span><br></pre></td></tr></table></figure>
+<h3 id="Optional__u7684_map__u548C_flatMap__u6E90_u7801"><a href="#Optional__u7684_map__u548C_flatMap__u6E90_u7801" class="headerlink" title="Optional 的 map 和 flatMap 源码"></a>Optional 的 <code>map</code> 和 <code>flatMap</code> 源码</h3><p>看完数组的实现，我们再来看看 Optional 中的相关实现。源码地址是：<a href="https://github.com/apple/swift/blob/master/stdlib/public/core/Optional.swift" target="_blank" rel="external">https://github.com/apple/swift/blob/master/stdlib/public/core/Optional.swift</a>，摘录如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/// If `self == nil`, returns `nil`.  &#10;/// Otherwise, returns `f(self!)`.&#10;public func map&#60;U&#62;(@noescape f: (Wrapped) throws -&#62; U) &#10;        rethrows -&#62; U? &#123;&#10;    switch self &#123;&#10;    case .Some(let y):&#10;        return .Some(try f(y))&#10;    case .None:&#10;        return .None&#10;    &#125;&#10;&#125;&#10;&#10;/// Returns `nil` if `self` is `nil`, &#10;/// `f(self!)` otherwise.&#10;@warn_unused_result&#10;public func flatMap&#60;U&#62;(@noescape f: (Wrapped) throws -&#62; U?) &#10;        rethrows -&#62; U? &#123;&#10;    switch self &#123;&#10;    case .Some(let y):&#10;        return try f(y)&#10;    case .None:&#10;        return .None&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>Optional 的这两函数真的是惊人的相似，如果你只看两段函数的注释的话，甚至看不出这两个函数的差别。</p>
+<p>这两函数实现的差别仅仅只有两处：</p>
+<ol>
+<li><code>f</code> 函数一个返回 <code>U</code>，另一个返回 <code>U?</code> 。</li>
+<li>一个调用的结果直接返回，另一个会把结果放到 .Some 里面返回。</li>
+</ol>
+<p>两个函数最终都保证了返回结果是 Optional 的。只是将结果转换成 Optional 的位置不一样。</p>
+<p>这就像我老婆给我说：「我喜欢这个东西，你送给我吗？不送的话我就直接刷你卡买了！」。。。买东西的结果本质上是一样的，谁付钱本质上也是一样的，差别只是谁动手而已。</p>
+<p>既然 Optional 的 <code>map</code> 和 <code>flatMap</code> 本质上是一样的，为什么要搞两种形式呢？这其实是为了调用者更方便而设计的。调用者提供的闭包函数，既可以返回 Optional 的结果，也可以返回非 Optional 的结果。对于后者，使用 <code>map</code> 方法，即可以将结果继续转换成 Optional 的。结果是 Optional 的意味着我们可以继续链式调用，也更方便我们处理错误。</p>
+<p>我们来看一段略烧脑的代码，它使用了 Optional 的 <code>flatMap</code> 方法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var arr = [1, 2, 4]&#10;let res = arr.first.flatMap &#123;&#10;    arr.reduce($0, combine: max)&#10;&#125;&#10;`</span><br></pre></td></tr></table></figure>
+<p>这段代码的功能是：计算出数组中的元素最大值，按理说，求最大值直接使用 <code>reduce</code> 方法就可以了。不过有一种特殊情况需要考虑：即数组中的元素个数为 0 的情况，在这种情况下，没有最大值。</p>
+<p>我们使用 Optional 的 <code>flatMap</code> 方法来处理了这种情况。arr 的 <code>first</code> 方法返回的结果是 Optional 的，当数组为空的时候，<code>first</code> 方法返回 .None，所以，这段代码可以处理数组元素个数为 0 的情况了。</p>
+<h2 id="u70E7_u8111_u7684_map__u548C_flatMap"><a href="#u70E7_u8111_u7684_map__u548C_flatMap" class="headerlink" title="烧脑的 map 和 flatMap"></a>烧脑的 <code>map</code> 和 <code>flatMap</code></h2><h3 id="u5173_u4E8E_u53D6_u540D"><a href="#u5173_u4E8E_u53D6_u540D" class="headerlink" title="关于取名"></a>关于取名</h3><p><img src="http://ww1.sinaimg.cn/large/65dc76a3gw1f0sygrb8chj20c606egmg.jpg" alt=""></p>
+<blockquote>
+<p>There are only two hard things in Computer Science: cache invalidation and naming things.</p>
+<p>– Phil Karlton</p>
+</blockquote>
+<p>有一位大师说，计算机世界真正称得上难题的就只有两个：第一个是缓存过期问题，第二个就是取名字。作为文章最后的烧脑环节，我们来聊聊取名字这个事吧。</p>
+<p>我来提几个看起来「无厘头」的问题：</p>
+<ul>
+<li>数组的 <code>map</code> 函数和 Optinal 的 <code>map</code> 函数的实现差别巨大？但是为什么都叫 <code>map</code> 这个名字？</li>
+<li>数组的 <code>flatMap</code> 函数和 Optinal 的 <code>flatMap</code> 函数的实现差别巨大？但是为什么都叫 <code>flatMap</code> 这个名字？</li>
+<li>数组的 <code>flatMap</code> 有两个重载的函数，两个重载的函数差别巨大，但是为什么都叫 <code>flatMap</code> 这个名字？</li>
+</ul>
+<p>在我看来，这样的取名其实都是有背后的原因的，我试着分享一下我的理解。我们先说结论，然后再解释。这段结论来自：<a href="http://www.mokacoding.com/blog/functor-applicative-monads-in-pictures/" target="_blank" rel="external">http://www.mokacoding.com/blog/functor-applicative-monads-in-pictures/</a>。</p>
+<ul>
+<li>数组和 Optional 的 <code>map</code> 函数都叫一样的名字，是因为它们都是 <a href="https://en.wikipedia.org/wiki/Functor" target="_blank" rel="external">Functor</a>。</li>
+<li>数组和 Optinal 的 <code>flatMap</code> 函数都叫一样的名字，是因为它们都是 <a href="https://en.wikipedia.org/wiki/Monad_(functional_programming" target="_blank" rel="external">Monad</a>)。</li>
+</ul>
+<p><img src="http://ww3.sinaimg.cn/large/65dc76a3gw1f0scj26hf9j205805k3yk.jpg" alt=""></p>
+<p>好吧，我猜你心里开始骂娘了：「为了解释一个问题，引入了两个新问题：谁知道什么是 Functor 和 Monad ！」</p>
+<p>不要着急，我们先说严谨的结论有助于更好地总结和归纳，我下面试着解释一下 Functor 和 Monad 。</p>
+<h3 id="Functor"><a href="#Functor" class="headerlink" title="Functor"></a>Functor</h3><p>Functor 在 <a href="https://en.wikipedia.org/wiki/Functor" target="_blank" rel="external">Wikipedia</a> 上的定义非常学术。我想了一个相对比较容易理解的定义：所谓的 Functor，就是可以把一个函数应用于一个「封装过的值」上，得到一个新的「封装过的值」。通常情况下，我们会把这个函数叫做 <code>map</code>。</p>
+<p>什么叫做「封装过的值」呢？数组就是对值的一种封装，Optional 也是对值的一种封装。如果你愿意，你也可以自己封装一些值，比如把网络请求的结果和网络异常封装在一起，做成一个 enum（如下所示）。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">enum Result&#60;T&#62; &#123;&#10;    case Success(T)&#10;    case Failure(ErrorType)&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>一个值能否成为「封装过的值」，取决于这个值的类型所表示的集合，通过 <code>map</code> 函数，能否映射到一个新集合中。这个新集合，也要求能够继续使用 <code>map</code> 函数，再映射到另外一个集合。</p>
+<p>我们拿数组和 Optional 类型来检查这个规则，就会发现是符合的：</p>
+<ul>
+<li>数组可以通过 <code>map</code> 函数，生成一个新的数组，新的数组可以继续使用 <code>map</code> 函数。</li>
+<li>Optional 可以通过 <code>map</code> 函数，生成一个新的 Optional 变量，新的 Optional 变量可以继续使用 <code>map</code> 函数。</li>
+</ul>
+<p>所以，数组 和 Optional 都是 Functor。</p>
+<h3 id="Monad"><a href="#Monad" class="headerlink" title="Monad"></a>Monad</h3><p>如果你能理解 <a href="https://en.wikipedia.org/wiki/Functor" target="_blank" rel="external">Functor</a>，那么 <a href="https://en.wikipedia.org/wiki/Monad_(functional_programming" target="_blank" rel="external">Monad</a>) 就相对容易一些了。所谓的 Monad，和 Functor 一样，也是把一个函数应用于一个「封装过的值」上，得到一个新的「封装过的值」。不过差别在于:</p>
+<ul>
+<li>Functor 的函数定义是从「未封装的值」到「未封装的值」的</li>
+<li>Monad   的函数定义是从「未封装的值」到「封装后的值」的。</li>
+</ul>
+<p>下面我举例解释一下：</p>
+<p>刚刚我们说，数组 和 Optional 都是 Functor，因为它们支持用 <code>map</code> 函数做「封装过的值」所在集合的变换。那么，你注意到了吗？map 函数的定义中，输入的参数和返回的结果，都不是「封装过的值」，而是「未封装的值」。什么是「未封装的值」？</p>
+<ul>
+<li>对于数组来说，「未封装的值」是数组里面一个一个的元素，map 函数的闭包接受的是一个一个的元素，返回的也是一个一个的元素。</li>
+<li>对于 Optional 来说，「未封装的值」是 Optional 解包出来的值，map 函数的闭包接受的是解包出来的值，返回的也是解包出来的值。</li>
+</ul>
+<p>下面是数组的示例代码，我故意加上了闭包的参数，我们再观察一下。我们可以发现，<code>map</code> 的闭包接受的是 Int 类型，返回的是 String 类型，都是一个一个的元素类型，而不是数组。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// map &#30340;&#38381;&#21253;&#25509;&#21463;&#30340;&#26159; Int &#31867;&#22411;&#65292;&#36820;&#22238;&#30340;&#26159; String &#31867;&#22411;&#65292;&#37117;&#26159;&#19968;&#20010;&#19968;&#20010;&#30340;&#20803;&#32032;&#31867;&#22411;&#65292;&#32780;&#19981;&#26159;&#25968;&#32452;&#12290;&#10;let arr = [1, 2, 4]&#10;let brr = arr.map &#123;&#10;    (element: Int) -&#62; String in&#10;    &#34;No.&#34; + String(element)&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>下面是 Optional 的示例代码，我也故意加上了闭包的参数。我们可以发现，<code>map</code> 的闭包接受的是 Int 类型，返回的是 Int 类型，都是非 Optional 的。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// map &#30340;&#38381;&#21253;&#25509;&#21463;&#30340;&#26159; Int &#31867;&#22411;&#65292;&#36820;&#22238;&#30340;&#26159; Int &#31867;&#22411;&#65292;&#37117;&#26159;&#38750; Optional &#30340;&#12290;&#10;let tq: Int? = 1&#10;tq.map &#123; (a: Int) -&#62; Int in&#10;    a * 2&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>我们刚刚说，对于 Monad 来说，它和 Functor 的差异实在太小，小到就只有闭包的参数类型不一样。数组实现了 <code>flatMap</code> ，它就是一种 Monad，下面我们就看看 <code>flatMap</code> 在数组中的函数定义，我们可以看出，闭包接受的是数组的元素，返回的是一个数组（封装后的值）。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// &#38381;&#21253;&#25509;&#21463;&#30340;&#26159;&#25968;&#32452;&#30340;&#20803;&#32032;&#65292;&#36820;&#22238;&#30340;&#26159;&#19968;&#20010;&#25968;&#32452;&#65288;&#23553;&#35013;&#21518;&#30340;&#20540;&#65289;&#10;let arr = [1, 2, 3]&#10;let brr = arr.flatMap &#123;&#10;    (element:Int) -&#62; [Int] in&#10;    return [element * 2]&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>下面是 <code>flatMap</code> 在 Optional 中的定义，我们可以看出，闭包接受的是 Int 类型，返回的是一个 Optional（封装后的值）。</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">// &#38381;&#21253;&#25509;&#21463;&#30340;&#26159; Int &#31867;&#22411;&#65292;&#36820;&#22238;&#30340;&#26159;&#19968;&#20010; Optional&#65288;&#23553;&#35013;&#21518;&#30340;&#20540;&#65289;&#10;let tq: Int? = 1&#10;tq.flatMap &#123; (a: Int) -&#62; Int? in&#10;    if a % 2 == 0 &#123;&#10;        return a&#10;    &#125; else &#123;&#10;        return nil&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>所以本质上，<code>map</code> 和 <code>flatMap</code> 代表着一类行为，我们把这类行为叫做 Functor 和 Monad。它们的差异仅仅在于闭包函数的参数返回类型不一样。所以，我们才会把数组和 Optional 这两个差别很大的类型，都加上两个实现差别很大的函数，但是都取名叫 <code>map</code> 和 <code>flatMap</code>。</p>
+<h3 id="u591A_u91CD_Optional"><a href="#u591A_u91CD_Optional" class="headerlink" title="多重 Optional"></a>多重 Optional</h3><p>我们在第一节烧脑文章中提到过多重 Optional，在使用 <code>map</code> 的时候不仔细，就会触发多重 Optional 的问题。比如下面这个代码，变量 <code>b</code> 因为是一个两层嵌套的 nil，所以 <code>if let</code> 失效了。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let tq: Int? = 1&#10;let b = tq.map &#123; (a: Int) -&#62; Int? in&#10;    if a % 2 == 0 &#123;&#10;        return a&#10;    &#125; else &#123;&#10;        return nil&#10;    &#125;&#10;&#125;&#10;if let _ = b &#123;&#10;    print(&#34;not nil&#34;)&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>解决办法是把 <code>map</code> 换成 <code>flatMap</code> 即可。</p>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>讨论完了，我们总结一下：</p>
+<ul>
+<li>数组和 Optional 都能支持 <code>map</code> 和 <code>flatMap</code> 函数。</li>
+<li>数组的 <code>flatMap</code> 有两个重载的实现，一个实现等价于先 <code>map</code> 再 <code>flatten</code>，另一个实现用于去掉结果中的 nil。</li>
+<li>通过阅读源码，我们更加深入理解了 <code>map</code> 和 <code>flatMap</code> 函数内部的机制。</li>
+<li>我们讨论了 <code>map</code> 和 <code>flatMap</code> 的取名问题，最后得出：一个类型如果支持 <code>map</code>，则表示它是一个 <a href="https://en.wikipedia.org/wiki/Functor" target="_blank" rel="external">Functor</a>；一个类型如果支持 <code>flatMap</code>，则表示它是一个 <a href="https://en.wikipedia.org/wiki/Monad_(functional_programming" target="_blank" rel="external">Monad</a>。</li>
+<li>我们讨论了 <code>map</code> 中使用不当造成的多重 Optional 问题。</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Swift/">Swift</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2016/03/05/swift-gym-4-map-and-flatmap/" data-title="Swift 烧脑体操（四） - map 和 flatMap | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/02/27/swift-gym-3-higher-order-function/"  title="Swift 烧脑体操（三） - 高阶函数">
+ <strong>下一篇：</strong><br/> 
+ <span>Swift 烧脑体操（三） - 高阶函数
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2016/03/05/swift-gym-4-map-and-flatmap/" data-title="Swift 烧脑体操（四） - map 和 flatMap" data-url="http://blog.devtang.com/2016/03/05/swift-gym-4-map-and-flatmap/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>90</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-summary/" title="iOS summary">iOS summary<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly<sup>45</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell<sup>6</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary<sup>22</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="/images/weixin-qr.jpg" width="220px" />
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"tangqiaoboy"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-28029597-1', 'null');  
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
