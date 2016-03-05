@@ -8,18 +8,12 @@
   <title>粉笔网iPhone端使用的第三方开源库 - 唐巧的技术博客</title>
   <meta name="author" content="唐巧">
 
-  
-  <meta name="description" content="前言 最近有朋友问我粉笔网iPhone端使用了哪些第三方的开源库。我在这儿整理了一下，分享给大家。 ASIHttpRequest ASIHttpRequest 是一个被广泛使用的第三方网络访问开源库。用于提供更加友好的网络访问接口。相信很多搞iOS开发的朋友都用过它。
-ASIHttpRequest &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.devtang.com/blog/2012/10/09/3rd-libs-used-in-fenbi-app">
+
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -76,178 +70,17 @@ ASIHttpRequest &hellip;">
 </nav>
   <div id="main">
     <div id="content">
-      <div>
+      <script type="text/javascript">
+window.location.pathname = window.location.pathname.replace('/blog', '')
+</script>
+
+<div>
 <article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">粉笔网iPhone端使用的第三方开源库</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-10-09T15:30:00+08:00" pubdate data-updated="true">Oct 9<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><h2>前言</h2>
-
-<p>最近有朋友问我粉笔网iPhone端使用了哪些第三方的开源库。我在这儿整理了一下，分享给大家。</p>
-
-<p><img src="/images/fenbi_libs.png"></p>
-
-<!-- more -->
-
-
-<h3>ASIHttpRequest</h3>
-
-<p><a href="http://allseeing-i.com/ASIHTTPRequest/">ASIHttpRequest</a> 是一个被广泛使用的第三方网络访问开源库。用于提供更加友好的网络访问接口。相信很多搞iOS开发的朋友都用过它。
-ASIHttpRequest 的主要使用文档可以<a href="http://allseeing-i.com/ASIHTTPRequest/How-to-use">参考这里</a>。</p>
-
-<p>另外，由于ASIHTTPRequest的作者已经公开说明不再维护这个开源项目，并且该项目已经一年多没有更新了，所以我一直在寻找替代的开源库。不过现在暂时还没有找到更好的。</p>
-
-<h3>RegexKit</h3>
-
-<p><a href="http://regexkit.sourceforge.net/">RegexKit</a>是一个正则表达式工具类。提供强大的正则表达式匹配和替换功能。我们主要使用它来对类似微博的正文替换工作。例如将 @某某 换成带链接的，将图片的URL换成img标签等。</p>
-
-<p>同时，开源库MGTemplateEngine也依赖于此库。附上<a href="http://regexkit.sourceforge.net/Documentation/index.html">RegexKit4.0的官方文档教程</a>。</p>
-
-<h3>MGTemplateEngine</h3>
-
-<p><a href="http://svn.cocoasourcecode.com/MGTemplateEngine">MGTemplateEngine</a>是一个模版引擎。我们主要使用它来生成单条微博页的内容。我们的单条微博页打算用UIWebView来显示，所以内容需要用模版渲染成HTML格式。MGTemplateEngine的模版语言比较象：Smarty, FreeMarker 和 Django的模版语言。</p>
-
-<p>MGTemplateEngine的作者官方博客在<a href="http://mattgemmell.com/2008/05/20/mgtemplateengine-templates-with-cocoa/">这里</a>。</p>
-
-<p>我们在使用时，对此开源库的Filter类进行了修改，主要增加了3个自定义的filter，用于提供我们的格式化时间，转义html和过滤空头象的用户的方式。</p>
-
-<h3>JSONKit</h3>
-
-<p><a href="https://github.com/johnezang/JSONKit">JSONKit</a>是一个比较高效的JSON解析库。我之前比较过各大JSON解析库的性能（<a href="http://blog.devtang.com/blog/2012/05/05/do-not-use-sbjson/">文章在此</a>），JSONKit算是非常不错的，大概的使用示例如下：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &quot;JSONKit.h&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">path</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSBundle</span> <span class="n">mainBundle</span><span class="p">]</span> <span class="nl">pathForResource:</span><span class="s">@&quot;data&quot;</span> <span class="nl">ofType:</span><span class="s">@&quot;json&quot;</span><span class="p">];</span>
-</span><span class='line'><span class="n">NSData</span> <span class="o">*</span><span class="n">content</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSData</span> <span class="nl">dataWithContentsOfFile:</span><span class="n">path</span><span class="p">];</span>
-</span><span class='line'><span class="n">NSDictionary</span> <span class="o">*</span><span class="n">kitData</span> <span class="o">=</span> <span class="p">[</span><span class="n">content</span> <span class="n">objectFromJSONData</span><span class="p">];</span>
-</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">kitString</span> <span class="o">=</span> <span class="p">[</span><span class="n">kitData</span> <span class="n">JSONString</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>GTMNSString</h3>
-
-<p><a href="https://code.google.com/p/google-toolbox-for-mac/">GTMNSString</a>主要用于转义HTML中的特殊字符。以防止XSS攻击。</p>
-
-<h3>FMDB</h3>
-
-<p><a href="https://github.com/ccgus/fmdb">FMDB</a>是一个sqlite数据库封装类，需要加入 libsqlite3.dylib 依赖以及引入 sqlite3.h 头文件即可。在使用上非常简单。如下是一个例子：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSString</span> <span class="o">*</span> <span class="n">docsdir</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSSearchPathForDirectoriesInDomains</span><span class="p">(</span><span class="n">NSDocumentDirectory</span><span class="p">,</span> <span class="n">NSUserDomainMask</span><span class="p">,</span> <span class="n">YES</span><span class="p">)</span> <span class="n">lastObject</span><span class="p">];</span>
-</span><span class='line'><span class="n">NSString</span> <span class="o">*</span> <span class="n">dbpath</span> <span class="o">=</span> <span class="p">[</span><span class="n">docsdir</span> <span class="nl">stringByAppendingPathComponent:</span><span class="s">@&quot;user.sqlite&quot;</span><span class="p">];</span>
-</span><span class='line'><span class="n">FMDatabase</span> <span class="o">*</span> <span class="n">db</span> <span class="o">=</span> <span class="p">[</span><span class="n">FMDatabase</span> <span class="nl">databaseWithPath:</span><span class="n">dbpath</span><span class="p">];</span>
-</span><span class='line'><span class="p">[</span><span class="n">db</span> <span class="n">open</span><span class="p">];</span>
-</span><span class='line'><span class="n">FMResultSet</span> <span class="o">*</span> <span class="n">rs</span> <span class="o">=</span> <span class="p">[</span><span class="n">db</span> <span class="nl">executeQuery:</span><span class="s">@&quot;select * from People&quot;</span><span class="p">];</span>
-</span><span class='line'><span class="k">while</span> <span class="p">([</span><span class="n">rs</span> <span class="n">next</span><span class="p">])</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@ %@&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">rs</span> <span class="nl">stringForColumn:</span><span class="s">@&quot;firstname&quot;</span><span class="p">],</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">rs</span> <span class="nl">stringForColumn:</span><span class="s">@&quot;lastname&quot;</span><span class="p">]);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="p">[</span><span class="n">db</span> <span class="n">close</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>BBCustomBackButtonViewController</h3>
-
-<p><a href="https://github.com/typeoneerror/BBCustomBackButtonViewController">BBCustomBackButtonViewController</a> 是用于在ios4上提供自定义的NavigationBar按钮的开源库。使用上异常简单，只需要让自己的ViewController继承它就可以了。</p>
-
-<p>我对BBCustomBackButtonViewController进行了修改，主要是改动它的自定义的按钮的样式，使其和我们的风格一致。</p>
-
-<h3>MTStatusBarOverlay</h3>
-
-<p><a href="https://github.com/myell0w/MTStatusBarOverlay">MTStatusBarOverlay</a> 是一个在iphone的顶部status bar显示消息的开源库。示例代码如下：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">showCompletedTextOnStatusBar:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">text</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">NSString</span> <span class="o">*</span> <span class="n">message</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;%@成功&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">];</span>
-</span><span class='line'>    <span class="n">MTStatusBarOverlay</span> <span class="o">*</span><span class="n">overlay</span> <span class="o">=</span> <span class="p">[</span><span class="n">MTStatusBarOverlay</span> <span class="n">sharedInstance</span><span class="p">];</span>
-</span><span class='line'>    <span class="n">overlay</span><span class="p">.</span><span class="n">animation</span> <span class="o">=</span> <span class="n">MTStatusBarOverlayAnimationFallDown</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">overlay</span><span class="p">.</span><span class="n">detailViewMode</span> <span class="o">=</span> <span class="n">MTDetailViewModeHistory</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">overlay</span> <span class="nl">postImmediateFinishMessage:</span><span class="n">message</span> <span class="nl">duration:</span><span class="mf">2.0</span> <span class="nl">animated:</span><span class="n">YES</span><span class="p">];</span>
-</span><span class='line'>    <span class="n">overlay</span><span class="p">.</span><span class="n">progress</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>但是stackoverflow上说，有项目因为这个审核被拒，但是新浪微博明显采用了此UI方案，所以我们还是大胆用了这个库。后来，我们也顺利通过了审核。</p>
-
-<h3>MBProgressHUD</h3>
-
-<p><a href="https://github.com/jdg/MBProgressHUD">MBProgressHUD</a> 是一个用于显示灰色的加载进度或结果的类。与系统自带的UIAlertView相比，MBProgressHUD由于背影是黑色的，所以视觉上不是那么强烈。我们主要用它来显示一些加载中的提示，以及一些自已会消失的操作结果（例如网络失败等）。</p>
-
-<h3>NSStringWrapper</h3>
-
-<p>因为自己有多年Java开发的经历，我还是不太习惯Objective-C连基本的字符串操作都要查文档，而我自己又记不住老长的方法名，所以我把Objective-C的字符串基本操作都封装成了Java风格的方法调用。这部分是很早前拿周末时间在家里写的，所以是开源的，<a href="https://github.com/tangqiaoboy/xcode_tool/tree/master/NSStringWrappeer">源代码地址</a>。</p>
-
-<h3>EGOTableViewPullRefresh</h3>
-
-<p><a href="https://github.com/enormego/EGOTableViewPullRefresh">EGOTableViewPullRefresh</a> 一个开源的下拉刷新组件。我对它进行了改进，增加了强制刷新功能。</p>
-
-<h3>LoadMoreTableFooterView</h3>
-
-<p><a href="https://github.com/sishen/LoadMoreTableFooterView">LoadMoreTableFooterView</a> 一个开源的上拉加载更多的组件。我做了少量修改，以便让它支持iPhone5的分辨率。</p>
-
-<h3>zepto.js</h3>
-
-<p><a href="http://zeptojs.com/">zepto</a>是一个类似JQuery的javascript开源库，用于实现css选择器和一些dom操作。它的api几乎和JQuery完全一样，优点是体积小巧。</p>
-
-<h3>ejs</h3>
-
-<p><a href="http://embeddedjs.com/getting_started.html">ejs</a>一个js端的模版库。我们主要用于渲染一些UIWebview中异步加载的内容。例如笔记的评论，问题的答案。</p>
-
-<h2>总结</h2>
-
-<p>希望上面的开源库能对你有用。最后分享一张粉笔网全站用到的所有开源项目的图片。</p>
-
-<p><img src="/images/opensource.jpg"></p>
-</div>
-
+文章内容已迁移到：
+<script type="text/javascript">
+var link = '<a href="' + window.location.href + '">' + window.location.href + '</a>'
+document.write(link)
+</script>
 
   <footer>
     <p class="meta">

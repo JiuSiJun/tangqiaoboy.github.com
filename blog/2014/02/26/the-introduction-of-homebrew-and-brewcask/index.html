@@ -8,20 +8,12 @@
   <title>使用brew cask来安装Mac应用 - 唐巧的技术博客</title>
   <meta name="author" content="唐巧">
 
-  
-  <meta name="description" content="简介 brew cask 是一个用命令行管理 Mac 下应用的工具，它是基于 homebrew 的一个增强工具。 homebrew可以管理 Mac 下的命令行工具，例如imagemagick, nodejs，如下所示： 1
-2
-brew install imagemagick
-brew &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.devtang.com/blog/2014/02/26/the-introduction-of-homebrew-and-brewcask">
+
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -78,124 +70,17 @@ brew &hellip;">
 </nav>
   <div id="main">
     <div id="content">
-      <div>
+      <script type="text/javascript">
+window.location.pathname = window.location.pathname.replace('/blog', '')
+</script>
+
+<div>
 <article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">使用brew cask来安装Mac应用</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-26T21:38:00+08:00" pubdate data-updated="true">Feb 26<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><h2>简介</h2>
-
-<p><a href="https://github.com/phinze/homebrew-cask"><code>brew cask</code></a> 是一个用命令行管理 Mac 下应用的工具，它是基于 <a href="http://brew.sh/"><code>homebrew</code></a> 的一个增强工具。</p>
-
-<p><code>homebrew</code>可以管理 Mac 下的命令行工具，例如<code>imagemagick</code>, <code>nodejs</code>，如下所示：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>brew install imagemagick
-</span><span class='line'>brew install node
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>而使用上<code>brew cask</code>之后，你还可以用它来管理 Mac 下的 Gui 程序，例如<code>qq</code>, <code>chrome</code>, <code>evernote</code>等，如下所示：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>brew cask install qq
-</span><span class='line'>brew cask install google-chrome
-</span><span class='line'>brew cask install evernote
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<!-- more -->
-
-
-<h2>安装</h2>
-
-<h3>安装 homebrew</h3>
-
-<p>用以下一行命令即可安装 homebrew</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"</span></code></pre></td></tr></table></div></figure>
-
-
-<p>之后执行 <code>brew doctor</code> 命令可以看看<code>homebrew</code>的环境是否正常。通常第一次安装完 brew 之后，还需要安装苹果的<code>Command Line Tools</code>。</p>
-
-<h3>安装 cask</h3>
-
-<p>用如下命令来安装 cask:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>brew tap phinze/cask
-</span><span class='line'>brew install brew-cask</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>LaunchRocket</h2>
-
-<p>另外再附带推荐一个工具。</p>
-
-<p><a href="https://github.com/jimbojsb/launchrocket">LaunchRocket</a> 是一个管理 brew 安装的 service 的工具，安装之后可以看所有的 service 的运行状态，如下图所示：</p>
-
-<p><img src="/images/LaunchRocketUI.png"></p>
-
-<p>安装<code>LaunchRocket</code>就要用到我刚刚提的<code>brew cask</code>，用如下命令即可：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>brew tap jimbojsb/launchrocket
-</span><span class='line'>brew cask install launchrocket</span></code></pre></td></tr></table></div></figure>
-
-
-<p>之后 LauchRocket 设置页面找到（如下图所示），它的启动项同时也保存在<code>/opt/homebrew-cask/Caskroom/launchrocket</code>目录中。</p>
-
-<p><img src="/images/launchRocket.jpg"></p>
-
-<p>启动 LauchRocket 有点麻烦，需要切换设置页面去手工启动。我自己想到一个办法，方法是把 <code>/opt/homebrew-cask</code>增加到 alfred 的 search 目录中，然后就可以用 alfred 来启动了，如下所示：</p>
-
-<ol>
-<li>设置 alfred</li>
-</ol>
-
-
-<p><img src="/images/launch-cask-1.jpg"></p>
-
-<ol>
-<li>用 alfred 启动 LauchRocket</li>
-</ol>
-
-
-<p><img src="/images/launch-cask-2.jpg"></p>
-
-<p>大家玩得开心～</p>
-</div>
-
+文章内容已迁移到：
+<script type="text/javascript">
+var link = '<a href="' + window.location.href + '">' + window.location.href + '</a>'
+document.write(link)
+</script>
 
   <footer>
     <p class="meta">

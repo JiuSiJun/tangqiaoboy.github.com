@@ -8,17 +8,12 @@
   <title>动态下载苹果提供的多种中文字体 - 唐巧的技术博客</title>
   <meta name="author" content="唐巧">
 
-  
-  <meta name="description" content="引言 在今年 WWDC 的内容公开之前，大家都以为 iOS 系统里面只有一种中文字体。为了达到更好的字体效果，有些应用在自己的应用资源包中加入了字体文件。但自己打包字体文件比较麻烦，原因在于： 1、字体文件通常比较大，10M &ndash; 20M 是一个常见的字体库的大小。大部分的非游戏的 &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.devtang.com/blog/2013/08/11/ios-asian-font-download-introduction">
+
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -75,203 +70,17 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
+      <script type="text/javascript">
+window.location.pathname = window.location.pathname.replace('/blog', '')
+</script>
+
+<div>
 <article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">动态下载苹果提供的多种中文字体</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-11T16:00:00+08:00" pubdate data-updated="true">Aug 11<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><p><img src="/images/wawati-sample.jpg"></p>
-
-<h2>引言</h2>
-
-<p>在今年 WWDC 的内容公开之前，大家都以为 iOS 系统里面只有一种中文字体。为了达到更好的字体效果，有些应用在自己的应用资源包中加入了字体文件。但自己打包字体文件比较麻烦，原因在于：</p>
-
-<p>1、字体文件通常比较大，10M &ndash; 20M 是一个常见的字体库的大小。大部分的非游戏的 app 体积都集中在 10M 以内，因为字体文件的加入而造成应用体积翻倍让人感觉有些不值。如果只是很少量的按钮字体需要设置，可以用一些工具把使用到的汉字字体编码从字体库中抽取出来，以节省体积。但如果是一些变化的内容需要自定义的字体，那就只有打包整个字体库了。</p>
-
-<p>2、中文的字体通常都是有版权的。在应用中加入特殊中文字体还需要处理相应的版权问题。对于一些小公司或个人开发者来说，这是一笔不小的开销。</p>
-
-<p>以上两点造成 App Store 里面使用特殊中文字库的 iOS 应用较少。现在通常只有阅读类的应用才会使用特殊中文字库。</p>
-
-<p>但其实从 iOS6 开始，苹果就支持动态下载中文字体到系统中。只是苹果一直没有公开相应的 API。最终，相应的 API 在今年的 WWDC 大会上公开，接下来就让我们来一起了解这个功能。</p>
-
-<!-- more -->
-
-
-<h2>功能介绍</h2>
-
-<p>使用动态下载中文字体的 API 可以动态地向 iOS 系统中添加字体文件，这些字体文件都是下载到系统的目录中（目录是<code>/private/var/mobile/Library/Assets/com_apple_MobileAsset_Font/</code>），所以并不会造成应用体积的增加。并且，由于字体文件是 iOS 系统提供的，也免去了字体使用版权的问题。虽然第一次下载相关的中文字体需要一些网络开销和下载时间，但是这些字体文件下载后可以在所有应用间共享，所以可以遇见到，随着该 API 使用的普及，大部分应用都不需要提示用户下载字体，因为很可能这些字体在之前就被其它应用下载下来了。</p>
-
-<h2>字体列表</h2>
-
-<p>在 <a href="http://support.apple.com/kb/HT5484?viewlocale=zh_CN">这个链接</a> 中，苹果列出了提供动态下载和使用中文字体文件列表。不过，由于下载的时候需要使用的名字是 PostScript 名称，所以如果你真正要动态下载相应的字体的话，还需要使用 Mac 内自带的应用 “字体册 “来获得相应字体的 PostScript 名称。如下显示了从” 字体册 “中获取《兰亭黑-简 特黑》字体的 PostScript 名称的截图：</p>
-
-<p><img src="/images/font-postscript-name.jpg"></p>
-
-<h2>API 介绍</h2>
-
-<p>苹果提供的动态下载代码的 <a href="http://developer.apple.com/library/ios/#samplecode/DownloadFont/Listings/DownloadFont_ViewController_m.html">Demo 工程</a> 链接在这里。将此 Demo 工程下载下来，即可学习相应 API 的使用。下面我对该工程中相应 API 做简单的介绍。</p>
-
-<p>假如我们现在要下载娃娃体字体，它的 PostScript 名称为<code>DFWaWaSC-W5</code>。具体的步骤如下：</p>
-
-<p>1、我们先判断该字体是否已经被下载下来了，代码如下：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">isFontDownloaded:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">fontName</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">UIFont</span><span class="o">*</span> <span class="n">aFont</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIFont</span> <span class="nl">fontWithName:</span><span class="n">fontName</span> <span class="nl">size:</span><span class="mf">12.0</span><span class="p">];</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">aFont</span> <span class="o">&amp;&amp;</span> <span class="p">([</span><span class="n">aFont</span><span class="p">.</span><span class="n">fontName</span> <span class="nl">compare:</span><span class="n">fontName</span><span class="p">]</span> <span class="o">==</span> <span class="n">NSOrderedSame</span>
-</span><span class='line'>               <span class="o">||</span> <span class="p">[</span><span class="n">aFont</span><span class="p">.</span><span class="n">familyName</span> <span class="nl">compare:</span><span class="n">fontName</span><span class="p">]</span> <span class="o">==</span> <span class="n">NSOrderedSame</span><span class="p">))</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">return</span> <span class="n">YES</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">return</span> <span class="n">NO</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>2、如果该字体下载过了，则可以直接使用。否则我们需要先准备下载字体 API 需要的一些参数，如下所示：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">// 用字体的 PostScript 名字创建一个 Dictionary</span>
-</span><span class='line'><span class="n">NSMutableDictionary</span> <span class="o">*</span><span class="n">attrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableDictionary</span> <span class="nl">dictionaryWithObjectsAndKeys:</span><span class="n">fontName</span><span class="p">,</span> <span class="n">kCTFontNameAttribute</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// 创建一个字体描述对象 CTFontDescriptorRef</span>
-</span><span class='line'><span class="n">CTFontDescriptorRef</span> <span class="n">desc</span> <span class="o">=</span> <span class="n">CTFontDescriptorCreateWithAttributes</span><span class="p">((</span><span class="n">__bridge</span> <span class="n">CFDictionaryRef</span><span class="p">)</span><span class="n">attrs</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// 将字体描述对象放到一个 NSMutableArray 中</span>
-</span><span class='line'><span class="n">NSMutableArray</span> <span class="o">*</span><span class="n">descs</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableArray</span> <span class="nl">arrayWithCapacity:</span><span class="mi">0</span><span class="p">];</span>
-</span><span class='line'><span class="p">[</span><span class="n">descs</span> <span class="nl">addObject:</span><span class="p">(</span><span class="n">__bridge</span> <span class="kt">id</span><span class="p">)</span><span class="n">desc</span><span class="p">];</span>
-</span><span class='line'><span class="n">CFRelease</span><span class="p">(</span><span class="n">desc</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>3、准备好上面的<code>descs</code>变量后，则可以进行字体的下载了，代码如下：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">__block</span> <span class="kt">BOOL</span> <span class="n">errorDuringDownload</span> <span class="o">=</span> <span class="n">NO</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">CTFontDescriptorMatchFontDescriptorsWithProgressHandler</span><span class="p">(</span> <span class="p">(</span><span class="n">__bridge</span> <span class="n">CFArrayRef</span><span class="p">)</span><span class="n">descs</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span>  <span class="o">^</span><span class="p">(</span><span class="n">CTFontDescriptorMatchingState</span> <span class="n">state</span><span class="p">,</span> <span class="n">CFDictionaryRef</span> <span class="n">progressParameter</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kt">double</span> <span class="n">progressValue</span> <span class="o">=</span> <span class="p">[[(</span><span class="n">__bridge</span> <span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="n">progressParameter</span> <span class="nl">objectForKey:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">kCTFontDescriptorMatchingPercentage</span><span class="p">]</span> <span class="n">doubleValue</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">state</span> <span class="o">==</span> <span class="n">kCTFontDescriptorMatchingDidBegin</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot; 字体已经匹配 &quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">state</span> <span class="o">==</span> <span class="n">kCTFontDescriptorMatchingDidFinish</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">errorDuringDownload</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot; 字体 %@ 下载完成 &quot;</span><span class="p">,</span> <span class="n">fontName</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">state</span> <span class="o">==</span> <span class="n">kCTFontDescriptorMatchingWillBeginDownloading</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot; 字体开始下载 &quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">state</span> <span class="o">==</span> <span class="n">kCTFontDescriptorMatchingDidFinishDownloading</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot; 字体下载完成 &quot;</span><span class="p">);</span>
-</span><span class='line'>        <span class="n">dispatch_async</span><span class="p">(</span> <span class="n">dispatch_get_main_queue</span><span class="p">(),</span> <span class="o">^</span> <span class="p">{</span>
-</span><span class='line'>            <span class="c1">// 可以在这里修改 UI 控件的字体</span>
-</span><span class='line'>        <span class="p">});</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">state</span> <span class="o">==</span> <span class="n">kCTFontDescriptorMatchingDownloading</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot; 下载进度 %.0f%% &quot;</span><span class="p">,</span> <span class="n">progressValue</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">state</span> <span class="o">==</span> <span class="n">kCTFontDescriptorMatchingDidFailWithError</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span> <span class="o">=</span> <span class="p">[(</span><span class="n">__bridge</span> <span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="n">progressParameter</span> <span class="nl">objectForKey:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">kCTFontDescriptorMatchingError</span><span class="p">];</span>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="nb">nil</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="n">_errorMessage</span> <span class="o">=</span> <span class="p">[</span><span class="n">error</span> <span class="n">description</span><span class="p">];</span>
-</span><span class='line'>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>            <span class="n">_errorMessage</span> <span class="o">=</span> <span class="s">@&quot;ERROR MESSAGE IS NOT AVAILABLE!&quot;</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>        <span class="c1">// 设置标志</span>
-</span><span class='line'>        <span class="n">errorDuringDownload</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
-</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot; 下载错误: %@&quot;</span><span class="p">,</span> <span class="n">_errorMessage</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">return</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="n">YES</span><span class="p">;</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>通常需要在下载完字体后开始使用字体，一般是将相应代码放到 kCTFontDescriptorMatchingDidFinish 那个条件中做，可以象苹果官网的示例代码上那样，用 GCD 来改 UI 的逻辑，也可以发 Notification 来通知相应的 Controller。</p>
-
-<p>以下是通过以上示例代码下载下来的娃娃体字体截图：</p>
-
-<p><img src="/images/wawati-sample.jpg"></p>
-
-<h2>iOS 版本限制</h2>
-
-<p>以上代码只能运行在 iOS6 以上的系统，但当前还有不少用户是 iOS5 的系统。不过，随着苹果在 WWDC2013 中推出 iOS7 的 beta 版，很多人都期待着使用 iOS7。从历史数据上看，苹果 iOS 新版本推出后，通常 3 个月内就可以达到 50% 以上的使用比例。所以，可以遇见到在今年年底，iOS5 的用户将所剩无几。如果我们打算在年底只支持 iOS6 以上的系统，那么就可以通过上面介绍的方法使用大量中文字体来美化你的应用。</p>
-
-<p>愿新的 API 能让大家的应用更加美观，have fun!</p>
-</div>
-
+文章内容已迁移到：
+<script type="text/javascript">
+var link = '<a href="' + window.location.href + '">' + window.location.href + '</a>'
+document.write(link)
+</script>
 
   <footer>
     <p class="meta">

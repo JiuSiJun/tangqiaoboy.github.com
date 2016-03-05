@@ -8,17 +8,12 @@
   <title>不要使用SBJSON(json-framework) - 唐巧的技术博客</title>
   <meta name="author" content="唐巧">
 
-  
-  <meta name="description" content="不知道为什么，在iOS开发中，有很多人使用 SBJSON （又被称作json-framework)来做JSON解析库。我想这是因为SBJSON是最早在iOS上出现的JSON解析库。但是随着iOS开发的流行，越来越多优秀的JSON解析库也涌现出来, SBJSON和它们相比，性能上有很大的差距。 &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.devtang.com/blog/2012/05/05/do-not-use-sbjson">
+
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -75,89 +70,17 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
+      <script type="text/javascript">
+window.location.pathname = window.location.pathname.replace('/blog', '')
+</script>
+
+<div>
 <article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">不要使用SBJSON(json-framework)</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-05T09:35:00+08:00" pubdate data-updated="true">May 5<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><p>不知道为什么，在iOS开发中，有很多人使用 <a href="https://github.com/stig/json-framework">SBJSON</a> （又被称作json-framework)来做JSON解析库。我想这是因为SBJSON是最早在iOS上出现的JSON解析库。但是随着iOS开发的流行，越来越多优秀的JSON解析库也涌现出来, SBJSON和它们相比，性能上有很大的差距。</p>
-
-<!-- more -->
-
-
-<p>现在iOS行业内主要流行的JSON解析库有：
-<a href="http://developer.apple.com/library/ios/#documentation/Foundation/Reference/NSJSONSerialization_Class/Reference/Reference.html#//apple_ref/doc/uid/TP40010946">NSJSONSerialization</a>、
-<a href="http://samsoff.es/posts/parsing-json-with-the-iphones-private-json-framework">Apple JSON</a>、
-<a href="http://github.com/schwa/TouchJSON">TouchJSON</a>、
-<a href="http://github.com/stig/json-framework">SBJSON</a>、
-<a href="http://github.com/gabriel/yajl-objc">YAJL</a>、
-<a href="http://github.com/johnezang/JSONKit">JSONKit</a></p>
-
-<p>行业内许多同行都对这些库进行过benchmark测试。我在网上搜到的测试文章包括：</p>
-
-<ul>
-<li><a href="https://github.com/samsoffes/json-benchmarks">https://github.com/samsoffes/json-benchmarks</a></li>
-<li><a href="http://blog.csdn.net/arthurchenjs/article/details/7009995">http://blog.csdn.net/arthurchenjs/article/details/7009995</a></li>
-<li><a href="http://blog.csdn.net/ccat/article/details/7207871">http://blog.csdn.net/ccat/article/details/7207871</a></li>
-<li><a href="http://omegadelta.net/2011/11/04/json-framework-now-sbjson-is-evil/">http://omegadelta.net/2011/11/04/json-framework-now-sbjson-is-evil/</a></li>
-<li><a href="http://stackoverflow.com/questions/2256625/comparison-of-json-parser-for-objective-c-json-framework-yajl-touchjson-etc">http://stackoverflow.com/questions/2256625/comparison-of-json-parser-for-objective-c-json-framework-yajl-touchjson-etc</a></li>
-</ul>
-
-
-<p>下图是我从<a href="http://my.csdn.net/ArthurChenJS">ArthurChenJS</a>的<a href="http://blog.csdn.net/arthurchenjs/article/details/7009995">博客文章</a>中截取的一张benchmark测试结果图(横条越短，解析速度越快)：</p>
-
-<p><img src="/images/json_benchmark.gif"></p>
-
-<p>从这些文章中可以看到，SBJSON在多数测试中都处于倒数的第一或倒数第二的位置。所以说，SBJSON实际上在性能这一点上讲，确实是非常“SB”的，实在不值得大家留念。赶快把你的JSON解析库换成其它的吧！</p>
-
-<p>那么应该换成哪个呢？
-如果你的app只支持iOS 5.0以上系统，那么直接用苹果官方提供的JSON库：<a href="http://developer.apple.com/library/ios/#documentation/Foundation/Reference/NSJSONSerialization_Class/Reference/Reference.html#//apple_ref/doc/uid/TP40010946">NSJSONSerialization</a>
-库即可。
-如果你的app要支持iOS 5.0以下的系统，那么我个人推荐JSONKit，不过JSONKit本身做了很多内存上的优化，所以不支持ARC，你在使用时可以对其加上 -fno-objc-arc 的编译标志即可，设置这个编译标志的详细步骤可以见<a href="http://stackoverflow.com/questions/6308425/ios-5-best-practice-release-retain">这篇文章</a>。</p>
-
-<p>JSONKit的使用也非常方便，在使用上只需要把SBJSON的JSONValue方法换成objectFromJSONData，JSONRepresentation方法换成JSONString即可。附上一段使用示例：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &quot;JSONKit.h&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">path</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSBundle</span> <span class="n">mainBundle</span><span class="p">]</span> <span class="nl">pathForResource:</span><span class="s">@&quot;data&quot;</span> <span class="nl">ofType:</span><span class="s">@&quot;json&quot;</span><span class="p">];</span>
-</span><span class='line'><span class="n">NSData</span> <span class="o">*</span><span class="n">content</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSData</span> <span class="nl">dataWithContentsOfFile:</span><span class="n">path</span><span class="p">];</span>
-</span><span class='line'><span class="n">NSDictionary</span> <span class="o">*</span><span class="n">kitData</span> <span class="o">=</span> <span class="p">[</span><span class="n">content</span> <span class="n">objectFromJSONData</span><span class="p">];</span>
-</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">kitString</span> <span class="o">=</span> <span class="p">[</span><span class="n">kitData</span> <span class="n">JSONString</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>祝大家玩得开心。</p>
-</div>
-
+文章内容已迁移到：
+<script type="text/javascript">
+var link = '<a href="' + window.location.href + '">' + window.location.href + '</a>'
+document.write(link)
+</script>
 
   <footer>
     <p class="meta">

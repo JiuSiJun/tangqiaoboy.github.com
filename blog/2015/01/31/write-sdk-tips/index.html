@@ -8,17 +8,12 @@
   <title>写iOS SDK注意事项 - 唐巧的技术博客</title>
   <meta name="author" content="唐巧">
 
-  
-  <meta name="description" content="我发现即使是像腾讯、小米这样的大厂提供的 SDK，在质量和规范上也有很多问题，而且包括我以及我身边的很多朋友都被恶心到了，所以我就把这些注意事项总结出来，希望大家不要犯同样的错误。 注意事项一：所有类名都应该加前缀 说明：没有前缀的类名有冲突的风险。 Bad Case：微信分享的 SDK，文件名： &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.devtang.com/blog/2015/01/31/write-sdk-tips">
+
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -75,131 +70,17 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
+      <script type="text/javascript">
+window.location.pathname = window.location.pathname.replace('/blog', '')
+</script>
+
+<div>
 <article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">写iOS SDK注意事项</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-01-31T21:44:33+08:00" pubdate data-updated="true">Jan 31<span>st</span>, 2015</time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><p>我发现即使是像腾讯、小米这样的大厂提供的 SDK，在质量和规范上也有很多问题，而且包括我以及我身边的很多朋友都被恶心到了，所以我就把这些注意事项总结出来，希望大家不要犯同样的错误。</p>
-
-<h3>注意事项一：所有类名都应该加前缀</h3>
-
-<p>说明：没有前缀的类名有冲突的风险。</p>
-
-<p>Bad Case：微信分享的 SDK，文件名：<code>WXApiObject.h</code>，代码如下，其中<code>BaseReq</code>类和<code>BaseResp</code>类都没有加前缀。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>@interface BaseReq : NSObject
-</span><span class='line'>
-</span><span class='line'>/** 请求类型 */
-</span><span class='line'>@property (nonatomic, assign) int type;
-</span><span class='line'>/** 由用户微信号和 AppID 组成的唯一标识，发送请求时第三方程序必须填写，用于校验微信用户是否换号登录 */
-</span><span class='line'>@property (nonatomic, retain) NSString* openID;
-</span><span class='line'>
-</span><span class='line'>@end
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>#pragma mark - BaseResp
-</span><span class='line'>/*! @brief 该类为微信终端 SDK 所有响应类的基类
-</span><span class='line'> *
-</span><span class='line'> */
-</span><span class='line'>@interface BaseResp : NSObject
-</span><span class='line'>/** 错误码 */
-</span><span class='line'>@property (nonatomic, assign) int errCode;
-</span><span class='line'>/** 错误提示字符串 */
-</span><span class='line'>@property (nonatomic, retain) NSString *errStr;
-</span><span class='line'>/** 响应类型 */
-</span><span class='line'>@property (nonatomic, assign) int type;
-</span><span class='line'>
-</span><span class='line'>@end</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>注意事项二：所有 category 方法加前缀</h3>
-
-<p>说明：category 方法如果不加前缀，有冲突的风险。</p>
-
-<p>Bad Case：腾讯分享的 SDK，它为 NSArray 增加了一个 JSONArray 的 category，造成我们本身的同名 category 被覆盖。另外他们为 NSArray 增加的其它 category 和著名的 Cordova 开源库冲突，造成 Cordova 无法使用。</p>
-
-<h3>注意事项三：不要将第三方库打包进 SDK</h3>
-
-<p>说明：尽量不要将第三方库打包进 SDK，如果要打包，最好也要将该第三方库重命名，以避免冲突。</p>
-
-<p>Bad Case：小米的推送 SDK，直接在 SDK 静态库里面编进去一个第三方依赖库，而且这个库还是 ASIHttpRequest。ASIHttp 当前已经处于无人维护状态，很多 Bug 都是大家自己在修复（例如网易就自己维护了一个 ASIHttpRequest 的分支）。在 SDK 中依赖这种库还是比较麻烦的。</p>
-
-<h3>注意事项四：做基本的检查和测试</h3>
-
-<p>说明：SDK 对外公布前应该进行基本的编译检查，不应该有编译器警告存在。</p>
-
-<p>Bad Case：腾讯分享的 SDK。它的 <code>CGIParamsWrap.o</code> 和  <code>TencentOAuth.o</code> 文件里面的方法名冲突了，如下所示：</p>
-
-<blockquote><p>ld: warning: instance method &lsquo;deleteAPIRequestBySeq:&rsquo; in category from /Users/tangqiao/work/iphone/solar-ios/lib_common/TencentOpenApi/TencentOpenAPI.framework/TencentOpenAPI(CGIParamsWrap.o) overrides method from class in /Users/tangqiao/work/iphone/solar-ios/lib_common/TencentOpenApi/TencentOpenAPI.framework/TencentOpenAPI(TencentOAuth.o)</p></blockquote>
-
-<h3>注意事项五：文档完整并且正确</h3>
-
-<p>说明：这就不用解释了吧？</p>
-
-<p>Bad Case: 微信官方的微信支付的示例代码，里面有各种错误，代码都无法编译成功。如下所示的是其中一个错误：</p>
-
-<p><img src="/images/weixin-pay-error.jpg"></p>
-
-<p>于是还有人专门帮微信另外制作了一个非官方的说明文档，地址在这里：<a href="https://github.com/gbammc/WechatPayDemo">https://github.com/gbammc/WechatPayDemo</a></p>
-
-<h3>注意事项六：支持最新的 CPU 版本</h3>
-
-<p>说明：去年苹果的一次 Bug，造成上传应用必须支持 arm64 的 CPU 版本，结果众多应用因为依赖的 SDK 不支持 arm64 而无法更新。当然，这次 Bug 出来之后，各 SDK 厂商都紧急做了更新。但是我觉得这种事情如果要做得专业，就应该一开始就紧跟技术更新，及时更新，而不是被迫更新。</p>
-
-<h2>总结</h2>
-
-<p>以上 6 点是我认为写一个 SDK 的最最基本的要求，希望被点名批评的同学能尽快改正哟～</p>
-
-<p>如果大家在使用其它 SDK 时也发现了类似的问题，欢迎在文章下面留言。希望通过这种方式给开发相关 SDK 的同学一些压力，让他们好好改一下。</p>
-</div>
-
+文章内容已迁移到：
+<script type="text/javascript">
+var link = '<a href="' + window.location.href + '">' + window.location.href + '</a>'
+document.write(link)
+</script>
 
   <footer>
     <p class="meta">

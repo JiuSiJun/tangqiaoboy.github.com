@@ -8,17 +8,12 @@
   <title>去掉Xcode源码末尾的空格 - 唐巧的技术博客</title>
   <meta name="author" content="唐巧">
 
-  
-  <meta name="description" content="在用 Xcode 开发的时候，很容易就在行末增加一些空格了。这些空格在上传到 review board 上后 , 就会被特别的颜色显示出来。因为一种好的编程风格是说 , 不应该在行末增加不必要的空格。如果是用 eclipse 写 java, 那么这种时候选中写好的代码，按 ctrl+shift+F &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.devtang.com/blog/2011/12/10/remove-tail-blankspace-in-xcode">
+
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -75,92 +70,17 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
+      <script type="text/javascript">
+window.location.pathname = window.location.pathname.replace('/blog', '')
+</script>
+
+<div>
 <article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">去掉Xcode源码末尾的空格</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-10T17:08:00+08:00" pubdate data-updated="true">Dec 10<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><p>在用 Xcode 开发的时候，很容易就在行末增加一些空格了。这些空格在上传到 review board 上后 , 就会被特别的颜色显示出来。因为一种好的编程风格是说 , 不应该在行末增加不必要的空格。如果是用 eclipse 写 java, 那么这种时候选中写好的代码，按 <code>ctrl+shift+F</code> 即可调整源码的风格 , 将尾部的空格去掉。可惜在 Xcode 中并没有提供相应的功能。</p>
-
-<!--more-->
-
-
-<p>不过我们可以用命令行来达到这一效果 , 在工程目录下输入:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>find . -name <span class="s2">&quot;*.[hm]&quot;</span> | xargs sed -Ee <span class="s1">&#39;s/ +$//g&#39;</span> -i <span class="s2">&quot;&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这样 , 就可以把源码中行末多出来的空格去掉了 , 是不是很爽 ? 可以把这句加到执行 post-review 的脚本上，这样就可以做到自动去空格了。</p>
-
-<p>顺便说一下，我打算把这些小脚本工具总结出来，放到 github 上，地址是 <a href="https://github.com/tangqiaoboy/xcode_tool">https://github.com/tangqiaoboy/xcode_tool</a>，感兴趣的同学可以把它 clone 下来。</p>
-
-<p>祝玩得开心～</p>
-
-<h2>2013 年 6 月 22 日更新</h2>
-
-<p>上文写于 2011 年末，在 2012 年在 WWDC 大会上，苹果推出了 Xcode4。从 Xcode4 开始，Xcode 会自动去掉源码末尾的空格。所以上面提到的脚本基本没用了。不过对于工程中的 html 或 js 文件，Xcode 的去末尾空格功能并没有打开，所以在某些时候才能有一些小用处。</p>
-
-<p>另外，每次记得敲命令来去掉空格是一件很恶心的事情，最好是由程序自动完成。考虑到现在 git 已经很普及了，在这里介绍另一种在 git 仓库中创建钩子 (hook) 的方法来去掉所有提交文件的末尾空格，具体做法如下：</p>
-
-<p>在工程目录的 <code>.git/hooks/</code> 目录下，创建一个名为 <code>pre-commit</code> 的文件，输入如下内容</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/sh</span>
-</span><span class='line'><span class="k">if </span>git-rev-parse --verify HEAD &gt;/dev/null 2&gt;&amp;1 ; <span class="k">then</span>
-</span><span class='line'><span class="k">   </span><span class="nv">against</span><span class="o">=</span>HEAD
-</span><span class='line'><span class="k">else</span>
-</span><span class='line'>   <span class="c"># Initial commit: diff against an empty tree object</span>
-</span><span class='line'>   <span class="nv">against</span><span class="o">=</span>4b825dc642cb6eb9a060e54bf8d69288fbee4904
-</span><span class='line'><span class="k">fi</span>
-</span><span class='line'><span class="c"># Find files with trailing whitespace</span>
-</span><span class='line'><span class="k">for </span>FILE in <span class="sb">`</span><span class="nb">exec </span>git diff-index --check --cached <span class="nv">$against</span> -- | sed <span class="s1">&#39;/^[+-]/d&#39;</span> | sed -E <span class="s1">&#39;s/:[0-9]+:.*//&#39;</span> | uniq<span class="sb">`</span> ; <span class="k">do</span>
-</span><span class='line'>    <span class="c"># Fix them!</span>
-</span><span class='line'>    sed -i <span class="s1">&#39;&#39;</span> -E <span class="s1">&#39;s/[[:space:]]*$//&#39;</span> <span class="s2">&quot;$FILE&quot;</span>
-</span><span class='line'>    git add <span class="s2">&quot;$FILE&quot;</span>
-</span><span class='line'><span class="k">done</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>然后用 <code>chmod +x pre-commit</code> 给该文件加上执行权限。这样，每次在 git 提交文件的时候，该脚本就会被自动执行并且将提交文件末尾的空格去掉。</p>
-</div>
-
+文章内容已迁移到：
+<script type="text/javascript">
+var link = '<a href="' + window.location.href + '">' + window.location.href + '</a>'
+document.write(link)
+</script>
 
   <footer>
     <p class="meta">

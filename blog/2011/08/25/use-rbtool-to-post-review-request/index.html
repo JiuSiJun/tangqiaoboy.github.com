@@ -8,20 +8,12 @@
   <title>使用RBTool自动提交code Review请求 - 唐巧的技术博客</title>
   <meta name="author" content="唐巧">
 
-  
-  <meta name="description" content="前言 让我们回想一下手工提交review请求的过程: 首先得用 svn diff > filename.diff 生成diff文件。
-然后输入review board的网址，可能是 rb.companyname.com
-然后需要输入你的账号密码进行登录验证。
-然后你需要填写你的svn &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.devtang.com/blog/2011/08/25/use-rbtool-to-post-review-request">
+
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -78,96 +70,17 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
+      <script type="text/javascript">
+window.location.pathname = window.location.pathname.replace('/blog', '')
+</script>
+
+<div>
 <article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">使用RBTool自动提交code Review请求</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-08-25T18:13:00+08:00" pubdate data-updated="true">Aug 25<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><h3>前言</h3>
-
-<p>让我们回想一下手工提交review请求的过程:</p>
-
-<ol>
-<li>首先得用 svn diff > filename.diff 生成diff文件。</li>
-<li>然后输入review board的网址，可能是 rb.companyname.com</li>
-<li>然后需要输入你的账号密码进行登录验证。</li>
-<li>然后你需要填写你的svn repository 地址，然后上传diff文件。</li>
-<li>然后你进到review请求的详细页面，填写summary, description, test-done, group和people项，而通常情况下，你的group是固定的，review你的people也就是那么几个人来回变。</li>
-<li>最后你填完这些内容，点击 publish 来发布你的review请求。</li>
-</ol>
-
-
-<!--more-->
-
-
-<h3>RBTool安装和配置</h3>
-
-<p>是不是觉得很烦索？其实review board官网提供了一个RBTool，
-可以帮你把这些步骤全部省掉，一切只需要在命令行敲一条 post-review指令即可。
-很心动吧？让我们来看看如何安装RBTool。</p>
-
-<p>首先需要你的电脑里安装了git, python, Mac同学表示这些东西都安全装预好了，如果是老版本的mac，也可以自行下载安装。Git的windows/mac/linux版本下载地址是：<a href="http://git-scm.com/">http://git-scm.com/</a> 。</p>
-
-<p>下载安装完git后，输入</p>
-
-<pre>
-git clone git://github.com/reviewboard/rbtools.git 
-cd rbtools
-sudo python setup.py install 
-</pre>
-
-
-<p>OK，post-review已经安装好了。</p>
-
-<p>然后你需要小小配置一下，在自己svn项目的根目录下，建立：.reviewboardrc 文件。在文件中输入：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>REVIEWBOARD_URL = "http://rb.yourcompany.com"
-</span><span class='line'>REPOSITORY = "https://dev.yourcompany.com/svn/xxxx"</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这2行分别代表你们公司的review board网址和svn根目录地址。</p>
-
-<h3>RBTool的使用</h3>
-
-<p>OK，以后你要提交review请求，只需要在项目根目录下输入 post-review 即可。第一次需要输入登陆review board的用户名密码，post-review工具会记住密码，以后就不用输入了。post-review默认会将你当前svn目录下的diff修改提交到review board上。你也可以加上一些指定的参数来指定group, people, description等等。比如我就写了一个小脚本，将post-review改成：</p>
-
-<pre>
-post-review --target-groups=mygroup --target-people=friendname1,friendname2
-</pre>
-
-
-<p>post-review还可以更新以前提交的diff,方法是用 -r 指定review number即可。具体的可以用post-review &mdash;help来查看详细信息。也可以去review board官网查看详细的说明：<a href="http://www.reviewboard.org/docs/codebase/dev/getting-started/#rbtools">http://www.reviewboard.org/docs/codebase/dev/getting-started/#rbtools</a></p>
-
-<p>如果是用git svn管理的项目，另外加上参数：&mdash;parent git-svn 即可。</p>
-
-<p>赶快用RBTool工具提高你的工作效率吧～</p>
-</div>
-
+文章内容已迁移到：
+<script type="text/javascript">
+var link = '<a href="' + window.location.href + '">' + window.location.href + '</a>'
+document.write(link)
+</script>
 
   <footer>
     <p class="meta">

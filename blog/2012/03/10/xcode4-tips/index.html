@@ -8,18 +8,12 @@
   <title>Xcode4使用技巧 - 唐巧的技术博客</title>
   <meta name="author" content="唐巧">
 
-  
-  <meta name="description" content="使用 xcode4 也有一段时间了，今天整理了一下 xcode4 的一些使用技巧，在这里分享给大家。 设置作者 这里所指的作者就是每个源文件头部注释中的 “Created by xxx&#8221; 中的作者名。
-我很长一段时间不知道应该在哪里设置它。后来终于找到了。 原来这个作者名是来自” &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.devtang.com/blog/2012/03/10/xcode4-tips">
+
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -76,158 +70,17 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
+      <script type="text/javascript">
+window.location.pathname = window.location.pathname.replace('/blog', '')
+</script>
+
+<div>
 <article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">Xcode4使用技巧</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-10T20:42:00+08:00" pubdate data-updated="true">Mar 10<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><p>使用 xcode4 也有一段时间了，今天整理了一下 xcode4 的一些使用技巧，在这里分享给大家。</p>
-
-<!-- more -->
-
-
-<h3>设置作者</h3>
-
-<p>这里所指的作者就是每个源文件头部注释中的 “Created by xxx&#8221; 中的作者名。
-我很长一段时间不知道应该在哪里设置它。后来终于找到了。</p>
-
-<p>原来这个作者名是来自” 地址薄 “这个程序中” 我 “的姓名。在 sportlight 中输入” 地 “即可找到这个程序。如下图所示：</p>
-
-<p><img src="/images/xcode-set-author-name.jpg"></p>
-
-<h3>设置公司（组织）</h3>
-
-<p>这里所指的公司也是指源文件头部注释中的”Copyright &copy; xxx&#8221; 中的公司名字。这个相对好找一些。
-点击工程，在右边的工具栏中就可以找到 &ldquo;Organization&rdquo; 这一项。</p>
-
-<h3>模拟器</h3>
-
-<p>iOS 模拟器也算是 xcode 的一部分。在刚开始使用时，不知道如何把照片导入到模拟器中。后来在网上搜到了方法：
-将照片拖到 iOS 模拟器中，iOS 模拟器会用 safari 打开该图片，然后在 safari 中长按该图，就会弹出菜单，选择 “保存到相册” 即可。</p>
-
-<p>另外，模拟器也有一些快捷键，我常用的是 cmd + 左 / 右 来调整 Orientation。另外，如果是 iPad 模拟器，可以按 cmd + 1 使其变成 100% 的大小。还有 cmd + s 可以将模拟器截图。</p>
-
-<h3>获得模拟器中的程序数据</h3>
-
-<p>其实模拟器中的程序存储在：/yourHome/Library/Application Support/iPhone Simulator/5.0/Applications 目录下，你可以直接进去找。</p>
-
-<p>另外，如果要删除所安装的程序，也可以直接将 Applications 目录下的文件夹删掉，这比在模拟器中删更方便。</p>
-
-<h3>安装旧版本的模拟器</h3>
-
-<p>在 xcode 中，只会带最新版的模拟器，虽然有些模拟器可以在设置里面下载，但是更老的版本就无法在 xcode 的设置页下载了。</p>
-
-<p>这个问题的解决办法是把以前的 xcode 和对应的模拟器装上，然后将模拟器复制或链接到最新的 xcode 目录下，代码如下：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs
-</span><span class='line'>sudo ln -s /Developer-3.2.5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk .
-</span><span class='line'>sudo ln -s /Developer-3.2.5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk .
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以前的 xcode 可以从 <a href="http://tangqiaoboy.blog.163.com/blog/static/116114258201191323919494/">以下地址</a> 下载到 (需要开发者账号), 建议大家每次安装新 xcode 的时候，把模拟器都备份一下，安装完再恢复回来，这样就不用这么每次折腾了。</p>
-
-<h3>Behaviors</h3>
-
-<p>Behaviors 是设置页面里的一栏，通过 cmd + 逗号可以调出设置页面看到。
-在 Behaviors 里可以设置各种行为发生时，界面应该做何改变。</p>
-
-<p>例如，如果我们要每次运行结束后，就关闭 Console 界面，可以在 Behaviors 下面的 &ldquo;Run completes&rdquo; 一栏的右边，选中 &ldquo;Hide debugger&rdquo; 一项即可（如下图红色标识所示)。</p>
-
-<p>另外，我们也可以点击左下角的 “+” 来增加一些自定义的行为，例如我就增加了 2 个行为，分别用于把导航栏和工具栏同时隐藏和显示（如下图蓝色标识所示）。Behavior 的扩展性很强，你甚至可以定义执行一些脚本，所以可以做的事情很多。</p>
-
-<p><img src="/images/xcode-behaviors.jpg"></p>
-
-<h3>快捷键</h3>
-
-<p>如果能慢慢熟悉一些快捷键，对于提高工作效率是有很大帮助的。虽然设置页面有所有的快键键列表，但是估计没人能全部记住并且用上，我个人总结出来常用的快键键如下：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>cmd + 1              切换成 Project Navigator <span class="o">(</span>cmd + 2~7 也可以做相应切换，不过不常用）
-</span><span class='line'>cmd + ctrl + 上     在 .h 和 .m 文件之间切换
-</span><span class='line'>cmd + enter          切换成 standard editor
-</span><span class='line'>cmd + opt + enter    切换成 assistant editor
-</span><span class='line'>cmd + <span class="nb">shift</span> + y      切换 Console View 的显示或隐藏
-</span><span class='line'>cmd + 0              隐藏左边的导航 <span class="o">(</span>Navigator<span class="o">)</span> 区
-</span><span class='line'>cmd + opt + 0        隐藏右边的工具 <span class="o">(</span>Utility<span class="o">)</span> 区
-</span><span class='line'>ctrl  + 6            列出当前文件中所有的方法，可以输入关键词来过滤。这个相当赞，可以快速定位到想编辑的方法。
-</span><span class='line'>                     我直接把这个快键盘改成了 ctrl+o，这样按起来更顺手。
-</span><span class='line'>cmd + ctrl + 左 / 右   到上 / 下一次编辑的位置，在 2 个编辑位置跳转的时候很方便。
-</span><span class='line'>cmd + opt + j        跳转到文件过滤区
-</span><span class='line'>cmd + <span class="nb">shift</span> + f      在工程中查找
-</span><span class='line'>cmd + r              运行，如果选上直接 <span class="nb">kill</span> 掉上次进程的话，每次直接一按就可以重新运行了
-</span><span class='line'>cmd + b              编译工程
-</span><span class='line'>cmd + <span class="nb">shift</span> + k      清空编译好的文件
-</span><span class='line'>cmd + .              结束本次调试
-</span><span class='line'>ESC                  调出代码补全
-</span><span class='line'>cmd + 单击           查看该方法的实现
-</span><span class='line'>opt + 单击           查看该方法的文档
-</span><span class='line'>cmd + t              新建一个 tab 栏
-</span><span class='line'>cmd + <span class="nb">shift</span> + <span class="o">[</span>      在 tab 栏之间切换
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Snippets</h3>
-
-<p>代码片段 (Snippets) 是 xcode4 新增的功能。用于管理一些常用的代码段，在需要时通过代码补全自动生成出来，可以提高工作效率。</p>
-
-<p>关于这个，可以参见我的另一篇文章：<a href="http://blog.devtang.com/blog/2012/02/04/use-git-to-manage-code-snippets/">http://blog.devtang.com/blog/2012/02/04/use-git-to-manage-code-snippets/</a></p>
-
-<h3>下载 xcode</h3>
-
-<p>从 Xcode4.3 开始，苹果将 Xcode 的下载放到了 Lion 的 mac app store 中。郁闷的是，中国区连接 app store 下载的速度相当慢，在试了一些方法（例如设置 hosts, 设置 dns）之后，我发现最好的办法如下：</p>
-
-<p>用开发者账号登陆：<a href="https://developer.apple.com/downloads/index.action">https://developer.apple.com/downloads/index.action</a>，然后点击下载获得下载地址，然后将地址复制到 mac 版迅雷中，用迅雷下载，速度可以达到 200K 左右。</p>
-
-<p>希望这些技巧能提高你的工作效率，祝玩得开心:)</p>
-</div>
-
+文章内容已迁移到：
+<script type="text/javascript">
+var link = '<a href="' + window.location.href + '">' + window.location.href + '</a>'
+document.write(link)
+</script>
 
   <footer>
     <p class="meta">

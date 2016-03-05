@@ -8,19 +8,12 @@
   <title>设置应用内的系统控件语言 - 唐巧的技术博客</title>
   <meta name="author" content="唐巧">
 
-  
-  <meta name="description" content="在iOS应用中，有时候会需要调用系统的一些UI控件，例如： 在UIWebView中长按会弹出系统的上下文菜单
-在UIImagePickerController中会使用系统的照相机界面
-在编译状态下的UITableViewCell，处于待删除时，会有一个系统的删除按钮。 以上这些UI控件中， &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.devtang.com/blog/2013/01/23/set-ios-system-ui-language">
+
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -77,78 +70,17 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
+      <script type="text/javascript">
+window.location.pathname = window.location.pathname.replace('/blog', '')
+</script>
+
+<div>
 <article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">设置应用内的系统控件语言</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-23T21:05:00+08:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><p><img src="/images/bdj-rank.jpg"></p>
-
-<p>在iOS应用中，有时候会需要调用系统的一些UI控件，例如：</p>
-
-<ol>
-<li>在UIWebView中长按会弹出系统的上下文菜单</li>
-<li>在UIImagePickerController中会使用系统的照相机界面</li>
-<li>在编译状态下的UITableViewCell，处于待删除时，会有一个系统的删除按钮。</li>
-</ol>
-
-
-<p>以上这些UI控件中，其显示的语言并不是和你当前手机的系统语言一致的。而是根据你的App内部的语言设置来显示。结果就是，如果你没有设置恰当的话，你的中文App可能会出现一些英文的控件文字。</p>
-
-<!-- more -->
-
-
-<p>例如下图中，一个名为“百思不得姐”的应用，其在AppStore免费总榜中排名前100，图书类分类榜排名第一的应用，就闹出了系统控件显示成了英文的笑话，在其软件界面中长按，就会出如下的菜单，可以看到，这个菜单的文字全是英文的：</p>
-
-<p><img src="/images/ios-menu-1.jpg"></p>
-
-<p>而正常的菜单应该是中文的，如下是新浪微博的正文长按之后的效果：</p>
-
-<p><img src="/images/ios-menu-2.jpg"></p>
-
-<p>如何解决这个问题呢？方法如下:</p>
-
-<p>用vim直接打开工程的Info.plist文件，在文件中增加如下内容即可：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'>   <span class="nt">&lt;key&gt;</span>CFBundleLocalizations<span class="nt">&lt;/key&gt;</span>
-</span><span class='line'>   <span class="nt">&lt;array&gt;</span>
-</span><span class='line'>           <span class="nt">&lt;string&gt;</span>zh_CN<span class="nt">&lt;/string&gt;</span>
-</span><span class='line'>           <span class="nt">&lt;string&gt;</span>en<span class="nt">&lt;/string&gt;</span>
-</span><span class='line'>   <span class="nt">&lt;/array&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>TO: 百思不得姐的开发者，不用谢：）你们应用的内容挺有意思的。</p>
-</div>
-
+文章内容已迁移到：
+<script type="text/javascript">
+var link = '<a href="' + window.location.href + '">' + window.location.href + '</a>'
+document.write(link)
+</script>
 
   <footer>
     <p class="meta">

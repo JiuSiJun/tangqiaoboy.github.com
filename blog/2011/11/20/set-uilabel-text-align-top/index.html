@@ -8,17 +8,12 @@
   <title>让UILabel的文字顶部对齐 - 唐巧的技术博客</title>
   <meta name="author" content="唐巧">
 
-  
-  <meta name="description" content="默认UILabel是垂直居中对齐的，如果你的UILabel高度有多行，当内容少的时候，会自动垂直居中。 如下图所示（图片来自stackoverflow)： 比较郁闷的是，UILabel并不提供设置其垂直对齐方式的选项。所以如果你想让你的文字顶部对齐，那么就需要自己想办法了。 &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.devtang.com/blog/2011/11/20/set-uilabel-text-align-top">
+
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -75,160 +70,17 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
+      <script type="text/javascript">
+window.location.pathname = window.location.pathname.replace('/blog', '')
+</script>
+
+<div>
 <article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">让UILabel的文字顶部对齐</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-11-20T22:43:00+08:00" pubdate data-updated="true">Nov 20<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><p>默认UILabel是垂直居中对齐的，如果你的UILabel高度有多行，当内容少的时候，会自动垂直居中。</p>
-
-<p>如下图所示（图片来自stackoverflow)：</p>
-
-<p><img src="/images/UILabel_1.jpg"></p>
-
-<p>比较郁闷的是，UILabel并不提供设置其垂直对齐方式的选项。所以如果你想让你的文字顶部对齐，那么就需要自己想办法了。 stackoverflow.com 上提供了几种方法来达到顶部对齐的效果。</p>
-
-<h4>方法一</h4>
-
-<p>在显示文字时，首先计算显示当前的文字需要多宽和多高，然后将对应的UILabel的大小改变成对应的宽度和高度。此方法的相示意图如下：</p>
-
-<p><img src="/images/UILabel_2.png"></p>
-
-<p>在显示文字时，首先计算显示当前的文字需要多宽和多高，然后将对应的UILabel的大小改变成对应的宽度和高度。此方法的相示意图如下：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">CGSize</span> <span class="n">maximumSize</span> <span class="o">=</span> <span class="n">CGSizeMake</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">9999</span><span class="p">);</span>
-</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">dateString</span> <span class="o">=</span> <span class="s">@&quot;The date today is January 1st, 1999&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="n">UIFont</span> <span class="o">*</span><span class="n">dateFont</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIFont</span> <span class="nl">fontWithName:</span><span class="s">@&quot;Helvetica&quot;</span> <span class="nl">size:</span><span class="mi">14</span><span class="p">];</span>
-</span><span class='line'><span class="n">CGSize</span> <span class="n">dateStringSize</span> <span class="o">=</span> <span class="p">[</span><span class="n">dateString</span> <span class="nl">sizeWithFont:</span><span class="n">dateFont</span>
-</span><span class='line'>    <span class="nl">constrainedToSize:</span><span class="n">maximumSize</span>
-</span><span class='line'>    <span class="nl">lineBreakMode:</span><span class="n">self</span><span class="p">.</span><span class="n">dateLabel</span><span class="p">.</span><span class="n">lineBreakMode</span><span class="p">];</span>
-</span><span class='line'><span class="n">CGRect</span> <span class="n">dateFrame</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="n">dateStringSize</span><span class="p">.</span><span class="n">height</span><span class="p">);</span>
-</span><span class='line'><span class="n">self</span><span class="p">.</span><span class="n">dateLabel</span><span class="p">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">dateFrame</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>方法二</h4>
-
-<p>此方法更加简单粗暴，但是很有效。其方法是在文本后面加多一些\n。
-需要注意的是，\n后还得加至少一个空格，否则多余的\n会被UILabel忽略。从这一点上看，UILabel似乎又过于“聪明”了。</p>
-
-<p>该方法的示意图如下：</p>
-
-<p><img src="/images/UILabel_3.png"></p>
-
-<p>该方法的代码如下：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">newLinesToPad</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">self</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">text</span> <span class="nl">stringByAppendingString:</span><span class="s">@&quot;</span><span class="se">\n</span><span class="s"> &quot;</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>方法三</h4>
-
-<p>最正统的方法，利用objective-c的category特性，修改UILabel的绘制代码。示例代码如下：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">// -- file: UILabel+VerticalAlign.h</span>
-</span><span class='line'><span class="cp">#pragma mark VerticalAlign</span>
-</span><span class='line'><span class="k">@interface</span> <span class="nc">UILabel</span> <span class="nl">(VerticalAlign)</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">alignTop</span><span class="p">;</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">alignBottom</span><span class="p">;</span>
-</span><span class='line'><span class="k">@end</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// -- file: UILabel+VerticalAlign.m</span>
-</span><span class='line'><span class="k">@implementation</span> <span class="nc">UILabel</span> <span class="nl">(VerticalAlign)</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">alignTop</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">CGSize</span> <span class="n">fontSize</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">text</span> <span class="nl">sizeWithFont:</span><span class="n">self</span><span class="p">.</span><span class="n">font</span><span class="p">];</span>
-</span><span class='line'>    <span class="kt">double</span> <span class="n">finalHeight</span> <span class="o">=</span> <span class="n">fontSize</span><span class="p">.</span><span class="n">height</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">numberOfLines</span><span class="p">;</span>
-</span><span class='line'>    <span class="kt">double</span> <span class="n">finalWidth</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">;</span>    <span class="c1">//expected width of label</span>
-</span><span class='line'>    <span class="n">CGSize</span> <span class="n">theStringSize</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">text</span> <span class="nl">sizeWithFont:</span><span class="n">self</span><span class="p">.</span><span class="n">font</span> <span class="nl">constrainedToSize:</span><span class="n">CGSizeMake</span><span class="p">(</span><span class="n">finalWidth</span><span class="p">,</span> <span class="n">finalHeight</span><span class="p">)</span> <span class="nl">lineBreakMode:</span><span class="n">self</span><span class="p">.</span><span class="n">lineBreakMode</span><span class="p">];</span>
-</span><span class='line'>    <span class="kt">int</span> <span class="n">newLinesToPad</span> <span class="o">=</span> <span class="p">(</span><span class="n">finalHeight</span>  <span class="o">-</span> <span class="n">theStringSize</span><span class="p">.</span><span class="n">height</span><span class="p">)</span> <span class="o">/</span> <span class="n">fontSize</span><span class="p">.</span><span class="n">height</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">newLinesToPad</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-</span><span class='line'>        <span class="n">self</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">text</span> <span class="nl">stringByAppendingString:</span><span class="s">@&quot;</span><span class="se">\n</span><span class="s"> &quot;</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">alignBottom</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">CGSize</span> <span class="n">fontSize</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">text</span> <span class="nl">sizeWithFont:</span><span class="n">self</span><span class="p">.</span><span class="n">font</span><span class="p">];</span>
-</span><span class='line'>    <span class="kt">double</span> <span class="n">finalHeight</span> <span class="o">=</span> <span class="n">fontSize</span><span class="p">.</span><span class="n">height</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">numberOfLines</span><span class="p">;</span>
-</span><span class='line'>    <span class="kt">double</span> <span class="n">finalWidth</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">;</span>    <span class="c1">//expected width of label</span>
-</span><span class='line'>    <span class="n">CGSize</span> <span class="n">theStringSize</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">text</span> <span class="nl">sizeWithFont:</span><span class="n">self</span><span class="p">.</span><span class="n">font</span> <span class="nl">constrainedToSize:</span><span class="n">CGSizeMake</span><span class="p">(</span><span class="n">finalWidth</span><span class="p">,</span> <span class="n">finalHeight</span><span class="p">)</span> <span class="nl">lineBreakMode:</span><span class="n">self</span><span class="p">.</span><span class="n">lineBreakMode</span><span class="p">];</span>
-</span><span class='line'>    <span class="kt">int</span> <span class="n">newLinesToPad</span> <span class="o">=</span> <span class="p">(</span><span class="n">finalHeight</span>  <span class="o">-</span> <span class="n">theStringSize</span><span class="p">.</span><span class="n">height</span><span class="p">)</span> <span class="o">/</span> <span class="n">fontSize</span><span class="p">.</span><span class="n">height</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">newLinesToPad</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-</span><span class='line'>        <span class="n">self</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot; </span><span class="se">\n</span><span class="s">%@&quot;</span><span class="p">,</span><span class="n">self</span><span class="p">.</span><span class="n">text</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>我选了简单暴力的方法二，你呢？</p>
-
-<h4>参考资料</h4>
-
-<p><a href="http://stackoverflow.com/questions/1054558/how-do-i-vertically-align-text-within-a-uilabel">http://stackoverflow.com/questions/1054558/how-do-i-vertically-align-text-within-a-uilabel</a> <br/>
-<a href="https://discussions.apple.com/thread/1759957?threadID=1759957">https://discussions.apple.com/thread/1759957?threadID=1759957</a></p>
-</div>
-
+文章内容已迁移到：
+<script type="text/javascript">
+var link = '<a href="' + window.location.href + '">' + window.location.href + '</a>'
+document.write(link)
+</script>
 
   <footer>
     <p class="meta">

@@ -8,17 +8,12 @@
   <title>使用Github来管理xcode4中的代码片段 - 唐巧的技术博客</title>
   <meta name="author" content="唐巧">
 
-  
-  <meta name="description" content="代码片段介绍 xcode4 引入了一个新 feature: code snippets，在整个界面的右下角，可以通过快捷键：cmd + ctrl + opt + 2 调出来。code snippets 是一些代码的模版，对于一些常见的编程模式，xcode 都将这些代码抽象成模版放到 code &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.devtang.com/blog/2012/02/04/use-git-to-manage-code-snippets">
+
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -75,79 +70,17 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
+      <script type="text/javascript">
+window.location.pathname = window.location.pathname.replace('/blog', '')
+</script>
+
+<div>
 <article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">使用Github来管理xcode4中的代码片段</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-04T14:32:00+08:00" pubdate data-updated="true">Feb 4<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><h3>代码片段介绍</h3>
-
-<p>xcode4 引入了一个新 feature: code snippets，在整个界面的右下角，可以通过快捷键：cmd + ctrl + opt + 2 调出来。code snippets 是一些代码的模版，对于一些常见的编程模式，xcode 都将这些代码抽象成模版放到 code snippet 中，使用的时候，只需要键入快捷键，就可以把模版的内容填到代码中。</p>
-
-<!--more-->
-
-
-<p>例如，在引入 GCD(Grand Central Dispatch) 后，当我们需要一个延时的操作时，只需要在 xcode 中键入：dispatch
-, 就可以看到 xcode 中弹出一个上下文菜单，第一项就是相应的代码片段。如下图所示：</p>
-
-<p><img src="/images/dispatch_after_snippet.jpg"></p>
-
-<h3>定义自己的代码片段</h3>
-
-<p>那么如何自定义 code snippet 呢，相当简单，当你觉得某段代码很有用，可以当作模版的时候，将其整块选中，
-拖动到 xcode 右下角的 code snippets 区域中即可。xcode 会自动帮你创建一个新的代码片段。
-之后你可以单击该代码片段，在弹出的界面中选择 edit，即可为此代码片段设置快捷键等信息。</p>
-
-<p>如果有些地方你想让用户替换掉，可以用 &lt;#被替换的内容#> 的格式。
-这样在代码片段被使用后，焦点会自动移到该处，你只需要连贯的键入替换后的内容即可。如下图所示：</p>
-
-<p><img src="/images/edit_code_snippet.jpg"></p>
-
-<p>关于 xcode 的一些代码片段，<a href="http://nearthespeedoflight.com/article/xcode_4_code_snippets">这里</a> 有一些用户的总结心得。</p>
-
-<h3>使用 Git 管理代码片段</h3>
-
-<p>在了解了 code snippet 之后，我在想能不能用 Git 来管理它，于是就研究了一下，发现它都存放于目录 ~/Library/Developer/Xcode/UserData/CodeSnippets 中。于是，我就将这个目录设置成一个 Git 的版本库，然后将自己整理
-的代码片段都放到 Github 上了。现在我有 2 台 mac 机器，一台笔记本，一台公司的 iMac，我常常在 2 台机器间切换着工作，由于将代码片段都放在 github 上，所以我在任何一端有更新，另一端都可以很方便的用 git pull 将更新拉到本地。前两天将公司机器升级到 lion，又重装了 lion 版的 xcode，简单设置一下，所有代码片段都回来了，非常方便。</p>
-
-<p>我的代码片段所在的 github 地址是 <a href="https://github.com/tangqiaoboy/xcode_tool">https://github.com/tangqiaoboy/xcode_tool</a>, 使用它非常方便，只需要如下 3 步即可：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/tangqiaoboy/xcode_tool
-</span><span class='line'>cd xcode_tool
-</span><span class='line'>./setup_snippets.sh</span></code></pre></td></tr></table></div></figure>
-
-
-<p>大家也可以将我的 github 项目 fork 一份，改成自己的。这样可以方便地增加和管理自己的代码片段。</p>
-
-<p>祝大家玩得开心。</p>
-</div>
-
+文章内容已迁移到：
+<script type="text/javascript">
+var link = '<a href="' + window.location.href + '">' + window.location.href + '</a>'
+document.write(link)
+</script>
 
   <footer>
     <p class="meta">

@@ -8,17 +8,12 @@
   <title>用脚本来简化iOS美术同学的工作 - 唐巧的技术博客</title>
   <meta name="author" content="唐巧">
 
-  
-  <meta name="description" content="问题 我们知道，在 iOS 开发中，为了使我们的 app 能够同时支持 iPhone 的 Retina 屏幕和普通屏幕，美术同学需要对 UI 设计稿中的每个元素进行 2 次切图。苹果要求对图片元素的命名分别为 name.png 和 name@2x.png，带 @2x 的表示是 Retina &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.devtang.com/blog/2012/08/26/use-script-to-power-up-ui-work">
+
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -75,274 +70,17 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
+      <script type="text/javascript">
+window.location.pathname = window.location.pathname.replace('/blog', '')
+</script>
+
+<div>
 <article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">用脚本来简化iOS美术同学的工作</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-26T20:34:00+08:00" pubdate data-updated="true">Aug 26<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><h2>问题</h2>
-
-<p>我们知道，在 iOS 开发中，为了使我们的 app 能够同时支持 iPhone 的 Retina 屏幕和普通屏幕，美术同学需要对 UI 设计稿中的每个元素进行 2 次切图。苹果要求对图片元素的命名分别为 name.png 和 name@2x.png，带 @2x 的表示是 Retina 屏幕的贴图，不带 @2x 的同名文件为普通屏幕的贴图。</p>
-
-<p>我在开发的时候发现很难要求美术同学按照开发的要求来对图片命名。她们通常对于切图的命名是例如 * 登录按钮大 .png<em> ，</em> 登录按钮小 .png<em>, * 登录按钮按下大 .png</em> * 登录按钮按下小 .png* 这样的形式。于是，对这些文件按照苹果的要求进行重命名就成了我这个码农的一个体力活。</p>
-
-<!-- more -->
-
-
-<h2>解决方案</h2>
-
-<p>有什么方法能减少开发和美术的体力活呢？想到因为 <a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#x6f;&#58;&#110;&#x61;&#x6d;&#101;&#x40;&#50;&#120;&#x2e;&#112;&#x6e;&#103;">&#x6e;&#97;&#109;&#x65;&#x40;&#x32;&#120;&#46;&#112;&#110;&#103;</a> 的图片是 name.png 图片的 2 整倍，所以，我们完全可以让美术只切 @2x 的大图，而我们使用脚本来生成小图。于是我写了下面这样的一个脚本，我只需要将所有的大图按照类似 <a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#111;&#58;&#x6e;&#97;&#x6d;&#101;&#45;&#x31;&#x40;&#50;&#120;&#x2e;&#x70;&#x6e;&#x67;">&#110;&#x61;&#x6d;&#x65;&#45;&#49;&#64;&#50;&#120;&#46;&#x70;&#x6e;&#x67;</a> , <a href="&#109;&#x61;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#110;&#x61;&#x6d;&#101;&#x2d;&#50;&#64;&#50;&#x78;&#x2e;&#x70;&#x6e;&#103;">&#110;&#x61;&#x6d;&#101;&#x2d;&#x32;&#x40;&#x32;&#120;&#46;&#112;&#x6e;&#x67;</a> 方式命名，然后脚本就会自动帮我生成对应的名为 name-1.png 和 name-2.png 的小图。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#! /bin/bash</span>
-</span><span class='line'><span class="cp"># File name : convertImage.sh</span>
-</span><span class='line'><span class="cp"># Author: Tang Qiao</span>
-</span><span class='line'><span class="cp"># </span>
-</span><span class='line'>
-</span><span class='line'><span class="cp"># print usage</span>
-</span><span class='line'><span class="n">usage</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">cat</span> <span class="o">&lt;&lt;</span> <span class="n">EOF</span>
-</span><span class='line'>    <span class="nl">Usage:</span>
-</span><span class='line'>        <span class="n">convertImage</span><span class="p">.</span><span class="n">sh</span> <span class="o">&lt;</span><span class="n">src</span> <span class="n">directory</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">dest</span> <span class="n">directory</span><span class="o">&gt;</span>
-</span><span class='line'><span class="n">EOF</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">if</span> <span class="p">[</span> <span class="n">$</span><span class="err">#</span> <span class="o">-</span><span class="n">ne</span> <span class="mi">2</span> <span class="p">];</span> <span class="n">then</span>
-</span><span class='line'>    <span class="n">usage</span>
-</span><span class='line'>    <span class="n">exit</span> <span class="mi">1</span>
-</span><span class='line'><span class="n">fi</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">SRC_DIR</span><span class="o">=</span><span class="n">$1</span>
-</span><span class='line'><span class="n">DEST_DIR</span><span class="o">=</span><span class="n">$2</span>
-</span><span class='line'>
-</span><span class='line'><span class="cp"># check src dir</span>
-</span><span class='line'><span class="k">if</span> <span class="p">[</span> <span class="o">!</span> <span class="o">-</span><span class="n">d</span> <span class="n">$SRC_DIR</span> <span class="p">];</span> <span class="n">then</span>
-</span><span class='line'>    <span class="n">echo</span> <span class="s">&quot;src directory not exist: $SRC_DIR&quot;</span>
-</span><span class='line'>    <span class="n">exit</span> <span class="mi">1</span>
-</span><span class='line'><span class="n">fi</span>
-</span><span class='line'>
-</span><span class='line'><span class="cp"># check dest dir</span>
-</span><span class='line'><span class="k">if</span> <span class="p">[</span> <span class="o">!</span> <span class="o">-</span><span class="n">d</span> <span class="n">$DEST_DIR</span> <span class="p">];</span> <span class="n">then</span>
-</span><span class='line'>    <span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="n">$DEST_DIR</span>
-</span><span class='line'><span class="n">fi</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">for</span> <span class="n">src_file</span> <span class="k">in</span> <span class="n">$SRC_DIR</span><span class="o">/*</span><span class="p">.</span><span class="o">*</span> <span class="p">;</span> <span class="k">do</span>
-</span><span class='line'>    <span class="n">echo</span> <span class="s">&quot;process file name: $src_file&quot;</span>
-</span><span class='line'>    <span class="err">#</span> <span class="err">获得去掉文件名的纯路径</span>
-</span><span class='line'>    <span class="n">src_path</span><span class="o">=</span><span class="err">`</span><span class="n">dirname</span> <span class="n">$src_file</span><span class="err">`</span>
-</span><span class='line'>    <span class="err">#</span> <span class="err">获得去掉路径的纯文件名</span>
-</span><span class='line'>    <span class="n">filename</span><span class="o">=</span><span class="err">`</span><span class="n">basename</span> <span class="n">$src_file</span><span class="err">`</span>
-</span><span class='line'>    <span class="err">#</span> <span class="err">获得文件名字</span> <span class="p">(</span><span class="err">不包括扩展名</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">name</span><span class="o">=</span><span class="err">`</span><span class="n">echo</span> <span class="s">&quot;$filename&quot;</span> <span class="o">|</span> <span class="n">cut</span> <span class="o">-</span><span class="n">d</span><span class="sc">&#39;.&#39;</span> <span class="o">-</span><span class="n">f1</span><span class="err">`</span>
-</span><span class='line'>    <span class="err">#</span> <span class="n">remove</span> <span class="err">@</span><span class="mi">2</span><span class="n">x</span> <span class="k">in</span> <span class="n">filename</span> <span class="k">if</span> <span class="n">there</span> <span class="n">is</span>
-</span><span class='line'>    <span class="n">name</span><span class="o">=</span><span class="err">`</span><span class="n">echo</span> <span class="s">&quot;$name&quot;</span> <span class="o">|</span> <span class="n">cut</span> <span class="o">-</span><span class="n">d</span><span class="s">&quot;@&quot;</span> <span class="o">-</span><span class="n">f1</span><span class="err">`</span>
-</span><span class='line'>    <span class="err">#</span> <span class="err">获得文件扩展名</span>
-</span><span class='line'>    <span class="n">extension</span><span class="o">=</span><span class="err">`</span><span class="n">echo</span> <span class="s">&quot;$filename&quot;</span> <span class="o">|</span> <span class="n">cut</span> <span class="o">-</span><span class="n">d</span><span class="sc">&#39;.&#39;</span> <span class="o">-</span><span class="n">f2</span><span class="err">`</span>
-</span><span class='line'>    <span class="n">dest_file</span><span class="o">=</span><span class="s">&quot;$DEST_DIR/${name}.${extension}&quot;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">convert</span> <span class="n">$src_file</span> <span class="o">-</span><span class="n">resize</span> <span class="mi">50</span><span class="o">%</span> <span class="n">$dest_file</span>
-</span><span class='line'><span class="n">done</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>脚本使用方法：将以上代码另存为 convertImage.sh，然后用以下方式调用此脚本，即可将源文件夹中所有以 @2x 结尾的图片文件转成一半大小的、去掉 @2x 的小图片。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>convertImage.sh 源文件夹 目标文件夹
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>使用以上脚本后，美术只用切一半的图了。因为给我的切图少了，所以我可以更加方便地找到对应的切图了。另外，我也减少了一半对切图进行重命名的工作。</p>
-
-<h2>Tips</h2>
-
-<h3>imagemagick</h3>
-
-<p>如果你运行以上脚本失败，请先用 brew 或 port 安装 imagemagick。imagemagick 是一个相当强大的图象处理库。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew install imagemagick
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>检查图片</h3>
-
-<p>在使用该脚本一段时间后，我发现美术同学给我的大图的长宽常常不是偶数，这样造成缩小的图就不是原图的整倍数了。为了方便我检查美术给我的图片是否宽高都是偶数，我写了如下检查的脚本，这样就可以检查图片的宽高是否符合要求了。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#! /bin/bash</span>
-</span><span class='line'><span class="c"># File name : checkImageSize.sh</span>
-</span><span class='line'><span class="c"># Author: Tang Qiao</span>
-</span><span class='line'><span class="c"># </span>
-</span><span class='line'>
-</span><span class='line'>usage<span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>    cat <span class="s">&lt;&lt;EOF</span>
-</span><span class='line'><span class="s">    Usage:</span>
-</span><span class='line'><span class="s">        checkImageSize.sh &lt;directory&gt;</span>
-</span><span class='line'><span class="s">EOF</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">if</span> <span class="o">[</span> <span class="nv">$# </span>-ne 1 <span class="o">]</span>; <span class="k">then</span>
-</span><span class='line'><span class="k">    </span>usage
-</span><span class='line'>    <span class="nb">exit </span>1
-</span><span class='line'><span class="k">fi</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">SRC_DIR</span><span class="o">=</span><span class="nv">$1</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># check src dir</span>
-</span><span class='line'><span class="k">if</span> <span class="o">[</span> ! -d <span class="nv">$SRC_DIR</span> <span class="o">]</span>; <span class="k">then</span>
-</span><span class='line'><span class="k">    </span><span class="nb">echo</span> <span class="s2">&quot;src directory not exist: $SRC_DIR&quot;</span>
-</span><span class='line'>    <span class="nb">exit </span>1
-</span><span class='line'><span class="k">fi</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">for </span>src_file in <span class="nv">$SRC_DIR</span>/*.png ; <span class="k">do</span>
-</span><span class='line'><span class="k">    </span><span class="nb">echo</span> <span class="s2">&quot;process file name: $src_file&quot;</span>
-</span><span class='line'>    <span class="nv">width</span><span class="o">=</span><span class="sb">`</span>identify -format <span class="s2">&quot;%[fx:w]&quot;</span> <span class="nv">$src_file</span><span class="sb">`</span>
-</span><span class='line'>    <span class="nv">height</span><span class="o">=</span><span class="sb">`</span>identify -format <span class="s2">&quot;%[fx:h]&quot;</span> <span class="nv">$src_file</span><span class="sb">`</span>
-</span><span class='line'>    <span class="c"># check width</span>
-</span><span class='line'>    <span class="nv">modValue</span><span class="o">=</span><span class="sb">`</span>awk -v <span class="nv">a</span><span class="o">=</span><span class="nv">$width</span> <span class="s1">&#39;BEGIN{printf &quot;%d&quot;, a % 2}&#39;</span><span class="sb">`</span>
-</span><span class='line'>    <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$modValue&quot;</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span> <span class="o">]</span>; <span class="k">then</span>
-</span><span class='line'><span class="k">       </span><span class="nb">echo</span> <span class="s2">&quot;[Error], the file $src_file width is $width&quot;</span>
-</span><span class='line'>    <span class="k">fi</span>
-</span><span class='line'>    <span class="c"># check height</span>
-</span><span class='line'>    <span class="nv">modValue</span><span class="o">=</span><span class="sb">`</span>awk -v <span class="nv">a</span><span class="o">=</span><span class="nv">$height</span> <span class="s1">&#39;BEGIN{printf &quot;%d&quot;, a % 2}&#39;</span><span class="sb">`</span>
-</span><span class='line'>    <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$modValue&quot;</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span> <span class="o">]</span>; <span class="k">then</span>
-</span><span class='line'><span class="k">       </span><span class="nb">echo</span> <span class="s2">&quot;[Error], the file $src_file height is $height&quot;</span>
-</span><span class='line'>    <span class="k">fi</span>
-</span><span class='line'><span class="k">done</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>问题</h3>
-
-<p>我在使用以上方法时，发现由于 imagemagick 压缩比太高，生成的图片如果象素太小，它就会生成索引图片，而不知道何故，少量索引图片在 iPhone 3GS 上会显示出一条黑线在图片底部。对于这些图片，用 photoshop 将其模式改成 RGB 颜色即可。如下所示：</p>
-
-<p><img src="/images/ui-script-tips.png" title="" ></p>
-
-<p>用脚本代替体力活是一件很 happy 的事情，因为你可以用省下来的时间多做一些有意思的事情了。</p>
-
-<p>Have fun !</p>
-
-<h3>后记</h3>
-
-<p>在发表完这篇文章后，得到了很多反馈。</p>
-
-<p>其中 <a href="http://weibo.com/wangyihan01">李祎</a> 同学提到了一个 iOS 独立开发者的解决思路：<a href="http://kevincao.com/2011/08/prepare-png-for-iphone-app/">http://kevincao.com/2011/08/prepare-png-for-iphone-app/</a> ，我感觉该博客中提到的方法，或许更加适合美术同学，因为整个操作都是图形化的。所以附在这里，希望对大家有用。</p>
-
-<p>另外，网易杭研院的 <a href="http://weibo.com/myerlang">施强</a> 同学推荐了一个用于缩图的软件:<a href="http://www.xnconvert.com/">http://www.xnconvert.com/</a> ，据说也能很好的解决以上问题。一并在此推荐给大家作为参考。</p>
-</div>
-
+文章内容已迁移到：
+<script type="text/javascript">
+var link = '<a href="' + window.location.href + '">' + window.location.href + '</a>'
+document.write(link)
+</script>
 
   <footer>
     <p class="meta">
