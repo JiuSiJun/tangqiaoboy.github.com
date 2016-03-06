@@ -4,25 +4,30 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>是否应该使用ARC? | 唐巧的技术博客</title>
+    <title>购买广告位 | 唐巧的技术博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="唐巧">
     
 
     
-    <meta name="description" content="我和身边做 iOS 开发的同事组建了一个 QQ 群，每隔一段时间，大家就会讨论是否应该使用 ARC。所以我觉得有必要将这些讨论分享出来，让大家消除对于 ARC 的疑虑。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="是否应该使用ARC?">
-<meta property="og:url" content="http://blog.devtang.com/2013/03/27/should-we-use-arc/index.html">
+    <meta name="description" content="概述本博客的主要内容是 iOS 开发，非常适合 iOS 开发相关的广告内容投放，例如招聘信息、商业 SDK、第三方的商业服务等。
+大家可以算一下，对于招聘来说，通常招到一个 iOS 开发者需要给付猎头 3 个月左右的工资作为费用。我们假设 iOS 开发者的月薪是 1 万，那这个费用可以在本博客投放 5 年的广告。
+根据 Google Analytics 的统计，本博客每天平均 3000 左右的 P">
+<meta property="og:type" content="website">
+<meta property="og:title" content="购买广告位">
+<meta property="og:url" content="http://blog.devtang.com/sponsor/index.html">
 <meta property="og:site_name" content="唐巧的技术博客">
-<meta property="og:description" content="我和身边做 iOS 开发的同事组建了一个 QQ 群，每隔一段时间，大家就会讨论是否应该使用 ARC。所以我觉得有必要将这些讨论分享出来，让大家消除对于 ARC 的疑虑。">
-<meta property="og:image" content="http://blog.devtang.com/images/arc-logo.jpg">
-<meta property="og:image" content="http://blog.devtang.com/images/xcode-convert-to-arc.jpg">
-<meta property="og:updated_time" content="2016-02-16T10:28:02.000Z">
+<meta property="og:description" content="概述本博客的主要内容是 iOS 开发，非常适合 iOS 开发相关的广告内容投放，例如招聘信息、商业 SDK、第三方的商业服务等。
+大家可以算一下，对于招聘来说，通常招到一个 iOS 开发者需要给付猎头 3 个月左右的工资作为费用。我们假设 iOS 开发者的月薪是 1 万，那这个费用可以在本博客投放 5 年的广告。
+根据 Google Analytics 的统计，本博客每天平均 3000 左右的 P">
+<meta property="og:image" content="http://blog.devtang.com/images/blog_analytics_1.jpg">
+<meta property="og:updated_time" content="2016-03-06T12:56:13.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="是否应该使用ARC?">
-<meta name="twitter:description" content="我和身边做 iOS 开发的同事组建了一个 QQ 群，每隔一段时间，大家就会讨论是否应该使用 ARC。所以我觉得有必要将这些讨论分享出来，让大家消除对于 ARC 的疑虑。">
+<meta name="twitter:title" content="购买广告位">
+<meta name="twitter:description" content="概述本博客的主要内容是 iOS 开发，非常适合 iOS 开发相关的广告内容投放，例如招聘信息、商业 SDK、第三方的商业服务等。
+大家可以算一下，对于招聘来说，通常招到一个 iOS 开发者需要给付猎头 3 个月左右的工资作为费用。我们假设 iOS 开发者的月薪是 1 万，那这个费用可以在本博客投放 5 年的广告。
+根据 Google Analytics 的统计，本博客每天平均 3000 左右的 P">
 
     
     <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
@@ -75,11 +80,11 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2013/03/27/should-we-use-arc/" title="是否应该使用ARC?" itemprop="url">是否应该使用ARC?</a>
+      <a href="/sponsor/index.html" title="购买广告位" itemprop="url">购买广告位</a>
   </h1>
   
   <p class="article-time">
-    <time datetime="2013-03-27T13:23:00.000Z" itemprop="datePublished"> 发表于 2013-03-27 21:23</time>
+    <time datetime="2016-02-15T06:32:00.000Z" itemprop="datePublished"> 发表于 2016-02-15 14:32</time>
     
   </p>
 </header>
@@ -88,41 +93,30 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#u6982_u8FF0"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5E7F_u544A_u4F4D"><span class="toc-number">2.</span> <span class="toc-text">广告位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8054_u7CFB_u65B9_u5F0F"><span class="toc-number">3.</span> <span class="toc-text">联系方式</span></a></li></ol>
 		
 		</div>
 		
-		<img src="/images/arc-logo.jpg">
-<p>我和身边做 iOS 开发的同事组建了一个 QQ 群，每隔一段时间，大家就会讨论是否应该使用 ARC。所以我觉得有必要将这些讨论分享出来，让大家消除对于 ARC 的疑虑。</p>
-<a id="more"></a>
-<p>关于 ARC 的介绍文章网上已经很多，苹果的官方文档也不少。担心使用 ARC 会带来问题的同学主要的理由有以下 5 点:</p>
-<ol>
-<li>担心这个技术方案不靠谱。苹果大多数时候的技术方案都是比较靠谱的，但也有一些技术方案有很多坑，例如 storyboard。关于 storyboard 的问题可以参看我的 <a href="/2012/12/15/do-not-use-storyboard/">这篇文章</a>。</li>
-<li>原有的项目在非 ARC 环境下运行良好，担心迁移成本或引入新的问题。</li>
-<li>苹果以前手工管理内存需要非常小心，稍微不注意应用程序就崩溃了。有过这段经历的 iOS 开发老手，心里上还是觉得自己手工管理内存更踏实一些。</li>
-<li>使用 ARC 需要了解 ARC 的一些细节，还需要引入 _bridge 等新的关键字，学习成本还是有的。</li>
-<li>以为 ARC 只能支持 iOS5.0 以上（这是非常大的误解）。</li>
-</ol>
-<p>对于上面提到 5 点问题，我认为相应的回答如下:</p>
-<ol>
-<li>ARC 是 WWDC2011 大会时提出的技术，离现在已经快 2 年了，而且苹果现在将 MacOS 上的垃圾回收机制废弃 (Deprecated)，采用 ARC 替代，无疑证明了 ARC 是成熟的了。</li>
-<li>确实有一些迁移成本，但苹果在 Xcode 中专门集成了迁移工具，成本已经非常小了。如下图就是 Xcode 集成的将非 ARC 工程转换成 ARC 工程的工具。另外，为了兼容第三方的非 ARC 开源库，你也可以在工程中随意使用编译参数：<code>-fno-objc-arc</code> , 这个参数允许对部分文件关闭 ARC。</li>
-<li>手工管理内存虽然踏实，但是泄露很容易发生。常常开发完成后，需要使用 Instruments 来检测泄露。但用了 ARC 后，基本不会出现泄露了，我在开发粉笔网 iPhone 客户端时，由于使用了 ARC，花三个月开发完的应用，用 instruments 检测后，没有发现任何内存泄漏问题。这在没有使用 ARC 的工程中是不可想象的。</li>
-<li>确实有学习成本。但是非常值得学习，能省不少开发精力。</li>
-<li>虽然 ARC 是与 iOS5 一同推出，但是由于 ARC 的实现机制是在编译期完成，所以使用 ARC 之后 App 仍然可以支持 iOS4.3。稍微需要注意的是，如果要在 ARC 开启的情况下支持 iOS4.3，需要将 weak 关键字换成 __unsafe_unretained，另外还有一些细节需要处理，在这里我就不展开说了。</li>
-</ol>
-<img src="/images/xcode-convert-to-arc.jpg">
-<p>所以，希望大家都能在项目中使用 ARC，一旦你感受到它带来的好处，你就离不开它了。它也能让你从繁琐的内存管理代码中解放出来，将精力更多关注于代码结构、设计模式而不是底层的内存管理。</p>
-<p>关于 ARC 的教程，除了苹果的官方文档外，推荐易飞杨写的 <a href="http://www.yifeiyang.net/category/embedded/iphone-embedded/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA/arc/" target="_blank" rel="external">ARC 相关的文章</a>（注：链接需要翻墙才能打开）。易飞杨的博客中关于 iPhone 开发的文章都写得很深入，值得好好阅读。</p>
+		<h3 id="u6982_u8FF0"><a href="#u6982_u8FF0" class="headerlink" title="概述"></a>概述</h3><p>本博客的主要内容是 iOS 开发，非常适合 iOS 开发相关的广告内容投放，例如招聘信息、商业 SDK、第三方的商业服务等。</p>
+<p>大家可以算一下，对于招聘来说，通常招到一个 iOS 开发者需要给付猎头 3 个月左右的工资作为费用。我们假设 iOS 开发者的月薪是 1 万，那这个费用可以在本博客投放 5 年的广告。</p>
+<p>根据 Google Analytics 的统计，本博客每天平均 3000 左右的 PV 浏览量（工作日约 4000 左右浏览量，周末约 2000 左右的浏览量），1000 以上的 UV 浏览量，平均停留时间约 3 分钟，约一半是新读者。</p>
+<p>以下是本博客今年的概要数据统计（中间的低谷期是因为春节）：</p>
+<img src="/images/blog_analytics_1.jpg">
+<h3 id="u5E7F_u544A_u4F4D"><a href="#u5E7F_u544A_u4F4D" class="headerlink" title="广告位"></a>广告位</h3><p>本博客右侧边栏可放置图片广告，该广告位会展示在本博客的首页和所有的文章页面。</p>
+<p>根据刚刚的概述数据，图片广告每天约展示 2000 次，每月约 6 万次。</p>
+<p>广告位价格：</p>
+<ul>
+<li>类型 A：图片宽度 235 px，高度 200 px。1000 元一月。</li>
+<li>类型 B：图片宽度 235 px，高度 100 px。500 元一月。</li>
+<li>所有类型 A 的图片广告，将位于类型 B 的上方。其它的按广告投放顺序依次排序。</li>
+<li>图片格式可以是 PNG, JPG 或 GIF，但大小需要保证在 100K 以内。</li>
+<li>需要提供图片点击后打开的网址，用于跳转到相关网站。</li>
+</ul>
+<h3 id="u8054_u7CFB_u65B9_u5F0F"><a href="#u8054_u7CFB_u65B9_u5F0F" class="headerlink" title="联系方式"></a>联系方式</h3><p>如有意投放广告，请微博私信联系 <a href="http://weibo.com/tangqiaoboy" target="_blank" rel="external">@ 唐巧 _boy</a>。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/iOS/">iOS</a>
-</div>
 
 
 </div>
@@ -131,7 +125,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://blog.devtang.com/2013/03/27/should-we-use-arc/" data-title="是否应该使用ARC? | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  <div data-url="http://blog.devtang.com/sponsor/index.html" data-title="购买广告位 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -142,30 +136,9 @@
    	       
 	</article>
 	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2013/04/07/tricks-in-iap/" title="iOS应用内支付(IAP)的那些坑">
-  <strong>上一篇：</strong><br/>
-  <span>
-  iOS应用内支付(IAP)的那些坑</span>
-</a>
-</div>
-
-
-<div class="next">
-<a href="/2013/02/21/introduction-of-weixin-public-account/"  title="分享iOS开发技巧的微信公共账号">
- <strong>下一篇：</strong><br/> 
- <span>分享iOS开发技巧的微信公共账号
-</span>
-</a>
-</div>
-
-</nav>
-
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2013/03/27/should-we-use-arc/" data-title="是否应该使用ARC?" data-url="http://blog.devtang.com/2013/03/27/should-we-use-arc/"></div>
+	<div class="ds-thread" data-thread-key="sponsor/index.html" data-title="购买广告位" data-url="http://blog.devtang.com/sponsor/index.html"></div>
 </section>
 
 
@@ -319,32 +292,6 @@ $(document).ready(function(){
       o.css('display', 'none');
         
     }
-  });
-});
-</script>
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  c.click(function(){
-    ta.css('display', 'block').addClass('fadeIn');
-  });
-  o.click(function(){
-    ta.css('display', 'none');
-  });
-  $(window).scroll(function(){
-    ta.css("top",Math.max(140,320-$(this).scrollTop()));
   });
 });
 </script>
