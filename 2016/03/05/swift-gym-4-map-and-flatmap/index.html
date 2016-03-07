@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://quotesaga.s3.amazonaws.com/quote/QS_be152af2851e4e4e8d5049b0d5cbaed9.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/65dc76a3gw1f0sygrb8chj20c606egmg.jpg">
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/65dc76a3gw1f0scj26hf9j205805k3yk.jpg">
-<meta property="og:updated_time" content="2016-03-05T12:24:03.000Z">
+<meta property="og:updated_time" content="2016-03-07T16:15:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift 烧脑体操（四） - map 和 flatMap">
 <meta name="twitter:description" content="版权说明本文为 InfoQ 中文站特供稿件，首发地址为：文章链接。如需转载，请与 InfoQ 中文站联系。
@@ -131,9 +131,9 @@
 <p>所以，对于一个 Optional 的变量来说，<code>map</code> 方法允许它再次修改自己的值，并且不必关心自己是否为 <code>.None</code>。例如：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let a1: Int? = 3&#10;let b1 = a1.map&#123; $0 * 2 &#125;&#10;// b1 = 6&#10;&#10;let a2: Int? = nil&#10;let b2 = a2.map&#123; $0 * 2 &#125;&#10;// b2 = nil</span><br></pre></td></tr></table></figure>
 <p>再举一个例子，比如我们想把一个字符串转成 NSDate 实例，如果不用 <code>map</code> 方法，我们只能这么写：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var date: NSDate? = ...&#10;var formatted = date == nil ? nil : NSDateFormatter().stringFromDate(date!)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let date: NSDate? = NSDate()&#10;let formatter = NSDateFormatter()&#10;formatter.dateFormat = &#34;YYYY-MM-dd&#34;&#10;var formatted: String? = nil&#10;if let date = date &#123;&#10;    formatted = formatter.stringFromDate(date)&#10;&#125;</span><br></pre></td></tr></table></figure>
 <p>而使用 <code>map</code> 函数后，代码变得更短，更易读：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var date: NSDate? = ...&#10;var formatted = date.map(NSDateFormatter().stringFromDate)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let date: NSDate? = NSDate()&#10;let formatter = NSDateFormatter()&#10;formatter.dateFormat = &#34;YYYY-MM-dd&#34;&#10;let formatted = date.map(formatter.stringFromDate)</span><br></pre></td></tr></table></figure>
 <p>看出来特点了吗？当我们的输入是一个 Optional，同时我们需要在逻辑中处理这个 Optional 是否为 nil，那么就适合用 <code>map</code> 来替代原来的写法，使得代码更加简短。</p>
 <p>那什么时候使用 Optional 的 <code>flatMap</code> 方法呢？答案是：当我们的闭包参数有可能返回 nil 的时候。</p>
 <p>比如，我们希望将一个字符串转换成 Int，但是转换可能失败，这个时候我们就可以用 <code>flatMap</code> 方法，如下所示：</p>

@@ -4,7 +4,7 @@
   <subtitle><![CDATA[记录下自己学习的点滴]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.devtang.com/"/>
-  <updated>2016-03-05T12:24:03.000Z</updated>
+  <updated>2016-03-07T16:15:14.000Z</updated>
   <id>http://blog.devtang.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://blog.devtang.com/2016/03/05/swift-gym-4-map-and-flatmap/"/>
     <id>http://blog.devtang.com/2016/03/05/swift-gym-4-map-and-flatmap/</id>
     <published>2016-03-05T12:15:34.000Z</published>
-    <updated>2016-03-05T12:24:03.000Z</updated>
+    <updated>2016-03-07T16:15:14.000Z</updated>
     <content type="html"><![CDATA[<h2 id="u7248_u6743_u8BF4_u660E"><a href="#u7248_u6743_u8BF4_u660E" class="headerlink" title="版权说明"></a>版权说明</h2><p>本文为 InfoQ 中文站特供稿件，首发地址为：<a href="http://www.infoq.com/cn/articles/swift-brain-gym-map-and-flatmap" target="_blank" rel="external">文章链接</a>。如需转载，请与 InfoQ 中文站联系。</p>
 <h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>Swift 其实比 Objective-C 复杂很多，相对于出生于上世纪 80 年代的 Objective-C 来说，Swift 融入了大量新特性。这也使得我们学习掌握这门语言变得相对来说更加困难。不过一切都是值得的，Swift 相比 Objective-C，写出来的程序更安全、更简洁，最终能够提高我们的工作效率和质量。</p>
 <p>Swift 相关的学习资料已经很多，我想从另外一个角度来介绍它的一些特性，我把这个角度叫做「烧脑体操」。什么意思呢？就是我们专门挑一些比较费脑子的语言细节来学习。通过「烧脑」地思考，来达到对 Swift 语言的更加深入的理解。</p>
@@ -54,9 +54,9 @@
 <p>所以，对于一个 Optional 的变量来说，<code>map</code> 方法允许它再次修改自己的值，并且不必关心自己是否为 <code>.None</code>。例如：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let a1: Int? = 3&#10;let b1 = a1.map&#123; $0 * 2 &#125;&#10;// b1 = 6&#10;&#10;let a2: Int? = nil&#10;let b2 = a2.map&#123; $0 * 2 &#125;&#10;// b2 = nil</span><br></pre></td></tr></table></figure>
 <p>再举一个例子，比如我们想把一个字符串转成 NSDate 实例，如果不用 <code>map</code> 方法，我们只能这么写：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var date: NSDate? = ...&#10;var formatted = date == nil ? nil : NSDateFormatter().stringFromDate(date!)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let date: NSDate? = NSDate()&#10;let formatter = NSDateFormatter()&#10;formatter.dateFormat = &#34;YYYY-MM-dd&#34;&#10;var formatted: String? = nil&#10;if let date = date &#123;&#10;    formatted = formatter.stringFromDate(date)&#10;&#125;</span><br></pre></td></tr></table></figure>
 <p>而使用 <code>map</code> 函数后，代码变得更短，更易读：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var date: NSDate? = ...&#10;var formatted = date.map(NSDateFormatter().stringFromDate)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let date: NSDate? = NSDate()&#10;let formatter = NSDateFormatter()&#10;formatter.dateFormat = &#34;YYYY-MM-dd&#34;&#10;let formatted = date.map(formatter.stringFromDate)</span><br></pre></td></tr></table></figure>
 <p>看出来特点了吗？当我们的输入是一个 Optional，同时我们需要在逻辑中处理这个 Optional 是否为 nil，那么就适合用 <code>map</code> 来替代原来的写法，使得代码更加简短。</p>
 <p>那什么时候使用 Optional 的 <code>flatMap</code> 方法呢？答案是：当我们的闭包参数有可能返回 nil 的时候。</p>
 <p>比如，我们希望将一个字符串转换成 Int，但是转换可能失败，这个时候我们就可以用 <code>flatMap</code> 方法，如下所示：</p>
