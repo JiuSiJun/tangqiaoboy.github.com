@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://github.com/seedante/iOS-ViewController-Transition-Demo/blob/master/Figures/ContainerVCTransition.mov.gif?raw=true">
 <meta property="og:image" content="https://github.com/seedante/iOS-ViewController-Transition-Demo/blob/master/Figures/Reference%20in%20Transition.png?raw=true">
 <meta property="og:image" content="https://github.com/seedante/iOS-ViewController-Transition-Demo/blob/master/Figures/Reference%20in%20Transition%20with%20Interactor.png?raw=true">
-<meta property="og:updated_time" content="2016-03-13T08:42:38.000Z">
+<meta property="og:updated_time" content="2016-03-13T12:06:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS 视图控制器转场详解">
 <meta name="twitter:description" content="作者：seedante，神秘人士，他的 GitHub。感谢投稿，原文链接。
@@ -197,7 +197,7 @@ enum ModalOperation{
 <pre><code>let transitionType = SDETransitionType.TabTransition(.Left)
 </code></pre><p>Slide 动画控制器的核心代码：</p>
 <pre><code>class SlideAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
-    init(type: SDETransitionTye) {...}
+    init(type: SDETransitionType) {...}
 
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
         ...
@@ -392,7 +392,7 @@ animateAlongsideTransitionInView:animation:completion:
                          fromViewController fromVC: UIViewController, 
                              toViewController toVC: UIViewController) -&gt; UIViewControllerAnimatedTransitioning? {
         //使用上一节实现的 Slide 动画控制器，需要提供操作类型信息。
-        let transitionType = SDETransitionTye.NavigationTransition(operation)
+        let transitionType = SDETransitionType.NavigationTransition(operation)
         return SlideAnimationController(type: transitionType)
     }
 }
@@ -419,7 +419,7 @@ self.navigationController?.popViewControllerAnimated(true)
         let toIndex = tabBarController.viewControllers!.indexOf(toVC)!
 
         let tabChangeDirection: TabOperationDirection = toIndex &lt; fromIndex ? .Left : .Right
-        let transitionType = SDETransitionTye.TabTransition(tabChangeDirection)
+        let transitionType = SDETransitionType.TabTransition(tabChangeDirection)
         let slideAnimationController = SlideAnimationController(type: transitionType)
         return slideAnimationController
     }

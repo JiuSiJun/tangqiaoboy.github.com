@@ -4,7 +4,7 @@
   <subtitle><![CDATA[记录下自己学习的点滴]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.devtang.com/"/>
-  <updated>2016-03-13T08:42:38.000Z</updated>
+  <updated>2016-03-13T12:06:03.000Z</updated>
   <id>http://blog.devtang.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://blog.devtang.com/2016/03/13/iOS-transition-guide/"/>
     <id>http://blog.devtang.com/2016/03/13/iOS-transition-guide/</id>
     <published>2016-03-13T08:15:47.000Z</published>
-    <updated>2016-03-13T08:42:38.000Z</updated>
+    <updated>2016-03-13T12:06:03.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>作者：<a href="http://weibo.com/u/1815689155" target="_blank" rel="external">seedante</a>，神秘人士，他的 <a href="https://github.com/seedante" target="_blank" rel="external">GitHub</a>。<br>感谢投稿，<a href="https://github.com/seedante/iOS-Note/wiki/ViewController-Transition" target="_blank" rel="external">原文链接</a>。</p>
 </blockquote>
@@ -108,7 +108,7 @@ enum ModalOperation{
 <pre><code>let transitionType = SDETransitionType.TabTransition(.Left)
 </code></pre><p>Slide 动画控制器的核心代码：</p>
 <pre><code>class SlideAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
-    init(type: SDETransitionTye) {...}
+    init(type: SDETransitionType) {...}
 
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
         ...
@@ -303,7 +303,7 @@ animateAlongsideTransitionInView:animation:completion:
                          fromViewController fromVC: UIViewController, 
                              toViewController toVC: UIViewController) -&gt; UIViewControllerAnimatedTransitioning? {
         //使用上一节实现的 Slide 动画控制器，需要提供操作类型信息。
-        let transitionType = SDETransitionTye.NavigationTransition(operation)
+        let transitionType = SDETransitionType.NavigationTransition(operation)
         return SlideAnimationController(type: transitionType)
     }
 }
@@ -330,7 +330,7 @@ self.navigationController?.popViewControllerAnimated(true)
         let toIndex = tabBarController.viewControllers!.indexOf(toVC)!
 
         let tabChangeDirection: TabOperationDirection = toIndex &lt; fromIndex ? .Left : .Right
-        let transitionType = SDETransitionTye.TabTransition(tabChangeDirection)
+        let transitionType = SDETransitionType.TabTransition(tabChangeDirection)
         let slideAnimationController = SlideAnimationController(type: transitionType)
         return slideAnimationController
     }

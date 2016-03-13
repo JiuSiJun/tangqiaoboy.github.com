@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.devtang.com/2016/03/13/iOS-transition-guide/</loc>
+    <lastmod>2016-03-13T12:06:03.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.devtang.com/2015/06/28/apple-watch-usage-exp/</loc>
     <lastmod>2016-03-13T08:49:03.000Z</lastmod>
   </url>
@@ -14,11 +19,6 @@
   <url>
     <loc>http://blog.devtang.com/2014/04/16/mobile-development-view-from-facebook/</loc>
     <lastmod>2016-03-13T08:48:42.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2016/03/13/iOS-transition-guide/</loc>
-    <lastmod>2016-03-13T08:42:38.000Z</lastmod>
   </url>
   
   <url>
