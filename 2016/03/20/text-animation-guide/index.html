@@ -1,0 +1,556 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>如何实现自己没实现过的需求之文本动画 | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="吕伟（@我在罪恶坑的日子）iOS 开发者，这些年在上海工作。专业：扯淡，兼职：开发。感谢投稿，原文链接。
+
+大家好，我是非知名程序员，想跟大家说一段传统相声节目，额，对不起，说错了。想跟大家分享一点关于文本和动画的东西。这不是一篇纯血统，高、精、尖的技术文章，但依然希望有人能像喜欢混血美女一样喜欢。
+前言记得以前看到过一个很赞的文字效果的动画，类似于这样：
+
+当时被惊艳到了，最近偶然间又再次见到，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何实现自己没实现过的需求之文本动画">
+<meta property="og:url" content="http://blog.devtang.com/2016/03/20/text-animation-guide/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="吕伟（@我在罪恶坑的日子）iOS 开发者，这些年在上海工作。专业：扯淡，兼职：开发。感谢投稿，原文链接。
+
+大家好，我是非知名程序员，想跟大家说一段传统相声节目，额，对不起，说错了。想跟大家分享一点关于文本和动画的东西。这不是一篇纯血统，高、精、尖的技术文章，但依然希望有人能像喜欢混血美女一样喜欢。
+前言记得以前看到过一个很赞的文字效果的动画，类似于这样：
+
+当时被惊艳到了，最近偶然间又再次见到，">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/3759810/13845905/1e55a5d0-ec7e-11e5-9631-68aaf6b07ba1.gif">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/3759810/13854816/4a6b5258-eca8-11e5-9870-15ed2d4f0d70.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/3759810/13854821/4c5b947e-eca8-11e5-811e-e9abb161345f.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/3759810/13878224/e142bef8-ed4a-11e5-9c84-798cb5939f36.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/3759810/13878392/fab15e02-ed4b-11e5-9d38-2dc00ed45b0b.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/3759810/13878767/7631a33c-ed4e-11e5-9d03-46d89d8af9c8.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/3759810/13857496/2443d70a-ecb5-11e5-8661-a499e9c8719d.gif">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/3759810/13864468/9fdcae9c-ecdc-11e5-9c49-278b327d1ba7.png">
+<meta property="og:updated_time" content="2016-03-20T14:54:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何实现自己没实现过的需求之文本动画">
+<meta name="twitter:description" content="吕伟（@我在罪恶坑的日子）iOS 开发者，这些年在上海工作。专业：扯淡，兼职：开发。感谢投稿，原文链接。
+
+大家好，我是非知名程序员，想跟大家说一段传统相声节目，额，对不起，说错了。想跟大家分享一点关于文本和动画的东西。这不是一篇纯血统，高、精、尖的技术文章，但依然希望有人能像喜欢混血美女一样喜欢。
+前言记得以前看到过一个很赞的文字效果的动画，类似于这样：
+
+当时被惊艳到了，最近偶然间又再次见到，">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/03/20/text-animation-guide/" title="如何实现自己没实现过的需求之文本动画" itemprop="url">如何实现自己没实现过的需求之文本动画</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2016-03-20T13:34:23.000Z" itemprop="datePublished"> 发表于 2016-03-20 21:34</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u9009_u62E9"><span class="toc-number">2.</span> <span class="toc-text">选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u521B_u9020"><span class="toc-number">3.</span> <span class="toc-text">创造</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5F00_u59CB"><span class="toc-number">4.</span> <span class="toc-text">开始</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-__u5206_u89E3_u4EFB_u52A1"><span class="toc-number">4.0.1.</span> <span class="toc-text">1.  分解任务 </span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-__u5148_u89E3_u51B3_u6587_u672C_u5E03_u5C40"><span class="toc-number">4.0.2.</span> <span class="toc-text">2.  先解决文本布局 </span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-__u52A8_u753B_u5B9E_u73B0"><span class="toc-number">4.0.3.</span> <span class="toc-text">3.  动画实现 </span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6536_u5DE5"><span class="toc-number">5.</span> <span class="toc-text">收工</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6700_u540E"><span class="toc-number">6.</span> <span class="toc-text">最后</span></a></li></ol>
+		
+		</div>
+		
+		<blockquote>
+<p>吕伟（<a href="http://weibo.com/u/1660258615" target="_blank" rel="external">@我在罪恶坑的日子</a>）iOS 开发者，这些年在上海工作。专业：扯淡，兼职：开发。<br>感谢投稿，<a href="http://www.ismash.cn/post/ru-he-shi-xian-zi-ji-mei-shi-xian-guo-de-xu-qiu-zhi-wen-ben-dong-hua-pian" target="_blank" rel="external">原文链接</a>。</p>
+</blockquote>
+<p>大家好，我是非知名程序员，想跟大家说一段传统相声节目，额，对不起，说错了。想跟大家分享一点关于文本和动画的东西。这不是一篇纯血统，高、精、尖的技术文章，但依然希望有人能像喜欢混血美女一样喜欢。</p>
+<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>记得以前看到过一个很赞的文字效果的动画，类似于这样：</p>
+<p><img src="https://cloud.githubusercontent.com/assets/3759810/13845905/1e55a5d0-ec7e-11e5-9631-68aaf6b07ba1.gif" alt="textanimation"></p>
+<p>当时被惊艳到了，最近偶然间又再次见到，依然还是那么喜欢。假设我们现在需要实现这样的需求。一般碰到需求我们都会去 GitHub 上看看，俗称找轮子（GitHub 基本上只有你想不到的，就没有它没有的）。大多数情况下，没有问题。或者说有点小问题：轮子太多，无从下嘴。</p>
+<h2 id="u9009_u62E9"><a href="#u9009_u62E9" class="headerlink" title="选择"></a>选择</h2><blockquote>
+<p>选轮子就像选姑娘，你不知道后面等着你的是什么 —–罪恶坑小程如是说</p>
+</blockquote>
+<p>程序员江湖，每位大侠的武功和套路不尽一样，少林，武当，昆仑各门各派，百花争艳。实现轮子的思路自然也不一样。有的轮子高深晦涩难懂，功能强大，有的清晰明了，功能简单。不过有一点相同是，选错了就会被坑，只是坑大坑小问题。选轮子自然需要无比谨慎，既要匹配需求同时也要能在掉坑里的时候填上（废话，出 bug 了，你不填，谁填），要能 hold 住。然而填坑哪能那么简单呢，首先轮子实现思路，代码的结构，运行时序你要搞清楚吧，提供了哪些功能，没提供哪些功能，你要了解吧。基本上一个复杂点的轮子，研究下来就要好些时间了。这还不包括你开会，沟通，解 bug，喝茶，倒水，上厕所，抽烟，骂娘，吐槽产品需求的时间。所以，妹子们，不要问我们今天加不加班，要问今天能不能在你睡前下班。（项目快上线了，小程不加班谁加班。嗯哼。）</p>
+<h2 id="u521B_u9020"><a href="#u521B_u9020" class="headerlink" title="创造"></a>创造</h2><blockquote>
+<p>如果能用代码扮演上帝话，苍老师的量产不是问题，就看产品经理定的需求是拟物还是扁平。—-罪恶坑小程如是说</p>
+</blockquote>
+<p>既然选轮子的时间成本也不低，那有时候我们可以自己造一个轮子。其实写一个的好处也多，有成就感，写好了可以吹牛逼，写坏了填坑速度快。但问题是，以前没写过怎么办？没把握怎么办？比如我们现在需要实现上面的文字效果，但是又不知道怎么写，怎么办？</p>
+<p>没关系，上帝创造世间也分了七步走，跟着这位带头大哥后面学，总不会错的。</p>
+<h2 id="u5F00_u59CB"><a href="#u5F00_u59CB" class="headerlink" title="开始"></a>开始</h2><blockquote>
+<p>罗马不是一天建成的，毛片不是一次性拍完的 —-罪恶坑小程如是说 </p>
+</blockquote>
+<p>咦，好像扯得有点多了。对不起，现在开始正式拍（苍老师准备下，小程也准备下，Action）：</p>
+<h4 id="1-__u5206_u89E3_u4EFB_u52A1"><a href="#1-__u5206_u89E3_u4EFB_u52A1" class="headerlink" title="1.  分解任务"></a>1. <strong> 分解任务 </strong></h4><p>通过简单观察我们可以马上知道，上面那个动画效果是通过对每个字符做动画完成的。而在 iOS 里，文本显示控件最常见和常用的是 UILabel。而 iOS 的 Explicit Animation 有 Properties Animation 和 keyframe Animation 两种。</p>
+<p>但是 UILabel 控件没有提供对其 Text 中每个字符的控制的功能，我们需要改造下。既然要对每个字符做动画，那少不了需要<code>frame</code>，<code>bounds</code>，<code>position</code>，<code>transform</code>，这些属性。<br>这样看来我们需要两个武器：一个做排版功能的 framework，不用说，肯定是 <a href="http://objccn.io/issue-5-1/" target="_blank" rel="external">TextKit</a>。而另一个是能显示单个字符也拥有<code>frame</code>，<code>bounds</code>，<code>position</code>，<code>transform</code>等属性的类，很自然，我们想到<code>CATextLayer</code>。</p>
+<h4 id="2-__u5148_u89E3_u51B3_u6587_u672C_u5E03_u5C40"><a href="#2-__u5148_u89E3_u51B3_u6587_u672C_u5E03_u5C40" class="headerlink" title="2.  先解决文本布局"></a>2. <strong> 先解决文本布局 </strong></h4><p>TextKit 里主要是三个类 <code>NSTextStorage</code>，<code>NSLayoutManager</code>，<code>NSContainer</code>。它们一起帮组我们解决文字布局，排版的工作。</p>
+<ul>
+<li><p><strong>NSTextStorage</strong>：<code>NSMutableAttributedString</code>的子类，持有文字内容，当字符发生改变时，通知<code>NSLayoutManager</code>对象</p>
+</li>
+<li><p><strong>NSLayoutManager</strong>: 我们的男主角，从<code>NSTextStorage</code>里获取文字内容后，转换成对应的 glyph，根据<code>NSTextContainer</code>的 visible Region 显示 glyph。</p>
+</li>
+<li><p><strong>NSContainer</strong>: 确定一个 region 来放置 text。这个 region 被<code>NSLayoutManager</code>用来决定哪里可以 break lines</p>
+</li>
+</ul>
+<p>不过可惜 UILabel 没有这三个类作为自己的属性对象，我们需要自己解决：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class TextAnimationLabel: UILabel,NSLayoutManagerDelegate &#123;   &#10;     let textStorage:NSTextStorage = NSTextStorage(string: &#34;&#34;)&#10;     let textLayoutManager:NSLayoutManager = NSLayoutManager()&#10;     let textContainer:NSTextContainer = NSTextContainer()&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>除此以外我们还需要两个 Array 用来保存文本变换前的旧字符和变换后的新字符:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var oldCharacterTextLayers:[CATextLayer] = [] &#10;var newCharacterTextLayers:[CATextLayer] = []</span><br></pre></td></tr></table></figure>
+<p>因为我们需要用我们自己的 textStorage 对象，所以我们需要覆盖 text 和 attributedText 等属性。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">override var text:String!&#123;&#10;    get &#123;&#10;        return super.text&#10;    &#125;&#10;    set &#123;&#10;        super.text = text&#10;        let attributedText = NSMutableAttributedString(string: newValue)&#10;        let textRange = NSMakeRange(0,newValue.characters.count)&#10;        attributedText.setAttributes([NSForegroundColorAttributeName:self.textColor], range: textRange)&#10;        attributedText.setAttributes([NSFontAttributeName:self.font], range: textRange)&#10;        let paragraphyStyle = NSMutableParagraphStyle()&#10;        paragraphyStyle.alignment = self.textAlignment&#10;        attributedText.addAttributes([NSParagraphStyleAttributeName:paragraphyStyle], range: textRange)&#10;        self.attributedText = attributedText&#10;        &#125;&#10;        &#10; &#125;&#10;    &#10;override var attributedText:NSAttributedString!&#123;&#10;    get &#123;&#10;        return self.textStorage as NSAttributedString&#10;    &#125;&#10;    set&#123;&#10;        cleanOutOldCharacterTextLayers()&#10;        oldCharacterTextLayers = Array(newCharacterTextLayers)&#10;        textStorage.setAttributedString(newValue)&#10;        self.startAnimation &#123; () -&#62; () in&#10;        &#125;&#10;            self.endAnimation(nil)&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>当 TextStorage 的文本内容改变时，会触发一个通知 send textLayoutManager 以便重新布局排版。显然我们可以在排版布局完成后来为每个字符创建设置一个 CATextLayer，并设置相应的 frame 以便正确的显示内容。我们可以有个函数来完成计算。并且 layout finish 完成时调用。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//Mark:NSLayoutMangerDelegate&#10;func layoutManager(layoutManager: NSLayoutManager, didCompleteLayoutForTextContainer textContainer: NSTextContainer?, atEnd layoutFinishedFlag: Bool) &#123;&#10;        calculateTextLayers()&#10;        print(&#34;\(textStorage.string)&#34;)&#10;&#125;&#10;    &#10;    &#10;//MARK:CalculateTextLayer&#10;func calculateTextLayers()&#10;&#123;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来我们的主要想法，是找到 text 里每个 character 以及对应的 glyph rect. 然后用 character 和 glyph rect 创建 CATextLayer</p>
+<p>首先我们要有一个空数组用来存放新的 CATextLayer。并且获取 textStorage 的 attributedText。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func calculateTextLayers()&#10;&#123;&#10;    newCharacterTextLayers.removeAll(keepCapacity:false)&#10;    let attributedText = textStorage.string&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来我们要通过 LayoutManger 找到 TextContainer 的 used Rect，这样方便我们可以让文本垂直居中，就像普通的 Label 那样。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func calculateTextLayers()&#10;&#123;&#10;    newCharacterTextLayers.removeAll(keepCapacity:false)&#10;    let attributedText = textStorage.string&#10;    let wordRange = NSMakeRange(0, attributedText.characters.count)&#10;    let attributedString = self.internalAttributedText();&#10;    let layoutRect = textLayoutManager.usedRectForTextContainer(textContainer)&#10;    var index = wordRange.location&#10;    let totalLength = NSMaxRange(wordRange)&#10;    while index &#60; totalLength &#123;&#10;         ...&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>现在我们开始迭代处理文本里的每个字符，创建一个 glyphRange 并且用这个 glyphRange 找到对应的 character，然后我们将 glyph index 丢给 LayoutManager 得到 textContainer，再用 container 和 glyphRange 取得 glyphRect(这里需要注意下 kerning 的问题)。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let glyphRange = NSMakeRange(index, 1)&#10;let characterRange = textLayoutManager.characterRangeForGlyphRange(glyphRange, actualGlyphRange: nil)&#10;let textContainer = textLayoutManager.textContainerForGlyphAtIndex(index, effectiveRange: nil)&#10;var glyphRect = textLayoutManager.boundingRectForGlyphRange(glyphRange, inTextContainer: textContainer!)</span><br></pre></td></tr></table></figure>
+<p>最终我们还需要注意的就是 glyph 的 kerning，如果 <code>kerningRange.location == index</code>，我们需要将前一个 textLayer 取出来调整其 Rect 的宽度至新的 glyphRect 的最右边，保证 glyph 不会被裁切掉（可以对比下面两张图片）</p>
+<p><img width="122" src="https://cloud.githubusercontent.com/assets/3759810/13854816/4a6b5258-eca8-11e5-9870-15ed2d4f0d70.png"></p>
+<p><img width="122" src="https://cloud.githubusercontent.com/assets/3759810/13854821/4c5b947e-eca8-11e5-811e-e9abb161345f.png"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let kerningRange = textLayoutManager.rangeOfNominallySpacedGlyphsContainingIndex(index)&#10;if kerningRange.location == index &#38;&#38; kerningRange.length &#62; 1 &#123;&#10;    if newCharacterTextLayers.count &#62; 0 &#123;&#10;        // &#22914;&#26524;&#21069;&#19968;&#20010; textlayer &#30340; frame.size.width &#19981;&#21464;&#22823;&#30340;&#35805;&#65292;&#10;        // &#24403;&#21069;&#30340; textLayer &#20250;&#36974;&#25377;&#20303;&#23383;&#20307;&#30340;&#19968;&#37096;&#20998;&#65292;&#27604;&#22914; &#8220;Yes&#8221; &#30340; Y &#21491;&#19978;&#35282;&#20250;&#34987;&#20999;&#25481;&#19968;&#37096;&#20998;&#10;        let previousLayer = newCharacterTextLayers[newCharacterTextLayers.endIndex - 1]&#10;        var frame = previousLayer.frame&#10;        frame.size.width += CGRectGetMaxX(glyphRect) - CGRectGetMaxX(frame)&#10;        previousLayer.frame = frame&#10;     &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>这里关于 kerning 和 glyph 要多说一点。先来说下 glyph，简单来说 glyph 是表示一个 character 的具体样式 , 但他们却不是一一对应的关系，比如一个字母 “A” 可以有不同的写法来表示例如：</p>
+<p><img width="417" alt="" src="https://cloud.githubusercontent.com/assets/3759810/13878224/e142bef8-ed4a-11e5-9c84-798cb5939f36.png"></p>
+<p>除此以外，还有这种情况：</p>
+<p><img width="243" alt="" src="https://cloud.githubusercontent.com/assets/3759810/13878392/fab15e02-ed4b-11e5-9d38-2dc00ed45b0b.png"></p>
+<p>上面是的 “ff” 虽然是两个 character，但是 glyph 却是一个。<br>不过不用担心，强大 LayoutManager 提供了两个方法帮助我们通过一个找到对应另外那个。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func characterIndexForGlyphAtIndex(_ glyphIndex: Int) -&#62; Int&#10;func glyphIndexForCharacterAtIndex(_ charIndex: Int) -&#62; Int</span><br></pre></td></tr></table></figure>
+<p>现在我们说下 kerning。通常，在水平排布的文本中，glyph 都是一个挨着一个放置的，但是在某些时候为了让文本的可读性更好，看上去更加优雅美观，一个字形和另外一个字形之间可能会稍微的错位下，比如下面这种情况：</p>
+<p><img width="601" alt="" src="https://cloud.githubusercontent.com/assets/3759810/13878767/7631a33c-ed4e-11e5-9d03-46d89d8af9c8.png"><br>这也是上面为什么”Y“会出现显示不全的原因了。</p>
+<p>接下来就比较简单了，创建 Textlayer, 设置垂直居中，添加到数组当中，<code>index += characterRange.length</code>，开始下次循环</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">glyphRect.origin.y += (self.bounds.size.height/2)-(layoutRect.size.height/2)&#10;let textLayer = CATextLayer(frame: glyphRect, string: attributedString.attributedSubstringFromRange(characterRange));&#10;layer.addSublayer(textLayer);&#10;newCharacterTextLayers.append(textLayer);&#10;index += characterRange.length</span><br></pre></td></tr></table></figure>
+<h4 id="3-__u52A8_u753B_u5B9E_u73B0"><a href="#3-__u52A8_u753B_u5B9E_u73B0" class="headerlink" title="3.  动画实现"></a>3. <strong> 动画实现 </strong></h4><p>上面我们解决了字符排版的问题，接下来动画的实现就相对的容易了，仔细观察那个动画，很容易得出主要是对 <code>opacity</code> 和 <code>transform</code> 两个属性做属性动画，<code>opacity</code> 让每个字体逐渐显示和逐渐消失，而 <code>transform</code>则做了两种变形，一种是往下移动，另外一种是旋转。用 <code>CABasicAnimation</code> 可以解决单个属性动画，而 <code>CAAnimationGroup</code> 则帮我们解决多个动画叠加的复合效果。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func groupAnimationWithLayerChanges(old olderLayer:CALayer, new newLayer:CALayer) &#10;     -&#62; CAAnimationGroup? &#123;&#10;&#10;    var animationGroup:CAAnimationGroup?&#10;    var animations:[CABasicAnimation] = [CABasicAnimation]()&#10;&#10;    if !CATransform3DEqualToTransform(olderLayer.transform,&#10;    newLayer.transform) &#123;&#10;         let basicAnimation = CABasicAnimation(keyPath: &#34;transform&#34;)&#10;         basicAnimation.fromValue = NSValue(CATransform3D: olderLayer.transform)&#10;         basicAnimation.toValue = NSValue(CATransform3D: newLayer.transform)&#10;         animations.append(basicAnimation)&#10;         &#125;&#10;&#10;    if olderLayer.opacity != newLayer.opacity &#123;&#10;       let basicAnimation = CABasicAnimation(keyPath: &#34;opacity&#34;)&#10;       basicAnimation.fromValue = olderLayer.opacity&#10;       basicAnimation.toValue = newLayer.opacity&#10;       animations.append(basicAnimation)&#10;       &#125;&#10;&#10;    if animations.count &#62; 0 &#123;&#10;       animationGroup = CAAnimationGroup()&#10;       animationGroup!.animations = animations&#10;   &#125;&#10;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>这里需要注意一个问题，就是隐式动画的问题，Core Animation 基于一个假说，就是屏幕上的任何东西都可以 (或者可能) 做动画，我们平时在写代码时应该有这种印象就是你只是 layer 设置了一个值，没有添加动画，但是你会看到一个平滑过渡的显示效果而不是非常突兀的变化。这就是隐式动画。当我们改变一个属性时，Core Animation 帮我们做了一个动画，动画时间取决于当前 NSTransaction 的设置，而动画类型取决于图层行为。</p>
+<p>这里有个有趣的东西，多说一点，就是当我们对 UIView 关联的图层做动画而不是一个单独的图层做动画，比如</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func changeColor()&#10;&#123;&#10;    CATransaction.begin();&#10;    CATransaction.setAnimationDuration(1.0)&#10;    CGFloat red = CGFloat(arc4random() / (CGFloat)INT_MAX);&#10;    CGFloat green = CGFloat(arc4random() / (CGFloat)INT_MAX);&#10;    CGFloat blue = CGFloat(arc4random() / (CGFloat)INT_MAX);&#10;    self.layerView.layer.backgroundColor = UIColor.(colorWithRed:red green:green blue:blue alpha:1.0).CGColor;&#10;    CATransaction.commit();&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>图层的颜色瞬间切换到新的值，而不是之前的平滑过渡，隐式动画似乎给关闭了。<br>我们知道 UIView 和 CALayer 最重要的关系就是 UIView 是 CALayer 的 delegate，<br>当我们改变 CALayer 的属性时，它会调用 <code>func actionForKey(_ event: String) -&gt; CAAction?</code> </p>
+<p>这个方法，接下来发生的事情在官方文档里都有写，实际上是如下几步:</p>
+<ul>
+<li><p><em>If the layer has a delegate that implements the actionForLayer:forKey: method, the layer calls that method. The delegate must do one of the following:</em></p>
+<ol>
+<li><p>Return the action object for the given key.</p>
+</li>
+<li><p>Return the NSNull object if it does not handle the action.</p>
+</li>
+</ol>
+</li>
+<li><p><em>The layer looks in the layer’s actions dictionary for a matching key/action pair.</em></p>
+</li>
+<li><em>The layer looks in the style dictionary for an actions dictionary for a matching key/action pair.</em></li>
+<li><em>The layer calls the defaultActionForKey: class method to look for any class-defined actions.</em></li>
+</ul>
+<p>UIView 作为它关联图层的 Delegate，实现了 <code>actionForLayer(_ layer: CALayer, forKey event: String) -&gt; CAAction?</code> ，当不在一个动画块中，UIView 返回 nil，而在动画块中则返回一个非空值</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">print(&#34;OutSide:\(self.view.actionForLayer(self.view.layer, forKey: &#34;backgroundColor&#34;))&#34;)&#10;UIView.beginAnimations(nil, context: nil)&#10;print(&#34;InSide:\(self.view.actionForLayer(self.view.layer,&#10;forKey: &#34;backgroundColor&#34;))&#34;)&#10;UIView.commitAnimations()</span><br></pre></td></tr></table></figure>
+<p>显示结果如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">OutSide:Optional(&#60;null&#62;)&#10;InSide:Optional(&#60;CABasicAnimation: 0x7f7f93ff81b0&#62;)</span><br></pre></td></tr></table></figure>
+<p>当然返回 nil 并不是禁用隐式动画的唯一方法，下面这样也行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">CATransaction.setDisableActions(true)</span><br></pre></td></tr></table></figure>
+<p>那为什么说这个问题呢？因为我们在对每个字符做动画的时候需要先将隐式动画关闭，否者将会做两次动画，比如下面这样:</p>
+<p><img src="https://cloud.githubusercontent.com/assets/3759810/13857496/2443d70a-ecb5-11e5-8661-a499e9c8719d.gif" alt="closeimplicitanimation"></p>
+<p>那么，我们先生成一份 oldlayer, 然后改变相应的属性，生产新的 newLayer。然后创建相应的动画组，添加显式动画。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let olderLayer = animationObjc.animatableLayerCopy(layer)&#10;CATransaction.begin()&#10;CATransaction.setDisableActions(true)&#10;newLayer = effectAnimationClosure(layer: layer)&#10;CATransaction.commit()&#10;var animationGroup:CAAnimationGroup?&#10;animationGroup = groupAnimationWithLayerChanges(old: olderLayer, new: newLayer!)&#10;layer.addAnimation(textAniamtionGroup, forKey: textAnimationGroupKey)</span><br></pre></td></tr></table></figure>
+<h2 id="u6536_u5DE5"><a href="#u6536_u5DE5" class="headerlink" title="收工"></a>收工</h2><p>好了，当上面所有的工作完成之后，就是我们最开始看到的那个效果，代码已经上传 GitHub，你可以从 <a href="https://github.com/morpheus1984/TextKitAndAnimationEffect.git" target="_blank" rel="external">这里</a> 下载。其实这个 demo 里实现的 label 还有很大优化的空间。比如支持多种类型的动画效果，动画效果可配置等等。这是我接下来打算做的事情。<br>本人才疏学浅，错漏难免，欢迎大家批评指正。如果你发现 bug，可以提个 pull request。如果你有更好地思路也请告诉我，让我进步，我请你喝咖啡 ：）。</p>
+<p>这是我的微信号（未完结，请往下看）：</p>
+<p><img src="https://cloud.githubusercontent.com/assets/3759810/13864468/9fdcae9c-ecdc-11e5-9c49-278b327d1ba7.png" alt="wechat"></p>
+<h2 id="u6700_u540E"><a href="#u6700_u540E" class="headerlink" title="最后"></a>最后</h2><p>不知不觉工作许多年了，这几年萝莉变成了姑娘，姑娘变成了孩子妈。大家从 QQ 空间杀到朋友圈。从晒女朋友，到晒结婚照继而到晒娃。这几年鸣人同志都不负众望当上了火影 (丫也不请吃饭)。大家都在发生变化。</p>
+<p>学会开始写点东西分享可能是我想要的一个变化。</p>
+<p>本来作为非知名程序员，平时都是自己上 GitHub 玩，自认为比起一干牛人既没本领可以提振民心士气，又没有独门绝技可以分享。直到我收到了一封来自组织的信。</p>
+<p>最近我加入了一个公会，里面云集了各类高手，轻功，内力，暗器，大家各有所长，时不时分享下自己的看家本领。还是那句老话，不看不知道，一看吓一跳。世界还是外面的大，姑娘还是城里的靓。在群里，大家都很积极活跃，学习氛围异常的好。其实自打做起程序员起，这么多年来，虽然生性慵懒，但是自学却未敢放下，毕竟逆水行舟，不进则退。不可否认的是一个人的学习是很苦闷无聊的，但一群人陪着你一起苦闷无聊也是很欣慰的。</p>
+<p>最后我想引用那封邮件里面的话来表达下我对公会的看法:</p>
+<blockquote>
+<p>这个社群的意义证明了，在互联网时代，依然有这么多人愿意为知识的积累和个人的成长付费，知识本身的价值得到重新的认知，人们以一种去中心化的方式连接起来，P2P 的创作和分享，可能会让知识和技能的积累、传播达到了一种新的高度、深度和广度</p>
+</blockquote>
+<p>我想一贯懒散的我为何突然想写这么个 blog 可能也是因为这个，毕竟知识的受益者永远是那些积极参与学习并持续思考的人。</p>
+<p>额，最后想说的是，是的，那段引用的文字你没看错，这是个需要付费的群，免费时代的付费群，它叫 <a href="http://mp.weixin.qq.com/s?__biz=MjM5ODQ2MDIyMA==&amp;mid=402078207&amp;idx=1&amp;sn=c0b437784c7fc789e06767eedf5cdf87&amp;scene=18#wechat_redirect" target="_blank" rel="external">攻城狮之路</a>。</p>
+<p>知识是很昂贵的，我一直这么认为。另外，其实这是篇硬广。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Swift/">Swift</a><a href="/tags/投稿/">投稿</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2016/03/20/text-animation-guide/" data-title="如何实现自己没实现过的需求之文本动画 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/03/13/iOS-transition-guide/"  title="iOS 视图控制器转场详解">
+ <strong>下一篇：</strong><br/> 
+ <span>iOS 视图控制器转场详解
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2016/03/20/text-animation-guide/" data-title="如何实现自己没实现过的需求之文本动画" data-url="http://blog.devtang.com/2016/03/20/text-animation-guide/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  <div class="sponsor">
+  <br />
+  <p class="asidetitle">广告</p>
+  <a target="_blank" href="https://www.jianxun.io?utm_source=tangqiao&utm_medium=webad&utm_campaign=regular&utm_content=&utm_term=rightbanner">
+  <img src="https://www.jianxun.io/ad/20151101/tangqiao-rightbanner.jpg" width="235px" height="200px" />
+  </a>
+
+  <br /><a href="/sponsor"><font color='#2ca6cb'>购买广告位</font></a>
+</div>
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary</a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS</a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly</a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac</a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell</a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary</a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注唐巧的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="http://ww4.sinaimg.cn/mw690/65dc76a3jw1f1ngaau9arj20760763yr.jpg" width="230px" />
+
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"tangqiaoboy"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-28029597-1', 'null');  
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
