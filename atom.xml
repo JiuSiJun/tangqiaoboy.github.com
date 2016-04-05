@@ -4,7 +4,7 @@
   <subtitle><![CDATA[记录下自己学习的点滴]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.devtang.com/"/>
-  <updated>2016-03-20T14:54:34.000Z</updated>
+  <updated>2016-04-05T14:56:07.000Z</updated>
   <id>http://blog.devtang.com/</id>
   
   <author>
@@ -13,6 +13,130 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Swift 烧脑体操（五）- Monad]]></title>
+    <link href="http://blog.devtang.com/2016/04/05/swift-gym-5-monad/"/>
+    <id>http://blog.devtang.com/2016/04/05/swift-gym-5-monad/</id>
+    <published>2016-04-05T14:56:07.000Z</published>
+    <updated>2016-04-05T14:56:07.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://ww2.sinaimg.cn/mw690/65dc76a3gw1f08hrkcyydj20i40cigv2.jpg" alt=""></p>
+<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>Swift 其实比 Objective-C 复杂很多，相对于出生于上世纪 80 年代的 Objective-C 来说，Swift 融入了大量新特性。这也使得我们学习掌握这门语言变得相对来说更加困难。不过一切都是值得的，Swift 相比 Objective-C，写出来的程序更安全、更简洁，最终能够提高我们的工作效率和质量。</p>
+<p>Swift 相关的学习资料已经很多，我想从另外一个角度来介绍它的一些特性，我把这个角度叫做「烧脑体操」。什么意思呢？就是我们专门挑一些比较费脑子的语言细节来学习。通过「烧脑」地思考，来达到对 Swift 语言的更加深入的理解。</p>
+<p>这是本体操的第五节，练习前请做好准备运动，保持头脑清醒。</p>
+<p><img src="http://ww4.sinaimg.cn/mw690/65dc76a3gw1f0sz15ou0fj20cx07d0u3.jpg" alt=""></p>
+<h2 id="Why_Monad_3F"><a href="#Why_Monad_3F" class="headerlink" title="Why Monad?"></a>Why Monad?</h2><p>因为 Monad 的定义有点复杂，我们先说为什么要理解和学习它。业界对于 Monad 的用处有着各种争论，特别是学术派喜欢用 Haskell 来解释它，因为「Haskell 是纯函数式编程语言」。但这往往让问题更加复杂了—-我为了理解一个概念，还需要先学习一门新语言。</p>
+<p>所以我希望就 Swift 这门语言，分享一下理解 Monad 有什么用。实际上，即使在 Wikipedia 上，<a href="https://en.wikipedia.org/wiki/Monad_(functional_programming" target="_blank" rel="external">Monad</a>) 也没有被强行用 Haskell 来解释。所以我相信基于 Swift 语言，还是可以把 Monad 的概念讲清楚。</p>
+<p>在我看来，之所以有 Monad 这种结构，实际上是为了链式调用服务的。什么是链式调用呢？我们来看看下面一段代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let tq: Int? = 1&#10;tq.flatMap &#123;&#10;    $0 * 100&#10;&#125;.flatMap &#123;&#10;    &#34;image&#34; + String($0)&#10;&#125;.flatMap &#123;&#10;    UIImage(named: $0)&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>所以，如果一句话解释 Monad，那就是：Monad 是一种设计模式，使得业务逻辑可以用链式调用的方式来书写。</p>
+<p>在某些情况下，链式调用的方式组织代码会特别有效，比如当你的调用步骤是异步的时候，很容易写成多层嵌套的 <code>dispatch_async</code>，使用 Monad 可以使得多层嵌套被展开成链式调用，逻辑更加清楚。除了异步调用之外，编程中涉及输入输出、异常处理、并发处理等情况，使用 Monad 也可以使得代码逻辑更清晰。</p>
+<h2 id="u57FA_u7840_u77E5_u8BC6"><a href="#u57FA_u7840_u77E5_u8BC6" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="u5C01_u88C5_u8FC7_u7684_u503C_uFF08wrapped_value_29"><a href="#u5C01_u88C5_u8FC7_u7684_u503C_uFF08wrapped_value_29" class="headerlink" title="封装过的值（wrapped value)"></a>封装过的值（wrapped value)</h3><p>这个中文词是我自己想出来的，有一些人把它叫做「上下文中的值」（value with a context），有一些人把它叫做「容器中的值」（value in a container)，意思是一样的。</p>
+<p>什么叫做「封装过的值」呢？即把裸露的数据放到另一个结构中。例如：</p>
+<ul>
+<li>数组就是对值的一种封装，因为数组把裸露的元素放到了一个线性表结构中。</li>
+<li>Optional 也是对值的一种封装，因为 Optional 把值和空放到了一个枚举（enum）类型中。</li>
+</ul>
+<p>如果你愿意，你也可以自己封装一些值，比如把网络请求的结果和网络异常封装在一起，做成一个 enum (如下所示）。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">enum Result&#60;T&#62; &#123;&#10;    case Success(T)&#10;    case Failure(ErrorType)&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>判断一个数据类型是不是「封装过的值」，有一个简单的办法：就是看这个数据类型能不能「被打开」，拿出里面的裸露的元素。</p>
+<ul>
+<li>数组可以被打开，拿出里面的数组元素。</li>
+<li>Optional 可以被打开，拿出里面的值或者 .None。</li>
+<li>一个 Int 类型的值，无法「被打开」，所以它不是「封装过的值」。</li>
+</ul>
+<p>一个字符串是不是「封装过的值」呢？前提是你如何定义它「被打开」，如果你把它的打开定义成获得字符串里面的每个字符，那么字符串也可以是一个「封装过的值」。</p>
+<!--
+那要这么说，其实 Int 也可以被看作一个「封装过的值」，如果你把它的打开，定义成获得这个 Int 的每个 bit 位的值就行。
+-->
+<h3 id="flatMap"><a href="#flatMap" class="headerlink" title="flatMap"></a>flatMap</h3><p>在上一篇烧脑文章中我们也提到过，要识别一个类型是不是 Monad，主要就是看它是否实现了 <code>flatMap</code> 方法。但是，如果你像下面这么实现 <code>flatMap</code>，那也不能叫 Monad：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class TangQiao &#123;&#10;    func flatMap() &#123;&#10;        print(&#34;Hello world&#34;)&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>Monad 对于 <code>flatMap</code> 函数有着严格的定义，在 Haskell 语言中，这个函数名叫 bind，但是定义是一样的，这个函数应该：</p>
+<ul>
+<li>作用在一个「封装过的值」M 上。</li>
+<li>它的参数应该是另一个闭包 F，这个闭包 F：接受一个解包后的值，返回一个「封装过的值」。</li>
+</ul>
+<p>具体在执行的时候，<code>flatMap</code> 会对 M 进行解包得到 C，然后调用闭包 F，传入解包后的 C，获得新的「封装过的值」。</p>
+<p>我们来看看 Optional 的 <code>flatMap</code> 实现，验证一下刚刚说的逻辑。源码地址是：<a href="https://github.com/apple/swift/blob/master/stdlib/public/core/Optional.swift" target="_blank" rel="external">https://github.com/apple/swift/blob/master/stdlib/public/core/Optional.swift</a>。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public func flatMap&#60;U&#62;(@noescape f: (Wrapped) throws -&#62; U?) &#10;        rethrows -&#62; U? &#123;&#10;    switch self &#123;&#10;    case .Some(let y):&#10;        return try f(y)&#10;    case .None:&#10;        return .None&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>Optional 的 <code>flatMap</code>：</p>
+<ul>
+<li>作用在一个「封装过的值」：<code>self</code> 身上。</li>
+<li>接受一个闭包参数 <code>f</code>，这个 <code>f</code> 的定义是：接受解包后的值，返回一个「封装过的值」: <code>U?</code> 。</li>
+<li>在执行时，<code>flatMap</code> 先对 <code>self</code> 进行解包，代码是 <code>case .Some(let y)</code>。</li>
+<li>如果解包成功，则调用函数 f，得到一个新的「封装过的值」，代码是 <code>try f(y)</code>。</li>
+<li>如果解包出来是 .None，则返回 .None。</li>
+</ul>
+<h2 id="u8BBE_u8BA1_u80CC_u540E_u7684_u8FFD_u95EE"><a href="#u8BBE_u8BA1_u80CC_u540E_u7684_u8FFD_u95EE" class="headerlink" title="设计背后的追问"></a>设计背后的追问</h2><p><code>flatMap</code> 接受的这个闭包参数，直观看起来很奇怪。接受的是解包的值，返回的又是封装过的值，一点都没有对称的美！</p>
+<p>为什么要这么设计？不这么设计就不能完成链式调用吗？我想了半天，答案就是一个字：懒！</p>
+<p>为什么这么说呢？因为「封装过的值」大多数时候不能直接计算，所以要计算的时候都要先解包，如果我们为了追求「对称的美」，使得函数接受的参数和返回的值都是「封装过的值」，当然是可以的。不过如果这么设计的话，你就会写大量雷同的解包代码。程序设计的时候追求「Don’t Repeat Yourself」原则，这么做当然是不被接受的。</p>
+<h2 id="Functor"><a href="#Functor" class="headerlink" title="Functor"></a>Functor</h2><p>刚刚我们说，在设计上为了复用代码，我们必须保证闭包的参数是解包后的值。</p>
+<p>那么，同样的道理，每次返回之前都封包一下，不一样很重复么？我们返回的值能不能是解包后的原始值，然后自动封装它？</p>
+<p>答案是可以的，但是这就不是 Monad 了，这成了 Functor 了。我们上一讲提到过，Functor 中实现的 <code>map</code> 方法，就是一个接受解包后的值，返回结果仍然是解包后的值。为了保证链式调用，map 会自动把结果再封包一次。</p>
+<p>我们再来回顾一下 <code>map</code> 的源码吧：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public func map&#60;U&#62;(@noescape f: (Wrapped) throws -&#62; U) &#10;        rethrows -&#62; U? &#123;&#10;    switch self &#123;&#10;    case .Some(let y):&#10;        return .Some(try f(y))&#10;    case .None:&#10;        return .None&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>在该源码中，函数 <code>f</code> 在被执行完后，结果会被封包成 Optional 类型，相关代码是：<code>.Some(try f(y))</code>。</p>
+<p>所以，Optional 的 <code>map</code> 和 <code>flatMap</code> 差别真的非常非常小，就看你的闭包想不想自己返回封装后的值了。</p>
+<p>在具体业务中，我们也有一些实际的需求，需要我们自己控制返回封装后的值。比如 Optional 在操作的时候，如果要返回 .None，则需要使用 <code>flatMap</code>，错误的使用了 <code>map</code> 函数的话，就会带来多重嵌套 nil 的问题。比如下面这个代码，变量 <code>b</code> 因为是一个两层嵌套的 nil，所以 <code>if let</code> 失效了。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let tq: Int? = 1&#10;let b = tq.map &#123; (a: Int) -&#62; Int? in&#10;    if a % 2 == 0 &#123;&#10;        return a&#10;    &#125; else &#123;&#10;        return nil&#10;    &#125;&#10;&#125;&#10;if let _ = b &#123;&#10;    print(&#34;not nil&#34;)&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>归根结底，你在编程时使用 Monad 还是 Functor，取决于你的具体业务需求：</p>
+<ul>
+<li>如果你在处理「封装过的值」时，不会（或不需要）返回异常数据，则可以使用 Functor，让数据的封装过程交给 <code>map</code> 函数来处理。</li>
+<li>如果你在处理「封装过的值」时，需要在闭包函数里返回类似 nil（或 ErrorType）一类的数据，则可以使用 Monad，自己返回新的「封装过的值」。</li>
+</ul>
+<h2 id="Applicative"><a href="#Applicative" class="headerlink" title="Applicative"></a>Applicative</h2><p>Swift 语言中并没有原生的 Applicative，但是 Applicative 和 Functor、Monad 算是三个形影不离的三兄弟，另外它们三者的差异都很小，所以干脆一并介绍了。</p>
+<p>刚刚我们讨论 Functor 与 Monad 时，都是说把值放在一个容器里面。但是我们别忘了，Swift 是函数式语言，函数是一等公民，所以，函数本身也是一种值，它也可以放到一个容器里面，而我们要讨论的 Applicative，就是一种关于「封装过的函数」的规则。</p>
+<p>Applicative 的定义是：使用「封装过的函数」处理「封装过的值」。这个「封装过的函数」解包之后的参数类型和 Functor 的要求是一样的。</p>
+<p>按照这个定义，我们可以自己改造数组和 Optional，使它们成为 Applicative，以下代码就是一个示例，来自 <a href="http://www.mokacoding.com/blog/functor-applicative-monads-in-pictures/" target="_blank" rel="external">这里</a>。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">extension Optional &#123;&#10;    func apply&#60;U&#62;(f: (T -&#62; U)?) -&#62; U? &#123;&#10;        switch f &#123;&#10;        case .Some(let someF): return self.map(someF)&#10;        case .None: return .None&#10;        &#125;&#10;    &#125;&#10;&#125;&#10;&#10;extension Array &#123;&#10;    func apply&#60;U&#62;(fs: [Element -&#62; U]) -&#62; [U] &#123;&#10;        var result = [U]()&#10;        for f in fs &#123;&#10;            for element in self.map(f) &#123;&#10;                result.append(element)&#10;            &#125;&#10;        &#125;&#10;        return result&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>我们为数组和 Optional 增加了一个 <code>apply</code> 方法，而这个方法符合 Applicative 的定义。如果和 <code>map</code> 方法对比，它们的唯一差别就是闭包函数是封装过后的了：</p>
+<ul>
+<li>对于 Optional 来说，<code>apply</code> 的闭包函数也变成 Optinoal 的了。</li>
+<li>对于数组来说，<code>apply</code> 的闭包函数也是一个数组（我们之前介绍过，数组也是对数据的一种封装）。</li>
+</ul>
+<h2 id="Monad__u7684_u5E94_u7528"><a href="#Monad__u7684_u5E94_u7528" class="headerlink" title="Monad 的应用"></a>Monad 的应用</h2><p>理论都离不开应用，否则就是「然并卵」了，讲完了概念，我们来看看除了 Swift 语言中的数组和 Optional，业界还有哪些对于 Monad 的应用。</p>
+<h3 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h3><p><a href="http://promisekit.org/" target="_blank" rel="external">PromiseKit</a> 是一个同时支持 Objective-C 和 Swift 的异步库。它用 Promise 来表示一个未来将要执行的操作，使用它可以简化我们的异步操作。因为篇幅有限，本文并不打算展开详细介绍 Promise，我们就看一个实际的使用示例吧。</p>
+<p>假设我们有一个业务场景，需要用户先登录，然后登录成功后发API获取数据，获取数据后更新 UITableView 的内容，整个过程如果有错误，显示相应的错误信息。</p>
+<p>传统情况下，我们需要把每个操作都封装起来，然后我们可以选择：</p>
+<ul>
+<li>方法一：用多层嵌套的 <code>dispatch_async</code> 把逻辑写到一起，但是这样嵌套代码，可读性和可维护性很差。</li>
+<li>方法二：每一步有一个 delegate 回调函数，把业务逻辑分散到各个回调函数中。但是这样不但逻辑分散了，而且关键的函数调用的依赖关系被我们隐藏起来了。</li>
+</ul>
+<p>另外，以上两种方法处理错误逻辑都可能会有多处，虽然我们可以把报错也封装成一个函数，但是在多个地方调用也不太舒服。使用 PromiseKit 之后，刚刚提到的业务场景可以用如下的示意代码来完成：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">login().then &#123;&#10;    return API.fetchKittens()&#10;&#125;.then &#123; fetchedKittens in&#10;    self.kittens = fetchedKittens&#10;    self.tableView.reloadData()&#10;&#125;.catch &#123; error in&#10;    UIAlertView(&#8230;).show()&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>另外，如果你的逻辑涉及并发，PromiseKit 也可以很好地处理，例如，你希望发两个网络请求，当两个网络请求都结束时，做相应的处理。那就可以让 PromiseKit 的 <code>when</code> 方法与 <code>then</code> 结合工作：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let search1 = MKLocalSearch(request: rq1).promise()&#10;let search2 = MKLocalSearch(request: rq2).promise()&#10;&#10;when(search1, search2).then &#123; response1, response2 in&#10;    //&#8230;&#10;&#125;.catch &#123; error in&#10;    // called if either search fails&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>在 PromiseKit 的设计中，<code>then</code> 方法接受的闭包的类型和 <code>flatMap</code> 是一样的，所以它本质上就是 <code>flatMap</code>。Promise 其实就是一种 Monad。</p>
+<h3 id="ReactiveCocoa"><a href="#ReactiveCocoa" class="headerlink" title="ReactiveCocoa"></a>ReactiveCocoa</h3><p>比起 PromiseKit，<a href="https://github.com/ReactiveCocoa/ReactiveCocoa" target="_blank" rel="external">ReactiveCocoa</a> 的名气要大得多。最新的 ReactiveCocoa 4.0 同时支持 Objective-C 和 Swift，我们在源码中发现了 RAC 的 <code>SignalType</code> 就是一个 Monad：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">extension SignalType &#123;&#10;&#10;    public func flatMap&#60;U&#62;(strategy: FlattenStrategy, transform: Value -&#62; SignalProducer&#60;U, Error&#62;)&#10;        -&#62; Signal&#60;U, Error&#62; &#123;&#10;        return map(transform).flatten(strategy)&#10;    &#125;&#10;&#10;    public func flatMap&#60;U&#62;(strategy: FlattenStrategy, transform: Value -&#62; Signal&#60;U, Error&#62;) &#10;        -&#62; Signal&#60;U, Error&#62; &#123;&#10;        return map(transform).flatten(strategy)&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>我们再次总结一下 Monad、Functor、Applicative：</p>
+<ul>
+<li>Monad：对一种封装过的值，使用 <code>flatMap</code> 函数。</li>
+<li>Functor：对一种封装过的值，使用 <code>map</code> 函数。</li>
+<li>Applicative：对一种封装过的值，使用 <code>apply</code> 函数。</li>
+</ul>
+<p>我们再对比一下<code>flatMap</code>、<code>map</code> 和 <code>apply</code>：</p>
+<ul>
+<li><code>flatMap</code>：对自己解包，然后应用到一个闭包上，这个闭包：接受一个「未封装的值」，返回一个「封装后的值」。</li>
+<li><code>map</code>：对自己解包，然后应用到一个闭包上，这个闭包：接受一个「未封装的值」，返回一个「未封装的值」。</li>
+<li><code>apply</code>：对自己解包，然后对闭包解包，解包后的闭包：接受一个「未封装的值」，返回一个「未封装的值」。</li>
+</ul>
+<h2 id="u53C2_u8003_u94FE_u63A5"><a href="#u53C2_u8003_u94FE_u63A5" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="http://www.mokacoding.com/blog/functor-applicative-monads-in-pictures/" target="_blank" rel="external">Swift Functors, Applicatives, and Monads in Pictures</a></li>
+<li><a href="http://blog.leichunfeng.com/blog/2015/11/08/functor-applicative-and-monad/" target="_blank" rel="external">Functor、Applicative 和 Monad</a></li>
+<li><a href="https://blog.jcoglan.com/2011/03/11/promises-are-the-monad-of-asynchronous-programming/" target="_blank" rel="external">Promises are the monad of asynchronous programming</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://ww2.sinaimg.cn/mw690/65dc76a3gw1f08hrkcyydj20i40cigv2.jpg" alt=""></p>
+<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class]]>
+    </summary>
+    
+      <category term="Swift" scheme="http://blog.devtang.com/tags/Swift/"/>
+    
+      <category term="iOS" scheme="http://blog.devtang.com/categories/iOS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[如何实现自己没实现过的需求之文本动画]]></title>
@@ -2620,141 +2744,6 @@ UPYUN:
     <summary type="html">
     <![CDATA[<img src="/images/apps-damaged-issue.jpg">
 <h2 id="u4E8B_u4EF6_u56DE_u987E"><a href="#u4E8B_u4EF6_u56DE_u987E" class="headerlink" title="事件回]]>
-    </summary>
-    
-      <category term="iOS" scheme="http://blog.devtang.com/categories/iOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Charles 从入门到精通]]></title>
-    <link href="http://blog.devtang.com/2015/11/14/charles-introduction/"/>
-    <id>http://blog.devtang.com/2015/11/14/charles-introduction/</id>
-    <published>2015-11-14T04:00:47.000Z</published>
-    <updated>2016-02-16T10:28:20.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="u76EE_u5F55"><a href="#u76EE_u5F55" class="headerlink" title="目录"></a>目录</h2><p>本文的内容主要包括：</p>
-<ul>
-<li>Charles 的简介</li>
-<li>如何安装 Charles</li>
-<li>将 Charles 设置成系统代理</li>
-<li>Charles 主界面介绍</li>
-<li>过滤网络请求</li>
-<li>截取 iPhone 上的网络封包</li>
-<li>截取 Https 通讯信息</li>
-<li>模拟慢速网络</li>
-<li>修改网络请求内容</li>
-<li>给服务器做压力测试</li>
-<li>修改服务器返回内容</li>
-<li>总结</li>
-</ul>
-<!--
-## Charles 中国特惠
-
-Charles 正版[五折优惠活动](http://item.taobao.com/item.htm?&id=524230901640)（限时：2015 年 11 月 14 日 - 30 日），仅限中国区购买，[点击购买](http://item.taobao.com/item.htm?&id=524230901640)。在活动期结束后，价格将从 169 元上涨到 199 元。
--->
-<h2 id="u7B80_u4ECB"><a href="#u7B80_u4ECB" class="headerlink" title="简介"></a>简介</h2><img src="/images/charles-logo.png">
-<p><a href="http://www.charlesproxy.com/" target="_blank" rel="external">Charles</a> 是在 Mac 下常用的网络封包截取工具，在做<br>移动开发时，我们为了调试与服务器端的网络通讯协议，常常需要截取网络封包来分析。</p>
-<p>Charles 通过将自己设置成系统的网络访问代理服务器，使得所有的网络访问请求都通过它来完成，从而实现了网络封包的截取和分析。</p>
-<p>除了在做移动开发中调试端口外，Charles 也可以用于分析第三方应用的通讯协议。配合 Charles 的 SSL 功能，Charles 还可以分析 Https 协议。</p>
-<p>Charles 是收费软件，可以免费试用 30 天。试用期过后，未付费的用户仍然可以继续使用，但是每次使用时间不能超过 30 分钟，并且启动时将会有 10 秒种的延时。因此，该付费方案对广大用户还是相当友好的，即使你长期不付费，也能使用完整的软件功能。只是当你需要长时间进行封包调试时，会因为 Charles 强制关闭而遇到影响。</p>
-<p>Charles 主要的功能包括：</p>
-<ol>
-<li>截取 Http 和 Https 网络封包。</li>
-<li>支持重发网络请求，方便后端调试。</li>
-<li>支持修改网络请求参数。</li>
-<li>支持网络请求的截获并动态修改。</li>
-<li>支持模拟慢速网络。</li>
-</ol>
-<h2 id="u5B89_u88C5_Charles"><a href="#u5B89_u88C5_Charles" class="headerlink" title="安装 Charles"></a>安装 Charles</h2><p>去 Charles 的官方网站（<a href="http://www.charlesproxy.com" target="_blank" rel="external">http://www.charlesproxy.com</a>）下载最新版的 Charles 安装包，是一个 dmg 后缀的文件。打开后将 Charles 拖到 Application 目录下即完成安装。</p>
-<h2 id="u5C06_Charles__u8BBE_u7F6E_u6210_u7CFB_u7EDF_u4EE3_u7406"><a href="#u5C06_Charles__u8BBE_u7F6E_u6210_u7CFB_u7EDF_u4EE3_u7406" class="headerlink" title="将 Charles 设置成系统代理"></a>将 Charles 设置成系统代理</h2><p>之前提到，Charles 是通过将自己设置成代理服务器来完成封包截取的，所以使用 Charles 的第一步是将其设置成系统的代理服务器。</p>
-<p>启动 Charles 后，第一次 Charles 会请求你给它设置系统代理的权限。你可以输入登录密码授予 Charles 该权限。你也可以忽略该请求，然后在需要将 Charles 设置成系统代理时，选择菜单中的 “Proxy” -&gt; “Mac OS X Proxy” 来将 Charles 设置成系统代理。如下所示：</p>
-<img src="/images/charles-pro-3.png">
-<p>之后，你就可以看到源源不断的网络请求出现在 Charles 的界面中。</p>
-<p>需要注意的是，Chrome 和 Firefox 浏览器默认并不使用系统的代理服务器设置，而 Charles 是通过将自己设置成代理服务器来完成封包截取的，所以在默认情况下无法截取 Chrome 和 Firefox 浏览器的网络通讯内容。如果你需要截取的话，在 Chrome 中设置成使用系统的代理服务器设置即可，或者直接将代理服务器设置成 <code>127.0.0.1:8888</code> 也可达到相同效果。</p>
-<h2 id="Charles__u4E3B_u754C_u9762_u4ECB_u7ECD"><a href="#Charles__u4E3B_u754C_u9762_u4ECB_u7ECD" class="headerlink" title="Charles 主界面介绍"></a>Charles 主界面介绍</h2><img src="/images/charles-pro-4.png">
-<p>Charles 主要提供两种查看封包的视图，分别名为 “Structure” 和 “Sequence”。 </p>
-<ol>
-<li>Structure 视图将网络请求按访问的域名分类。</li>
-<li>Sequence 视图将网络请求按访问的时间排序。</li>
-</ol>
-<p>大家可以根据具体的需要在这两种视图之前来回切换。请求多了有些时候会看不过来，Charles 提供了一个简单的 Filter 功能，可以输入关键字来快速筛选出 URL 中带指定关键字的网络请求。</p>
-<p>对于某一个具体的网络请求，你可以查看其详细的请求内容和响应内容。如果请求内容是 POST 的表单，Charles 会自动帮你将表单进行分项显示。如果响应内容是 JSON 格式的，那么 Charles 可以自动帮你将 JSON 内容格式化，方便你查看。如果响应内容是图片，那么 Charles 可以显示出图片的预览。</p>
-<h2 id="u8FC7_u6EE4_u7F51_u7EDC_u8BF7_u6C42"><a href="#u8FC7_u6EE4_u7F51_u7EDC_u8BF7_u6C42" class="headerlink" title="过滤网络请求"></a>过滤网络请求</h2><p>通常情况下，我们需要对网络请求进行过滤，只监控向指定目录服务器上发送的请求。对于这种需求，以下几种办法：</p>
-<p>方法一：在主界面的中部的 Filter 栏中填入需要过滤出来的关键字。例如我们的服务器的地址是：<code>http://yuantiku.com</code> , 那么只需要在 Filter 栏中填入 yuantiku 即可。</p>
-<p>方法二：在 Charles 的菜单栏选择 “Proxy”-&gt;”Recording Settings”，然后选择 Include 栏，选择添加一个项目，然后填入需要监控的协议，主机地址，端口号。这样就可以只截取目标网站的封包了。如下图所示：</p>
-<img src="/images/charles-filter-setting.jpg">
-<p>通常情况下，我们使用方法一做一些临时性的封包过滤，使用方法二做一些经常性的封包过滤。</p>
-<p>方法三：在想过滤的网络请求上右击，选择 “Focus”，之后在 Filter 一栏勾选上 Focussed 一项，如下图所示：</p>
-<img src="/images/charles-focus.png">
-<p>这种方式可以临时性的，快速地过滤出一些没有通过关键字的一类网络请求。</p>
-<h2 id="u622A_u53D6_iPhone__u4E0A_u7684_u7F51_u7EDC_u5C01_u5305"><a href="#u622A_u53D6_iPhone__u4E0A_u7684_u7F51_u7EDC_u5C01_u5305" class="headerlink" title="截取 iPhone 上的网络封包"></a>截取 iPhone 上的网络封包</h2><p>Charles 通常用来截取本地上的网络封包，但是当我们需要时，我们也可以用来截取其它设备上的网络请求。下面我就以 iPhone 为例，讲解如何进行相应操作。</p>
-<h3 id="Charles__u4E0A_u7684_u8BBE_u7F6E"><a href="#Charles__u4E0A_u7684_u8BBE_u7F6E" class="headerlink" title="Charles 上的设置"></a>Charles 上的设置</h3><p>要截取 iPhone 上的网络请求，我们首先需要将 Charles 的代理功能打开。在 Charles 的菜单栏上选择 “Proxy”-&gt;”Proxy Settings”，填入代理端口 8888，并且勾上 “Enable transparent HTTP proxying” 就完成了在 Charles 上的设置。如下图所示:</p>
-<img src="/images/charles-proxy-setting.jpg">
-<h3 id="iPhone__u4E0A_u7684_u8BBE_u7F6E"><a href="#iPhone__u4E0A_u7684_u8BBE_u7F6E" class="headerlink" title="iPhone 上的设置"></a>iPhone 上的设置</h3><p>首先我们需要获取 Charles 运行所在电脑的 IP 地址，Charles 的顶部菜单的 “Help”-&gt;”Local IP Address”，即可在弹出的对话框中看到 IP 地址，如下图所示：</p>
-<img src="/images/charles-local-ip.png">
-<p>在 iPhone 的 “ 设置 “-&gt;” 无线局域网 “ 中，可以看到当前连接的 wifi 名，通过点击右边的详情键，可以看到当前连接上的 wifi 的详细信息，包括 IP 地址，子网掩码等信息。在其最底部有「HTTP 代理」一项，我们将其切换成手动，然后填上 Charles 运行所在的电脑的 IP，以及端口号 8888，如下图所示：</p>
-<img src="/images/charles-iphone-setting.jpg">
-<p>设置好之后，我们打开 iPhone 上的任意需要网络通讯的程序，就可以看到 Charles 弹出 iPhone 请求连接的确认菜单（如下图所示），点击 “Allow” 即可完成设置。</p>
-<img src="/images/charles-proxy-confirm.jpg">
-<h2 id="u622A_u53D6_Https__u901A_u8BAF_u4FE1_u606F"><a href="#u622A_u53D6_Https__u901A_u8BAF_u4FE1_u606F" class="headerlink" title="截取 Https 通讯信息"></a>截取 Https 通讯信息</h2><h3 id="u5B89_u88C5_u8BC1_u4E66"><a href="#u5B89_u88C5_u8BC1_u4E66" class="headerlink" title="安装证书"></a>安装证书</h3><p>如果你需要截取分析 Https 协议相关的内容。那么需要安装 Charles 的 CA 证书。具体步骤如下。</p>
-<p>首先我们需要在 Mac 电脑上安装证书。点击 Charles 的顶部菜单，选择 “Help” -&gt; “SSL Proxying” -&gt; “Install Charles Root Certificate”，然后输入系统的帐号密码，即可在 KeyChain 看到添加好的证书。如下图所示：</p>
-<img src="/images/charles-pro-1.png">
-<p>需要注意的是，即使是安装完证书之后，Charles 默认也并不截取 Https 网络通讯的信息，如果你想对截取某个网站上的所有 Https 网络请求，可以在该请求上右击，选择 SSL proxy，如下图所示：</p>
-<img src="/images/charles-ssl-add-host.jpg">
-<p>这样，对于该 Host 的所有 SSL 请求可以被截取到了。</p>
-<h3 id="u622A_u53D6_u79FB_u52A8_u8BBE_u5907_u4E2D_u7684_Https__u901A_u8BAF_u4FE1_u606F"><a href="#u622A_u53D6_u79FB_u52A8_u8BBE_u5907_u4E2D_u7684_Https__u901A_u8BAF_u4FE1_u606F" class="headerlink" title="截取移动设备中的 Https 通讯信息"></a>截取移动设备中的 Https 通讯信息</h3><p>如果我们需要在 iOS 或 Android 机器上截取 Https 协议的通讯内容，还需要在手机上安装相应的证书。点击 Charles 的顶部菜单，选择 “Help” -&gt; “SSL Proxying” -&gt; “Install Charles Root Certificate on a Mobile Device or Remote Browser”，然后就可以看到 Charles 弹出的简单的安装教程。如下图所示：</p>
-<img src="/images/charles-pro-2.png">
-<p>按照我们之前说的教程，在设备上设置好 Charles 为代理后，在手机浏览器中访问地址：<a href="http://charlesproxy.com/getssl" target="_blank" rel="external">http://charlesproxy.com/getssl</a>，即可打开证书安装的界面，安装完证书后，就可以截取手机上的 Https 通讯内容了。不过同样需要注意，默认情况下 Charles 并不做截取，你还需要在要截取的网络请求上右击，选择 SSL proxy 菜单项。</p>
-<h2 id="u6A21_u62DF_u6162_u901F_u7F51_u7EDC"><a href="#u6A21_u62DF_u6162_u901F_u7F51_u7EDC" class="headerlink" title="模拟慢速网络"></a>模拟慢速网络</h2><p>在做移动开发的时候，我们常常需要模拟慢速网络或者高延迟的网络，以测试在移动网络下，应用的表现是否正常。Charles 对此需求提供了很好的支持。</p>
-<p>在 Charles 的菜单上，选择 “Proxy”-&gt;”Throttle Setting” 项，在之后弹出的对话框中，我们可以勾选上 “Enable Throttling”，并且可以设置 Throttle Preset 的类型。如下图所示：</p>
-<img src="/images/charles-throttle-setting.jpg">
-<p>如果我们只想模拟指定网站的慢速网络，可以再勾选上图中的 “Only for selected hosts” 项，然后在对话框的下半部分设置中增加指定的 hosts 项即可。</p>
-<h2 id="u4FEE_u6539_u7F51_u7EDC_u8BF7_u6C42_u5185_u5BB9"><a href="#u4FEE_u6539_u7F51_u7EDC_u8BF7_u6C42_u5185_u5BB9" class="headerlink" title="修改网络请求内容"></a>修改网络请求内容</h2><p>有些时候为了调试服务器的接口，我们需要反复尝试不同参数的网络请求。Charles 可以方便地提供网络请求的修改和重发功能。只需要在以往的网络请求上点击右键，选择 “Edit”，即可创建一个可编辑的网络请求。如下所示：</p>
-<img src="/images/charles-edit.png">
-<p>我们可以修改该请求的任何信息，包括 URL 地址、端口、参数等，之后点击 “Execute” 即可发送该修改后的网络请求（如下图所示）。Charles 支持我们多次修改和发送该请求，这对于我们和服务器端调试接口非常方便，如下图所示：</p>
-<img src="/images/charles-execute.png">
-<h2 id="u7ED9_u670D_u52A1_u5668_u505A_u538B_u529B_u6D4B_u8BD5"><a href="#u7ED9_u670D_u52A1_u5668_u505A_u538B_u529B_u6D4B_u8BD5" class="headerlink" title="给服务器做压力测试"></a>给服务器做压力测试</h2><p>我们可以使用 Charles 的 Repeat 功能来简单地测试服务器的并发处理能力，方法如下。</p>
-<p>我们在想打压的网络请求上（POST 或 GET 请求均可）右击，然后选择 「Repeat Advanced」菜单项，如下所示：</p>
-<img src="/images/charles-repeat-1.png">
-<p>接着我们就可以在弹出的对话框中，选择打压的并发线程数以及打压次数，确定之后，即可开始打压。</p>
-<img src="/images/charles-repeat-2.png">
-<p>悄悄说一句，一些写得很弱的投票网站，也可以用这个办法来快速投票。当然，我也拿 Charles 的 Repeat 功能给一些诈骗的钓鱼网站喂了不少垃圾数据，上次不小心还把一个钓鱼网站的数据库打挂了，嗯，请叫我雷锋。</p>
-<h2 id="u4FEE_u6539_u670D_u52A1_u5668_u8FD4_u56DE_u5185_u5BB9"><a href="#u4FEE_u6539_u670D_u52A1_u5668_u8FD4_u56DE_u5185_u5BB9" class="headerlink" title="修改服务器返回内容"></a>修改服务器返回内容</h2><p>有些时候我们想让服务器返回一些指定的内容，方便我们调试一些特殊情况。例如列表页面为空的情况，数据异常的情况，部分耗时的网络请求超时的情况等。如果没有 Charles，要服务器配合构造相应的数据显得会比较麻烦。这个时候，使用 Charles 相关的功能就可以满足我们的需求。</p>
-<p>根据具体的需求，Charles 提供了 Map 功能、 Rewrite 功能以及 Breakpoints 功能，都可以达到修改服务器返回内容的目的。这三者在功能上的差异是：</p>
-<ol>
-<li>Map 功能适合长期地将某一些请求重定向到另一个网络地址或本地文件。</li>
-<li>Rewrite 功能适合对网络请求进行一些正则替换。</li>
-<li>Breakpoints 功能适合做一些临时性的修改。</li>
-</ol>
-<h3 id="Map__u529F_u80FD"><a href="#Map__u529F_u80FD" class="headerlink" title="Map 功能"></a>Map 功能</h3><p>Charles 的 Map 功能分 Map Remote 和 Map Local 两种，顾名思义，Map Remote 是将指定的网络请求重定向到另一个网址请求地址，Map Local 是将指定的网络请求重定向到本地文件。</p>
-<p>在 Charles 的菜单中，选择 “Tools”-&gt;”Map Remote” 或 “Map Local” 即可进入到相应功能的设置页面。</p>
-<img src="/images/charles-map.png">
-<p>对于 Map Remote 功能，我们需要分别填写网络重定向的源地址和目的地址，对于不需要限制的条件，可以留空。下图是一个示例，我将所有 <code>ytk1.yuanku.ws</code>（测试服务器）的请求重定向到了 <code>www.yuantiku.com</code>（线上服务器）。</p>
-<img src="/images/charles-map-remote.png">
-<p>对于 Map Local 功能，我们需要填写的重定向的源地址和本地的目标文件。对于有一些复杂的网络请求结果，我们可以先使用 Charles 提供的 “Save Response…” 功能，将请求结果保存到本地（如下图所示），然后稍加修改，成为我们的目标映射文件。</p>
-<img src="/images/charles-save-response.png">
-<p>下图是一个示例，我将一个指定的网络请求通过 Map Local 功能映射到了本地的一个经过修改的文件中。</p>
-<img src="/images/charles-map-local.png">
-<h3 id="Rewrite__u529F_u80FD"><a href="#Rewrite__u529F_u80FD" class="headerlink" title="Rewrite 功能"></a>Rewrite 功能</h3><p>Rewrite 功能功能适合对某一类网络请求进行一些正则替换，以达到修改结果的目的。</p>
-<p>例如，我们的客户端有一个 API 请求是获得用户昵称，而我当前的昵称是 “tangqiaoboy”，如下所示：</p>
-<img src="/images/charles-rewrite-1.jpeg">
-<p>我们想试着直接修改网络返回值，将 tangqiaoboy 换成成 iosboy。于是我们启用 Rewrite 功能，然后设置如下的规则：</p>
-<img src="/images/charles-rewrite-2.png">
-<p>完成设置之后，我们就可以从 Charles 中看到，之后的 API 获得的昵称被自动 Rewrite 成了 iosboy，如下图所示：</p>
-<img src="/images/charles-rewrite-3.png">
-<h3 id="Breakpoints__u529F_u80FD"><a href="#Breakpoints__u529F_u80FD" class="headerlink" title="Breakpoints 功能"></a>Breakpoints 功能</h3><p>上面提供的 Rewrite 功能最适合做批量和长期的替换，但是很多时候，我们只是想临时修改一次网络请求结果，这个时候，使用 Rewrite 功能虽然也可以达到目的，但是过于麻烦，对于临时性的修改，我们最好使用 Breakpoints 功能。</p>
-<p>Breakpoints 功能类似我们在 Xcode 中设置的断点一样，当指定的网络请求发生时，Charles 会截获该请求，这个时候，我们可以在 Charles 中临时修改网络请求的返回内容。</p>
-<p>下图是我们临时修改获取用户信息的 API，将用户的昵称进行了更改，修改完成后点击 “Execute” 则可以让网络请求继续进行。</p>
-<img src="/images/charles-breakpoint.png">
-<p>需要注意的是，使用 Breakpoints 功能将网络请求截获并修改过程中，整个网络请求的计时并不会暂停，所以长时间的暂停可能导致客户端的请求超时。</p>
-<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>通过 Charles 软件，我们可以很方便地在日常开发中，截取和调试网络请求内容，分析封包协议以及模拟慢速网络。用好 Charles 可以极大的方便我们对于带有网络请求的 App 的开发和调试。</p>
-<p>愿本文帮助大家成为 Charles 的专家，祝大家玩得开心～</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="u76EE_u5F55"><a href="#u76EE_u5F55" class="headerlink" title="目录"></a>目录</h2><p>本文的内容主要包括：</p>
-<ul>
-<li>Charles 的简介</li>
-<li>如何安装 Ch]]>
     </summary>
     
       <category term="iOS" scheme="http://blog.devtang.com/categories/iOS/"/>
