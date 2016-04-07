@@ -1,0 +1,451 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>应该如何管理密码 - 我的密码管理心得 | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="我的密码升级之路我最早接触密码这个概念是在高中的时候，那个时候我第一次申请 QQ 号，需要想一个超过 6 位数的密码。于是，我填上了我爸爸的手机号。老实说，手机号作为密码还不算最糟糕的。比起生日来说，手机号更长一些，可能的组合也更多一些。
+我很快就了解了撞库这种攻击方式，你的密码如果在任何平台都用一样的话，如果有一个平台不靠谱，明文存储了密码（在那个年代其实并不少见，CSDN 都曾经存的是明文），">
+<meta property="og:type" content="article">
+<meta property="og:title" content="应该如何管理密码 - 我的密码管理心得">
+<meta property="og:url" content="http://blog.devtang.com/2016/04/07/my-password-management-way/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="我的密码升级之路我最早接触密码这个概念是在高中的时候，那个时候我第一次申请 QQ 号，需要想一个超过 6 位数的密码。于是，我填上了我爸爸的手机号。老实说，手机号作为密码还不算最糟糕的。比起生日来说，手机号更长一些，可能的组合也更多一些。
+我很快就了解了撞库这种攻击方式，你的密码如果在任何平台都用一样的话，如果有一个平台不靠谱，明文存储了密码（在那个年代其实并不少见，CSDN 都曾经存的是明文），">
+<meta property="og:image" content="http://blog.devtang.com/images/password.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/safari-1p.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/1p-license-list.jpg">
+<meta property="og:updated_time" content="2016-04-07T16:05:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="应该如何管理密码 - 我的密码管理心得">
+<meta name="twitter:description" content="我的密码升级之路我最早接触密码这个概念是在高中的时候，那个时候我第一次申请 QQ 号，需要想一个超过 6 位数的密码。于是，我填上了我爸爸的手机号。老实说，手机号作为密码还不算最糟糕的。比起生日来说，手机号更长一些，可能的组合也更多一些。
+我很快就了解了撞库这种攻击方式，你的密码如果在任何平台都用一样的话，如果有一个平台不靠谱，明文存储了密码（在那个年代其实并不少见，CSDN 都曾经存的是明文），">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/04/07/my-password-management-way/" title="应该如何管理密码 - 我的密码管理心得" itemprop="url">应该如何管理密码 - 我的密码管理心得</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2016-04-07T15:59:37.000Z" itemprop="datePublished"> 发表于 2016-04-07 23:59</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u6211_u7684_u5BC6_u7801_u5347_u7EA7_u4E4B_u8DEF"><span class="toc-number">1.</span> <span class="toc-text">我的密码升级之路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1password"><span class="toc-number">2.</span> <span class="toc-text">1password</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5BC6_u7801_u88AB_u76D7"><span class="toc-number">3.</span> <span class="toc-text">密码被盗</span></a></li></ol>
+		
+		</div>
+		
+		<img src="/images/password.jpg">
+<h2 id="u6211_u7684_u5BC6_u7801_u5347_u7EA7_u4E4B_u8DEF"><a href="#u6211_u7684_u5BC6_u7801_u5347_u7EA7_u4E4B_u8DEF" class="headerlink" title="我的密码升级之路"></a>我的密码升级之路</h2><p>我最早接触密码这个概念是在高中的时候，那个时候我第一次申请 QQ 号，需要想一个超过 6 位数的密码。于是，我填上了我爸爸的手机号。老实说，手机号作为密码还不算最糟糕的。比起生日来说，手机号更长一些，可能的组合也更多一些。</p>
+<p>我很快就了解了撞库这种攻击方式，你的密码如果在任何平台都用一样的话，如果有一个平台不靠谱，明文存储了密码（在那个年代其实并不少见，CSDN 都曾经存的是明文），那么黑客就可以用这个账号密码尝试登录其它平台。</p>
+<p>于是，我把自己的密码分成了几套，简单的一套用于注册一些不太重要的服务，复杂的一套用于一些比较重要的服务，支付相关的还有一套。</p>
+<p>对于每一套密码，我在密码后面加上了平台的名字。比如 QQ 的密码就是基础密码后面加 qq，网易邮箱的密码就是基础密码后面加 mail。</p>
+<p>用了一段时间之后，我又增加了一些变化，我希望我尾部增加的与平台相关的名字不那么明显，于是，我把平台的首字母简单的取其字典序的下一个字母，然后插入到一个中间的位置。比如 qq 的密码，就是去 q 的下一个字母 r，然后把 r 插入到密码中间位置。因为我的基础密码本来就是一段随机的数字字母（真是随机的，只不过我背下来了），所以要看出规律可能需要爆出两个库才行。</p>
+<p>但是，这么管理密码还是很累。而且，现在不断出现的安全事故让我觉得爆出两个网站被拖库也不算什么让人意外的事情。</p>
+<h2 id="1password"><a href="#1password" class="headerlink" title="1password"></a>1password</h2><p>终于，我尝试购买了 1password，开始用 1password 来管理密码。1password 常常有 5 折的优惠活动，今年春节趁他家 APP 优惠，我开始了我的密码迁移之旅。</p>
+<p>1password 完全采用随机的方式来生成每一个网站的密码，通常推荐的是 12 位的字母数字组合。我花了好几天，才把所有自己在用的账号密码做了更新。</p>
+<p>1password 支持各种方式（iCloud 或 Dropbox）在云端同步你的密码。这样你也不用担心换了电脑找不到密码了。对于云端数据安全，1password 使用的是加密的方式来保存。即使黑客获得了你们密码文件，也需要一个解密的密码来解开它。而这个密码，就是你需要牢牢记住的那最后一个密码。</p>
+<p>使用 1password 之后，每次在 chrome 中需要输入密码时，直接使用 1password 的插件进行自动的填充即可。习惯 Safari 的朋友，1password 也有 safari 的插件。值得一提的是，1password 还支持在 iOS 系统的 Safari 中填充密码，如下所示：</p>
+<img src="/images/safari-1p.jpg">
+<p>除去浏览器后，主要需要输入密码的地方就是 Mac 的原生应用和手机 APP 了。对于原生应用和手机 APP，1password 都支持把密码用复制的方式，粘贴到应用的密码输入界面。对了，买了 Mac 版的 1password，手机版的 1password 高级功能也自动解锁了。</p>
+<p>1password 唯一搞不定的是那些不允许粘贴密码的应用，比如支付宝。对于这些应用，我另外有一套密码独立管理，没有放在 1password 管理中。</p>
+<p>有了 1password 之后，一些软件的 License 也可以集中管理了，这还是一件挺爽的事情。1password 可以自动识别出软件的图标，如下所示。</p>
+<img src="/images/1p-license-list.jpg">
+<p>反思过来，密码确实是一个非常反人类的事情，因为人们天然怕麻烦，所以大多数人都只有一套密码，并且密码规则非常弱。</p>
+<p>现在我们也慢慢看到越来越多的应用开始抛弃密码，用手机随机短信验证码来登录。还有一次公司，尝试用指纹（比如 iPhone)、声音 (比如微信的声音锁）、头像视频（比如借贷宝的认证）等来作为安全认证的替代品，都是不错的兼顾用户体验和安全的尝试。</p>
+<h2 id="u5BC6_u7801_u88AB_u76D7"><a href="#u5BC6_u7801_u88AB_u76D7" class="headerlink" title="密码被盗"></a>密码被盗</h2><p>悲剧的是，就在我刚刚改完各种密码之后，我的百度云账号被盗，而且我通过正常渠道申诉失败。后来发现原因是我百度云账号绑定的网易邮箱被盗了，而那个邮箱我很久没有使用，都忘记了，所以也没有用 1password 改过密码。盗号者盗完我的网易邮箱后，从里面看到了我的注册百度云的确认邮件，于是申请了百度云找回密码，从而重置了我的百度云密码。重置之后，我的绑定邮箱被解绑，于是我就没有方法找回百度云密码了。</p>
+<p>最终多亏在百度的朋友帮忙和担保，我才得以用非正常的渠道申诉成功。看到家里的所有照片失而复得，我第一次感觉到安全问题离自己这么近。</p>
+<p>最后推荐 Mac 的各位朋友都使用 1password 来管理密码，并且对于一些非常重要的账号，用独立的非 1password 密码来管理。</p>
+<p>安全问题，真的就在我们身边，大家还是小心一点。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/summary/">summary</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2016/04/07/my-password-management-way/" data-title="应该如何管理密码 - 我的密码管理心得 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/04/05/swift-gym-5-monad/"  title="Swift 烧脑体操（五）- Monad">
+ <strong>下一篇：</strong><br/> 
+ <span>Swift 烧脑体操（五）- Monad
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2016/04/07/my-password-management-way/" data-title="应该如何管理密码 - 我的密码管理心得" data-url="http://blog.devtang.com/2016/04/07/my-password-management-way/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  <div class="sponsor">
+  <br />
+  <p class="asidetitle">广告</p>
+  <a target="_blank" href="https://h5.jianxun.io/20160321-qianlima?utm_source=event&utm_medium=blog_ad&utm_campaign=qianlima&utm_content=tangqiao&utm_term=wangzhan">
+  <img src="https://www.jianxun.io/ad/20151101/tangqiao-rightbanner.jpg" width="235px" height="200px" />
+  </a>
+
+  <br /><a href="/sponsor"><font color='#2ca6cb'>购买广告位</font></a>
+</div>
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary</a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS</a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly</a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac</a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell</a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary</a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注唐巧的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="http://ww4.sinaimg.cn/mw690/65dc76a3jw1f1ngaau9arj20760763yr.jpg" width="230px" />
+
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"tangqiaoboy"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-28029597-1', 'null');  
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
