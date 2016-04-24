@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.devtang.com/2016/04/25/swiftcon-2016-notes/</loc>
+    <lastmod>2016-04-24T16:14:05.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.devtang.com/2016/04/19/talk-about-wwdc-2016/</loc>
     <lastmod>2016-04-19T13:34:23.000Z</lastmod>
   </url>

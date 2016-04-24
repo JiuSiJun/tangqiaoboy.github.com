@@ -1,0 +1,495 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>SwiftCon 2016 参会感想 | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="4 月 23 - 24 日，我参加了由 Think 技术社区举办的 SwiftCon 大会。这次大会见到了很多新老朋友，也从嘉宾的分享中学习了很多，微博上对于此次大会也有一些争议，一并写个参会感想，分享一下我的观点。
+分享笔记首先分享一下我两天听分享的收获。
+一个 Swift 项目的网络层变迁——陈乘方陈乘方负责开发 ENJOY 这个 App，ENJOY 是一个比美团和点评更「上档次」的美食推荐和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SwiftCon 2016 参会感想">
+<meta property="og:url" content="http://blog.devtang.com/2016/04/25/swiftcon-2016-notes/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="4 月 23 - 24 日，我参加了由 Think 技术社区举办的 SwiftCon 大会。这次大会见到了很多新老朋友，也从嘉宾的分享中学习了很多，微博上对于此次大会也有一些争议，一并写个参会感想，分享一下我的观点。
+分享笔记首先分享一下我两天听分享的收获。
+一个 Swift 项目的网络层变迁——陈乘方陈乘方负责开发 ENJOY 这个 App，ENJOY 是一个比美团和点评更「上档次」的美食推荐和">
+<meta property="og:updated_time" content="2016-04-24T16:14:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SwiftCon 2016 参会感想">
+<meta name="twitter:description" content="4 月 23 - 24 日，我参加了由 Think 技术社区举办的 SwiftCon 大会。这次大会见到了很多新老朋友，也从嘉宾的分享中学习了很多，微博上对于此次大会也有一些争议，一并写个参会感想，分享一下我的观点。
+分享笔记首先分享一下我两天听分享的收获。
+一个 Swift 项目的网络层变迁——陈乘方陈乘方负责开发 ENJOY 这个 App，ENJOY 是一个比美团和点评更「上档次」的美食推荐和">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/04/25/swiftcon-2016-notes/" title="SwiftCon 2016 参会感想" itemprop="url">SwiftCon 2016 参会感想</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2016-04-24T16:10:53.000Z" itemprop="datePublished"> 发表于 2016-04-25 00:10</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u5206_u4EAB_u7B14_u8BB0"><span class="toc-number">1.</span> <span class="toc-text">分享笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E00_u4E2A_Swift__u9879_u76EE_u7684_u7F51_u7EDC_u5C42_u53D8_u8FC1_u2014_u2014_u9648_u4E58_u65B9"><span class="toc-number">1.1.</span> <span class="toc-text">一个 Swift 项目的网络层变迁——陈乘方</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Objective-C__u548C_Swift__u7684_u8DE8_u5E73_u53F0_u5F00_u53D1_u2014_u2014Tinyfool"><span class="toc-number">1.2.</span> <span class="toc-text">Objective-C 和 Swift 的跨平台开发——Tinyfool</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9006_u5411_u5DE5_u7A0B_uFF1A_u4ECE_Objective-C__u5230_Swift_u2014_u2014_u5305_u6DB5_u537F"><span class="toc-number">1.3.</span> <span class="toc-text">逆向工程：从 Objective-C 到 Swift——包涵卿</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u62E5_u62B1_Swift_3-0__u4E0E_u672A_u6765_u5C55_u671B_u2014_u2014_u56FE_u62C9_u9F0E"><span class="toc-number">1.4.</span> <span class="toc-text">拥抱 Swift 3.0 与未来展望——图拉鼎</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redux_in_Swift_u2014_u2014_u65B0_u4E00_u4EE3_u7684_iOS__u5E94_u7528_u67B6_u6784_u2014_u2014_u65B9_u5FD7_u521A"><span class="toc-number">1.5.</span> <span class="toc-text">Redux in Swift——新一代的 iOS 应用架构——方志刚</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#How_to_parse_float_numbers_-_the_really_hard_way_u2014_u2014_u5085_u82E5_u611A"><span class="toc-number">1.6.</span> <span class="toc-text">How to parse float numbers - the really hard way——傅若愚</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BFB_Swift__u6E90_u7801_uFF0C_u7406_u89E3_Monad_u2014_u2014_u5510_u5DE7"><span class="toc-number">1.7.</span> <span class="toc-text">读 Swift 源码，理解 Monad——唐巧</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5176_u5B83"><span class="toc-number">2.</span> <span class="toc-text">其它</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5173_u4E8E_u5BF9_u4F1A_u8BAE_u7684_u8BA8_u8BBA"><span class="toc-number">3.</span> <span class="toc-text">关于对会议的讨论</span></a></li></ol>
+		
+		</div>
+		
+		<p>4 月 23 - 24 日，我参加了由 Think 技术社区举办的 <a href="http://www.swiftconchina.com/" target="_blank" rel="external">SwiftCon</a> 大会。这次大会见到了很多新老朋友，也从嘉宾的分享中学习了很多，微博上对于此次大会也有一些争议，一并写个参会感想，分享一下我的观点。</p>
+<h2 id="u5206_u4EAB_u7B14_u8BB0"><a href="#u5206_u4EAB_u7B14_u8BB0" class="headerlink" title="分享笔记"></a>分享笔记</h2><p>首先分享一下我两天听分享的收获。</p>
+<h3 id="u4E00_u4E2A_Swift__u9879_u76EE_u7684_u7F51_u7EDC_u5C42_u53D8_u8FC1_u2014_u2014_u9648_u4E58_u65B9"><a href="#u4E00_u4E2A_Swift__u9879_u76EE_u7684_u7F51_u7EDC_u5C42_u53D8_u8FC1_u2014_u2014_u9648_u4E58_u65B9" class="headerlink" title="一个 Swift 项目的网络层变迁——陈乘方"></a>一个 Swift 项目的网络层变迁——陈乘方</h3><p>陈乘方负责开发 ENJOY 这个 App，ENJOY 是一个比美团和点评更「上档次」的美食推荐和团购应用。而 ENJOY 是一个由纯 Swift 语言开发出来的 App。陈乘方的这次分享中，我感受到了大家 ENJOY 这个项目对于 Swift 新特性的接受和演进过程。</p>
+<p>大家刚开始写 Swift 项目的时候，都是把 Objective-C 翻译成 Swift，那个时候，虽然我们用的语言是 Swift，但是我们的思维方式还是 Objective-C 的，所以，陈乘方首先介绍了在项目演进过程中，大家对于 Swift 新特性的引入，从而带来编码方式的变革过程。</p>
+<p>他们使用枚举、范型、以及 protocol extension 作为第一个演进版本，使得自己的项目更加 Swift 化。</p>
+<p>接着第二个演进版本，他们将 AFNetworking 进行了替换，改成了 Alamofire。比较关键的一点，他们把成功和失败的双回调，合并成 <code>completion</code> 单回调，所以就产生了 <code>APIResult</code> 对象：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">enum APIResult&#60;T&#62; &#123;&#10;   case Success(T)&#10;   case Failure(NSError, AnyObject?)&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>这种改进是更加 Swift 化的尝试，因为 <code>APIResult</code> 这种保存网络结果的方式，是一种对数据的封装，可以更加方便地使用 <code>map</code> 和 <code>flatMap</code> 进行链式调用。</p>
+<p>最后一个演进版本，他们：</p>
+<ul>
+<li>用 ObjectMapper 代替了 Mantle</li>
+<li>去掉命名前缀</li>
+<li>用 Struct 类型的 Model</li>
+<li>尽可能减少 optional 的 Model 属性</li>
+<li>为 APIResult 增加了 map 和 flatMap 方法</li>
+</ul>
+<p>整个演进过程中，我能感受到他们对于 Swift 的最佳实践也是一步一步摸索得更加清晰。除了总结性的介绍外，陈乘方在演讲的后半部分，还以一个具体的 API 请求为例，展示代码的整个生成过程，让我更加清晰地理解了他们的应用架构方式。</p>
+<p>这个主题分享非常适合那些刚刚迁移到 Swift 语言的新项目，他们可以从中吸取到宝贵的实践经验。</p>
+<p>最后恭喜 ENJOY 获得了 3000 万美元的新一轮融资，以及陈乘方本人抽中了今年 WWDC 的门票，ENJOY 公司会报销陈乘方参加 WWDC 的全部费用，真是良心公司，大家投简历去吧，哈哈。</p>
+<h3 id="Objective-C__u548C_Swift__u7684_u8DE8_u5E73_u53F0_u5F00_u53D1_u2014_u2014Tinyfool"><a href="#Objective-C__u548C_Swift__u7684_u8DE8_u5E73_u53F0_u5F00_u53D1_u2014_u2014Tinyfool" class="headerlink" title="Objective-C 和 Swift 的跨平台开发——Tinyfool"></a>Objective-C 和 Swift 的跨平台开发——Tinyfool</h3><p>tinyfool 的这个分享我很早以前听过，当时应该是在网上看的他参加博览网的分享，分享地址 <a href="http://boolan.com/lecture/1000001076" target="_blank" rel="external">在这里</a>，当时他分享的主题是《如何把 iOS 代码编译为 Android 应用》。这次分享的题目虽然不一样，但实质内容是一样的。</p>
+<p>这其实是一个非常有技术含量的事情，tinyfool 基本上把他们要做的事情讲了，但是并没有深入到细节讲怎么做。这其实是完全能够理解的，因为这些细节讲起来会非常碎，在场的人也很难有谁有这方面的需求做同样的事情。所以基本上，这件事情大家了解他是如何着手计划和实施的，就可以了。</p>
+<p>不过这场分享，很多人表达出不满意。我想 tiny 如果抛出两个技术细节，让大家玩味一下会更有意思一些。</p>
+<h3 id="u9006_u5411_u5DE5_u7A0B_uFF1A_u4ECE_Objective-C__u5230_Swift_u2014_u2014_u5305_u6DB5_u537F"><a href="#u9006_u5411_u5DE5_u7A0B_uFF1A_u4ECE_Objective-C__u5230_Swift_u2014_u2014_u5305_u6DB5_u537F" class="headerlink" title="逆向工程：从 Objective-C 到 Swift——包涵卿"></a>逆向工程：从 Objective-C 到 Swift——包涵卿</h3><p>这个分享非常对我的味口，因为我一直对 iOS 安全非常关心。</p>
+<p>包涵卿在演讲中，介绍了他使用 Hopper Disassembler， IDA Pro， otool, class-dump 逆向分析 Objective-C 和 Swift 的编译后代码。其中涉及的技术细节都非常有意思。</p>
+<p>例如 Non Fragile Layout，这种编译方案，使得父类增加成量变量，不会影响子类的二进制代码运行。这样，苹果就可以在新的 iOS 操作系统中，默默地升级 NSObject，UIView 和 UIViewController 这些大家都会继承的父类的成员变量，而不会影响原有的代码运行。这个技术细节感觉国内并没有多少人是真正理解清楚的。</p>
+<p>关于这个，我记得王晓磊给我的公众号投稿过一篇名为 <a href="https://mp.weixin.qq.com/s?__biz=MjM5NTIyNTUyMQ==&amp;mid=206233994&amp;idx=1&amp;sn=1d3379abb1cec9306d40efc38910434e&amp;scene=1&amp;srcid=0424ZMkiur8yL1FDeGxrzT9X&amp;key=b28b03434249256bd1853e2fbc502b1a9a19b062d66276afd7aa2c9ab2dc68c0e8368c260f4345ffbf461be0b77510bf&amp;ascene=0&amp;uin=NDU1NzA2MTk1&amp;devicetype=iMac+MacBookAir" target="_blank" rel="external">Objective-C 类成员变量深度剖析</a> 的文章，也对这个特性做了详细的分析。</p>
+<p>包涵卿还介绍了 Swift-String 的内部实现，通过介绍它的大小是是 24 字节，一步步分析，最后还原出原来是它有一个 _core 的变量，类型是一个 _StringCore 结构。这个结构里面有三个变量：_baseAddress, _countAndFlags, _owner。</p>
+<p>包涵卿接着介绍了 Swift-Demangle 的细节，一个 Swift Protocol 的指针大小是 40 字节的逆向分析。</p>
+<p>包涵卿介绍了一个超有用的分析命令<code>ima lookup -a &lt;address&gt;</code> ，可以查对应地址可能是什么对象，有这个命令之后，在分析对象组成的时候，就方便很多了。</p>
+<p>最后，我了解到 protocol witness，它是一个类似 C++ 的虚方法表的实现，这让我理解了 Swift 对 Protocol 的实现方式。</p>
+<h3 id="u62E5_u62B1_Swift_3-0__u4E0E_u672A_u6765_u5C55_u671B_u2014_u2014_u56FE_u62C9_u9F0E"><a href="#u62E5_u62B1_Swift_3-0__u4E0E_u672A_u6765_u5C55_u671B_u2014_u2014_u56FE_u62C9_u9F0E" class="headerlink" title="拥抱 Swift 3.0 与未来展望——图拉鼎"></a>拥抱 Swift 3.0 与未来展望——图拉鼎</h3><p>图拉鼎是奇点和 Manico 的作者，也以 Remote 的方式为 ENJOY 工作过。</p>
+<p>图拉鼎的这次分享，首先介绍了 Swift 3.0 的目标：</p>
+<ul>
+<li>ABI 稳定</li>
+<li>跨平台</li>
+<li>Package Manager</li>
+</ul>
+<p>接着，他分享了 Swift 2.2 在语言演进上的变化，包括：selector、keyPath、去 Objective-C 化、标准化命名、参数化命名、废除 IUO 。</p>
+<p>这些语言变化对我都很有帮助，特别是标准化命名这一点，方法名加 ed 结尾统一表示返回新的对象，例如：sort 是在原数组排序，sorted 是返回的是新数组。类似的还有 reversed, enumerated 等。这种命名方式设计是非常舒服的，而我之前并没有注意到这一点。</p>
+<p>废除 IUO（Implicityly Unwrapped Optional） 这一点对我启发也很大，我们了解到苹果对于语言的演进过程，其实就能理解哪些是好的设计，哪些是不好的设计。</p>
+<p>最后，图拉鼎介绍了 Swift 未来的 <a href="https://github.com/apple/swift-evolution" target="_blank" rel="external">演进方向</a>：</p>
+<ul>
+<li>SE-0025: Scoped Access Level</li>
+<li>SE-0038: Package Manager C Language Target Support</li>
+<li>SE-0048: Generic type alias</li>
+</ul>
+<p>对此，我最大的收获是知道了原来可以 <a href="https://github.com/apple/swift-evolution" target="_blank" rel="external">从这里</a> 看苹果对于 Swift 语言未来的规划，相信我以后会常常到这里翻翻，看看苹果是如何做计划的。</p>
+<p>图拉鼎还介绍了一个好的学习平台，IBM 的 Swift sandbox: <a href="https://swiftlang.ng.bluemix.net" target="_blank" rel="external">https://swiftlang.ng.bluemix.net</a>，听他说这个平台更新非常及时，可以方便我们实验 Swift 的新特性。</p>
+<h3 id="Redux_in_Swift_u2014_u2014_u65B0_u4E00_u4EE3_u7684_iOS__u5E94_u7528_u67B6_u6784_u2014_u2014_u65B9_u5FD7_u521A"><a href="#Redux_in_Swift_u2014_u2014_u65B0_u4E00_u4EE3_u7684_iOS__u5E94_u7528_u67B6_u6784_u2014_u2014_u65B9_u5FD7_u521A" class="headerlink" title="Redux in Swift——新一代的 iOS 应用架构——方志刚"></a>Redux in Swift——新一代的 iOS 应用架构——方志刚</h3><p>方志刚自己在 playground 上做了一个用于演讲的程序，可以播放 PPT + 看代码，而且你知道吗？这是他在第一天演讲的现场撸出来的。真是后生可畏啊！</p>
+<p>在这个分享中，方志刚分享了一个小众的、新颖的架构方案：Redux。在介绍完架构后，方志刚直接上代码，带着我们一步一步演示如果用 Redux 开发出一个 TODO 的应用。Redux 优点：好测，简单，可缓存，时光倒退模式这些都让人感觉耳目一新。</p>
+<p>但是，我最大的收获倒不是这个框架本身。我相信一个新的框架肯定也会有各种各样的问题，我最大的收获是方志刚在介绍如何把这个框架改造成支持异步的时候，提出了一个 Inverse Of Control 的方案：把 dispatch 反转控制，交给异步的线程来回调。</p>
+<p>我不知道未来我是否会有类似的设计架构的需求，如果我以后也有改造现有框架，让它支持异步的方案时，我应该会仔细评估方志刚的这种设计方式，还是挺有意思的。</p>
+<h3 id="How_to_parse_float_numbers_-_the_really_hard_way_u2014_u2014_u5085_u82E5_u611A"><a href="#How_to_parse_float_numbers_-_the_really_hard_way_u2014_u2014_u5085_u82E5_u611A" class="headerlink" title="How to parse float numbers - the really hard way——傅若愚"></a>How to parse float numbers - the really hard way——傅若愚</h3><p>每次听傅若愚的分享，我都有智商被碾压的感觉，不过每次回头再仔细学习他的 keynote，我总是会收获很多。其实我的 Swift 烧脑系列文章，有几篇都是在傅若愚的演讲中得到的启发。</p>
+<p>这次我听到他一下子定义了大量操作，将 Monad, Application 和 Functor 都实现并且应用在浮点数转换中时，我又知道我得会后再下功夫了。</p>
+<p>其实傅若愚也明白这一点，他将所有的讲稿和代码都放到了 <a href="https://github.com/lingoer/SwiftyCharms" target="_blank" rel="external">GitHub</a> 上，大家可以自行学习。</p>
+<h3 id="u8BFB_Swift__u6E90_u7801_uFF0C_u7406_u89E3_Monad_u2014_u2014_u5510_u5DE7"><a href="#u8BFB_Swift__u6E90_u7801_uFF0C_u7406_u89E3_Monad_u2014_u2014_u5510_u5DE7" class="headerlink" title="读 Swift 源码，理解 Monad——唐巧"></a>读 Swift 源码，理解 Monad——唐巧</h3><p>我自己的分享，主办方把我放在中午饭之后，让我压力山大，为了让大家不睡着，我带大家一起伸了懒腰，是的，我们大会所有人一起举起双手伸了一个大懒腰。然后，我结合《引爆点》这本书，给大家讲了一个段子：「如何成为 iOS 大 V」。</p>
+<p>热场大概花了 10 分钟吧，然后就进入正题讲 Monad。整体语速还是有点稍快，现场没有提词器，我不得不时不时回头，对观众还是挺不友好的。最后演讲完，我让听懂的同学举手，现场大概有一半的同学举手表示懂了。</p>
+<p>我自己学习 Monad 大概断断续续花了一年时间，能够在 40 分钟内让现场有一半的同学听懂，我认为值了。这场演讲是我准备得最多次数的演讲，在正式演讲前，我一共讲了五次（一次给 Lancy，一次公司内部分享，一次给 T 线下沙龙，一次给南京软件技术大会，一次给汤圣罡），也是我认为最有挑战的演讲内容吧，整体来说，我给自己打 90 分。</p>
+<p>没听懂的同学，对不住了，我已经尽力了。如果你没听懂，建议再学习一下相关的资料：<a href="http://t.cn/Rq4fwJk" target="_blank" rel="external">http://t.cn/Rq4fwJk</a>、<a href="http://t.cn/Rqp3GiW" target="_blank" rel="external">http://t.cn/Rqp3GiW</a>、<a href="http://t.cn/RL5pYwM" target="_blank" rel="external">http://t.cn/RL5pYwM</a></p>
+<h2 id="u5176_u5B83"><a href="#u5176_u5B83" class="headerlink" title="其它"></a>其它</h2><p>以上几个分享，是我认真听了，并且觉得非常值得总结的。除此之外，由于我和会场的朋友聊天，错过了「从数学函数角度理解函数式编程——丁峰」，「Swift 语言的设计取舍及跨语言调用——董一凡」，「Asynchronous Programming in Swift，Swift 异步编程——刘冠杉」这三个分享，所以无法总结。</p>
+<p>「Swift 设计模式——老镇 (曾伟) 」这个分享我听了，我觉得稍微有一些问题，因为老镇只是把这些设计模式一一介绍，其实这样并不是很有效。作为分享，还不如选一两个点，结合 Swift 的源码来理解，可能更好一些。不过老镇对这次分享准备得非常认真，写了一万多字的讲稿，举了大量武侠的例子，没能深入也蛮可惜的。我感觉还是他经验太少，在内容组织上没有经验，期待他以后会演讲得更好。</p>
+<h2 id="u5173_u4E8E_u5BF9_u4F1A_u8BAE_u7684_u8BA8_u8BBA"><a href="#u5173_u4E8E_u5BF9_u4F1A_u8BAE_u7684_u8BA8_u8BBA" class="headerlink" title="关于对会议的讨论"></a>关于对会议的讨论</h2><p>从昨天开始，twitter 和 微博上就有人开始喷这次 SwiftCon 会议，我感觉实在犯不着，因为这次大会有相当多的内容都是精心准备的，如果有一两场不合你的胃口，也不用攻击整场会议。这次 SwiftCon 会议的分享内容，在我以上总结到的分享，都是高质量的，而这些总结，已经覆盖了超过半数的分享议题了。如果你仅仅拿一两场的分享说事，明显犯了以点盖面的错误。如果有谁觉得不对，建议也能够详细指出每一场分享到底水在哪里，让讨论能够更加客观和公正。</p>
+<p>另外，微博上发泄或者互喷是相当浪费时间的，有这个时间还是看看技术文章，看看开源代码吧。整个互联网圈子已经够乱了，我还是希望我们 iOS 圈子能够少一些偏激，多一些心平气和的讨论。</p>
+<p>最后，我要说，这次会议其实是非赢利的，首先所有讲师都没有报酬的。我从锅巴和板子那里了解到，所有的大会志愿者，也是没有任何劳务报酬的，大会的主持吴柯瑶（其实她是一个 iOS 开发者）也是没有任何报酬的。那为什么要收门票呢？因为分享的场地设备得花钱，外地讲师的路费和住宿费得花钱，所以这些钱需要通过门票来补贴。</p>
+<p>如果你能理解这是一个完全民间的团体，组织的一次非赢利性的大会，他们都是本着做事和分享的态度来做这个会议，那么我相信你的心态会更加宽容一些。这是上海有史以来的第一次 Swift 大会，所有人都希望它办成功，这个过程中有什么不如意的，我们改进就行了，没有那么不可原谅的。</p>
+<p>愿大家开心～</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2016/04/25/swiftcon-2016-notes/" data-title="SwiftCon 2016 参会感想 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/04/19/talk-about-wwdc-2016/"  title="聊聊 WWDC 的八卦">
+ <strong>下一篇：</strong><br/> 
+ <span>聊聊 WWDC 的八卦
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2016/04/25/swiftcon-2016-notes/" data-title="SwiftCon 2016 参会感想" data-url="http://blog.devtang.com/2016/04/25/swiftcon-2016-notes/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  <div class="sponsor">
+  <br />
+  <p class="asidetitle">广告</p>
+  <a target="_blank" href="https://h5.jianxun.io/20160321-qianlima?utm_source=event&utm_medium=blog_ad&utm_campaign=qianlima&utm_content=tangqiao&utm_term=wangzhan">
+  <img src="https://www.jianxun.io/ad/20151101/tangqiao-rightbanner.jpg" width="235px" height="200px" />
+  </a>
+
+  <br /><a href="/sponsor"><font color='#2ca6cb'>购买广告位</font></a>
+</div>
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary</a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS</a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly</a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac</a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell</a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary</a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注唐巧的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="http://ww4.sinaimg.cn/mw690/65dc76a3jw1f1ngaau9arj20760763yr.jpg" width="230px" />
+
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"tangqiaoboy"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-28029597-1', 'null');  
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
