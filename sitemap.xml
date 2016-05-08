@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.devtang.com/2016/05/08/jeju-island-tour/</loc>
+    <lastmod>2016-05-08T14:01:15.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.devtang.com/2016/05/07/swiftcon-2016-chat-notes/</loc>
     <lastmod>2016-05-06T16:01:37.000Z</lastmod>
   </url>
@@ -137,32 +142,32 @@
   </url>
   
   <url>
+    <loc>http://blog.devtang.com/2015/03/10/ios-weekly-40/</loc>
+    <lastmod>2016-02-27T01:33:21.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2014/09/09/ios-weekly-24/</loc>
+    <lastmod>2016-02-27T01:33:21.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2014/09/01/ios-weekly-23/</loc>
+    <lastmod>2016-02-27T01:33:21.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2014/08/24/ios-weekly-22/</loc>
+    <lastmod>2016-02-27T01:33:21.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.devtang.com/2014/09/14/ios-weekly-25/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/10/30/ios-weekly-29/</loc>
-    <lastmod>2016-02-27T01:33:21.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.devtang.com/2014/09/24/ios-weekly-26/</loc>
-    <lastmod>2016-02-27T01:33:21.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2014/08/18/ios-weekly-21/</loc>
-    <lastmod>2016-02-27T01:33:21.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2016/02/27/swift-gym-2-function-argument/</loc>
-    <lastmod>2016-02-27T01:33:21.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2014/08/12/ios-weekly-20/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
@@ -187,7 +192,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/02/27/swift-gym-1-nested-optional/</loc>
+    <loc>http://blog.devtang.com/2014/08/18/ios-weekly-21/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
@@ -207,17 +212,17 @@
   </url>
   
   <url>
+    <loc>http://blog.devtang.com/2014/08/12/ios-weekly-20/</loc>
+    <lastmod>2016-02-27T01:33:21.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2014/04/10/ios-weekly-7/</loc>
+    <lastmod>2016-02-27T01:33:21.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.devtang.com/2014/10/12/ios-weekly-27/</loc>
-    <lastmod>2016-02-27T01:33:21.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2014/09/01/ios-weekly-23/</loc>
-    <lastmod>2016-02-27T01:33:21.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2014/09/09/ios-weekly-24/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
@@ -272,12 +277,12 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2015/03/10/ios-weekly-40/</loc>
+    <loc>http://blog.devtang.com/2015/11/02/mvc-and-mvvm/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/08/24/ios-weekly-22/</loc>
+    <loc>http://blog.devtang.com/2016/02/27/swift-gym-1-nested-optional/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
@@ -317,7 +322,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2015/11/02/mvc-and-mvvm/</loc>
+    <loc>http://blog.devtang.com/2016/02/27/swift-gym-2-function-argument/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
@@ -372,7 +377,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/04/10/ios-weekly-7/</loc>
+    <loc>http://blog.devtang.com/2014/10/30/ios-weekly-29/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
