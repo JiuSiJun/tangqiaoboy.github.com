@@ -4,7 +4,7 @@
   <subtitle><![CDATA[记录下自己学习的点滴]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.devtang.com/"/>
-  <updated>2016-05-08T14:01:15.000Z</updated>
+  <updated>2016-05-22T05:47:47.000Z</updated>
   <id>http://blog.devtang.com/</id>
   
   <author>
@@ -13,6 +13,46 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Swift 烧脑体操（六）- 类型推断]]></title>
+    <link href="http://blog.devtang.com/2016/05/22/swift-gym-6-type-infer/"/>
+    <id>http://blog.devtang.com/2016/05/22/swift-gym-6-type-infer/</id>
+    <published>2016-05-22T05:46:26.000Z</published>
+    <updated>2016-05-22T05:47:47.000Z</updated>
+    <content type="html"><![CDATA[<p>前几天，一个朋友在微博上通过私信问了我一个问题，如下的代码，为什么变量 <code>crr</code> 没能把值为 nil 的元素过滤掉？</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr:[Int?] = [1, 2, 3, nil, 4, 5]&#10;let brr = arr.flatMap &#123; $0 &#125;&#10;brr&#10;// brr = [1, 2, 3, 4, 5]&#10;&#10;let crr:[Int?] = arr.flatMap &#123; $0 &#125;&#10;crr&#10;// crr = [&#123;Some 1&#125;, &#123;Some 2&#125;, &#123;Some 3&#125;, nil, &#123;Some 4&#125;, &#123;Some 5&#125;]</span><br></pre></td></tr></table></figure>
+<p>简单来看，同样是使用 <code>flatMap</code> 函数，brr 变量成功过滤掉了值为 nil 的元素，变量 crr 过滤失败。而 brr 和 crr 的区别就是它们的类型不一样，brr 的类型是 <code>[Int]</code> ，而 crr 的类型是 <code>[Int?]</code>，想必其中原因与此有关，那到底是为什么呢？</p>
+<p>在和一些朋友讨论之后，我大概想明白了，这和类型推断有关系。在 crr 相关的代码中，因为 crr 的类型已经被程序员指定为 <code>[Int?]</code>，所以为了编译通过，编译器需要推断出 <code>flatMap</code> 中的闭包的输入和输出变量类型。我们回顾一下 <code>flatMap</code> 在数据中的定义：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">extension SequenceType &#123;&#10;    public func flatMap&#60;T&#62;(@noescape transform: (Self.Generator.Element) throws -&#62; T?)&#10;                rethrows -&#62; [T]&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看出，flatMap 返回的结果是 <code>[T]</code>，而闭包 transform 返回的结果是 <code>T?</code>。而在 crr 这个例子中，T 被推断出是 <code>Int?</code> , 因此 tranform 中 <code>T?</code> 就被代入，变成了 <code>(Int?)?</code> 。所以，如果完善一下上面例子的代码，编译器推断出来的类型是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let crr:[Int?] = arr.flatMap &#123;&#10;    (element: Int?) -&#62; (Int?)? in&#10;    return element&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>注意这里，返回的变量 element 其实类型并不是 <code>(Int?)?</code>，但是 Optional 是有 conversion 的方法，允许将一个类型的 <code>S</code> 的变量，自动转成 <code>S?</code>，所以转换被自动做了，并没有编译错误发生。</p>
+<p>怎么改这个代码呢？</p>
+<p>有人说把闭包的类型手工指定成 <code>Int?</code>，我试了一下，确实能够正常了，不过我感觉这更像是一个编译器的 Bug，我们再看看这个接口：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">extension SequenceType &#123;&#10;    public func flatMap&#60;T&#62;(@noescape transform: (Self.Generator.Element) throws -&#62; T?)&#10;                rethrows -&#62; [T]&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>按照 <code>flatMap</code> 的接口定义，如果闭包返回的是 Int?，那么按照这个定义，最终 <code>flatMap</code> 的结果就必须是 <code>[Int]</code>，而我们要强制要求结果是 <code>[Int?]</code>，除非这里有自动的转换，否则就应该编译失败。而我自己的试验代码失败，确认出并没有从 [Int] 到 <code>[Int?]</code> 的自动转换。所以我暂时认为这么改能正常工作是一个编译器的 Bug（如有错误，欢迎指出）。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">error: cannot convert value of type &#39;[Int]&#39; to specified type &#39;[Int?]&#39;</span><br></pre></td></tr></table></figure>
+<p>另外，也有朋友说，在这种场景下并不应该使用 <code>flatMap</code> 函数。确实是这样，flatMap 函数本来就有着 flat 的作用在里面，在数组的 <code>flatMap</code> 实现中，有两个重载：</p>
+<ul>
+<li>一个重载版本是为了打平嵌套的多维数据。</li>
+<li>另一个重载版本，就是我们刚刚讨论的版本，flat 是为了去掉 Optional 的封包，同时把 nil 元素去掉。</li>
+</ul>
+<p>而这个示例代码调用了 <code>flatMap</code> 函数，却希望仍然得到 Optional 的数组，实在是不应该使用 <code>flatMap</code> 来做这个事情。如果只是为了去掉 Optional 中的 nil 元素，使用 <code>filter</code> 方法可能更为合适一些：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;let arr:[Int?] = [1, 2, 3, nil, 4, 5]&#10;let drr:[Int?] = arr.filter &#123;&#10;    if let _ = $0 &#123;&#10;        return true&#10;    &#125; else &#123;&#10;        return false&#10;    &#125;&#10;&#125;&#10;drr&#10;// drr = [&#123;Some 1&#125;, &#123;Some 2&#125;, &#123;Some 3&#125;, &#123;Some 4&#125;, &#123;Some 5&#125;]</span><br></pre></td></tr></table></figure>
+<p>其实函数式编程的方法不止 <code>map</code>, <code>flatMap</code>, <code>filter</code> 这些，在一个名为 <a href="http://reactivex.io/" target="_blank" rel="external">reactiveX</a> 的网站上，列举了 Reactive 编程实践下的一些 <a href="http://reactivex.io/documentation/operators.html" target="_blank" rel="external">常见的函数</a>，里面的很多方法都挺有意思，这些方法也被实现在了 <a href="https://github.com/ReactiveX/RxSwift" target="_blank" rel="external">RxSwift</a> 中，感兴趣的同学可以看看。</p>
+<p>祝玩得开心！</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>前几天，一个朋友在微博上通过私信问了我一个问题，如下的代码，为什么变量 <code>crr</code> 没能把值为 nil 的元素过滤掉？</p>
+<figure class="highlight plain"><table><tr><td class="code"><p]]>
+    </summary>
+    
+      <category term="Swift" scheme="http://blog.devtang.com/tags/Swift/"/>
+    
+      <category term="iOS" scheme="http://blog.devtang.com/categories/iOS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[济州岛旅游见闻]]></title>
@@ -2390,39 +2430,6 @@ func cancelInteractiveTransition()
     </summary>
     
       <category term="books summary" scheme="http://blog.devtang.com/categories/books-summary/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[MagicalRecord 作者 Saul Mora 的故事]]></title>
-    <link href="http://blog.devtang.com/2016/01/12/saul-introdution/"/>
-    <id>http://blog.devtang.com/2016/01/12/saul-introdution/</id>
-    <published>2016-01-12T14:20:45.000Z</published>
-    <updated>2016-02-16T10:26:44.000Z</updated>
-    <content type="html"><![CDATA[<img src="/images/saul-mora.jpg">
-<p>这次 Swift 开发者大会上，我认识到了一位新朋友，他叫 Saul Mora（如上图），听到这个名字时我没有什么感觉，但是随后旁边的一个朋友介绍道：「他是 MagicRecord」的作者之一，我突然眼睛亮了。</p>
-<p>不知道有多少人听过 MagicRecord，MagicRecord 是一个基于 Core Data 的库，可以让你更加方便地使用 Core Data。在我学习 Core Data 时，曾经抱怨过 Core Data 一些设计过于繁琐，使用不方便，那时就常常会听到人们说：「你应该使用 MagicRecord」。而 MagicalRecord 的 Github 首页上 <a href="https://github.com/magicalpanda/MagicalRecord" target="_blank" rel="external">https://github.com/magicalpanda/MagicalRecord</a> ，已经有了 8000 多的 Star 数。</p>
-<p>在我进一步和 Saul Mora 聊天时，我才发现，他的作品远远不只是 MagicRecord。他还是著名的 iOS 网站 Ray Wenderlich 的图书《Core Data by Tutorials》作者，并且发表了很多文章在 Ray Wenderlich 上。另外，他也是一个有趣的人，他维护着他的名为 NSBrief 的 podcast：<a href="http://nsbrief.com" target="_blank" rel="external">http://nsbrief.com</a>，采访了很多 iOS 和 Mac 的开发者。</p>
-<p>好了，现在关键来了，Saul Mora 在硅谷工作得有些腻了，而且他想学习中文，于是他现在来到了中国，打算在北京、上海或成都找一份 iOS 开发的工作。</p>
-<p>我想，这对于很多公司来说，都是一个千载难逢的机会，来招募到一位全球顶尖的 iOS 开发者。所以，如果你对 Saul 感兴趣，可以将你的公司介绍、希望他过去做的事情、大概的待遇，以及任何你觉得可以吸引他的信息，发到他的邮箱：</p>
-<p>Saul@casademora.com</p>
-<p>对了，Saul 现在还在学习中文，所以他还不能很流利地用中文交流。所以如果邮件用英文写的话，会更有利于他考虑工作机会哟。</p>
-<p>感谢 Saul 给开源社区的贡献，也祝福他在中国能够开始一段愉快的经历！</p>
-<hr>
-
-<p>以下是 Saul 写的自我介绍：</p>
-<p>About Saul</p>
-<p>Saul Mora is an American iOS developer. He has been involved with the iOS community for several years. He has helped start Cocoaheads and NSCoderNight meetups in Phoenix, Arizona and Denver, Colorado. </p>
-<p>He is the author of MagicalRecord (<a href="http://magicalrecord.com" target="_blank" rel="external">http://magicalrecord.com</a>), the iOS framework for use with Core Data. Saul is a co-author of Core Data by Tutorials (<a href="http://www.raywenderlich.com/store/core-data-by-tutorials" target="_blank" rel="external">http://www.raywenderlich.com/store/core-data-by-tutorials</a>) published with Ray Wenderlich (<a href="http://raywenderlich.com" target="_blank" rel="external">http://raywenderlich.com</a>)</p>
-<p>Over the past few years, Saul has produced the NSBrief podcast (<a href="http://nsbrief.com" target="_blank" rel="external">http://nsbrief.com</a>) to talk to many developers in the iOS and Mac development community. Saul has also shared his knowledge in person all over the world giving talks at many developer conferences in the USA and Europe. </p>
-<p>Saul has spent the last year in Silicon Valley and has recently decided to move to China to pursue his goal to become fluent in the Chinese language. He is eager to meet iOS developers everywhere and share his knowledge and experience with all the developers in China.</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<img src="/images/saul-mora.jpg">
-<p>这次 Swift 开发者大会上，我认识到了一位新朋友，他叫 Saul Mora（如上图），听到这个名字时我没有什么感觉，但是随后旁边的一个朋友介绍道：「他是 MagicRecord」的作者之一，我突然眼睛亮]]>
-    </summary>
-    
-      <category term="iOS" scheme="http://blog.devtang.com/categories/iOS/"/>
     
   </entry>
   

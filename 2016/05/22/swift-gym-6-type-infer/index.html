@@ -1,0 +1,453 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Swift 烧脑体操（六）- 类型推断 | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="前几天，一个朋友在微博上通过私信问了我一个问题，如下的代码，为什么变量 crr 没能把值为 nil 的元素过滤掉？
+let arr:[Int?] = [1, 2, 3, nil, 4, 5]&amp;#10;let brr = arr.flatMap &amp;#123; $0 &amp;#125;&amp;#10;brr&amp;#10;// brr = [1, 2, 3, 4, 5]&amp;#10;&amp;#10;let crr:[Int?]">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift 烧脑体操（六）- 类型推断">
+<meta property="og:url" content="http://blog.devtang.com/2016/05/22/swift-gym-6-type-infer/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="前几天，一个朋友在微博上通过私信问了我一个问题，如下的代码，为什么变量 crr 没能把值为 nil 的元素过滤掉？
+let arr:[Int?] = [1, 2, 3, nil, 4, 5]&amp;#10;let brr = arr.flatMap &amp;#123; $0 &amp;#125;&amp;#10;brr&amp;#10;// brr = [1, 2, 3, 4, 5]&amp;#10;&amp;#10;let crr:[Int?]">
+<meta property="og:updated_time" content="2016-05-22T05:47:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift 烧脑体操（六）- 类型推断">
+<meta name="twitter:description" content="前几天，一个朋友在微博上通过私信问了我一个问题，如下的代码，为什么变量 crr 没能把值为 nil 的元素过滤掉？
+let arr:[Int?] = [1, 2, 3, nil, 4, 5]&amp;#10;let brr = arr.flatMap &amp;#123; $0 &amp;#125;&amp;#10;brr&amp;#10;// brr = [1, 2, 3, 4, 5]&amp;#10;&amp;#10;let crr:[Int?]">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/05/22/swift-gym-6-type-infer/" title="Swift 烧脑体操（六）- 类型推断" itemprop="url">Swift 烧脑体操（六）- 类型推断</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2016-05-22T05:46:26.000Z" itemprop="datePublished"> 发表于 2016-05-22 13:46</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			
+		
+		</div>
+		
+		<p>前几天，一个朋友在微博上通过私信问了我一个问题，如下的代码，为什么变量 <code>crr</code> 没能把值为 nil 的元素过滤掉？</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr:[Int?] = [1, 2, 3, nil, 4, 5]&#10;let brr = arr.flatMap &#123; $0 &#125;&#10;brr&#10;// brr = [1, 2, 3, 4, 5]&#10;&#10;let crr:[Int?] = arr.flatMap &#123; $0 &#125;&#10;crr&#10;// crr = [&#123;Some 1&#125;, &#123;Some 2&#125;, &#123;Some 3&#125;, nil, &#123;Some 4&#125;, &#123;Some 5&#125;]</span><br></pre></td></tr></table></figure>
+<p>简单来看，同样是使用 <code>flatMap</code> 函数，brr 变量成功过滤掉了值为 nil 的元素，变量 crr 过滤失败。而 brr 和 crr 的区别就是它们的类型不一样，brr 的类型是 <code>[Int]</code> ，而 crr 的类型是 <code>[Int?]</code>，想必其中原因与此有关，那到底是为什么呢？</p>
+<p>在和一些朋友讨论之后，我大概想明白了，这和类型推断有关系。在 crr 相关的代码中，因为 crr 的类型已经被程序员指定为 <code>[Int?]</code>，所以为了编译通过，编译器需要推断出 <code>flatMap</code> 中的闭包的输入和输出变量类型。我们回顾一下 <code>flatMap</code> 在数据中的定义：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">extension SequenceType &#123;&#10;    public func flatMap&#60;T&#62;(@noescape transform: (Self.Generator.Element) throws -&#62; T?)&#10;                rethrows -&#62; [T]&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看出，flatMap 返回的结果是 <code>[T]</code>，而闭包 transform 返回的结果是 <code>T?</code>。而在 crr 这个例子中，T 被推断出是 <code>Int?</code> , 因此 tranform 中 <code>T?</code> 就被代入，变成了 <code>(Int?)?</code> 。所以，如果完善一下上面例子的代码，编译器推断出来的类型是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let crr:[Int?] = arr.flatMap &#123;&#10;    (element: Int?) -&#62; (Int?)? in&#10;    return element&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>注意这里，返回的变量 element 其实类型并不是 <code>(Int?)?</code>，但是 Optional 是有 conversion 的方法，允许将一个类型的 <code>S</code> 的变量，自动转成 <code>S?</code>，所以转换被自动做了，并没有编译错误发生。</p>
+<p>怎么改这个代码呢？</p>
+<p>有人说把闭包的类型手工指定成 <code>Int?</code>，我试了一下，确实能够正常了，不过我感觉这更像是一个编译器的 Bug，我们再看看这个接口：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">extension SequenceType &#123;&#10;    public func flatMap&#60;T&#62;(@noescape transform: (Self.Generator.Element) throws -&#62; T?)&#10;                rethrows -&#62; [T]&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>按照 <code>flatMap</code> 的接口定义，如果闭包返回的是 Int?，那么按照这个定义，最终 <code>flatMap</code> 的结果就必须是 <code>[Int]</code>，而我们要强制要求结果是 <code>[Int?]</code>，除非这里有自动的转换，否则就应该编译失败。而我自己的试验代码失败，确认出并没有从 [Int] 到 <code>[Int?]</code> 的自动转换。所以我暂时认为这么改能正常工作是一个编译器的 Bug（如有错误，欢迎指出）。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">error: cannot convert value of type &#39;[Int]&#39; to specified type &#39;[Int?]&#39;</span><br></pre></td></tr></table></figure>
+<p>另外，也有朋友说，在这种场景下并不应该使用 <code>flatMap</code> 函数。确实是这样，flatMap 函数本来就有着 flat 的作用在里面，在数组的 <code>flatMap</code> 实现中，有两个重载：</p>
+<ul>
+<li>一个重载版本是为了打平嵌套的多维数据。</li>
+<li>另一个重载版本，就是我们刚刚讨论的版本，flat 是为了去掉 Optional 的封包，同时把 nil 元素去掉。</li>
+</ul>
+<p>而这个示例代码调用了 <code>flatMap</code> 函数，却希望仍然得到 Optional 的数组，实在是不应该使用 <code>flatMap</code> 来做这个事情。如果只是为了去掉 Optional 中的 nil 元素，使用 <code>filter</code> 方法可能更为合适一些：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;let arr:[Int?] = [1, 2, 3, nil, 4, 5]&#10;let drr:[Int?] = arr.filter &#123;&#10;    if let _ = $0 &#123;&#10;        return true&#10;    &#125; else &#123;&#10;        return false&#10;    &#125;&#10;&#125;&#10;drr&#10;// drr = [&#123;Some 1&#125;, &#123;Some 2&#125;, &#123;Some 3&#125;, &#123;Some 4&#125;, &#123;Some 5&#125;]</span><br></pre></td></tr></table></figure>
+<p>其实函数式编程的方法不止 <code>map</code>, <code>flatMap</code>, <code>filter</code> 这些，在一个名为 <a href="http://reactivex.io/" target="_blank" rel="external">reactiveX</a> 的网站上，列举了 Reactive 编程实践下的一些 <a href="http://reactivex.io/documentation/operators.html" target="_blank" rel="external">常见的函数</a>，里面的很多方法都挺有意思，这些方法也被实现在了 <a href="https://github.com/ReactiveX/RxSwift" target="_blank" rel="external">RxSwift</a> 中，感兴趣的同学可以看看。</p>
+<p>祝玩得开心！</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Swift/">Swift</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2016/05/22/swift-gym-6-type-infer/" data-title="Swift 烧脑体操（六）- 类型推断 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/05/08/jeju-island-tour/"  title="济州岛旅游见闻">
+ <strong>下一篇：</strong><br/> 
+ <span>济州岛旅游见闻
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2016/05/22/swift-gym-6-type-infer/" data-title="Swift 烧脑体操（六）- 类型推断" data-url="http://blog.devtang.com/2016/05/22/swift-gym-6-type-infer/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  <div class="sponsor">
+  <br />
+  <p class="asidetitle">广告</p>
+  <a target="_blank" href="https://h5.jianxun.io/20160321-qianlima?utm_source=event&utm_medium=blog_ad&utm_campaign=qianlima&utm_content=tangqiao&utm_term=wangzhan">
+  <img src="https://www.jianxun.io/ad/20151101/tangqiao-rightbanner.jpg" width="235px" height="200px" />
+  </a>
+
+  <br /><a href="/sponsor"><font color='#2ca6cb'>购买广告位</font></a>
+</div>
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary</a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS</a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly</a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac</a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell</a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary</a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注唐巧的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="http://ww4.sinaimg.cn/mw690/65dc76a3jw1f1ngaau9arj20760763yr.jpg" width="230px" />
+
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"tangqiaoboy"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-28029597-1', 'null');  
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
