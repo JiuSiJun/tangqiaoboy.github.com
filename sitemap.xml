@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.devtang.com/2016/05/24/migrate-from-oc-to-swift/</loc>
+    <lastmod>2016-05-24T15:15:30.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.devtang.com/2016/05/22/swift-gym-6-type-infer/</loc>
     <lastmod>2016-05-22T05:47:47.000Z</lastmod>
   </url>
