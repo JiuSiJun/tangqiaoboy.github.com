@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.devtang.com/2016/05/26/mentor-guide/</loc>
+    <lastmod>2016-05-26T14:23:09.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.devtang.com/2016/05/24/migrate-from-oc-to-swift/</loc>
     <lastmod>2016-05-24T15:15:30.000Z</lastmod>
   </url>
@@ -217,7 +222,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/06/10/ios-weekly-14/</loc>
+    <loc>http://blog.devtang.com/2014/06/24/ios-weekly-15/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
@@ -232,12 +237,12 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/02/27/ios-weekly-1/</loc>
+    <loc>http://blog.devtang.com/2014/06/10/ios-weekly-14/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/06/24/ios-weekly-15/</loc>
+    <loc>http://blog.devtang.com/2014/02/27/ios-weekly-1/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
