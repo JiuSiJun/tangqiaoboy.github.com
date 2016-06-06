@@ -4,7 +4,7 @@
   <subtitle><![CDATA[记录下自己学习的点滴]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.devtang.com/"/>
-  <updated>2016-06-05T16:00:05.000Z</updated>
+  <updated>2016-06-06T14:50:35.000Z</updated>
   <id>http://blog.devtang.com/</id>
   
   <author>
@@ -16,10 +16,10 @@
   
   <entry>
     <title><![CDATA[写给程序员的管理入门课程 -《格鲁夫给经理人的第一课》]]></title>
-    <link href="http://blog.devtang.com/2016/06/05/high-output-management-summary/"/>
-    <id>http://blog.devtang.com/2016/06/05/high-output-management-summary/</id>
-    <published>2016-06-05T15:50:00.000Z</published>
-    <updated>2016-06-05T16:00:05.000Z</updated>
+    <link href="http://blog.devtang.com/2016/06/06/high-output-management-summary/"/>
+    <id>http://blog.devtang.com/2016/06/06/high-output-management-summary/</id>
+    <published>2016-06-06T15:50:00.000Z</published>
+    <updated>2016-06-06T14:50:35.000Z</updated>
     <content type="html"><![CDATA[<h2 id="u5E8F"><a href="#u5E8F" class="headerlink" title="序"></a>序</h2><p><img src="http://upload-images.jianshu.io/upload_images/12199-5514b01b879a2353.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="格鲁夫给经理人的第一课"></p>
 <p><a href="http://item.jd.com/11232323.html" target="_blank" rel="external">《格鲁夫给经理人的第一课》</a> 最早出版于 2007 年，书原名为《High Output Management》。本书的作者格鲁夫是 Intel 的前 CEO，领导了 Intel 从一家濒临倒闭的存储器公司，转型为微处理器公司，并且在个人 PC 开始流行时，成功和微软缔结 Wintel 联盟，主宰了整个 PC 电脑时代。</p>
 <p>格鲁夫是一个技术出身的管理者，在本书中，我们甚至看到他多次用编译器来举例，所以这本书也非常适合有技术背景的读者。</p>
@@ -174,7 +174,7 @@
 <p>本章只讲了一个故事，当早餐店做得越来越好时，分店越来越多，带来的管理上的复杂度也越来越大。不管是采购，还是人事，还是资产，我们都需要专门雇佣人员来负责。</p>
 <p>但是除了这个故事外，本章并没有涉及任何解决方案的内容。</p>
 <h3 id="u7B2C_u516B_u7AE0__u6DF7_u8840_u578B_u7EC4_u7EC7"><a href="#u7B2C_u516B_u7AE0__u6DF7_u8840_u578B_u7EC4_u7EC7" class="headerlink" title="第八章 混血型组织"></a>第八章 混血型组织</h3><blockquote>
-<p>斯隆总结他在通用汽车数十年的经验时说：“好的经营管理，是中央集权和地方分权间的折中产品。</p>
+<p>斯隆总结他在通用汽车数十年的经验时说：好的经营管理，是中央集权和地方分权间的折中产品。</p>
 </blockquote>
 <p>本章讨论了两种组织形式：「任务导向组织」和「功能导向组织」。</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/12199-7e60dfbe27488335.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="两种组织形式"></p>
