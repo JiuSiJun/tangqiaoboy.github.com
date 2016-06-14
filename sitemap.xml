@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.devtang.com/2016/06/14/wwdc-2016-notes/</loc>
+    <lastmod>2016-06-14T14:46:50.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2013/06/17/startup-anniversary-note/</loc>
+    <lastmod>2016-06-10T01:25:29.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.devtang.com/2016/06/06/high-output-management-summary/</loc>
     <lastmod>2016-06-07T13:57:28.000Z</lastmod>
   </url>
@@ -167,22 +177,17 @@
   </url>
   
   <url>
+    <loc>http://blog.devtang.com/2014/10/22/ios-weekly-28/</loc>
+    <lastmod>2016-02-27T01:33:21.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.devtang.com/2014/09/14/ios-weekly-25/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/10/30/ios-weekly-29/</loc>
-    <lastmod>2016-02-27T01:33:21.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.devtang.com/2014/09/24/ios-weekly-26/</loc>
-    <lastmod>2016-02-27T01:33:21.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2014/08/18/ios-weekly-21/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
@@ -193,6 +198,11 @@
   
   <url>
     <loc>http://blog.devtang.com/2014/08/12/ios-weekly-20/</loc>
+    <lastmod>2016-02-27T01:33:21.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2016/02/27/swift-gym-1-nested-optional/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
@@ -212,27 +222,22 @@
   </url>
   
   <url>
+    <loc>http://blog.devtang.com/2014/07/30/ios-weekly-19/</loc>
+    <lastmod>2016-02-27T01:33:21.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.devtang.com/2014/03/14/ios-weekly-3/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/02/27/swift-gym-1-nested-optional/</loc>
+    <loc>http://blog.devtang.com/2014/08/24/ios-weekly-22/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/03/21/ios-weekly-4/</loc>
-    <lastmod>2016-02-27T01:33:21.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2014/10/12/ios-weekly-27/</loc>
-    <lastmod>2016-02-27T01:33:21.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2014/04/03/ios-weekly-6/</loc>
+    <loc>http://blog.devtang.com/2014/03/28/ios-weekly-5/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
@@ -242,12 +247,17 @@
   </url>
   
   <url>
+    <loc>http://blog.devtang.com/2014/04/03/ios-weekly-6/</loc>
+    <lastmod>2016-02-27T01:33:21.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.devtang.com/2014/04/10/ios-weekly-7/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/09/09/ios-weekly-24/</loc>
+    <loc>http://blog.devtang.com/2014/10/12/ios-weekly-27/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
@@ -267,11 +277,6 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/05/16/ios-weekly-11/</loc>
-    <lastmod>2016-02-27T01:33:21.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.devtang.com/2015/04/24/ios-weekly-43/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
@@ -282,7 +287,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/05/24/ios-weekly-12/</loc>
+    <loc>http://blog.devtang.com/2014/05/16/ios-weekly-11/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
@@ -292,12 +297,12 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/10/22/ios-weekly-28/</loc>
+    <loc>http://blog.devtang.com/2014/05/24/ios-weekly-12/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/06/01/ios-weekly-13/</loc>
+    <loc>http://blog.devtang.com/2014/09/09/ios-weekly-24/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
@@ -307,7 +312,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/06/10/ios-weekly-14/</loc>
+    <loc>http://blog.devtang.com/2014/06/01/ios-weekly-13/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
@@ -322,12 +327,12 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/06/24/ios-weekly-15/</loc>
+    <loc>http://blog.devtang.com/2014/06/10/ios-weekly-14/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/08/24/ios-weekly-22/</loc>
+    <loc>http://blog.devtang.com/2014/06/24/ios-weekly-15/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
@@ -337,7 +342,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/07/03/ios-weekly-16/</loc>
+    <loc>http://blog.devtang.com/2015/11/02/mvc-and-mvvm/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
@@ -347,12 +352,12 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2015/11/02/mvc-and-mvvm/</loc>
+    <loc>http://blog.devtang.com/2014/08/18/ios-weekly-21/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/07/11/ios-weekly-17/</loc>
+    <loc>http://blog.devtang.com/2014/07/03/ios-weekly-16/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
@@ -362,7 +367,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/07/22/ios-weekly-18/</loc>
+    <loc>http://blog.devtang.com/2014/07/11/ios-weekly-17/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
@@ -377,7 +382,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/07/30/ios-weekly-19/</loc>
+    <loc>http://blog.devtang.com/2014/07/22/ios-weekly-18/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
@@ -402,7 +407,12 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/03/28/ios-weekly-5/</loc>
+    <loc>http://blog.devtang.com/2014/10/30/ios-weekly-29/</loc>
+    <lastmod>2016-02-27T01:33:21.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2014/03/21/ios-weekly-4/</loc>
     <lastmod>2016-02-27T01:33:21.000Z</lastmod>
   </url>
   
@@ -462,11 +472,6 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2013/06/17/startup-anniversary-note/</loc>
-    <lastmod>2016-02-16T10:28:36.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.devtang.com/2016/01/02/2015-summary/</loc>
     <lastmod>2016-02-16T10:28:20.000Z</lastmod>
   </url>
@@ -482,6 +487,11 @@
   </url>
   
   <url>
+    <loc>http://blog.devtang.com/2014/06/29/ios-dev-tools/</loc>
+    <lastmod>2016-02-16T10:28:02.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.devtang.com/2012/02/05/mvc-in-ios-develop/</loc>
     <lastmod>2016-02-16T10:28:02.000Z</lastmod>
   </url>
@@ -492,12 +502,12 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2015/01/22/pgy-usage-guide/</loc>
+    <loc>http://blog.devtang.com/2012/11/16/drop-ios4-enbrace-ios5/</loc>
     <lastmod>2016-02-16T10:28:02.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2012/11/16/drop-ios4-enbrace-ios5/</loc>
+    <loc>http://blog.devtang.com/2015/01/22/pgy-usage-guide/</loc>
     <lastmod>2016-02-16T10:28:02.000Z</lastmod>
   </url>
   
@@ -512,12 +522,12 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2013/03/27/should-we-use-arc/</loc>
+    <loc>http://blog.devtang.com/2014/06/02/use-gitcafe-to-host-blog/</loc>
     <lastmod>2016-02-16T10:28:02.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/06/02/use-gitcafe-to-host-blog/</loc>
+    <loc>http://blog.devtang.com/2013/03/27/should-we-use-arc/</loc>
     <lastmod>2016-02-16T10:28:02.000Z</lastmod>
   </url>
   
@@ -527,17 +537,12 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2013/04/07/tricks-in-iap/</loc>
-    <lastmod>2016-02-16T10:28:02.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.devtang.com/2014/05/30/understand-tagged-pointer/</loc>
     <lastmod>2016-02-16T10:28:02.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2013/04/29/the-missing-objc-keywords/</loc>
+    <loc>http://blog.devtang.com/2013/04/07/tricks-in-iap/</loc>
     <lastmod>2016-02-16T10:28:02.000Z</lastmod>
   </url>
   
@@ -547,22 +552,17 @@
   </url>
   
   <url>
+    <loc>http://blog.devtang.com/2013/04/29/the-missing-objc-keywords/</loc>
+    <lastmod>2016-02-16T10:28:02.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.devtang.com/2014/10/01/startup-2nd-year-summary/</loc>
     <lastmod>2016-02-16T10:28:02.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/06/29/ios-dev-tools/</loc>
-    <lastmod>2016-02-16T10:28:02.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.devtang.com/2013/06/23/alipay-plugin-mechanism/</loc>
-    <lastmod>2016-02-16T10:28:02.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2015/05/06/ios-weekly-44/</loc>
     <lastmod>2016-02-16T10:28:02.000Z</lastmod>
   </url>
   
@@ -573,6 +573,11 @@
   
   <url>
     <loc>http://blog.devtang.com/2013/10/19/the-tech-detail-of-ape-client-2/</loc>
+    <lastmod>2016-02-16T10:28:02.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2015/05/06/ios-weekly-44/</loc>
     <lastmod>2016-02-16T10:28:02.000Z</lastmod>
   </url>
   
@@ -607,7 +612,12 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2015/06/27/using-coretext-1/</loc>
+    <loc>http://blog.devtang.com/2015/06/16/talk-about-tech-interview/</loc>
+    <lastmod>2016-02-16T10:26:44.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2015/06/27/using-coretext-2/</loc>
     <lastmod>2016-02-16T10:26:44.000Z</lastmod>
   </url>
   
@@ -617,17 +627,12 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2015/08/01/become-a-tech-leader-summary/</loc>
-    <lastmod>2016-02-16T10:26:44.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.devtang.com/2014/03/05/use-alcatraz-to-manage-xcode-plugins/</loc>
     <lastmod>2016-02-16T10:26:44.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2015/08/02/the-story-of-success-book-summary/</loc>
+    <loc>http://blog.devtang.com/2015/08/01/become-a-tech-leader-summary/</loc>
     <lastmod>2016-02-16T10:26:44.000Z</lastmod>
   </url>
   
@@ -657,7 +662,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2015/06/16/talk-about-tech-interview/</loc>
+    <loc>http://blog.devtang.com/2015/05/31/the-end-of-ios-weekly/</loc>
     <lastmod>2016-02-16T10:26:44.000Z</lastmod>
   </url>
   
@@ -667,7 +672,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2015/05/31/the-end-of-ios-weekly/</loc>
+    <loc>http://blog.devtang.com/2015/05/25/can-we-buy-time/</loc>
     <lastmod>2016-02-16T10:26:44.000Z</lastmod>
   </url>
   
@@ -677,17 +682,17 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2015/08/15/talk-about-execution/</loc>
-    <lastmod>2016-02-16T10:26:44.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2015/05/25/can-we-buy-time/</loc>
+    <loc>http://blog.devtang.com/2015/08/02/the-story-of-success-book-summary/</loc>
     <lastmod>2016-02-16T10:26:44.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://blog.devtang.com/2015/05/23/build-ios-content-ecosystem/</loc>
+    <lastmod>2016-02-16T10:26:44.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2014/04/19/ios-jailbreak-trojan/</loc>
     <lastmod>2016-02-16T10:26:44.000Z</lastmod>
   </url>
   
@@ -707,7 +712,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/04/19/ios-jailbreak-trojan/</loc>
+    <loc>http://blog.devtang.com/2015/05/01/apple-release-analytics-beta/</loc>
     <lastmod>2016-02-16T10:26:44.000Z</lastmod>
   </url>
   
@@ -717,12 +722,12 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2015/05/01/apple-release-analytics-beta/</loc>
+    <loc>http://blog.devtang.com/2015/04/24/qcon-2015-note/</loc>
     <lastmod>2016-02-16T10:26:44.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/05/08/ios-security-dev-overview/</loc>
+    <loc>http://blog.devtang.com/2015/08/15/talk-about-execution/</loc>
     <lastmod>2016-02-16T10:26:44.000Z</lastmod>
   </url>
   
@@ -732,7 +737,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2015/04/24/qcon-2015-note/</loc>
+    <loc>http://blog.devtang.com/2014/05/08/ios-security-dev-overview/</loc>
     <lastmod>2016-02-16T10:26:44.000Z</lastmod>
   </url>
   
@@ -802,7 +807,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2015/06/27/using-coretext-2/</loc>
+    <loc>http://blog.devtang.com/2015/06/27/using-coretext-1/</loc>
     <lastmod>2016-02-16T10:26:44.000Z</lastmod>
   </url>
   
@@ -917,7 +922,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/07/27/ios-levelup-tips/</loc>
+    <loc>http://blog.devtang.com/2014/12/07/about-ios-pro-book/</loc>
     <lastmod>2016-02-16T10:26:44.000Z</lastmod>
   </url>
   
@@ -927,7 +932,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/12/07/about-ios-pro-book/</loc>
+    <loc>http://blog.devtang.com/2014/07/27/ios-levelup-tips/</loc>
     <lastmod>2016-02-16T10:26:44.000Z</lastmod>
   </url>
   

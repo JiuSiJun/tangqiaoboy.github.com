@@ -4,7 +4,7 @@
   <subtitle><![CDATA[记录下自己学习的点滴]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.devtang.com/"/>
-  <updated>2016-06-07T13:57:28.000Z</updated>
+  <updated>2016-06-14T14:46:50.000Z</updated>
   <id>http://blog.devtang.com/</id>
   
   <author>
@@ -13,6 +13,74 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[WWDC 2016 随想]]></title>
+    <link href="http://blog.devtang.com/2016/06/14/wwdc-2016-notes/"/>
+    <id>http://blog.devtang.com/2016/06/14/wwdc-2016-notes/</id>
+    <published>2016-06-14T14:32:50.000Z</published>
+    <updated>2016-06-14T14:46:50.000Z</updated>
+    <content type="html"><![CDATA[<img src="/images/wwdc-2016.jpg">
+<p>今天凌晨 1 点钟，熬夜看了今年的 WWDC，一些随想分享给大家。</p>
+<h2 id="u82B1_u7D6E"><a href="#u82B1_u7D6E" class="headerlink" title="花絮"></a>花絮</h2><p>我为了半夜起来看 WWDC，特意提前 10 点钟就睡觉了。我睡觉前特意带上 Apple watch，并且设置好震动闹钟，免得到时候闹钟吵到家人。结果这傻 watch 在我睡着后先是提醒我看每周运动摘要，然后过半小时又震动提醒我已经静止太久应该活动一下，你妹啊！</p>
+<p>不准笑！说你呢！！</p>
+<h2 id="u65F6_u5149"><a href="#u65F6_u5149" class="headerlink" title="时光"></a>时光</h2><p>因为刚刚说的原因，结果我到 12 点都还没有睡着，我在迷迷糊糊中躺到了快一点钟，watch 震动了，于是我翻身走到客厅，打开电脑，连上直播地址。对了，还有一些朋友不知道直播地址，大家可以记一下，每年直播地址都是固定的：<wwdc.apple.com> 。</wwdc.apple.com></p>
+<p>我还记得我刚毕业那阵子，也是熬夜看 WWDC，那个时候我还和老婆租的房子住，并且和校友一起合租的一个两居室。想想也就过去几年，现在自己有了更大的房子住，而整个移动互联网也成就了大量的百亿市值的公司。Tim Cook 在直播中提到，AppStore 是 8 年前出现的，再次感叹到移动互联网真的是好年轻啊。</p>
+<h2 id="u5185_u5BB9"><a href="#u5185_u5BB9" class="headerlink" title="内容"></a>内容</h2><p>这次的 WWDC keynote 主要分成 4 个部分，其实就是四个平台：watchOS, tvOS，macOS（原来叫 OS X）, iOS。整个分享中规中矩，分别给大家介绍一下我觉得值得关注的改进吧。</p>
+<h3 id="watchOS"><a href="#watchOS" class="headerlink" title="watchOS"></a>watchOS</h3><p>watchOS 推出了 watchOS 3，据说启动速度更快了，但是不知道耗电是不是也是更多了。关于这个，后续有一个 session 主题分享<a href="https://developer.apple.com/videos/play/wwdc2016/227/" target="_blank" rel="external">《Architecting for Performance on watchOS 3》</a>，感兴趣的朋友可以关注。</p>
+<p>增加了 scribbles 功能，其实就是一种手写输入，手写居然还支持中文，我当时就在想：你倒是写一个复杂一点的字试试看呢？我对此功能不太看好。</p>
+<p>别的改进都很小，比如增加了滑动更换主题，快速报警，现场还花大力气介绍一款叫 breathe 的应用，而这个应用就是指导你深呼吸的。不知道大家喜不喜欢，反正我是不会用的。</p>
+<h3 id="tvOS"><a href="#tvOS" class="headerlink" title="tvOS"></a>tvOS</h3><p>这部分直接跳过吧，原因你懂的。</p>
+<h3 id="macOS"><a href="#macOS" class="headerlink" title="macOS"></a>macOS</h3><p>OS X 更名为了 macOS，可以支持通过 apple watch 解锁电脑了。哦耶，我的手表终于不再只是用来看时间了 ! </p>
+<p>剪切版支持从手机上复制，在电脑上粘贴，这个还是挺有用的，我平常都是用 QQ 或微信的文件传输助手做类似的事情。</p>
+<p>optimize storage 功能可以把老文件自动存在云端，据说可以节省大概 100G 的空间。不过我猜想，iCloud 的免费空间应该不够用吧？是不是得花钱买些容量才行。</p>
+<p>apple pay 可以在 PC 的浏览器上直接支付，点击支付时，需要在手机上确认授权。整个体验类似于拿微信或支付宝扫二维码付款。</p>
+<p>siri 可以在 mac 上使用了，并且 siri 的结果可以 pin 在一个列表中，并可以拖动到别的地方。我有一阵子很喜欢用 iPhone 上的 siri，不过还是不太稳定。mac 上一般办公室是不太方便用 siri 的，家里的话要是没有培养出习惯，估计也不太会使用。所以这个功能到底实用性有多大还不确定。</p>
+<p>增加了一个名为 picture in picture 的功能，其实就是看视频的时候可以固定住视频。</p>
+<h3 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h3><p>介绍了 10 个特性，我选一些有意思的介绍吧。</p>
+<p>Siri 可以和微信整合，这个很赞，你可以直接用 siri 控制发信息给微信中的好友。</p>
+<p>系统的 Map 整合了大量的应用，比如可以在上面看大众点评的评价，可以直接叫滴滴打车。如果做得好，Map 很可能成为一个重要的打车入口，想到这儿就能明白为什么苹果投了滴滴 10 亿美金了。不过就苹果系统 Map 的那个糟糕体验，我不确定我是否能够接受它。反正我已经喜欢上了高德地图里面的郭德纲和林志玲的声音，离线的地图和导航也很适合中国这种按流量计费的移动网络环境。相比而言，系统自带的 Map 有些不接地气。</p>
+<p>homekit 与智能家居的整合，整体的效果非常酷，但整个还需要依赖生态产业的配合。当前来看，国内的小米在这方面做得比苹果还是要快一些。</p>
+<p>电话功能终于支持恶意电话提醒了，现场提到用的是腾讯的解决方案。嗯，360 估计是没有翻身的可能了。另外，phone  extension 似乎可以做更多的事情。</p>
+<p>iMessage 可以发更多的内容，tap to replace to emoji 功能的交互设计还是挺有意思的，省却了选择 emoji 的时间。不过现场演示出现了 Bug，还是挺尴尬的。另外，大家都已经习惯了微信，而且 iMessage 只能和 iPhone 用户发，我觉得这些功能做得再有意思，也没有多大用。大家的直觉还是用微信来社交。</p>
+<h3 id="u4E2D_u56FD_u5143_u7D20"><a href="#u4E2D_u56FD_u5143_u7D20" class="headerlink" title="中国元素"></a>中国元素</h3><p>这次 WWDC 中多次提到了中国，以及中国的互联网产品，包括微信，大众点评，滴滴。中国为苹果的赢收增长做出了巨大的贡献，我们也能看到苹果越来越重视中国区的需求了。比如恶意来电提醒，就是一个特别针对中国区用户的设计。</p>
+<h3 id="Developer"><a href="#Developer" class="headerlink" title="Developer"></a>Developer</h3><p>这次 Tim Cook 专门介绍了针对开发者做的 iPad 版的 Swift Playground，其实这哪是一个 Playground 啊，这就是一个学习编程的 3D 游戏！整个 App 设计得非常用心，效果看起来也非常棒，下面是这个应用的界面，大家感受一下。</p>
+<img src="/images/ipad-swift-playground.png">
+<p>不过 Tim Cook 毕竟是做销售出身的，他不明白，其实我们真正关心的是，Swift 3 什么时候推出啊！结果他在 keynote 上啥都没说，让我们以为 Swift 3 没戏了，结果，我们事后又发现 Swift 3 的内容安静地躺在苹果的官方网站上：<a href="https://developer.apple.com/swift/" target="_blank" rel="external">https://developer.apple.com/swift/</a> 。</p>
+<p>所以说，Tim Cook 还是不了解我们， iPad 版的 Swift Playground 太酷，那也就是给小孩学编程入门用的，大量的程序员还是关心的是 Swift 啥时候稳定，Xcode 有啥有意思的功能不，这些都被 Cook 给忽视了。</p>
+<p>还算我眼睛尖，我在他的一页大量的 feature list 中，看到了下面的一行字：</p>
+<p><img src="http://ww4.sinaimg.cn/mw690/65dc76a3jw1f4u663wkc6j20bv05ct9e.jpg" alt=""></p>
+<p>这意味着，Xcode 终于官方支持插件了！妈妈再也不用担心升级 Xcode 的时候插件失效了！我今天翻了一下日程，WWDC 中专门有一个 session 做相关的介绍，是：<a href="https://developer.apple.com/videos/play/wwdc2016/414/" target="_blank" rel="external">《Using and Extending the Xcode Source Editor》</a></p>
+<h2 id="u7ED3_u8BED"><a href="#u7ED3_u8BED" class="headerlink" title="结语"></a>结语</h2><p>最后看完 WWDC，已经是零辰 3 点钟了，有一点点失落。今年的内容惊喜不多，但是，我终归是又一次熬夜观看了直播。希望自己能保持这样对技术的激情，也希望苹果明年的 WWDC 能有一些惊喜。</p>
+<p>哦，我整理了一个后续值得观注的 session 列表，分享给大家：</p>
+<blockquote><p>Improving Existing Apps with Modern Best Practices<br><a href="https://developer.apple.com/videos/play/wwdc2016/213/" target="_blank" rel="external">https://developer.apple.com/videos/play/wwdc2016/213/</a></p>
+<p>What’s New in Cocoa Touch<br><a href="https://developer.apple.com/videos/play/wwdc2016/205/" target="_blank" rel="external">https://developer.apple.com/videos/play/wwdc2016/205/</a></p>
+<p>What’s New in Foundation for Swift<br><a href="https://developer.apple.com/videos/play/wwdc2016/207/" target="_blank" rel="external">https://developer.apple.com/videos/play/wwdc2016/207/</a></p>
+<p>What’s New in UICollectionView in iOS 10<br><a href="https://developer.apple.com/videos/play/wwdc2016/219/" target="_blank" rel="external">https://developer.apple.com/videos/play/wwdc2016/219/</a></p>
+<p>Typography and Fonts<br><a href="https://developer.apple.com/videos/play/wwdc2016/803/" target="_blank" rel="external">https://developer.apple.com/videos/play/wwdc2016/803/</a></p>
+<p>Advanced Testing and Continuous Integration<br><a href="https://developer.apple.com/videos/play/wwdc2016/409/" target="_blank" rel="external">https://developer.apple.com/videos/play/wwdc2016/409/</a></p>
+<p>Debugging Tips and Tricks<br><a href="https://developer.apple.com/videos/play/wwdc2016/417/" target="_blank" rel="external">https://developer.apple.com/videos/play/wwdc2016/417/</a></p>
+<p>Getting Started with Swift ( 有最新 Swift 3 的内容）<br><a href="https://developer.apple.com/videos/play/wwdc2016/404/" target="_blank" rel="external">https://developer.apple.com/videos/play/wwdc2016/404/</a></p>
+<p>Going Server-side with Swift Open Source<br><a href="https://developer.apple.com/videos/play/wwdc2016/415/" target="_blank" rel="external">https://developer.apple.com/videos/play/wwdc2016/415/</a></p>
+<p>Introduction to Xcode ( 看看 Xcode 8 的新功能有啥）<br><a href="https://developer.apple.com/videos/play/wwdc2016/413/" target="_blank" rel="external">https://developer.apple.com/videos/play/wwdc2016/413/</a></p>
+<p>Swift API Design Guidelines<br><a href="https://developer.apple.com/videos/play/wwdc2016/403/" target="_blank" rel="external">https://developer.apple.com/videos/play/wwdc2016/403/</a></p>
+<p>Understanding Swift Performance<br><a href="https://developer.apple.com/videos/play/wwdc2016/416/" target="_blank" rel="external">https://developer.apple.com/videos/play/wwdc2016/416/</a></p>
+<p>Using and Extending the Xcode Source Editor（了解 Xcode 编辑器的插件功能）<br><a href="https://developer.apple.com/videos/play/wwdc2016/414/" target="_blank" rel="external">https://developer.apple.com/videos/play/wwdc2016/414/</a></p>
+<p>What’s New in LLVM<br><a href="https://developer.apple.com/videos/play/wwdc2016/405/" target="_blank" rel="external">https://developer.apple.com/videos/play/wwdc2016/405/</a></p>
+<p>What’s New in Swift<br><a href="https://developer.apple.com/videos/play/wwdc2016/402/" target="_blank" rel="external">https://developer.apple.com/videos/play/wwdc2016/402/</a></p>
+<p>What’s New in Xcode App Signing<br><a href="https://developer.apple.com/videos/play/wwdc2016/401/" target="_blank" rel="external">https://developer.apple.com/videos/play/wwdc2016/401/</a></p>
+<p>Concurrent Programming With GCD in Swift 3<br><a href="https://developer.apple.com/videos/play/wwdc2016/720/" target="_blank" rel="external">https://developer.apple.com/videos/play/wwdc2016/720/</a></p>
+<p>NSURLSession: New Features and Best Practices<br><a href="https://developer.apple.com/videos/play/wwdc2016/711/" target="_blank" rel="external">https://developer.apple.com/videos/play/wwdc2016/711/</a></p>
+</blockquote>]]></content>
+    <summary type="html">
+    <![CDATA[<img src="/images/wwdc-2016.jpg">
+<p>今天凌晨 1 点钟，熬夜看了今年的 WWDC，一些随想分享给大家。</p>
+<h2 id="u82B1_u7D6E"><a href="#u82B1_u7D6E" class="headerlink" ti]]>
+    </summary>
+    
+      <category term="iOS" scheme="http://blog.devtang.com/categories/iOS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[写给程序员的管理入门课程 -《格鲁夫给经理人的第一课》]]></title>
@@ -2445,54 +2513,6 @@ func cancelInteractiveTransition()
       <category term="Swift" scheme="http://blog.devtang.com/tags/Swift/"/>
     
       <category term="iOS" scheme="http://blog.devtang.com/categories/iOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[从 Octopress 迁移到 Hexo]]></title>
-    <link href="http://blog.devtang.com/2016/02/16/from-octopress-to-hexo/"/>
-    <id>http://blog.devtang.com/2016/02/16/from-octopress-to-hexo/</id>
-    <published>2016-02-16T11:05:46.000Z</published>
-    <updated>2016-02-16T12:47:52.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="u5E8F_u8A00"><a href="#u5E8F_u8A00" class="headerlink" title="序言"></a>序言</h2><p>我的博客之前一直使用的是 <a href="http://octopress.org/" target="_blank" rel="external">Octopress</a>，不过 Octopress 已经很久没有更新了。而且 Octopress 是基于 Ruby 的，生成博客文章的速度真的是非常非常慢，每次我使用 <code>rake preview</code> 命令时，我的 MacBook 的 CPU 就会狂转。最新的一次我试图在新 MBP 上搭建 Octopress 博客环境失败了，这让我打定主意更换掉它。</p>
-<p>之后我调研了一下，最终决定迁移到 Hexo，主要的原因是：</p>
-<ul>
-<li>Hexo 的原理和 Octopress 一样，都是生成静态文件，这样可以方便地托管到 GitHub 和 GitCafe 上。</li>
-<li>Hexo 是基于 Node 的，而 Node 的速度非常快。</li>
-<li>Hexo 对 Octopress 的迁移很友好，图片引用方式完全一样，所以我的博客文章不需要做什么改动。</li>
-</ul>
-<p>迁移本来应该在春节前就做完的，不过我在选择 Hexo 的主题上犯难了，Hexo 自带的主题丑极了，而我试了将近 10 个主题，都不满意。最终，我发现了 <a href="http://swift.gg/" target="_blank" rel="external">SwiftGG</a> 使用的主题 <a href="https://github.com/wuchong/jacman" target="_blank" rel="external">Jacman</a>，于是决定就它了！</p>
-<p>整个迁移过程大概如下：</p>
-<h2 id="u5B89_u88C5_Hexo"><a href="#u5B89_u88C5_Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h2><p>首先使用如下命令安装 Hexo：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-<h2 id="u521B_u5EFA_u4E00_u4E2A_u65B0_u7684_u535A_u5BA2"><a href="#u521B_u5EFA_u4E00_u4E2A_u65B0_u7684_u535A_u5BA2" class="headerlink" title="创建一个新的博客"></a>创建一个新的博客</h2><p>接着我们创建一个新的博客目录：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo init &#60;folder&#62;&#10;$ cd &#60;folder&#62;&#10;$ npm install</span><br></pre></td></tr></table></figure>
-<p>以上命令完成后，会在目标目录生成以下的目录结构：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.&#10;&#9500;&#9472;&#9472; _config.yml&#10;&#9500;&#9472;&#9472; package.json&#10;&#9500;&#9472;&#9472; scaffolds&#10;&#9500;&#9472;&#9472; source&#10;|   &#9500;&#9472;&#9472; _drafts&#10;|   &#9492;&#9472;&#9472; _posts&#10;&#9492;&#9472;&#9472; themes</span><br></pre></td></tr></table></figure>
-<p>相比 Octopress，Hexo 的目录结构更加简单：</p>
-<ul>
-<li>_config.yml 是博客的配置文件。</li>
-<li>scaffolds 是博客文章模板。</li>
-<li>source 是博客文章目录。</li>
-<li>themes 存放主题风格文件。</li>
-</ul>
-<h2 id="u8FC1_u79FB_u548C_u914D_u7F6E"><a href="#u8FC1_u79FB_u548C_u914D_u7F6E" class="headerlink" title="迁移和配置"></a>迁移和配置</h2><p>迁移起来还是很方便，把以前 Octopress 的 <code>source/_post</code> 目录下的文章，拷贝到 Hexo 的同名目录下即可。</p>
-<p>以前的图片目录，也可以直接拷贝到 <code>source/images</code> 目录下。</p>
-<p>Google 统计相关的设置可以在 jacman 的 _config.yml 文件中配置。我以前用的评论系统太旧了，这次正好换成了<a href="http://tangqiaoboy.duoshuo.com/" target="_blank" rel="external">多说</a>，同样也是在 jacman 的配置文件中设置。</p>
-<h2 id="u4FEE_u6539_u754C_u9762"><a href="#u4FEE_u6539_u754C_u9762" class="headerlink" title="修改界面"></a>修改界面</h2><p>选择 Hexo 的另一个原因就是它的结构很简单，比较方便我定制。我在迁移完博客文章后，对 jacman 主题进行了一些定制。删掉了底部的作者介绍，然后在右侧边栏加上了我的微信公众号介绍。如果你想看看我是如何定制的，可以直接查看我 Fork 出来的 jacman 项目上的 Commits 即可，项目地址在 <a href="https://github.com/tangqiaoboy/jacman" target="_blank" rel="external">这里</a>。</p>
-<h2 id="u53D1_u5E03_u6587_u7AE0"><a href="#u53D1_u5E03_u6587_u7AE0" class="headerlink" title="发布文章"></a>发布文章</h2><p>Hexo 支持直接发布到 GitHub，不过我在配置好 <code>_config.yml</code> 文件后，执行 <code>Hexo deploy</code> 一直失败！Hexo 一直卡在生成页面过程中，没有任何报错，这使得我也不知道如何修复它。</p>
-<p>最终，我自己写了一个小脚本来做发布工作：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#! /bin/zsh&#10;&#10;hexo clean&#10;hexo generate&#10;cd public&#10;&#10;git init&#10;git add .&#10;git commit -m &#34;update at `date` &#34;&#10;&#10;git remote add origin git@github.com:tangqiaoboy/tangqiaoboy.github.com.git &#62;&#62; /dev/null 2&#62;&#38;1&#10;echo &#34;### Pushing to Github...&#34;&#10;git push origin master -f&#10;echo &#34;### Done&#34;&#10;&#10;git remote add gitcafe git@gitcafe.com:tangqiaoboy/tangqiaoboy.git &#62;&#62; /dev/null 2&#62;&#38;1&#10;echo &#34;### Pushing to GitCafe...&#34;&#10;git push gitcafe master:gitcafe-pages -f&#10;echo &#34;### Done&#34;</span><br></pre></td></tr></table></figure>
-<p>如果你遇到了和我一样问题的话，把以上脚本稍做修改应该也能很好地工作。</p>
-<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>Octopress 已经过时，建议有时间的朋友都可以尝试替换掉它。Hexo 算不上完美，但还算是一个不错的替代方案。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="u5E8F_u8A00"><a href="#u5E8F_u8A00" class="headerlink" title="序言"></a>序言</h2><p>我的博客之前一直使用的是 <a href="http://octopress.org/" target=]]>
-    </summary>
-    
-      <category term="blog" scheme="http://blog.devtang.com/tags/blog/"/>
-    
-      <category term="shell" scheme="http://blog.devtang.com/categories/shell/"/>
     
   </entry>
   
