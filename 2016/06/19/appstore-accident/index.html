@@ -1,0 +1,454 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>为什么提交 AppStore 总有事故发生 | 唐巧的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="6 月 18 日上午，百度云 iOS 版出现了线上事故，他们在提交 AppStore 审核的时候，把名字给弄错了。用户更新 App 之后，看到的 App 名字是 netdisk_iPhone，如下图所示。此后，百度在当天紧急提交了一个加急版本，修复了该问题。
+
+百度云在 AppStore 总榜中排名 50 名左右，这次事故虽然不太影响用户使用，但是确实会给用户感觉到一些困扰。比如因为它的名字实际上">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为什么提交 AppStore 总有事故发生">
+<meta property="og:url" content="http://blog.devtang.com/2016/06/19/appstore-accident/index.html">
+<meta property="og:site_name" content="唐巧的技术博客">
+<meta property="og:description" content="6 月 18 日上午，百度云 iOS 版出现了线上事故，他们在提交 AppStore 审核的时候，把名字给弄错了。用户更新 App 之后，看到的 App 名字是 netdisk_iPhone，如下图所示。此后，百度在当天紧急提交了一个加急版本，修复了该问题。
+
+百度云在 AppStore 总榜中排名 50 名左右，这次事故虽然不太影响用户使用，但是确实会给用户感觉到一些困扰。比如因为它的名字实际上">
+<meta property="og:image" content="http://blog.devtang.com/images/baidu-bug-1.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/baidu-bug-2.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/sina-bug.jpg">
+<meta property="og:updated_time" content="2016-06-19T12:32:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="为什么提交 AppStore 总有事故发生">
+<meta name="twitter:description" content="6 月 18 日上午，百度云 iOS 版出现了线上事故，他们在提交 AppStore 审核的时候，把名字给弄错了。用户更新 App 之后，看到的 App 名字是 netdisk_iPhone，如下图所示。此后，百度在当天紧急提交了一个加急版本，修复了该问题。
+
+百度云在 AppStore 总榜中排名 50 名左右，这次事故虽然不太影响用户使用，但是确实会给用户感觉到一些困扰。比如因为它的名字实际上">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的技术博客">唐巧的技术博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/06/19/appstore-accident/" title="为什么提交 AppStore 总有事故发生" itemprop="url">为什么提交 AppStore 总有事故发生</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2016-06-19T12:23:24.000Z" itemprop="datePublished"> 发表于 2016-06-19 20:23</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			
+		
+		</div>
+		
+		<p>6 月 18 日上午，百度云 iOS 版出现了线上事故，他们在提交 AppStore 审核的时候，把名字给弄错了。用户更新 App 之后，看到的 App 名字是 netdisk_iPhone，如下图所示。此后，百度在当天紧急提交了一个加急版本，修复了该问题。</p>
+<img src="/images/baidu-bug-1.jpg">
+<p>百度云在 AppStore 总榜中排名 50 名左右，这次事故虽然不太影响用户使用，但是确实会给用户感觉到一些困扰。比如因为它的名字实际上不存在，所以当它想获取 PUSH 消息权限时，弹出来的对话框是如下图这样。用户很可能会觉得奇怪，从而点击 “不允许”。</p>
+<img src="/images/baidu-bug-2.jpg">
+<p>在大厂里面，不止百度犯过错误，大约在一年前，新浪微博的客户端不小心把调试选项给加包到了正式功能中。于是大家都乐坏了，各种给自己加 VIP 效果，当然，服务器端的验证逻辑还是存在的，所以倒也并没有产生非常大的事故。下图是当时新浪微博事故 App 的截图。</p>
+<img src="/images/sina-bug.jpg">
+<p>也不能光说别人，其实我们公司前段时间也出现了一个线上事故。猿辅导 App 不小心把测试版给提交到 AppStore 上了，但是由于测试服务器地址不是对外网公开的，于是更新了的同学就无法正常使用 App 了。这个事故大概影响了我们将近一天时间，线上服务完全连不上，算是比较严重的了。</p>
+<p>我见过的最最严重的事故，大概是两年前，某个上市公司出的金融类应用，在打包的时候，不小心把源代码打进了 IPA 里面。这个行为恰好被喜欢解 IPA 随意翻翻的 BeeFramework 的老郭看到了，于是大家一起围观了一下它的代码。好在大家都是圈内人，没什么恶意，所以也没有公开此事。不然，用这个代码随意做一些社交机器人或者抓取机器人还是挺容易的。</p>
+<p>好了，关键来了。如何防止这类事故发生呢？我觉得做到以下几点应该就可以了：</p>
+<ol>
+<li>不需要到线上的调试代码，需要用 DEBUG 宏在代码里面明确禁掉。</li>
+<li>将整个工程的配置，用 shared scheme 的方式，放在版本管理之下，所有的配置改动，都需要进行 review。</li>
+<li>使用自动打包的脚本，不依赖人工进行打包操作。</li>
+<li>在正式上线前，用苹果的 TestFlight 进行测试。TestFlight 的测试包可以做到和线上的包完全一致，所以像以上提到的所有问题，都可以在这一个环节发现。</li>
+</ol>
+<p>百度云的这次事故，很可能的原因是被开发误删除了配置中的 App Name，如果采用上面的步骤，那么在第二步和第四步中，将会发现这个问题。</p>
+<p>大家有什么更好的办法吗？欢迎回复讨论。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2016/06/19/appstore-accident/" data-title="为什么提交 AppStore 总有事故发生 | 唐巧的技术博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/06/14/wwdc-2016-notes/"  title="WWDC 2016 随想">
+ <strong>下一篇：</strong><br/> 
+ <span>WWDC 2016 随想
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2016/06/19/appstore-accident/" data-title="为什么提交 AppStore 总有事故发生" data-url="http://blog.devtang.com/2016/06/19/appstore-accident/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  <div class="sponsor">
+  <br />
+  <p class="asidetitle">广告</p>
+  <a target="_blank" href="https://h5.jianxun.io/20160321-qianlima?utm_source=event&utm_medium=blog_ad&utm_campaign=qianlima&utm_content=tangqiao&utm_term=wangzhan">
+  <img src="https://www.jianxun.io/ad/20151101/tangqiao-rightbanner.jpg" width="235px" height="200px" />
+  </a>
+  <br />
+  <br />
+  <a target="_blank" href="https://www.bugtags.com/?utm_source=devtang&utm_medium=banner&utm_campaign=678_banner&utm_content=umbrella&utm_term=inapp">
+  <img src="http://ww2.sinaimg.cn/large/65dc76a3gw1f4o63qmcxlj206j05kwf0.jpg" width="235px" height="200px" />
+  </a>
+
+  <br /><a href="/sponsor"><font color='#2ca6cb'>购买广告位</font></a>
+</div>
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary</a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS</a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly</a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac</a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell</a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary</a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注唐巧的「iOS开发」公众号，获得精选的 iOS 开发文章和创业心得：</p>
+  <img src="http://ww4.sinaimg.cn/mw690/65dc76a3jw1f1ngaau9arj20760763yr.jpg" width="230px" />
+
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"tangqiaoboy"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-28029597-1', 'null');  
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
