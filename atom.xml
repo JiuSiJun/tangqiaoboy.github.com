@@ -4,7 +4,7 @@
   <subtitle><![CDATA[记录下自己学习的点滴]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.devtang.com/"/>
-  <updated>2016-06-19T12:32:05.000Z</updated>
+  <updated>2016-06-26T13:28:44.000Z</updated>
   <id>http://blog.devtang.com/</id>
   
   <author>
@@ -13,6 +13,45 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[我与 InfoQ 的故事]]></title>
+    <link href="http://blog.devtang.com/2016/06/26/my-story-about-infoq/"/>
+    <id>http://blog.devtang.com/2016/06/26/my-story-about-infoq/</id>
+    <published>2016-06-26T13:28:29.000Z</published>
+    <updated>2016-06-26T13:28:44.000Z</updated>
+    <content type="html"><![CDATA[<p>如果你也喜欢写作，这个真实的故事或许能够帮助你继续坚持下去。</p>
+<p>我最早听说 <a href="http://www.infoq.com/cn" target="_blank" rel="external">InfoQ</a> ，是因为在上面发现了很多关于敏捷开发的文章。可以说，InfoQ 是最早推广敏捷软件开发的社区。之后 InfoQ 的内容范围开始扩展，除了敏捷外，服务器开发，移动开发的内容也都有了。</p>
+<p>在我心目中，InfoQ 网站上的文章一直是「高大上」的，直到有一天，我的老大常圳看到我常常写博客，推荐我向 InfoQ 投稿时，我才发现，或许我可以把「向 InfoQ 投稿」作为一个长远的目标。</p>
+<p>我最早的投稿文章都是偏 iOS 开发工具类的，那个时候网上的 iOS 文章很少，有一些好用的工具并不是那么普及，于是我就将我熟悉的 <a href="http://www.infoq.com/cn/articles/network-packet-analysis-tool-charles" target="_blank" rel="external">Charles</a>, Reveal, <a href="http://www.infoq.com/cn/articles/crashlytics-crash-statistics-tools" target="_blank" rel="external">Crashlytics</a> 等工具整理成文章发表到了 InfoQ 上。很感谢 InfoQ 的水哥和杨赛两位编辑，他们对于我这个新手非常 Nice，对于文章内容也提了很多有价值的意见。这些文章在 InfoQ 上的发表给了我最初的信心。</p>
+<p>于是我开始写一些更难的 iOS 技术文章，包括分析 Tagged Pointer 实现的：<a href="http://www.infoq.com/cn/articles/deep-understanding-of-tagged-pointer" target="_blank" rel="external">《深入理解Tagged Pointer》</a>、block 的实现原理等。</p>
+<p>最终，我发现这些文章已经足够汇集成一本书了，于是我就出版了<a href="http://item.jd.com/11598468.html" target="_blank" rel="external">《iOS 开发进阶》</a>。所以，如果没有 InfoQ 最初的鼓励，应该就没有这本书的出版。</p>
+<p>也正是因为我在 iOS 领域的文章得到了 InfoQ 和读者的认可，也才使得我更加大胆地表达意见。包括推广 ReactiveCocoa 的文章：<a href="http://www.infoq.com/cn/articles/reactivecocoa-ios-new-develop-framework" target="_blank" rel="external">《ReactiveCocoa - iOS开发的新框架》</a>，以及警示大家避免过于崇拜 MVVM 和函数式编程的文章：<a href="http://www.infoq.com/cn/articles/rethinking-mvc-mvvm" target="_blank" rel="external">《被误解的MVC和被神化的MVVM》</a>，以及关于 Swift 的<a href="http://www.infoq.com/cn/articles/swift-brain-gym-monad" target="_blank" rel="external">一些思考</a>。</p>
+<p>现在的我更加自信，我可以明确地表达出自己的技术观点，包括对于 Core Data 的厌恶，对于 Realm 的警慎，对于 React Native 的悲观，对于 Xib 的漠视，对于自动化测试的遗憾。这些观点在新人口中说出很可能会被认为无知，而我有信心坚持自己的观点。</p>
+<p>我在快速成长，InfoQ 也是。现在的 InfoQ ，已经成长为极客邦，旗下除了 <a href="http://www.infoq.com/cn" target="_blank" rel="external">InfoQ</a>，还包括 <a href="http://git.geekbang.org/" target="_blank" rel="external">GIT</a>，<a href="http://ego.geekbang.org/" target="_blank" rel="external">EGO</a> 和 <a href="http://www.stuq.org/" target="_blank" rel="external">StuQ</a>。而 InfoQ 主办的 QCon 、ArchSummit 已经成为全中国最有名的技术会议。在今年，InfoQ 开始涉足垂直领域，上周刚刚结束的<a href="http://gmtc.geekbang.org/" target="_blank" rel="external">全球移动技术大会（GMTC）</a> 就是一次成功的移动端会议。</p>
+<p>现在，InfoQ 不但有网站了，也有微信公众号，里面的推送内容有相当一部分都是移动开发相关的，例如：</p>
+<ul>
+<li>携程移动 App 架构优化之旅（编号 21）</li>
+<li>全栈工程师谈微博 iOS 客户端架构与优化之路（编号 22）</li>
+<li>京东无线服务端架构演进历程（编号 23）</li>
+<li>滴滴 iOS 客户端的架构演变之路（编号 24）</li>
+<li>偷师饿了么：怎样用 HTTP/2 优化 iOS APP 网络层次架构？（编号 25）</li>
+<li>被误解的 MVC 和被神化的 MVVM（我的投稿，编号 28）</li>
+</ul>
+<img src="/images/infoq-wexin.jpg">
+<p>这些文章都是非常有阅读价值的，长按上面的二维码，关注 InfoQ 后，在 InfoQ 的微信公众号回复相应编号，就可以看到相关文章。</p>
+<p>感谢 InfoQ 一直以来对我的帮助，如果你也希望像我一样成为技术作者，那么可以从尝试给 InfoQ 投稿做起，相信你一定会收获很多。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>如果你也喜欢写作，这个真实的故事或许能够帮助你继续坚持下去。</p>
+<p>我最早听说 <a href="http://www.infoq.com/cn" target="_blank" rel="external">InfoQ</a> ，是因为在上面发现了很多关于敏捷开发]]>
+    </summary>
+    
+      <category term="writing" scheme="http://blog.devtang.com/tags/writing/"/>
+    
+      <category term="summary" scheme="http://blog.devtang.com/categories/summary/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[为什么提交 AppStore 总有事故发生]]></title>
@@ -2306,124 +2345,6 @@ func cancelInteractiveTransition()
 <li>学习了 Swift 语言中的一些使用高阶函数的示例，包括 <code>map</code>, <code>reduce</code>, <code>filter</code> 等。</li>
 <li>学习了利用高阶函数来构造以函数为主体的功能模块。</li>
 <li>练习了一些奇怪的面试题。</li>
-</ul>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://ww2.sinaimg.cn/mw690/65dc76a3gw1f08hrkcyydj20i40cigv2.jpg" alt=""></p>
-<h2 id="u7248_u6743_u8BF4_u660E"><a href="#u7248_]]>
-    </summary>
-    
-      <category term="Swift" scheme="http://blog.devtang.com/tags/Swift/"/>
-    
-      <category term="iOS" scheme="http://blog.devtang.com/categories/iOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Swift 烧脑体操（二） - 函数的参数]]></title>
-    <link href="http://blog.devtang.com/2016/02/27/swift-gym-2-function-argument/"/>
-    <id>http://blog.devtang.com/2016/02/27/swift-gym-2-function-argument/</id>
-    <published>2016-02-27T01:23:29.000Z</published>
-    <updated>2016-06-19T03:14:33.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://ww2.sinaimg.cn/mw690/65dc76a3gw1f08hrkcyydj20i40cigv2.jpg" alt=""></p>
-<h2 id="u7248_u6743_u8BF4_u660E"><a href="#u7248_u6743_u8BF4_u660E" class="headerlink" title="版权说明"></a>版权说明</h2><p>本文为 InfoQ 中文站特供稿件，首发地址为：<a href="http://www.infoq.com/cn/articles/swift-brain-gym-arguments" target="_blank" rel="external">文章链接</a>。如需转载，请与 InfoQ 中文站联系。</p>
-<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>Swift 其实比 Objective-C 复杂很多，相对于出生于上世纪 80 年代的 Objective-C 来说，Swift 融入了大量新特性。这也使得我们学习掌握这门语言变得相对来说更加困难。不过一切都是值得的，Swift 相比 Objective-C，写出来的程序更安全、更简洁，最终能够提高我们的工作效率和质量。</p>
-<p>Swift 相关的学习资料已经很多，我想从另外一个角度来介绍它的一些特性，我把这个角度叫做「烧脑体操」。什么意思呢？就是我们专门挑一些比较费脑子的语言细节来学习。通过「烧脑」地思考，来达到对 Swift 语言的更加深入的理解。</p>
-<p>这是本体操的第二节，练习前请做好准备运动，保持头脑清醒。</p>
-<h2 id="u51C6_u5907_u8FD0_u52A8_uFF1A_u57FA_u7840_u77E5_u8BC6"><a href="#u51C6_u5907_u8FD0_u52A8_uFF1A_u57FA_u7840_u77E5_u8BC6" class="headerlink" title="准备运动：基础知识"></a>准备运动：基础知识</h2><p><img src="http://ww3.sinaimg.cn/mw690/65dc76a3gw1f0sz14p1u4j206w0a33zb.jpg" alt=""></p>
-<h3 id="u9762_u5411_u5BF9_u8C61_u8BED_u8A00_u7684_u4E16_u754C_u89C2"><a href="#u9762_u5411_u5BF9_u8C61_u8BED_u8A00_u7684_u4E16_u754C_u89C2" class="headerlink" title="面向对象语言的世界观"></a>面向对象语言的世界观</h3><p>对于很多面向对象的编程语言来说，在思考问题时，总是把「对象」作为考虑问题的基本出发点。</p>
-<p>面向对象的程序设计通过以下三大规则，构建出程序设计的基础，它们是：</p>
-<ol>
-<li>封装（Encapsulation），将一个相对独立的逻辑涉及的变量和函数放到一个类中，然后对外暴露少量接口，使其高内聚，低耦合。</li>
-<li>继承（Inheritance），子类可以继承父类的变量和函数，并且可以修改或扩展父类的行为。</li>
-<li>多态（Polymorphism），父类的指针可以指向子类的实例，在运行时程序语言支持找到子类对应的函数实现。</li>
-</ol>
-<p>在以上三大准则的基础上，再引入一些设计原则，比如：</p>
-<ol>
-<li>单一职责原则（Single Responsibility），每个类只应该做一件事情。</li>
-<li>不要重复原则（Don’t Repeat Yourself），相同（或相似）的代码不应该重复两次。</li>
-<li>好的组合优于继承（Better Composition over Inheritance），尽量使用组合而不是继承来设计。</li>
-</ol>
-<p>于是，程序世界就基于这些规则和原则，产生出了设计模式，进而能更加精准地指导我们的编程行为。这就像我们学习几何，先学习几条公理，然后以后的大量定理都通过公理证明而来。</p>
-<p>举个例子，单例模式（Singleton Pattern）其实就是封装和单一职责原则的产物。代理模式（Delegate Pattern) 也是单一职责和封装中的面向接口设计的思想的产物。</p>
-<p>但是，在面向对象语言的世界观里面，函数都是作为一个附属物存在的。函数通常附属于一个具体类的某个方法中。或许有一个函数它根本都不需要任何对象作为容器，为了这个世界的统一，我们还是会构造一个类，把这个函数放进去。比如，在小猿搜题中，我们就有一个叫 ImageUtils 的类，里面放了操作图像的各种各样的静态方法，有一些图象操作函数其实也不太通用，但是总得找一个类放不是。</p>
-<p>在一些面向对象语言的世界中，如果把对象称作 OOP 的一等公民的话，那么函数就是二等公民。</p>
-<h3 id="u51FD_u6570_u5F0F_u7F16_u7A0B"><a href="#u51FD_u6570_u5F0F_u7F16_u7A0B" class="headerlink" title="函数式编程"></a>函数式编程</h3><p>在 Swift 的世界中，函数并不是二等公民。是的，Swift 引入了大量函数式编程的特性，使得我们能够把函数当作一等公民来对待。</p>
-<p>一等公民有什么权利呢？那就是函数可以像对象一样，被赋值、被当作参数传递、参与计算或者当作结果被返回。</p>
-<p>我们先来看一段函数被赋值的例子，在下例中，我们将一个函数赋值给一个名为 <code>myFunc</code> 的变量，然后调用它。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let myFunc = &#123; &#10;    () -&#62; String in&#10;    return &#34;Tang Qiao&#34;&#10;&#125;&#10;&#10;let value = myFunc()&#10;// value &#30340;&#20540;&#20026; &#34;Tang Qiao&#34;</span><br></pre></td></tr></table></figure>
-<p>我们再来看一个函数被当作运算结果返回的例子。在这个例子中，我们希望构造一个「加法器」工厂，这个工厂能够接受一个参数 addValue，返回一个加法器函数，这个加法器函数能够将传递的参数加 addValue 之后返回。以下是实现的代码：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func addFactory(addValue: Int) -&#62; (Int -&#62; Int) &#123;&#10;    func adder(value: Int) -&#62; Int &#123;&#10;        return addValue + value&#10;    &#125;&#10;    return adder&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>有了上面这个函数，我们就可以构造一个 <code>+2</code> 的函数，然后使用它，如下所示：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let add2 = addFactory(2) // &#26500;&#36896;&#19968;&#20010; +2 &#30340;&#20989;&#25968;&#10;let result = add2(3) // &#36816;&#31639;&#65292;&#20256;&#20837; 3&#65292;&#24471;&#21040; 5</span><br></pre></td></tr></table></figure>
-<h2 id="u51FD_u6570_u7684_u53C2_u6570"><a href="#u51FD_u6570_u7684_u53C2_u6570" class="headerlink" title="函数的参数"></a>函数的参数</h2><p>但是在本次「烧脑体操」中，全面介绍函数式编程明显不太现实，所以我们仅从函数的参数来深入学习一下，看看在 Swift 语言中，函数的参数能够有多复杂。</p>
-<!--
-这里多说一句题外话，有部分同学看了「烧脑体操」第一节后，留言说：本来简单的 Swift 语言，被你这么一说，弄得都不敢学了，你是不是在吓大家？还有一些人留言：你搞这么绕还不是为了装逼？
-
-对此，我想回答说：我研究这些仅仅是为了避免在语言细节的地方掉坑里，如果你对此不感兴趣，有一个动作叫做「取消关注」，我写文章并没有收费，如果你不喜欢，取关即可，犯不着在后台留言恶心我吧？
--->
-<h3 id="u53C2_u6570_u7684_u7701_u7565"><a href="#u53C2_u6570_u7684_u7701_u7565" class="headerlink" title="参数的省略"></a>参数的省略</h3><p>我们先来简单看看函数参数的省略吧，因为有类型推导，函数的参数在 Swift 中常常可以被省略掉，特别以匿名函数（闭包）的形式存在的时候。</p>
-<p>我们来看一个数组排序的例子：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let array = [1, 3, 2, 4]&#10;let res = array.sort &#123;&#10;    (a: Int, b: Int) -&#62; Bool in&#10;    return a &#60; b&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>如果一个函数返回类型可以通过推导出来，则返回类型可以省略。所以以上代码中的 <code>-&gt; Bool</code> 可以删掉，变成：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let array = [1, 3, 2, 4]&#10;let res = array.sort &#123;&#10;    (a: Int, b: Int) in&#10;    return a &#60; b&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>如果一个函数的参数类型可以推导出来，则参数的类型可以省略。所以以上代码中的 <code>: Int</code> 可以删掉，变成：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let array = [1, 3, 2, 4]&#10;let res = array.sort &#123;&#10;    (a, b) in&#10;    return a &#60; b&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>如果函数参数的个数可以推导出来，也可以不写参数。那怎么使用这些参数呢？可以用 <code>$0</code>, <code>$1</code> 这样的方式来引用参数。所以以上代码中的 <code>(a, b)</code> 可以删掉，因为这样的话，参数和返回值都省略了，所以<code>in</code>也可以省略了，变成：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let array = [1, 3, 2, 4]&#10;let res = array.sort &#123;&#10;    return $0 &#60; $1&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>Swift 还有一个规则，如果函数的 body 只有一行，则可以把 <code>return</code> 关键字省略了，所以以上代码可以进一步简化成：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let array = [1, 3, 2, 4]&#10;let res = array.sort &#123;&#10;    $0 &#60; $1&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>最后一个简化规则更加暴力，因为 <code>&lt;</code> 符号也是一个函数，它接受的参数个数，类型和返回值与 sort 函数需要的一样，所以可以直接简化成：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let array = [1, 3, 2, 4]&#10;let res = array.sort( &#60; )</span><br></pre></td></tr></table></figure>
-<p>拿这个的方法，同样可以把我们刚刚写的 <code>addFactory</code> 做简化，最后简化成如下的形式：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// &#31616;&#21270;&#21069;&#10;func addFactory(addValue: Int) -&#62; (Int -&#62; Int) &#123;&#10;    func adder(value: Int) -&#62; Int &#123;&#10;        return addValue + value&#10;    &#125;&#10;    return adder&#10;&#125;&#10;// &#31616;&#21270;&#21518;&#10;func addFactory(addValue: Int) -&#62; (Int -&#62; Int) &#123;&#10;    return &#123; addValue + $0 &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="u51FD_u6570_u53C2_u6570_u4E2D_u7684_u5176_u5B83_u5173_u952E_u5B57"><a href="#u51FD_u6570_u53C2_u6570_u4E2D_u7684_u5176_u5B83_u5173_u952E_u5B57" class="headerlink" title="函数参数中的其它关键字"></a>函数参数中的其它关键字</h3><p>有些时候，我们的函数接受的参数就是另外一个函数，例如 sort，map，所以我们在看代码的时候，需要具备熟悉这种写法的能力。</p>
-<p>我们来看看数组的 map 函数的定义吧：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public func map&#60;T&#62;(@noescape transform: (Self.Generator.Element) throws -&#62; T) rethrows -&#62; [T]</span><br></pre></td></tr></table></figure>
-<p>这个函数定义中出现了几个我们刚刚没提到的关键词，我们先学习一下。</p>
-<h4 id="@noescape"><a href="#@noescape" class="headerlink" title="@noescape"></a><code>@noescape</code></h4><p><code>@noescape</code>，这是一个从 Swift 1.2 引入的关键字，它是专门用于修饰函数闭包这种参数类型的，当出现这个参数时，它表示该闭包不会跳出这个函数调用的生命期：即函数调用完之后，这个闭包的生命期也结束了。以下是苹果的文档原文：</p>
-<blockquote>
-<p>A new @noescape attribute may be used on closure parameters to functions. This indicates that the parameter is only ever called (or passed as an @noescape parameter in a call), which means that it cannot outlive the lifetime of the call. This enables some minor performance optimizations, but more importantly disables the self. requirement in closure arguments.</p>
-</blockquote>
-<p>什么情况下一个闭包参数会跳出函数的生命期呢？很简单，我们在函数实现内，将一个闭包用 <code>dispatch_async</code> 嵌套，这样这个闭包就会在另外一个线程中存在，从而跳出了当前函数的生命期。这样做主要是可以帮助编译器做性能的优化。</p>
-<p>如果你对此感兴趣，这里有一些更详细的介绍供你学习：</p>
-<ul>
-<li><a href="https://stackoverflow.com/questions/28427436/noescape-attribute-in-swift-1-2/28428521#28428521" target="_blank" rel="external">https://stackoverflow.com/questions/28427436/noescape-attribute-in-swift-1-2/28428521#28428521</a></li>
-<li><a href="http://nshint.io/blog/2015/10/23/noescape-attribute/" target="_blank" rel="external">http://nshint.io/blog/2015/10/23/noescape-attribute/</a></li>
-</ul>
-<h4 id="throws__u548C_rethrows"><a href="#throws__u548C_rethrows" class="headerlink" title="throws 和 rethrows"></a><code>throws</code> 和 <code>rethrows</code></h4><p><code>throws</code> 关键字表示：这个函数（闭包）可能抛出异常。而 <code>rethrows</code> 关键字表示：这个函数如果抛出异常，仅可能是因为传递给它的闭包的调用导致了异常。</p>
-<p><code>throws</code> 关键字的存在大家都应该能理解，因为总有一些异常可能在设计的时候希望暴露给上层，<code>throws</code> 关键字的存在使得这种设计成为可能。</p>
-<p>那么为什么会有 <code>rethrows</code> 关键字呢？在我看来，这是为了简化很多代码的书写。因为一旦一个函数会抛出异常，按 Swift 类型安全的写法，我们就需要使用 try 语法。但是如果很多地方都需要写 try 的话，会造成代码非常啰嗦。 <code>rethrows</code> 关键字使得一些情况下，如果你传进去的闭包不会抛出异常，那么你的调用代码就不需要写 try。</p>
-<p>如果你对此感兴趣，这里有一些更详细的介绍供你学习：</p>
-<ul>
-<li><a href="http://robnapier.net/re-throws" target="_blank" rel="external">http://robnapier.net/re-throws</a></li>
-</ul>
-<h3 id="u51FD_u6570_u4F5C_u4E3A_u51FD_u6570_u7684_u53C2_u6570"><a href="#u51FD_u6570_u4F5C_u4E3A_u51FD_u6570_u7684_u53C2_u6570" class="headerlink" title="函数作为函数的参数"></a>函数作为函数的参数</h3><p>刚刚说到，函数作为一等公民，意味着函数可以像对象一样，被当作参数传递或者被当作值返回。对此，我们专门有一个名称来称呼它，叫做<a href="https://en.wikipedia.org/wiki/Higher-order_function" target="_blank" rel="external">高阶函数（higher-order function）</a>。</p>
-<p>在刚刚那个数组的 map 函数中，我们就看到了它接着另外一个函数作为参数，这个函数接受数组元素类型作为参数，返回一个新类型。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public func map&#60;T&#62;(@noescape transform: (Self.Generator.Element) throws -&#62; T) rethrows -&#62; [T]</span><br></pre></td></tr></table></figure>
-<p>有了 map 函数，我们就可以轻松做数组元素的变换了。如下所示：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr = [1, 2, 4]&#10;// arr = [1, 2, 4]&#10;&#10;let brr = arr.map &#123;&#10;    &#34;No.&#34; + String($0)&#10;&#125;&#10;// brr = [&#34;No.1&#34;, &#34;No.2&#34;, &#34;No.4&#34;]</span><br></pre></td></tr></table></figure>
-<h2 id="u70E7_u8111_u7684_u53C2_u6570"><a href="#u70E7_u8111_u7684_u53C2_u6570" class="headerlink" title="烧脑的参数"></a>烧脑的参数</h2><p>好了，现在进入参数烧脑游戏的正式环节。</p>
-<p>我们需要构造一个工厂函数，这个函数接受两个函数作为参数，返回一个新的函数。新函数是两个函数参数的叠加作用效果。</p>
-<p>举一个具体的例子，假如我们有一个 <code>+2</code> 的函数，有一个 <code>+3</code> 的函数，那用这个工厂函数，我们可以得到一个 <code>+5</code> 的函数。</p>
-<p>又比如我们有一个 <code>*2</code> 的函数，有一个 <code>*5</code> 的函数，用这个工厂函数，我们就可以得到一个 <code>*10</code> 的函数。</p>
-<p>那这个函数如何写呢？我们先看答案吧：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func funcBuild(f: Int -&#62; Int, _ g: Int -&#62; Int) &#10;    -&#62; Int -&#62; Int &#123;&#10;    return &#123;&#10;        f(g($0))&#10;    &#125;&#10;&#125;&#10;&#10;let f1 = funcBuild(&#123;$0 + 2&#125;, &#123;$0 + 3&#125;)&#10;f1(0) // &#24471;&#21040; 5&#10;let f2 = funcBuild(&#123;$0 * 2&#125;, &#123;$0 * 5&#125;)&#10;f2(1) // &#24471;&#21040; 10</span><br></pre></td></tr></table></figure>
-<p>这个函数充分反映了函数作为一等公民的地位。但是，我们同时也看出来，函数作为参数存在时，对于程序的可读性带来了挑战。好在我们有 <code>typealias</code>，通过 <code>typealias</code>，我们可以将函数的类型写得更加易读，比如上面的代码，就可以修改成如下形式：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">typealias IntFunction = Int -&#62; Int&#10;&#10;func funcBuild(f: IntFunction, _ g: IntFunction)&#10;    -&#62; IntFunction &#123;&#10;    return &#123;&#10;        f(g($0))&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>现在看看代码，是不是清晰了很多？</p>
-<h2 id="u53C2_u6570_u4E2D_u7684_u8303_u578B"><a href="#u53C2_u6570_u4E2D_u7684_u8303_u578B" class="headerlink" title="参数中的范型"></a>参数中的范型</h2><p>当函数中的参数再引入范型之后，函数的功能更加强大，但是可读性进一步下降。比如刚刚的例子，限制函数只能是 <code>Int -&gt; Int</code> 其实是没有必要的，我们将两个函数拼成一个函数，只需要保证一个函数的输出类型，与另一个函数的输入类型匹配即可。所以，刚刚的例子，可以进一步用范型改造：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func funcBuild&#60;T, U, V&#62;(f: T -&#62; U, _ g: V -&#62; T)&#10;    -&#62; V -&#62; U &#123;&#10;        return &#123;&#10;            f(g($0))&#10;        &#125;&#10;&#125;&#10;let f3 = funcBuild(&#123; &#34;No.&#34; + String($0) &#125;, &#123;$0 * 2&#125;)&#10;f3(23) // &#32467;&#26524;&#26159; &#34;No.46&#34;</span><br></pre></td></tr></table></figure>
-<p>在上面这个例子中，我们保证函数 g 的输出类型是 T，函数 f 的输入类型是 T。这样，在例子中，我们将一个 <code>*2</code> 的函数与一个数字转字符串的函数拼接起来，构造出一个先乘 2，再转字符串的函数。</p>
-<p>相应的例子还有很多，比如 WWDC 中就介绍过一个给函数增加缓存机制的代码，在该代码中，任意一个不带缓存功能的函数，经过改造，都可以变成一个带缓存功能的函数。代码如下，大家可以自行学习一下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func memoize&#60;T: Hashable, U&#62;( body: (T)-&#62;U ) -&#62; (T-&#62;U) &#123;&#10;    var memo = Dictionary&#60;T, U&#62;()&#10;    return &#123; x in&#10;        if let q = memo[x] &#123; return q &#125;&#10;        let r = body(x)&#10;        memo[x] = r&#10;        return r&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>总结一下本次烧脑锻炼到的脑细胞：</p>
-<ul>
-<li>Swift 是一个结合面向对象编程和函数式编程特性的语言。</li>
-<li>函数在 Swift 中是一等公民，可以被赋值、被当作参数传递、参与计算、当作结果被返回或被动态创建。</li>
-<li>因为有类型推导，函数的参数有各种省略规则。</li>
-<li>函数作为参数时，有 @noescape，throw 和 rethrow 关键字需要了解。</li>
-<li>函数作为参数时，不易阅读。合理使用 typealias 可以使源码结构更清晰。</li>
 </ul>
 ]]></content>
     <summary type="html">

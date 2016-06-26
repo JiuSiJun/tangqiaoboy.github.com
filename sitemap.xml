@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.devtang.com/2016/06/26/my-story-about-infoq/</loc>
+    <lastmod>2016-06-26T13:28:44.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2014/01/08/why-we-need-write/</loc>
+    <lastmod>2016-06-26T12:43:24.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.devtang.com/2016/06/14/wwdc-2016-notes/</loc>
     <lastmod>2016-06-19T12:32:09.000Z</lastmod>
   </url>
@@ -9,11 +19,6 @@
   <url>
     <loc>http://blog.devtang.com/2016/06/19/appstore-accident/</loc>
     <lastmod>2016-06-19T12:32:05.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2016/06/05/tech-talk-notes/</loc>
-    <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
   <url>
@@ -662,7 +667,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/01/08/why-we-need-write/</loc>
+    <loc>http://blog.devtang.com/2016/06/05/tech-talk-notes/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
