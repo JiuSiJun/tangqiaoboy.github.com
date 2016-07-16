@@ -4,7 +4,7 @@
   <subtitle><![CDATA[记录下自己学习的点滴]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.devtang.com/"/>
-  <updated>2016-07-09T14:46:24.000Z</updated>
+  <updated>2016-07-16T04:46:53.000Z</updated>
   <id>http://blog.devtang.com/</id>
   
   <author>
@@ -13,6 +13,87 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[写在创业四周年]]></title>
+    <link href="http://blog.devtang.com/2016/07/16/startup-4th-year-summary/"/>
+    <id>http://blog.devtang.com/2016/07/16/startup-4th-year-summary/</id>
+    <published>2016-07-16T04:07:05.000Z</published>
+    <updated>2016-07-16T04:46:53.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="u5E8F"><a href="#u5E8F" class="headerlink" title="序"></a>序</h2><p>一转眼，创业四周年了。我从来没有想到过，我的职业生涯中，待得最久的是猿题库这家创业公司。2016 年 5 月 31 日，我们宣布了获得腾讯的 <a href="http://tech.qq.com/a/20160531/011514.htm" target="_blank" rel="external">4000 万美元投资</a>，这是腾讯在 K12 在线教育领域最大的一笔战略投资。拿 BAT 的钱更像是一种站队行为，腾讯拥有 QQ 和微信两大社交平台，如果要选的话，腾讯理应是最好的选择。趁着拿到融资的机会，我们顺便把公司名从「猿题库」改成了「猿辅导」，我们希望从「猿辅导」中，找到合适的商业化道路。</p>
+<img src="/images/yuanfudao-company.jpg">
+<p>说说我个人吧，和两年前的创业总结 <a href="/2014/10/01/startup-2nd-year-summary/">《写在创业两周年》</a> 相比，我最大的变化是从一名纯 iOS 开发，转变为一个项目负责人。</p>
+<h2 id="u65F6_u95F4_u6D41_u6C34"><a href="#u65F6_u95F4_u6D41_u6C34" class="headerlink" title="时间流水"></a>时间流水</h2><p>2014 年 7 月小猿搜题立项，我开始负责这个项目。刚开始我一边负责 iOS 的开发工作，一边参与产品稿和 UI 稿的讨论。当时的我以非技术工作还很陌生，基本上不太敢提意见，不过产品稿都有郭常圳和产品委员会把关，因此并不会带来什么问题。</p>
+<p>2014 年 9 月底小猿搜题第一版上线，我们当时评测显示和竞争对手算法差别不大，不过产品层面上，还有许多需要打磨的地方。</p>
+<p>2015 年初，我们认为产品打磨得差不多了，于是开始了大规模的运营推广。我们很快在用户量和搜索量上，将某个竞争对手甩开了。</p>
+<p>我在负责小猿搜题项目时，首先需要解决的是将 iOS 开发的事情交出去，如果我一直在 iOS 开发具体工作上耗费精力，我就无法关注别的事情了。但是招聘从来都不是一件容易的事情，相比 iOS 开发，我又觉得产品和项目管理的事情更重要，所以在 2014 年的最后两个月，有一些 iOS 端的开发工作被我延后了。</p>
+<p>2015 年 1 月，我招到了一个 iOS 开发新手，于是开始带她，差不多带了 3 个月之后，我发现她基本可以独立工作了，所以就只做 code review 的事情。后来 6 月份的时候，我又招过来一个 iOS 开发新手，我指导他做了一些安全方面的工作之后，他们开始相互 review 代码，我参与过几次之后，我发现他们做得很好，所以就不再参与了。</p>
+<p>安卓方面，刚开始从猿题库项目组调来一个应届生新人，同时猿题库的安卓负责人参与我们的 review 工作。也是等到这个新人熟悉工作后，他就开始独立开发了，之后补充了一个社招的安卓开发。</p>
+<p>小猿搜题在 2015 上半年，相继补充了测试工程师，服务器开发，web 前端开发，产品实习生。到 2015 下半年，我们的团队基本成型了。</p>
+<p>2016 年，我们的团队继续扩张，我有些管理不过来。我尝试将一些事情授权给别人，比如培养技术负责人和产品负责人。我们也明确了 iOS 和 Android 端的负责人，以便于更有效地沟通。</p>
+<h2 id="u4E2A_u4EBA_u6210_u957F"><a href="#u4E2A_u4EBA_u6210_u957F" class="headerlink" title="个人成长"></a>个人成长</h2><p>对于我来说，我开始像<a href="/2016/02/16/the-leadership-pipeline-summary/">《领导梯队》</a>那本书讲的那样，一开始经历了从管理自我到管理他人的阶段，而现在又开始经历从管理他人到管理经理人员的阶段。</p>
+<h3 id="u4ECE_u7BA1_u7406_u81EA_u6211_u5230_u7BA1_u7406_u4ED6_u4EBA"><a href="#u4ECE_u7BA1_u7406_u81EA_u6211_u5230_u7BA1_u7406_u4ED6_u4EBA" class="headerlink" title="从管理自我到管理他人"></a>从管理自我到管理他人</h3><p>从管理自我到管理他人，我学习到的技能点包括：</p>
+<p>授权。在从管理自我到管理他人的阶段中，我学会了尽量放弃自己亲力亲为，特别是开发工作。因为开发工作需要长时间集中注意力，而我本身的工作性质导致沟通工作较多，容易被打断。足够的授权才能为自己争取到额外的时间，在授权的同时加以一些监督和检查，就又可以即保证新人得到锻炼，又保证这些工作的质量。</p>
+<p>项目进展。管理他人另一个需要注意的就是关注于项目的进展，通常情况下都会有各种各样的问题需要介入讨论，保证进度。</p>
+<p>沟通。管理他人中，沟通是一个很重要的环节，新人刚来的一个月是我特别花精力沟通的阶段。沟通的技能包括一对一沟通、绩效沟通、以及平常对于错误行为的及时纠正。其实保持友谊也很重要，不过人多了可能也确实比较难以做到。</p>
+<p>流程。关注于规则是否有利于大家工作，是否需要改进。</p>
+<h3 id="u4ECE_u7BA1_u7406_u4ED6_u4EBA_u5230_u7BA1_u7406_u7ECF_u7406_u4EBA_u5458"><a href="#u4ECE_u7BA1_u7406_u4ED6_u4EBA_u5230_u7BA1_u7406_u7ECF_u7406_u4EBA_u5458" class="headerlink" title="从管理他人到管理经理人员"></a>从管理他人到管理经理人员</h3><p>从管理他人到管理经理人员阶段，我正在学习。</p>
+<p>时间点。我发现在这一阶段，我无法细致到项目进展的每一方面，所以我对于项目进展的推动更多地依赖于别人了。而我只能强调时间点。具体的细节问题推进，我更多地依赖于别人。</p>
+<p>沟通。由于人员变多，我只能和重要的负责人进行沟通了，不过和他们的沟通频率应该变得比以前更高，我通过和他们沟通，来获得更细致的项目进展问题和流程上的问题。</p>
+<p>其它沟通。沟通不止是向下的，也包括向上的沟通和横向的跨组沟通。这部分工作也开始越来越占用时间了。</p>
+<p>产品。我更多地思考产品方向，看一些产品数据或问题。</p>
+<p>培训。我开始做一些培训，给相关负责人或者是新员工。给负责人的培训更多是通过聊天讨论的方式，因为这样一对一的讨论是更容易达成一致的。给新员工的培训更多是一对多分享的方式。</p>
+<h3 id="u601D_u8003"><a href="#u601D_u8003" class="headerlink" title="思考"></a>思考</h3><p>看起来管理他人的职位会涉及具体的业务细节的讨论和推进，属于在「一线」的管理人员，这些管理人员通常也具备不错的专业能力。</p>
+<p>管理经理人员的职位会相对脱离「一线」，他的工作会有更多沟通的事情，和老大的向上沟通，和运营，研究，市场，HR 部门以及兄弟产品的横向沟通，和负责人的沟通，这些事情会占用他大量的时间。</p>
+<p>但是这个职位也同样需要有一些「一线」的工作，例如看产品数据，试用产品功能，讨论产品稿，思考产品方向，了解开发的业务进展等。</p>
+<p>总之我还没有很好地描述和定义清楚该职位的工作内容，很多时候我感觉自己插手的事情也相当多，当前的我还需要更多的学习和体会。</p>
+<p>希望自己继续学习和总结。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="u5E8F"><a href="#u5E8F" class="headerlink" title="序"></a>序</h2><p>一转眼，创业四周年了。我从来没有想到过，我的职业生涯中，待得最久的是猿题库这家创业公司。2016 年 5 月 31 日，我们宣布了获]]>
+    </summary>
+    
+      <category term="startup" scheme="http://blog.devtang.com/tags/startup/"/>
+    
+      <category term="summary" scheme="http://blog.devtang.com/categories/summary/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[被中国黑客玩坏的苹果]]></title>
+    <link href="http://blog.devtang.com/2016/07/16/hack-way-through-apple/"/>
+    <id>http://blog.devtang.com/2016/07/16/hack-way-through-apple/</id>
+    <published>2016-07-16T01:25:21.000Z</published>
+    <updated>2016-07-16T03:23:02.000Z</updated>
+    <content type="html"><![CDATA[<p>最近从几个做 iOS 开发的小伙伴那儿听说了几个发垃圾邮件的黑科技，利用的都是苹果的一些小「漏洞」，实在是让人觉得中国人的「创新」能力太强，分享给大家。</p>
+<h2 id="u65B9_u6CD5_u4E00"><a href="#u65B9_u6CD5_u4E00" class="headerlink" title="方法一"></a>方法一</h2><img src="/images/hack-way-1.jpg">
+<p>详细的办法在上面的这个截图中解释了，简单来说就是将自己的帐号名改成广告信息，然后不停修改自己的安全邮箱，于是这些含有自己的帐号名（其实就是广告）的邮件就通过苹果的服务器发送出来了。各大邮箱厂家确实是不敢贸然屏蔽苹果的邮件的，所以垃圾邮件被顺利发送出去。</p>
+<p>我有一个小伙伴就收到了这样一封垃圾邮件：</p>
+<img src="/images/hack-way-2.jpg">
+<p>苹果在发现这个漏洞被利用后，简单把用户昵称在邮件中不再显示了，不过可以看得出来改动非常匆忙：</p>
+<img src="/images/hack-way-3.jpg">
+<h2 id="u65B9_u6CD5_u4E8C"><a href="#u65B9_u6CD5_u4E8C" class="headerlink" title="方法二"></a>方法二</h2><p>在方法一被苹果封堵后，前两天，梁杰发现了一个新的垃圾邮件发送行为。这次利用的是苹果的共享日历的功能。黑客利用将广告以日历日程的形式共享给大家，以便获得展示广告的能力。</p>
+<img src="/images/hack-way-4.jpg">
+<img src="/images/hack-way-5.jpg">
+<h2 id="u80CC_u540E_u7684_u5229_u76CA"><a href="#u80CC_u540E_u7684_u5229_u76CA" class="headerlink" title="背后的利益"></a>背后的利益</h2><p><del> 由于对岛国大片的热爱，</del> 我还真研究了一下这个垃圾邮件所描述的网址。这个网址打开后跳到一个看起来有各种诱人视频的播放列表中，然后弹出了如下 <a href="http://www.avv06.com/movie/play_480.html" target="_blank" rel="external">付款说明</a>：</p>
+<img src="/images/hack-way-6.jpg">
+<p>这个页面明显是一个骗人的假页面，因为上面描述的是：「付款之后刷新页面，尽享奇妙之旅」。我理解「奇妙之旅」应该就是可以播放视频吧。但是，这个付款的二维码是一个微信支付的二维码，所以，所有用户看到的二维码是一样的。</p>
+<p>这就带来一个问题：假如有一个用户付款完，这个时候有两个用户同时按刷新，服务器端根本就无法知道是哪个用户付的款。所以，这根本就是一个诈骗的网站。</p>
+<p>这个诈骗网站同时考虑了警察的心理，假如有人受骗报警，诈骗 18.8 元这种事情，对于警察叔叔来说，根本就达不到立案标准。如果警察叔叔要立案，他需要收集到上千个受害人的信息。另外，中国的办案还涉及管辖权，如果这个网站不在北京，那么北京的警察叔叔还需要找网站所在地的警察联合配合，这种事情想想都头大。于是，这个网站到现在还是能够正常打开（已经安全存在快一个月了）。</p>
+<p>但是这如果不是一个诈骗网站，而是一个黄色网站，那么性质就完全不一样了。黄赌毒是警方重点的打击对象，警方跨辖区合作起来更有动力。相对诈骗网站来说，黄色网站的站长也会有更大的压力，而且就 18.8 这点钱，估计连站长的流量费都挣不回来。</p>
+<h2 id="u6728_u9A6C_u7684_u4F20_u64AD"><a href="#u6728_u9A6C_u7684_u4F20_u64AD" class="headerlink" title="木马的传播"></a>木马的传播</h2><p>除以上面这种骗 18.8 的诈骗网站外，还有一种黑客行为是传播木马。通常的形式是要求你下载一款专用的视频播放器，用于看岛国大片。这类视频播放器通常都含有木马。</p>
+<p>对于 Android 来说，视频播放器在安装时会要求大量系统级权限，然后在你不经意的时候，发一条扣费短信。注意，这种扣费短信通常只有 1 毛钱，对于这种报案，你可以想像一下警察叔叔的心理阴影面积了，他可能得收集上万个报案人的信息，才能达到立案的涉案金额，进而合并立案。在黑客界，这种扣费行为被称为最安全的挣钱方式，因为现有的法律使得警方的办案成本非常高。</p>
+<p>对于 iOS 来说，视频播放器通常使用企业证书安装。有些小白用户或许觉得我的 iPhone 没有越狱，安装这类 App 没有风险，那么你就 too young too native 了。企业证书的安装的 App 不经苹果审核，黑客可以随意利用私有 API 进行各种信息的窃取。这里我就不教大家太多了，简单说一个过时的技巧吧：在 iOS 9 以前，企业证书的包可以覆盖同名的在 AppStore 上下载的 App。所以黑客可以利用一些小弹窗提示：「你的微信有新版本，是否更新」，从而把你的微信覆盖成它的修改后的版本。之后黑客可以做的事情就太多了。</p>
+<h2 id="u5199_u5728_u6700_u540E"><a href="#u5199_u5728_u6700_u540E" class="headerlink" title="写在最后"></a>写在最后</h2><p>安全的故事和事故每天都在上演，我们大家都得小心。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>最近从几个做 iOS 开发的小伙伴那儿听说了几个发垃圾邮件的黑科技，利用的都是苹果的一些小「漏洞」，实在是让人觉得中国人的「创新」能力太强，分享给大家。</p>
+<h2 id="u65B9_u6CD5_u4E00"><a href="#u65B9_u6CD5_u4E00" ]]>
+    </summary>
+    
+      <category term="iOS" scheme="http://blog.devtang.com/categories/iOS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[技术主导型公司的困境]]></title>
@@ -1396,255 +1477,6 @@
     </summary>
     
       <category term="summary" scheme="http://blog.devtang.com/categories/summary/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Swift 烧脑体操（五）- Monad]]></title>
-    <link href="http://blog.devtang.com/2016/04/05/swift-gym-5-monad/"/>
-    <id>http://blog.devtang.com/2016/04/05/swift-gym-5-monad/</id>
-    <published>2016-04-05T14:56:07.000Z</published>
-    <updated>2016-06-19T03:14:33.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://ww2.sinaimg.cn/mw690/65dc76a3gw1f08hrkcyydj20i40cigv2.jpg" alt=""></p>
-<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>Swift 其实比 Objective-C 复杂很多，相对于出生于上世纪 80 年代的 Objective-C 来说，Swift 融入了大量新特性。这也使得我们学习掌握这门语言变得相对来说更加困难。不过一切都是值得的，Swift 相比 Objective-C，写出来的程序更安全、更简洁，最终能够提高我们的工作效率和质量。</p>
-<p>Swift 相关的学习资料已经很多，我想从另外一个角度来介绍它的一些特性，我把这个角度叫做「烧脑体操」。什么意思呢？就是我们专门挑一些比较费脑子的语言细节来学习。通过「烧脑」地思考，来达到对 Swift 语言的更加深入的理解。</p>
-<p>这是本体操的第五节，练习前请做好准备运动，保持头脑清醒。</p>
-<p><img src="http://ww4.sinaimg.cn/mw690/65dc76a3gw1f0sz15ou0fj20cx07d0u3.jpg" alt=""></p>
-<h2 id="Why_Monad_3F"><a href="#Why_Monad_3F" class="headerlink" title="Why Monad?"></a>Why Monad?</h2><p>因为 Monad 的定义有点复杂，我们先说为什么要理解和学习它。业界对于 Monad 的用处有着各种争论，特别是学术派喜欢用 Haskell 来解释它，因为「Haskell 是纯函数式编程语言」。但这往往让问题更加复杂了—-我为了理解一个概念，还需要先学习一门新语言。</p>
-<p>所以我希望就 Swift 这门语言，分享一下理解 Monad 有什么用。实际上，即使在 Wikipedia 上，<a href="https://en.wikipedia.org/wiki/Monad_(functional_programming" target="_blank" rel="external">Monad</a>) 也没有被强行用 Haskell 来解释。所以我相信基于 Swift 语言，还是可以把 Monad 的概念讲清楚。</p>
-<p>在我看来，之所以有 Monad 这种结构，实际上是为了链式调用服务的。什么是链式调用呢？我们来看看下面一段代码：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let tq: Int? = 1&#10;tq.flatMap &#123;&#10;    $0 * 100&#10;&#125;.flatMap &#123;&#10;    &#34;image&#34; + String($0)&#10;&#125;.flatMap &#123;&#10;    UIImage(named: $0)&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>所以，如果一句话解释 Monad，那就是：Monad 是一种设计模式，使得业务逻辑可以用链式调用的方式来书写。</p>
-<p>在某些情况下，链式调用的方式组织代码会特别有效，比如当你的调用步骤是异步的时候，很容易写成多层嵌套的 <code>dispatch_async</code>，使用 Monad 可以使得多层嵌套被展开成链式调用，逻辑更加清楚。除了异步调用之外，编程中涉及输入输出、异常处理、并发处理等情况，使用 Monad 也可以使得代码逻辑更清晰。</p>
-<h2 id="u57FA_u7840_u77E5_u8BC6"><a href="#u57FA_u7840_u77E5_u8BC6" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="u5C01_u88C5_u8FC7_u7684_u503C_uFF08wrapped_value_29"><a href="#u5C01_u88C5_u8FC7_u7684_u503C_uFF08wrapped_value_29" class="headerlink" title="封装过的值（wrapped value)"></a>封装过的值（wrapped value)</h3><p>这个中文词是我自己想出来的，有一些人把它叫做「上下文中的值」（value with a context），有一些人把它叫做「容器中的值」（value in a container)，意思是一样的。</p>
-<p>什么叫做「封装过的值」呢？即把裸露的数据放到另一个结构中。例如：</p>
-<ul>
-<li>数组就是对值的一种封装，因为数组把裸露的元素放到了一个线性表结构中。</li>
-<li>Optional 也是对值的一种封装，因为 Optional 把值和空放到了一个枚举（enum）类型中。</li>
-</ul>
-<p>如果你愿意，你也可以自己封装一些值，比如把网络请求的结果和网络异常封装在一起，做成一个 enum (如下所示）。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">enum Result&#60;T&#62; &#123;&#10;    case Success(T)&#10;    case Failure(ErrorType)&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>判断一个数据类型是不是「封装过的值」，有一个简单的办法：就是看这个数据类型能不能「被打开」，拿出里面的裸露的元素。</p>
-<ul>
-<li>数组可以被打开，拿出里面的数组元素。</li>
-<li>Optional 可以被打开，拿出里面的值或者 .None。</li>
-<li>一个 Int 类型的值，无法「被打开」，所以它不是「封装过的值」。</li>
-</ul>
-<p>一个字符串是不是「封装过的值」呢？前提是你如何定义它「被打开」，如果你把它的打开定义成获得字符串里面的每个字符，那么字符串也可以是一个「封装过的值」。</p>
-<!--
-那要这么说，其实 Int 也可以被看作一个「封装过的值」，如果你把它的打开，定义成获得这个 Int 的每个 bit 位的值就行。
--->
-<h3 id="flatMap"><a href="#flatMap" class="headerlink" title="flatMap"></a>flatMap</h3><p>在上一篇烧脑文章中我们也提到过，要识别一个类型是不是 Monad，主要就是看它是否实现了 <code>flatMap</code> 方法。但是，如果你像下面这么实现 <code>flatMap</code>，那也不能叫 Monad：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class TangQiao &#123;&#10;    func flatMap() &#123;&#10;        print(&#34;Hello world&#34;)&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>Monad 对于 <code>flatMap</code> 函数有着严格的定义，在 Haskell 语言中，这个函数名叫 bind，但是定义是一样的，这个函数应该：</p>
-<ul>
-<li>作用在一个「封装过的值」M 上。</li>
-<li>它的参数应该是另一个闭包 F，这个闭包 F：接受一个解包后的值，返回一个「封装过的值」。</li>
-</ul>
-<p>具体在执行的时候，<code>flatMap</code> 会对 M 进行解包得到 C，然后调用闭包 F，传入解包后的 C，获得新的「封装过的值」。</p>
-<p>我们来看看 Optional 的 <code>flatMap</code> 实现，验证一下刚刚说的逻辑。源码地址是：<a href="https://github.com/apple/swift/blob/master/stdlib/public/core/Optional.swift" target="_blank" rel="external">https://github.com/apple/swift/blob/master/stdlib/public/core/Optional.swift</a>。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public func flatMap&#60;U&#62;(@noescape f: (Wrapped) throws -&#62; U?) &#10;        rethrows -&#62; U? &#123;&#10;    switch self &#123;&#10;    case .Some(let y):&#10;        return try f(y)&#10;    case .None:&#10;        return .None&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>Optional 的 <code>flatMap</code>：</p>
-<ul>
-<li>作用在一个「封装过的值」：<code>self</code> 身上。</li>
-<li>接受一个闭包参数 <code>f</code>，这个 <code>f</code> 的定义是：接受解包后的值，返回一个「封装过的值」: <code>U?</code> 。</li>
-<li>在执行时，<code>flatMap</code> 先对 <code>self</code> 进行解包，代码是 <code>case .Some(let y)</code>。</li>
-<li>如果解包成功，则调用函数 f，得到一个新的「封装过的值」，代码是 <code>try f(y)</code>。</li>
-<li>如果解包出来是 .None，则返回 .None。</li>
-</ul>
-<h2 id="u8BBE_u8BA1_u80CC_u540E_u7684_u8FFD_u95EE"><a href="#u8BBE_u8BA1_u80CC_u540E_u7684_u8FFD_u95EE" class="headerlink" title="设计背后的追问"></a>设计背后的追问</h2><p><code>flatMap</code> 接受的这个闭包参数，直观看起来很奇怪。接受的是解包的值，返回的又是封装过的值，一点都没有对称的美！</p>
-<p>为什么要这么设计？不这么设计就不能完成链式调用吗？我想了半天，答案就是一个字：懒！</p>
-<p>为什么这么说呢？因为「封装过的值」大多数时候不能直接计算，所以要计算的时候都要先解包，如果我们为了追求「对称的美」，使得函数接受的参数和返回的值都是「封装过的值」，当然是可以的。不过如果这么设计的话，你就会写大量雷同的解包代码。程序设计的时候追求「Don’t Repeat Yourself」原则，这么做当然是不被接受的。</p>
-<h2 id="Functor"><a href="#Functor" class="headerlink" title="Functor"></a>Functor</h2><p>刚刚我们说，在设计上为了复用代码，我们必须保证闭包的参数是解包后的值。</p>
-<p>那么，同样的道理，每次返回之前都封包一下，不一样很重复么？我们返回的值能不能是解包后的原始值，然后自动封装它？</p>
-<p>答案是可以的，但是这就不是 Monad 了，这成了 Functor 了。我们上一讲提到过，Functor 中实现的 <code>map</code> 方法，就是一个接受解包后的值，返回结果仍然是解包后的值。为了保证链式调用，map 会自动把结果再封包一次。</p>
-<p>我们再来回顾一下 <code>map</code> 的源码吧：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public func map&#60;U&#62;(@noescape f: (Wrapped) throws -&#62; U) &#10;        rethrows -&#62; U? &#123;&#10;    switch self &#123;&#10;    case .Some(let y):&#10;        return .Some(try f(y))&#10;    case .None:&#10;        return .None&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>在该源码中，函数 <code>f</code> 在被执行完后，结果会被封包成 Optional 类型，相关代码是：<code>.Some(try f(y))</code>。</p>
-<p>所以，Optional 的 <code>map</code> 和 <code>flatMap</code> 差别真的非常非常小，就看你的闭包想不想自己返回封装后的值了。</p>
-<p>在具体业务中，我们也有一些实际的需求，需要我们自己控制返回封装后的值。比如 Optional 在操作的时候，如果要返回 .None，则需要使用 <code>flatMap</code>，错误的使用了 <code>map</code> 函数的话，就会带来多重嵌套 nil 的问题。比如下面这个代码，变量 <code>b</code> 因为是一个两层嵌套的 nil，所以 <code>if let</code> 失效了。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let tq: Int? = 1&#10;let b = tq.map &#123; (a: Int) -&#62; Int? in&#10;    if a % 2 == 0 &#123;&#10;        return a&#10;    &#125; else &#123;&#10;        return nil&#10;    &#125;&#10;&#125;&#10;if let _ = b &#123;&#10;    print(&#34;not nil&#34;)&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>归根结底，你在编程时使用 Monad 还是 Functor，取决于你的具体业务需求：</p>
-<ul>
-<li>如果你在处理「封装过的值」时，不会（或不需要）返回异常数据，则可以使用 Functor，让数据的封装过程交给 <code>map</code> 函数来处理。</li>
-<li>如果你在处理「封装过的值」时，需要在闭包函数里返回类似 nil（或 ErrorType）一类的数据，则可以使用 Monad，自己返回新的「封装过的值」。</li>
-</ul>
-<h2 id="Applicative"><a href="#Applicative" class="headerlink" title="Applicative"></a>Applicative</h2><p>Swift 语言中并没有原生的 Applicative，但是 Applicative 和 Functor、Monad 算是三个形影不离的三兄弟，另外它们三者的差异都很小，所以干脆一并介绍了。</p>
-<p>刚刚我们讨论 Functor 与 Monad 时，都是说把值放在一个容器里面。但是我们别忘了，Swift 是函数式语言，函数是一等公民，所以，函数本身也是一种值，它也可以放到一个容器里面，而我们要讨论的 Applicative，就是一种关于「封装过的函数」的规则。</p>
-<p>Applicative 的定义是：使用「封装过的函数」处理「封装过的值」。这个「封装过的函数」解包之后的参数类型和 Functor 的要求是一样的。</p>
-<p>按照这个定义，我们可以自己改造数组和 Optional，使它们成为 Applicative，以下代码就是一个示例，来自 <a href="http://www.mokacoding.com/blog/functor-applicative-monads-in-pictures/" target="_blank" rel="external">这里</a>。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">extension Optional &#123;&#10;    func apply&#60;U&#62;(f: (T -&#62; U)?) -&#62; U? &#123;&#10;        switch f &#123;&#10;        case .Some(let someF): return self.map(someF)&#10;        case .None: return .None&#10;        &#125;&#10;    &#125;&#10;&#125;&#10;&#10;extension Array &#123;&#10;    func apply&#60;U&#62;(fs: [Element -&#62; U]) -&#62; [U] &#123;&#10;        var result = [U]()&#10;        for f in fs &#123;&#10;            for element in self.map(f) &#123;&#10;                result.append(element)&#10;            &#125;&#10;        &#125;&#10;        return result&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>我们为数组和 Optional 增加了一个 <code>apply</code> 方法，而这个方法符合 Applicative 的定义。如果和 <code>map</code> 方法对比，它们的唯一差别就是闭包函数是封装过后的了：</p>
-<ul>
-<li>对于 Optional 来说，<code>apply</code> 的闭包函数也变成 Optinoal 的了。</li>
-<li>对于数组来说，<code>apply</code> 的闭包函数也是一个数组（我们之前介绍过，数组也是对数据的一种封装）。</li>
-</ul>
-<h2 id="Monad__u7684_u5E94_u7528"><a href="#Monad__u7684_u5E94_u7528" class="headerlink" title="Monad 的应用"></a>Monad 的应用</h2><p>理论都离不开应用，否则就是「然并卵」了，讲完了概念，我们来看看除了 Swift 语言中的数组和 Optional，业界还有哪些对于 Monad 的应用。</p>
-<h3 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h3><p><a href="http://promisekit.org/" target="_blank" rel="external">PromiseKit</a> 是一个同时支持 Objective-C 和 Swift 的异步库。它用 Promise 来表示一个未来将要执行的操作，使用它可以简化我们的异步操作。因为篇幅有限，本文并不打算展开详细介绍 Promise，我们就看一个实际的使用示例吧。</p>
-<p>假设我们有一个业务场景，需要用户先登录，然后登录成功后发API获取数据，获取数据后更新 UITableView 的内容，整个过程如果有错误，显示相应的错误信息。</p>
-<p>传统情况下，我们需要把每个操作都封装起来，然后我们可以选择：</p>
-<ul>
-<li>方法一：用多层嵌套的 <code>dispatch_async</code> 把逻辑写到一起，但是这样嵌套代码，可读性和可维护性很差。</li>
-<li>方法二：每一步有一个 delegate 回调函数，把业务逻辑分散到各个回调函数中。但是这样不但逻辑分散了，而且关键的函数调用的依赖关系被我们隐藏起来了。</li>
-</ul>
-<p>另外，以上两种方法处理错误逻辑都可能会有多处，虽然我们可以把报错也封装成一个函数，但是在多个地方调用也不太舒服。使用 PromiseKit 之后，刚刚提到的业务场景可以用如下的示意代码来完成：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">login().then &#123;&#10;    return API.fetchKittens()&#10;&#125;.then &#123; fetchedKittens in&#10;    self.kittens = fetchedKittens&#10;    self.tableView.reloadData()&#10;&#125;.catch &#123; error in&#10;    UIAlertView(&#8230;).show()&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>另外，如果你的逻辑涉及并发，PromiseKit 也可以很好地处理，例如，你希望发两个网络请求，当两个网络请求都结束时，做相应的处理。那就可以让 PromiseKit 的 <code>when</code> 方法与 <code>then</code> 结合工作：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let search1 = MKLocalSearch(request: rq1).promise()&#10;let search2 = MKLocalSearch(request: rq2).promise()&#10;&#10;when(search1, search2).then &#123; response1, response2 in&#10;    //&#8230;&#10;&#125;.catch &#123; error in&#10;    // called if either search fails&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>在 PromiseKit 的设计中，<code>then</code> 方法接受的闭包的类型和 <code>flatMap</code> 是一样的，所以它本质上就是 <code>flatMap</code>。Promise 其实就是一种 Monad。</p>
-<h3 id="ReactiveCocoa"><a href="#ReactiveCocoa" class="headerlink" title="ReactiveCocoa"></a>ReactiveCocoa</h3><p>比起 PromiseKit，<a href="https://github.com/ReactiveCocoa/ReactiveCocoa" target="_blank" rel="external">ReactiveCocoa</a> 的名气要大得多。最新的 ReactiveCocoa 4.0 同时支持 Objective-C 和 Swift，我们在源码中发现了 RAC 的 <code>SignalType</code> 就是一个 Monad：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">extension SignalType &#123;&#10;&#10;    public func flatMap&#60;U&#62;(strategy: FlattenStrategy, transform: Value -&#62; SignalProducer&#60;U, Error&#62;)&#10;        -&#62; Signal&#60;U, Error&#62; &#123;&#10;        return map(transform).flatten(strategy)&#10;    &#125;&#10;&#10;    public func flatMap&#60;U&#62;(strategy: FlattenStrategy, transform: Value -&#62; Signal&#60;U, Error&#62;) &#10;        -&#62; Signal&#60;U, Error&#62; &#123;&#10;        return map(transform).flatten(strategy)&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>我们再次总结一下 Monad、Functor、Applicative：</p>
-<ul>
-<li>Monad：对一种封装过的值，使用 <code>flatMap</code> 函数。</li>
-<li>Functor：对一种封装过的值，使用 <code>map</code> 函数。</li>
-<li>Applicative：对一种封装过的值，使用 <code>apply</code> 函数。</li>
-</ul>
-<p>我们再对比一下<code>flatMap</code>、<code>map</code> 和 <code>apply</code>：</p>
-<ul>
-<li><code>flatMap</code>：对自己解包，然后应用到一个闭包上，这个闭包：接受一个「未封装的值」，返回一个「封装后的值」。</li>
-<li><code>map</code>：对自己解包，然后应用到一个闭包上，这个闭包：接受一个「未封装的值」，返回一个「未封装的值」。</li>
-<li><code>apply</code>：对自己解包，然后对闭包解包，解包后的闭包：接受一个「未封装的值」，返回一个「未封装的值」。</li>
-</ul>
-<h2 id="u53C2_u8003_u94FE_u63A5"><a href="#u53C2_u8003_u94FE_u63A5" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
-<li><a href="http://www.mokacoding.com/blog/functor-applicative-monads-in-pictures/" target="_blank" rel="external">Swift Functors, Applicatives, and Monads in Pictures</a></li>
-<li><a href="http://blog.leichunfeng.com/blog/2015/11/08/functor-applicative-and-monad/" target="_blank" rel="external">Functor、Applicative 和 Monad</a></li>
-<li><a href="https://blog.jcoglan.com/2011/03/11/promises-are-the-monad-of-asynchronous-programming/" target="_blank" rel="external">Promises are the monad of asynchronous programming</a></li>
-</ul>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://ww2.sinaimg.cn/mw690/65dc76a3gw1f08hrkcyydj20i40cigv2.jpg" alt=""></p>
-<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class]]>
-    </summary>
-    
-      <category term="Swift" scheme="http://blog.devtang.com/tags/Swift/"/>
-    
-      <category term="iOS" scheme="http://blog.devtang.com/categories/iOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[如何实现自己没实现过的需求之文本动画]]></title>
-    <link href="http://blog.devtang.com/2016/03/20/text-animation-guide/"/>
-    <id>http://blog.devtang.com/2016/03/20/text-animation-guide/</id>
-    <published>2016-03-20T13:34:23.000Z</published>
-    <updated>2016-06-19T03:14:33.000Z</updated>
-    <content type="html"><![CDATA[<blockquote>
-<p>吕伟（<a href="http://weibo.com/u/1660258615" target="_blank" rel="external">@我在罪恶坑的日子</a>）iOS 开发者，这些年在上海工作。专业：扯淡，兼职：开发。<br>感谢投稿，<a href="http://www.ismash.cn/post/ru-he-shi-xian-zi-ji-mei-shi-xian-guo-de-xu-qiu-zhi-wen-ben-dong-hua-pian" target="_blank" rel="external">原文链接</a>。</p>
-</blockquote>
-<p>大家好，我是非知名程序员，想跟大家说一段传统相声节目，额，对不起，说错了。想跟大家分享一点关于文本和动画的东西。这不是一篇纯血统，高、精、尖的技术文章，但依然希望有人能像喜欢混血美女一样喜欢。</p>
-<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>记得以前看到过一个很赞的文字效果的动画，类似于这样：</p>
-<p><img src="https://cloud.githubusercontent.com/assets/3759810/13845905/1e55a5d0-ec7e-11e5-9631-68aaf6b07ba1.gif" alt="textanimation"></p>
-<p>当时被惊艳到了，最近偶然间又再次见到，依然还是那么喜欢。假设我们现在需要实现这样的需求。一般碰到需求我们都会去 GitHub 上看看，俗称找轮子（GitHub 基本上只有你想不到的，就没有它没有的）。大多数情况下，没有问题。或者说有点小问题：轮子太多，无从下嘴。</p>
-<h2 id="u9009_u62E9"><a href="#u9009_u62E9" class="headerlink" title="选择"></a>选择</h2><blockquote>
-<p>选轮子就像选姑娘，你不知道后面等着你的是什么 —–罪恶坑小程如是说</p>
-</blockquote>
-<p>程序员江湖，每位大侠的武功和套路不尽一样，少林，武当，昆仑各门各派，百花争艳。实现轮子的思路自然也不一样。有的轮子高深晦涩难懂，功能强大，有的清晰明了，功能简单。不过有一点相同是，选错了就会被坑，只是坑大坑小问题。选轮子自然需要无比谨慎，既要匹配需求同时也要能在掉坑里的时候填上（废话，出 bug 了，你不填，谁填），要能 hold 住。然而填坑哪能那么简单呢，首先轮子实现思路，代码的结构，运行时序你要搞清楚吧，提供了哪些功能，没提供哪些功能，你要了解吧。基本上一个复杂点的轮子，研究下来就要好些时间了。这还不包括你开会，沟通，解 bug，喝茶，倒水，上厕所，抽烟，骂娘，吐槽产品需求的时间。所以，妹子们，不要问我们今天加不加班，要问今天能不能在你睡前下班。（项目快上线了，小程不加班谁加班。嗯哼。）</p>
-<h2 id="u521B_u9020"><a href="#u521B_u9020" class="headerlink" title="创造"></a>创造</h2><blockquote>
-<p>如果能用代码扮演上帝话，苍老师的量产不是问题，就看产品经理定的需求是拟物还是扁平。—-罪恶坑小程如是说</p>
-</blockquote>
-<p>既然选轮子的时间成本也不低，那有时候我们可以自己造一个轮子。其实写一个的好处也多，有成就感，写好了可以吹牛逼，写坏了填坑速度快。但问题是，以前没写过怎么办？没把握怎么办？比如我们现在需要实现上面的文字效果，但是又不知道怎么写，怎么办？</p>
-<p>没关系，上帝创造世间也分了七步走，跟着这位带头大哥后面学，总不会错的。</p>
-<h2 id="u5F00_u59CB"><a href="#u5F00_u59CB" class="headerlink" title="开始"></a>开始</h2><blockquote>
-<p>罗马不是一天建成的，毛片不是一次性拍完的 —-罪恶坑小程如是说 </p>
-</blockquote>
-<p>咦，好像扯得有点多了。对不起，现在开始正式拍（苍老师准备下，小程也准备下，Action）：</p>
-<h4 id="1-__u5206_u89E3_u4EFB_u52A1"><a href="#1-__u5206_u89E3_u4EFB_u52A1" class="headerlink" title="1.  分解任务"></a>1. <strong> 分解任务 </strong></h4><p>通过简单观察我们可以马上知道，上面那个动画效果是通过对每个字符做动画完成的。而在 iOS 里，文本显示控件最常见和常用的是 UILabel。而 iOS 的 Explicit Animation 有 Properties Animation 和 keyframe Animation 两种。</p>
-<p>但是 UILabel 控件没有提供对其 Text 中每个字符的控制的功能，我们需要改造下。既然要对每个字符做动画，那少不了需要<code>frame</code>，<code>bounds</code>，<code>position</code>，<code>transform</code>，这些属性。<br>这样看来我们需要两个武器：一个做排版功能的 framework，不用说，肯定是 <a href="http://objccn.io/issue-5-1/" target="_blank" rel="external">TextKit</a>。而另一个是能显示单个字符也拥有<code>frame</code>，<code>bounds</code>，<code>position</code>，<code>transform</code>等属性的类，很自然，我们想到<code>CATextLayer</code>。</p>
-<h4 id="2-__u5148_u89E3_u51B3_u6587_u672C_u5E03_u5C40"><a href="#2-__u5148_u89E3_u51B3_u6587_u672C_u5E03_u5C40" class="headerlink" title="2.  先解决文本布局"></a>2. <strong> 先解决文本布局 </strong></h4><p>TextKit 里主要是三个类 <code>NSTextStorage</code>，<code>NSLayoutManager</code>，<code>NSContainer</code>。它们一起帮组我们解决文字布局，排版的工作。</p>
-<ul>
-<li><p><strong>NSTextStorage</strong>：<code>NSMutableAttributedString</code>的子类，持有文字内容，当字符发生改变时，通知<code>NSLayoutManager</code>对象</p>
-</li>
-<li><p><strong>NSLayoutManager</strong>: 我们的男主角，从<code>NSTextStorage</code>里获取文字内容后，转换成对应的 glyph，根据<code>NSTextContainer</code>的 visible Region 显示 glyph。</p>
-</li>
-<li><p><strong>NSContainer</strong>: 确定一个 region 来放置 text。这个 region 被<code>NSLayoutManager</code>用来决定哪里可以 break lines</p>
-</li>
-</ul>
-<p>不过可惜 UILabel 没有这三个类作为自己的属性对象，我们需要自己解决：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class TextAnimationLabel: UILabel,NSLayoutManagerDelegate &#123;   &#10;     let textStorage:NSTextStorage = NSTextStorage(string: &#34;&#34;)&#10;     let textLayoutManager:NSLayoutManager = NSLayoutManager()&#10;     let textContainer:NSTextContainer = NSTextContainer()&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>除此以外我们还需要两个 Array 用来保存文本变换前的旧字符和变换后的新字符:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var oldCharacterTextLayers:[CATextLayer] = [] &#10;var newCharacterTextLayers:[CATextLayer] = []</span><br></pre></td></tr></table></figure>
-<p>因为我们需要用我们自己的 textStorage 对象，所以我们需要覆盖 text 和 attributedText 等属性。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">override var text:String!&#123;&#10;    get &#123;&#10;        return super.text&#10;    &#125;&#10;    set &#123;&#10;        super.text = text&#10;        let attributedText = NSMutableAttributedString(string: newValue)&#10;        let textRange = NSMakeRange(0,newValue.characters.count)&#10;        attributedText.setAttributes([NSForegroundColorAttributeName:self.textColor], range: textRange)&#10;        attributedText.setAttributes([NSFontAttributeName:self.font], range: textRange)&#10;        let paragraphyStyle = NSMutableParagraphStyle()&#10;        paragraphyStyle.alignment = self.textAlignment&#10;        attributedText.addAttributes([NSParagraphStyleAttributeName:paragraphyStyle], range: textRange)&#10;        self.attributedText = attributedText&#10;        &#125;&#10;        &#10; &#125;&#10;    &#10;override var attributedText:NSAttributedString!&#123;&#10;    get &#123;&#10;        return self.textStorage as NSAttributedString&#10;    &#125;&#10;    set&#123;&#10;        cleanOutOldCharacterTextLayers()&#10;        oldCharacterTextLayers = Array(newCharacterTextLayers)&#10;        textStorage.setAttributedString(newValue)&#10;        self.startAnimation &#123; () -&#62; () in&#10;        &#125;&#10;            self.endAnimation(nil)&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>当 TextStorage 的文本内容改变时，会触发一个通知 send textLayoutManager 以便重新布局排版。显然我们可以在排版布局完成后来为每个字符创建设置一个 CATextLayer，并设置相应的 frame 以便正确的显示内容。我们可以有个函数来完成计算。并且 layout finish 完成时调用。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//Mark:NSLayoutMangerDelegate&#10;func layoutManager(layoutManager: NSLayoutManager, didCompleteLayoutForTextContainer textContainer: NSTextContainer?, atEnd layoutFinishedFlag: Bool) &#123;&#10;        calculateTextLayers()&#10;        print(&#34;\(textStorage.string)&#34;)&#10;&#125;&#10;    &#10;    &#10;//MARK:CalculateTextLayer&#10;func calculateTextLayers()&#10;&#123;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>接下来我们的主要想法，是找到 text 里每个 character 以及对应的 glyph rect. 然后用 character 和 glyph rect 创建 CATextLayer</p>
-<p>首先我们要有一个空数组用来存放新的 CATextLayer。并且获取 textStorage 的 attributedText。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func calculateTextLayers()&#10;&#123;&#10;    newCharacterTextLayers.removeAll(keepCapacity:false)&#10;    let attributedText = textStorage.string&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>接下来我们要通过 LayoutManger 找到 TextContainer 的 used Rect，这样方便我们可以让文本垂直居中，就像普通的 Label 那样。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func calculateTextLayers()&#10;&#123;&#10;    newCharacterTextLayers.removeAll(keepCapacity:false)&#10;    let attributedText = textStorage.string&#10;    let wordRange = NSMakeRange(0, attributedText.characters.count)&#10;    let attributedString = self.internalAttributedText();&#10;    let layoutRect = textLayoutManager.usedRectForTextContainer(textContainer)&#10;    var index = wordRange.location&#10;    let totalLength = NSMaxRange(wordRange)&#10;    while index &#60; totalLength &#123;&#10;         ...&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>现在我们开始迭代处理文本里的每个字符，创建一个 glyphRange 并且用这个 glyphRange 找到对应的 character，然后我们将 glyph index 丢给 LayoutManager 得到 textContainer，再用 container 和 glyphRange 取得 glyphRect(这里需要注意下 kerning 的问题)。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let glyphRange = NSMakeRange(index, 1)&#10;let characterRange = textLayoutManager.characterRangeForGlyphRange(glyphRange, actualGlyphRange: nil)&#10;let textContainer = textLayoutManager.textContainerForGlyphAtIndex(index, effectiveRange: nil)&#10;var glyphRect = textLayoutManager.boundingRectForGlyphRange(glyphRange, inTextContainer: textContainer!)</span><br></pre></td></tr></table></figure>
-<p>最终我们还需要注意的就是 glyph 的 kerning，如果 <code>kerningRange.location == index</code>，我们需要将前一个 textLayer 取出来调整其 Rect 的宽度至新的 glyphRect 的最右边，保证 glyph 不会被裁切掉（可以对比下面两张图片）</p>
-<p><img width="122" src="https://cloud.githubusercontent.com/assets/3759810/13854816/4a6b5258-eca8-11e5-9870-15ed2d4f0d70.png"></p>
-<p><img width="122" src="https://cloud.githubusercontent.com/assets/3759810/13854821/4c5b947e-eca8-11e5-811e-e9abb161345f.png"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let kerningRange = textLayoutManager.rangeOfNominallySpacedGlyphsContainingIndex(index)&#10;if kerningRange.location == index &#38;&#38; kerningRange.length &#62; 1 &#123;&#10;    if newCharacterTextLayers.count &#62; 0 &#123;&#10;        // &#22914;&#26524;&#21069;&#19968;&#20010; textlayer &#30340; frame.size.width &#19981;&#21464;&#22823;&#30340;&#35805;&#65292;&#10;        // &#24403;&#21069;&#30340; textLayer &#20250;&#36974;&#25377;&#20303;&#23383;&#20307;&#30340;&#19968;&#37096;&#20998;&#65292;&#27604;&#22914; &#8220;Yes&#8221; &#30340; Y &#21491;&#19978;&#35282;&#20250;&#34987;&#20999;&#25481;&#19968;&#37096;&#20998;&#10;        let previousLayer = newCharacterTextLayers[newCharacterTextLayers.endIndex - 1]&#10;        var frame = previousLayer.frame&#10;        frame.size.width += CGRectGetMaxX(glyphRect) - CGRectGetMaxX(frame)&#10;        previousLayer.frame = frame&#10;     &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>这里关于 kerning 和 glyph 要多说一点。先来说下 glyph，简单来说 glyph 是表示一个 character 的具体样式 , 但他们却不是一一对应的关系，比如一个字母 “A” 可以有不同的写法来表示例如：</p>
-<p><img width="417" alt="" src="https://cloud.githubusercontent.com/assets/3759810/13878224/e142bef8-ed4a-11e5-9c84-798cb5939f36.png"></p>
-<p>除此以外，还有这种情况：</p>
-<p><img width="243" alt="" src="https://cloud.githubusercontent.com/assets/3759810/13878392/fab15e02-ed4b-11e5-9d38-2dc00ed45b0b.png"></p>
-<p>上面是的 “ff” 虽然是两个 character，但是 glyph 却是一个。<br>不过不用担心，强大 LayoutManager 提供了两个方法帮助我们通过一个找到对应另外那个。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func characterIndexForGlyphAtIndex(_ glyphIndex: Int) -&#62; Int&#10;func glyphIndexForCharacterAtIndex(_ charIndex: Int) -&#62; Int</span><br></pre></td></tr></table></figure>
-<p>现在我们说下 kerning。通常，在水平排布的文本中，glyph 都是一个挨着一个放置的，但是在某些时候为了让文本的可读性更好，看上去更加优雅美观，一个字形和另外一个字形之间可能会稍微的错位下，比如下面这种情况：</p>
-<p><img width="601" alt="" src="https://cloud.githubusercontent.com/assets/3759810/13878767/7631a33c-ed4e-11e5-9d03-46d89d8af9c8.png"><br>这也是上面为什么”Y“会出现显示不全的原因了。</p>
-<p>接下来就比较简单了，创建 Textlayer, 设置垂直居中，添加到数组当中，<code>index += characterRange.length</code>，开始下次循环</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">glyphRect.origin.y += (self.bounds.size.height/2)-(layoutRect.size.height/2)&#10;let textLayer = CATextLayer(frame: glyphRect, string: attributedString.attributedSubstringFromRange(characterRange));&#10;layer.addSublayer(textLayer);&#10;newCharacterTextLayers.append(textLayer);&#10;index += characterRange.length</span><br></pre></td></tr></table></figure>
-<h4 id="3-__u52A8_u753B_u5B9E_u73B0"><a href="#3-__u52A8_u753B_u5B9E_u73B0" class="headerlink" title="3.  动画实现"></a>3. <strong> 动画实现 </strong></h4><p>上面我们解决了字符排版的问题，接下来动画的实现就相对的容易了，仔细观察那个动画，很容易得出主要是对 <code>opacity</code> 和 <code>transform</code> 两个属性做属性动画，<code>opacity</code> 让每个字体逐渐显示和逐渐消失，而 <code>transform</code>则做了两种变形，一种是往下移动，另外一种是旋转。用 <code>CABasicAnimation</code> 可以解决单个属性动画，而 <code>CAAnimationGroup</code> 则帮我们解决多个动画叠加的复合效果。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func groupAnimationWithLayerChanges(old olderLayer:CALayer, new newLayer:CALayer) &#10;     -&#62; CAAnimationGroup? &#123;&#10;&#10;    var animationGroup:CAAnimationGroup?&#10;    var animations:[CABasicAnimation] = [CABasicAnimation]()&#10;&#10;    if !CATransform3DEqualToTransform(olderLayer.transform,&#10;    newLayer.transform) &#123;&#10;         let basicAnimation = CABasicAnimation(keyPath: &#34;transform&#34;)&#10;         basicAnimation.fromValue = NSValue(CATransform3D: olderLayer.transform)&#10;         basicAnimation.toValue = NSValue(CATransform3D: newLayer.transform)&#10;         animations.append(basicAnimation)&#10;         &#125;&#10;&#10;    if olderLayer.opacity != newLayer.opacity &#123;&#10;       let basicAnimation = CABasicAnimation(keyPath: &#34;opacity&#34;)&#10;       basicAnimation.fromValue = olderLayer.opacity&#10;       basicAnimation.toValue = newLayer.opacity&#10;       animations.append(basicAnimation)&#10;       &#125;&#10;&#10;    if animations.count &#62; 0 &#123;&#10;       animationGroup = CAAnimationGroup()&#10;       animationGroup!.animations = animations&#10;   &#125;&#10;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>这里需要注意一个问题，就是隐式动画的问题，Core Animation 基于一个假说，就是屏幕上的任何东西都可以 (或者可能) 做动画，我们平时在写代码时应该有这种印象就是你只是 layer 设置了一个值，没有添加动画，但是你会看到一个平滑过渡的显示效果而不是非常突兀的变化。这就是隐式动画。当我们改变一个属性时，Core Animation 帮我们做了一个动画，动画时间取决于当前 NSTransaction 的设置，而动画类型取决于图层行为。</p>
-<p>这里有个有趣的东西，多说一点，就是当我们对 UIView 关联的图层做动画而不是一个单独的图层做动画，比如</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func changeColor()&#10;&#123;&#10;    CATransaction.begin();&#10;    CATransaction.setAnimationDuration(1.0)&#10;    CGFloat red = CGFloat(arc4random() / (CGFloat)INT_MAX);&#10;    CGFloat green = CGFloat(arc4random() / (CGFloat)INT_MAX);&#10;    CGFloat blue = CGFloat(arc4random() / (CGFloat)INT_MAX);&#10;    self.layerView.layer.backgroundColor = UIColor.(colorWithRed:red green:green blue:blue alpha:1.0).CGColor;&#10;    CATransaction.commit();&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>图层的颜色瞬间切换到新的值，而不是之前的平滑过渡，隐式动画似乎给关闭了。<br>我们知道 UIView 和 CALayer 最重要的关系就是 UIView 是 CALayer 的 delegate，<br>当我们改变 CALayer 的属性时，它会调用 <code>func actionForKey(_ event: String) -&gt; CAAction?</code> </p>
-<p>这个方法，接下来发生的事情在官方文档里都有写，实际上是如下几步:</p>
-<ul>
-<li><p><em>If the layer has a delegate that implements the actionForLayer:forKey: method, the layer calls that method. The delegate must do one of the following:</em></p>
-<ol>
-<li><p>Return the action object for the given key.</p>
-</li>
-<li><p>Return the NSNull object if it does not handle the action.</p>
-</li>
-</ol>
-</li>
-<li><p><em>The layer looks in the layer’s actions dictionary for a matching key/action pair.</em></p>
-</li>
-<li><em>The layer looks in the style dictionary for an actions dictionary for a matching key/action pair.</em></li>
-<li><em>The layer calls the defaultActionForKey: class method to look for any class-defined actions.</em></li>
-</ul>
-<p>UIView 作为它关联图层的 Delegate，实现了 <code>actionForLayer(_ layer: CALayer, forKey event: String) -&gt; CAAction?</code> ，当不在一个动画块中，UIView 返回 nil，而在动画块中则返回一个非空值</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">print(&#34;OutSide:\(self.view.actionForLayer(self.view.layer, forKey: &#34;backgroundColor&#34;))&#34;)&#10;UIView.beginAnimations(nil, context: nil)&#10;print(&#34;InSide:\(self.view.actionForLayer(self.view.layer,&#10;forKey: &#34;backgroundColor&#34;))&#34;)&#10;UIView.commitAnimations()</span><br></pre></td></tr></table></figure>
-<p>显示结果如下</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">OutSide:Optional(&#60;null&#62;)&#10;InSide:Optional(&#60;CABasicAnimation: 0x7f7f93ff81b0&#62;)</span><br></pre></td></tr></table></figure>
-<p>当然返回 nil 并不是禁用隐式动画的唯一方法，下面这样也行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">CATransaction.setDisableActions(true)</span><br></pre></td></tr></table></figure>
-<p>那为什么说这个问题呢？因为我们在对每个字符做动画的时候需要先将隐式动画关闭，否者将会做两次动画，比如下面这样:</p>
-<p><img src="https://cloud.githubusercontent.com/assets/3759810/13857496/2443d70a-ecb5-11e5-8661-a499e9c8719d.gif" alt="closeimplicitanimation"></p>
-<p>那么，我们先生成一份 oldlayer, 然后改变相应的属性，生产新的 newLayer。然后创建相应的动画组，添加显式动画。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let olderLayer = animationObjc.animatableLayerCopy(layer)&#10;CATransaction.begin()&#10;CATransaction.setDisableActions(true)&#10;newLayer = effectAnimationClosure(layer: layer)&#10;CATransaction.commit()&#10;var animationGroup:CAAnimationGroup?&#10;animationGroup = groupAnimationWithLayerChanges(old: olderLayer, new: newLayer!)&#10;layer.addAnimation(textAniamtionGroup, forKey: textAnimationGroupKey)</span><br></pre></td></tr></table></figure>
-<h2 id="u6536_u5DE5"><a href="#u6536_u5DE5" class="headerlink" title="收工"></a>收工</h2><p>好了，当上面所有的工作完成之后，就是我们最开始看到的那个效果，代码已经上传 GitHub，你可以从 <a href="https://github.com/morpheus1984/TextKitAndAnimationEffect.git" target="_blank" rel="external">这里</a> 下载。其实这个 demo 里实现的 label 还有很大优化的空间。比如支持多种类型的动画效果，动画效果可配置等等。这是我接下来打算做的事情。<br>本人才疏学浅，错漏难免，欢迎大家批评指正。如果你发现 bug，可以提个 pull request。如果你有更好地思路也请告诉我，让我进步，我请你喝咖啡 ：）。</p>
-<p>这是我的微信号（未完结，请往下看）：</p>
-<p><img src="https://cloud.githubusercontent.com/assets/3759810/13864468/9fdcae9c-ecdc-11e5-9c49-278b327d1ba7.png" alt="wechat"></p>
-<h2 id="u6700_u540E"><a href="#u6700_u540E" class="headerlink" title="最后"></a>最后</h2><p>不知不觉工作许多年了，这几年萝莉变成了姑娘，姑娘变成了孩子妈。大家从 QQ 空间杀到朋友圈。从晒女朋友，到晒结婚照继而到晒娃。这几年鸣人同志都不负众望当上了火影 (丫也不请吃饭)。大家都在发生变化。</p>
-<p>学会开始写点东西分享可能是我想要的一个变化。</p>
-<p>本来作为非知名程序员，平时都是自己上 GitHub 玩，自认为比起一干牛人既没本领可以提振民心士气，又没有独门绝技可以分享。直到我收到了一封来自组织的信。</p>
-<p>最近我加入了一个公会，里面云集了各类高手，轻功，内力，暗器，大家各有所长，时不时分享下自己的看家本领。还是那句老话，不看不知道，一看吓一跳。世界还是外面的大，姑娘还是城里的靓。在群里，大家都很积极活跃，学习氛围异常的好。其实自打做起程序员起，这么多年来，虽然生性慵懒，但是自学却未敢放下，毕竟逆水行舟，不进则退。不可否认的是一个人的学习是很苦闷无聊的，但一群人陪着你一起苦闷无聊也是很欣慰的。</p>
-<p>最后我想引用那封邮件里面的话来表达下我对公会的看法:</p>
-<blockquote>
-<p>这个社群的意义证明了，在互联网时代，依然有这么多人愿意为知识的积累和个人的成长付费，知识本身的价值得到重新的认知，人们以一种去中心化的方式连接起来，P2P 的创作和分享，可能会让知识和技能的积累、传播达到了一种新的高度、深度和广度</p>
-</blockquote>
-<p>我想一贯懒散的我为何突然想写这么个 blog 可能也是因为这个，毕竟知识的受益者永远是那些积极参与学习并持续思考的人。</p>
-<p>额，最后想说的是，是的，那段引用的文字你没看错，这是个需要付费的群，免费时代的付费群，它叫 <a href="http://mp.weixin.qq.com/s?__biz=MjM5ODQ2MDIyMA==&amp;mid=402078207&amp;idx=1&amp;sn=c0b437784c7fc789e06767eedf5cdf87&amp;scene=18#wechat_redirect" target="_blank" rel="external">攻城狮之路</a>。</p>
-<p>知识是很昂贵的，我一直这么认为。另外，其实这是篇硬广。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<blockquote>
-<p>吕伟（<a href="http://weibo.com/u/1660258615" target="_blank" rel="external">@我在罪恶坑的日子</a>）iOS 开发者，这些年在上海工作。专业：扯淡，兼职：开发。<br>感谢投]]>
-    </summary>
-    
-      <category term="Swift" scheme="http://blog.devtang.com/tags/Swift/"/>
-    
-      <category term="投稿" scheme="http://blog.devtang.com/tags/%E6%8A%95%E7%A8%BF/"/>
-    
-      <category term="iOS" scheme="http://blog.devtang.com/categories/iOS/"/>
     
   </entry>
   
