@@ -2,6 +2,56 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.devtang.com/2016/07/24/management-30-summary/</loc>
+    <lastmod>2016-07-24T13:00:46.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2016/04/19/control-yourself/</loc>
+    <lastmod>2016-07-24T12:57:54.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2016/02/16/the-leadership-pipeline-summary/</loc>
+    <lastmod>2016-07-24T12:57:40.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2016/02/16/make-friend-with-time/</loc>
+    <lastmod>2016-07-24T12:57:36.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2016/02/16/inspired-summary/</loc>
+    <lastmod>2016-07-24T12:57:32.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2016/01/17/how-to-read-a-book-summary/</loc>
+    <lastmod>2016-07-24T12:57:22.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2015/08/02/the-story-of-success-book-summary/</loc>
+    <lastmod>2016-07-24T12:57:10.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2015/08/01/become-a-tech-leader-summary/</loc>
+    <lastmod>2016-07-24T12:56:46.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2015/04/04/from-0-to-1-book-summary/</loc>
+    <lastmod>2016-07-24T12:56:42.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2015/03/01/tipping-point/</loc>
+    <lastmod>2016-07-24T12:56:35.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.devtang.com/2016/07/20/programming-worlds-farmer-and-god/</loc>
     <lastmod>2016-07-20T12:18:04.000Z</lastmod>
   </url>
@@ -62,52 +112,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/05/26/mentor-guide/</loc>
-    <lastmod>2016-06-19T03:14:33.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2016/05/24/migrate-from-oc-to-swift/</loc>
-    <lastmod>2016-06-19T03:14:33.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2016/05/22/swift-gym-6-type-infer/</loc>
-    <lastmod>2016-06-19T03:14:33.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2016/05/08/jeju-island-tour/</loc>
-    <lastmod>2016-06-19T03:14:33.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2016/05/07/swiftcon-2016-chat-notes/</loc>
-    <lastmod>2016-06-19T03:14:33.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2016/04/25/swiftcon-2016-notes/</loc>
-    <lastmod>2016-06-19T03:14:33.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2016/04/19/talk-about-wwdc-2016/</loc>
-    <lastmod>2016-06-19T03:14:33.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2016/04/19/control-yourself/</loc>
-    <lastmod>2016-06-19T03:14:33.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2016/04/12/tomato-time-management/</loc>
-    <lastmod>2016-06-19T03:14:33.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2016/04/07/my-password-management-way/</loc>
+    <loc>http://blog.devtang.com/2014/06/24/ios-weekly-15/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -147,17 +152,17 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/02/16/the-leadership-pipeline-summary/</loc>
+    <loc>http://blog.devtang.com/2016/06/05/tech-talk-notes/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/02/16/make-friend-with-time/</loc>
+    <loc>http://blog.devtang.com/2016/05/26/mentor-guide/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/02/16/inspired-summary/</loc>
+    <loc>http://blog.devtang.com/2016/05/22/swift-gym-6-type-infer/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -167,7 +172,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/01/17/how-to-read-a-book-summary/</loc>
+    <loc>http://blog.devtang.com/2016/05/08/jeju-island-tour/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -257,12 +262,12 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2015/08/02/the-story-of-success-book-summary/</loc>
+    <loc>http://blog.devtang.com/2016/05/07/swiftcon-2016-chat-notes/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2015/08/01/become-a-tech-leader-summary/</loc>
+    <loc>http://blog.devtang.com/2016/04/25/swiftcon-2016-notes/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -337,7 +342,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2015/04/04/from-0-to-1-book-summary/</loc>
+    <loc>http://blog.devtang.com/2016/04/19/talk-about-wwdc-2016/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -362,7 +367,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2015/03/01/tipping-point/</loc>
+    <loc>http://blog.devtang.com/2016/06/06/high-output-management-summary/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -527,7 +532,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/07/27/ios-levelup-tips/</loc>
+    <loc>http://blog.devtang.com/2016/04/12/tomato-time-management/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -537,7 +542,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/06/05/tech-talk-notes/</loc>
+    <loc>http://blog.devtang.com/2014/07/11/ios-weekly-17/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -557,7 +562,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/06/24/ios-weekly-15/</loc>
+    <loc>http://blog.devtang.com/2016/05/24/migrate-from-oc-to-swift/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -702,7 +707,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/06/06/high-output-management-summary/</loc>
+    <loc>http://blog.devtang.com/2016/04/07/my-password-management-way/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -1037,7 +1042,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/07/11/ios-weekly-17/</loc>
+    <loc>http://blog.devtang.com/2014/07/27/ios-levelup-tips/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
