@@ -30,10 +30,10 @@
 <meta property="og:image" content="http://blog.devtang.com/images/memory-cycle-2.png">
 <meta property="og:image" content="http://blog.devtang.com/images/memory-cycle-3.png">
 <meta property="og:image" content="http://blog.devtang.com/images/memory-cycle-4.png">
-<meta property="og:image" content="http://blog.devtang.com/images/memory-instruments-1.png">
-<meta property="og:image" content="http://blog.devtang.com/images/memory-instruments-2.png">
+<meta property="og:image" content="http://blog.devtang.com/images/memory-instruments-1.jpg">
+<meta property="og:image" content="http://blog.devtang.com/images/memory-instruments-2.jpg">
 <meta property="og:image" content="http://blog.devtang.com/images/memory-instruments-3.png">
-<meta property="og:updated_time" content="2016-07-30T00:43:42.000Z">
+<meta property="og:updated_time" content="2016-07-30T01:02:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解 iOS 的内存管理">
 <meta name="twitter:description" content="远古时代的故事那些经历过手工管理内存（MRC）时代的人们，一定对 iOS 开发中的内存管理记忆犹新。那个时候大约是 2010 年，国内 iOS 开发刚刚兴起，tinyfool 大叔的大名已经如雷贯耳，而我还是一个默默无闻的刚毕业的小子。那个时候的 iOS 开发过程是这样的：
@@ -104,7 +104,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u8FDC_u53E4_u65F6_u4EE3_u7684_u6545_u4E8B"><span class="toc-number">1.</span> <span class="toc-text">远古时代的故事</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4EC0_u4E48_u662F_u5F15_u7528_u8BA1_u6570"><span class="toc-number">2.</span> <span class="toc-text">什么是引用计数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6211_u4EEC_u4E3A_u4EC0_u4E48_u9700_u8981_u5F15_u7528_u8BA1_u6570"><span class="toc-number">3.</span> <span class="toc-text">我们为什么需要引用计数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4E0D_u8981_u5411_u5DF2_u7ECF_u91CA_u653E_u7684_u5BF9_u8C61_u53D1_u9001_u6D88_u606F"><span class="toc-number">4.</span> <span class="toc-text">不要向已经释放的对象发送消息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARC__u4E0B_u7684_u5185_u5B58_u7BA1_u7406_u95EE_u9898"><span class="toc-number">5.</span> <span class="toc-text">ARC 下的内存管理问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5FAA_u73AF_u5F15_u7528_uFF08Reference_Cycle_uFF09_u95EE_u9898"><span class="toc-number">5.1.</span> <span class="toc-text">循环引用（Reference Cycle）问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4F7F_u7528_Xcode__u68C0_u6D4B_u5FAA_u73AF_u5F15_u7528"><span class="toc-number">5.2.</span> <span class="toc-text">使用 Xcode 检测循环引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Core_Foundation__u5BF9_u8C61_u7684_u5185_u5B58_u7BA1_u7406"><span class="toc-number">5.3.</span> <span class="toc-text">Core Foundation 对象的内存管理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u8FDC_u53E4_u65F6_u4EE3_u7684_u6545_u4E8B"><span class="toc-number">1.</span> <span class="toc-text">远古时代的故事</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4EC0_u4E48_u662F_u5F15_u7528_u8BA1_u6570"><span class="toc-number">2.</span> <span class="toc-text">什么是引用计数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6211_u4EEC_u4E3A_u4EC0_u4E48_u9700_u8981_u5F15_u7528_u8BA1_u6570"><span class="toc-number">3.</span> <span class="toc-text">我们为什么需要引用计数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4E0D_u8981_u5411_u5DF2_u7ECF_u91CA_u653E_u7684_u5BF9_u8C61_u53D1_u9001_u6D88_u606F"><span class="toc-number">4.</span> <span class="toc-text">不要向已经释放的对象发送消息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARC__u4E0B_u7684_u5185_u5B58_u7BA1_u7406_u95EE_u9898"><span class="toc-number">5.</span> <span class="toc-text">ARC 下的内存管理问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5FAA_u73AF_u5F15_u7528_uFF08Reference_Cycle_uFF09_u95EE_u9898"><span class="toc-number">5.1.</span> <span class="toc-text">循环引用（Reference Cycle）问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E3B_u52A8_u65AD_u5F00_u5FAA_u73AF_u5F15_u7528"><span class="toc-number">5.2.</span> <span class="toc-text">主动断开循环引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4F7F_u7528_u5F31_u5F15_u7528"><span class="toc-number">5.3.</span> <span class="toc-text">使用弱引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5F31_u5F15_u7528_u7684_u5B9E_u73B0_u539F_u7406"><span class="toc-number">5.4.</span> <span class="toc-text">弱引用的实现原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4F7F_u7528_Xcode__u68C0_u6D4B_u5FAA_u73AF_u5F15_u7528"><span class="toc-number">5.5.</span> <span class="toc-text">使用 Xcode 检测循环引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Core_Foundation__u5BF9_u8C61_u7684_u5185_u5B58_u7BA1_u7406"><span class="toc-number">5.6.</span> <span class="toc-text">Core Foundation 对象的内存管理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
 		
 		</div>
 		
@@ -153,7 +153,7 @@
 <img src="/images/memory-cycle-1.png">
 <p>不止两对象存在循环引用问题，多个对象依次持有对方，形式一个环状，也可以造成循环引用问题，而且在真实编程环境中，环越大就越难被发现。下图是 4 个对象形成的循环引用问题。</p>
 <img src="/images/memory-cycle-2.png">
-<p>解决循环引用问题主要有两个办法，第一个办法是我明确知道这里会存在循环引用，在合理的位置主动断开环中的一个引用，使得对象得以回收。如下图所示：</p>
+<h3 id="u4E3B_u52A8_u65AD_u5F00_u5FAA_u73AF_u5F15_u7528"><a href="#u4E3B_u52A8_u65AD_u5F00_u5FAA_u73AF_u5F15_u7528" class="headerlink" title="主动断开循环引用"></a>主动断开循环引用</h3><p>解决循环引用问题主要有两个办法，第一个办法是我明确知道这里会存在循环引用，在合理的位置主动断开环中的一个引用，使得对象得以回收。如下图所示：</p>
 <img src="/images/memory-cycle-3.png">
 <p>主动断开循环引用这种方式常见于各种与 block 相关的代码逻辑中。例如在我开源的 <a href="https://github.com/yuantiku/YTKNetwork" target="_blank" rel="external">YTKNetwork</a> 网络库中，网络请求的回调 block 是被持有的，但是如果这个 block 中又存在对于 View Controller 的引用，就很容易产生从循环引用，因为：</p>
 <ul>
@@ -164,14 +164,21 @@
 <p>解决办法就是，在网络请求结束后，网络请求对象执行完 block 之后，主动释放对于 block 的持有，以便打破循环引用。相关的代码见：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// https://github.com/yuantiku/YTKNetwork/blob/master/YTKNetwork/YTKBaseRequest.m&#10;// &#31532; 147 &#34892;&#65306;&#10;- (void)clearCompletionBlock &#123;&#10;    // &#20027;&#21160;&#37322;&#25918;&#25481;&#23545;&#20110; block &#30340;&#24341;&#29992;&#10;    self.successCompletionBlock = nil;&#10;    self.failureCompletionBlock = nil;&#10;&#125;</span><br></pre></td></tr></table></figure>
 <p>不过，主动断开循环引用这种操作依赖于程序员自己手工显式地控制，相当于回到了以前 “谁申请谁释放” 的内存管理年代，它依赖于程序员自己有能力发现循环引用并且知道在什么时机断开循环引用回收内存（这通常与具体的业务逻辑相关），所以这种解决方法并不常用，更常见的办法是使用弱引用 (weak reference) 的办法。</p>
-<p>弱引用虽然持有对象，但是并不增加引用计数，这样就避免了循环引用的产生。在 iOS 开发中，弱引用通常在 delegate 模式中使用。举个例子来说，两个 ViewController A 和 B，ViewController A 需要弹出 ViewController B，让用户输入一些内容，当用户输入完成后，ViewController B 需要将内容返回给 ViewController A。这个时候，View Controller 的 delegate 成员变量通常是一个弱引用，以避免两个 ViewController 相互引用对方造成循环引用问题，如下所示：</p>
+<h3 id="u4F7F_u7528_u5F31_u5F15_u7528"><a href="#u4F7F_u7528_u5F31_u5F15_u7528" class="headerlink" title="使用弱引用"></a>使用弱引用</h3><p>弱引用虽然持有对象，但是并不增加引用计数，这样就避免了循环引用的产生。在 iOS 开发中，弱引用通常在 delegate 模式中使用。举个例子来说，两个 ViewController A 和 B，ViewController A 需要弹出 ViewController B，让用户输入一些内容，当用户输入完成后，ViewController B 需要将内容返回给 ViewController A。这个时候，View Controller 的 delegate 成员变量通常是一个弱引用，以避免两个 ViewController 相互引用对方造成循环引用问题，如下所示：</p>
 <img src="/images/memory-cycle-4.png">
+<h3 id="u5F31_u5F15_u7528_u7684_u5B9E_u73B0_u539F_u7406"><a href="#u5F31_u5F15_u7528_u7684_u5B9E_u73B0_u539F_u7406" class="headerlink" title="弱引用的实现原理"></a>弱引用的实现原理</h3><p>弱引用的实现原理是这样，系统对于每一个有弱引用的对象，都维护一个表来记录它所有的弱引用的指针地址。这样，当一个对象的引用计数为 0 时，系统就通过这张表，找到所有的弱引用指针，继而把它们都置成 nil。</p>
+<p>从这个原理中，我们可以看出，弱引用的使用是有额外的开销的。虽然这个开销很小，但是如果一个地方我们肯定它不需要弱引用的特性，就不应该盲目使用弱引用。举个例子，有人喜欢在手写界面的时候，将所有界面元素都设置成 weak 的，这某种程度上与 Xcode 通过 Storyboard 拖拽生成的新变量是一致的。但是我个人认为这样做并不太合适。因为：</p>
+<ol>
+<li>我们在创建这个对象时，需要注意临时使用一个强引用持有它，否则因为 weak 变量并不持有对象，就会造成一个对象刚被创建就销毁掉。</li>
+<li>大部分 ViewController 的视图对象的生命周期与 ViewController 本身是一致的，没有必要额外做这个事情。</li>
+<li>早先苹果这么设计，是有历史原因的。在早年，当时系统收到 Memory Warning 的时候，ViewController 的 View 会被 unLoad 掉。这个时候，使用 weak 的视图变量是有用的，可以保持这些内存被回收。但是这个设计已经被废弃了，替代方案是将相关视图的 CALayer 对应的 CABackingStore 类型的内存区会被标记成 volatile 类型，详见<a href="/2013/05/18/goodbye-viewdidunload/">《再见，viewDidUnload方法》</a>。</li>
+</ol>
 <h3 id="u4F7F_u7528_Xcode__u68C0_u6D4B_u5FAA_u73AF_u5F15_u7528"><a href="#u4F7F_u7528_Xcode__u68C0_u6D4B_u5FAA_u73AF_u5F15_u7528" class="headerlink" title="使用 Xcode 检测循环引用"></a>使用 Xcode 检测循环引用</h3><p>Xcode 的 Instruments 工具集可以很方便的检测循环引用。为了测试效果，我们在一个测试用的 ViewController 中填入以下代码，该代码中的 <code>firstArray</code> 和 <code>secondArray</code> 相互引用了对方，构成了循环引用。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- (void)viewDidLoad&#10;&#123;&#10;    [super viewDidLoad];&#10;    NSMutableArray *firstArray = [NSMutableArray array];&#10;    NSMutableArray *secondArray = [NSMutableArray array];&#10;    [firstArray addObject:secondArray];&#10;    [secondArray addObject:firstArray];&#10;&#125;</span><br></pre></td></tr></table></figure>
 <p>在 Xcode 的菜单栏选择：Product -&gt; Profile，然后选择 “Leaks”，再点击右下角的”Profile” 按钮开始检测。如下图</p>
-<img src="/images/memory-instruments-1.png">
+<img src="/images/memory-instruments-1.jpg">
 <p>这个时候 iOS 模拟器会运行起来，我们在模拟器里进行一些界面的切换操作。稍等几秒钟，就可以看到 Instruments 检测到了我们的这次循环引用。Instruments 中会用一条红色的条来表示一次内存泄漏的产生。如下图所示：</p>
-<img src="/images/memory-instruments-2.png">
+<img src="/images/memory-instruments-2.jpg">
 <p>我们可以切换到 Leaks 这栏，点击”Cycles &amp; Roots”，就可以看到以图形方式显示出来的循环引用。这样我们就可以非常方便地找到循环引用的对象了。</p>
 <img src="/images/memory-instruments-3.png">
 <h3 id="Core_Foundation__u5BF9_u8C61_u7684_u5185_u5B58_u7BA1_u7406"><a href="#Core_Foundation__u5BF9_u8C61_u7684_u5185_u5B58_u7BA1_u7406" class="headerlink" title="Core Foundation 对象的内存管理"></a>Core Foundation 对象的内存管理</h3><p>下面我们就来简单介绍一下对底层 Core Foundation 对象的内存管理。底层的 Core Foundation 对象，在创建时大多以 XxxCreateWithXxx 这样的方式创建，例如：</p>
