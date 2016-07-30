@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.devtang.com/2016/07/30/ios-memory-management/</loc>
+    <lastmod>2016-07-30T00:43:42.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.devtang.com/2016/07/24/management-30-summary/</loc>
     <lastmod>2016-07-24T13:00:46.000Z</lastmod>
   </url>
@@ -527,12 +532,12 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/07/30/ios-weekly-19/</loc>
+    <loc>http://blog.devtang.com/2016/04/12/tomato-time-management/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/04/12/tomato-time-management/</loc>
+    <loc>http://blog.devtang.com/2014/07/27/ios-levelup-tips/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -1042,7 +1047,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/07/27/ios-levelup-tips/</loc>
+    <loc>http://blog.devtang.com/2014/07/30/ios-weekly-19/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
