@@ -11,48 +11,38 @@
     
 
     
-    <meta name="description" content="目录本文的内容主要包括：
+    <meta name="description" content="目录及更新说明更新记录：
+
+2013 年 12 月，第一版。
+2015 年 11 月，增加 Rewrite 相关介绍。
+2016 年 8 月，增加 Charles 4 的介绍，反向代理功能和设置外部代理，并且介绍了如何解决与翻墙软件的冲突。
+
+本文的内容主要包括：
 
 Charles 的简介
 如何安装 Charles
 将 Charles 设置成系统代理
 Charles 主界面介绍
 过滤网络请求
-截取 iPhone 上的网络封包
-截取 Https 通讯信息
-模拟慢速网络
-修改网络请求内容
-给服务器做压力测试
-修改服务器返回内容
-总结
-
-&amp;lt;!--
-## Charles 中国特惠
-
-Charles 正版[五折优惠活动](http://ite">
+截取">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Charles 从入门到精通">
 <meta property="og:url" content="http://blog.devtang.com/2015/11/14/charles-introduction/index.html">
 <meta property="og:site_name" content="唐巧的技术博客">
-<meta property="og:description" content="目录本文的内容主要包括：
+<meta property="og:description" content="目录及更新说明更新记录：
+
+2013 年 12 月，第一版。
+2015 年 11 月，增加 Rewrite 相关介绍。
+2016 年 8 月，增加 Charles 4 的介绍，反向代理功能和设置外部代理，并且介绍了如何解决与翻墙软件的冲突。
+
+本文的内容主要包括：
 
 Charles 的简介
 如何安装 Charles
 将 Charles 设置成系统代理
 Charles 主界面介绍
 过滤网络请求
-截取 iPhone 上的网络封包
-截取 Https 通讯信息
-模拟慢速网络
-修改网络请求内容
-给服务器做压力测试
-修改服务器返回内容
-总结
-
-&amp;lt;!--
-## Charles 中国特惠
-
-Charles 正版[五折优惠活动](http://ite">
+截取">
 <meta property="og:image" content="http://blog.devtang.com/images/charles-logo.png">
 <meta property="og:image" content="http://blog.devtang.com/images/charles-pro-3.png">
 <meta property="og:image" content="http://blog.devtang.com/images/charles-pro-4.png">
@@ -78,28 +68,24 @@ Charles 正版[五折优惠活动](http://ite">
 <meta property="og:image" content="http://blog.devtang.com/images/charles-rewrite-2.png">
 <meta property="og:image" content="http://blog.devtang.com/images/charles-rewrite-3.png">
 <meta property="og:image" content="http://blog.devtang.com/images/charles-breakpoint.png">
-<meta property="og:updated_time" content="2016-06-19T03:14:33.000Z">
+<meta property="og:image" content="http://blog.devtang.com/images/charles-reverse-proxy.jpg">
+<meta property="og:updated_time" content="2016-08-07T05:42:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Charles 从入门到精通">
-<meta name="twitter:description" content="目录本文的内容主要包括：
+<meta name="twitter:description" content="目录及更新说明更新记录：
+
+2013 年 12 月，第一版。
+2015 年 11 月，增加 Rewrite 相关介绍。
+2016 年 8 月，增加 Charles 4 的介绍，反向代理功能和设置外部代理，并且介绍了如何解决与翻墙软件的冲突。
+
+本文的内容主要包括：
 
 Charles 的简介
 如何安装 Charles
 将 Charles 设置成系统代理
 Charles 主界面介绍
 过滤网络请求
-截取 iPhone 上的网络封包
-截取 Https 通讯信息
-模拟慢速网络
-修改网络请求内容
-给服务器做压力测试
-修改服务器返回内容
-总结
-
-&amp;lt;!--
-## Charles 中国特惠
-
-Charles 正版[五折优惠活动](http://ite">
+截取">
 
     
     <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
@@ -165,11 +151,17 @@ Charles 正版[五折优惠活动](http://ite">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u76EE_u5F55"><span class="toc-number">1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u7B80_u4ECB"><span class="toc-number">2.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5B89_u88C5_Charles"><span class="toc-number">3.</span> <span class="toc-text">安装 Charles</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5C06_Charles__u8BBE_u7F6E_u6210_u7CFB_u7EDF_u4EE3_u7406"><span class="toc-number">4.</span> <span class="toc-text">将 Charles 设置成系统代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Charles__u4E3B_u754C_u9762_u4ECB_u7ECD"><span class="toc-number">5.</span> <span class="toc-text">Charles 主界面介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8FC7_u6EE4_u7F51_u7EDC_u8BF7_u6C42"><span class="toc-number">6.</span> <span class="toc-text">过滤网络请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u622A_u53D6_iPhone__u4E0A_u7684_u7F51_u7EDC_u5C01_u5305"><span class="toc-number">7.</span> <span class="toc-text">截取 iPhone 上的网络封包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Charles__u4E0A_u7684_u8BBE_u7F6E"><span class="toc-number">7.1.</span> <span class="toc-text">Charles 上的设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#iPhone__u4E0A_u7684_u8BBE_u7F6E"><span class="toc-number">7.2.</span> <span class="toc-text">iPhone 上的设置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u622A_u53D6_Https__u901A_u8BAF_u4FE1_u606F"><span class="toc-number">8.</span> <span class="toc-text">截取 Https 通讯信息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5B89_u88C5_u8BC1_u4E66"><span class="toc-number">8.1.</span> <span class="toc-text">安装证书</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u622A_u53D6_u79FB_u52A8_u8BBE_u5907_u4E2D_u7684_Https__u901A_u8BAF_u4FE1_u606F"><span class="toc-number">8.2.</span> <span class="toc-text">截取移动设备中的 Https 通讯信息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6A21_u62DF_u6162_u901F_u7F51_u7EDC"><span class="toc-number">9.</span> <span class="toc-text">模拟慢速网络</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4FEE_u6539_u7F51_u7EDC_u8BF7_u6C42_u5185_u5BB9"><span class="toc-number">10.</span> <span class="toc-text">修改网络请求内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u7ED9_u670D_u52A1_u5668_u505A_u538B_u529B_u6D4B_u8BD5"><span class="toc-number">11.</span> <span class="toc-text">给服务器做压力测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4FEE_u6539_u670D_u52A1_u5668_u8FD4_u56DE_u5185_u5BB9"><span class="toc-number">12.</span> <span class="toc-text">修改服务器返回内容</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Map__u529F_u80FD"><span class="toc-number">12.1.</span> <span class="toc-text">Map 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rewrite__u529F_u80FD"><span class="toc-number">12.2.</span> <span class="toc-text">Rewrite 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Breakpoints__u529F_u80FD"><span class="toc-number">12.3.</span> <span class="toc-text">Breakpoints 功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">13.</span> <span class="toc-text">总结</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u76EE_u5F55_u53CA_u66F4_u65B0_u8BF4_u660E"><span class="toc-number">1.</span> <span class="toc-text">目录及更新说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Charles__u9650_u65F6_u4F18_u60E0"><span class="toc-number">2.</span> <span class="toc-text">Charles 限时优惠</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u7B80_u4ECB"><span class="toc-number">3.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5B89_u88C5_Charles"><span class="toc-number">4.</span> <span class="toc-text">安装 Charles</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5C06_Charles__u8BBE_u7F6E_u6210_u7CFB_u7EDF_u4EE3_u7406"><span class="toc-number">5.</span> <span class="toc-text">将 Charles 设置成系统代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Charles__u4E3B_u754C_u9762_u4ECB_u7ECD"><span class="toc-number">6.</span> <span class="toc-text">Charles 主界面介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8FC7_u6EE4_u7F51_u7EDC_u8BF7_u6C42"><span class="toc-number">7.</span> <span class="toc-text">过滤网络请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u622A_u53D6_iPhone__u4E0A_u7684_u7F51_u7EDC_u5C01_u5305"><span class="toc-number">8.</span> <span class="toc-text">截取 iPhone 上的网络封包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Charles__u4E0A_u7684_u8BBE_u7F6E"><span class="toc-number">8.1.</span> <span class="toc-text">Charles 上的设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#iPhone__u4E0A_u7684_u8BBE_u7F6E"><span class="toc-number">8.2.</span> <span class="toc-text">iPhone 上的设置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u622A_u53D6_Https__u901A_u8BAF_u4FE1_u606F"><span class="toc-number">9.</span> <span class="toc-text">截取 Https 通讯信息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5B89_u88C5_u8BC1_u4E66"><span class="toc-number">9.1.</span> <span class="toc-text">安装证书</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u622A_u53D6_u79FB_u52A8_u8BBE_u5907_u4E2D_u7684_Https__u901A_u8BAF_u4FE1_u606F"><span class="toc-number">9.2.</span> <span class="toc-text">截取移动设备中的 Https 通讯信息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6A21_u62DF_u6162_u901F_u7F51_u7EDC"><span class="toc-number">10.</span> <span class="toc-text">模拟慢速网络</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4FEE_u6539_u7F51_u7EDC_u8BF7_u6C42_u5185_u5BB9"><span class="toc-number">11.</span> <span class="toc-text">修改网络请求内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u7ED9_u670D_u52A1_u5668_u505A_u538B_u529B_u6D4B_u8BD5"><span class="toc-number">12.</span> <span class="toc-text">给服务器做压力测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4FEE_u6539_u670D_u52A1_u5668_u8FD4_u56DE_u5185_u5BB9"><span class="toc-number">13.</span> <span class="toc-text">修改服务器返回内容</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Map__u529F_u80FD"><span class="toc-number">13.1.</span> <span class="toc-text">Map 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rewrite__u529F_u80FD"><span class="toc-number">13.2.</span> <span class="toc-text">Rewrite 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Breakpoints__u529F_u80FD"><span class="toc-number">13.3.</span> <span class="toc-text">Breakpoints 功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u53CD_u5411_u4EE3_u7406"><span class="toc-number">14.</span> <span class="toc-text">反向代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8BBE_u7F6E_u5916_u90E8_u4EE3_u7406_uFF0C_u89E3_u51B3_u4E0E_u7FFB_u5899_u8F6F_u4EF6_u7684_u51B2_u7A81"><span class="toc-number">15.</span> <span class="toc-text">设置外部代理，解决与翻墙软件的冲突</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">16.</span> <span class="toc-text">总结</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="u76EE_u5F55"><a href="#u76EE_u5F55" class="headerlink" title="目录"></a>目录</h2><p>本文的内容主要包括：</p>
+		<h2 id="u76EE_u5F55_u53CA_u66F4_u65B0_u8BF4_u660E"><a href="#u76EE_u5F55_u53CA_u66F4_u65B0_u8BF4_u660E" class="headerlink" title="目录及更新说明"></a>目录及更新说明</h2><p>更新记录：</p>
+<ul>
+<li>2013 年 12 月，第一版。</li>
+<li>2015 年 11 月，增加 Rewrite 相关介绍。</li>
+<li>2016 年 8 月，增加 Charles 4 的介绍，反向代理功能和设置外部代理，并且介绍了如何解决与翻墙软件的冲突。</li>
+</ul>
+<p>本文的内容主要包括：</p>
 <ul>
 <li>Charles 的简介</li>
 <li>如何安装 Charles</li>
@@ -182,12 +174,13 @@ Charles 正版[五折优惠活动](http://ite">
 <li>修改网络请求内容</li>
 <li>给服务器做压力测试</li>
 <li>修改服务器返回内容</li>
+<li>反向代理</li>
+<li>设置外部代理，解决与翻墙软件的冲突</li>
 <li>总结</li>
 </ul>
+<h2 id="Charles__u9650_u65F6_u4F18_u60E0"><a href="#Charles__u9650_u65F6_u4F18_u60E0" class="headerlink" title="Charles 限时优惠"></a>Charles 限时优惠</h2><p>Charles 4 正版限时优惠优惠活动（限时：2016 年 8 月 8 日 - 15 日），优惠 30 元，<a href="https://taoquan.taobao.com/coupon/unify_apply.htm?sellerId=881336826&amp;activityId=8764822622de490a82ccc6383abce406" target="_blank" rel="external">点击领取优惠券</a>。</p>
 <!--
-## Charles 中国特惠
-
-Charles 正版[五折优惠活动](http://item.taobao.com/item.htm?&id=524230901640)（限时：2015 年 11 月 14 日 - 30 日），仅限中国区购买，[点击购买](http://item.taobao.com/item.htm?&id=524230901640)。在活动期结束后，价格将从 169 元上涨到 199 元。
+淘口令：Charles 新版发布，使用￥Charles￥限时特惠购买正版（长按复制整段文案，打开手机淘宝即可进入活动内容）
 -->
 <h2 id="u7B80_u4ECB"><a href="#u7B80_u4ECB" class="headerlink" title="简介"></a>简介</h2><img src="/images/charles-logo.png">
 <p><a href="http://www.charlesproxy.com/" target="_blank" rel="external">Charles</a> 是在 Mac 下常用的网络封包截取工具，在做<br>移动开发时，我们为了调试与服务器端的网络通讯协议，常常需要截取网络封包来分析。</p>
@@ -201,6 +194,11 @@ Charles 正版[五折优惠活动](http://item.taobao.com/item.htm?&id=524230901
 <li>支持修改网络请求参数。</li>
 <li>支持网络请求的截获并动态修改。</li>
 <li>支持模拟慢速网络。</li>
+</ol>
+<p>Charles 4 新增的主要功能包括：</p>
+<ol>
+<li>支持 Http 2。</li>
+<li>支持 IPv6。</li>
 </ol>
 <h2 id="u5B89_u88C5_Charles"><a href="#u5B89_u88C5_Charles" class="headerlink" title="安装 Charles"></a>安装 Charles</h2><p>去 Charles 的官方网站（<a href="http://www.charlesproxy.com" target="_blank" rel="external">http://www.charlesproxy.com</a>）下载最新版的 Charles 安装包，是一个 dmg 后缀的文件。打开后将 Charles 拖到 Application 目录下即完成安装。</p>
 <h2 id="u5C06_Charles__u8BBE_u7F6E_u6210_u7CFB_u7EDF_u4EE3_u7406"><a href="#u5C06_Charles__u8BBE_u7F6E_u6210_u7CFB_u7EDF_u4EE3_u7406" class="headerlink" title="将 Charles 设置成系统代理"></a>将 Charles 设置成系统代理</h2><p>之前提到，Charles 是通过将自己设置成代理服务器来完成封包截取的，所以使用 Charles 的第一步是将其设置成系统的代理服务器。</p>
@@ -272,6 +270,7 @@ Charles 正版[五折优惠活动](http://item.taobao.com/item.htm?&id=524230901
 <img src="/images/charles-save-response.png">
 <p>下图是一个示例，我将一个指定的网络请求通过 Map Local 功能映射到了本地的一个经过修改的文件中。</p>
 <img src="/images/charles-map-local.png">
+<p>Map Local 在使用的时候，有一个潜在的问题，就是其返回的 Http Response Header 与正常的请求并不一样。这个时候如果客户端校验了 Http Response Header 中的部分内容，就会使得该功能失效。解决办法是同时使用 Map Local 以下面提到的 Rewrite 功能，将相关的 Http 头 Rewrite 成我们希望的内容。</p>
 <h3 id="Rewrite__u529F_u80FD"><a href="#Rewrite__u529F_u80FD" class="headerlink" title="Rewrite 功能"></a>Rewrite 功能</h3><p>Rewrite 功能功能适合对某一类网络请求进行一些正则替换，以达到修改结果的目的。</p>
 <p>例如，我们的客户端有一个 API 请求是获得用户昵称，而我当前的昵称是 “tangqiaoboy”，如下所示：</p>
 <img src="/images/charles-rewrite-1.jpeg">
@@ -284,6 +283,10 @@ Charles 正版[五折优惠活动](http://item.taobao.com/item.htm?&id=524230901
 <p>下图是我们临时修改获取用户信息的 API，将用户的昵称进行了更改，修改完成后点击 “Execute” 则可以让网络请求继续进行。</p>
 <img src="/images/charles-breakpoint.png">
 <p>需要注意的是，使用 Breakpoints 功能将网络请求截获并修改过程中，整个网络请求的计时并不会暂停，所以长时间的暂停可能导致客户端的请求超时。</p>
+<h2 id="u53CD_u5411_u4EE3_u7406"><a href="#u53CD_u5411_u4EE3_u7406" class="headerlink" title="反向代理"></a>反向代理</h2><p>Charles 的反向代理功能允许我们将本地的端口映射到远程的另一个端口上。例如，在下图中，我将本机的 61234 端口映射到了远程（www.yuantiku.com）的80端口上了。这样，当我访问本地的 61234 端口时，实际返回的内容会由 www.yuantiku.com 的 80 端口提供。</p>
+<img src="/images/charles-reverse-proxy.jpg">
+<h2 id="u8BBE_u7F6E_u5916_u90E8_u4EE3_u7406_uFF0C_u89E3_u51B3_u4E0E_u7FFB_u5899_u8F6F_u4EF6_u7684_u51B2_u7A81"><a href="#u8BBE_u7F6E_u5916_u90E8_u4EE3_u7406_uFF0C_u89E3_u51B3_u4E0E_u7FFB_u5899_u8F6F_u4EF6_u7684_u51B2_u7A81" class="headerlink" title="设置外部代理，解决与翻墙软件的冲突"></a>设置外部代理，解决与翻墙软件的冲突</h2><p>Charles 的原理是把自己设置成系统的代理服务器，但是在中国，由于工作需要，我们常常需要使用 Google 搜索，所以大部分程序员都有自己的翻墙软件，而这些软件的基本原理，也是把自己设置成系统的代理服务器，来做到透明的翻墙。</p>
+<p>为了使得两者能够和平共处，我们可以在 Charles 的 <code>External Proxy Settings</code> 中，设置翻墙的代理端口以及相关信息。同时，我们也要关闭相关翻墙软件的自动设置，使其不主动修改系统代理，避免 Charles 失效。</p>
 <h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>通过 Charles 软件，我们可以很方便地在日常开发中，截取和调试网络请求内容，分析封包协议以及模拟慢速网络。用好 Charles 可以极大的方便我们对于带有网络请求的 App 的开发和调试。</p>
 <p>愿本文帮助大家成为 Charles 的专家，祝大家玩得开心～</p>
   
