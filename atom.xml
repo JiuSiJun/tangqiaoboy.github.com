@@ -45,7 +45,7 @@
     <link href="http://blog.devtang.com/2016/08/04/i-do-not-like-core-data/"/>
     <id>http://blog.devtang.com/2016/08/04/i-do-not-like-core-data/</id>
     <published>2016-08-04T14:47:06.000Z</published>
-    <updated>2016-08-04T14:51:47.000Z</updated>
+    <updated>2016-08-07T09:19:41.000Z</updated>
     <content type="html"><![CDATA[<img src="/images/core-data-head.jpg">
 <p>我一直不喜欢 Core Data，以前不太敢明目张胆地这么表达，现在收集到越来越多相关的信息，所以给大家分享一下，我为什么不喜欢 Core Data。</p>
 <h2 id="Core_Data__u592A_u590D_u6742"><a href="#Core_Data__u592A_u590D_u6742" class="headerlink" title="Core Data 太复杂"></a>Core Data 太复杂</h2><p>在今年刚刚结束的 <a href="http://gmtc.geekbang.org/" target="_blank" rel="external">GMTC 大会</a>上，来自澳洲的李剑做了题为《iOS 遗留系统上的架构重构》的演讲，其中就提到 Core Data 给他们 500 万用户带来了 300 万次崩溃。我想任何产品都是不能接受这样的崩溃率的。</p>
