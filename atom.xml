@@ -4,7 +4,7 @@
   <subtitle><![CDATA[记录下自己学习的点滴]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.devtang.com/"/>
-  <updated>2016-08-06T09:44:05.000Z</updated>
+  <updated>2016-08-09T07:37:09.000Z</updated>
   <id>http://blog.devtang.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://blog.devtang.com/2016/08/06/revert-to-target-commit-with-git/"/>
     <id>http://blog.devtang.com/2016/08/06/revert-to-target-commit-with-git/</id>
     <published>2016-08-06T09:39:43.000Z</published>
-    <updated>2016-08-06T09:44:05.000Z</updated>
+    <updated>2016-08-09T07:37:09.000Z</updated>
     <content type="html"><![CDATA[<h2 id="u9700_u6C42"><a href="#u9700_u6C42" class="headerlink" title="需求"></a>需求</h2><p>有些时候，在一些特殊情况下，我们需要将代码恢复到一个历史的提交版本上。而这个历史提交版本，离最新的提交已经比较久远了。</p>
 <p>比如，我希望将如下的仓库的提交，恢复到上上上上次提交。当然，我可以一次一次的 revert，但是有没有更快更简单的办法呢？</p>
 <img src="/images/git-revert-1.jpg">
@@ -30,6 +30,7 @@
 <p>首先，和刚刚一样，用 <code>git reset --hard 23801b2</code> 将代码切换到目标提交的 id。接下来，用 <code>git reset --soft origin/source</code> 命令，将当前代码切换回最新的提交。</p>
 <p>执行完上面两步后，你的仓库还是最新的提交，但是工作区变成了历史的提交内容，这个时候用 <code>git add</code> 和 <code>git commit</code> 即可。最终完成的效果如下：</p>
 <img src="/images/git-revert-2.jpg">
+<p>不过经过念茜的提醒，该方法需要保证 reset 的时候没有别人做新的提交，如果有的话，会一并把别人的提交也撤销了。所以还是挺危险的，慎用。</p>
 <p>虽然用到的时候很少，但是理解它的原理有助于大家理解 Git 的工作区，暂存区和版本库的各种指针操作的意义，希望对大家有用。</p>
 ]]></content>
     <summary type="html">

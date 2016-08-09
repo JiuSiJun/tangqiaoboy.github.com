@@ -25,7 +25,7 @@
 暴力的方式如果你的仓库是自己在用（不影响别人），那么你可以使用 git reset --hard &amp;lt;target_commit_id&amp;gt; 来">
 <meta property="og:image" content="http://blog.devtang.com/images/git-revert-1.jpg">
 <meta property="og:image" content="http://blog.devtang.com/images/git-revert-2.jpg">
-<meta property="og:updated_time" content="2016-08-06T09:44:05.000Z">
+<meta property="og:updated_time" content="2016-08-09T07:37:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何用 Git 将代码恢复到一个历史的版本">
 <meta name="twitter:description" content="需求有些时候，在一些特殊情况下，我们需要将代码恢复到一个历史的提交版本上。而这个历史提交版本，离最新的提交已经比较久远了。
@@ -111,6 +111,7 @@
 <p>首先，和刚刚一样，用 <code>git reset --hard 23801b2</code> 将代码切换到目标提交的 id。接下来，用 <code>git reset --soft origin/source</code> 命令，将当前代码切换回最新的提交。</p>
 <p>执行完上面两步后，你的仓库还是最新的提交，但是工作区变成了历史的提交内容，这个时候用 <code>git add</code> 和 <code>git commit</code> 即可。最终完成的效果如下：</p>
 <img src="/images/git-revert-2.jpg">
+<p>不过经过念茜的提醒，该方法需要保证 reset 的时候没有别人做新的提交，如果有的话，会一并把别人的提交也撤销了。所以还是挺危险的，慎用。</p>
 <p>虽然用到的时候很少，但是理解它的原理有助于大家理解 Git 的工作区，暂存区和版本库的各种指针操作的意义，希望对大家有用。</p>
   
 	</div>
