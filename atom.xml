@@ -4,7 +4,7 @@
   <subtitle><![CDATA[记录下自己学习的点滴]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.devtang.com/"/>
-  <updated>2016-08-13T03:11:23.000Z</updated>
+  <updated>2016-08-13T03:31:11.000Z</updated>
   <id>http://blog.devtang.com/</id>
   
   <author>
@@ -13,6 +13,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[小青和他的 RxSwift 课程]]></title>
+    <link href="http://blog.devtang.com/2016/08/13/xiaoqing-and-rxswfit-course/"/>
+    <id>http://blog.devtang.com/2016/08/13/xiaoqing-and-rxswfit-course/</id>
+    <published>2016-08-13T03:31:11.000Z</published>
+    <updated>2016-08-13T03:31:11.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7xil0e.com1.z0.glb.clouddn.com/teacher/57908b8961854.png" alt=""></p>
+<p>第一次认识小青（<a href="http://weibo.com/u/2314535081" target="_blank" rel="external">@靛青K</a>），是在他与梁杰一起创办的 <a href="http://t.swift.gg/" target="_blank" rel="external">T 沙龙</a>聚会上。当时小青邀请到了代码家，给大家介绍了函数式编程的一些内容。T 沙龙的模式很有意思，它强调纯线下的、小范围的、免费的交流。这与现在这个强调规模与经济的互联网时代格格不入，但是不可否认的是，小青和梁杰办得很成功。就在上一次分享会中，小青邀请到了 <a href="http://weibo.com/u/2157980617" target="_blank" rel="external">@txx</a> 和 h4x 为大家分享逆向，特别是 txx 现象从头到尾演示一个 App 被逆向的过程让我对逆向的实践有了更多的了解。</p>
+<p>沙龙的茶歇期间的闲聊，我才了解到小青还未大学毕业，但是他已经在 Enjoy 开始了他的第二份实习，而这份实习中，他将会用 RxSwift 重构 Enjoy 的众多模块。我私下问他为什么选择 Enjoy，他毫不犹豫地说：「因为可以用 RxSwift 呀！」。其实这也从一个侧面反映出，业界对于 RxSwift 以及比 RxSwift 更早的 ReactiveCocoa 都处于观望的心态，真正勇于尝试的并不多。</p>
+<p>为了学习和推广 RxSwift，小青也花了大量的精力，比如他发布了大量 RxSwift 的教程在 <a href="http://t.swift.gg/t/rxswift-course" target="_blank" rel="external">SwiftGG网站</a>  和<a href="https://medium.com/@DianQK" target="_blank" rel="external">他的博客</a> 上。今年初，小青也成为了 GMTC 2016 全球移动技术大会 Swift 专场讲师，为大家分享了 RxSwift。另外他也在编写一本 RxSwift 的书，预计年底将会出版。</p>
+<p>与此同时，小青也在 StuQ 开设了一门 RxSwift 在线直播小班课，这个课程当前处于报名阶段，预计 8 月下旬开课。这个在线直播课程限 60 人，感兴趣的同学可以查看这里的<a href="http://www.stuq.org/my/courses/study/1062" target="_blank" rel="external">详细介绍</a>，你可以说这是一个广告，也可以说这是一个推荐，反正我自己是报名了。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://7xil0e.com1.z0.glb.clouddn.com/teacher/57908b8961854.png" alt=""></p>
+<p>第一次认识小青（<a href="http://weibo.com/u/2314535081"]]>
+    </summary>
+    
+      <category term="iOS" scheme="http://blog.devtang.com/categories/iOS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[谈谈 T 型人才]]></title>
@@ -1459,46 +1480,6 @@
     </summary>
     
       <category term="Interview" scheme="http://blog.devtang.com/tags/Interview/"/>
-    
-      <category term="Swift" scheme="http://blog.devtang.com/tags/Swift/"/>
-    
-      <category term="iOS" scheme="http://blog.devtang.com/categories/iOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Swift 烧脑体操（六）- 类型推断]]></title>
-    <link href="http://blog.devtang.com/2016/05/22/swift-gym-6-type-infer/"/>
-    <id>http://blog.devtang.com/2016/05/22/swift-gym-6-type-infer/</id>
-    <published>2016-05-22T05:46:26.000Z</published>
-    <updated>2016-06-19T03:14:33.000Z</updated>
-    <content type="html"><![CDATA[<p>前几天，一个朋友在微博上通过私信问了我一个问题，如下的代码，为什么变量 <code>crr</code> 没能把值为 nil 的元素过滤掉？</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr:[Int?] = [1, 2, 3, nil, 4, 5]&#10;let brr = arr.flatMap &#123; $0 &#125;&#10;brr&#10;// brr = [1, 2, 3, 4, 5]&#10;&#10;let crr:[Int?] = arr.flatMap &#123; $0 &#125;&#10;crr&#10;// crr = [&#123;Some 1&#125;, &#123;Some 2&#125;, &#123;Some 3&#125;, nil, &#123;Some 4&#125;, &#123;Some 5&#125;]</span><br></pre></td></tr></table></figure>
-<p>简单来看，同样是使用 <code>flatMap</code> 函数，brr 变量成功过滤掉了值为 nil 的元素，变量 crr 过滤失败。而 brr 和 crr 的区别就是它们的类型不一样，brr 的类型是 <code>[Int]</code> ，而 crr 的类型是 <code>[Int?]</code>，想必其中原因与此有关，那到底是为什么呢？</p>
-<p>在和一些朋友讨论之后，我大概想明白了，这和类型推断有关系。在 crr 相关的代码中，因为 crr 的类型已经被程序员指定为 <code>[Int?]</code>，所以为了编译通过，编译器需要推断出 <code>flatMap</code> 中的闭包的输入和输出变量类型。我们回顾一下 <code>flatMap</code> 在数据中的定义：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">extension SequenceType &#123;&#10;    public func flatMap&#60;T&#62;(@noescape transform: (Self.Generator.Element) throws -&#62; T?)&#10;                rethrows -&#62; [T]&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>可以看出，flatMap 返回的结果是 <code>[T]</code>，而闭包 transform 返回的结果是 <code>T?</code>。而在 crr 这个例子中，T 被推断出是 <code>Int?</code> , 因此 tranform 中 <code>T?</code> 就被代入，变成了 <code>(Int?)?</code> 。所以，如果完善一下上面例子的代码，编译器推断出来的类型是这样的：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let crr:[Int?] = arr.flatMap &#123;&#10;    (element: Int?) -&#62; (Int?)? in&#10;    return element&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>注意这里，返回的变量 element 其实类型并不是 <code>(Int?)?</code>，但是 Optional 是有 conversion 的方法，允许将一个类型的 <code>S</code> 的变量，自动转成 <code>S?</code>，所以转换被自动做了，并没有编译错误发生。</p>
-<p>怎么改这个代码呢？</p>
-<p>有人说把闭包的类型手工指定成 <code>Int?</code>，我试了一下，确实能够正常了，不过我感觉这更像是一个编译器的 Bug，我们再看看这个接口：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">extension SequenceType &#123;&#10;    public func flatMap&#60;T&#62;(@noescape transform: (Self.Generator.Element) throws -&#62; T?)&#10;                rethrows -&#62; [T]&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>按照 <code>flatMap</code> 的接口定义，如果闭包返回的是 Int?，那么按照这个定义，最终 <code>flatMap</code> 的结果就必须是 <code>[Int]</code>，而我们要强制要求结果是 <code>[Int?]</code>，除非这里有自动的转换，否则就应该编译失败。而我自己的试验代码失败，确认出并没有从 [Int] 到 <code>[Int?]</code> 的自动转换。所以我暂时认为这么改能正常工作是一个编译器的 Bug（如有错误，欢迎指出）。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">error: cannot convert value of type &#39;[Int]&#39; to specified type &#39;[Int?]&#39;</span><br></pre></td></tr></table></figure>
-<p>另外，也有朋友说，在这种场景下并不应该使用 <code>flatMap</code> 函数。确实是这样，flatMap 函数本来就有着 flat 的作用在里面，在数组的 <code>flatMap</code> 实现中，有两个重载：</p>
-<ul>
-<li>一个重载版本是为了打平嵌套的多维数据。</li>
-<li>另一个重载版本，就是我们刚刚讨论的版本，flat 是为了去掉 Optional 的封包，同时把 nil 元素去掉。</li>
-</ul>
-<p>而这个示例代码调用了 <code>flatMap</code> 函数，却希望仍然得到 Optional 的数组，实在是不应该使用 <code>flatMap</code> 来做这个事情。如果只是为了去掉 Optional 中的 nil 元素，使用 <code>filter</code> 方法可能更为合适一些：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;let arr:[Int?] = [1, 2, 3, nil, 4, 5]&#10;let drr:[Int?] = arr.filter &#123;&#10;    if let _ = $0 &#123;&#10;        return true&#10;    &#125; else &#123;&#10;        return false&#10;    &#125;&#10;&#125;&#10;drr&#10;// drr = [&#123;Some 1&#125;, &#123;Some 2&#125;, &#123;Some 3&#125;, &#123;Some 4&#125;, &#123;Some 5&#125;]</span><br></pre></td></tr></table></figure>
-<p>其实函数式编程的方法不止 <code>map</code>, <code>flatMap</code>, <code>filter</code> 这些，在一个名为 <a href="http://reactivex.io/" target="_blank" rel="external">reactiveX</a> 的网站上，列举了 Reactive 编程实践下的一些 <a href="http://reactivex.io/documentation/operators.html" target="_blank" rel="external">常见的函数</a>，里面的很多方法都挺有意思，这些方法也被实现在了 <a href="https://github.com/ReactiveX/RxSwift" target="_blank" rel="external">RxSwift</a> 中，感兴趣的同学可以看看。</p>
-<p>祝玩得开心！</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>前几天，一个朋友在微博上通过私信问了我一个问题，如下的代码，为什么变量 <code>crr</code> 没能把值为 nil 的元素过滤掉？</p>
-<figure class="highlight plain"><table><tr><td class="code"><p]]>
-    </summary>
     
       <category term="Swift" scheme="http://blog.devtang.com/tags/Swift/"/>
     
