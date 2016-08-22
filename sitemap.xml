@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.devtang.com/2016/08/22/soft-skills/</loc>
+    <lastmod>2016-08-22T14:08:05.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.devtang.com/2016/08/13/xiaoqing-and-rxswfit-course/</loc>
     <lastmod>2016-08-13T03:31:11.000Z</lastmod>
   </url>
@@ -157,12 +162,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/06/02/use-gitcafe-to-host-blog/</loc>
-    <lastmod>2016-06-19T03:14:33.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2016/02/27/swift-gym-3-higher-order-function/</loc>
+    <loc>http://blog.devtang.com/2014/06/01/ios-weekly-13/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -177,6 +177,11 @@
   </url>
   
   <url>
+    <loc>http://blog.devtang.com/2016/05/08/jeju-island-tour/</loc>
+    <lastmod>2016-06-19T03:14:33.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.devtang.com/2016/05/22/swift-gym-6-type-infer/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
@@ -187,17 +192,12 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/05/26/mentor-guide/</loc>
-    <lastmod>2016-06-19T03:14:33.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.devtang.com/2016/02/16/from-octopress-to-hexo/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/06/06/high-output-management-summary/</loc>
+    <loc>http://blog.devtang.com/2016/05/26/mentor-guide/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -242,7 +242,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/06/05/tech-talk-notes/</loc>
+    <loc>http://blog.devtang.com/2016/06/06/high-output-management-summary/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -287,12 +287,12 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/05/07/swiftcon-2016-chat-notes/</loc>
+    <loc>http://blog.devtang.com/2016/06/05/tech-talk-notes/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/04/19/talk-about-wwdc-2016/</loc>
+    <loc>http://blog.devtang.com/2016/04/25/swiftcon-2016-notes/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -367,7 +367,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/05/08/jeju-island-tour/</loc>
+    <loc>http://blog.devtang.com/2016/05/07/swiftcon-2016-chat-notes/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -542,12 +542,12 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/04/07/my-password-management-way/</loc>
+    <loc>http://blog.devtang.com/2014/08/18/ios-weekly-21/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/08/12/ios-weekly-20/</loc>
+    <loc>http://blog.devtang.com/2016/04/07/my-password-management-way/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -597,12 +597,12 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/04/25/swiftcon-2016-notes/</loc>
+    <loc>http://blog.devtang.com/2014/06/02/use-gitcafe-to-host-blog/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/06/01/ios-weekly-13/</loc>
+    <loc>http://blog.devtang.com/2016/04/19/talk-about-wwdc-2016/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -1072,7 +1072,12 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/08/18/ios-weekly-21/</loc>
+    <loc>http://blog.devtang.com/2016/02/27/swift-gym-3-higher-order-function/</loc>
+    <lastmod>2016-06-19T03:14:33.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2014/08/12/ios-weekly-20/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
