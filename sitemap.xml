@@ -2,6 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.devtang.com/2016/08/22/soft-skills/</loc>
+    <lastmod>2016-09-04T14:32:31.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2016/07/20/programming-worlds-farmer-and-god/</loc>
+    <lastmod>2016-09-04T14:29:25.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2016/09/04/open-your-brain/</loc>
+    <lastmod>2016-09-04T14:27:39.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.devtang.com/2016/09/04/company-with-personality/</loc>
     <lastmod>2016-09-04T13:19:39.000Z</lastmod>
   </url>
@@ -14,11 +29,6 @@
   <url>
     <loc>http://blog.devtang.com/2016/09/01/dev-level-up-stories/</loc>
     <lastmod>2016-09-01T14:02:34.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2016/08/22/soft-skills/</loc>
-    <lastmod>2016-08-22T14:08:05.000Z</lastmod>
   </url>
   
   <url>
@@ -109,11 +119,6 @@
   <url>
     <loc>http://blog.devtang.com/2015/03/01/tipping-point/</loc>
     <lastmod>2016-07-24T12:56:35.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2016/07/20/programming-worlds-farmer-and-god/</loc>
-    <lastmod>2016-07-20T12:18:04.000Z</lastmod>
   </url>
   
   <url>
@@ -547,12 +552,12 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/09/01/ios-weekly-23/</loc>
+    <loc>http://blog.devtang.com/2016/04/07/my-password-management-way/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/04/07/my-password-management-way/</loc>
+    <loc>http://blog.devtang.com/2014/08/24/ios-weekly-22/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -1087,7 +1092,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/08/24/ios-weekly-22/</loc>
+    <loc>http://blog.devtang.com/2014/09/01/ios-weekly-23/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
