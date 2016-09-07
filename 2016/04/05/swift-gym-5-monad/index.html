@@ -11,21 +11,45 @@
     
 
     
-    <meta name="description" content="前言Swift 其实比 Objective-C 复杂很多，相对于出生于上世纪 80 年代的 Objective-C 来说，Swift 融入了大量新特性。这也使得我们学习掌握这门语言变得相对来说更加困难。不过一切都是值得的，Swift 相比 Objective-C，写出来的程序更安全、更简洁，最终能够提高我们的工作效率和质量。
-Swift 相关的学习资料已经很多，我想从另外一个角度来介绍它的一些特性">
+    <meta name="description" content="索引Swift 烧脑系列文章列表：
+
+Swift 烧脑体操（一） - Optional 的嵌套
+Swift 烧脑体操（二） - 函数的参数
+Swift 烧脑体操（三） - 高阶函数
+Swift 烧脑体操（四） - map 和 flatMap
+Swift 烧脑体操（五）- Monad
+Swift 烧脑体操（六）- 类型推断
+
+前言Swift 其实比 Objective-C 复杂很多，相对于出生于上世">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Swift 烧脑体操（五）- Monad">
 <meta property="og:url" content="http://blog.devtang.com/2016/04/05/swift-gym-5-monad/index.html">
 <meta property="og:site_name" content="唐巧的技术博客">
-<meta property="og:description" content="前言Swift 其实比 Objective-C 复杂很多，相对于出生于上世纪 80 年代的 Objective-C 来说，Swift 融入了大量新特性。这也使得我们学习掌握这门语言变得相对来说更加困难。不过一切都是值得的，Swift 相比 Objective-C，写出来的程序更安全、更简洁，最终能够提高我们的工作效率和质量。
-Swift 相关的学习资料已经很多，我想从另外一个角度来介绍它的一些特性">
+<meta property="og:description" content="索引Swift 烧脑系列文章列表：
+
+Swift 烧脑体操（一） - Optional 的嵌套
+Swift 烧脑体操（二） - 函数的参数
+Swift 烧脑体操（三） - 高阶函数
+Swift 烧脑体操（四） - map 和 flatMap
+Swift 烧脑体操（五）- Monad
+Swift 烧脑体操（六）- 类型推断
+
+前言Swift 其实比 Objective-C 复杂很多，相对于出生于上世">
 <meta property="og:image" content="http://ww2.sinaimg.cn/mw690/65dc76a3gw1f08hrkcyydj20i40cigv2.jpg">
 <meta property="og:image" content="http://ww4.sinaimg.cn/mw690/65dc76a3gw1f0sz15ou0fj20cx07d0u3.jpg">
-<meta property="og:updated_time" content="2016-06-19T03:14:33.000Z">
+<meta property="og:updated_time" content="2016-09-07T14:25:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift 烧脑体操（五）- Monad">
-<meta name="twitter:description" content="前言Swift 其实比 Objective-C 复杂很多，相对于出生于上世纪 80 年代的 Objective-C 来说，Swift 融入了大量新特性。这也使得我们学习掌握这门语言变得相对来说更加困难。不过一切都是值得的，Swift 相比 Objective-C，写出来的程序更安全、更简洁，最终能够提高我们的工作效率和质量。
-Swift 相关的学习资料已经很多，我想从另外一个角度来介绍它的一些特性">
+<meta name="twitter:description" content="索引Swift 烧脑系列文章列表：
+
+Swift 烧脑体操（一） - Optional 的嵌套
+Swift 烧脑体操（二） - 函数的参数
+Swift 烧脑体操（三） - 高阶函数
+Swift 烧脑体操（四） - map 和 flatMap
+Swift 烧脑体操（五）- Monad
+Swift 烧脑体操（六）- 类型推断
+
+前言Swift 其实比 Objective-C 复杂很多，相对于出生于上世">
 
     
     <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
@@ -91,11 +115,20 @@ Swift 相关的学习资料已经很多，我想从另外一个角度来介绍�
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Why_Monad_3F"><span class="toc-number">2.</span> <span class="toc-text">Why Monad?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u57FA_u7840_u77E5_u8BC6"><span class="toc-number">3.</span> <span class="toc-text">基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5C01_u88C5_u8FC7_u7684_u503C_uFF08wrapped_value_29"><span class="toc-number">3.1.</span> <span class="toc-text">封装过的值（wrapped value)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flatMap"><span class="toc-number">3.2.</span> <span class="toc-text">flatMap</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8BBE_u8BA1_u80CC_u540E_u7684_u8FFD_u95EE"><span class="toc-number">4.</span> <span class="toc-text">设计背后的追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Functor"><span class="toc-number">5.</span> <span class="toc-text">Functor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Applicative"><span class="toc-number">6.</span> <span class="toc-text">Applicative</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Monad__u7684_u5E94_u7528"><span class="toc-number">7.</span> <span class="toc-text">Monad 的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise"><span class="toc-number">7.1.</span> <span class="toc-text">Promise</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ReactiveCocoa"><span class="toc-number">7.2.</span> <span class="toc-text">ReactiveCocoa</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">8.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u53C2_u8003_u94FE_u63A5"><span class="toc-number">9.</span> <span class="toc-text">参考链接</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7D22_u5F15"><span class="toc-number">1.</span> <span class="toc-text">索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">2.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Why_Monad_3F"><span class="toc-number">3.</span> <span class="toc-text">Why Monad?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u57FA_u7840_u77E5_u8BC6"><span class="toc-number">4.</span> <span class="toc-text">基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5C01_u88C5_u8FC7_u7684_u503C_uFF08wrapped_value_29"><span class="toc-number">4.1.</span> <span class="toc-text">封装过的值（wrapped value)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flatMap"><span class="toc-number">4.2.</span> <span class="toc-text">flatMap</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8BBE_u8BA1_u80CC_u540E_u7684_u8FFD_u95EE"><span class="toc-number">5.</span> <span class="toc-text">设计背后的追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Functor"><span class="toc-number">6.</span> <span class="toc-text">Functor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Applicative"><span class="toc-number">7.</span> <span class="toc-text">Applicative</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Monad__u7684_u5E94_u7528"><span class="toc-number">8.</span> <span class="toc-text">Monad 的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise"><span class="toc-number">8.1.</span> <span class="toc-text">Promise</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ReactiveCocoa"><span class="toc-number">8.2.</span> <span class="toc-text">ReactiveCocoa</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">9.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u53C2_u8003_u94FE_u63A5"><span class="toc-number">10.</span> <span class="toc-text">参考链接</span></a></li></ol>
 		
 		</div>
 		
 		<p><img src="http://ww2.sinaimg.cn/mw690/65dc76a3gw1f08hrkcyydj20i40cigv2.jpg" alt=""></p>
+<h2 id="u7D22_u5F15"><a href="#u7D22_u5F15" class="headerlink" title="索引"></a>索引</h2><p>Swift 烧脑系列文章列表：</p>
+<ul>
+<li><a href="/2016/02/27/swift-gym-1-nested-optional/">Swift 烧脑体操（一） - Optional 的嵌套</a></li>
+<li><a href="/2016/02/27/swift-gym-2-function-argument/">Swift 烧脑体操（二） - 函数的参数</a></li>
+<li><a href="/2016/02/27/swift-gym-3-higher-order-function/">Swift 烧脑体操（三） - 高阶函数</a></li>
+<li><a href="/2016/03/05/swift-gym-4-map-and-flatmap/">Swift 烧脑体操（四） - map 和 flatMap</a></li>
+<li><a href="/2016/04/05/swift-gym-5-monad/">Swift 烧脑体操（五）- Monad</a></li>
+<li><a href="/2016/05/22/swift-gym-6-type-infer/">Swift 烧脑体操（六）- 类型推断</a></li>
+</ul>
 <h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>Swift 其实比 Objective-C 复杂很多，相对于出生于上世纪 80 年代的 Objective-C 来说，Swift 融入了大量新特性。这也使得我们学习掌握这门语言变得相对来说更加困难。不过一切都是值得的，Swift 相比 Objective-C，写出来的程序更安全、更简洁，最终能够提高我们的工作效率和质量。</p>
 <p>Swift 相关的学习资料已经很多，我想从另外一个角度来介绍它的一些特性，我把这个角度叫做「烧脑体操」。什么意思呢？就是我们专门挑一些比较费脑子的语言细节来学习。通过「烧脑」地思考，来达到对 Swift 语言的更加深入的理解。</p>
 <p>这是本体操的第五节，练习前请做好准备运动，保持头脑清醒。</p>
@@ -271,8 +304,8 @@ Swift 相关的学习资料已经很多，我想从另外一个角度来介绍�
   <div class="sponsor">
   <br />
   <p class="asidetitle">广告</p>
-  <a target="_blank" href="http://campus.sogou.com/">
-  <img src="http://ww4.sinaimg.cn/large/65dc76a3gw1f79ry8worsj206j05kwfm.jpg" width="235px" height="200px" />
+  <a target="_blank" href="https://h5.jianxun.io/20160818-jianzisheng//?utm_source=ad&utm_medium=site_ad&utm_compaign=tangqiao&utm_content=pos_right&utm_term=jialezhang">
+  <img src="https://jianxun.io/gg/201609/tangqiao@1x.png" width="235px" height="200px" />
   </a>
   <br />
   <br />

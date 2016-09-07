@@ -11,21 +11,45 @@
     
 
     
-    <meta name="description" content="版权说明本文为 InfoQ 中文站特供稿件，首发地址为：文章链接。如需转载，请与 InfoQ 中文站联系。
-前言Swift 其实比 Objective-C 复杂很多，相对于出生于上世纪 80 年代的 Objective-C 来说，Swift 融入了大量新特性。这也使得我们学习掌握这门语言变得相对来说更加困难。不过一切都是值得的，Swift 相比 Objective-C，写出来的程序更安全、更简洁，">
+    <meta name="description" content="索引Swift 烧脑系列文章列表：
+
+Swift 烧脑体操（一） - Optional 的嵌套
+Swift 烧脑体操（二） - 函数的参数
+Swift 烧脑体操（三） - 高阶函数
+Swift 烧脑体操（四） - map 和 flatMap
+Swift 烧脑体操（五）- Monad
+Swift 烧脑体操（六）- 类型推断
+
+前言Swift 其实比 Objective-C 复杂很多，相对于出生于上世">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Swift 烧脑体操（三） - 高阶函数">
 <meta property="og:url" content="http://blog.devtang.com/2016/02/27/swift-gym-3-higher-order-function/index.html">
 <meta property="og:site_name" content="唐巧的技术博客">
-<meta property="og:description" content="版权说明本文为 InfoQ 中文站特供稿件，首发地址为：文章链接。如需转载，请与 InfoQ 中文站联系。
-前言Swift 其实比 Objective-C 复杂很多，相对于出生于上世纪 80 年代的 Objective-C 来说，Swift 融入了大量新特性。这也使得我们学习掌握这门语言变得相对来说更加困难。不过一切都是值得的，Swift 相比 Objective-C，写出来的程序更安全、更简洁，">
+<meta property="og:description" content="索引Swift 烧脑系列文章列表：
+
+Swift 烧脑体操（一） - Optional 的嵌套
+Swift 烧脑体操（二） - 函数的参数
+Swift 烧脑体操（三） - 高阶函数
+Swift 烧脑体操（四） - map 和 flatMap
+Swift 烧脑体操（五）- Monad
+Swift 烧脑体操（六）- 类型推断
+
+前言Swift 其实比 Objective-C 复杂很多，相对于出生于上世">
 <meta property="og:image" content="http://ww2.sinaimg.cn/mw690/65dc76a3gw1f08hrkcyydj20i40cigv2.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/mw690/65dc76a3gw1f0sz14hv65j20er08t0tz.jpg">
-<meta property="og:updated_time" content="2016-06-19T03:14:33.000Z">
+<meta property="og:updated_time" content="2016-09-07T14:26:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift 烧脑体操（三） - 高阶函数">
-<meta name="twitter:description" content="版权说明本文为 InfoQ 中文站特供稿件，首发地址为：文章链接。如需转载，请与 InfoQ 中文站联系。
-前言Swift 其实比 Objective-C 复杂很多，相对于出生于上世纪 80 年代的 Objective-C 来说，Swift 融入了大量新特性。这也使得我们学习掌握这门语言变得相对来说更加困难。不过一切都是值得的，Swift 相比 Objective-C，写出来的程序更安全、更简洁，">
+<meta name="twitter:description" content="索引Swift 烧脑系列文章列表：
+
+Swift 烧脑体操（一） - Optional 的嵌套
+Swift 烧脑体操（二） - 函数的参数
+Swift 烧脑体操（三） - 高阶函数
+Swift 烧脑体操（四） - map 和 flatMap
+Swift 烧脑体操（五）- Monad
+Swift 烧脑体操（六）- 类型推断
+
+前言Swift 其实比 Objective-C 复杂很多，相对于出生于上世">
 
     
     <link rel="alternative" href="/atom.xml" title="唐巧的技术博客" type="application/atom+xml">
@@ -91,12 +115,20 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7248_u6743_u8BF4_u660E"><span class="toc-number">1.</span> <span class="toc-text">版权说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">2.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u51C6_u5907_u8FD0_u52A8_uFF1A_u57FA_u7840_u77E5_u8BC6"><span class="toc-number">3.</span> <span class="toc-text">准备运动：基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Trailing_Closure_Syntax"><span class="toc-number">3.1.</span> <span class="toc-text">Trailing Closure Syntax</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5E38_u89C1_u7528_u6CD5_u793A_u4F8B"><span class="toc-number">4.</span> <span class="toc-text">常见用法示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u904D_u5386"><span class="toc-number">4.1.</span> <span class="toc-text">遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6C42_u548C"><span class="toc-number">4.2.</span> <span class="toc-text">求和</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7B5B_u9009"><span class="toc-number">4.3.</span> <span class="toc-text">筛选</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u904D_u5386-1"><span class="toc-number">4.4.</span> <span class="toc-text">遍历</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u70E7_u8111_u4F53_u64CD"><span class="toc-number">5.</span> <span class="toc-text">烧脑体操</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7528_u9AD8_u9636_u51FD_u6570_u6765_u9690_u85CF_u79C1_u6709_u53D8_u91CF"><span class="toc-number">5.1.</span> <span class="toc-text">用高阶函数来隐藏私有变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9762_u8BD5_u9898"><span class="toc-number">5.2.</span> <span class="toc-text">面试题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#u9898_u76EE_u4E00"><span class="toc-number">5.2.1.</span> <span class="toc-text">题目一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u9898_u76EE_u4E8C"><span class="toc-number">5.2.2.</span> <span class="toc-text">题目二</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u9898_u76EE_u4E09"><span class="toc-number">5.2.3.</span> <span class="toc-text">题目三</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u53C2_u8003_u7B54_u6848"><span class="toc-number">5.3.</span> <span class="toc-text">参考答案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#u9898_u76EE_u4E00-1"><span class="toc-number">5.3.1.</span> <span class="toc-text">题目一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u9898_u76EE_u4E8C-1"><span class="toc-number">5.3.2.</span> <span class="toc-text">题目二</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u9898_u76EE_u4E09-1"><span class="toc-number">5.3.3.</span> <span class="toc-text">题目三</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7D22_u5F15"><span class="toc-number">1.</span> <span class="toc-text">索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">2.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u51C6_u5907_u8FD0_u52A8_uFF1A_u57FA_u7840_u77E5_u8BC6"><span class="toc-number">3.</span> <span class="toc-text">准备运动：基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Trailing_Closure_Syntax"><span class="toc-number">3.1.</span> <span class="toc-text">Trailing Closure Syntax</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5E38_u89C1_u7528_u6CD5_u793A_u4F8B"><span class="toc-number">4.</span> <span class="toc-text">常见用法示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u904D_u5386"><span class="toc-number">4.1.</span> <span class="toc-text">遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6C42_u548C"><span class="toc-number">4.2.</span> <span class="toc-text">求和</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7B5B_u9009"><span class="toc-number">4.3.</span> <span class="toc-text">筛选</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u904D_u5386-1"><span class="toc-number">4.4.</span> <span class="toc-text">遍历</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u70E7_u8111_u4F53_u64CD"><span class="toc-number">5.</span> <span class="toc-text">烧脑体操</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7528_u9AD8_u9636_u51FD_u6570_u6765_u9690_u85CF_u79C1_u6709_u53D8_u91CF"><span class="toc-number">5.1.</span> <span class="toc-text">用高阶函数来隐藏私有变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9762_u8BD5_u9898"><span class="toc-number">5.2.</span> <span class="toc-text">面试题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#u9898_u76EE_u4E00"><span class="toc-number">5.2.1.</span> <span class="toc-text">题目一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u9898_u76EE_u4E8C"><span class="toc-number">5.2.2.</span> <span class="toc-text">题目二</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u9898_u76EE_u4E09"><span class="toc-number">5.2.3.</span> <span class="toc-text">题目三</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u53C2_u8003_u7B54_u6848"><span class="toc-number">5.3.</span> <span class="toc-text">参考答案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#u9898_u76EE_u4E00-1"><span class="toc-number">5.3.1.</span> <span class="toc-text">题目一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u9898_u76EE_u4E8C-1"><span class="toc-number">5.3.2.</span> <span class="toc-text">题目二</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u9898_u76EE_u4E09-1"><span class="toc-number">5.3.3.</span> <span class="toc-text">题目三</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
 		
 		</div>
 		
 		<p><img src="http://ww2.sinaimg.cn/mw690/65dc76a3gw1f08hrkcyydj20i40cigv2.jpg" alt=""></p>
-<h2 id="u7248_u6743_u8BF4_u660E"><a href="#u7248_u6743_u8BF4_u660E" class="headerlink" title="版权说明"></a>版权说明</h2><p>本文为 InfoQ 中文站特供稿件，首发地址为：<a href="http://www.infoq.com/cn/articles/swift-brain-gym-high-order-function" target="_blank" rel="external">文章链接</a>。如需转载，请与 InfoQ 中文站联系。</p>
+<h2 id="u7D22_u5F15"><a href="#u7D22_u5F15" class="headerlink" title="索引"></a>索引</h2><p>Swift 烧脑系列文章列表：</p>
+<ul>
+<li><a href="/2016/02/27/swift-gym-1-nested-optional/">Swift 烧脑体操（一） - Optional 的嵌套</a></li>
+<li><a href="/2016/02/27/swift-gym-2-function-argument/">Swift 烧脑体操（二） - 函数的参数</a></li>
+<li><a href="/2016/02/27/swift-gym-3-higher-order-function/">Swift 烧脑体操（三） - 高阶函数</a></li>
+<li><a href="/2016/03/05/swift-gym-4-map-and-flatmap/">Swift 烧脑体操（四） - map 和 flatMap</a></li>
+<li><a href="/2016/04/05/swift-gym-5-monad/">Swift 烧脑体操（五）- Monad</a></li>
+<li><a href="/2016/05/22/swift-gym-6-type-infer/">Swift 烧脑体操（六）- 类型推断</a></li>
+</ul>
 <h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>Swift 其实比 Objective-C 复杂很多，相对于出生于上世纪 80 年代的 Objective-C 来说，Swift 融入了大量新特性。这也使得我们学习掌握这门语言变得相对来说更加困难。不过一切都是值得的，Swift 相比 Objective-C，写出来的程序更安全、更简洁，最终能够提高我们的工作效率和质量。</p>
 <p>Swift 相关的学习资料已经很多，我想从另外一个角度来介绍它的一些特性，我把这个角度叫做「烧脑体操」。什么意思呢？就是我们专门挑一些比较费脑子的语言细节来学习。通过「烧脑」地思考，来达到对 Swift 语言的更加深入的理解。</p>
 <p>这是本体操的第三节，练习前请做好准备运动，保持头脑清醒。</p>
@@ -221,8 +253,8 @@
   <div class="sponsor">
   <br />
   <p class="asidetitle">广告</p>
-  <a target="_blank" href="http://campus.sogou.com/">
-  <img src="http://ww4.sinaimg.cn/large/65dc76a3gw1f79ry8worsj206j05kwfm.jpg" width="235px" height="200px" />
+  <a target="_blank" href="https://h5.jianxun.io/20160818-jianzisheng//?utm_source=ad&utm_medium=site_ad&utm_compaign=tangqiao&utm_content=pos_right&utm_term=jialezhang">
+  <img src="https://jianxun.io/gg/201609/tangqiao@1x.png" width="235px" height="200px" />
   </a>
   <br />
   <br />
