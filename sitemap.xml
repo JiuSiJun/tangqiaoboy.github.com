@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.devtang.com/2016/09/26/ios-weekly-45/</loc>
+    <lastmod>2016-09-26T14:22:01.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.devtang.com/2016/09/16/what-is-love/</loc>
     <lastmod>2016-09-16T15:04:36.000Z</lastmod>
   </url>
@@ -552,12 +557,12 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/09/09/ios-weekly-24/</loc>
+    <loc>http://blog.devtang.com/2016/04/25/swiftcon-2016-notes/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/04/25/swiftcon-2016-notes/</loc>
+    <loc>http://blog.devtang.com/2014/09/01/ios-weekly-23/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -1097,7 +1102,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/09/01/ios-weekly-23/</loc>
+    <loc>http://blog.devtang.com/2014/09/09/ios-weekly-24/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
