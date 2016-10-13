@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.devtang.com/sponsor/index.html</loc>
+    <lastmod>2016-10-13T01:30:01.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.devtang.com/2016/10/10/ios-weekly-46/</loc>
     <lastmod>2016-10-10T12:43:09.000Z</lastmod>
   </url>
@@ -64,11 +69,6 @@
   <url>
     <loc>http://blog.devtang.com/2016/09/04/company-with-personality/</loc>
     <lastmod>2016-09-04T13:19:39.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/sponsor/index.html</loc>
-    <lastmod>2016-09-02T00:58:09.000Z</lastmod>
   </url>
   
   <url>
