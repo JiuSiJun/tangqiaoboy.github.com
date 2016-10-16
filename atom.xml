@@ -4,7 +4,7 @@
   <subtitle><![CDATA[记录下自己学习的点滴]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.devtang.com/"/>
-  <updated>2016-10-10T12:43:09.000Z</updated>
+  <updated>2016-10-16T14:19:27.000Z</updated>
   <id>http://blog.devtang.com/</id>
   
   <author>
@@ -13,6 +13,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[iOS 移动开发周报 - 第 47 期]]></title>
+    <link href="http://blog.devtang.com/2016/10/16/ios-weekly-47/"/>
+    <id>http://blog.devtang.com/2016/10/16/ios-weekly-47/</id>
+    <published>2016-10-16T15:34:22.000Z</published>
+    <updated>2016-10-16T14:19:27.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="u65B0_u95FB"><a href="#u65B0_u95FB" class="headerlink" title="新闻"></a>新闻</h2><h3 id="u82F9_u679C_u89E3_u91CA_Dash__u4E0B_u67B6_u7684_u539F_u56E0"><a href="#u82F9_u679C_u89E3_u91CA_Dash__u4E0B_u67B6_u7684_u539F_u56E0" class="headerlink" title="苹果解释 Dash 下架的原因"></a>苹果解释 Dash 下架的原因</h3><p>上周关于 Dash 被苹果下架的事情有了来自 <a href="http://www.loopinsight.com/2016/10/10/apple-responds-to-dash-controversy-with-proof/" target="_blank" rel="external">苹果的解释</a>，苹果说 Dash 进行了刷榜，具体来说，是在 Dash 的评价中发现了一些明显带有欺骗性的评分。苹果同时说这个决定是最终的，并且不可申述（final and can’t be appealed），所以这件事情可能最终的结果就是这样了。</p>
+<p>我们从这件事情中可以看出，苹果对于刷榜的行为变得越来越严厉了。但是在国内，刷榜的行为还是普遍存在，而且大多数都没有受到惩罚。例如，我们公司的三款产品都没有刷榜，但是我们的竞争对手其实都有明显的刷榜行为。希望苹果能够有机会也整治一下国内的环境，让大家都在一个公平的环境中竞争。</p>
+<h3 id="Swift_4"><a href="#Swift_4" class="headerlink" title="Swift 4"></a>Swift 4</h3><p>是的，Swift 4 开始开发了，在 Swift 4 在 GitHub 的主页上，苹果公布了 Swift 4 的 <a href="https://github.com/apple/swift-evolution/blob/master/README.md#development-major-version--swift-40" target="_blank" rel="external">主要目标</a>。时间上，苹果计划在 2017 年晚些时候正式发布 Swift 4。苹果希望将 Swift 4 的开发分为两个阶段：</p>
+<ul>
+<li>第一阶段：关注于核心的一些需求，以及 ABI 的稳定性。苹果不希望在 Swift 4 中引入 ABI-breaking 的改变。</li>
+<li>第二阶段：该阶段希望在 2017 年春能够开始讨论，在第一阶段的任务完成后，可以增加一些或大或小的新特性。</li>
+</ul>
+<h2 id="u6587_u7AE0"><a href="#u6587_u7AE0" class="headerlink" title="文章"></a>文章</h2><h3 id="u95ED_u5305_u7684_escaping__u4E0E_non-escaping"><a href="#u95ED_u5305_u7684_escaping__u4E0E_non-escaping" class="headerlink" title="闭包的 escaping 与 non-escaping"></a>闭包的 escaping 与 non-escaping</h3><p><a href="https://oleb.net/blog/2016/10/optional-non-escaping-closures/" target="_blank" rel="external">Optional Non-Escaping Closures</a>： 本文讨论了 Swift 中的闭包的 escaping 的情况。所谓 escaping，就是指闭包在作为参数，传递给相应函数之后，相应函数执行完成了，但是闭包可能还需要被调用。所以，这个闭包似乎是逃离（escaping）了函数的作用时间。因为按理说函数执行完了，相应的参数应该就没用了，但是对于 escaping 的闭包，却不是这样。</p>
+<p>什么情况下会出现这种情况呢？最常见的场景就是异步调用。比如我们发起一个网络请求，传入了一个闭包作为回调参数。这个闭包显然需要在网络请求结束时，才会被调用，这就是一个 escaping 的闭包。类似的还包括：我们把一些闭包放到 GCD 提供的 Dispatch Queue 中，也会造成 escaping 的闭包。</p>
+<p>在本文中，作者讨论了一种比较特别的现象：只要一个闭包是 Optional 的，则它一定会是一个 escaping 的闭包。作者讨论了产生此问题的原因，并且提供了一些解决方案。</p>
+<h3 id="u628A_u7B2C_u4E09_u65B9_iOS__u5E94_u7528_u8F6C_u6210_u52A8_u6001_u5E93"><a href="#u628A_u7B2C_u4E09_u65B9_iOS__u5E94_u7528_u8F6C_u6210_u52A8_u6001_u5E93" class="headerlink" title="把第三方 iOS 应用转成动态库"></a>把第三方 iOS 应用转成动态库</h3><p><a href="http://mp.weixin.qq.com/s?__biz=MjM5NTIyNTUyMQ==&amp;mid=2709545228&amp;idx=1&amp;sn=7a47a0de32e06f9c465319e8db8ca13f&amp;chksm=828f0bd2b5f882c46416ab20cd9ea482b3c57b202d876b75d5625a1bb036d40fe01d31c2679a&amp;mpshare=1&amp;scene=1&amp;srcid=1009N6R6XQyc1MDWhh0MfG7h#rd" target="_blank" rel="external">《黑科技：把第三方 iOS 应用转成动态库》</a>，本文介绍了一个自己写的工具，能够把第三方 iOS 应用转成动态库，并加载到自己的 App 中，文章最后会以支付宝为例，展示如何调用其中的 C 函数和 OC 方法。另外，本文首发在我的微信公众号：iOSDevTips 中，如果你还没有关注过，请扫码关注哟：</p>
+<p><img src="http://ww4.sinaimg.cn/mw690/65dc76a3jw1f1ngaau9arj20760763yr.jpg" alt=""></p>
+<h2 id="u89C6_u9891"><a href="#u89C6_u9891" class="headerlink" title="视频"></a>视频</h2><p>本周视频推荐 objc.io 出的一期视频：<a href="https://talk.objc.io/episodes/S01E15-building-parser-combinators-part-1" target="_blank" rel="external">手写一个 Parser</a>。</p>
+<h2 id="u5DE5_u5177"><a href="#u5DE5_u5177" class="headerlink" title="工具"></a>工具</h2><p>本周推荐的工具，是一个 Xcode 8 的效率工具。它可以方便你在任何时候输入需要 import 的内容。其实这类工具在别的平台都是 IDE 自动提供的，以前我在用 Eclipse 写后台的时候，用了一个需要 import 的库的类，只需要按 cmd + shift + o，IDE 就会自动把这些需要 import 的头文件帮你填上，以节省时间。Xcode 在这方面，还有挺多需要加强的。Anyway，Xcode 的 extension 这个机制也让我们能够自己动手丰衣足食了。</p>
+<p>该工具在 GitHub 上的地址是 <a href="https://github.com/markohlebar/Import" target="_blank" rel="external">Import</a>，以下是使用起来的效果动画：</p>
+<p><img src="https://raw.githubusercontent.com/markohlebar/Import/master/Resources/usage.gif" alt=""></p>
+<h2 id="u6709_u8DA3"><a href="#u6709_u8DA3" class="headerlink" title="有趣"></a>有趣</h2><p>本周的趣图来自 <a href="http://weibo.com/lexrus?from=feed&amp;loc=nickname" target="_blank" rel="external">汤圣罡</a>，由苹果的各种配件组成的一个笑脸，愿大家都有一个愉快的一天。</p>
+<p><img src="http://ww3.sinaimg.cn/mw690/68212547jw1f87dsllmyzj20u00u0q4h.jpg" alt=""></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="u65B0_u95FB"><a href="#u65B0_u95FB" class="headerlink" title="新闻"></a>新闻</h2><h3 id="u82F9_u679C_u89E3_u91CA_Dash__u4E0B_u67B6_u7684]]>
+    </summary>
+    
+      <category term="iOS weekly" scheme="http://blog.devtang.com/categories/iOS-weekly/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[iOS 移动开发周报 - 第 46 期]]></title>
@@ -1157,49 +1190,6 @@
       <category term="books" scheme="http://blog.devtang.com/tags/books/"/>
     
       <category term="books summary" scheme="http://blog.devtang.com/categories/books-summary/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[美团到底为什么从 AppStore 下架]]></title>
-    <link href="http://blog.devtang.com/2016/06/26/why-meituan-is-removed-from-appstore/"/>
-    <id>http://blog.devtang.com/2016/06/26/why-meituan-is-removed-from-appstore/</id>
-    <published>2016-06-26T15:08:39.000Z</published>
-    <updated>2016-06-26T15:28:34.000Z</updated>
-    <content type="html"><![CDATA[<img src="/images/meituan.jpg">
-<h2 id="u6545_u4E8B_u80CC_u666F"><a href="#u6545_u4E8B_u80CC_u666F" class="headerlink" title="故事背景"></a>故事背景</h2><p>6 月 23 日（上周四）晚上，美团公司旗下的所有 App（包括美团团购、美团外卖、猫眼电影等 13 款）被苹果下架。一时间谣言四起，网上传得最多的原因是美团没有支付牌照，被实名举报，所以被下架了。而美团对外称是由于技术原因下架，正在和苹果沟通。</p>
-<p>6 月 24 日上午，美团公司的全线产品重新上架成功。而美团和苹果公司均没有对外详细透露此次下架原因。</p>
-<p>但是，此次事件里面反映出很多有意思的细节，值得和大家分析一下。</p>
-<h2 id="u5206_u6790"><a href="#u5206_u6790" class="headerlink" title="分析"></a>分析</h2><h3 id="u5FD8_u8BB0_u7EED_u8D39"><a href="#u5FD8_u8BB0_u7EED_u8D39" class="headerlink" title="忘记续费"></a>忘记续费</h3><p>首先我们来分析一下美团是否是因为忘记续费而被下架。做 iOS 开发的应该都知道，当我们的开发者帐号快要到期时，iTunesConnect 后台的顶部会出现黄色的警告提示，另外开发者的邮箱也会收到相应的邮件提醒。</p>
-<p>美团旗下有 13 款应用，按照应用发版的频率，肯定会有工程师看到 iTunesConnect 后台的警告。因此，忘记续费这种事情实在是不太可能发生的。</p>
-<h3 id="u724C_u7167_u95EE_u9898"><a href="#u724C_u7167_u95EE_u9898" class="headerlink" title="牌照问题"></a>牌照问题</h3><p>我们再来看看网上传得最多的理由：牌照问题。美团确确实实没有支付牌照，但是，如果真的是因为这个理由被全线下架，那么为什么仅仅过了一天又全线上架了？</p>
-<p>美团到现在也没有获得支付牌照，它旗下的 13 款应用在恢复上架后也没有做明显的功能改动。所以如果它因为这个理由被下架，那么理应在获得牌照，或者关闭相应功能后才能重新上架。</p>
-<p>我查了一下，在恢复上架后，美团的应用最后更新时间是 6 月 20 日，美团外卖的最后更新时间是 6 月 2 日。这就说明这些 App 并没有做任何功能改动就重新上架了。</p>
-<img src="/images/meituanwaimai-updatetime.jpg">
-<p>因此，牌照问题这个理由也是站不住脚的。</p>
-<h3 id="u4E0B_u67B6_u7406_u7531_u731C_u6D4B"><a href="#u4E0B_u67B6_u7406_u7531_u731C_u6D4B" class="headerlink" title="下架理由猜测"></a>下架理由猜测</h3><p>那么，还有什么可能的下架理由吗？我突然想起来我以前在网易有道听到过的一个故事。</p>
-<blockquote>
-<p>有一家公司的 App 有个小问题，苹果的审核人员想让他们做一个修改，但是，苹果发现这家公司留的 Agent 帐号里的电话号码打不通（或者没人接），于是苹果就霸气地把人家的 App 直接下架了。这家公司当然慌了，赶紧联系苹果，于是这个小修改迅速被执行了，App 被重新上架。</p>
-</blockquote>
-<p>美团有可能遇上了类似的遭遇吗？我感觉是很有可能的。因为苹果在应用市场一贯强势的态度，让各大互联网公司都不敢怠慢。</p>
-<p>而这种理由，也是最最可能不被苹果和美团公开的。因为对于苹果来说，因为联系不上就把人家全线 App 下架明显做法不太厚道。而对于美团来说，因为不敢得罪苹果，加上自己失误在先，也会选择不公开原因。</p>
-<p>于是，技术原因就成了对外的公关说辞了。</p>
-<h2 id="u6211_u89C1_u8FC7_u7684_u4E0B_u67B6_u4E8B_u4EF6"><a href="#u6211_u89C1_u8FC7_u7684_u4E0B_u67B6_u4E8B_u4EF6" class="headerlink" title="我见过的下架事件"></a>我见过的下架事件</h2><p>在我的 iOS 开发经历中，除了上面讲的那个沟通不畅带来的下架外，我还知道两次下架事件。</p>
-<p>一次下架事件是关于抄袭的。2012 年 9 月，大众点评向苹果举报食神摇摇抄袭大众点评内容，于是食神摇摇被苹果 App Store 下架。这次算是公司维护知识产权的一次正常博弈。</p>
-<p>另一次下架事件是关于人人网的。2013 年，人人网旗下的游戏因为在 AppStore 恶劣地刷榜行为，被苹果全线下架。AppStore 的刷榜行为其实到现在也没有停息过，而且做得更加隐蔽，我们公司也深受其害，而且我们向苹果举报也不管用，我本周会另外撰文介绍那些不为人知的刷榜手段。</p>
-<h2 id="u5199_u5728_u6700_u540E"><a href="#u5199_u5728_u6700_u540E" class="headerlink" title="写在最后"></a>写在最后</h2><p>这个事情还有一点比较奇怪的是，我私下认识一些美团的 iOS 开发，连他们都不知道这件事情的背后原因，让这件事情更加神秘了。</p>
-<p>另外，我了解到像微信这种海量用户的 App，会被苹果的审核团队特别照顾。除了能够获得快速的审核外，审核员也会和微信团队有更加密切的交流，以便微信能够快速响应审核意见。</p>
-<p>我个人认为，除了微信以外，像美团这种在中国区 AppStore 总榜前十的应用，也理应受到这样的审核照顾。这种野蛮的下架，对于中国区的 iPhone 用户来说，也是一种伤害。</p>
-<p>就在发稿前，美团在 AppStore 排名总榜第五（下图）。</p>
-<img src="/images/meituan-rank.jpg">
-<p>苹果现在更加重视中国市场了，而应用审核时更加良好的沟通，就是对于中国市场和开发者最大的激励，期望 AppStore 中国区越来越好。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<img src="/images/meituan.jpg">
-<h2 id="u6545_u4E8B_u80CC_u666F"><a href="#u6545_u4E8B_u80CC_u666F" class="headerlink" title="故事背景"></a>故事背景]]>
-    </summary>
-    
-      <category term="iOS" scheme="http://blog.devtang.com/categories/iOS/"/>
     
   </entry>
   
