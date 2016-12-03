@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.devtang.com/2016/12/03/liulishuo-dongni-english-summary/</loc>
+    <lastmod>2016-12-03T14:42:05.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2016/12/03/talk-about-information-explosion/</loc>
+    <lastmod>2016-12-03T14:41:46.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.devtang.com/2016/11/01/ios-weekly-48/</loc>
     <lastmod>2016-11-01T15:45:00.000Z</lastmod>
   </url>
@@ -562,12 +572,12 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/09/14/ios-weekly-25/</loc>
+    <loc>http://blog.devtang.com/2016/04/25/swiftcon-2016-notes/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/04/25/swiftcon-2016-notes/</loc>
+    <loc>http://blog.devtang.com/2014/09/13/scrum-introduction/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -1117,7 +1127,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/09/13/scrum-introduction/</loc>
+    <loc>http://blog.devtang.com/2014/09/14/ios-weekly-25/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
