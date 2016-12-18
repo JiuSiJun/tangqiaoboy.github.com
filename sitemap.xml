@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.devtang.com/about/index.html</loc>
+    <lastmod>2016-12-18T07:12:09.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2016/12/18/kuaishou-summary/</loc>
+    <lastmod>2016-12-18T07:09:49.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.devtang.com/2016/12/17/flying-big-phenomenon/</loc>
     <lastmod>2016-12-17T14:34:56.000Z</lastmod>
   </url>
@@ -197,11 +207,6 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/about/index.html</loc>
-    <lastmod>2016-07-16T05:03:31.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.devtang.com/2016/07/16/startup-4th-year-summary/</loc>
     <lastmod>2016-07-16T04:46:53.000Z</lastmod>
   </url>
@@ -247,7 +252,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/05/30/understand-tagged-pointer/</loc>
+    <loc>http://blog.devtang.com/2016/04/19/talk-about-wwdc-2016/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -257,7 +262,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/06/06/high-output-management-summary/</loc>
+    <loc>http://blog.devtang.com/2016/06/05/tech-talk-notes/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -302,7 +307,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/06/05/tech-talk-notes/</loc>
+    <loc>http://blog.devtang.com/2016/04/12/tomato-time-management/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -352,7 +357,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/03/13/iOS-transition-guide/</loc>
+    <loc>http://blog.devtang.com/2016/06/06/high-output-management-summary/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -427,7 +432,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/04/12/tomato-time-management/</loc>
+    <loc>http://blog.devtang.com/2016/03/20/text-animation-guide/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -452,7 +457,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/04/19/talk-about-wwdc-2016/</loc>
+    <loc>http://blog.devtang.com/2016/03/13/iOS-transition-guide/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -572,12 +577,12 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/04/25/swiftcon-2016-notes/</loc>
+    <loc>http://blog.devtang.com/2016/05/26/mentor-guide/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/09/14/ios-weekly-25/</loc>
+    <loc>http://blog.devtang.com/2016/05/24/migrate-from-oc-to-swift/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -672,7 +677,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/03/20/text-animation-guide/</loc>
+    <loc>http://blog.devtang.com/2014/05/30/understand-tagged-pointer/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -792,7 +797,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/05/07/swiftcon-2016-chat-notes/</loc>
+    <loc>http://blog.devtang.com/2014/09/24/ios-weekly-26/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -1107,7 +1112,7 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/05/24/migrate-from-oc-to-swift/</loc>
+    <loc>http://blog.devtang.com/2016/05/07/swiftcon-2016-chat-notes/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
@@ -1127,12 +1132,12 @@
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2016/05/26/mentor-guide/</loc>
+    <loc>http://blog.devtang.com/2016/04/25/swiftcon-2016-notes/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.devtang.com/2014/09/24/ios-weekly-26/</loc>
+    <loc>http://blog.devtang.com/2014/09/14/ios-weekly-25/</loc>
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
   </url>
   
