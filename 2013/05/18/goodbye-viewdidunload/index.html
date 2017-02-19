@@ -23,6 +23,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="再见，viewDidUnload方法">
 <meta name="twitter:description" content="前言我在去年的一篇文章 《iOS5 中 UIViewController 的新方法》 中介绍了 iOS5 引入的关于 ViewController 的新方法。但是现在如果运行该文章中的 Sample 代码的话，你会发现 Log 中不会再出现 viewDidUnload 方法被调用的记录。这是因为在 iOS6 中，viewDidUnload 回调方法被 Deprecated 掉了。查看苹果的文档，可">
+<meta name="twitter:image" content="http://blog.devtang.com/images/viewdidunload-1.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="唐巧的博客" type="application/atom+xml">
@@ -31,7 +32,7 @@
     <link rel="icon" href="/img/favicon.png">
     
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -88,17 +89,17 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5206_u6790"><span class="toc-number">2.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5185_u5B58_u4F18_u5316"><span class="toc-number">3.</span> <span class="toc-text">内存优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u53C2_u8003_u94FE_u63A5"><span class="toc-number">5.</span> <span class="toc-text">参考链接</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分析"><span class="toc-number">2.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存优化"><span class="toc-number">3.</span> <span class="toc-text">内存优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考链接"><span class="toc-number">5.</span> <span class="toc-text">参考链接</span></a></li></ol>
 		
 		</div>
 		
-		<h3 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h3><p>我在去年的一篇文章 <a href="/2012/02/06/new-methods-in-uiviewcontroller-of-ios5/">《iOS5 中 UIViewController 的新方法》</a> 中介绍了 iOS5 引入的关于 ViewController 的新方法。但是现在如果运行该文章中的 Sample 代码的话，你会发现 Log 中不会再出现 viewDidUnload 方法被调用的记录。这是因为在 iOS6 中，viewDidUnload 回调方法被 Deprecated 掉了。查看苹果的文档，可以看到如下的说明。</p>
+		<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>我在去年的一篇文章 <a href="/2012/02/06/new-methods-in-uiviewcontroller-of-ios5/">《iOS5 中 UIViewController 的新方法》</a> 中介绍了 iOS5 引入的关于 ViewController 的新方法。但是现在如果运行该文章中的 Sample 代码的话，你会发现 Log 中不会再出现 viewDidUnload 方法被调用的记录。这是因为在 iOS6 中，viewDidUnload 回调方法被 Deprecated 掉了。查看苹果的文档，可以看到如下的说明。</p>
 <img src="/images/viewdidunload-1.jpg">
 <p>那么，原本在 viewDidUnload 中的代码应该怎么处理？在 iOS6 中，又应该怎么处理内存警告？带着这些问题，我查找了一些资料，在此分享给大家。</p>
 <a id="more"></a>
-<h3 id="u5206_u6790"><a href="#u5206_u6790" class="headerlink" title="分析"></a>分析</h3><p>在 iOS4 和 iOS5 系统中，当内存不足，应用收到 Memory warning 时，系统会自动调用当前没在界面上的 ViewController 的 viewDidUnload 方法。<br>通常情况下，这些未显示在界面上的 ViewController 是 UINavigationController Push 栈中未在栈顶的 ViewController，以及 UITabBarViewController 中未显示的子 ViewController。这些 View Controller 都会在 Memory Warning 事件发生时，被系统自动调用 viewDidUnload 方法。</p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>在 iOS4 和 iOS5 系统中，当内存不足，应用收到 Memory warning 时，系统会自动调用当前没在界面上的 ViewController 的 viewDidUnload 方法。<br>通常情况下，这些未显示在界面上的 ViewController 是 UINavigationController Push 栈中未在栈顶的 ViewController，以及 UITabBarViewController 中未显示的子 ViewController。这些 View Controller 都会在 Memory Warning 事件发生时，被系统自动调用 viewDidUnload 方法。</p>
 <p>在 iOS6 中，由于 viewDidUnload 事件在 iOS6 下任何情况都不会被触发，所以苹果在文档中建议，应该将回收内存的相关操作移到另一个回调函数：didReceiveMemoryWarning 中。但是如果你仅仅是把以前写到 viewDidUnload 函数中的代码移动到 didReceiveMemoryWarning 函数中，那么你就错了。以下是一个 <font color="red"> 错误的示例代码 </font> ：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)didReceiveMemoryWarning &#123;</span><br><span class="line">    [<span class="keyword">super</span> didReceiveMemoryWarning];</span><br><span class="line">    <span class="keyword">if</span>([<span class="keyword">self</span> isViewLoaded] &amp;&amp; ![[<span class="keyword">self</span> view] window]) &#123;</span><br><span class="line">        [<span class="keyword">self</span> setView:<span class="literal">nil</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"></div><div class="line">- (<span class="keyword">void</span>)didReceiveMemoryWarning &#123;</div><div class="line">    [<span class="keyword">super</span> didReceiveMemoryWarning];</div><div class="line">    <span class="keyword">if</span>([<span class="keyword">self</span> isViewLoaded] &amp;&amp; ![[<span class="keyword">self</span> view] window]) &#123;</div><div class="line">        [<span class="keyword">self</span> setView:<span class="literal">nil</span>];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><a href="http://thejoeconwayblog.wordpress.com/2012/10/04/view-controller-lifecycle-in-ios-6/" target="_blank" rel="external">这篇文章</a> 解释了 iOS6 不推荐你将 view 置为 nil 的原因（链接打开需要翻墙）, 翻译过来如下：</p>
 <ol>
 <li><p>UIView 有一个 CALayer 的成员变量，CALayer 是具体用于将自己画到屏幕上的。如下图所示：</p>
@@ -111,7 +112,7 @@
 <li><p>在 iOS6 时，当系统发出 MemoryWarning 时，系统会自动回收 bitmap 类。但是不回收 UIView 和 CALayer 类。这样即回收了大部分内存，又能在需要 bitmap 类时，通过调用 UIView 的 drawRect: 方法重建。</p>
 </li>
 </ol>
-<h3 id="u5185_u5B58_u4F18_u5316"><a href="#u5185_u5B58_u4F18_u5316" class="headerlink" title="内存优化"></a>内存优化</h3><p>另外文章中还提到苹果的操作系统对此做的一个内存优化技巧，解释如下：</p>
+<h3 id="内存优化"><a href="#内存优化" class="headerlink" title="内存优化"></a>内存优化</h3><p>另外文章中还提到苹果的操作系统对此做的一个内存优化技巧，解释如下：</p>
 <ol>
 <li><p>当一段内存被分配时，它会被标记成 “In use“, 以防止被重复使用。当内存被释放时，这段内存会被标记成 “Not in use”，这样，在有新的内存申请时，这块内存就可能被分配给其它变量。</p>
 </li>
@@ -119,11 +120,11 @@
 </li>
 </ol>
 <p>这样，有了上面的优化后，当收到 Memoy Warning 时，虽然所有的 CALayer 所包含的 bitmap 内存都被标记成 volatile 了，但是只要这块内存没有再次被复用，那么当需要重建 bitmap 内存时，<br>它就可以直接被复用，而避免了再次调用 UIView 的 drawRect: 方法。</p>
-<h3 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h3><p>所以，简单来说，对于 iOS6，你不需要做任何以前 viewDidUnload 的事情，更不需要把以前 viewDidUnload 的代码移动到 didReceiveMemoryWarning 方法中。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>所以，简单来说，对于 iOS6，你不需要做任何以前 viewDidUnload 的事情，更不需要把以前 viewDidUnload 的代码移动到 didReceiveMemoryWarning 方法中。</p>
 <p>引用 WWDC 2012 中的一段话来给 viewDidUnload 说再见：</p>
 <blockquote><p>The method viewWillUnload and viewDidUnload. We’re not going to call them anymore. I mean, there’s kind of a cost-benifit equation and analysis that we went through. In the early days, there was a real performance need for us to ensure that on memory warnings we unloaded views. There was all kinds of graphics and backing stores and so forth that would also get unloaded. We now unload those independently of the view, so it isn’t that big of a deal for us for those to be unloaded, and there were so many bugs where there would be pointers into。</p>
 </blockquote>
-<h3 id="u53C2_u8003_u94FE_u63A5"><a href="#u53C2_u8003_u94FE_u63A5" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
 <li><a href="http://thejoeconwayblog.wordpress.com/2012/10/04/view-controller-lifecycle-in-ios-6/" target="_blank" rel="external">View Controller Lifecycle in iOS 6</a></li>
 <li><a href="http://blog.spacemanlabs.com/2011/08/calayer-internals-contents/" target="_blank" rel="external">CALayer Internals: Contents</a></li>
 </ul>

@@ -11,17 +11,18 @@
     
 
     
-    <meta name="description" content="事件回顾据国外多名网友反映，从 11 月 13 号开始，打开一些 Mac App Store 中下载的软件时，会出现 “已损坏”（Damaged）的提示。受此问题影响的软件较多，包括广为人知的 1Password、Dash、Byword 和 Tweetbot 等。Tweetbot 开发者 Paul Haddad 在 Twitter 上表示这个问题看起来与认证证书到期有关，并猜想目前证书使用 SHA">
+    <meta name="description" content="事件回顾据国外多名网友反映，从 11 月 13 号开始，打开一些 Mac App Store 中下载的软件时，会出现 “已损坏”（Damaged）的提示。受此问题影响的软件较多，包括广为人知的 1Password、Dash、Byword 和 Tweetbot 等。Tweetbot 开发者 Paul Haddad 在 Twitter 上表示这个问题看起来与认证证书到期有关，并猜想目前证书使用 SH">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mac 应用出现「已损坏」问题，苹果到底犯了什么傻逼错误？">
 <meta property="og:url" content="http://blog.devtang.com/2015/11/21/apps-damaged-bug/index.html">
 <meta property="og:site_name" content="唐巧的博客">
-<meta property="og:description" content="事件回顾据国外多名网友反映，从 11 月 13 号开始，打开一些 Mac App Store 中下载的软件时，会出现 “已损坏”（Damaged）的提示。受此问题影响的软件较多，包括广为人知的 1Password、Dash、Byword 和 Tweetbot 等。Tweetbot 开发者 Paul Haddad 在 Twitter 上表示这个问题看起来与认证证书到期有关，并猜想目前证书使用 SHA">
+<meta property="og:description" content="事件回顾据国外多名网友反映，从 11 月 13 号开始，打开一些 Mac App Store 中下载的软件时，会出现 “已损坏”（Damaged）的提示。受此问题影响的软件较多，包括广为人知的 1Password、Dash、Byword 和 Tweetbot 等。Tweetbot 开发者 Paul Haddad 在 Twitter 上表示这个问题看起来与认证证书到期有关，并猜想目前证书使用 SH">
 <meta property="og:image" content="http://blog.devtang.com/images/apps-damaged-issue.jpg">
 <meta property="og:updated_time" content="2016-06-19T03:14:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac 应用出现「已损坏」问题，苹果到底犯了什么傻逼错误？">
-<meta name="twitter:description" content="事件回顾据国外多名网友反映，从 11 月 13 号开始，打开一些 Mac App Store 中下载的软件时，会出现 “已损坏”（Damaged）的提示。受此问题影响的软件较多，包括广为人知的 1Password、Dash、Byword 和 Tweetbot 等。Tweetbot 开发者 Paul Haddad 在 Twitter 上表示这个问题看起来与认证证书到期有关，并猜想目前证书使用 SHA">
+<meta name="twitter:description" content="事件回顾据国外多名网友反映，从 11 月 13 号开始，打开一些 Mac App Store 中下载的软件时，会出现 “已损坏”（Damaged）的提示。受此问题影响的软件较多，包括广为人知的 1Password、Dash、Byword 和 Tweetbot 等。Tweetbot 开发者 Paul Haddad 在 Twitter 上表示这个问题看起来与认证证书到期有关，并猜想目前证书使用 SH">
+<meta name="twitter:image" content="http://blog.devtang.com/images/apps-damaged-issue.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="唐巧的博客" type="application/atom+xml">
@@ -30,7 +31,7 @@
     <link rel="icon" href="/img/favicon.png">
     
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -87,13 +88,13 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u4E8B_u4EF6_u56DE_u987E"><span class="toc-number">1.</span> <span class="toc-text">事件回顾</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u95EE_u9898_u539F_u56E0"><span class="toc-number">2.</span> <span class="toc-text">问题原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#事件回顾"><span class="toc-number">1.</span> <span class="toc-text">事件回顾</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题原因"><span class="toc-number">2.</span> <span class="toc-text">问题原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
 		
 		</div>
 		
 		<img src="/images/apps-damaged-issue.jpg">
-<h2 id="u4E8B_u4EF6_u56DE_u987E"><a href="#u4E8B_u4EF6_u56DE_u987E" class="headerlink" title="事件回顾"></a>事件回顾</h2><p>据国外多名网友反映，从 11 月 13 号开始，打开一些 Mac App Store 中下载的软件时，会出现 “已损坏”（Damaged）的提示。受此问题影响的软件较多，包括广为人知的 1Password、Dash、Byword 和 Tweetbot 等。Tweetbot 开发者 Paul Haddad 在 Twitter 上表示这个问题看起来与认证证书到期有关，并猜想目前证书使用 SHA256 加密，或许会和 OS X 老版本不兼容。</p>
-<h2 id="u95EE_u9898_u539F_u56E0"><a href="#u95EE_u9898_u539F_u56E0" class="headerlink" title="问题原因"></a>问题原因</h2><p>微博上的 <a href="http://weibo.com/u/1713195262" target="_blank" rel="external">@webfrogs</a> 分享的<a href="http://m.imore.com/heres-whats-happening-mac-app-store-and-damaged-apps" target="_blank" rel="external">这篇文章</a>中详细解答了这个问题产生的原因。我仔细读了一下，给大家分享一下。</p>
+<h2 id="事件回顾"><a href="#事件回顾" class="headerlink" title="事件回顾"></a>事件回顾</h2><p>据国外多名网友反映，从 11 月 13 号开始，打开一些 Mac App Store 中下载的软件时，会出现 “已损坏”（Damaged）的提示。受此问题影响的软件较多，包括广为人知的 1Password、Dash、Byword 和 Tweetbot 等。Tweetbot 开发者 Paul Haddad 在 Twitter 上表示这个问题看起来与认证证书到期有关，并猜想目前证书使用 SHA256 加密，或许会和 OS X 老版本不兼容。</p>
+<h2 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h2><p>微博上的 <a href="http://weibo.com/u/1713195262" target="_blank" rel="external">@webfrogs</a> 分享的<a href="http://m.imore.com/heres-whats-happening-mac-app-store-and-damaged-apps" target="_blank" rel="external">这篇文章</a>中详细解答了这个问题产生的原因。我仔细读了一下，给大家分享一下。</p>
 <p>每一个 Mac AppStore 下载的软件都有一个证书，证明该软件是合法购买并且没有被篡改的。在以前，该证书是通过 SHA-1 来进行散列验证的，<a href="https://zh.wikipedia.org/wiki/SHA%E5%AE%B6%E6%97%8F" target="_blank" rel="external">SHA-1</a> 是一种类似 MD5 的散列算法，比 MD5 更安全，但是计算起来更耗费 CPU 。</p>
 <p>最近，苹果更改了证书的算法，使用 SHA-2 来进行散列验证的。这本来应该是对用户透明的，但是，苹果的质量部门却没有发现这个大 Bug。于是影响了大范围的用户。</p>
 <p>具体影响的过程是：</p>
@@ -105,7 +106,7 @@
 <p>方案一：类似 XcodeGhost 事件那样，可以将那些使用旧版 OpenSSL 应用被苹果下架，要求它们升级到最新版的 OpenSSL，但是这个至少需要几天时间。</p>
 <p>方案二：苹果将算法退回到 SHA-1。</p>
 <p>于是，在愤怒的用户面前，苹果想了想，还是怂了，将算法退回（Roll back）到了 SHA-1。当然，想必他也会要求以后的应用必须使用新的 OpenSSL 库，然后确保没问题后再升级加密算法。</p>
-<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>总结起来就是：苹果傻逼了，搞了一个大 bug，然后自己回退代码了。这次事故苹果的质量保证部门应该犯有不可推卸的责任。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总结起来就是：苹果傻逼了，搞了一个大 bug，然后自己回退代码了。这次事故苹果的质量保证部门应该犯有不可推卸的责任。</p>
 <p>另外，我居然没受影响，原因是我没有升级 OS X 到最新版，所以逃过了一劫。不过我的一些搞 iOS 开发的小伙们可惨了，好多人挨个把软件重新下载了一遍。</p>
 <p>乔布斯离世之后，苹果的软件质量变得越来越不稳定，加上创业太累，这让我这个不喜欢折腾的人越发喜欢等大家测试稳定之后再升级，希望这是我的错觉吧。</p>
   

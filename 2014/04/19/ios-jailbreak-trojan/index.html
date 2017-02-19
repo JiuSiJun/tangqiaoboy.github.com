@@ -12,20 +12,21 @@
 
     
     <meta name="description" content="关于木马今天，国外的 iOS 开发者 @iOn1c 发现一个来自中国的开发者 “WANG XIN” 签名的 iOS 平台的木马插件，该插件是一个名为Unflod.dylib动态链接库，可以将越狱机器上的 Apple ID 用户名和密码盗取，并且发送到指定服务器上。这里 有该恶意插件的反汇编代码。这里 有关于该木马插件的详细分析。
-检测与原理检查你的设备是否有该木马的方法：用iFile查看/Libr">
+检测与原理检查你的设备是否有该木马的方法：用iFile查看/Lib">
 <meta property="og:type" content="article">
 <meta property="og:title" content="专门针对越狱iOS设备的盗号木马出现">
 <meta property="og:url" content="http://blog.devtang.com/2014/04/19/ios-jailbreak-trojan/index.html">
 <meta property="og:site_name" content="唐巧的博客">
 <meta property="og:description" content="关于木马今天，国外的 iOS 开发者 @iOn1c 发现一个来自中国的开发者 “WANG XIN” 签名的 iOS 平台的木马插件，该插件是一个名为Unflod.dylib动态链接库，可以将越狱机器上的 Apple ID 用户名和密码盗取，并且发送到指定服务器上。这里 有该恶意插件的反汇编代码。这里 有关于该木马插件的详细分析。
-检测与原理检查你的设备是否有该木马的方法：用iFile查看/Libr">
+检测与原理检查你的设备是否有该木马的方法：用iFile查看/Lib">
 <meta property="og:image" content="http://blog.devtang.com/images/jailbreak-warning.jpg">
 <meta property="og:image" content="http://blog.devtang.com/images/kuaiyong.jpg">
 <meta property="og:updated_time" content="2016-06-19T03:14:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="专门针对越狱iOS设备的盗号木马出现">
 <meta name="twitter:description" content="关于木马今天，国外的 iOS 开发者 @iOn1c 发现一个来自中国的开发者 “WANG XIN” 签名的 iOS 平台的木马插件，该插件是一个名为Unflod.dylib动态链接库，可以将越狱机器上的 Apple ID 用户名和密码盗取，并且发送到指定服务器上。这里 有该恶意插件的反汇编代码。这里 有关于该木马插件的详细分析。
-检测与原理检查你的设备是否有该木马的方法：用iFile查看/Libr">
+检测与原理检查你的设备是否有该木马的方法：用iFile查看/Lib">
+<meta name="twitter:image" content="http://blog.devtang.com/images/jailbreak-warning.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="唐巧的博客" type="application/atom+xml">
@@ -34,7 +35,7 @@
     <link rel="icon" href="/img/favicon.png">
     
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -91,20 +92,20 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5173_u4E8E_u6728_u9A6C"><span class="toc-number">1.</span> <span class="toc-text">关于木马</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u68C0_u6D4B_u4E0E_u539F_u7406"><span class="toc-number">2.</span> <span class="toc-text">检测与原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u611F_u60F3"><span class="toc-number">3.</span> <span class="toc-text">感想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5EFA_u8BAE"><span class="toc-number">4.</span> <span class="toc-text">建议</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#关于木马"><span class="toc-number">1.</span> <span class="toc-text">关于木马</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#检测与原理"><span class="toc-number">2.</span> <span class="toc-text">检测与原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#感想"><span class="toc-number">3.</span> <span class="toc-text">感想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#建议"><span class="toc-number">4.</span> <span class="toc-text">建议</span></a></li></ol>
 		
 		</div>
 		
 		<img src="/images/jailbreak-warning.jpg">
-<h3 id="u5173_u4E8E_u6728_u9A6C"><a href="#u5173_u4E8E_u6728_u9A6C" class="headerlink" title="关于木马"></a>关于木马</h3><p>今天，国外的 iOS 开发者 <a href="https://twitter.com/iOn1c" target="_blank" rel="external">@iOn1c</a> 发现一个来自中国的开发者 “WANG XIN” 签名的 iOS 平台的木马插件，该插件是一个名为<code>Unflod.dylib</code>动态链接库，可以将越狱机器上的 Apple ID 用户名和密码盗取，并且发送到指定服务器上。<a href="http://pastebin.com/raw.php?i=QxVRd2ha" target="_blank" rel="external">这里</a> 有该恶意插件的反汇编代码。<a href="https://www.sektioneins.de/en/blog/14-04-18-iOS-malware-campaign-unflod-baby-panda.html" target="_blank" rel="external">这里</a> 有关于该木马插件的详细分析。</p>
-<h3 id="u68C0_u6D4B_u4E0E_u539F_u7406"><a href="#u68C0_u6D4B_u4E0E_u539F_u7406" class="headerlink" title="检测与原理"></a>检测与原理</h3><p>检查你的设备是否有该木马的方法：用<code>iFile</code>查看<code>/Library/MobileSubstrate/DynamicLibraries/Unflod.dylib</code> 文件是否存在，如果存在，请立即删除并且重新启动设备。</p>
+<h3 id="关于木马"><a href="#关于木马" class="headerlink" title="关于木马"></a>关于木马</h3><p>今天，国外的 iOS 开发者 <a href="https://twitter.com/iOn1c" target="_blank" rel="external">@iOn1c</a> 发现一个来自中国的开发者 “WANG XIN” 签名的 iOS 平台的木马插件，该插件是一个名为<code>Unflod.dylib</code>动态链接库，可以将越狱机器上的 Apple ID 用户名和密码盗取，并且发送到指定服务器上。<a href="http://pastebin.com/raw.php?i=QxVRd2ha" target="_blank" rel="external">这里</a> 有该恶意插件的反汇编代码。<a href="https://www.sektioneins.de/en/blog/14-04-18-iOS-malware-campaign-unflod-baby-panda.html" target="_blank" rel="external">这里</a> 有关于该木马插件的详细分析。</p>
+<h3 id="检测与原理"><a href="#检测与原理" class="headerlink" title="检测与原理"></a>检测与原理</h3><p>检查你的设备是否有该木马的方法：用<code>iFile</code>查看<code>/Library/MobileSubstrate/DynamicLibraries/Unflod.dylib</code> 文件是否存在，如果存在，请立即删除并且重新启动设备。</p>
 <p>国外的越狱开发者也分析了一下该插件的工作原理，它通过监听所有的 SSL 协议，来截取用户的帐号和密码。所以理论上，该技术方案其实不光可以监听 Apple ID 帐号，还可以用来监听支付宝、微信等应用的帐号和密码。</p>
-<h3 id="u611F_u60F3"><a href="#u611F_u60F3" class="headerlink" title="感想"></a>感想</h3><p>自从 2010 年 7 月 26 日，美国版权局修改《千禧年数字版权法》中的豁免条款，认可了 iOS 越狱的合法性以后，国外越狱社区就一直在为了自由地使用 iPhone 设备努力。国外的 Cydia 商店不但提供了大量优秀的免费软件，也提供了付费的越狱软件的下载。越狱在国外，是与盗版严格划清界限的，大多数的越狱开发者，也都是为了更好的使用 iPhone 而开发相关软件。</p>
+<h3 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h3><p>自从 2010 年 7 月 26 日，美国版权局修改《千禧年数字版权法》中的豁免条款，认可了 iOS 越狱的合法性以后，国外越狱社区就一直在为了自由地使用 iPhone 设备努力。国外的 Cydia 商店不但提供了大量优秀的免费软件，也提供了付费的越狱软件的下载。越狱在国外，是与盗版严格划清界限的，大多数的越狱开发者，也都是为了更好的使用 iPhone 而开发相关软件。</p>
 <p>但是在国内，大部分的越狱用户的目的还是停留在使用盗版软件上，这也反映出国人的版权意识薄弱以及法律对于知识产权保护的不力。相关的盗版软件渠道，不但能够堂堂正正的宣传 <a href="http://weibo.com/2786069543/yxpdRrpGB?mod=weibotime" target="_blank" rel="external">“海量正版软件游戏，全部免费安装”</a>，而且有些公司还能被大公司以 <a href="http://tech.sina.com.cn/i/baidubuy91/" target="_blank" rel="external">上亿美金收购</a>。只能说国内的环境实在是太奇葩。</p>
 <p>以下是某助手的广告截图，你相信全部苹果游戏应用，本身就是免费的么？</p>
 <img src="/images/kuaiyong.jpg">
 <p>这次由中国开发者 “WANG XIN” 签名的这个木马插件，实在是让中国人自 “太极” 事件之后再次蒙羞。简单来说，就是坏了规矩。以后来自中国越狱开发者开发的正常越狱软件，将会受到更多潜在的 “歧视” 和 “关照”。而国外的开发者看中国市场，会更加坚定地认为这是一个盗版横行的市场，从而想办法特别 “关照” 中国用户或者直接像很多国外的游戏厂商那样，直接忽视中国市场。</p>
-<h3 id="u5EFA_u8BAE"><a href="#u5EFA_u8BAE" class="headerlink" title="建议"></a>建议</h3><p>最后回说安全这件事，笔者作为一个资深 iOS 开发者，建议一般普通用户，如果是为了用盗版软件就别越狱了，各种国内的越狱渠道都非常不安全的。</p>
+<h3 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h3><p>最后回说安全这件事，笔者作为一个资深 iOS 开发者，建议一般普通用户，如果是为了用盗版软件就别越狱了，各种国内的越狱渠道都非常不安全的。</p>
 <p>如果是开发者们为了研究安全而越狱的，最好也只是在专门研究用的 iTouch 上使用，以避免可能的安全风险。</p>
 <p>虽然感觉那一天还比较遥远，但真心希望有一天，国内对于版权的保护能够开展起来，这对于整个中国互联网产业的发展，将会是一个极大的促进。</p>
   

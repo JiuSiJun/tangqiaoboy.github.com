@@ -35,7 +35,7 @@
     <link rel="icon" href="/img/favicon.png">
     
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -92,14 +92,14 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7248_u6743_u8BF4_u660E"><span class="toc-number">1.</span> <span class="toc-text">版权说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6559_u7A0B"><span class="toc-number">2.</span> <span class="toc-text">教程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5F00_u6E90_u9879_u76EE"><span class="toc-number">3.</span> <span class="toc-text">开源项目</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#版权说明"><span class="toc-number">1.</span> <span class="toc-text">版权说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#教程"><span class="toc-number">2.</span> <span class="toc-text">教程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开源项目"><span class="toc-number">3.</span> <span class="toc-text">开源项目</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="u7248_u6743_u8BF4_u660E"><a href="#u7248_u6743_u8BF4_u660E" class="headerlink" title="版权说明"></a>版权说明</h2><p>本文为 InfoQ 中文站特供稿件，首发地址为：<a href="http://www.infoq.com/cn/news/2014/03/lldb-debug-command" target="_blank" rel="external">文章链接</a>。如需转载，请与 InfoQ 中文站联系。</p>
-<h3 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h3><p>欢迎国内的iOS同行或技术作者向我提交周报线索，线索可以是新闻、教程、开发工具或开源项目，将相关文章的简介和链接在微博上发布并 <a href="http://weibo.com/tangqiaoboy" target="_blank" rel="external">@唐巧_boy</a> 即可。</p>
+		<h2 id="版权说明"><a href="#版权说明" class="headerlink" title="版权说明"></a>版权说明</h2><p>本文为 InfoQ 中文站特供稿件，首发地址为：<a href="http://www.infoq.com/cn/news/2014/03/lldb-debug-command" target="_blank" rel="external">文章链接</a>。如需转载，请与 InfoQ 中文站联系。</p>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>欢迎国内的iOS同行或技术作者向我提交周报线索，线索可以是新闻、教程、开发工具或开源项目，将相关文章的简介和链接在微博上发布并 <a href="http://weibo.com/tangqiaoboy" target="_blank" rel="external">@唐巧_boy</a> 即可。</p>
 <p>本周iOS移动开发周报，带来一系列iOS开发教程以及2个开源项目。这期中的2个开源项目都比较值得关注，一个是VVebo写的GIF解决方案，另一个是用OC实现的QQ自动回复机器人。后者的作者是图书<a href="http://item.jd.com/11389860.html" target="_blank" rel="external">《iOS应用逆向工程》</a>的作者，这本书也是一本不错的安全方面的入门图书，一并推荐给大家。</p>
-<h2 id="u6559_u7A0B"><a href="#u6559_u7A0B" class="headerlink" title="教程"></a>教程</h2><ol>
+<h2 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h2><ol>
 <li><p><a href="http://wufawei.com/2014/03/symbolicating-ios-crash-logs/" target="_blank" rel="external">《分析iOS Crash文件：符号化iOS Crash文件的3种方法》</a>：文章介绍了拿到用户的<code>.crash</code>文件之后，如何符合化（Symbolicating）crash文件的3种方法。它们分别是：使用Xcode、使用命令行工具symbolicatecrash，以及使用命令行工具atos。这些方法可以帮助开发者尽快找到应用crash的原因。</p>
 </li>
 <li><p><a href="http://objcio.com/blog/2014/03/10/custom-controls/" target="_blank" rel="external">《自定义控件》</a>：本文翻译自objc.io的《Custom Controls》，讨论了一些自定义视图和控件的诀窍和技巧。文章先对UIKit已经提供的控件做了一个概览，介绍一些渲染技巧，随后深入到视图和它们的所有者之间的通信策略，并简略探讨了辅助功能、本地化和测试。</p>
@@ -119,7 +119,7 @@
 <li><p><a href="http://blog.csdn.net/yiyaaixuexi/article/details/21469769" target="_blank" rel="external">《static和被裁的符号表》</a>：作者念茜这次从安全防御角度出发，讲解利用static关键字裁掉函数符号，以便不让攻击者理清自己程序的敏感业务逻辑，提高应用的逆向门槛。</p>
 </li>
 </ol>
-<h2 id="u5F00_u6E90_u9879_u76EE"><a href="#u5F00_u6E90_u9879_u76EE" class="headerlink" title="开源项目"></a>开源项目</h2><ol>
+<h2 id="开源项目"><a href="#开源项目" class="headerlink" title="开源项目"></a>开源项目</h2><ol>
 <li><p>微博客户端 <a href="http://weibo.com/appsupport" target="_blank" rel="external">VVebo</a> 的作者开源了他自己为VVebo写的GIF解决方案 <a href="https://github.com/johnil/VVeboImageView" target="_blank" rel="external">VVeboImageView</a>， 占用内存很小。</p>
 </li>
 <li><p><a href="https://github.com/iosre/Skua" target="_blank" rel="external">《iOS客户端自动回复机器人源码》</a>：作者实现了一个QQ的自动回复机器人。</p>

@@ -13,14 +13,14 @@
     
     <meta name="description" content="本文首发于 InfoQ，版权归 InfoQ 所有，转载请保留 原文链接。
 简介Crashlytic 成立于 2011 年，是专门为移动应用开者发提供的保存和分析应用崩溃信息的工具。Crashlytics 的使用者包括：支付工具 Paypal, 点评应用 Yelp, 照片分享应用 Path, 团购应用 GroupOn 等移动应用。
-2013 年 1 月，Crashlytics被 Twitter 收购">
+2013 年 1 月，Crashlytics被 Twitter 收">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Crashlytics来保存应用崩溃信息">
 <meta property="og:url" content="http://blog.devtang.com/2013/07/24/use-crashlytics/index.html">
 <meta property="og:site_name" content="唐巧的博客">
 <meta property="og:description" content="本文首发于 InfoQ，版权归 InfoQ 所有，转载请保留 原文链接。
 简介Crashlytic 成立于 2011 年，是专门为移动应用开者发提供的保存和分析应用崩溃信息的工具。Crashlytics 的使用者包括：支付工具 Paypal, 点评应用 Yelp, 照片分享应用 Path, 团购应用 GroupOn 等移动应用。
-2013 年 1 月，Crashlytics被 Twitter 收购">
+2013 年 1 月，Crashlytics被 Twitter 收">
 <meta property="og:image" content="http://blog.devtang.com/images/crashlytics-logo.jpg">
 <meta property="og:image" content="http://blog.devtang.com/images/crashlytics-vs-itunes-1.jpg">
 <meta property="og:image" content="http://blog.devtang.com/images/crashlytics-vs-itunes-2.jpg">
@@ -36,7 +36,8 @@
 <meta name="twitter:title" content="使用Crashlytics来保存应用崩溃信息">
 <meta name="twitter:description" content="本文首发于 InfoQ，版权归 InfoQ 所有，转载请保留 原文链接。
 简介Crashlytic 成立于 2011 年，是专门为移动应用开者发提供的保存和分析应用崩溃信息的工具。Crashlytics 的使用者包括：支付工具 Paypal, 点评应用 Yelp, 照片分享应用 Path, 团购应用 GroupOn 等移动应用。
-2013 年 1 月，Crashlytics被 Twitter 收购">
+2013 年 1 月，Crashlytics被 Twitter 收">
+<meta name="twitter:image" content="http://blog.devtang.com/images/crashlytics-logo.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="唐巧的博客" type="application/atom+xml">
@@ -45,7 +46,7 @@
     <link rel="icon" href="/img/favicon.png">
     
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -102,13 +103,13 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7B80_u4ECB"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4F7F_u7528_u4ECB_u7ECD"><span class="toc-number">2.</span> <span class="toc-text">使用介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7533_u8BF7_u5E10_u53F7"><span class="toc-number">2.1.</span> <span class="toc-text">申请帐号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BBE_u7F6E_u5DE5_u7A0B"><span class="toc-number">2.2.</span> <span class="toc-text">设置工程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5B9E_u73B0_u539F_u7406_u548C_u4F7F_u7528_u4F53_u4F1A"><span class="toc-number">3.</span> <span class="toc-text">实现原理和使用体会</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5B9E_u73B0_u539F_u7406"><span class="toc-number">3.1.</span> <span class="toc-text">实现原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4F7F_u7528_u4F53_u4F1A"><span class="toc-number">3.2.</span> <span class="toc-text">使用体会</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用介绍"><span class="toc-number">2.</span> <span class="toc-text">使用介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#申请帐号"><span class="toc-number">2.1.</span> <span class="toc-text">申请帐号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置工程"><span class="toc-number">2.2.</span> <span class="toc-text">设置工程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现原理和使用体会"><span class="toc-number">3.</span> <span class="toc-text">实现原理和使用体会</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现原理"><span class="toc-number">3.1.</span> <span class="toc-text">实现原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用体会"><span class="toc-number">3.2.</span> <span class="toc-text">使用体会</span></a></li></ol></li></ol>
 		
 		</div>
 		
 		<img src="/images/crashlytics-logo.jpg">
 <p>本文首发于 InfoQ，版权归 InfoQ 所有，转载请保留 <a href="http://www.infoq.com/cn/articles/crashlytics-crash-statistics-tools" target="_blank" rel="external">原文链接</a>。</p>
-<h2 id="u7B80_u4ECB"><a href="#u7B80_u4ECB" class="headerlink" title="简介"></a>简介</h2><p><a href="http://try.crashlytics.com/" target="_blank" rel="external">Crashlytic</a> 成立于 2011 年，是专门为移动应用开者发提供的保存和分析应用崩溃信息的工具。Crashlytics 的使用者包括：支付工具 Paypal, 点评应用 Yelp, 照片分享应用 Path, 团购应用 GroupOn 等移动应用。</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><a href="http://try.crashlytics.com/" target="_blank" rel="external">Crashlytic</a> 成立于 2011 年，是专门为移动应用开者发提供的保存和分析应用崩溃信息的工具。Crashlytics 的使用者包括：支付工具 Paypal, 点评应用 Yelp, 照片分享应用 Path, 团购应用 GroupOn 等移动应用。</p>
 <p>2013 年 1 月，Crashlytics<a href="http://www.crashlytics.com/blog/crashlytics-is-joining-forces-with-twitter/" target="_blank" rel="external">被 Twitter 收购</a>，成为又一个成功的创业产品。被收购之后，由于没有了创业公司的不稳定因素，我们更有理由使用它来分析应用崩溃信息。</p>
 <a id="more"></a>
 <p>使用 Crashlytics 的好处有：</p>
@@ -119,31 +120,31 @@
 <img src="/images/crashlytics-close-issue.jpg">
 <p>3、Crashlytics 可以每天和每周将崩溃信息汇总发到你的邮箱，所有信息一目了然。</p>
 <p>下面我就给大家介绍如何使用 Crashlytics。</p>
-<h2 id="u4F7F_u7528_u4ECB_u7ECD"><a href="#u4F7F_u7528_u4ECB_u7ECD" class="headerlink" title="使用介绍"></a>使用介绍</h2><h3 id="u7533_u8BF7_u5E10_u53F7"><a href="#u7533_u8BF7_u5E10_u53F7" class="headerlink" title="申请帐号"></a>申请帐号</h3><p>Crashlytics 的服务是免费提供的，但是并不能直接注册使用，需要先申请，打开 <a href="http://try.crashlytics.com/" target="_blank" rel="external">Crashlytic 的官网</a> ，输入自己的邮箱申请使用。如下图所示：</p>
+<h2 id="使用介绍"><a href="#使用介绍" class="headerlink" title="使用介绍"></a>使用介绍</h2><h3 id="申请帐号"><a href="#申请帐号" class="headerlink" title="申请帐号"></a>申请帐号</h3><p>Crashlytics 的服务是免费提供的，但是并不能直接注册使用，需要先申请，打开 <a href="http://try.crashlytics.com/" target="_blank" rel="external">Crashlytic 的官网</a> ，输入自己的邮箱申请使用。如下图所示：</p>
 <img src="/images/crashlytics-1.jpg">
 <p>提交完邮箱之后，你的申请会放在 Crashlytics 的申请队列中，网页跳转到如下界面。在这个界面的右侧，你可以提供更多有效信息来让 Crashlytics 优先处理你的申请，建议大家都填上更多自己的信息。</p>
 <img src="/images/crashlytics-2.jpg">
 <p>如果顺利，通常 1-2 天左右，你就会收到 Crashlytics 发来的申请通过邮件，如下图所示，通过邮件链接跳转到注册界面，填写密码即可完成注册。</p>
 <img src="/images/crashlytics-3.jpg">
-<h3 id="u8BBE_u7F6E_u5DE5_u7A0B"><a href="#u8BBE_u7F6E_u5DE5_u7A0B" class="headerlink" title="设置工程"></a>设置工程</h3><p>在使用 Crashlytics 前需要对原有的 XCode 工程进行配置，在这一点上，Crashlytics 做得比其它任何我见过的 SDK 提供商都体贴。因为 Crashlytics 专门做了一个 Mac 端的 App 来帮助你进行配置，所以，在配置前你先需要去 <a href="https://www.crashlytics.com/downloads/xcode" target="_blank" rel="external">这里</a> 下载该应用。</p>
+<h3 id="设置工程"><a href="#设置工程" class="headerlink" title="设置工程"></a>设置工程</h3><p>在使用 Crashlytics 前需要对原有的 XCode 工程进行配置，在这一点上，Crashlytics 做得比其它任何我见过的 SDK 提供商都体贴。因为 Crashlytics 专门做了一个 Mac 端的 App 来帮助你进行配置，所以，在配置前你先需要去 <a href="https://www.crashlytics.com/downloads/xcode" target="_blank" rel="external">这里</a> 下载该应用。</p>
 <p>应用下载后，运行该应用并登录帐号。然后选择应用中的 “New App” 按钮，然后选择自己要增加 Crashlytics 的工程，然后 Crashlytics 的应用会提示你为工程增加一个 Run Script，如果你不知道如何添加，这里有一个 <a href="http://www.runscriptbuildphase.com/?utm_source=desktopapp&amp;utm_medium=setup&amp;utm_campaign=mac" target="_blank" rel="external">帮助的文档</a>。添加好之后的工程截图如下所示</p>
 <img src="/images/crashlytics-4.jpg">
 <p>接着，Crashlytics 的本地应用会提示你将 Crashlytics 相关的 framework 拖到工程中。如下所示：</p>
 <img src="/images/crashlytics-5.jpg">
 <p>按照提示做完之后，就到了最后一步了，在<code>AppDelegate</code>的<code>didFinishLaunchingWithOptions</code>方法中加入如下代码：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">&lt;Crashlytics/Crashlytics.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application </span><br><span class="line">    didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions &#123;</span><br><span class="line">   [Crashlytics startWithAPIKey:<span class="string">@"your identify code"</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">&lt;Crashlytics/Crashlytics.h&gt;</span></span></div><div class="line"></div><div class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application </div><div class="line">    didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions &#123;</div><div class="line">   [Crashlytics startWithAPIKey:<span class="string">@"your identify code"</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>之后，运行一下程序，Crashlytics 就会检测到你设置成功。如果你感兴趣，可以自己手工触发一个崩溃记录，看 Crashlytics 能否帮你收集到。使用如下代码即可</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[[Crashlytics sharedInstance] crash];</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line">[[Crashlytics sharedInstance] crash];</div></pre></td></tr></table></figure>
 <p>如果你想测试一个 Exception 导致的崩溃，可以使用如下代码：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[<span class="built_in">NSObject</span> doesNotRecognizeSelector];</span><br><span class="line">[arrayWithOnlyTwoElements objectAtIndex:<span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line">[<span class="built_in">NSObject</span> doesNotRecognizeSelector];</div><div class="line">[arrayWithOnlyTwoElements objectAtIndex:<span class="number">3</span>];</div></pre></td></tr></table></figure>
 <p>应用对外发布后，就可以在 Crashlytics 后台查看和修改相关的记录。另外，Crashlytics 还支持将数据导入到其它项目管理工具（例如 Redmine 或 Jira）如下所示，配置都非常简单。</p>
 <img src="/images/crashlytics-6.jpg">
-<h2 id="u5B9E_u73B0_u539F_u7406_u548C_u4F7F_u7528_u4F53_u4F1A"><a href="#u5B9E_u73B0_u539F_u7406_u548C_u4F7F_u7528_u4F53_u4F1A" class="headerlink" title="实现原理和使用体会"></a>实现原理和使用体会</h2><h3 id="u5B9E_u73B0_u539F_u7406"><a href="#u5B9E_u73B0_u539F_u7406" class="headerlink" title="实现原理"></a>实现原理</h3><p>在原理上，Crashlytics 的通过以下 2 步完成崩溃日志的上传和分析：</p>
+<h2 id="实现原理和使用体会"><a href="#实现原理和使用体会" class="headerlink" title="实现原理和使用体会"></a>实现原理和使用体会</h2><h3 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h3><p>在原理上，Crashlytics 的通过以下 2 步完成崩溃日志的上传和分析：</p>
 <ol>
 <li>提供应用 SDK，你需要在应用启动时调用其 SDK 来设置你的应用。SDK 会集成到你的应用中，完成 Crash 信息的收集和上传。</li>
 <li>修改工程的编译配置，加入一段代码，在你每次工程编译完成后，上传该工程对应的 dSYM 文件。研究过手工分析 Crash 日志的同学应该知道，只有通过该文件，才能将 Crash 日志还原成可读的 Call Stack 信息。</li>
 </ol>
-<h3 id="u4F7F_u7528_u4F53_u4F1A"><a href="#u4F7F_u7528_u4F53_u4F1A" class="headerlink" title="使用体会"></a>使用体会</h3><p>为了更加方便开发者设置相应的工程，Crashlytics 提供了 mac 端的应用程序，帮助你检测相关工程是否正确设置并且提供相应的帮助信息。后来我还发现，该程序还会自动帮你升级 Crashlytics 的 SDK 文件。虽然这一点很体贴，但是我个人觉得还是不太友好。因为毕竟修改 SDK 会影响应用编译后的内部逻辑，在没有任何通知的情况下升级，我都无法确定 Crashlytics 有没有干坏事。不过国外的服务，特别是象 Twitter 这种相对较大知名度公司提供的服务要有节操得多，所以在这一点上我还是比较放心的。</p>
+<h3 id="使用体会"><a href="#使用体会" class="headerlink" title="使用体会"></a>使用体会</h3><p>为了更加方便开发者设置相应的工程，Crashlytics 提供了 mac 端的应用程序，帮助你检测相关工程是否正确设置并且提供相应的帮助信息。后来我还发现，该程序还会自动帮你升级 Crashlytics 的 SDK 文件。虽然这一点很体贴，但是我个人觉得还是不太友好。因为毕竟修改 SDK 会影响应用编译后的内部逻辑，在没有任何通知的情况下升级，我都无法确定 Crashlytics 有没有干坏事。不过国外的服务，特别是象 Twitter 这种相对较大知名度公司提供的服务要有节操得多，所以在这一点上我还是比较放心的。</p>
 <p>使用 Crashlytics 可以让你摆脱管理应用崩溃记录的烦恼。并且帮助你找出应用的一些重大隐藏性 Bug。例如我之前写的一个应用就过一个缓存过期的问题，只有当缓存过期时才会触发这个 Bug，这样的问题在测试人员那边很难触发，因为他们不可能了解你的应用内部实现细节。通过 Crashlytics，使我清楚了解到应用 Crash 的数量和位置，结合自己的开发经验，就很容易找到问题所在了。</p>
 <p>值得一提的是，Crashlytics 本身的 <a href="http://support.crashlytics.com/knowledgebase/topics/14721-crashlytics-sdk-for-ios" target="_blank" rel="external">官方文档</a> 也非常健全，如果你在使用中遇到任何问题，也可以上去查看详细的文档。</p>
 <p>愿 Crashlytics 能让大家的应用都更加健壮～</p>

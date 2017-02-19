@@ -13,14 +13,14 @@
     
     <meta name="description" content="简介Alcatraz 是一个帮你管理 Xcode 插件、模版以及颜色配置的工具。它可以直接集成到 Xcode 的图形界面中，让你感觉就像在使用 Xcode 自带的功能一样。
 安装和删除使用如下的命令行来安装 Alcatraz：
-mkdir -p ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins;curl -L http:/">
+mkdir -p ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins;curl -L http:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Alcatraz来管理Xcode插件">
 <meta property="og:url" content="http://blog.devtang.com/2014/03/05/use-alcatraz-to-manage-xcode-plugins/index.html">
 <meta property="og:site_name" content="唐巧的博客">
 <meta property="og:description" content="简介Alcatraz 是一个帮你管理 Xcode 插件、模版以及颜色配置的工具。它可以直接集成到 Xcode 的图形界面中，让你感觉就像在使用 Xcode 自带的功能一样。
 安装和删除使用如下的命令行来安装 Alcatraz：
-mkdir -p ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins;curl -L http:/">
+mkdir -p ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins;curl -L http:">
 <meta property="og:image" content="http://blog.devtang.com/images/Alcatraz-logo.jpg">
 <meta property="og:image" content="http://blog.devtang.com/images/alcatraz-menu.jpg">
 <meta property="og:image" content="http://blog.devtang.com/images/alcatraz-home.jpg">
@@ -30,7 +30,8 @@ mkdir -p ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins;curl -L 
 <meta name="twitter:title" content="使用Alcatraz来管理Xcode插件">
 <meta name="twitter:description" content="简介Alcatraz 是一个帮你管理 Xcode 插件、模版以及颜色配置的工具。它可以直接集成到 Xcode 的图形界面中，让你感觉就像在使用 Xcode 自带的功能一样。
 安装和删除使用如下的命令行来安装 Alcatraz：
-mkdir -p ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins;curl -L http:/">
+mkdir -p ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins;curl -L http:">
+<meta name="twitter:image" content="http://blog.devtang.com/images/Alcatraz-logo.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="唐巧的博客" type="application/atom+xml">
@@ -39,7 +40,7 @@ mkdir -p ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins;curl -L 
     <link rel="icon" href="/img/favicon.png">
     
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -96,31 +97,31 @@ mkdir -p ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins;curl -L 
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7B80_u4ECB"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5B89_u88C5_u548C_u5220_u9664"><span class="toc-number">2.</span> <span class="toc-text">安装和删除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4F7F_u7528"><span class="toc-number">3.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D2_u4EF6_u8DEF_u5F84"><span class="toc-number">4.</span> <span class="toc-text">插件路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5173_u4E8E_Xcode__u7684_u63D2_u4EF6_u673A_u5236"><span class="toc-number">5.</span> <span class="toc-text">关于 Xcode 的插件机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u63A8_u8350_u7684_u63D2_u4EF6"><span class="toc-number">6.</span> <span class="toc-text">推荐的插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D2_u4EF6_u5F00_u53D1"><span class="toc-number">7.</span> <span class="toc-text">插件开发</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装和删除"><span class="toc-number">2.</span> <span class="toc-text">安装和删除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-number">3.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插件路径"><span class="toc-number">4.</span> <span class="toc-text">插件路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于-Xcode-的插件机制"><span class="toc-number">5.</span> <span class="toc-text">关于 Xcode 的插件机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#推荐的插件"><span class="toc-number">6.</span> <span class="toc-text">推荐的插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插件开发"><span class="toc-number">7.</span> <span class="toc-text">插件开发</span></a></li></ol>
 		
 		</div>
 		
 		<img src="/images/Alcatraz-logo.jpg">
-<h2 id="u7B80_u4ECB"><a href="#u7B80_u4ECB" class="headerlink" title="简介"></a>简介</h2><p>Alcatraz 是一个帮你管理 Xcode 插件、模版以及颜色配置的工具。它可以直接集成到 Xcode 的图形界面中，让你感觉就像在使用 Xcode 自带的功能一样。</p>
-<h2 id="u5B89_u88C5_u548C_u5220_u9664"><a href="#u5B89_u88C5_u548C_u5220_u9664" class="headerlink" title="安装和删除"></a>安装和删除</h2><p>使用如下的命令行来安装 Alcatraz：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir -p ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins;</span><br><span class="line">curl -L http://git.io/lOQWeA | tar xvz -C ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins</span><br></pre></td></tr></table></figure>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Alcatraz 是一个帮你管理 Xcode 插件、模版以及颜色配置的工具。它可以直接集成到 Xcode 的图形界面中，让你感觉就像在使用 Xcode 自带的功能一样。</p>
+<h2 id="安装和删除"><a href="#安装和删除" class="headerlink" title="安装和删除"></a>安装和删除</h2><p>使用如下的命令行来安装 Alcatraz：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">mkdir -p ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins;</div><div class="line">curl -L http://git.io/lOQWeA | tar xvz -C ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins</div></pre></td></tr></table></figure>
 <p>如果你不想使用 Alcatraz 了，可以使用如下命令来删除：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rm -rf ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins/Alcatraz.xcplugin</span><br><span class="line">rm -rf ~/Library/Application\ Support/Alcatraz</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">rm -rf ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins/Alcatraz.xcplugin</div><div class="line">rm -rf ~/Library/Application\ Support/Alcatraz</div></pre></td></tr></table></figure>
 <a id="more"></a>
-<h2 id="u4F7F_u7528"><a href="#u4F7F_u7528" class="headerlink" title="使用"></a>使用</h2><p>安装成功后重启 Xcode，就可以在 Xcode 的顶部菜单中找到 Alcatraz，如下所示：</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>安装成功后重启 Xcode，就可以在 Xcode 的顶部菜单中找到 Alcatraz，如下所示：</p>
 <img src="/images/alcatraz-menu.jpg">
 <p>点击 “Package Manager”，即可启动插件列表页面，如下所示：</p>
 <img src="/images/alcatraz-home.jpg">
 <p>之后你可以在右上角搜索插件，对于想安装的插件，点击其左边的图标，即可下载安装，如下所示，我正在安装<code>KImageNamed</code>插件：</p>
 <img src="/images/alcatraz-install.jpg">
 <p>安装完成后，再次点击插件左边的图标，可以将该插件删除。</p>
-<h2 id="u63D2_u4EF6_u8DEF_u5F84"><a href="#u63D2_u4EF6_u8DEF_u5F84" class="headerlink" title="插件路径"></a>插件路径</h2><p>Xcode 所有的插件都安装在目录<code>~/Library/Application Support/Developer/Shared/Xcode/Plug-ins/</code>下，你也可以手工切换到这个目录来删除插件。</p>
-<h2 id="u5173_u4E8E_Xcode__u7684_u63D2_u4EF6_u673A_u5236"><a href="#u5173_u4E8E_Xcode__u7684_u63D2_u4EF6_u673A_u5236" class="headerlink" title="关于 Xcode 的插件机制"></a>关于 Xcode 的插件机制</h2><p>Alcatraz 当前只支持 OSX 10.9 and Xcode 5。不要抱怨了，这其实主要是因为苹果并没有开放插件机制，每次升级 Alcatraz 都都要重新适配。如果你看 Alcatraz 的 Commit Log，你就会发现，Alcatraz 花了几个月时间，才适配到 Xcode 5，这对于插件开发者来说，是比较难受的。</p>
+<h2 id="插件路径"><a href="#插件路径" class="headerlink" title="插件路径"></a>插件路径</h2><p>Xcode 所有的插件都安装在目录<code>~/Library/Application Support/Developer/Shared/Xcode/Plug-ins/</code>下，你也可以手工切换到这个目录来删除插件。</p>
+<h2 id="关于-Xcode-的插件机制"><a href="#关于-Xcode-的插件机制" class="headerlink" title="关于 Xcode 的插件机制"></a>关于 Xcode 的插件机制</h2><p>Alcatraz 当前只支持 OSX 10.9 and Xcode 5。不要抱怨了，这其实主要是因为苹果并没有开放插件机制，每次升级 Alcatraz 都都要重新适配。如果你看 Alcatraz 的 Commit Log，你就会发现，Alcatraz 花了几个月时间，才适配到 Xcode 5，这对于插件开发者来说，是比较难受的。</p>
 <p>所以作为一款开源并且免费的插件，只支持最新版的 Xcode 可以让开源作者节省大量精力。我也希望苹果能早日开放 Xcode 的插件机制标准，方便广大的插件开发者构建强大的第三方增强工具。</p>
-<h2 id="u63A8_u8350_u7684_u63D2_u4EF6"><a href="#u63A8_u8350_u7684_u63D2_u4EF6" class="headerlink" title="推荐的插件"></a>推荐的插件</h2><p>我个人比较喜欢 XCode 的 vim 插件 XVim，微博里大家推荐过的还有 KImageNamed 插件，Alcatraz 里面应该好用的插件很多，我还没有时间试用。</p>
+<h2 id="推荐的插件"><a href="#推荐的插件" class="headerlink" title="推荐的插件"></a>推荐的插件</h2><p>我个人比较喜欢 XCode 的 vim 插件 XVim，微博里大家推荐过的还有 KImageNamed 插件，Alcatraz 里面应该好用的插件很多，我还没有时间试用。</p>
 <p>这儿有一些朋友整理的插件列表：<a href="http://www.cocoachina.com/applenews/devnews/2013/0918/7022.html" target="_blank" rel="external">《那些不能错过的 Xcode 插件》</a></p>
 <p>如要你发现好用的插件，欢迎在留言处回复告诉我，我可以推荐给大家。谢谢～</p>
-<h2 id="u63D2_u4EF6_u5F00_u53D1"><a href="#u63D2_u4EF6_u5F00_u53D1" class="headerlink" title="插件开发"></a>插件开发</h2><p>如果你觉得自己很牛逼，想尝试开发插件，这儿有一些教程：</p>
+<h2 id="插件开发"><a href="#插件开发" class="headerlink" title="插件开发"></a>插件开发</h2><p>如果你觉得自己很牛逼，想尝试开发插件，这儿有一些教程：</p>
 <ul>
 <li><a href="http://studentdeng.github.io/blog/2014/02/21/xcode-plugin-fun/" target="_blank" rel="external">《Xcode5 Plugins 开发简介》</a></li>
 <li><a href="http://onevcat.com/2013/02/xcode-plugin/" target="_blank" rel="external">《Xcode 4 插件制作入门》</a></li>

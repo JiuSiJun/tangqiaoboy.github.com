@@ -22,6 +22,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="不要使用SBJSON(json-framework)">
 <meta name="twitter:description" content="不知道为什么，在iOS开发中，有很多人使用 SBJSON （又被称作json-framework)来做JSON解析库。我想这是因为SBJSON是最早在iOS上出现的JSON解析库。但是随着iOS开发的流行，越来越多优秀的JSON解析库也涌现出来, SBJSON和它们相比，性能上有很大的差距。">
+<meta name="twitter:image" content="http://blog.devtang.com/images/json_benchmark.gif">
 
     
     <link rel="alternative" href="/atom.xml" title="唐巧的博客" type="application/atom+xml">
@@ -30,7 +31,7 @@
     <link rel="icon" href="/img/favicon.png">
     
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -107,7 +108,7 @@
 <p>从这些文章中可以看到，SBJSON在多数测试中都处于倒数的第一或倒数第二的位置。所以说，SBJSON实际上在性能这一点上讲，确实是非常“SB”的，实在不值得大家留念。赶快把你的JSON解析库换成其它的吧！</p>
 <p>那么应该换成哪个呢？<br>如果你的app只支持iOS 5.0以上系统，那么直接用苹果官方提供的JSON库：<a href="http://developer.apple.com/library/ios/#documentation/Foundation/Reference/NSJSONSerialization_Class/Reference/Reference.html#//apple_ref/doc/uid/TP40010946" target="_blank" rel="external">NSJSONSerialization</a><br>库即可。<br>如果你的app要支持iOS 5.0以下的系统，那么我个人推荐JSONKit，不过JSONKit本身做了很多内存上的优化，所以不支持ARC，你在使用时可以对其加上 -fno-objc-arc 的编译标志即可，设置这个编译标志的详细步骤可以见<a href="http://stackoverflow.com/questions/6308425/ios-5-best-practice-release-retain" target="_blank" rel="external">这篇文章</a>。</p>
 <p>JSONKit的使用也非常方便，在使用上只需要把SBJSON的JSONValue方法换成objectFromJSONData，JSONRepresentation方法换成JSONString即可。附上一段使用示例：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"JSONKit.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="built_in">NSString</span> *path = [[<span class="built_in">NSBundle</span> mainBundle] pathForResource:<span class="string">@"data"</span> ofType:<span class="string">@"json"</span>];</span><br><span class="line"><span class="built_in">NSData</span> *content = [<span class="built_in">NSData</span> dataWithContentsOfFile:path];</span><br><span class="line"><span class="built_in">NSDictionary</span> *kitData = [content objectFromJSONData];</span><br><span class="line"><span class="built_in">NSString</span> *kitString = [kitData JSO<span class="built_in">NString</span>];</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">"JSONKit.h"</span></span></div><div class="line"></div><div class="line"><span class="built_in">NSString</span> *path = [[<span class="built_in">NSBundle</span> mainBundle] pathForResource:<span class="string">@"data"</span> ofType:<span class="string">@"json"</span>];</div><div class="line"><span class="built_in">NSData</span> *content = [<span class="built_in">NSData</span> dataWithContentsOfFile:path];</div><div class="line"><span class="built_in">NSDictionary</span> *kitData = [content objectFromJSONData];</div><div class="line"><span class="built_in">NSString</span> *kitString = [kitData JSONString];</div></pre></td></tr></table></figure>
 <p>祝大家玩得开心。</p>
   
 	</div>

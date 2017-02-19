@@ -32,7 +32,7 @@
     <link rel="icon" href="/img/favicon.png">
     
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -89,7 +89,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Chris"><span class="toc-number">1.</span> <span class="toc-text">Chris</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5085_u82E5_u611A"><span class="toc-number">2.</span> <span class="toc-text">傅若愚</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Greg"><span class="toc-number">3.</span> <span class="toc-text">Greg</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u674E_u6D01_u4FE1"><span class="toc-number">4.</span> <span class="toc-text">李洁信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u738B_u5DCD"><span class="toc-number">5.</span> <span class="toc-text">王巍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5305_u6DB5_u537F"><span class="toc-number">6.</span> <span class="toc-text">包涵卿</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7FC1_u9633"><span class="toc-number">7.</span> <span class="toc-text">翁阳</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5468_u6977_u96EF"><span class="toc-number">8.</span> <span class="toc-text">周楷雯</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u540E_u8BB0"><span class="toc-number">9.</span> <span class="toc-text">后记</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Chris"><span class="toc-number">1.</span> <span class="toc-text">Chris</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#傅若愚"><span class="toc-number">2.</span> <span class="toc-text">傅若愚</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Greg"><span class="toc-number">3.</span> <span class="toc-text">Greg</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#李洁信"><span class="toc-number">4.</span> <span class="toc-text">李洁信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#王巍"><span class="toc-number">5.</span> <span class="toc-text">王巍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#包涵卿"><span class="toc-number">6.</span> <span class="toc-text">包涵卿</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#翁阳"><span class="toc-number">7.</span> <span class="toc-text">翁阳</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#周楷雯"><span class="toc-number">8.</span> <span class="toc-text">周楷雯</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#后记"><span class="toc-number">9.</span> <span class="toc-text">后记</span></a></li></ol>
 		
 		</div>
 		
@@ -106,9 +106,9 @@
 </ol>
 <p>最终，我们看到了一个重构之后的游戏 Demo，相比以前的工程，重构后的项目代码更短，逻辑更清晰。</p>
 <p>人们常说，Talk is cheap, show me the code。 Chris 用行动让我们看到如何写出更好的 Swift 代码。</p>
-<h3 id="u5085_u82E5_u611A"><a href="#u5085_u82E5_u611A" class="headerlink" title="傅若愚"></a>傅若愚</h3><p>傅若愚来自 thoughtworks，和我一样是成都人。他这次的演讲主题是《越过 OC 与 Swift 间的鸿沟》，对于正在经历从 OC 到 Swift 转型的各位来说，非常实际。</p>
+<h3 id="傅若愚"><a href="#傅若愚" class="headerlink" title="傅若愚"></a>傅若愚</h3><p>傅若愚来自 thoughtworks，和我一样是成都人。他这次的演讲主题是《越过 OC 与 Swift 间的鸿沟》，对于正在经历从 OC 到 Swift 转型的各位来说，非常实际。</p>
 <p>他从一段代码来引出了大家的好奇，下面这段代码，居然会有两种输出结果，你猜出来是什么原因了吗？</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">someArray = [1, 2, 3]&#10;var result = someArray.map(&#123;&#34;No. \($0)&#34;&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">someArray = [1, 2, 3]</div><div class="line">var result = someArray.map(&#123;&quot;No. \($0)&quot;&#125;)</div></pre></td></tr></table></figure>
 <p>接着傅若愚介绍了从 OC 转到 Swift 需要注意的地方：</p>
 <ol>
 <li>优先用 protocol 而不是继承</li>
@@ -124,8 +124,8 @@
 </ol>
 <p>提问环节的时候，Chris 当托似地问了一个非常有趣的问题：「你最近 1 年在写 Swift 代码上有何转变？」。</p>
 <p>这个问题非常有意思，Greg 说他现在用了更多的 guard 关键词，然后 Greg 也说到，他写习惯 Swift 之后，因为养成了强类型检查的习惯，他偶尔回去写 oc 的时候会不停地 check 各种 nil。</p>
-<h3 id="u674E_u6D01_u4FE1"><a href="#u674E_u6D01_u4FE1" class="headerlink" title="李洁信"></a>李洁信</h3><p>李洁信是下午第一场，非常犯困的时间。洁信稍微有一些紧张，内容是关于《Swift 中的协议编程》，他把这些内容都梳理得挺好的，讲得挺清楚。</p>
-<h3 id="u738B_u5DCD"><a href="#u738B_u5DCD" class="headerlink" title="王巍"></a>王巍</h3><p>喵神王巍是下午第二场，王巍的主题是《如何打造一个让人愉快的框架》，喵神的准备非常充分，演讲过程中还各种卖萌，实在是非常可爱。喵神主要从以下几个方面介绍了框架的开发：</p>
+<h3 id="李洁信"><a href="#李洁信" class="headerlink" title="李洁信"></a>李洁信</h3><p>李洁信是下午第一场，非常犯困的时间。洁信稍微有一些紧张，内容是关于《Swift 中的协议编程》，他把这些内容都梳理得挺好的，讲得挺清楚。</p>
+<h3 id="王巍"><a href="#王巍" class="headerlink" title="王巍"></a>王巍</h3><p>喵神王巍是下午第二场，王巍的主题是《如何打造一个让人愉快的框架》，喵神的准备非常充分，演讲过程中还各种卖萌，实在是非常可爱。喵神主要从以下几个方面介绍了框架的开发：</p>
 <ol>
 <li>静态库和框架的对比</li>
 <li>包和依赖管理</li>
@@ -135,10 +135,10 @@
 <li>持续集成</li>
 </ol>
 <p>如果你希望基于 Swift 来开发一个 framework，非常值得看看喵神的分享。</p>
-<h3 id="u5305_u6DB5_u537F"><a href="#u5305_u6DB5_u537F" class="headerlink" title="包涵卿"></a>包涵卿</h3><p>包涵卿讲的是《Swift 函数式编程实践》，这块其实是挺难讲的，前面的一些函数式编程的基础还好，比如柯里化之类，但是后面估计比较难理解，我不知道现场有多少人听懂了 Monad 的概念，不过这个确实是比较挑战的话题。</p>
-<h3 id="u7FC1_u9633"><a href="#u7FC1_u9633" class="headerlink" title="翁阳"></a>翁阳</h3><p>这场话题茶歇回去之后听了一半，所以没怎么整理出来笔记。有些遗憾。</p>
-<h3 id="u5468_u6977_u96EF"><a href="#u5468_u6977_u96EF" class="headerlink" title="周楷雯"></a>周楷雯</h3><p>周楷雯的分享里介绍了各种性能优化的技巧。可惜他当时手机变砖，有一些着急，讲得比较快，很多点感觉展开讲会更好一些。</p>
-<h3 id="u540E_u8BB0"><a href="#u540E_u8BB0" class="headerlink" title="后记"></a>后记</h3><p>这次 Swift 大会中还做了一些有趣的调查，在此将数据分享给大家：</p>
+<h3 id="包涵卿"><a href="#包涵卿" class="headerlink" title="包涵卿"></a>包涵卿</h3><p>包涵卿讲的是《Swift 函数式编程实践》，这块其实是挺难讲的，前面的一些函数式编程的基础还好，比如柯里化之类，但是后面估计比较难理解，我不知道现场有多少人听懂了 Monad 的概念，不过这个确实是比较挑战的话题。</p>
+<h3 id="翁阳"><a href="#翁阳" class="headerlink" title="翁阳"></a>翁阳</h3><p>这场话题茶歇回去之后听了一半，所以没怎么整理出来笔记。有些遗憾。</p>
+<h3 id="周楷雯"><a href="#周楷雯" class="headerlink" title="周楷雯"></a>周楷雯</h3><p>周楷雯的分享里介绍了各种性能优化的技巧。可惜他当时手机变砖，有一些着急，讲得比较快，很多点感觉展开讲会更好一些。</p>
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>这次 Swift 大会中还做了一些有趣的调查，在此将数据分享给大家：</p>
 <ol>
 <li>这次有 3/4 的听众来自外地！</li>
 <li>现场有 1/3 的听众已经开始将 Swift 应用于公司项目开发中。</li>

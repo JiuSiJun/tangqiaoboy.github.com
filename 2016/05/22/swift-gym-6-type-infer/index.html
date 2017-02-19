@@ -56,7 +56,7 @@ Swift 烧脑体操（六）- 类型推断
     <link rel="icon" href="/img/favicon.png">
     
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -113,11 +113,11 @@ Swift 烧脑体操（六）- 类型推断
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7D22_u5F15"><span class="toc-number">1.</span> <span class="toc-text">索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6B63_u6587"><span class="toc-number">2.</span> <span class="toc-text">正文</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#索引"><span class="toc-number">1.</span> <span class="toc-text">索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正文"><span class="toc-number">2.</span> <span class="toc-text">正文</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="u7D22_u5F15"><a href="#u7D22_u5F15" class="headerlink" title="索引"></a>索引</h2><p>Swift 烧脑系列文章列表：</p>
+		<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p>Swift 烧脑系列文章列表：</p>
 <ul>
 <li><a href="/2016/02/27/swift-gym-1-nested-optional/">Swift 烧脑体操（一） - Optional 的嵌套</a></li>
 <li><a href="/2016/02/27/swift-gym-2-function-argument/">Swift 烧脑体操（二） - 函数的参数</a></li>
@@ -126,26 +126,26 @@ Swift 烧脑体操（六）- 类型推断
 <li><a href="/2016/04/05/swift-gym-5-monad/">Swift 烧脑体操（五）- Monad</a></li>
 <li><a href="/2016/05/22/swift-gym-6-type-infer/">Swift 烧脑体操（六）- 类型推断</a></li>
 </ul>
-<h2 id="u6B63_u6587"><a href="#u6B63_u6587" class="headerlink" title="正文"></a>正文</h2><p>前几天，一个朋友在微博上通过私信问了我一个问题，如下的代码，为什么变量 <code>crr</code> 没能把值为 nil 的元素过滤掉？</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr:[Int?] = [1, 2, 3, nil, 4, 5]&#10;let brr = arr.flatMap &#123; $0 &#125;&#10;brr&#10;// brr = [1, 2, 3, 4, 5]&#10;&#10;let crr:[Int?] = arr.flatMap &#123; $0 &#125;&#10;crr&#10;// crr = [&#123;Some 1&#125;, &#123;Some 2&#125;, &#123;Some 3&#125;, nil, &#123;Some 4&#125;, &#123;Some 5&#125;]</span><br></pre></td></tr></table></figure>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>前几天，一个朋友在微博上通过私信问了我一个问题，如下的代码，为什么变量 <code>crr</code> 没能把值为 nil 的元素过滤掉？</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">let arr:[Int?] = [1, 2, 3, nil, 4, 5]</div><div class="line">let brr = arr.flatMap &#123; $0 &#125;</div><div class="line">brr</div><div class="line">// brr = [1, 2, 3, 4, 5]</div><div class="line"></div><div class="line">let crr:[Int?] = arr.flatMap &#123; $0 &#125;</div><div class="line">crr</div><div class="line">// crr = [&#123;Some 1&#125;, &#123;Some 2&#125;, &#123;Some 3&#125;, nil, &#123;Some 4&#125;, &#123;Some 5&#125;]</div></pre></td></tr></table></figure>
 <p>简单来看，同样是使用 <code>flatMap</code> 函数，brr 变量成功过滤掉了值为 nil 的元素，变量 crr 过滤失败。而 brr 和 crr 的区别就是它们的类型不一样，brr 的类型是 <code>[Int]</code> ，而 crr 的类型是 <code>[Int?]</code>，想必其中原因与此有关，那到底是为什么呢？</p>
 <p>在和一些朋友讨论之后，我大概想明白了，这和类型推断有关系。在 crr 相关的代码中，因为 crr 的类型已经被程序员指定为 <code>[Int?]</code>，所以为了编译通过，编译器需要推断出 <code>flatMap</code> 中的闭包的输入和输出变量类型。我们回顾一下 <code>flatMap</code> 在数据中的定义：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">extension SequenceType &#123;&#10;    public func flatMap&#60;T&#62;(@noescape transform: (Self.Generator.Element) throws -&#62; T?)&#10;                rethrows -&#62; [T]&#10;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">extension SequenceType &#123;</div><div class="line">    public func flatMap&lt;T&gt;(@noescape transform: (Self.Generator.Element) throws -&gt; T?)</div><div class="line">                rethrows -&gt; [T]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>可以看出，flatMap 返回的结果是 <code>[T]</code>，而闭包 transform 返回的结果是 <code>T?</code>。而在 crr 这个例子中，T 被推断出是 <code>Int?</code> , 因此 tranform 中 <code>T?</code> 就被代入，变成了 <code>(Int?)?</code> 。所以，如果完善一下上面例子的代码，编译器推断出来的类型是这样的：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let crr:[Int?] = arr.flatMap &#123;&#10;    (element: Int?) -&#62; (Int?)? in&#10;    return element&#10;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">let crr:[Int?] = arr.flatMap &#123;</div><div class="line">    (element: Int?) -&gt; (Int?)? in</div><div class="line">    return element</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>注意这里，返回的变量 element 其实类型并不是 <code>(Int?)?</code>，但是 Optional 是有 conversion 的方法，允许将一个类型的 <code>S</code> 的变量，自动转成 <code>S?</code>，所以转换被自动做了，并没有编译错误发生。</p>
 <p>怎么改这个代码呢？</p>
 <p>有人说把闭包的类型手工指定成 <code>Int?</code>，我试了一下，确实能够正常了，不过我感觉这更像是一个编译器的 Bug，我们再看看这个接口：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">extension SequenceType &#123;&#10;    public func flatMap&#60;T&#62;(@noescape transform: (Self.Generator.Element) throws -&#62; T?)&#10;                rethrows -&#62; [T]&#10;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">extension SequenceType &#123;</div><div class="line">    public func flatMap&lt;T&gt;(@noescape transform: (Self.Generator.Element) throws -&gt; T?)</div><div class="line">                rethrows -&gt; [T]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>按照 <code>flatMap</code> 的接口定义，如果闭包返回的是 Int?，那么按照这个定义，最终 <code>flatMap</code> 的结果就必须是 <code>[Int]</code>，而我们要强制要求结果是 <code>[Int?]</code>，除非这里有自动的转换，否则就应该编译失败。而我自己的试验代码失败，确认出并没有从 [Int] 到 <code>[Int?]</code> 的自动转换。所以我暂时认为这么改能正常工作是一个编译器的 Bug（如有错误，欢迎指出）。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">error: cannot convert value of type &#39;[Int]&#39; to specified type &#39;[Int?]&#39;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">error: cannot convert value of type &apos;[Int]&apos; to specified type &apos;[Int?]&apos;</div></pre></td></tr></table></figure>
 <p>另外，也有朋友说，在这种场景下并不应该使用 <code>flatMap</code> 函数。确实是这样，flatMap 函数本来就有着 flat 的作用在里面，在数组的 <code>flatMap</code> 实现中，有两个重载：</p>
 <ul>
 <li>一个重载版本是为了打平嵌套的多维数据。</li>
 <li>另一个重载版本，就是我们刚刚讨论的版本，flat 是为了去掉 Optional 的封包，同时把 nil 元素去掉。</li>
 </ul>
 <p>而这个示例代码调用了 <code>flatMap</code> 函数，却希望仍然得到 Optional 的数组，实在是不应该使用 <code>flatMap</code> 来做这个事情。如果只是为了去掉 Optional 中的 nil 元素，使用 <code>filter</code> 方法可能更为合适一些：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;let arr:[Int?] = [1, 2, 3, nil, 4, 5]&#10;let drr:[Int?] = arr.filter &#123;&#10;    if let _ = $0 &#123;&#10;        return true&#10;    &#125; else &#123;&#10;        return false&#10;    &#125;&#10;&#125;&#10;drr&#10;// drr = [&#123;Some 1&#125;, &#123;Some 2&#125;, &#123;Some 3&#125;, &#123;Some 4&#125;, &#123;Some 5&#125;]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"></div><div class="line">let arr:[Int?] = [1, 2, 3, nil, 4, 5]</div><div class="line">let drr:[Int?] = arr.filter &#123;</div><div class="line">    if let _ = $0 &#123;</div><div class="line">        return true</div><div class="line">    &#125; else &#123;</div><div class="line">        return false</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">drr</div><div class="line">// drr = [&#123;Some 1&#125;, &#123;Some 2&#125;, &#123;Some 3&#125;, &#123;Some 4&#125;, &#123;Some 5&#125;]</div></pre></td></tr></table></figure>
 <p>其实函数式编程的方法不止 <code>map</code>, <code>flatMap</code>, <code>filter</code> 这些，在一个名为 <a href="http://reactivex.io/" target="_blank" rel="external">reactiveX</a> 的网站上，列举了 Reactive 编程实践下的一些 <a href="http://reactivex.io/documentation/operators.html" target="_blank" rel="external">常见的函数</a>，里面的很多方法都挺有意思，这些方法也被实现在了 <a href="https://github.com/ReactiveX/RxSwift" target="_blank" rel="external">RxSwift</a> 中，感兴趣的同学可以看看。</p>
 <p>祝玩得开心！</p>
   

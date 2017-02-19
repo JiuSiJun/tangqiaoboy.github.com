@@ -17,7 +17,7 @@
 在UIImagePickerController中会使用系统的照相机界面
 在编译状态下的UITableViewCell，处于待删除时，会有一个系统的删除按钮。
 
-以上这些UI控件中，其显示的语言并不是和你当前手机的系统语言一致的。而是根据你的App内部的语言设置来显示。结果就是，如果你没">
+以上这些UI控件中，其显示的语言并不是和你当前手机的系统语言一致的。而是根据你的App内部的语言设置来显示。结果就是，如果你">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设置应用内的系统控件语言">
 <meta property="og:url" content="http://blog.devtang.com/2013/01/23/set-ios-system-ui-language/index.html">
@@ -28,7 +28,7 @@
 在UIImagePickerController中会使用系统的照相机界面
 在编译状态下的UITableViewCell，处于待删除时，会有一个系统的删除按钮。
 
-以上这些UI控件中，其显示的语言并不是和你当前手机的系统语言一致的。而是根据你的App内部的语言设置来显示。结果就是，如果你没">
+以上这些UI控件中，其显示的语言并不是和你当前手机的系统语言一致的。而是根据你的App内部的语言设置来显示。结果就是，如果你">
 <meta property="og:image" content="http://blog.devtang.com/images/bdj-rank.jpg">
 <meta property="og:image" content="http://blog.devtang.com/images/ios-menu-1.jpg">
 <meta property="og:image" content="http://blog.devtang.com/images/ios-menu-2.jpg">
@@ -41,7 +41,8 @@
 在UIImagePickerController中会使用系统的照相机界面
 在编译状态下的UITableViewCell，处于待删除时，会有一个系统的删除按钮。
 
-以上这些UI控件中，其显示的语言并不是和你当前手机的系统语言一致的。而是根据你的App内部的语言设置来显示。结果就是，如果你没">
+以上这些UI控件中，其显示的语言并不是和你当前手机的系统语言一致的。而是根据你的App内部的语言设置来显示。结果就是，如果你">
+<meta name="twitter:image" content="http://blog.devtang.com/images/bdj-rank.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="唐巧的博客" type="application/atom+xml">
@@ -50,7 +51,7 @@
     <link rel="icon" href="/img/favicon.png">
     
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -126,7 +127,7 @@
 <img src="/images/ios-menu-2.jpg">
 <p>如何解决这个问题呢？方法如下:</p>
 <p>用vim直接打开工程的Info.plist文件，在文件中增加如下内容即可：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">key</span>&gt;</span>CFBundleLocalizations<span class="tag">&lt;/<span class="title">key</span>&gt;</span>       </span><br><span class="line"><span class="tag">&lt;<span class="title">array</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">string</span>&gt;</span>zh_CN<span class="tag">&lt;/<span class="title">string</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">string</span>&gt;</span>en<span class="tag">&lt;/<span class="title">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">array</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>CFBundleLocalizations<span class="tag">&lt;/<span class="name">key</span>&gt;</span>       </div><div class="line"><span class="tag">&lt;<span class="name">array</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">string</span>&gt;</span>zh_CN<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">string</span>&gt;</span>en<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">array</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>TO: 百思不得姐的开发者，不用谢：）你们应用的内容挺有意思的。</p>
   
 	</div>

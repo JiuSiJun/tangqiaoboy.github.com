@@ -32,7 +32,7 @@
     <link rel="icon" href="/img/favicon.png">
     
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -89,11 +89,11 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u5E8F_u8A00"><span class="toc-number">1.</span> <span class="toc-text">序言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5B89_u88C5_Hexo"><span class="toc-number">2.</span> <span class="toc-text">安装 Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u521B_u5EFA_u4E00_u4E2A_u65B0_u7684_u535A_u5BA2"><span class="toc-number">3.</span> <span class="toc-text">创建一个新的博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8FC1_u79FB_u548C_u914D_u7F6E"><span class="toc-number">4.</span> <span class="toc-text">迁移和配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4FEE_u6539_u754C_u9762"><span class="toc-number">5.</span> <span class="toc-text">修改界面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u53D1_u5E03_u6587_u7AE0"><span class="toc-number">6.</span> <span class="toc-text">发布文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">7.</span> <span class="toc-text">总结</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#序言"><span class="toc-number">1.</span> <span class="toc-text">序言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-Hexo"><span class="toc-number">2.</span> <span class="toc-text">安装 Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建一个新的博客"><span class="toc-number">3.</span> <span class="toc-text">创建一个新的博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#迁移和配置"><span class="toc-number">4.</span> <span class="toc-text">迁移和配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改界面"><span class="toc-number">5.</span> <span class="toc-text">修改界面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#发布文章"><span class="toc-number">6.</span> <span class="toc-text">发布文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">7.</span> <span class="toc-text">总结</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="u5E8F_u8A00"><a href="#u5E8F_u8A00" class="headerlink" title="序言"></a>序言</h2><p>我的博客之前一直使用的是 <a href="http://octopress.org/" target="_blank" rel="external">Octopress</a>，不过 Octopress 已经很久没有更新了。而且 Octopress 是基于 Ruby 的，生成博客文章的速度真的是非常非常慢，每次我使用 <code>rake preview</code> 命令时，我的 MacBook 的 CPU 就会狂转。最新的一次我试图在新 MBP 上搭建 Octopress 博客环境失败了，这让我打定主意更换掉它。</p>
+		<h2 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h2><p>我的博客之前一直使用的是 <a href="http://octopress.org/" target="_blank" rel="external">Octopress</a>，不过 Octopress 已经很久没有更新了。而且 Octopress 是基于 Ruby 的，生成博客文章的速度真的是非常非常慢，每次我使用 <code>rake preview</code> 命令时，我的 MacBook 的 CPU 就会狂转。最新的一次我试图在新 MBP 上搭建 Octopress 博客环境失败了，这让我打定主意更换掉它。</p>
 <p>之后我调研了一下，最终决定迁移到 Hexo，主要的原因是：</p>
 <ul>
 <li>Hexo 的原理和 Octopress 一样，都是生成静态文件，这样可以方便地托管到 GitHub 和 GitCafe 上。</li>
@@ -102,12 +102,12 @@
 </ul>
 <p>迁移本来应该在春节前就做完的，不过我在选择 Hexo 的主题上犯难了，Hexo 自带的主题丑极了，而我试了将近 10 个主题，都不满意。最终，我发现了 <a href="http://swift.gg/" target="_blank" rel="external">SwiftGG</a> 使用的主题 <a href="https://github.com/wuchong/jacman" target="_blank" rel="external">Jacman</a>，于是决定就它了！</p>
 <p>整个迁移过程大概如下：</p>
-<h2 id="u5B89_u88C5_Hexo"><a href="#u5B89_u88C5_Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h2><p>首先使用如下命令安装 Hexo：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-<h2 id="u521B_u5EFA_u4E00_u4E2A_u65B0_u7684_u535A_u5BA2"><a href="#u521B_u5EFA_u4E00_u4E2A_u65B0_u7684_u535A_u5BA2" class="headerlink" title="创建一个新的博客"></a>创建一个新的博客</h2><p>接着我们创建一个新的博客目录：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo init &#60;folder&#62;&#10;$ cd &#60;folder&#62;&#10;$ npm install</span><br></pre></td></tr></table></figure>
+<h2 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h2><p>首先使用如下命令安装 Hexo：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">npm install -g hexo-cli</div></pre></td></tr></table></figure>
+<h2 id="创建一个新的博客"><a href="#创建一个新的博客" class="headerlink" title="创建一个新的博客"></a>创建一个新的博客</h2><p>接着我们创建一个新的博客目录：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$ hexo init &lt;folder&gt;</div><div class="line">$ cd &lt;folder&gt;</div><div class="line">$ npm install</div></pre></td></tr></table></figure>
 <p>以上命令完成后，会在目标目录生成以下的目录结构：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.&#10;&#9500;&#9472;&#9472; _config.yml&#10;&#9500;&#9472;&#9472; package.json&#10;&#9500;&#9472;&#9472; scaffolds&#10;&#9500;&#9472;&#9472; source&#10;|   &#9500;&#9472;&#9472; _drafts&#10;|   &#9492;&#9472;&#9472; _posts&#10;&#9492;&#9472;&#9472; themes</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">.</div><div class="line">├── _config.yml</div><div class="line">├── package.json</div><div class="line">├── scaffolds</div><div class="line">├── source</div><div class="line">|   ├── _drafts</div><div class="line">|   └── _posts</div><div class="line">└── themes</div></pre></td></tr></table></figure>
 <p>相比 Octopress，Hexo 的目录结构更加简单：</p>
 <ul>
 <li>_config.yml 是博客的配置文件。</li>
@@ -115,15 +115,15 @@
 <li>source 是博客文章目录。</li>
 <li>themes 存放主题风格文件。</li>
 </ul>
-<h2 id="u8FC1_u79FB_u548C_u914D_u7F6E"><a href="#u8FC1_u79FB_u548C_u914D_u7F6E" class="headerlink" title="迁移和配置"></a>迁移和配置</h2><p>迁移起来还是很方便，把以前 Octopress 的 <code>source/_post</code> 目录下的文章，拷贝到 Hexo 的同名目录下即可。</p>
+<h2 id="迁移和配置"><a href="#迁移和配置" class="headerlink" title="迁移和配置"></a>迁移和配置</h2><p>迁移起来还是很方便，把以前 Octopress 的 <code>source/_post</code> 目录下的文章，拷贝到 Hexo 的同名目录下即可。</p>
 <p>以前的图片目录，也可以直接拷贝到 <code>source/images</code> 目录下。</p>
 <p>Google 统计相关的设置可以在 jacman 的 _config.yml 文件中配置。我以前用的评论系统太旧了，这次正好换成了<a href="http://tangqiaoboy.duoshuo.com/" target="_blank" rel="external">多说</a>，同样也是在 jacman 的配置文件中设置。</p>
-<h2 id="u4FEE_u6539_u754C_u9762"><a href="#u4FEE_u6539_u754C_u9762" class="headerlink" title="修改界面"></a>修改界面</h2><p>选择 Hexo 的另一个原因就是它的结构很简单，比较方便我定制。我在迁移完博客文章后，对 jacman 主题进行了一些定制。删掉了底部的作者介绍，然后在右侧边栏加上了我的微信公众号介绍。如果你想看看我是如何定制的，可以直接查看我 Fork 出来的 jacman 项目上的 Commits 即可，项目地址在 <a href="https://github.com/tangqiaoboy/jacman" target="_blank" rel="external">这里</a>。</p>
-<h2 id="u53D1_u5E03_u6587_u7AE0"><a href="#u53D1_u5E03_u6587_u7AE0" class="headerlink" title="发布文章"></a>发布文章</h2><p>Hexo 支持直接发布到 GitHub，不过我在配置好 <code>_config.yml</code> 文件后，执行 <code>Hexo deploy</code> 一直失败！Hexo 一直卡在生成页面过程中，没有任何报错，这使得我也不知道如何修复它。</p>
+<h2 id="修改界面"><a href="#修改界面" class="headerlink" title="修改界面"></a>修改界面</h2><p>选择 Hexo 的另一个原因就是它的结构很简单，比较方便我定制。我在迁移完博客文章后，对 jacman 主题进行了一些定制。删掉了底部的作者介绍，然后在右侧边栏加上了我的微信公众号介绍。如果你想看看我是如何定制的，可以直接查看我 Fork 出来的 jacman 项目上的 Commits 即可，项目地址在 <a href="https://github.com/tangqiaoboy/jacman" target="_blank" rel="external">这里</a>。</p>
+<h2 id="发布文章"><a href="#发布文章" class="headerlink" title="发布文章"></a>发布文章</h2><p>Hexo 支持直接发布到 GitHub，不过我在配置好 <code>_config.yml</code> 文件后，执行 <code>Hexo deploy</code> 一直失败！Hexo 一直卡在生成页面过程中，没有任何报错，这使得我也不知道如何修复它。</p>
 <p>最终，我自己写了一个小脚本来做发布工作：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#! /bin/zsh&#10;&#10;hexo clean&#10;hexo generate&#10;cd public&#10;&#10;git init&#10;git add .&#10;git commit -m &#34;update at `date` &#34;&#10;&#10;git remote add origin git@github.com:tangqiaoboy/tangqiaoboy.github.com.git &#62;&#62; /dev/null 2&#62;&#38;1&#10;echo &#34;### Pushing to Github...&#34;&#10;git push origin master -f&#10;echo &#34;### Done&#34;&#10;&#10;git remote add gitcafe git@gitcafe.com:tangqiaoboy/tangqiaoboy.git &#62;&#62; /dev/null 2&#62;&#38;1&#10;echo &#34;### Pushing to GitCafe...&#34;&#10;git push gitcafe master:gitcafe-pages -f&#10;echo &#34;### Done&#34;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">#! /bin/zsh</div><div class="line"></div><div class="line">hexo clean</div><div class="line">hexo generate</div><div class="line">cd public</div><div class="line"></div><div class="line">git init</div><div class="line">git add .</div><div class="line">git commit -m &quot;update at `date` &quot;</div><div class="line"></div><div class="line">git remote add origin git@github.com:tangqiaoboy/tangqiaoboy.github.com.git &gt;&gt; /dev/null 2&gt;&amp;1</div><div class="line">echo &quot;### Pushing to Github...&quot;</div><div class="line">git push origin master -f</div><div class="line">echo &quot;### Done&quot;</div><div class="line"></div><div class="line">git remote add gitcafe git@gitcafe.com:tangqiaoboy/tangqiaoboy.git &gt;&gt; /dev/null 2&gt;&amp;1</div><div class="line">echo &quot;### Pushing to GitCafe...&quot;</div><div class="line">git push gitcafe master:gitcafe-pages -f</div><div class="line">echo &quot;### Done&quot;</div></pre></td></tr></table></figure>
 <p>如果你遇到了和我一样问题的话，把以上脚本稍做修改应该也能很好地工作。</p>
-<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>Octopress 已经过时，建议有时间的朋友都可以尝试替换掉它。Hexo 算不上完美，但还算是一个不错的替代方案。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Octopress 已经过时，建议有时间的朋友都可以尝试替换掉它。Hexo 算不上完美，但还算是一个不错的替代方案。</p>
   
 	</div>
 		<footer class="article-footer clearfix">

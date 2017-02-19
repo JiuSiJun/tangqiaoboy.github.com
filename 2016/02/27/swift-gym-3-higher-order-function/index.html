@@ -20,7 +20,7 @@ Swift 烧脑体操（四） - map 和 flatMap
 Swift 烧脑体操（五）- Monad
 Swift 烧脑体操（六）- 类型推断
 
-前言Swift 其实比 Objective-C 复杂很多，相对于出生于上世">
+前言Swift 其实比 Objective-C 复杂很多，相对于出生于上">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Swift 烧脑体操（三） - 高阶函数">
 <meta property="og:url" content="http://blog.devtang.com/2016/02/27/swift-gym-3-higher-order-function/index.html">
@@ -34,7 +34,7 @@ Swift 烧脑体操（四） - map 和 flatMap
 Swift 烧脑体操（五）- Monad
 Swift 烧脑体操（六）- 类型推断
 
-前言Swift 其实比 Objective-C 复杂很多，相对于出生于上世">
+前言Swift 其实比 Objective-C 复杂很多，相对于出生于上">
 <meta property="og:image" content="http://ww2.sinaimg.cn/mw690/65dc76a3gw1f08hrkcyydj20i40cigv2.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/mw690/65dc76a3gw1f0sz14hv65j20er08t0tz.jpg">
 <meta property="og:updated_time" content="2016-09-07T14:26:56.000Z">
@@ -49,7 +49,8 @@ Swift 烧脑体操（四） - map 和 flatMap
 Swift 烧脑体操（五）- Monad
 Swift 烧脑体操（六）- 类型推断
 
-前言Swift 其实比 Objective-C 复杂很多，相对于出生于上世">
+前言Swift 其实比 Objective-C 复杂很多，相对于出生于上">
+<meta name="twitter:image" content="http://ww2.sinaimg.cn/mw690/65dc76a3gw1f08hrkcyydj20i40cigv2.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="唐巧的博客" type="application/atom+xml">
@@ -58,7 +59,7 @@ Swift 烧脑体操（六）- 类型推断
     <link rel="icon" href="/img/favicon.png">
     
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -115,12 +116,12 @@ Swift 烧脑体操（六）- 类型推断
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7D22_u5F15"><span class="toc-number">1.</span> <span class="toc-text">索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">2.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u51C6_u5907_u8FD0_u52A8_uFF1A_u57FA_u7840_u77E5_u8BC6"><span class="toc-number">3.</span> <span class="toc-text">准备运动：基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Trailing_Closure_Syntax"><span class="toc-number">3.1.</span> <span class="toc-text">Trailing Closure Syntax</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5E38_u89C1_u7528_u6CD5_u793A_u4F8B"><span class="toc-number">4.</span> <span class="toc-text">常见用法示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u904D_u5386"><span class="toc-number">4.1.</span> <span class="toc-text">遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6C42_u548C"><span class="toc-number">4.2.</span> <span class="toc-text">求和</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7B5B_u9009"><span class="toc-number">4.3.</span> <span class="toc-text">筛选</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u904D_u5386-1"><span class="toc-number">4.4.</span> <span class="toc-text">遍历</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u70E7_u8111_u4F53_u64CD"><span class="toc-number">5.</span> <span class="toc-text">烧脑体操</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7528_u9AD8_u9636_u51FD_u6570_u6765_u9690_u85CF_u79C1_u6709_u53D8_u91CF"><span class="toc-number">5.1.</span> <span class="toc-text">用高阶函数来隐藏私有变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9762_u8BD5_u9898"><span class="toc-number">5.2.</span> <span class="toc-text">面试题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#u9898_u76EE_u4E00"><span class="toc-number">5.2.1.</span> <span class="toc-text">题目一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u9898_u76EE_u4E8C"><span class="toc-number">5.2.2.</span> <span class="toc-text">题目二</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u9898_u76EE_u4E09"><span class="toc-number">5.2.3.</span> <span class="toc-text">题目三</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u53C2_u8003_u7B54_u6848"><span class="toc-number">5.3.</span> <span class="toc-text">参考答案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#u9898_u76EE_u4E00-1"><span class="toc-number">5.3.1.</span> <span class="toc-text">题目一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u9898_u76EE_u4E8C-1"><span class="toc-number">5.3.2.</span> <span class="toc-text">题目二</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u9898_u76EE_u4E09-1"><span class="toc-number">5.3.3.</span> <span class="toc-text">题目三</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#索引"><span class="toc-number">1.</span> <span class="toc-text">索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">2.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#准备运动：基础知识"><span class="toc-number">3.</span> <span class="toc-text">准备运动：基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Trailing-Closure-Syntax"><span class="toc-number">3.1.</span> <span class="toc-text">Trailing Closure Syntax</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见用法示例"><span class="toc-number">4.</span> <span class="toc-text">常见用法示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历"><span class="toc-number">4.1.</span> <span class="toc-text">遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#求和"><span class="toc-number">4.2.</span> <span class="toc-text">求和</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#筛选"><span class="toc-number">4.3.</span> <span class="toc-text">筛选</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历-1"><span class="toc-number">4.4.</span> <span class="toc-text">遍历</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#烧脑体操"><span class="toc-number">5.</span> <span class="toc-text">烧脑体操</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用高阶函数来隐藏私有变量"><span class="toc-number">5.1.</span> <span class="toc-text">用高阶函数来隐藏私有变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#面试题"><span class="toc-number">5.2.</span> <span class="toc-text">面试题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#题目一"><span class="toc-number">5.2.1.</span> <span class="toc-text">题目一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#题目二"><span class="toc-number">5.2.2.</span> <span class="toc-text">题目二</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#题目三"><span class="toc-number">5.2.3.</span> <span class="toc-text">题目三</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考答案"><span class="toc-number">5.3.</span> <span class="toc-text">参考答案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#题目一-1"><span class="toc-number">5.3.1.</span> <span class="toc-text">题目一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#题目二-1"><span class="toc-number">5.3.2.</span> <span class="toc-text">题目二</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#题目三-1"><span class="toc-number">5.3.3.</span> <span class="toc-text">题目三</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
 		
 		</div>
 		
 		<p><img src="http://ww2.sinaimg.cn/mw690/65dc76a3gw1f08hrkcyydj20i40cigv2.jpg" alt=""></p>
-<h2 id="u7D22_u5F15"><a href="#u7D22_u5F15" class="headerlink" title="索引"></a>索引</h2><p>Swift 烧脑系列文章列表：</p>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p>Swift 烧脑系列文章列表：</p>
 <ul>
 <li><a href="/2016/02/27/swift-gym-1-nested-optional/">Swift 烧脑体操（一） - Optional 的嵌套</a></li>
 <li><a href="/2016/02/27/swift-gym-2-function-argument/">Swift 烧脑体操（二） - 函数的参数</a></li>
@@ -129,55 +130,55 @@ Swift 烧脑体操（六）- 类型推断
 <li><a href="/2016/04/05/swift-gym-5-monad/">Swift 烧脑体操（五）- Monad</a></li>
 <li><a href="/2016/05/22/swift-gym-6-type-infer/">Swift 烧脑体操（六）- 类型推断</a></li>
 </ul>
-<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>Swift 其实比 Objective-C 复杂很多，相对于出生于上世纪 80 年代的 Objective-C 来说，Swift 融入了大量新特性。这也使得我们学习掌握这门语言变得相对来说更加困难。不过一切都是值得的，Swift 相比 Objective-C，写出来的程序更安全、更简洁，最终能够提高我们的工作效率和质量。</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Swift 其实比 Objective-C 复杂很多，相对于出生于上世纪 80 年代的 Objective-C 来说，Swift 融入了大量新特性。这也使得我们学习掌握这门语言变得相对来说更加困难。不过一切都是值得的，Swift 相比 Objective-C，写出来的程序更安全、更简洁，最终能够提高我们的工作效率和质量。</p>
 <p>Swift 相关的学习资料已经很多，我想从另外一个角度来介绍它的一些特性，我把这个角度叫做「烧脑体操」。什么意思呢？就是我们专门挑一些比较费脑子的语言细节来学习。通过「烧脑」地思考，来达到对 Swift 语言的更加深入的理解。</p>
 <p>这是本体操的第三节，练习前请做好准备运动，保持头脑清醒。</p>
-<h2 id="u51C6_u5907_u8FD0_u52A8_uFF1A_u57FA_u7840_u77E5_u8BC6"><a href="#u51C6_u5907_u8FD0_u52A8_uFF1A_u57FA_u7840_u77E5_u8BC6" class="headerlink" title="准备运动：基础知识"></a>准备运动：基础知识</h2><p><img src="http://ww1.sinaimg.cn/mw690/65dc76a3gw1f0sz14hv65j20er08t0tz.jpg" alt=""></p>
+<h2 id="准备运动：基础知识"><a href="#准备运动：基础知识" class="headerlink" title="准备运动：基础知识"></a>准备运动：基础知识</h2><p><img src="http://ww1.sinaimg.cn/mw690/65dc76a3gw1f0sz14hv65j20er08t0tz.jpg" alt=""></p>
 <p>在上一节里面，我们其实已经涉及到了高阶函数了。在 <a href="https://en.wikipedia.org/wiki/Higher-order_function" target="_blank" rel="external">Wikipedia</a> 中，是这么定义高阶函数（higher-order function）的，如果一个函数：</p>
 <ul>
 <li>接受一个或多个函数当作参数</li>
 <li>把一个函数当作返回值</li>
 </ul>
 <p>那么这个函数就被称作高阶函数。下面是一个简单的排序的例子，在这个例子中，传进去的参数就是一个函数：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let numbers = [1, 4, 2, 3]&#10;let res = numbers.sort &#123;&#10;    $0 &#60; $1&#10;&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Trailing_Closure_Syntax"><a href="#Trailing_Closure_Syntax" class="headerlink" title="Trailing Closure Syntax"></a>Trailing Closure Syntax</h3><p>上面的代码看着不像是函数作为参数存在，这是因为 Swift 的 Trailing Closure 特性。Swift 允许当函数的最后一个参数是闭包的时候，以紧跟 <code>{ }</code> 的形式，将最后一个闭包的内容附加在函数后面。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">let numbers = [1, 4, 2, 3]</div><div class="line">let res = numbers.sort &#123;</div><div class="line">    $0 &lt; $1</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Trailing-Closure-Syntax"><a href="#Trailing-Closure-Syntax" class="headerlink" title="Trailing Closure Syntax"></a>Trailing Closure Syntax</h3><p>上面的代码看着不像是函数作为参数存在，这是因为 Swift 的 Trailing Closure 特性。Swift 允许当函数的最后一个参数是闭包的时候，以紧跟 <code>{ }</code> 的形式，将最后一个闭包的内容附加在函数后面。</p>
 <p>所以，以下两行代码是等价的：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// &#27491;&#24120;&#20889;&#27861;&#65292;&#20989;&#25968;&#26159;&#20316;&#20026; sort &#30340;&#21442;&#25968;&#10;arr.sort(&#123; $0 &#60; $1 &#125;)&#10;&#10;// Trailing Closure &#20889;&#27861;&#65292;&#26356;&#31616;&#27905;&#26126;&#20102;&#10;arr.sort &#123; $0 &#60; $1 &#125;</span><br></pre></td></tr></table></figure>
-<h2 id="u5E38_u89C1_u7528_u6CD5_u793A_u4F8B"><a href="#u5E38_u89C1_u7528_u6CD5_u793A_u4F8B" class="headerlink" title="常见用法示例"></a>常见用法示例</h2><p>高阶函数在 Swift 语言中有大量的使用场景，我们先来看一看常见的用法：</p>
-<h3 id="u904D_u5386"><a href="#u904D_u5386" class="headerlink" title="遍历"></a>遍历</h3><p>我们可以用 <code>map</code> 方法来对数组元素进行某种规则的转换，例如：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr = [1, 2, 4]&#10;// arr = [1, 2, 4]&#10;&#10;let brr = arr.map &#123;&#10;    &#34;No.&#34; + String($0)&#10;&#125;&#10;// brr = [&#34;No.1&#34;, &#34;No.2&#34;, &#34;No.4&#34;]</span><br></pre></td></tr></table></figure>
-<h3 id="u6C42_u548C"><a href="#u6C42_u548C" class="headerlink" title="求和"></a>求和</h3><p>我们可以用 <code>reduce</code> 方法，来对数组元素进行某种规则的求和（不一定是加和）。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr = [1, 2, 4]&#10;// arr = [1, 2, 4]&#10;&#10;let brr = arr.reduce(0) &#123;&#10;    (prevSum: Int, element: Int) in&#10;    return prevSum + element&#10;&#125;&#10;// brr = 7&#10;let crr = arr.reduce(&#34;&#34;) &#123;&#10;    if $0 == &#34;&#34; &#123;&#10;        return String($1)&#10;    &#125; else &#123;&#10;        return $0 + &#34; &#34; + String($1)&#10;    &#125;&#10;&#125;&#10;// crr = &#34;1 2 4&#34;</span><br></pre></td></tr></table></figure>
-<h3 id="u7B5B_u9009"><a href="#u7B5B_u9009" class="headerlink" title="筛选"></a>筛选</h3><p>我们可以利用 <code>filter</code> 方法，来对数组元素进行某种规则的过滤，例如：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr = [1, 2, 4]&#10;// arr = [1, 2, 4]&#10;&#10;let brr = arr.filter &#123;&#10;    $0 % 2 == 0&#10;&#125;&#10;// brr = [2, 4]</span><br></pre></td></tr></table></figure>
-<h3 id="u904D_u5386-1"><a href="#u904D_u5386-1" class="headerlink" title="遍历"></a>遍历</h3><p>即使是以前最简单的遍历，我们也可以用高阶函数的写法，将遍历需要的操作，以函数参数的形式传入 <code>forEach</code> 方法中，例如：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr = [1, 2, 4]&#10;arr.forEach &#123;&#10;    print($0)&#10;&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="u70E7_u8111_u4F53_u64CD"><a href="#u70E7_u8111_u4F53_u64CD" class="headerlink" title="烧脑体操"></a>烧脑体操</h2><p>下面我们来看看高阶函数一些比较烧脑的细节。</p>
-<h3 id="u7528_u9AD8_u9636_u51FD_u6570_u6765_u9690_u85CF_u79C1_u6709_u53D8_u91CF"><a href="#u7528_u9AD8_u9636_u51FD_u6570_u6765_u9690_u85CF_u79C1_u6709_u53D8_u91CF" class="headerlink" title="用高阶函数来隐藏私有变量"></a>用高阶函数来隐藏私有变量</h3><p>高阶函数使得代码逻辑可以用函数为主体来进行封装，下面我将详细解释一下这句话。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">// 正常写法，函数是作为 sort 的参数</div><div class="line">arr.sort(&#123; $0 &lt; $1 &#125;)</div><div class="line"></div><div class="line">// Trailing Closure 写法，更简洁明了</div><div class="line">arr.sort &#123; $0 &lt; $1 &#125;</div></pre></td></tr></table></figure>
+<h2 id="常见用法示例"><a href="#常见用法示例" class="headerlink" title="常见用法示例"></a>常见用法示例</h2><p>高阶函数在 Swift 语言中有大量的使用场景，我们先来看一看常见的用法：</p>
+<h3 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h3><p>我们可以用 <code>map</code> 方法来对数组元素进行某种规则的转换，例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">let arr = [1, 2, 4]</div><div class="line">// arr = [1, 2, 4]</div><div class="line"></div><div class="line">let brr = arr.map &#123;</div><div class="line">    &quot;No.&quot; + String($0)</div><div class="line">&#125;</div><div class="line">// brr = [&quot;No.1&quot;, &quot;No.2&quot;, &quot;No.4&quot;]</div></pre></td></tr></table></figure>
+<h3 id="求和"><a href="#求和" class="headerlink" title="求和"></a>求和</h3><p>我们可以用 <code>reduce</code> 方法，来对数组元素进行某种规则的求和（不一定是加和）。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">let arr = [1, 2, 4]</div><div class="line">// arr = [1, 2, 4]</div><div class="line"></div><div class="line">let brr = arr.reduce(0) &#123;</div><div class="line">    (prevSum: Int, element: Int) in</div><div class="line">    return prevSum + element</div><div class="line">&#125;</div><div class="line">// brr = 7</div><div class="line">let crr = arr.reduce(&quot;&quot;) &#123;</div><div class="line">    if $0 == &quot;&quot; &#123;</div><div class="line">        return String($1)</div><div class="line">    &#125; else &#123;</div><div class="line">        return $0 + &quot; &quot; + String($1)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">// crr = &quot;1 2 4&quot;</div></pre></td></tr></table></figure>
+<h3 id="筛选"><a href="#筛选" class="headerlink" title="筛选"></a>筛选</h3><p>我们可以利用 <code>filter</code> 方法，来对数组元素进行某种规则的过滤，例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">let arr = [1, 2, 4]</div><div class="line">// arr = [1, 2, 4]</div><div class="line"></div><div class="line">let brr = arr.filter &#123;</div><div class="line">    $0 % 2 == 0</div><div class="line">&#125;</div><div class="line">// brr = [2, 4]</div></pre></td></tr></table></figure>
+<h3 id="遍历-1"><a href="#遍历-1" class="headerlink" title="遍历"></a>遍历</h3><p>即使是以前最简单的遍历，我们也可以用高阶函数的写法，将遍历需要的操作，以函数参数的形式传入 <code>forEach</code> 方法中，例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">let arr = [1, 2, 4]</div><div class="line">arr.forEach &#123;</div><div class="line">    print($0)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="烧脑体操"><a href="#烧脑体操" class="headerlink" title="烧脑体操"></a>烧脑体操</h2><p>下面我们来看看高阶函数一些比较烧脑的细节。</p>
+<h3 id="用高阶函数来隐藏私有变量"><a href="#用高阶函数来隐藏私有变量" class="headerlink" title="用高阶函数来隐藏私有变量"></a>用高阶函数来隐藏私有变量</h3><p>高阶函数使得代码逻辑可以用函数为主体来进行封装，下面我将详细解释一下这句话。</p>
 <p>在面向对象的世界里，逻辑存在的基本单元是对象，每个对象代表着一个最小可复用模块。在对象的内部，由高内聚的成员变量和成员函数构成。这些函数相互调用，并且操作对象的内部成员变量，最终对外产生可预期的行为。</p>
 <p>但是利用高阶函数，我们可以同样做到与对象类似的，高内聚的成员变量和成员函数，下面我就举一个具体的例子。</p>
 <p>下面的代码中，我们用类的方式，实现了一个 <code>Clock</code> 类， <code>Clock</code> 类实现了一个 <code>getCount</code> 方法，每次调用的时候返回的值 <code>+1</code>。为了测试代码，我们定义了两个实例 c1 和 c2，它们都可以正常输出预期的值。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Clock &#123;&#10;    var count: Int = 0&#10;    func getCount() -&#62; Int &#123;&#10;        return ++count;&#10;    &#125;&#10;&#125;&#10;&#10;let c1 = Clock()&#10;c1.getCount() // &#24471;&#21040; 1&#10;c1.getCount() // &#24471;&#21040; 2&#10;let c2 = Clock()&#10;c2.getCount() // &#24471;&#21040; 1</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">class Clock &#123;</div><div class="line">    var count: Int = 0</div><div class="line">    func getCount() -&gt; Int &#123;</div><div class="line">        return ++count;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let c1 = Clock()</div><div class="line">c1.getCount() // 得到 1</div><div class="line">c1.getCount() // 得到 2</div><div class="line">let c2 = Clock()</div><div class="line">c2.getCount() // 得到 1</div></pre></td></tr></table></figure>
 <p>那么接下来，我们用高阶函数的方式，来做一下同样的事情。我们先看代码：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func getClock() -&#62; () -&#62; Int &#123;&#10;    var count: Int = 0&#10;    let getCount = &#123; () -&#62; Int in&#10;        ++count;&#10;    &#125;&#10;    return getCount&#10;&#125;&#10;&#10;let c1 = getClock()&#10;c1()  // &#24471;&#21040; 1&#10;c1()  // &#24471;&#21040; 2&#10;let c2 = getClock()&#10;c2()  // &#24471;&#21040; 1</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">func getClock() -&gt; () -&gt; Int &#123;</div><div class="line">    var count: Int = 0</div><div class="line">    let getCount = &#123; () -&gt; Int in</div><div class="line">        ++count;</div><div class="line">    &#125;</div><div class="line">    return getCount</div><div class="line">&#125;</div><div class="line"></div><div class="line">let c1 = getClock()</div><div class="line">c1()  // 得到 1</div><div class="line">c1()  // 得到 2</div><div class="line">let c2 = getClock()</div><div class="line">c2()  // 得到 1</div></pre></td></tr></table></figure>
 <p>在上面的代码中，我们这里定义了一个 <code>getClock</code> 函数，这个函数可以返回一个 <code>getCount</code> 函数。然后，不太一样的地方是，这个 <code>getCount</code> 函数持有了一个外部的变量 <code>count</code>。于是，这个函数也变得有了状态（或者你也可以说它有了 Side Effect）。每次调用这个函数的时候，返回的值都会变化。</p>
 <p>另一方面，因为<code>count</code>变量是 <code>getClock</code> 这个高阶函数的内部变量，所以它并没有像全局变量一样使得封装性被打破。<code>getClock</code>函数仍然可以看作一个高内部的可复用模块，并且对外隐藏了实现细节。</p>
 <p>所以，Swift 语言的高阶函数以及闭包可以 capture 外部变量的特性，使得代码逻辑可以以函数作为主体来进行封装，这将使得我们的代码组织更加灵活。</p>
 <p>当然，如果滥用，这也会造成代码组织变得更加混乱。</p>
-<h3 id="u9762_u8BD5_u9898"><a href="#u9762_u8BD5_u9898" class="headerlink" title="面试题"></a>面试题</h3><h4 id="u9898_u76EE_u4E00"><a href="#u9898_u76EE_u4E00" class="headerlink" title="题目一"></a>题目一</h4><p>另一个烧脑的故事是来自于一个朋友的面试题。在面试中，面试官要求他用数组的 <code>reduce</code> 方法实现 <code>map</code> 的功能。</p>
+<h3 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h3><h4 id="题目一"><a href="#题目一" class="headerlink" title="题目一"></a>题目一</h4><p>另一个烧脑的故事是来自于一个朋友的面试题。在面试中，面试官要求他用数组的 <code>reduce</code> 方法实现 <code>map</code> 的功能。</p>
 <p>这个题目实在是非常蛋疼，不过用来烧脑倒是不错，大家感兴趣的话可以先想想，再翻下面的参考答案。</p>
-<h4 id="u9898_u76EE_u4E8C"><a href="#u9898_u76EE_u4E8C" class="headerlink" title="题目二"></a>题目二</h4><p>不过说回来，虽然题目一有些奇怪，但是它确实考查了对于高阶函数灵活使用以及对 <code>reduce</code> 方法的理解。大家还可以试试这些题目：</p>
+<h4 id="题目二"><a href="#题目二" class="headerlink" title="题目二"></a>题目二</h4><p>不过说回来，虽然题目一有些奇怪，但是它确实考查了对于高阶函数灵活使用以及对 <code>reduce</code> 方法的理解。大家还可以试试这些题目：</p>
 <ul>
 <li>问题一：用 <code>reduce</code> 方法找出数组中的最大值。</li>
 <li>问题二：用 <code>reduce</code> 方法一次求出数组中奇数的和、以及偶数乘积。</li>
 </ul>
-<h4 id="u9898_u76EE_u4E09"><a href="#u9898_u76EE_u4E09" class="headerlink" title="题目三"></a>题目三</h4><p>高阶函数另一个魔力就是可以链式调用，大家可以尝试这么一道题目：求一个数组中偶数的平方和。</p>
-<h3 id="u53C2_u8003_u7B54_u6848"><a href="#u53C2_u8003_u7B54_u6848" class="headerlink" title="参考答案"></a>参考答案</h3><h4 id="u9898_u76EE_u4E00-1"><a href="#u9898_u76EE_u4E00-1" class="headerlink" title="题目一"></a>题目一</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr = [1, 3, 2]&#10;let res = arr.reduce([]) &#123;&#10;    (a: [Int], element: Int) -&#62; [Int] in&#10;    var t = Array(a)&#10;    t.append(element * 2)&#10;    return t&#10;&#125;&#10;// res = [2, 6, 4]</span><br></pre></td></tr></table></figure>
-<h4 id="u9898_u76EE_u4E8C-1"><a href="#u9898_u76EE_u4E8C-1" class="headerlink" title="题目二"></a>题目二</h4><p>问题二的参考答案：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr = [1, 3, 2, 4]&#10;&#10;let res: (Int, Int) = arr.reduce((0, 1)) &#123;&#10;    (a :(Int, Int), element: Int) -&#62; (Int, Int) in&#10;    if element % 2 == 0 &#123;&#10;        return (a.0, a.1 * element)&#10;    &#125; else &#123;&#10;        return (a.0 + element, a.1)&#10;    &#125;&#10;&#125;&#10;// res = (4, 8)</span><br></pre></td></tr></table></figure>
-<h4 id="u9898_u76EE_u4E09-1"><a href="#u9898_u76EE_u4E09-1" class="headerlink" title="题目三"></a>题目三</h4><p>以下是参考答案：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let arr = [1, 3, 2, 4]&#10;let res = arr.filter &#123;&#10;        $0 % 2 == 0&#10;    &#125;.map &#123;&#10;        $0 * $0&#10;    &#125;.reduce(0) &#123;&#10;        $0 + $1&#10;    &#125;</span><br></pre></td></tr></table></figure>
-<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>总结一下本次烧脑锻炼到的脑细胞：</p>
+<h4 id="题目三"><a href="#题目三" class="headerlink" title="题目三"></a>题目三</h4><p>高阶函数另一个魔力就是可以链式调用，大家可以尝试这么一道题目：求一个数组中偶数的平方和。</p>
+<h3 id="参考答案"><a href="#参考答案" class="headerlink" title="参考答案"></a>参考答案</h3><h4 id="题目一-1"><a href="#题目一-1" class="headerlink" title="题目一"></a>题目一</h4><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">let arr = [1, 3, 2]</div><div class="line">let res = arr.reduce([]) &#123;</div><div class="line">    (a: [Int], element: Int) -&gt; [Int] in</div><div class="line">    var t = Array(a)</div><div class="line">    t.append(element * 2)</div><div class="line">    return t</div><div class="line">&#125;</div><div class="line">// res = [2, 6, 4]</div></pre></td></tr></table></figure>
+<h4 id="题目二-1"><a href="#题目二-1" class="headerlink" title="题目二"></a>题目二</h4><p>问题二的参考答案：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">let arr = [1, 3, 2, 4]</div><div class="line"></div><div class="line">let res: (Int, Int) = arr.reduce((0, 1)) &#123;</div><div class="line">    (a :(Int, Int), element: Int) -&gt; (Int, Int) in</div><div class="line">    if element % 2 == 0 &#123;</div><div class="line">        return (a.0, a.1 * element)</div><div class="line">    &#125; else &#123;</div><div class="line">        return (a.0 + element, a.1)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">// res = (4, 8)</div></pre></td></tr></table></figure>
+<h4 id="题目三-1"><a href="#题目三-1" class="headerlink" title="题目三"></a>题目三</h4><p>以下是参考答案：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">let arr = [1, 3, 2, 4]</div><div class="line">let res = arr.filter &#123;</div><div class="line">        $0 % 2 == 0</div><div class="line">    &#125;.map &#123;</div><div class="line">        $0 * $0</div><div class="line">    &#125;.reduce(0) &#123;</div><div class="line">        $0 + $1</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总结一下本次烧脑锻炼到的脑细胞：</p>
 <ul>
 <li>学习了 Swift 语言中的一些使用高阶函数的示例，包括 <code>map</code>, <code>reduce</code>, <code>filter</code> 等。</li>
 <li>学习了利用高阶函数来构造以函数为主体的功能模块。</li>

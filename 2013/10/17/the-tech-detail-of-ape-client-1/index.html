@@ -27,6 +27,7 @@
 <meta name="twitter:title" content="猿题库iOS客户端的技术细节（一）：使用多target来构建大量相似App">
 <meta name="twitter:description" content="前言本人今年主要在负责猿题库 iOS 客户端的开发，本文旨在通过分享猿题库 iOS 客户端开发过程中的技术细节，达到总结和交流的目的。
 这是本技术分享系列文章的第一篇。本文涉及的技术细节是：采用多 Target 编译方案来实现多个相似 App 的开发，以保证我们能够快速地推出多个相似课程的客户端。">
+<meta name="twitter:image" content="http://blog.devtang.com/images/ape-arch-1.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="唐巧的博客" type="application/atom+xml">
@@ -35,7 +36,7 @@
     <link rel="icon" href="/img/favicon.png">
     
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -92,14 +93,14 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u95EE_u9898_u63CF_u8FF0"><span class="toc-number">2.</span> <span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6280_u672F_u89E3_u51B3_u65B9_u6848"><span class="toc-number">3.</span> <span class="toc-text">技术解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u62BD_u53D6_u5B50_u9879_u76EE"><span class="toc-number">3.1.</span> <span class="toc-text">抽取子项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6784_u9020_u591A_u4E2A_u7F16_u8BD1_Target"><span class="toc-number">3.2.</span> <span class="toc-text">构造多个编译 Target</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Config__u7C7B"><span class="toc-number">3.3.</span> <span class="toc-text">Config 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4ECE_u4E0D_u540C_u7684_xib__u4E2D_u52A0_u8F7D_u754C_u9762"><span class="toc-number">3.4.</span> <span class="toc-text">从不同的 xib 中加载界面</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题描述"><span class="toc-number">2.</span> <span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#技术解决方案"><span class="toc-number">3.</span> <span class="toc-text">技术解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#抽取子项目"><span class="toc-number">3.1.</span> <span class="toc-text">抽取子项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造多个编译-Target"><span class="toc-number">3.2.</span> <span class="toc-text">构造多个编译 Target</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Config-类"><span class="toc-number">3.3.</span> <span class="toc-text">Config 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#从不同的-xib-中加载界面"><span class="toc-number">3.4.</span> <span class="toc-text">从不同的 xib 中加载界面</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>本人今年主要在负责猿题库 iOS 客户端的开发，本文旨在通过分享猿题库 iOS 客户端开发过程中的技术细节，达到总结和交流的目的。</p>
+		<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本人今年主要在负责猿题库 iOS 客户端的开发，本文旨在通过分享猿题库 iOS 客户端开发过程中的技术细节，达到总结和交流的目的。</p>
 <p>这是本技术分享系列文章的第一篇。本文涉及的技术细节是：采用多 Target 编译方案来实现多个相似 App 的开发，以保证我们能够快速地推出多个相似课程的客户端。</p>
 <a id="more"></a>
-<h2 id="u95EE_u9898_u63CF_u8FF0"><a href="#u95EE_u9898_u63CF_u8FF0" class="headerlink" title="问题描述"></a>问题描述</h2><p>今年春节后，我们对外发布了应用 <a href="http://yuantiku.com/m?courseSet=xingce" target="_blank" rel="external">“猿题库-公务员考试行测”</a>，接着我们就开始一个个发布猿题库系列课程应用。到现在半年多过去了，我们一共对外发布了 8 款应用（如下图所示）。</p>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>今年春节后，我们对外发布了应用 <a href="http://yuantiku.com/m?courseSet=xingce" target="_blank" rel="external">“猿题库-公务员考试行测”</a>，接着我们就开始一个个发布猿题库系列课程应用。到现在半年多过去了，我们一共对外发布了 8 款应用（如下图所示）。</p>
 <img src="/images/ape-arch-1.jpg">
 <p>这些课程，随了 <a href="http://yuantiku.com/m?courseSet=shenlun" target="_blank" rel="external">“ 猿题库-公务员考试申论 “</a> 和其它课程不一样之外，另外 7 个课程都有着相似，但是又不完全相同的功能和界面。</p>
 <p>这些应用的相同点包括：</p>
@@ -116,14 +117,14 @@
 <li>有些课程会有一些自定义的界面，例如高考的应用可以设置昵称，有些课程的真题练习中是有推荐真题模块的，而有些课程又没有。</li>
 <li>有些课程有扫描答题卡功能，有些课程有考前冲刺功能，有些课程有大题专项查看功能，而有些课程又没有上述功能。另外还有一些微小细节，但是解决方法和类似，所以就不一一展开说明。</li>
 </ol>
-<h2 id="u6280_u672F_u89E3_u51B3_u65B9_u6848"><a href="#u6280_u672F_u89E3_u51B3_u65B9_u6848" class="headerlink" title="技术解决方案"></a>技术解决方案</h2><p>我们的技术解决方案主要说来分 4 步：</p>
+<h2 id="技术解决方案"><a href="#技术解决方案" class="headerlink" title="技术解决方案"></a>技术解决方案</h2><p>我们的技术解决方案主要说来分 4 步：</p>
 <ol>
 <li>通过抽取子项目，构建可复用的大模块。</li>
 <li>通过多 Target 编译的方式，不同课程的在编译时，采用不同的资源文件和源文件。</li>
 <li>在第 2 步的基础上，在项目中创建配置用的 Config 类，然后在不同 Target 各自的配置文件中设置不同的 Config 值。实现课程的差异化界面。</li>
 <li>从不同的 xib 中加载界面。</li>
 </ol>
-<h3 id="u62BD_u53D6_u5B50_u9879_u76EE"><a href="#u62BD_u53D6_u5B50_u9879_u76EE" class="headerlink" title="抽取子项目"></a>抽取子项目</h3><p>我们首先做的是抽取子项目，从 <a href="http://yuantiku.com/m?courseSet=sikao" target="_blank" rel="external">“猿题库司法考试客户端 “</a> 开始，我们将可以重用的模块一一抽取出来，以 git submodule 的形式组织到项目中。这个抽取过程在开发完猿题库司法考试客户端之后，基本成型了。我们抽取的 submodule 主要分为 4 部分：</p>
+<h3 id="抽取子项目"><a href="#抽取子项目" class="headerlink" title="抽取子项目"></a>抽取子项目</h3><p>我们首先做的是抽取子项目，从 <a href="http://yuantiku.com/m?courseSet=sikao" target="_blank" rel="external">“猿题库司法考试客户端 “</a> 开始，我们将可以重用的模块一一抽取出来，以 git submodule 的形式组织到项目中。这个抽取过程在开发完猿题库司法考试客户端之后，基本成型了。我们抽取的 submodule 主要分为 4 部分：</p>
 <ol>
 <li>UI Common，涉及可复用的登录界面，注册界面，付费界面，NPS 界面，意见反馈界面，关于界面，扫描答题卡界面。另外，我们将一些可复用的 UI 风格控件也抽取成了相应的静态工厂方法，用于生成统一风格的按钮、背景以及状态栏等。</li>
 <li>Core Common，涉及可复用的底层模块。包括网络请求模块，自己封装的 Core Text 渲染引擎，缓存模块，一些静态 util 方法等。</li>
@@ -131,7 +132,7 @@
 <li>Scan Common, 答题卡扫描识别算法模块，实现核心的扫描算法。</li>
 </ol>
 <p>以上只是粗粒度划分，这些模块化的子项目可能在以后被重用，例如 Core Common 完全就可以复用在任何其它项目中。</p>
-<h3 id="u6784_u9020_u591A_u4E2A_u7F16_u8BD1_Target"><a href="#u6784_u9020_u591A_u4E2A_u7F16_u8BD1_Target" class="headerlink" title="构造多个编译 Target"></a>构造多个编译 Target</h3><p>抽取完子项目以后，我们采用多 target 的方式，将不同课程中的同名资源文件打包进各自的 Target 中，最后所有课程在一个工程项目中，如下图所示：</p>
+<h3 id="构造多个编译-Target"><a href="#构造多个编译-Target" class="headerlink" title="构造多个编译 Target"></a>构造多个编译 Target</h3><p>抽取完子项目以后，我们采用多 target 的方式，将不同课程中的同名资源文件打包进各自的 Target 中，最后所有课程在一个工程项目中，如下图所示：</p>
 <img src="/images/ape-targets.jpg">
 <p>先简单介绍一下 Xcode 中 target 的概念，苹果在文档中写道：</p>
 <blockquote><p>Targets that define the products to build. A target organizes the files and instructions needed to build a product into a sequence of build actions that can be taken.”</p>
@@ -143,13 +144,13 @@
 <li><p>对于文案一类的差别，我们通过修改<code>Compile Sources</code>，使不同的课程有着不同的文案定义文件。通过这样，我们使不同课程有了不同的文案。另外包括后台网络接口的差异性问题，统计项的差异性问题，也都是这样处理的。</p>
 </li>
 </ol>
-<h3 id="Config__u7C7B"><a href="#Config__u7C7B" class="headerlink" title="Config 类"></a>Config 类</h3><p>最后，我们使用 Config 类来完成交互和页面 UI 组件差异性问题。拿能力评估报告页面来说，不同的课程的页面都有一些差异。我们在公共层的代码中将这些逻辑全部实现，具体的 UI 在呈现时，通过读取相关的 Config 类来决定具体如何展示。这样，我们只需要在第 2 步提供的各个课程的差异性源文件中，完成 Config 类的配置即可。</p>
-<h3 id="u4ECE_u4E0D_u540C_u7684_xib__u4E2D_u52A0_u8F7D_u754C_u9762"><a href="#u4ECE_u4E0D_u540C_u7684_xib__u4E2D_u52A0_u8F7D_u754C_u9762" class="headerlink" title="从不同的 xib 中加载界面"></a>从不同的 xib 中加载界面</h3><p>有些时候，我们仅仅需要的是 UI 界面排列方式不一样，其它交互逻辑完全一样。对于这种需求，我们尝试同一个 view 对应有多个 xib，然后通过上一步的 Config 类的信息，来加载不同的 xib 界面。这样所有的差异性都在不同的 xib 中解决了，对 controller 层可以完全透明。</p>
+<h3 id="Config-类"><a href="#Config-类" class="headerlink" title="Config 类"></a>Config 类</h3><p>最后，我们使用 Config 类来完成交互和页面 UI 组件差异性问题。拿能力评估报告页面来说，不同的课程的页面都有一些差异。我们在公共层的代码中将这些逻辑全部实现，具体的 UI 在呈现时，通过读取相关的 Config 类来决定具体如何展示。这样，我们只需要在第 2 步提供的各个课程的差异性源文件中，完成 Config 类的配置即可。</p>
+<h3 id="从不同的-xib-中加载界面"><a href="#从不同的-xib-中加载界面" class="headerlink" title="从不同的 xib 中加载界面"></a>从不同的 xib 中加载界面</h3><p>有些时候，我们仅仅需要的是 UI 界面排列方式不一样，其它交互逻辑完全一样。对于这种需求，我们尝试同一个 view 对应有多个 xib，然后通过上一步的 Config 类的信息，来加载不同的 xib 界面。这样所有的差异性都在不同的 xib 中解决了，对 controller 层可以完全透明。</p>
 <p>下图是我们报告页面的 xib 界面，分为：高考课程、有目标考试的课程、没有目标考试的课程三种。由于这 3 个界面的后台逻辑和交互逻辑都一样，我们通过 3 个 xib 来实现它们之间差异性的部分。</p>
 <img src="/images/ape-xibs.jpg">
 <p>以下是 view 加载对应的 xib 的代码逻辑：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">+ (IPadAbilityReportHeaderView *)loadFromNib:(IPadAbilityReportHeaderViewType)type &#123;</span><br><span class="line">    <span class="built_in">NSString</span> *nibFileName;</span><br><span class="line">    <span class="keyword">switch</span> (type) &#123;</span><br><span class="line">        <span class="keyword">case</span> IPadAbilityReportHeaderViewTypeWithQuiz:</span><br><span class="line">            nibFileName = <span class="string">@"IPadAbilityReportHeaderViewWithQuiz"</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> IPadAbilityReportHeaderViewTypeWithoutQuiz:</span><br><span class="line">            nibFileName = <span class="string">@"IPadAbilityReportHeaderViewWithoutQuiz"</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> IPadAbilityReportHeaderViewTypeGaokao:</span><br><span class="line">            nibFileName = <span class="string">@"IPadAbilityReportHeaderViewInGaokao"</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">NSArray</span> *nibArray = [[<span class="built_in">NSBundle</span> mainBundle] loadNibNamed:nibFileName owner:<span class="literal">nil</span> options:<span class="literal">nil</span>];</span><br><span class="line">    <span class="keyword">if</span> (nibArray<span class="variable">.count</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> [nibArray lastObject];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>通过多 target 编译方案，我们可以很方便的实现多个相似 App 的开发，以保证我们能够快速地推出多个相似课程的客户端。同时，由于在一个工程中，我们也可以方便地测试新的代码逻辑在各个课程下是否正常。</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"></div><div class="line">+ (IPadAbilityReportHeaderView *)loadFromNib:(IPadAbilityReportHeaderViewType)type &#123;</div><div class="line">    <span class="built_in">NSString</span> *nibFileName;</div><div class="line">    <span class="keyword">switch</span> (type) &#123;</div><div class="line">        <span class="keyword">case</span> IPadAbilityReportHeaderViewTypeWithQuiz:</div><div class="line">            nibFileName = <span class="string">@"IPadAbilityReportHeaderViewWithQuiz"</span>;</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">case</span> IPadAbilityReportHeaderViewTypeWithoutQuiz:</div><div class="line">            nibFileName = <span class="string">@"IPadAbilityReportHeaderViewWithoutQuiz"</span>;</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">case</span> IPadAbilityReportHeaderViewTypeGaokao:</div><div class="line">            nibFileName = <span class="string">@"IPadAbilityReportHeaderViewInGaokao"</span>;</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">default</span>:</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">NSArray</span> *nibArray = [[<span class="built_in">NSBundle</span> mainBundle] loadNibNamed:nibFileName owner:<span class="literal">nil</span> options:<span class="literal">nil</span>];</div><div class="line">    <span class="keyword">if</span> (nibArray.count &gt; <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">return</span> [nibArray lastObject];</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过多 target 编译方案，我们可以很方便的实现多个相似 App 的开发，以保证我们能够快速地推出多个相似课程的客户端。同时，由于在一个工程中，我们也可以方便地测试新的代码逻辑在各个课程下是否正常。</p>
 <p>该方案可以用来解决 “维护大量逻辑相似但是又有细微不同的应用” 的需求，希望本文能给业界同行一些帮助。</p>
   
 	</div>

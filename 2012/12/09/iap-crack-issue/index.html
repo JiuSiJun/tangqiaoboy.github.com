@@ -26,6 +26,7 @@
 <meta name="twitter:title" content="关于IAP的破解">
 <meta name="twitter:description" content="介绍大概在今年7月份，有俄罗斯黑客破解了苹果的应用内付费（In-App Purchases），设备在不越狱的情况下就可以免费获得来自苹果官网App Store里应用的收费道具。受影响的产品众多，包括著名的Angry Birds，切水果，Mega Jump, Pandora等。这里有一份受影响的著名的游戏应用列表。
 正常的越狱行为还是比较复杂的，需要下载破解软件，并且操作进入DFU模式，所以大部分人">
+<meta name="twitter:image" content="http://blog.devtang.com/images/iap-crack-issue.png">
 
     
     <link rel="alternative" href="/atom.xml" title="唐巧的博客" type="application/atom+xml">
@@ -34,7 +35,7 @@
     <link rel="icon" href="/img/favicon.png">
     
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -91,23 +92,23 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#u4ECB_u7ECD"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u653B_u51FB_u539F_u7406"><span class="toc-number">2.</span> <span class="toc-text">攻击原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5E94_u5BF9_u63AA_u65BD"><span class="toc-number">3.</span> <span class="toc-text">应对措施</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#攻击原理"><span class="toc-number">2.</span> <span class="toc-text">攻击原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#应对措施"><span class="toc-number">3.</span> <span class="toc-text">应对措施</span></a></li></ol>
 		
 		</div>
 		
-		<h3 id="u4ECB_u7ECD"><a href="#u4ECB_u7ECD" class="headerlink" title="介绍"></a>介绍</h3><p>大概在今年7月份，有俄罗斯黑客<a href="http://www.in-appstore.com/" target="_blank" rel="external">破解</a>了苹果的应用内付费（In-App Purchases），设备在不越狱的情况下就可以免费获得来自苹果官网App Store里应用的收费道具。受影响的产品众多，包括著名的Angry Birds，切水果，Mega Jump, Pandora等。<a href="https://docs.google.com/spreadsheet/ccc?key=0AvSXyNTiqEXMdGRKZlN1Snl5S3h1Z1NsTTFYTlJPTUE#gid=0" target="_blank" rel="external">这里</a>有一份受影响的著名的游戏应用列表。</p>
+		<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>大概在今年7月份，有俄罗斯黑客<a href="http://www.in-appstore.com/" target="_blank" rel="external">破解</a>了苹果的应用内付费（In-App Purchases），设备在不越狱的情况下就可以免费获得来自苹果官网App Store里应用的收费道具。受影响的产品众多，包括著名的Angry Birds，切水果，Mega Jump, Pandora等。<a href="https://docs.google.com/spreadsheet/ccc?key=0AvSXyNTiqEXMdGRKZlN1Snl5S3h1Z1NsTTFYTlJPTUE#gid=0" target="_blank" rel="external">这里</a>有一份受影响的著名的游戏应用列表。</p>
 <p>正常的越狱行为还是比较复杂的，需要下载破解软件，并且操作进入DFU模式，所以大部分人并不能够方便地越狱。但该方案不需要越狱就可以破解应用内付费，给用户实施该行为提供了方便。</p>
 <a id="more"></a>
 <p>为了验证破解的有效性，我今天试了一下，确实能够直接绕开苹果的应用内付费就直接完成购买操作。而苹果也在它的官方文档上<a href="http://developer.apple.com/library/ios/#releasenotes/StoreKit/IAP_ReceiptValidation/_index.html" target="_blank" rel="external">特别注明</a>了该漏洞的存在，截图如下：</p>
 <img src="/images/iap-crack-issue.png">
 <p>从该文档中我们可以知道，iOS6以下的所有设备（包括越狱或非越狱设备），都会受到该漏洞的影响。</p>
-<h3 id="u653B_u51FB_u539F_u7406"><a href="#u653B_u51FB_u539F_u7406" class="headerlink" title="攻击原理"></a>攻击原理</h3><p>我们知道通常的IAP购买行为，从逻辑上就是设备向App Store发起一个购买操作，App Store在验证过用户的密码确认身份后，扣费并返回购买成功的凭证，整个网络操作是通过SSL加密的。</p>
+<h3 id="攻击原理"><a href="#攻击原理" class="headerlink" title="攻击原理"></a>攻击原理</h3><p>我们知道通常的IAP购买行为，从逻辑上就是设备向App Store发起一个购买操作，App Store在验证过用户的密码确认身份后，扣费并返回购买成功的凭证，整个网络操作是通过SSL加密的。</p>
 <p>该IAP破解方法，是让设备误以为另一个网站就是AppStore，而向它通讯，而这个假AppStore返回一个假的购买成功的凭证，这样就欺骗设备完成了购买。整个欺骗使用的手段包括：</p>
 <ol>
 <li>用户给自己添加一个受信任的证书以完成SSL通讯的证书校验</li>
 <li>设置一个伪DNS（域名解析服务）地址，把AppStore的域名指向假的地址。</li>
 </ol>
-<h3 id="u5E94_u5BF9_u63AA_u65BD"><a href="#u5E94_u5BF9_u63AA_u65BD" class="headerlink" title="应对措施"></a>应对措施</h3><p>现在看来，暂时有效的应对方法是，将该交易凭证上传到我们自己的服务器上，然后让我们自己的服务器与AppStore进行验证，以确认该凭证是否是伪造的，然后将验证结果返回给设备。苹果的官方网站上也是这么介绍的。这样做麻烦的地方是，对于那些游戏和工具类应用，增加了服务器开发和维护的开销。</p>
+<h3 id="应对措施"><a href="#应对措施" class="headerlink" title="应对措施"></a>应对措施</h3><p>现在看来，暂时有效的应对方法是，将该交易凭证上传到我们自己的服务器上，然后让我们自己的服务器与AppStore进行验证，以确认该凭证是否是伪造的，然后将验证结果返回给设备。苹果的官方网站上也是这么介绍的。这样做麻烦的地方是，对于那些游戏和工具类应用，增加了服务器开发和维护的开销。</p>
 <p>但是就象苹果自己也意识到的那样（如下图），既然破解者可以欺骗设备来和AppStore通讯，那么同样破解者从原理上，也可以欺骗设备同我们自己的服务器通讯，到头来，设备本身无论如何是无法知道自己的信息的真实性的。</p>
 <img src="/images/iap-crack-isuue-2.png">
 <p>对于这件事，我们只能期望于：因为我们的应用用户量不大，验证协议又不是通用的，所以破解者需要专门针对我们的通讯协议进行破解，这需要他本身有动力做这个事情，并且要花费他一些时间。所以可能他觉得做这个事情没什么挑战和意义，就不破解我们了。在这件事情上，“希望他不要破解”，好象也是我们唯一能做的事情。</p>

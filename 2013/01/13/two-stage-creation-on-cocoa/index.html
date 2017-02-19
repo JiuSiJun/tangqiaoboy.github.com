@@ -25,6 +25,7 @@ NSString * str = [[NSString alloc] initWith">
 <meta name="twitter:title" content="谈ObjC对象的两段构造模式">
 <meta name="twitter:description" content="前言Objective-c 语言在申请对象的时，需要使用两段构造 (Two Stage Creation) 的模式。一个对象的创建，需要先调用 alloc 方法或 allocWithZone 方法，再调用 init 方法或 initWithSomething 方法。如下是一个 NSString 对象的创建示例：
 NSString * str = [[NSString alloc] initWith">
+<meta name="twitter:image" content="http://blog.devtang.com/images/allocWithZone.png">
 
     
     <link rel="alternative" href="/atom.xml" title="唐巧的博客" type="application/atom+xml">
@@ -33,7 +34,7 @@ NSString * str = [[NSString alloc] initWith">
     <link rel="icon" href="/img/favicon.png">
     
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -90,17 +91,17 @@ NSString * str = [[NSString alloc] initWith">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5BF9_u8C61_u7684_u521B_u5EFA"><span class="toc-number">2.</span> <span class="toc-text">对象的创建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#alloc__u65B9_u6CD5"><span class="toc-number">2.1.</span> <span class="toc-text">alloc 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#init__u65B9_u6CD5"><span class="toc-number">2.2.</span> <span class="toc-text">init 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#new"><span class="toc-number">2.3.</span> <span class="toc-text">new</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4E3A_u4EC0_u4E48_u8FD9_u4E48_u8BBE_u8BA1"><span class="toc-number">3.</span> <span class="toc-text">为什么这么设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u540E_u8BB0"><span class="toc-number">4.</span> <span class="toc-text">后记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#allocWithZone__u88AB_u5E9F_u5F03"><span class="toc-number">4.1.</span> <span class="toc-text">allocWithZone 被废弃</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Objective-C__u7684_u5386_u53F2"><span class="toc-number">5.</span> <span class="toc-text">Objective-C 的历史</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象的创建"><span class="toc-number">2.</span> <span class="toc-text">对象的创建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#alloc-方法"><span class="toc-number">2.1.</span> <span class="toc-text">alloc 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#init-方法"><span class="toc-number">2.2.</span> <span class="toc-text">init 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#new"><span class="toc-number">2.3.</span> <span class="toc-text">new</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么这么设计"><span class="toc-number">3.</span> <span class="toc-text">为什么这么设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后记"><span class="toc-number">4.</span> <span class="toc-text">后记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#allocWithZone-被废弃"><span class="toc-number">4.1.</span> <span class="toc-text">allocWithZone 被废弃</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Objective-C-的历史"><span class="toc-number">5.</span> <span class="toc-text">Objective-C 的历史</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>Objective-c 语言在申请对象的时，需要使用两段构造 (<a href="http://volonbolon.net/post/634999801/two-stage-creation-in-cocoa" target="_blank" rel="external">Two Stage Creation</a>) 的模式。一个对象的创建，需要先调用 alloc 方法或 allocWithZone 方法，再调用 init 方法或 initWithSomething 方法。如下是一个 NSString 对象的创建示例：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSString</span> * str = [[<span class="built_in">NSString</span> alloc] initWithString:<span class="string">@"http://blog.devtang.com"</span>];</span><br></pre></td></tr></table></figure>
+		<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Objective-c 语言在申请对象的时，需要使用两段构造 (<a href="http://volonbolon.net/post/634999801/two-stage-creation-in-cocoa" target="_blank" rel="external">Two Stage Creation</a>) 的模式。一个对象的创建，需要先调用 alloc 方法或 allocWithZone 方法，再调用 init 方法或 initWithSomething 方法。如下是一个 NSString 对象的创建示例：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="built_in">NSString</span> * str = [[<span class="built_in">NSString</span> alloc] initWithString:<span class="string">@"http://blog.devtang.com"</span>];</div></pre></td></tr></table></figure>
 <p>由于该语言的对象创建方法和大多数其它语言（如 C、C++、Java、JavaScript）都不一样，所以引起了我的好奇。是什么原因促使 Objective-C 做了这种设计，而又是什么原因促使大多数其它语言都采用 “new” 方法来一次性创建对象呢？</p>
 <p>在看了 <a href="http://www.amazon.com/Cocoa-Design-Patterns-Erik-Buck/dp/0321535022" target="_blank" rel="external">《Cocoa Design Patterns》</a> 一书（顺便吐槽一下该书中文版翻译质量不高，建议看英文版），并且做了一些调研之后，我将总结分享给大家，欢迎大家讨论。</p>
 <a id="more"></a>
-<h2 id="u5BF9_u8C61_u7684_u521B_u5EFA"><a href="#u5BF9_u8C61_u7684_u521B_u5EFA" class="headerlink" title="对象的创建"></a>对象的创建</h2><p>我们先来看看在对象的创建过程中，alloc 和 init 到底做了哪些事情。</p>
-<h3 id="alloc__u65B9_u6CD5"><a href="#alloc__u65B9_u6CD5" class="headerlink" title="alloc 方法"></a>alloc 方法</h3><p>根据苹果的 <a href="https://developer.apple.com/library/mac/#documentation/cocoa/conceptual/CocoaFundamentals/CocoaObjects/CocoaObjects.html#//apple_ref/doc/uid/TP40002974-CH4-SW54" target="_blank" rel="external">官方文档</a>。当对象创建时，cocoa 会从应用程序的虚拟地址空间上为该对象分配足够的内存。cocoa 会遍历该对象所有的成员变量，通过成员变量的类型来计算所需占用的内存。</p>
+<h2 id="对象的创建"><a href="#对象的创建" class="headerlink" title="对象的创建"></a>对象的创建</h2><p>我们先来看看在对象的创建过程中，alloc 和 init 到底做了哪些事情。</p>
+<h3 id="alloc-方法"><a href="#alloc-方法" class="headerlink" title="alloc 方法"></a>alloc 方法</h3><p>根据苹果的 <a href="https://developer.apple.com/library/mac/#documentation/cocoa/conceptual/CocoaFundamentals/CocoaObjects/CocoaObjects.html#//apple_ref/doc/uid/TP40002974-CH4-SW54" target="_blank" rel="external">官方文档</a>。当对象创建时，cocoa 会从应用程序的虚拟地址空间上为该对象分配足够的内存。cocoa 会遍历该对象所有的成员变量，通过成员变量的类型来计算所需占用的内存。</p>
 <p>当我们通过 alloc 或 allocWithZone 方法创建对象时，cocoa 会返回一个未” 初使化 “过的对象。在这个过程中，cocoa 除了上面提到的申请了一块足够大的内存外，还做了以下 3 件事：</p>
 <ol>
 <li>将该新对象的引用计数 (Retain Count) 设置成 1。</li>
@@ -108,14 +109,14 @@ NSString * str = [[NSString alloc] initWith">
 <li>将该新对象的所有其它成员变量的值设置成零。（根据成员变量类型，零有可能是指 nil 或 Nil 或 0.0）</li>
 </ol>
 <p>isa 成员变量是在 <a href="https://developer.apple.com/library/mac/#documentation/cocoa/Reference/Foundation/Classes/NSObject_Class/Reference/Reference.html#//apple_ref/occ/cl/NSObject" target="_blank" rel="external">NSObject</a> 中定义的，所以保证 Cocoa 的所有对象都带有此成员变量。借助该变量可以实现 Cocoa 对象在运行时的自省 (Introspection) 功能。</p>
-<h3 id="init__u65B9_u6CD5"><a href="#init__u65B9_u6CD5" class="headerlink" title="init 方法"></a>init 方法</h3><p>大部分情况下，我们都不希望所有成员变量都是零，所以 init 方法会做真正的初使化工作，让对象的成员变量的值符合我们程序逻辑中的初始化状态。例如，NSMutableString 可能就会额外再申请一块字符数组，用于动态修改字符串。</p>
+<h3 id="init-方法"><a href="#init-方法" class="headerlink" title="init 方法"></a>init 方法</h3><p>大部分情况下，我们都不希望所有成员变量都是零，所以 init 方法会做真正的初使化工作，让对象的成员变量的值符合我们程序逻辑中的初始化状态。例如，NSMutableString 可能就会额外再申请一块字符数组，用于动态修改字符串。</p>
 <p>init 还有一个需要注意的问题。某些情况下，init 会造成 alloc 的原本空间不够用，而第二次分配内存空间。所以下面的写法是错的：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSString</span> * s = [<span class="built_in">NSString</span> alloc];</span><br><span class="line">[s init]; <span class="comment">// 这儿 init 返回的地址可能会变。s 原本的指针地址可能是无效的地址。</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="built_in">NSString</span> * s = [<span class="built_in">NSString</span> alloc];</div><div class="line">[s init]; <span class="comment">// 这儿 init 返回的地址可能会变。s 原本的指针地址可能是无效的地址。</span></div></pre></td></tr></table></figure>
 <p>为此，苹果引入了一个编程规范，让大家写的时候将 alloc 和 init 写在一行。所以上面的代码正确的写法是</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSString</span> * s = [[<span class="built_in">NSString</span> alloc] init];</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="built_in">NSString</span> * s = [[<span class="built_in">NSString</span> alloc] init];</div></pre></td></tr></table></figure>
 <h3 id="new"><a href="#new" class="headerlink" title="new"></a>new</h3><p>在后来，苹果也引入了类方法：new。但是由于历史原因，init 方法是实例方法而非类方法，所以作为类方法的 new，只能简单地等价于 alloc + init，不能指定 init 的参数，所以用处不大。苹果在设计上也禁止多次调用 init 方法，例如如下代码会抛出 NSInvalidArgumentException。</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSString</span> * str = [<span class="built_in">NSString</span> new];</span><br><span class="line">str = [str initWithString:<span class="string">@"Bar"</span>];</span><br></pre></td></tr></table></figure>
-<h2 id="u4E3A_u4EC0_u4E48_u8FD9_u4E48_u8BBE_u8BA1"><a href="#u4E3A_u4EC0_u4E48_u8FD9_u4E48_u8BBE_u8BA1" class="headerlink" title="为什么这么设计"></a>为什么这么设计</h2><p>说回来文章开始时提出来问题，为什么苹果要这么设计而其它语言不这么设计？</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="built_in">NSString</span> * str = [<span class="built_in">NSString</span> new];</div><div class="line">str = [str initWithString:<span class="string">@"Bar"</span>];</div></pre></td></tr></table></figure>
+<h2 id="为什么这么设计"><a href="#为什么这么设计" class="headerlink" title="为什么这么设计"></a>为什么这么设计</h2><p>说回来文章开始时提出来问题，为什么苹果要这么设计而其它语言不这么设计？</p>
 <p>上面提到，alloc 其实不只干了申请内存的事情，还做了：</p>
 <ol>
 <li>内存管理的事情，设置 Retain Count。</li>
@@ -125,9 +126,9 @@ NSString * str = [[NSString alloc] initWith">
 <p>简单看来，根据设计模式的 Single Responsibility 的设计原则，苹果觉得 alloc 和 init 是做的 2 件不同的事情，把这两件事情分开放在 2 个函数中，对于程序员更加清楚明了。更详细查阅文档后，我觉得这是由于历史原因，让苹果觉得 alloc 方法过于复杂，在历史上，alloc 不仅仅是分配内存，还可以详细的指定该内存所在的内存分区（用 NSZone 表示）。这就是下面要提到的 allocWithZone 方法。</p>
 <p>在 <a href="http://www.amazon.com/Cocoa-Design-Patterns-Erik-Buck/dp/0321535022" target="_blank" rel="external">《Cocoa Design Patterns》</a> 一书也提到，早期苹果是建议程序员使用 allocWithZone 来管理内存分配的，每个 NSZone 表示一块内存分区，allowWithZone 方法可以允许对象从指定分区分配内存。了解到这段历史后，也不难理解苹果这么设计的原因了。因为在这种情况下，alloc 要处理的情况复杂，和 init 放到一起不合适。</p>
 <p>而对于大多数出生在 90 年代的语言来说 (例如 Java,JavaScript,C#)，由于内存具体的分配方案都不需要程序员操心了，所以就不需要单独为内存分配实现一个 alloc 方法了。</p>
-<h2 id="u540E_u8BB0"><a href="#u540E_u8BB0" class="headerlink" title="后记"></a>后记</h2><h3 id="allocWithZone__u88AB_u5E9F_u5F03"><a href="#allocWithZone__u88AB_u5E9F_u5F03" class="headerlink" title="allocWithZone 被废弃"></a>allocWithZone 被废弃</h3><p>自从 Mac OS X 10.5 上引入了垃圾回收机制后，苹果就不建议程序员使用 allocWithZone 了，事实上，cocoa 框架也会忽略 allocWithZone 指定的分区。苹果在文档中也 <a href="https://developer.apple.com/library/mac/#documentation/cocoa/Reference/Foundation/Classes/NSObject_Class/Reference/Reference.html#//apple_ref/occ/clm/NSObject/allocWithZone:" target="_blank" rel="external">提到</a>，allocWithZone 仅仅是一个历史遗留设计了。下图是苹果的文档截图：</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><h3 id="allocWithZone-被废弃"><a href="#allocWithZone-被废弃" class="headerlink" title="allocWithZone 被废弃"></a>allocWithZone 被废弃</h3><p>自从 Mac OS X 10.5 上引入了垃圾回收机制后，苹果就不建议程序员使用 allocWithZone 了，事实上，cocoa 框架也会忽略 allocWithZone 指定的分区。苹果在文档中也 <a href="https://developer.apple.com/library/mac/#documentation/cocoa/Reference/Foundation/Classes/NSObject_Class/Reference/Reference.html#//apple_ref/occ/clm/NSObject/allocWithZone:" target="_blank" rel="external">提到</a>，allocWithZone 仅仅是一个历史遗留设计了。下图是苹果的文档截图：</p>
 <img src="/images/allocWithZone.png">
-<h2 id="Objective-C__u7684_u5386_u53F2"><a href="#Objective-C__u7684_u5386_u53F2" class="headerlink" title="Objective-C 的历史"></a>Objective-C 的历史</h2><p>Objective-C 是一门非常老的语言。如果你查阅文档，你会发现它和 C++ 出生在同一时代（两种语言的发行年份都是 <a href="http://en.wikipedia.org/wiki/Stepstone" target="_blank" rel="external">1983 年</a>），都是作为 C 语言的面向对象的接班人被推出。当然，最终 C++ 胜出。由于历史久远，Objective-C 也无法有太多优秀的语言做参考，所以，有很多历史遗留的设计。在 2007 年苹果公司发布了 Obj-C 2.0, 对其进行了大量改进。</p>
+<h2 id="Objective-C-的历史"><a href="#Objective-C-的历史" class="headerlink" title="Objective-C 的历史"></a>Objective-C 的历史</h2><p>Objective-C 是一门非常老的语言。如果你查阅文档，你会发现它和 C++ 出生在同一时代（两种语言的发行年份都是 <a href="http://en.wikipedia.org/wiki/Stepstone" target="_blank" rel="external">1983 年</a>），都是作为 C 语言的面向对象的接班人被推出。当然，最终 C++ 胜出。由于历史久远，Objective-C 也无法有太多优秀的语言做参考，所以，有很多历史遗留的设计。在 2007 年苹果公司发布了 Obj-C 2.0, 对其进行了大量改进。</p>
 <p>在最近几年的 WWDC 大会上，每年苹果都会对 Objective-C 和其对应的 LLVM 编译器进行改进，例如 WWDC2011 推出的 ARC，WWDC2012 推出的 Object Literals 等。所以现在使用 Objective-C 做开发已经非常舒服了。期待苹果给开发者带来更多惊喜。</p>
   
 	</div>
