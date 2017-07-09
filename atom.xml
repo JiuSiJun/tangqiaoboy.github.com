@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.devtang.com/"/>
-  <updated>2017-06-26T14:28:13.000Z</updated>
+  <updated>2017-07-09T14:44:11.000Z</updated>
   <id>http://blog.devtang.com/</id>
   
   <author>
@@ -14,6 +14,43 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>如何戒掉王者荣耀</title>
+    <link href="http://blog.devtang.com/2017/07/09/how-to-get-rid-of-games/"/>
+    <id>http://blog.devtang.com/2017/07/09/how-to-get-rid-of-games/</id>
+    <published>2017-07-09T14:36:53.000Z</published>
+    <updated>2017-07-09T14:44:11.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>王者荣耀最近火了，不，应该是说火了好久了。我自己也玩了几个月，排位赛打到铂金 V，等级打到 29 级。不过我最近几个月戒掉了，如果你刚好也想戒掉，可以看看我的经验。</p>
+<h2 id="意识层面的工作"><a href="#意识层面的工作" class="headerlink" title="意识层面的工作"></a>意识层面的工作</h2><p>要戒掉王者荣耀，首先需要从意识上辨别它的危害。基本上，除了职业战队，大部分人玩游戏都是为了娱乐，就是开心。但是，其实现在大多数的游戏设计出来不是让人开心的，而是让人沉迷的。</p>
+<p>让人开心和让人沉迷差别巨大。让人开心的事情结束后，你通常会感觉到很舒服和满足，然后稍微有些留恋和不舍。而让人沉迷的事情结束后，通常都会带来失落和不舒服，就像上瘾了一样。</p>
+<p>举个例子，看电影，旅行，享用美食就是让人开心的事情。大家经历这些事情的时候很开心，事情结束后，虽然有留恋，但是谈不上不舒服。而游戏某些时候就像吸烟一样，不玩就会让人特别不舒服。</p>
+<p>当你明白游戏设计者的动机是让你上瘾进而挣钱的话，你可能就不会那么开心了对吧？而且作为程序员，我们的工作从来都是设计和控制程序的行为，现在却被别的程序控制，从心理上大家也应该不太情愿吧？</p>
+<p>王者荣耀还有一点麻烦的是：它的游戏模式属于即时对战类的，这类游戏玩起来必须全神贯注。所以，你会忽略所有游戏之外的事情。最容易受伤的可能就是家人和朋友吧。在家里玩很可能被家人批评，在朋友聚会时玩很容易被认为不愿和大家交流。这些最终会让你感觉到不舒服，感觉被游戏控制。</p>
+<h2 id="行动层面的工作"><a href="#行动层面的工作" class="headerlink" title="行动层面的工作"></a>行动层面的工作</h2><p>光意识到危害还不行，还得有能戒除王者荣耀的手段。这里分享一下我的一些办法。</p>
+<p>沉迷游戏通常是由于自己还是有一些空闲的时间，所以想戒掉王者荣耀，首先需要给自己的这些时间做好合理的安排。当你有 side project 的时候，那么你就不舍得把时间都浪费在游戏上了。</p>
+<p>对于我来说，我分析下来，感觉自己可以有很多可以做的事情。比如写一些总结文章，我的读者一直比较多，写文章可以收获不少阅读量和读者反馈带来的成就感。又比如看书，今年我其实希望多看看管理学和炒股的书，把时间花在这些上面有意义得多。又比如看看美剧和电影，我买了爱奇艺的会员，单从娱乐来说，看美剧和电影带来的沉迷要小得多，而且顺便还可以练练英语听力。</p>
+<p>总之，你首先需要规划好自己的空余时间，不管是看电影，看综艺节目，或者学习，健身，逛街都可以，只要你觉得有成就感或者有意思，否则无聊会把你重新拉回游戏的世界中。</p>
+<p>规划好自己的空余时间之后，你需要的第二步就是：卸载你的游戏。王者荣耀体积很大，卸载掉重新安装很花时间，这会帮助你戒除它。</p>
+<p>你可以选一个好的时候，在某个打玩王者荣耀的深夜，你玩得筋疲力尽，但是一直都在输，你想起因为玩游戏耽误了好多事情，乘这个机会赶快把应用卸载掉吧。</p>
+<p>如果你用了上面两步还没有戒掉，那可以试试第三步：你把所有的符文都卖掉再买再卖，直到把钱用光，把所有的金币都买自己永远不会玩的英雄，恶意加入游戏然后骂队友并且直接退出，把自己的信誉分搞成 0 分，删除所有的游戏好友关系，退出游戏的战队。基本这么搞完之后，你估计也没兴趣玩了，</p>
+<h2 id="我为什么要玩它"><a href="#我为什么要玩它" class="headerlink" title="我为什么要玩它"></a>我为什么要玩它</h2><p>我为什么当初要玩呢？原因挺多的。首先我其实挺想学习一下好的游戏的设计的。推塔游戏的鼻祖应该是 DOTA 吧，王者荣耀把 DOTA 简化到可以直接在手机上操作，在产品设计角度还是非常牛逼的。另外我年初身体不太好，晚上常常胃疼，游戏可以让我暂时忘掉身体的不适。最后就是王者荣耀吸引了很多小学生用户，我们公司的 App 是面向小学生的，我希望在做用户访谈的时候，和小朋友们有一些共同语言。</p>
+<p>顺便说一下，王者荣耀这类竞技类比较强的游戏，其实新手很容易由于玩得不好而没有成就感。王者荣耀为了让新手能够持续玩，设计了大量的细节，其中一个就是在对战的时候，有机器人假装成你的对手输给你。基本上可能让你在游戏的前几天收获满满的成就感。</p>
+<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>王者荣耀是一款优秀的游戏，但是我们无论如何也不应该被游戏控制，让它影响我们的生活，工作，家庭对吧？</p>
+<p>是时候戒掉它了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;序&quot;&gt;&lt;a href=&quot;#序&quot; class=&quot;headerlink&quot; title=&quot;序&quot;&gt;&lt;/a&gt;序&lt;/h2&gt;&lt;p&gt;王者荣耀最近火了，不，应该是说火了好久了。我自己也玩了几个月，排位赛打到铂金 V，等级打到 29 级。不过我最近几个月戒掉了，如果你刚好也想戒掉，可
+    
+    </summary>
+    
+      <category term="summary" scheme="http://blog.devtang.com/categories/summary/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>了解企业的数据指标 - 读《一本书读懂财报》</title>
@@ -1116,37 +1153,6 @@
     
       &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;大家国庆节过得如何？我反正是整个人的作息都变了，估计要调整过来得花不少时间。&lt;/p&gt;
 &lt;p&gt;国庆节期间开车还经历了人生第一次剐蹭，倒车时方向
-    
-    </summary>
-    
-      <category term="iOS weekly" scheme="http://blog.devtang.com/categories/iOS-weekly/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>iOS移动开发周报-第45期</title>
-    <link href="http://blog.devtang.com/2016/09/26/ios-weekly-45/"/>
-    <id>http://blog.devtang.com/2016/09/26/ios-weekly-45/</id>
-    <published>2016-09-26T14:15:15.000Z</published>
-    <updated>2016-09-26T14:22:35.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>是的，我又开始写周报了！主要是因为喵神不写周报了，加上我发现大家对写 iOS 技术周报这件事情似乎没什么兴趣。其实我觉得这是一个挺好的学习总结的办法，所以要不就继续我来吧。</p>
-<p>我会每周从国外的周报，微博，GitHub，QQ / 微信群里收集各种 iOS 的信息，然后挑选一些有价值的分享给大家。</p>
-<h2 id="MDCC"><a href="#MDCC" class="headerlink" title="MDCC"></a>MDCC</h2><p>MDCC 大会刚刚结束，这次大会请来了在日本的喵神王巍，滴滴的孙源，LeanCloud 的陈宜龙等众多 iOS 开发者。会议的所有 iOS 讲稿都会更新到这个地址，感兴趣的同学请一定关注更新：<a href="https://github.com/MDCC2016/iOS-Session-Slides" target="_blank" rel="external">https://github.com/MDCC2016/iOS-Session-Slides</a></p>
-<p>王巍提前已经将他的讲稿和 Demo 代码公布在微博上了，地址是：<a href="http://weibo.com/1708947107/E9JHnoNtS" target="_blank" rel="external">http://weibo.com/1708947107/E9JHnoNtS</a></p>
-<h2 id="苹果加强应用标题审核力度"><a href="#苹果加强应用标题审核力度" class="headerlink" title="苹果加强应用标题审核力度"></a>苹果加强应用标题审核力度</h2><p>你的应用最近因为起名字的原因被拒过吗？在以前，由于标题文字在搜索中的排序权重较高，所以有一些应用会把一些热门关键词写在标题中。苹果对此行为一直管得不严，有些审核员管，有些审核员不管。不过最近似乎每个审核员都更加严格执行这项标准了，那些稍长的名字，都被要求进行进一步的精简。详见：<a href="http://www.gupowang.com/app/5057.html" target="_blank" rel="external">http://www.gupowang.com/app/5057.html</a></p>
-<h2 id="适配-iOS-10"><a href="#适配-iOS-10" class="headerlink" title="适配 iOS 10"></a>适配 iOS 10</h2><p>Xcode 10 发布以后，编译器开始不支持 iOS 7，所以很多应用在适配完 iOS 10 以后，都不再支持 iOS 7 了。我的同事看了一下，包括网易新闻，滴滴出行这些大应用也都选择了不再兼容 iOS 7 的方法。但是也有一些应用选择适配 iOS 10 同时支持 iOS 7，这些应用有 QQ，美团 等。由于 AppStore 支持 iOS 7 的设备下载旧的版本，所以我个人觉得即便不支持 iOS 7，所以不支持 iOS 7 或许是最省事的办法。</p>
-<h2 id="Swift-3"><a href="#Swift-3" class="headerlink" title="Swift 3"></a>Swift 3</h2><p>Swift 3 推出之后，Ray 出了一个迁移到 Swift 3 的视频教程，感兴趣的同学可以看看，不过据说，Alarmfire 网络库在适配 Swift 3 后，只支持 iOS 9 以上的版本。这对于国内系统升级缓慢的应用来说，似乎是一个很尴尬的事情。另一个尴尬的事情是迁移 Swift 3 还需要各种第三方库的配合，当前看起来，还需要一些时间。所以，建议大家还是继续使用 Swift 2.3  的版本。<a href="https://videos.raywenderlich.com/screencasts/ios-10-swift-3-in-3-minutes" target="_blank" rel="external">https://videos.raywenderlich.com/screencasts/ios-10-swift-3-in-3-minutes</a></p>
-<h2 id="Push-Notifications"><a href="#Push-Notifications" class="headerlink" title="Push Notifications"></a>Push Notifications</h2><p>苹果最近改进了它的 Push Notifications 使用方式，除了可以使用以前的证书验证方式外，增加了一种名为 Token Authentication 的方式。苹果原话说： A token is easy to generate, doesn’t expire, and can be used to send notifications to all of your apps. 感兴趣的读者可以试试，相关链接：<a href="https://developer.apple.com/news/?id=09222016a" target="_blank" rel="external">https://developer.apple.com/news/?id=09222016a</a></p>
-<h2 id="Vapor"><a href="#Vapor" class="headerlink" title="Vapor"></a>Vapor</h2><p>Vapor 1.0 正式发布了，这是一个基于 Swift 的服务器端框架，感兴趣的朋友可以玩玩。<a href="http://vapor.codes/" target="_blank" rel="external">http://vapor.codes/</a></p>
-<h2 id="有趣"><a href="#有趣" class="headerlink" title="有趣"></a>有趣</h2><p>最近 AppStore 的热门搜索出现了奇怪的词条，详见下面第三条，看不懂的别问我，我也不懂！请向老司机请教！</p>
-<p><img src="http://ww2.sinaimg.cn/mw690/65dc76a3jw1f7zsq678yij20qo1bf410.jpg" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;是的，我又开始写周报了！主要是因为喵神不写周报了，加上我发现大家对写 iOS 技术周报这件事情似乎没什么兴趣。其实我觉得这是一个挺好的学习总
     
     </summary>
     
