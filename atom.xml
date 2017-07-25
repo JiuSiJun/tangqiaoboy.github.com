@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.devtang.com/"/>
-  <updated>2017-07-09T14:44:11.000Z</updated>
+  <updated>2017-07-23T09:13:44.000Z</updated>
   <id>http://blog.devtang.com/</id>
   
   <author>
@@ -14,6 +14,46 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>游戏化学习的典范 - 玩《Human Resource Machine》</title>
+    <link href="http://blog.devtang.com/2017/07/23/human-resource-machine-game/"/>
+    <id>http://blog.devtang.com/2017/07/23/human-resource-machine-game/</id>
+    <published>2017-07-23T09:02:35.000Z</published>
+    <updated>2017-07-23T09:13:44.000Z</updated>
+    
+    <content type="html"><![CDATA[<img src="/images/human-resource-machine.png">
+<h3 id="游戏介绍"><a href="#游戏介绍" class="headerlink" title="游戏介绍"></a>游戏介绍</h3><p>最近一次和美团的朋友聚餐的时候，一个朋友向我推荐了这个<a href="https://itunes.apple.com/cn/app/human-resource-machine/id1005098334?mt=8" target="_blank" rel="external">《Human Resource Machine<br>》</a>游戏。仔细一看才发现这还是苹果的编辑推荐 App，售价 30 人民币。于是我当时就下载了，这个周末刚好有时间，就仔细玩了玩。</p>
+<p>一玩起来我就停不下来了，这个游戏的整个玩法是让玩家编写汇编语言的程序来通关，但是作者居然把枯燥的汇编语言变成了非常有意思的挑战关卡。运行过程中的游戏主角异常生动，让你感觉到了创造和指导主角的「上帝感」；与此同时，游戏考虑到大家学习汇编语言的难度，从最简单的无条件跳转开始，一步一步引导你学会用汇编语言来实现 if 判断、for 循环、字符串的存取、除法指令、取模指令、指针操作。下图是我在玩「质因数分解」关卡的运行过程。</p>
+<img src="/images/human-resource-machine-game-93233.png">
+<p>最终你发现，你竟然可以用游戏提供给你的仅有的 10 多条汇编指令，实现复杂的排序、质因数分解，完成复杂的逻辑的时候，你理解了这个世界上所有编程语言的本质：那就是靠仅有的几十条汇编语言来构建复杂的逻辑。</p>
+<p>应该说，这个游戏还是挺难的，游戏最终的几关，汇编代码量已经有 50 行了，在手机上仅靠拖拽来管理源码，并且没有模块的情况下基本已经快到极限了。另外，最后几关涉及的关于字符串存取，指针的操作技巧，排序算法，如果没有学过相关知识，自己靠聪明才智自己推断出来还是有些难度。游戏的 RPC 似乎也意识到了这一点，示意大家要学会「翻阅资料」。</p>
+<p>于是，这个游戏就成了一个最好的汇编语言学习的配套练习。玩家通过游戏入手，在遇到不懂的知识的时候查阅专业的书籍。当游戏通关的时候（只要不是作弊），玩家就已经完全掌握汇编语言，那么就有能力通过相关的考试，获得相应的学分或认证。</p>
+<h3 id="游戏化学习"><a href="#游戏化学习" class="headerlink" title="游戏化学习"></a>游戏化学习</h3><p>游戏化学习一直在业界居于探索期，我一直觉得游戏化学习在高年级不太可能行得通，因为游戏化学习如果过于注重游戏性，可能会给学习效率带来冲突，但是这款游戏给了我很大的震撼。</p>
+<p>如果一款学习游戏，能够给人合适的挑战难度，让玩家持续的获得激励，享受到挑战的成就感。同时又能像这款游戏这样，用丰富的交互细节给人真实感和信息量，让玩家通过游戏细节获得更加丰富的知识，那么确实游戏化学习可以颠覆掉原有的枯燥学习过程。</p>
+<p>好的游戏激发人们探索和追求极限的欲望。这款游戏在很多地方让大家「翻阅资料」，使得大家为了通关可以学习到更多相关知识。另外，这款游戏对于每一关，都设置了额外的挑战目标：让你追求代码的精简或者运行效率，最终即使你通关，你也会为了额外的挑战陷入其中苦苦探索（如下图）。</p>
+<img src="/images/human-resource-machine-game-29508.png">
+<img src="/images/human-resource-machine-game-e9e03.png">
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>总结一下这款游戏的设计特点：</p>
+<ul>
+<li>通过关卡难度设计，持续的激励玩家</li>
+<li>丰富真实的交互体验</li>
+<li>鼓励查阅资料，通过延伸阅读来通关</li>
+<li>额外的附加挑战</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;/images/human-resource-machine.png&quot;&gt;
+&lt;h3 id=&quot;游戏介绍&quot;&gt;&lt;a href=&quot;#游戏介绍&quot; class=&quot;headerlink&quot; title=&quot;游戏介绍&quot;&gt;&lt;/a&gt;游戏介绍&lt;/h3&gt;&lt;p&gt;最近一次和美团的朋友聚餐的时候
+    
+    </summary>
+    
+      <category term="summary" scheme="http://blog.devtang.com/categories/summary/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>如何戒掉王者荣耀</title>
@@ -1114,45 +1154,6 @@
     <summary type="html">
     
       &lt;h2 id=&quot;新闻&quot;&gt;&lt;a href=&quot;#新闻&quot; class=&quot;headerlink&quot; title=&quot;新闻&quot;&gt;&lt;/a&gt;新闻&lt;/h2&gt;&lt;h3 id=&quot;苹果解释-Dash-下架的原因&quot;&gt;&lt;a href=&quot;#苹果解释-Dash-下架的原因&quot; class=&quot;headerlink&quot; ti
-    
-    </summary>
-    
-      <category term="iOS weekly" scheme="http://blog.devtang.com/categories/iOS-weekly/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>iOS 移动开发周报 - 第 46 期</title>
-    <link href="http://blog.devtang.com/2016/10/10/ios-weekly-46/"/>
-    <id>http://blog.devtang.com/2016/10/10/ios-weekly-46/</id>
-    <published>2016-10-10T13:08:08.000Z</published>
-    <updated>2016-10-10T12:43:09.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>大家国庆节过得如何？我反正是整个人的作息都变了，估计要调整过来得花不少时间。</p>
-<p>国庆节期间开车还经历了人生第一次剐蹭，倒车时方向盘转得过猛，车头把停在旁边的一台宝马 5 系给蹭到了，吓得我赶紧报了保险。结果最后定损的维修费用也就几百块钱，用交强险就 cover 住所有费用了。人生就是不停地经历，有了这次出险，以后估计开车会更加小心。</p>
-<p>好了，言归正传，我们来看看本周的 iOS 新闻。</p>
-<h2 id="新闻"><a href="#新闻" class="headerlink" title="新闻"></a>新闻</h2><h3 id="Search-Ads-上线"><a href="#Search-Ads-上线" class="headerlink" title="Search Ads 上线"></a>Search Ads 上线</h3><p>苹果的 AppStore 搜索广告终于 <a href="https://developer.apple.com/news/?id=09282016a" target="_blank" rel="external">正式上线了</a>，不过现在仅支持 iPhone 平台和美国区。AppStore 搜索广告类似于百度搜索关健词的竞价排名机制，该平台未来在中国区上线之后，我估计会使得一部分刷榜行为转移到正常的广告投放上。另外各个公司其实也需要及时介入，对自己的商标或产品关键词进行提前保护，以避免被恶意投放广告。关于 Search Ads 的详细介绍，今年的 WWDC 有<a href="https://developer.apple.com/videos/play/wwdc2016/302/" target="_blank" rel="external">专门的介绍视频</a>，建议大家都看看。</p>
-<h3 id="Dash-被-AppStore-下架"><a href="#Dash-被-AppStore-下架" class="headerlink" title="Dash 被 AppStore 下架"></a>Dash 被 AppStore 下架</h3><p>Dash 是一款优秀的 Mac 效率工具，恰当的使用它，可以极大地提高你的输入速度。最近，作者被 Apple 告知其帐户「因涉嫌诈欺」而被停权。作者提供了授权迁移工具，便于大家将授权转移出来。详情：<a href="https://zhuanlan.zhihu.com/p/22782111" target="_blank" rel="external">阅读原文</a>。</p>
-<p>关于 Dash 被下架的原因，大家众说纷纭，其中有一个说法是：Dash 在将其的个人帐户转成企业帐户时，涉及的邓白氏码（DUNS）的代理公司可能提供的信息有问题，牵连了 Dash。</p>
-<h3 id="春雨医生创始人张锐去世"><a href="#春雨医生创始人张锐去世" class="headerlink" title="春雨医生创始人张锐去世"></a>春雨医生创始人张锐去世</h3><p>我和张锐有过在网易门户的短暂共事经历，不曾想到张锐正值创业上升时期 <a href="http://politics.caijing.com.cn/20161006/4183250.shtml" target="_blank" rel="external">离世</a>，令人唏嘘不已。国内互联网公司虽然有着远高于别的行业的平均薪水，但是也同时伴随着极高的工作强度，不管是创业公司，还是已经上市的 BAT，加班就犹如家常便饭。但是，身体总归还是我们自己的，希望大家都能平衡好事业和身体。</p>
-<h2 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h2><h3 id="Swift-3"><a href="#Swift-3" class="headerlink" title="Swift 3"></a>Swift 3</h3><p>Swift 3 的迁移工作并不轻松，喵神说他的开源库 <a href="https://github.com/onevcat/Kingfisher" target="_blank" rel="external">Kingfisher</a> 大概花了 200 个提交，才完成了迁移工作。</p>
-<p>最近，Glow 技术团队分享了 Swift 3 带来的改变，感兴趣的可以<a href="http://tech.glowing.com/cn/swift3/" target="_blank" rel="external">点这里阅读</a>。</p>
-<p>国庆前，图拉鼎也分享了适配 Swift 3 的一点小经验和坑，<a href="https://imtx.me/archives/2064.html" target="_blank" rel="external">点这里阅读</a>。</p>
-<h3 id="Let’s-Talk-About-project-pbxproj"><a href="#Let’s-Talk-About-project-pbxproj" class="headerlink" title="Let’s Talk About project.pbxproj"></a>Let’s Talk About project.pbxproj</h3><p><code>project.pbxproj</code> 文件被包含于 Xcode 工程文件 <code>*.xcodeproj</code> 之中，存储着 Xcode 工程的各项配置参数。它本质上是一种旧风格的 Property List 文件，历史可追溯到 NeXT 的 OpenStep。其可读性不如 xml 和 json，苹果却一直沿用至今，作为一家以创新闻名的公司可能这里剩下的就是情怀吧。</p>
-<p>本文谈了下 <code>project.pbxproj</code> 的知识，并总结了一些操作工程文件的优秀轮子，并在最后给出了自己的解决方案 <a href="https://github.com/yulingtianxia/pbxprojHelper" target="_blank" rel="external">pbxprojHelper</a>。</p>
-<p>阅读请戳：<a href="http://t.cn/Rcg8jUc" target="_blank" rel="external">http://t.cn/Rcg8jUc</a></p>
-<h3 id="Swift-算法"><a href="#Swift-算法" class="headerlink" title="Swift 算法"></a>Swift 算法</h3><p>Ray Wenderlich 上有一个算法系列的专题，叫做《Swift Algorithm Club》，每个月会出一篇文章，介绍如何用 Swift 实现一些基本的算法，最新的一期文章是《Swift Linked List Data Structure》，感兴趣的<a href="http://t.cn/RVzeGCu" target="_blank" rel="external">点这里阅读</a>。</p>
-<h2 id="会议"><a href="#会议" class="headerlink" title="会议"></a>会议</h2><h3 id="dev-world-2016-大会"><a href="#dev-world-2016-大会" class="headerlink" title="/dev/world/2016 大会"></a>/dev/world/2016 大会</h3><p>在澳大利亚举办的 /dev/world/2016 大会结束后，主办方公开的相关的大会演讲视频。视频内容涉及跨平台开发、UI 设计、自动化测试、Swift、函数式编程，欢迎围观：<a href="http://t.cn/RcucyX2" target="_blank" rel="external">http://t.cn/RcucyX2</a>。注意地址在 youtube 上，需要翻墙。</p>
-<h2 id="开源项目"><a href="#开源项目" class="headerlink" title="开源项目"></a>开源项目</h2><p>本周开源项目推荐的是 <a href="https://github.com/castial/HYFileManager/blob/master/Docs/README_cn.md" target="_blank" rel="external">HYFileManager</a>，HYFileManager 一个基于 NSFileManager的文件操作类，它提供一系列的静态方法，只用少量的代码，来处理经常需要处理的文件操作，使得工作更加方便快捷。</p>
-<h2 id="有趣"><a href="#有趣" class="headerlink" title="有趣"></a>有趣</h2><p>据说下图表示的是「断点调试」的场景：</p>
-<p><img src="http://ww4.sinaimg.cn/mw690/805c3d47jw1f8l8r3389gg20dw0a1b08.gif" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;大家国庆节过得如何？我反正是整个人的作息都变了，估计要调整过来得花不少时间。&lt;/p&gt;
-&lt;p&gt;国庆节期间开车还经历了人生第一次剐蹭，倒车时方向
     
     </summary>
     
