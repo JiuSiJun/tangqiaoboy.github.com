@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.devtang.com/"/>
-  <updated>2017-08-20T01:38:08.000Z</updated>
+  <updated>2017-09-02T15:16:24.000Z</updated>
   <id>http://blog.devtang.com/</id>
   
   <author>
@@ -14,6 +14,66 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>我理解的 ICO</title>
+    <link href="http://blog.devtang.com/2017/09/02/talk-about-ico/"/>
+    <id>http://blog.devtang.com/2017/09/02/talk-about-ico/</id>
+    <published>2017-09-02T15:07:20.000Z</published>
+    <updated>2017-09-02T15:16:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近新闻上 ICO 很火，出于好奇，我研究了一下 ICO，分享一下我的看法。</p>
+<h2 id="什么是-ICO"><a href="#什么是-ICO" class="headerlink" title="什么是 ICO"></a>什么是 ICO</h2><p>首先我们需要搞清楚 ICO 是什么。网上有一句很混蛋的话：「看懂 ICO 的都忙着挣钱去了」，好像这个事情多么难懂。但随后研究下来，我觉得 ICO 并不复杂。稍加分析，我们很容易就能理解它是什么。</p>
+<p>我用 Google 查到了一个 ICO 的中文解释，我们先看看，稍后再分析一下：</p>
+<blockquote>
+<p>ICO（全称 Initial Coin Offering，首次代币发行众筹）就是区块链界的 IPO，一般是指区块链相关的初创项目在 ICO 平台上发行该项目独有的加密代币（对应 IPO 中的股票），投资者则使用数字货币（如比特币、以太币）购买该项目的代币，实现募资。投资人手中持有的代币代表其持有的股权份额，随着项目成果落地，这些代币作为交易媒介和权益的价值也不断提升，并且可以转让。</p>
+</blockquote>
+<p>好了，我们再来分析一下这个定义。</p>
+<h2 id="交易的计价货币及影响"><a href="#交易的计价货币及影响" class="headerlink" title="交易的计价货币及影响"></a>交易的计价货币及影响</h2><p>在定义中， ICO 必须使用数字货币购买。这种设计其实是增加了代币价格波动的风险，因为很多数字货币（包括比特币）本身价格就不稳定。ICO 基于一个价格波动剧烈的货币之上，自然就会受到相关数字货币的波动影响。而如果以法定货币（比如人民币）来交易，明显可以避免这种风险。</p>
+<p>那么为什么 ICO 要选择数字货币呢？我个人认为是为了规避各种金融机构的监管。在中国以及一些别的国家，如果将 ICO 视为股权众筹或者证券发行，理应有证监会监管；但是 ICO 募集的资金不是法币而是数字虚拟货币，数字货币又应该由央行监管。ICO 这样的规则使得在中国可以规避掉监管主体，所以才会滋生出各种非法集资的现象。</p>
+<p>在规避监管主体的同时，ICO 也规避掉了相关的监管法规。股权众筹或者证券发行其实有大量的法律存在，比如国内有《中国证券投资基金法》，这使得大家在做事情的时候有规则可以依据。但是 ICO 这种机制使得它可以随意制定自己的规则。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>举个例子：</p>
+<p>如果我通过 ICO 发行一批代币，规定一年之后以 10% 的利率回购。那么我其实是发行了一个年化收益 10% 的债券。如果我允许在回购之前大家可以交易这个代币，那么相当于做了一个可交易的债券。</p>
+<p>如果我不承诺回购，但是承诺以后可以分红，也可以交易，那么我其实是发行了一个类似没有投票权的股票。</p>
+<p>我也可以把 ICO 发行的代币承诺为公司的股权，那么其实我的行为就类似于股权融资了。只是这个代币无需等待公司上市就可以随意交易，同时也规避了国内对于未上市公司股东数量的限制。</p>
+<p>我也可以不承诺任何的分红，也不承诺代币持有者的股东身份。那么代币的价值完全就和企业的业绩无关了。按理说这样的 ICO 应该没有人买才对，但是追捧的人其实并不少。</p>
+<p>下面我们看一个实际的 ICO 项目：PressOne。</p>
+<h2 id="PressOne-项目"><a href="#PressOne-项目" class="headerlink" title="PressOne 项目"></a>PressOne 项目</h2><p>在比特币名人李笑来的 ICO 项目 <a href="https://press.one/cn" target="_blank" rel="external">PressOne</a> 的介绍上，我没有看到任何对于该项目的代币持有者所具有的股东权利的描述，只看到一个暂定的可转账交易的时间：2018 年 7 月 12 日。见：<a href="https://press.one/pub_cn" target="_blank" rel="external">https://press.one/pub_cn</a> 。</p>
+<p>在分红权利上，PressOne 只介绍了 40 亿枚代币投资的项目有收益分红（下图）。而 PressOne 本身公司的经营收益如何分配，并未提及。</p>
+<img src="/images/talk-about-ICO-e227c.png">
+<p>在该项目的代币权利明显较弱的同时，2 亿美元的融资额却远超大多数国内的上规模的创业公司。我所在的猿辅导公司估值 10 亿美金，但是到现在的融资最多一次也只有 1.2 亿美元。</p>
+<p>有人说你是不是看着别人融资额比你高眼红，所以才写这样的文章？其实不是的。</p>
+<p>我看了李笑来的那个项目，说实话我还挺感兴趣。我也很喜欢李笑来的书，我也相信李笑来不会主观恶意骗大家的钱。我只是觉得，市场对于这种事情太不理性了。对于一个只有概念的想法，给出一个定价超高，没有股东权利的融资方案，虽然说买卖是一个愿打一个愿挨的生意，但是稍微有点风险意识的人，应该看出这样的项目其实风险非常高。</p>
+<p>就连李笑来本人可能都认为投资者太疯狂了。在 PressOne 的官网上，没有项目的详细白皮书，但是却有关于该项目风险的明确提示。另外 PressOne 还提供了一个开放 24 小时的退出机会。我相信李笑来也希望 PressOne 的投资者是理性的，有风险意识的，这样对于项目的成功和失败才会更加坦然，而不是抱着投机的心态。</p>
+<img src="/images/talk-about-ICO-911fc.png">
+<h2 id="ICO-规则的灵活性风险"><a href="#ICO-规则的灵活性风险" class="headerlink" title="ICO 规则的灵活性风险"></a>ICO 规则的灵活性风险</h2><p>大家看到了，由于 ICO 规避了相关法规，又可以极大地随意制定规则。如果你愿意发挥想象力，或许你还能设计出具有 “传销” 规则的 ICO 发行方案。这样的事情在完全没有监管下发展，实在不可能有什么好的结果。</p>
+<p>由于 ICO 的规则变化灵活，对确定监管主体和相关法规带来了难度。在国外，美国和新加坡都将 ICO 采取逐案评估的办法。而在中国，由于是新事物，国家的政策没有出来。但是至少我们可以看到，近期国家已经开始相关的监管工作了：一场本应于 9 月 2 日召开的区块链盛会被有关部门叫停，与此同时 ICOINFO 宣布暂停了 ICO 业务，比特币中国暂停 ICOCOIN 交易：</p>
+<img src="/images/talk-about-ICO-7c79e.png">
+<img src="/images/talk-about-ICO-8cd82.png">
+<p>另外，据财新的报道，ICO 被监管认为是变相的非法集资。</p>
+<img src="/images/talk-about-ICO-f73f2.png">
+<p>事情的发展看起来越来越明显了，国家显然也看到了 ICO 带来的风险，并且希望加强监管，我相信相关的法规会很快出台。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总结说来，ICO 就是企业为了筹集资金，在 ICO 平台上发行以电子货币交易的代币。代币可以制定灵活的交易锁定期，分红权，投票权，回购权。由于缺乏监管，所以容易滋生非法融资行为。代币的交易基于区块链技术，所以非常安全和方便。</p>
+<p>ICO 在中国缺乏相关法规，亟待引入监管，以避免鱼龙混杂的情况。</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="https://en.wikipedia.org/wiki/Initial_coin_offering" target="_blank" rel="external">Initial coin offering</a></li>
+<li><a href="http://3g.163.com/dy/article/CT67TI4M05118K7K.html" target="_blank" rel="external">ICO，披着金融创新的币圈传销？监管刻不容缓！</a></li>
+<li><a href="https://ico.info/" target="_blank" rel="external">ICOINFO 官网</a></li>
+<li><a href="https://press.one/cn" target="_blank" rel="external">PressOne 官网</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近新闻上 ICO 很火，出于好奇，我研究了一下 ICO，分享一下我的看法。&lt;/p&gt;
+&lt;h2 id=&quot;什么是-ICO&quot;&gt;&lt;a href=&quot;#什么是-ICO&quot; class=&quot;headerlink&quot; title=&quot;什么是 ICO&quot;&gt;&lt;/a&gt;什么是 ICO&lt;/h2&gt;&lt;p&gt;首先我们
+    
+    </summary>
+    
+      <category term="summary" scheme="http://blog.devtang.com/categories/summary/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>711 的成功之道 - 读《零售的哲学》</title>
@@ -1139,39 +1199,6 @@
     </summary>
     
       <category term="summary" scheme="http://blog.devtang.com/categories/summary/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>iOS 移动开发周报 - 第 48 期</title>
-    <link href="http://blog.devtang.com/2016/11/01/ios-weekly-48/"/>
-    <id>http://blog.devtang.com/2016/11/01/ios-weekly-48/</id>
-    <published>2016-11-01T15:26:06.000Z</published>
-    <updated>2016-11-01T15:45:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="新闻"><a href="#新闻" class="headerlink" title="新闻"></a>新闻</h2><h3 id="CocoaPods"><a href="#CocoaPods" class="headerlink" title="CocoaPods"></a>CocoaPods</h3><p>由于众所周知的原因，国内并不能访问到官方的 Ruby 源，所以大部分朋友可能都是使用的国内的镜像源。而这里面，使用的最多的，可能就是淘宝提供的镜像源了。不过最近淘宝的镜像源 ruby.taobao.org 停止更新了，所以使用 CocoaPods 的同学，请更新到 ruby china 的源。详细的内容，请参见：<a href="https://ruby-china.org/topics/29250" target="_blank" rel="external">https://ruby-china.org/topics/29250</a>。</p>
-<p>另一方面 , CocoaPods 最近也升级到了 <a href="http://blog.cocoapods.org/CocoaPods-1.1.0/" target="_blank" rel="external">1.1.0 版本</a>，主要是增加了对 Xcode 8 的支持。</p>
-<h3 id="苹果发布会"><a href="#苹果发布会" class="headerlink" title="苹果发布会"></a>苹果发布会</h3><p>苹果在不久前发布了新款 <a href="https://36kr.com/p/5055335.html" target="_blank" rel="external">MacBook Pro</a>，库克对 Vim 党痛下杀手，取消了 ESC 键。另外增加了酷炫的 Touch Bar。有小伙伴已经尝试了 Touch Bar 对外的编程接口，说是和 「watchOS 很像」。一向前位的苹果也取消了包括 USB 在内的众多接口，只保留了 Thunderbolt 3 接口。</p>
-<h3 id="Swift-Server-Api"><a href="#Swift-Server-Api" class="headerlink" title="Swift Server Api"></a>Swift Server Api</h3><p>苹果在 Swift 官方网站上新建了一个基于 Swift 的 <a href="https://swift.org/server-apis/" target="_blank" rel="external">API 项目</a>，该项目用于支持将 Swift 用于服务器端开发的基础设施的构建。</p>
-<h3 id="UniBeast"><a href="#UniBeast" class="headerlink" title="UniBeast"></a>UniBeast</h3><p><a href="https://www.tonymacx86.com/threads/unibeast-install-macos-sierra-on-any-supported-intel-based-pc.200564/" target="_blank" rel="external">UniBeast</a> 是一个能够将 macOS Sierra 安装到任何基于 Intel CPU 的电脑上。</p>
-<h2 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h2><ul>
-<li><p><a href="http://www.zoomfeng.com/blog/ipa-size-thin.html" target="_blank" rel="external">《iOS 安装包瘦身指南》</a>： 本文介绍了包括资源优化，编译选项优化，可执行文件优化等 IPA 文件的瘦身方法。</p>
-</li>
-<li><p><a href="http://www.jianshu.com/p/f792f9aa2e45" target="_blank" rel="external">《Xcode8调试黑科技：Memory Graph实战解决闭包引用循环问题》</a>：Xcode8 的调试技能又增加了一个黑科技：Memory Graph。简单的说就是可以在运行时将内存中的对象生成一张图，这样检查循环引用问题将更加方便。</p>
-</li>
-</ul>
-<h2 id="有趣"><a href="#有趣" class="headerlink" title="有趣"></a>有趣</h2><p>本周趣图，是苹果公司在 2008 年生产的一款黑色 MacBook，看久了银白色的 MacBook 的你，是否感到耳目一新？</p>
-<p><img src="http://ww1.sinaimg.cn/large/65dc76a3jw1f9d0wslzigj20lu0czwgn.jpg" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;新闻&quot;&gt;&lt;a href=&quot;#新闻&quot; class=&quot;headerlink&quot; title=&quot;新闻&quot;&gt;&lt;/a&gt;新闻&lt;/h2&gt;&lt;h3 id=&quot;CocoaPods&quot;&gt;&lt;a href=&quot;#CocoaPods&quot; class=&quot;headerlink&quot; title=&quot;CocoaPo
-    
-    </summary>
-    
-      <category term="iOS weekly" scheme="http://blog.devtang.com/categories/iOS-weekly/"/>
     
     
   </entry>
