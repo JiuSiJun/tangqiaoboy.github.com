@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.devtang.com/"/>
-  <updated>2017-10-29T05:42:43.000Z</updated>
+  <updated>2017-11-25T12:45:30.000Z</updated>
   <id>http://blog.devtang.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://blog.devtang.com/2017/10/29/game-and-gamification-2/"/>
     <id>http://blog.devtang.com/2017/10/29/game-and-gamification-2/</id>
     <published>2017-10-29T05:34:43.000Z</published>
-    <updated>2017-10-29T05:42:43.000Z</updated>
+    <updated>2017-11-25T12:45:30.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="广义的游戏"><a href="#广义的游戏" class="headerlink" title="广义的游戏"></a>广义的游戏</h2><p>说完游戏，我们再说说游戏化。上面我们讲的游戏，其实是狭义的游戏，在我看来，还有一种广义的游戏。广义的游戏是指：为了达成某个目标，我们在设计中引入游戏的某些元素，使得大家从人性上更容易达成目标。</p>
 <p>举一个例子：背单词。背单词是一件非常反人性的事情。单词的记忆量大，所需的记忆时间长，为了记住需要一遍一遍地复习。市面上的背单词软件为了让大家从人性上更加容易完成背单词这件枯燥的事情，想了各种游戏化的方案。例如：在背诵时把单词的意思画成小插画、打卡机制、各种阶段性任务、任务完成之后勋章、朋友圈各种分享炫耀等。背单词和游戏其实并不相关，但是不影响它引入游戏化的元素。</p>
@@ -107,8 +107,10 @@
     
     </summary>
     
-      <category term="summary" scheme="http://blog.devtang.com/categories/summary/"/>
+      <category term="books summary" scheme="http://blog.devtang.com/categories/books-summary/"/>
     
+    
+      <category term="books" scheme="http://blog.devtang.com/tags/books/"/>
     
   </entry>
   
@@ -117,7 +119,7 @@
     <link href="http://blog.devtang.com/2017/10/11/game-and-gamification/"/>
     <id>http://blog.devtang.com/2017/10/11/game-and-gamification/</id>
     <published>2017-10-11T13:55:42.000Z</published>
-    <updated>2017-10-11T14:02:40.000Z</updated>
+    <updated>2017-11-25T12:45:37.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>最近看完了两本书：《游戏改变世界》和《游戏化思维》。前者是讲游戏的，后者是讲游戏化的。</p>
 <img src="/images/2017-10-11-game-and-gamification-3d29e.png">
@@ -159,8 +161,10 @@
     
     </summary>
     
-      <category term="summary" scheme="http://blog.devtang.com/categories/summary/"/>
+      <category term="books summary" scheme="http://blog.devtang.com/categories/books-summary/"/>
     
+    
+      <category term="books" scheme="http://blog.devtang.com/tags/books/"/>
     
   </entry>
   
