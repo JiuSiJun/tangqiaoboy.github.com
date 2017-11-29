@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.devtang.com/2017/11/28/fupan-summary/</loc>
+    
+    <lastmod>2017-11-29T00:13:55.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.devtang.com/2017/01/01/2016-summary/</loc>
     
     <lastmod>2017-11-26T15:25:25.000Z</lastmod>
@@ -535,13 +542,6 @@
   
   <url>
     <loc>http://blog.devtang.com/2015/01/11/how-to-finish-ios-pro-book/</loc>
-    
-    <lastmod>2016-06-19T03:14:33.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2014/03/28/ios-weekly-5/</loc>
     
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
     
@@ -1718,6 +1718,13 @@
   
   <url>
     <loc>http://blog.devtang.com/2014/03/21/weak_object_lifecycle_and_tagged_pointer/</loc>
+    
+    <lastmod>2016-06-19T03:14:33.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.devtang.com/2014/03/28/ios-weekly-5/</loc>
     
     <lastmod>2016-06-19T03:14:33.000Z</lastmod>
     
