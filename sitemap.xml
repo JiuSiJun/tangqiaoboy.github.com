@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.devtang.com/2017/10/11/game-and-gamification/</loc>
+    
+    <lastmod>2017-12-04T14:18:32.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.devtang.com/2017/12/03/contagious-book-summary/</loc>
     
     <lastmod>2017-12-03T12:49:38.000Z</lastmod>
@@ -82,13 +89,6 @@
     <loc>http://blog.devtang.com/about/index.html</loc>
     
     <lastmod>2017-11-26T14:21:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/2017/10/11/game-and-gamification/</loc>
-    
-    <lastmod>2017-11-25T12:45:37.000Z</lastmod>
     
   </url>
   

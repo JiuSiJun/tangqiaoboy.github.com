@@ -226,7 +226,7 @@
     <link href="http://blog.devtang.com/2017/10/11/game-and-gamification/"/>
     <id>http://blog.devtang.com/2017/10/11/game-and-gamification/</id>
     <published>2017-10-11T13:55:42.000Z</published>
-    <updated>2017-11-25T12:45:37.000Z</updated>
+    <updated>2017-12-04T14:18:32.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>最近看完了两本书：《游戏改变世界》和《游戏化思维》。前者是讲游戏的，后者是讲游戏化的。</p>
 <img src="/images/2017-10-11-game-and-gamification-3d29e.png">
@@ -259,6 +259,9 @@
 <p>“个人最优化的障碍”的实现相对来说是有很多套路的。但是游戏的目标和规则却是真正比拼创意的事情。很多成功的游戏都开创了一些新的玩法从而成功。“王者荣耀”将 PC 时代的 DOTA 成功简化到手机上，优化掉各种装备购买，补刀等逻辑，这里面肯定花费了大量精力来做可玩性的设计。</p>
 <p>单单是一款游戏里面的各种参数值，都会对游戏产生致命性影响。高中时我玩过一个 PC 网游叫“决战”，那款游戏的失败之处就在于法师的数值远高于别的职业，造成游戏完全没有平衡性可言。所以游戏开发里面专门有“数值设定”这个职位，他们的工作就是一遍一遍地调整游戏参数，使得整个世界的平衡性得以保证。</p>
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>总结一下，一款成功的游戏都有着”个人最优化的障碍”作为基础，在这之上，通过清晰的目标和规则、即时的反馈、低成本的失败压力、社交元素来构建出一个让人上瘾的环境。</p>
+<h2 id="更新-2017-12-04"><a href="#更新-2017-12-04" class="headerlink" title="更新(2017.12.04)"></a>更新(2017.12.04)</h2><p>非常有意思的是，当本文在博客上发表之后，我的一个同事转给我<a href="http://www.ifanr.com/948155" target="_blank" rel="external">一篇文章</a>，上面介绍了 EA 公司申请的「动态难度调节」（Dynamic Difficulty Adjustment）<a href="http://www.freepatentsonline.com/y2017/0259177.html" target="_blank" rel="external">专利</a>。文章是这么介绍这个功能的：</p>
+<p>当玩家的表现不尽如人意的时候，游戏会自动降低难度，让游戏变简单；当玩家表现神勇的时候，游戏又会调高难度，让游戏充满挑战——早在 1986 年，「红白机」FC 上的飞行射击游戏 Zanac 就曾引入过「动态难度调节」系统，当玩家 Game Over 的次数越多，游戏难度就越低。后来，《求生之路》（Left 4 Dead）、《生化危机 4》上也都采用过类似的系统。</p>
+<p>这，不就是我们说了半天的“个人最优化障碍”么？</p>
 ]]></content>
     
     <summary type="html">
