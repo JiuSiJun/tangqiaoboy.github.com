@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.devtang.com/about/index.html</loc>
+    
+    <lastmod>2018-01-01T15:39:17.465Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.devtang.com/2018/01/01/2017-summary/</loc>
     
     <lastmod>2018-01-01T14:31:25.617Z</lastmod>
@@ -131,13 +138,6 @@
     <loc>http://blog.devtang.com/2013/02/21/introduction-of-weixin-public-account/</loc>
     
     <lastmod>2017-11-26T14:23:29.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.devtang.com/about/index.html</loc>
-    
-    <lastmod>2017-11-26T14:21:23.000Z</lastmod>
     
   </url>
   
