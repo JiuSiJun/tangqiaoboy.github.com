@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.devtang.com/"/>
-  <updated>2018-05-27T16:38:53.138Z</updated>
+  <updated>2018-06-18T10:31:42.941Z</updated>
   <id>http://blog.devtang.com/</id>
   
   <author>
@@ -14,6 +14,48 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>读《人工智能简史》</title>
+    <link href="http://blog.devtang.com/2018/06/18/AI-history-summary/"/>
+    <id>http://blog.devtang.com/2018/06/18/AI-history-summary/</id>
+    <published>2018-06-18T10:16:43.000Z</published>
+    <updated>2018-06-18T10:31:42.941Z</updated>
+    
+    <content type="html"><![CDATA[<img src="/images/2018-06-18-AI-history-summary-5223e.png">
+<p>端午节期间，读完了<a href="https://item.jd.com/12274722.html" target="_blank" rel="external">《人工智能简史》</a>。这是一本轻松的读物，书中并不涉及太多人工智能的专业知识，作者更多的是以一个轻松的心态来介绍人工智能的历史，以下是一些读书心得。</p>
+<h2 id="Ngram"><a href="#Ngram" class="headerlink" title="Ngram"></a>Ngram</h2><p>Ngram 表示多个词合在一起的组合。谷歌提供了一个名为 Ngram 的工具，可以查询指定词在历史上出现的频率，其地址是：<a href="https://books.google.com/ngrams" target="_blank" rel="external">https://books.google.com/ngrams</a>。在书中，作者通过比较「United States are」和「United States is」在历史上出现的 <a href="https://books.google.com/ngrams/graph?content=United+States+are%2C+United+States+is&amp;year_start=1800&amp;year_end=2000&amp;corpus=15&amp;smoothing=3&amp;share=&amp;direct_url=t1%3B%2CUnited%20States%20are%3B%2Cc0%3B.t1%3B%2CUnited%20States%20is%3B%2Cc0" target="_blank" rel="external">频率</a>，看出美国人是何时开始认同美国作为一个统一的国家的。这可以看出大数据即使在历史学科，也能提供非常有力的证据。</p>
+<p>有意思的是，Ngram 的用处远远不止于此。例如，我们可以用 Ngram 来做语法纠错，比如你发现历史上「as soon as possible」出现的次数非常高的时候，你就可以让机器把这个理解成一个高频搭配，当某个人把「soon」拼写成「soom」的时候，你就可以基于上下文来帮他做拼写的纠正。</p>
+<p>你看，基于大数据的统计非常简单，又非常有效。有些时候，他有效得让人感觉到吃惊，甚至在基于大数据的统计分析来看，任何人类的经验都可能是狭隘或者有害的。比如在书中就提到，机器翻译领域，很多专家都认为语言学知识对翻译没什么用处，有些时候还会起反作用。比如 IBM TJ Wason 研究中心的机器翻译小组成员贾里尼克（Frederick Jelinek）以及谷歌翻译团队的欧赫（Franz Josef Och）就都表达过上述观点。</p>
+<p>在学术上，语法派和统计派一直相互争论。不过我现在认为统计派越来越占上风了，特别是统计派将大数据的处理方式改成深度学习之后。Google 和 Facebook 分别使用 RNN 和 CNN 两种神经网络来训练，最终在机器翻译领域取得突破性进展。</p>
+<p>那么问题来了，这么翻译出来的东西，机器真的能够理解吗？也许翻译本身根本就不是理解问题，翻译本身并不需要理解，翻译只是翻译，只是数据问题，而不是语义问题。</p>
+<p>除了在翻译领域，人类发现自己的经验没什么用，在围棋领域也是同样。<a href="https://deepmind.com/blog/alphago-zero-learning-scratch/" target="_blank" rel="external">AlphaZero</a> 仅仅过 40 天的自我学习，就超过了那些学习了大量人类棋手的前辈：AlphaGo Lee 和 AlphaGo Master 。这除了说明机器自我对弈的强化学习（Reinforcement Learning）的效果超强之外，也同时宣告人类的经验在有时候真的是负担。</p>
+<p><img src="https://storage.googleapis.com/deepmind-live-cms/documents/TrainingTime-Graph-171019-r01.gif" alt=""><br><!-- backup image: /images/TrainingTime-Graph-171019-r01.gif --></p>
+<h2 id="知识图谱和机器阅读"><a href="#知识图谱和机器阅读" class="headerlink" title="知识图谱和机器阅读"></a>知识图谱和机器阅读</h2><p>维基百科搭建了一个给全人类的免费知识库，但是，机器却不能轻易读懂这些内容。为了让机器更加容易处理各类信息，Google 在 2012 年发起了知识图谱（Knowledge Graph）的 <a href="https://en.wikipedia.org/wiki/Knowledge_Graph" target="_blank" rel="external">项目</a>。</p>
+<p>Google 并不是从零开始这个项目，它其实在 2010 年收购了一家名为 Metaweb 的公司，而这家公司运营着一个拥有 4000 万代表知识实体的数据库：Freebase。Freebase 的数据是结构化的，这样机器可以很方便地对知识进行再处理。相对应的，维基百科在 2016 年的文章数仅为 1000 万篇。</p>
+<p>2016 年 Google 停止对 Freebase 更新，并把所有数据捐给 Wikidata，Wikidata 是维基百科的母公司。除了 Wikidata 外，还有几个开源的知识图谱，如 DBpedia, Yago, SUMO 等。</p>
+<p>当知识图谱足够大的时候，它的回答能力会大的惊人。2011 年 IBM 的沃森 (Watson) 在美国电视智力竞赛节目《危险边缘》（Jeopardy!）中击败人类选手，获得百万美元大奖，就是利用了包括 WordNet，DBpedia 和 Yago 等各种知识图谱。</p>
+<p>除了将数据更加结构化外，研究人员也在不停地改进机器阅读自然文章的能力。相比于将原有的知识结构化，直接让机器读懂人类语言的文章虽然挑战更大，但是收益也是非常明显的。</p>
+<p>对于这点，全世界的 AI 公司都在努力，包括我们公司。吹牛逼时间到了：我们猿辅导公司最近就因此出现在互联网女皇的报告中，因为我们在斯坦福的问答评测 SQuAD1.1 中排名第三（其实现在已经第二了）。量子位的 <a href="https://mp.weixin.qq.com/s?__biz=MzIzNjc1NzUzMw==&amp;mid=2247499907&amp;idx=3&amp;sn=4547130b005112ef5c95c521c32002e8&amp;chksm=e8d077f1dfa7fee7bfe590b41d80956eb3b3544d56d1198c7fd8452e28f90e2a5407414a0aa2&amp;mpshare=1&amp;scene=1&amp;srcid=0613V1QEK3fKdP1DA4frraTd&amp;rd2werd=1#wechat_redirect" target="_blank" rel="external">一篇文章</a> 深度介绍斯坦福的这个评测集。</p>
+<img src="/images/2018-06-18-AI-history-summary-9df7e.png">
+<h2 id="未来"><a href="#未来" class="headerlink" title="未来"></a>未来</h2><p>在我们公司参加的另一个机器阅读理解评测集 MSMARCO 中，我们有幸拿到了第一，并且超过了人类的基准水平。基准水平可以理解为人类的平均水平。这让我再一次作为人类产生了危机感。</p>
+<p>或许有一天，人工智能不光在围棋，象棋，驾驶这些有限场景下代替人，还能比人类更加理解文字，更快吸收知识，最终全面超越人类。</p>
+<p>在《未来简史》中，作者把这个潜在新物种叫做神人（Homo Deus），新物种在我们这个时代是否会出现，让我们拭目以待。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;/images/2018-06-18-AI-history-summary-5223e.png&quot;&gt;
+&lt;p&gt;端午节期间，读完了&lt;a href=&quot;https://item.jd.com/12274722.html&quot; target=&quot;_blank&quot; rel=&quot;ext
+    
+    </summary>
+    
+      <category term="books summary" scheme="http://blog.devtang.com/categories/books-summary/"/>
+    
+    
+      <category term="books" scheme="http://blog.devtang.com/tags/books/"/>
+    
+  </entry>
   
   <entry>
     <title>构建网状组织架构 - 读《赋能》</title>
@@ -1313,63 +1355,6 @@
     <summary type="html">
     
       &lt;h2 id=&quot;广义的游戏&quot;&gt;&lt;a href=&quot;#广义的游戏&quot; class=&quot;headerlink&quot; title=&quot;广义的游戏&quot;&gt;&lt;/a&gt;广义的游戏&lt;/h2&gt;&lt;p&gt;说完游戏，我们再说说游戏化。上面我们讲的游戏，其实是狭义的游戏，在我看来，还有一种广义的游戏。广义的游戏是指：为了达
-    
-    </summary>
-    
-      <category term="books summary" scheme="http://blog.devtang.com/categories/books-summary/"/>
-    
-    
-      <category term="books" scheme="http://blog.devtang.com/tags/books/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>游戏和游戏化（上）</title>
-    <link href="http://blog.devtang.com/2017/10/11/game-and-gamification/"/>
-    <id>http://blog.devtang.com/2017/10/11/game-and-gamification/</id>
-    <published>2017-10-11T13:55:42.000Z</published>
-    <updated>2017-12-04T14:18:32.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>最近看完了两本书：《游戏改变世界》和《游戏化思维》。前者是讲游戏的，后者是讲游戏化的。</p>
-<img src="/images/2017-10-11-game-and-gamification-3d29e.png">
-<p>《游戏改变世界》的作者简•麦戈尼格尔 (Jane McGonigal) 认为游戏不但好，而且建立了相对于真实社会的一种“平行宇宙”，进入游戏其实就像进入了另一个社会一样。所以本书的英文名更为贴切，叫：《Reality is Broken》。作者从头到尾都在夸游戏中的社会是如何如何好，现实是如何如何让人沮丧。</p>
-<img src="/images/2017-10-11-game-and-gamification-bcec8.png">
-<p>《游戏化思维》从另外一个角度来讲游戏：主要是将游戏中的一些元素融入到非游戏中，使得人们更加轻松地完成一些现实中的任务。</p>
-<p>我们先说游戏吧。</p>
-<h2 id="游戏"><a href="#游戏" class="headerlink" title="游戏"></a>游戏</h2><p>《游戏改变世界》认为所有游戏都有一个决定性的特征：目标、规则、反馈系统和自愿参与。前三者比较好理解，最后一项自愿参与：要求所有玩游戏的人都了解并愿意接受目标，规则和反馈。这一条其实建立了玩家的安全感，保证玩家把游戏中的高压挑战当作愉快的活动。</p>
-<p>《游戏改变世界》将游戏世界对现实世界的改造比喻成“补丁”。在书中，作者一共介绍了 14 个补丁，用于描述游戏世界相对于现实世界的优越性。</p>
-<img src="/images/2017-10-11-game-and-gamification-511d0.png">
-<p>但是，我觉得作者的解释过于拖沓，并且没有重点。其实游戏世界相对于现实世界的最最核心的理由是：游戏世界构造了一些机制，使得玩家一直处于一种心流（flow）的状态。所谓的心流，是指游戏构造了一种合适的难度，这种难度使得玩家一直处于自己可以在能力上“够得着”的状态。在书中，这种状态被称作：”个人最优化的障碍”，这种状态可以让人始终产生成就感。</p>
-<p>这种持续的成就感很快就会让人上瘾。上瘾之后，游戏会加大难度，使得大家为了再次体会到类似的快感欲罢不能。我们来看几个例子。</p>
-<p>俄罗斯方块恐怕是最简单又让人上瘾的游戏了。在游戏的刚开始，一切操作速度都很慢，玩家很容易适应游戏的节奏。然后俄罗斯方块通过各种即时反馈，让人们感觉到”正反馈“。比如随时在增加的分数，消除掉多行的快感，于是人们觉得”有点意思“。但是这种心流状态很快随着熟练就丧失了，于是游戏的难度加大，你不得不集中精力来处理快速下落的方块，最终你输了，虽然有所遗憾，但是你得到了历史最高的分数。于是你顾不得休息，又开始了新一轮的尝试。</p>
-<p>最近流行的游戏王者荣耀也是这样。如果你也玩王者荣耀，并且是iOS平台的玩家，建议你尝试拿个Android手机重新玩一次，由于苹果的限制，在王者荣耀中iOS和Android 手机并不能互通角色。然后你就可以重新体验一次游戏的整个生命期。</p>
-<p>我玩了大概半年的王者荣耀，一次偶然的机会，我拿起身边的一台 Android 测试机重新登录了一个新号。于是我立马发现了王者荣耀为新手构建了一个异常强大的”个人最优化的障碍”。在我用 Android 重新玩的那几天，王者荣耀为我模拟了一个非常舒服的比赛环境，我在游戏中把把拿 MVP，几乎没有输过。我突然想到，我在 iOS 平台刚开始玩黄忠的时候，基本上每次都赢，但是之后才发现黄忠其实被很多英雄相克，我很好奇，在相当长的几个月中，我都没有遇到过一次黄忠的克星。</p>
-<p>所以，我几乎可以肯定的是：王者荣耀为玩家构建了一个相当长时期的保护期。在这个保护期内，你就如同进入了 iOS 的沙盒环境，所有的对手都是为你特别准备的，刚好够让你杀个痛快还有一点挑战。我有一次细心观察了一下，对手有一个走位明显就是机器人。我才一下子明白了，原来这个环境竟然是虚拟的。</p>
-<p>所以大家就可以明白了，为什么有那么多妹子喜欢玩王者荣耀，其实游戏玩得好的女生非常少，但是王者荣耀的”个人最优化的障碍”机制，使得很多陪练参与其中，真实的玩家得到了极大地鼓励。当然，你如果一直这么玩，难道水平就不会有涨进吗？答案是肯定的，这就像《异类》中提到的那些成功人士一样让人羡慕。</p>
-<p>在《异类》中，作者分析发现那些各种所谓的天才，其实只是比别人更加早完成 10000 小时练习而已，而他们的坚持动力，很大程度上都来自于刚开始比别人稍微强一点点，这稍微一点点的优势，成为了他的激励和成就感来源。这其实就是真实社会的”个人最优化的障碍”。在书中印象最深的是加拿大冰球队队员大多集中在 1 月份的例子：</p>
-<blockquote>
-<p>加拿大冰球队按年龄分组所依据的分界线是 1 月 1 日，即从 1 月 1 日到当年 12 月 31 日之间出生的球员将会被分在同一组。也就是说，一个 1 月 1 日出生的选手，是在跟许多年纪比他小的队友争夺晋级权。</p>
-<p>而年龄大几个月而显现的微弱优势，会在孩子的成长过程中不断积累，最终引导孩子走向成功或不成功，自信或不自信的轨道中，其影响会延伸许多年。</p>
-<p>社会学家罗伯特·默顿援引《新约·马太福音》，把这种现象叫作 “马太效应”。“凡是有的，还要加给他，叫他有余；没有的，连他所有的，也要夺过来。” 成功者，换句话说，就是获得这些特殊机遇的人，他们因此最终取得了更大的进步。</p>
-</blockquote>
-<p>我们脑洞一下，如果整个人类社会都是虚拟的，然后整个社会为了某个真实玩家而构建”个人最优化的障碍”，例如让你每次努力和别人比赛的时候都能赢。每次成绩都获得家长、同学、老师的肯定。当然，给玩家刻意构造几次挫折和失败也是必要的。然后社会再给这个玩家各种千载难逢的机会。最终这个人从虚拟社会中”毕业“的时候，他会不会在各个需要后天培养的地方都达到我们理想中的标准？我觉得答案是肯定的。</p>
-<p>这个设定在各种科幻题材的作品中常常看到。比如经典的电影《黑客帝国》，人类就生存在一个机器构造的虚拟世界（电影中叫Matrix）中。在美剧《Rick and Morty》的第一季第四集，也脑洞了一个完全虚拟的世界（下图）。</p>
-<img src="/images/2017-10-11-game-and-gamification-69ee0.png">
-<p>需要注意的是，”个人最优化的障碍”并不意味着一定要让玩家通关。在玩家对于游戏熟悉之后，通关并不是最爽的，相反，不能通关反倒是让人欲罢不能的事情。</p>
-<p>国内的火爆游戏“天天爱消除”，其实就是让你一遍一遍不能通关，让你产生反复尝试的动力。最终有些人买了道具通关了，其实他的乐趣也结束了。“王者荣耀”也是这样，最终人们会陷在游戏给他的一个几乎不能完成的目标里面不能自拔，但是自己还乐在其中。</p>
-<h2 id="其它因素"><a href="#其它因素" class="headerlink" title="其它因素"></a>其它因素</h2><p>当然，一款游戏光有”个人最优化的障碍”也是不够的，书中介绍的清晰的目标和规则、即时的反馈、低成本的失败压力、多人协作等元素，也是游戏成功必不可少的环节。</p>
-<p>“个人最优化的障碍”的实现相对来说是有很多套路的。但是游戏的目标和规则却是真正比拼创意的事情。很多成功的游戏都开创了一些新的玩法从而成功。“王者荣耀”将 PC 时代的 DOTA 成功简化到手机上，优化掉各种装备购买，补刀等逻辑，这里面肯定花费了大量精力来做可玩性的设计。</p>
-<p>单单是一款游戏里面的各种参数值，都会对游戏产生致命性影响。高中时我玩过一个 PC 网游叫“决战”，那款游戏的失败之处就在于法师的数值远高于别的职业，造成游戏完全没有平衡性可言。所以游戏开发里面专门有“数值设定”这个职位，他们的工作就是一遍一遍地调整游戏参数，使得整个世界的平衡性得以保证。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>总结一下，一款成功的游戏都有着”个人最优化的障碍”作为基础，在这之上，通过清晰的目标和规则、即时的反馈、低成本的失败压力、社交元素来构建出一个让人上瘾的环境。</p>
-<h2 id="更新-2017-12-04"><a href="#更新-2017-12-04" class="headerlink" title="更新(2017.12.04)"></a>更新(2017.12.04)</h2><p>非常有意思的是，当本文在博客上发表之后，我的一个同事转给我<a href="http://www.ifanr.com/948155" target="_blank" rel="external">一篇文章</a>，上面介绍了 EA 公司申请的「动态难度调节」（Dynamic Difficulty Adjustment）<a href="http://www.freepatentsonline.com/y2017/0259177.html" target="_blank" rel="external">专利</a>。文章是这么介绍这个功能的：</p>
-<p>当玩家的表现不尽如人意的时候，游戏会自动降低难度，让游戏变简单；当玩家表现神勇的时候，游戏又会调高难度，让游戏充满挑战——早在 1986 年，「红白机」FC 上的飞行射击游戏 Zanac 就曾引入过「动态难度调节」系统，当玩家 Game Over 的次数越多，游戏难度就越低。后来，《求生之路》（Left 4 Dead）、《生化危机 4》上也都采用过类似的系统。</p>
-<p>这，不就是我们说了半天的“个人最优化障碍”么？</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h2&gt;&lt;p&gt;最近看完了两本书：《游戏改变世界》和《游戏化思维》。前者是讲游戏的，后者是讲游戏化的。&lt;/p&gt;
-&lt;img src=&quot;/images/2017
     
     </summary>
     
