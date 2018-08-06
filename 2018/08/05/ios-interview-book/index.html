@@ -1,0 +1,444 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>iOS 面试之道 | 唐巧的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="唐巧">
+    
+
+    
+    <meta name="description" content="关于新书故胤道长 和 我合著的一本 iOS 面试方面的新书《iOS 面试之道》，两周前出版了。这本书我负责前面的第一章，讲面试的准备。后面的算法基础和 100 多道面试题，则是由道长编写。
+老实说，这算不上一本很难很深的书。面试嘛，一般考察的内容也不会很偏很深，还是会偏基础知识一些，所以各位读者可以把这当作一本基础的面试讨论的书。书中有道长精心整理的 100 多道面试题，拿来练练手也是不错。
+该">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 面试之道">
+<meta property="og:url" content="http://blog.devtang.com/2018/08/05/ios-interview-book/index.html">
+<meta property="og:site_name" content="唐巧的博客">
+<meta property="og:description" content="关于新书故胤道长 和 我合著的一本 iOS 面试方面的新书《iOS 面试之道》，两周前出版了。这本书我负责前面的第一章，讲面试的准备。后面的算法基础和 100 多道面试题，则是由道长编写。
+老实说，这算不上一本很难很深的书。面试嘛，一般考察的内容也不会很偏很深，还是会偏基础知识一些，所以各位读者可以把这当作一本基础的面试讨论的书。书中有道长精心整理的 100 多道面试题，拿来练练手也是不错。
+该">
+<meta property="og:image" content="http://blog.devtang.com/images/2018-08-05-ios-interview-book-8cc12.png">
+<meta property="og:image" content="http://blog.devtang.com/images/2018-08-05-ios-interview-book-68387.png">
+<meta property="og:image" content="http://blog.devtang.com/images/2018-08-05-ios-interview-book-c4afb.png">
+<meta property="og:updated_time" content="2018-08-05T10:12:23.091Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS 面试之道">
+<meta name="twitter:description" content="关于新书故胤道长 和 我合著的一本 iOS 面试方面的新书《iOS 面试之道》，两周前出版了。这本书我负责前面的第一章，讲面试的准备。后面的算法基础和 100 多道面试题，则是由道长编写。
+老实说，这算不上一本很难很深的书。面试嘛，一般考察的内容也不会很偏很深，还是会偏基础知识一些，所以各位读者可以把这当作一本基础的面试讨论的书。书中有道长精心整理的 100 多道面试题，拿来练练手也是不错。
+该">
+<meta name="twitter:image" content="http://blog.devtang.com/images/2018-08-05-ios-interview-book-8cc12.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="唐巧的博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="唐巧的博客">唐巧的博客</a></h1>
+				<h2 class="blog-motto">记录下自己学习的点滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.devtang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/08/05/ios-interview-book/" title="iOS 面试之道" itemprop="url">iOS 面试之道</a>
+  </h1>
+  
+  <p class="article-time">
+    <time datetime="2018-08-05T07:38:24.000Z" itemprop="datePublished"> 发表于 2018-08-05 15:38</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#关于新书"><span class="toc-number">1.</span> <span class="toc-text">关于新书</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#面试之道"><span class="toc-number">2.</span> <span class="toc-text">面试之道</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#面试的不严谨一面"><span class="toc-number">2.1.</span> <span class="toc-text">面试的不严谨一面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#面试的严谨一面"><span class="toc-number">2.2.</span> <span class="toc-text">面试的严谨一面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#执行层面"><span class="toc-number">2.3.</span> <span class="toc-text">执行层面</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">3.</span> <span class="toc-text">结束语</span></a></li></ol>
+		
+		</div>
+		
+		<img src="/images/2018-08-05-ios-interview-book-8cc12.png">
+<h2 id="关于新书"><a href="#关于新书" class="headerlink" title="关于新书"></a>关于新书</h2><p>故胤道长 和 我合著的一本 iOS 面试方面的新书<a href="http://item.jd.com/12403068.html" target="_blank" rel="external">《iOS 面试之道》</a>，两周前出版了。这本书我负责前面的第一章，讲面试的准备。后面的算法基础和 100 多道面试题，则是由道长编写。</p>
+<p>老实说，这算不上一本很难很深的书。面试嘛，一般考察的内容也不会很偏很深，还是会偏基础知识一些，所以各位读者可以把这当作一本基础的面试讨论的书。书中有道长精心整理的 100 多道面试题，拿来练练手也是不错。</p>
+<p>该书刚刚上市，还是获得了一些成绩。首先首印的 3500 册已经在几天内售罄，你现在下单的话，买到的是刚刚补货成功的 4000 册。另外，该书在上周冲上了京东的“计算机与互联网销量榜”第一名。</p>
+<img src="/images/2018-08-05-ios-interview-book-68387.png">
+<p>以下还有一些图书的相关信息</p>
+<img src="/images/2018-08-05-ios-interview-book-c4afb.png">
+<p>相信大家不管是当面试官还是当候选人，都可以从本书中学到一些有用的东西。该书在各大网店都已上架，点击<a href="http://item.jd.com/12403068.html" target="_blank" rel="external">这里</a>，可以直达京东购买。</p>
+<h2 id="面试之道"><a href="#面试之道" class="headerlink" title="面试之道"></a>面试之道</h2><p>我从一个程序员，转变为业务负责人，面试的人从 iOS 到服务器研发，再到测试、产品经理、UI、教研，运营等。所以，我可以在这儿分享一些面试各类成才的通用的「面试之道」。当然，这些内容是没写在书里面的，该书还是只讲「iOS面试」之道的。</p>
+<h3 id="面试的不严谨一面"><a href="#面试的不严谨一面" class="headerlink" title="面试的不严谨一面"></a>面试的不严谨一面</h3><p>基本上，面试有着它不严谨的一面：因为你要求在 3 个小时内，考察出一个人的水平。程序员还好，你可以问问他专业知识，写两行代码。但是别的职位其实很难。</p>
+<p>就拿产品经理来说吧，因为一个产品线上的结果是由各方面决定的，你很难评价一个产品经理的工作质量。也许这个产品经理能力一般，但是他的老板本身非常注重产品细节，让最终的产品细节打磨得很好，除非这个候选人特别诚实，否则你这在面试的时候很难判断得出来。</p>
+<p>又比如说设计师的作品，一般设计团队的 Leader 会对团队的作品严格把关，这就使得你看到的作品，不知道多少是他自己的能力，多少是他所在团队的能力。</p>
+<p>所以，有些公司只招好学校的毕业生，只招成功产品的产品经理，只招成功投放过的市场人员，也是为了降低这类的风险，与歧视无关。</p>
+<h3 id="面试的严谨一面"><a href="#面试的严谨一面" class="headerlink" title="面试的严谨一面"></a>面试的严谨一面</h3><p>如果你看过《眨眼之间》《思考快与慢》这些书，你就会发现，直觉这个东西其实是可以训练的。《思考快与慢》的作者是诺贝尔经济学家得主丹尼尔·卡尼曼，他认为直觉很多时候是不靠谱的。但是他赞同《眨眼之间》作者的一个观点：在环境类似，方法可提炼的场景，个人的直觉能力会被提升。例如医生、消防员、画家、警察等职业工作场景。</p>
+<p>我个人认为，面试也是一个非常类似的场景。虽然面试官只有短短的 45 分钟与候选人交谈，问的问题也是千篇一律的问题。但是就是因为面试官不停地在“重复”，所以他很容易就对同一个问题的上百次回答产生直觉性判断。面试得多了，候选人的一些小细节都可能被面试官捕捉并观察到。打个不恰当的比喻，这和《眨眼之间》里面警察审犯人时能一眼看出犯人是否撒谎是一个道理</p>
+<h3 id="执行层面"><a href="#执行层面" class="headerlink" title="执行层面"></a>执行层面</h3><p>在执行层面，我觉得一个面试各类职位的通用型的面试应该考察到：逻辑、表达、热情、细节、团队合作这些方面。下面简单展开说一说。</p>
+<p>逻辑。所有职位的人，都要讲逻辑。不管是产品经理，还是设计师。逻辑不清楚的人，很难让别人理解和接受他的意见。所以，我会特别看重一个人表达的逻辑性。如果一个人的表达不但有逻辑，还很「结构化」，那么我会很喜欢。</p>
+<p>表达。表达的流利程度也很重要，但是这个看职位和性格，我不会特别强求。比如程序员大多内向，表达语速偏慢，偏严谨，都是很正常的。重要的还是他的表达背后的逻辑性强不强，信息量是不是足够的。我特别不喜欢一个候选人回答了很久，但是没有抓住问题的重点，简单来说就是答非所问。</p>
+<p>热情。现在早已经不是吃大锅饭的年代，大家也很难一辈子在一家公司。我希望候选人对应聘的职位有热情，希望提升他自己的某些方面，这样才是一个双赢的事情。如果一个候选人在专业上表达得并不热情，又特别看重按时上下班这些，我通常是减分的。这其实并不代表我希望大家加班，其实我们公司是一个加班文化特别少的公司，甚至还会强调尽量不加班。但是我觉得如果一个人工作的追求仅仅是「不加班」，是很低级的，这就像一个人工作只希望吃饱饭一样，追求层次太低。</p>
+<p>细节。每个人的简历都是偏概括型的，只有深入追问细节，你才可以有更多的信息量进行判断。要深入细节问，可以问项目的背景，目标，流程，进度控制，人员规模和分工，协作方式，挑战等各种信息。深入细节后，你首先可以判断出他对于简历的描述是否是真实的，然后可以判断他对于项目的贡献度是多少，有些时候你还可以判断出他的工作质量。</p>
+<p>团队合作。几乎所有的职位都不是单打独斗的，所以团队合作非常重要。有一些候选人在面试时性格表现得特别咄咄逼人，那么在工作中对待同事可能也是这样。有一些候选人把所有的项目失败的原因都归结给别人，但是又没能利用自己的影响力对项目做引导。有一些候选人性格特别内向，但是他的职位需要偏外向的性格。这些都是面试考察中需要注意的地方。</p>
+<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>不管怎么努力，面试终究还是博一个概率事件，再牛逼的面试官也有看走眼的时候，只是相对来说概率比较低。这也是为什么所有企业都有「试用期」一说。所以如果真的招进来人不合适，还是尽快给双方一个退路更好。</p>
+<p>就酱。</p>
+<p>欢迎购买道长和我的新书<a href="http://item.jd.com/12403068.html" target="_blank" rel="external">《iOS 面试之道》</a>，谢谢~</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS/">iOS</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.devtang.com/2018/08/05/ios-interview-book/" data-title="iOS 面试之道 | 唐巧的博客" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/07/01/how-to-invest/"  title="风投是如何进行投资判断的">
+ <strong>下一篇：</strong><br/> 
+ <span>风投是如何进行投资判断的
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  <div class="sponsor">
+  <br />
+  <p class="asidetitle">赞助商</p>
+  <a target="_blank" href="https://partner.lizhi.io/tangqiao/cp">
+  <img src="http://wx1.sinaimg.cn/mw690/65dc76a3ly1fpax34wnsaj20d20b4gls.jpg" width="235px" height="200px" />
+  </a>
+  <br />
+  <a href="/sponsor">
+  <font color="#2ca6cb" style="
+    font-size: 14px;
+    text-align: right;
+">购买广告位</font></a>
+</div>
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/books-summary/" title="books summary">books summary</a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS/" title="iOS">iOS</a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-weekly/" title="iOS weekly">iOS weekly</a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac</a></li>
+		  
+		
+		  
+			<li><a href="/categories/shell/" title="shell">shell</a></li>
+		  
+		
+		  
+			<li><a href="/categories/summary/" title="summary">summary</a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="weixin">
+  <br />
+  <p class="asidetitle">微信公众号</p>
+  <p>关注我的微信公众号，和我一起成长：</p>
+  <img src="http://ww4.sinaimg.cn/mw690/65dc76a3jw1f1ngaau9arj20760763yr.jpg" width="230px" />
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+	<p class="copyright" style="margin-top: 10px;">
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018
+	
+	<a href="/about" target="_blank" title="唐巧">唐巧</a>
+	
+
+	</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-28029597-1', 'null');  
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
